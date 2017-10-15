@@ -1,5 +1,5 @@
 // tslint:disable no-use-before-declare
-import {AsyncValidatorFn, FormGroup, ValidatorFn} from '@angular/forms';
+import {FormGroup} from '@angular/forms';
 
 import {ControlConfig} from '../config/control-config.interface';
 import {GroupOptions} from '../config/control-options.interface';

@@ -1,6 +1,6 @@
-import {Component, Input, Output, SimpleChanges} from '@angular/core';
+import {Component, Input} from '@angular/core';
 import {NG_VALUE_ACCESSOR, ControlValueAccessor} from '@angular/forms';
-import {ListPicker} from 'ui/list-picker';
+// import {ListPicker} from 'ui/list-picker';
 
 
 @Component({

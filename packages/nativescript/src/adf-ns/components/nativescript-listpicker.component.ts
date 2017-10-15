@@ -1,5 +1,4 @@
 import {OnChanges, SimpleChanges} from '@angular/core';
-import {CustomListPicker} from './custom-listpicker.component';
 
 // TODO: create a custom component using ValueControlAccessor and use it here to modify the form model
 

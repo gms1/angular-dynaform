@@ -1,5 +1,4 @@
-import {Component, AfterViewInit, Type, ViewChild} from '@angular/core';
-import {ValidatorFn, Validators} from '@angular/forms';
+import {Component, Type, ViewChild} from '@angular/core';
 
 import {DynamicForm, DynamicFormService, FormConfig, FormModel} from '@angular-dynaform/core';
 

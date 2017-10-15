@@ -1,7 +1,5 @@
 // tslint:disable use-life-cycle-interface
 
-import {FormGroup} from '@angular/forms';
-
 import {DynamicFormAction} from './dynamic-form.action';
 
 export class ClearButtonAction extends DynamicFormAction {

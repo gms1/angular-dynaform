@@ -1,6 +1,6 @@
 import {ControlType, DynamicFormModule, DynamicFormService} from '@angular-dynaform/core';
 import {CommonModule} from '@angular/common';
-import {ModuleWithProviders, NgModule, NO_ERRORS_SCHEMA} from '@angular/core';
+import {NgModule, NO_ERRORS_SCHEMA} from '@angular/core';
 import {ReactiveFormsModule} from '@angular/forms';
 
 import {NativeScriptFormsModule} from 'nativescript-angular/forms';

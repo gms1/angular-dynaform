@@ -4,8 +4,6 @@ import {ComponentRef, Directive, Input, SimpleChanges, ViewContainerRef} from '@
 // tslint:disable-next-line no-unused-variable  ?
 import {DynamicFormFormControl} from '../components/dynamic-form-form-control.interface';
 import {DynamicFormComponent} from '../components/dynamic-form.component';
-// tslint:disable-next-line no-unused-variable  ?
-import {GroupOptions} from '../config/control-options.interface';
 import {GroupModel} from '../models/group-model';
 import {DynamicFormComponentFactoryService} from '../services/dynamic-form-component-factory.service';
 

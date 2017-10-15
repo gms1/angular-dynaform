@@ -1,11 +1,7 @@
-import {APP_BASE_HREF} from '@angular/common';
 import {TestBed, async} from '@angular/core/testing';
-import {CommonModule} from '@angular/common';
-import {ReactiveFormsModule} from '@angular/forms';
 
 import {DynamicFormModule} from '../dynamic-form.module';
 import {DynamicFormService} from './dynamic-form.service';
-import {DynamicFormModelFactoryService} from './dynamic-form-model-factory.service';
 
 
 

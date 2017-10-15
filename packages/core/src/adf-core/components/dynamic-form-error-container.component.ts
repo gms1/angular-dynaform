@@ -1,4 +1,4 @@
-import {Component, DoCheck, Input, SimpleChanges} from '@angular/core';
+import {Component, DoCheck, Input} from '@angular/core';
 
 import {ControlModel} from '../models/control-model.interface';
 import {ValidationError} from '../validations/validation-error.interface';

@@ -1,5 +1,3 @@
-import {AsyncValidatorFn, ValidatorFn} from '@angular/forms';
-
 import {ControlConfig} from '../config/control-config.interface';
 import {ArrayOptions, GroupOptions} from '../config/control-options.interface';
 import {DynamicFormService} from '../services/dynamic-form.service';
@@ -171,7 +169,7 @@ export class ArrayModel extends AbstractControlModel<NgFormArray, ArrayOptions> 
     appArray.length = this.items.length;
     jpCurr.set(appData, appArray);
 
-    this.items.forEach((item, idx) => { let ifxval = item.valueToAppModel(appData, appPointerPrefix); });
+    this.items.forEach((item, idx) => { item.valueToAppModel(appData, appPointerPrefix); });
     return appData;
   }
 }

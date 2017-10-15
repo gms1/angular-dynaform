@@ -3,10 +3,8 @@ import {Injectable} from '@angular/core';
 import {AbstractControl} from '@angular/forms';
 import {AsyncValidatorFn, ValidatorFn, Validators} from '@angular/forms';
 
-import {ArrayModel} from '../models/array-model';
 import {ValueControlModel} from '../models/control-model';
 import {ControlModel} from '../models/control-model.interface';
-import {GroupModel} from '../models/group-model';
 
 import {ValidationError} from './validation-error.interface';
 

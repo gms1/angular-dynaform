@@ -1,4 +1,4 @@
-import {Injectable, Injector, Type} from '@angular/core';
+import {Injectable, Type} from '@angular/core';
 
 import {FormConfig} from '../config/form-config.interface';
 import {FormI18n} from '../config/form-i18n.interface';

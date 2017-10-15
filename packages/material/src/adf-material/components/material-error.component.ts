@@ -6,7 +6,6 @@ import {
   DynamicForm,
   ValidationError
 } from '@angular-dynaform/core';
-import {SimpleChanges} from '@angular/core';
 // TODO: add class 'mat-input-error'
 
 // tslint:disable use-input-property-decorator use-output-property-decorator no-access-missing-member

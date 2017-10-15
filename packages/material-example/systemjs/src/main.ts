@@ -5,7 +5,6 @@ import {ReactiveFormsModule} from '@angular/forms';
 import {DynamicFormModule} from '@angular-dynaform/core';
 
 import {BrowserModule} from '@angular/platform-browser';
-import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {MatCardModule} from '@angular/material';
 import {DynamicMaterialFormModule} from '@angular-dynaform/material';
 

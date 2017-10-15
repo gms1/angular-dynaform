@@ -1,12 +1,9 @@
 // tslint:disable no-forward-ref
-import {Component, ComponentRef, EventEmitter, Input, Output, SimpleChanges} from '@angular/core';
+import {Component, ComponentRef, EventEmitter, Input, Output} from '@angular/core';
 import {Observable} from 'rxjs/Observable';
 
 import {FormModel} from '../models/form-model';
 
-// tslint:disable-next-line no-unused-variable  ?
-import {DynamicFormControlComponentBase} from './dynamic-form-control.component';
-// tslint:disable-next-line no-unused-variable  ?
 import {DynamicFormControl} from './dynamic-form-control.interface';
 import {DynamicFormFormControl} from './dynamic-form-form-control.interface';
 import {DynamicForm} from './dynamic-form.interface';

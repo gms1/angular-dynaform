@@ -1,27 +1,8 @@
 // TODO: remove tslint:disable
 // tslint:disable
-import {
-  Directive,
-  ElementRef,
-  Host,
-  HostBinding,
-  HostListener,
-  Input,
-  OnDestroy,
-  OnInit,
-  Optional,
-  Renderer,
-  SimpleChanges
-} from '@angular/core';
-import {FormControl, FormGroup} from '@angular/forms';
-import {Observable} from 'rxjs/Rx';
+import {Directive, ElementRef, Renderer} from '@angular/core';
 
-import {
-  ModelType,
-  ControlConfig,
-  DynamicFormControlComponentBase,
-  DynamicFormDomElementDirective
-} from '@angular-dynaform/core';
+import {DynamicFormControlComponentBase, DynamicFormDomElementDirective} from '@angular-dynaform/core';
 
 // forwards blur/focus/click events to the control component and calls the lifecycle hooks for optional dynamic actions
 
