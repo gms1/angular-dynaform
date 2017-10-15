@@ -1,3 +1,7 @@
+[![npm version](https://badge.fury.io/js/%40angular-dynaform%2Fcore.svg)](https://badge.fury.io/js/%40angular-dynaform%2Fcore)
+[![Known Vulnerabilities](https://snyk.io/test/github/gms1/%40angular-dynaform%2Fcore/badge.svg)](https://snyk.io/test/github/gms1/%40angular-dynaform%2Fcore)
+[![DeepScan Grade](https://deepscan.io/api/projects/698/branches/1106/badge/grade.svg)](https://deepscan.io/dashboard/#view=project&pid=698&bid=1106)
+
 # angular-dynaform
 
 **angular-dynaform** is a library for rapid development of model-driven reactive forms for mobile and web.
