@@ -1,5 +1,5 @@
 [![npm version](https://badge.fury.io/js/%40angular-dynaform%2Fcore.svg)](https://badge.fury.io/js/%40angular-dynaform%2Fcore)
-[![Known Vulnerabilities](https://snyk.io/test/github/gms1/%40angular-dynaform%2Fcore/badge.svg)](https://snyk.io/test/github/gms1/%40angular-dynaform%2Fcore)
+[![Known Vulnerabilities](https://snyk.io/test/github/gms1/angular-dynaform/badge.svg)](https://snyk.io/test/github/gms1/angular-dynaform)
 [![DeepScan Grade](https://deepscan.io/api/projects/698/branches/1106/badge/grade.svg)](https://deepscan.io/dashboard/#view=project&pid=698&bid=1106)
 
 # angular-dynaform
