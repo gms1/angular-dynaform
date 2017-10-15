@@ -1,5 +1,4 @@
 import {Directive, ElementRef, Renderer} from '@angular/core';
-import {FormControl} from '@angular/forms';
 
 import {DynamicFormDomElementDirective} from './dynamic-form-dom-element.directive';
 import {DynamicFormControlComponentBase} from '../components/dynamic-form-control.component';
