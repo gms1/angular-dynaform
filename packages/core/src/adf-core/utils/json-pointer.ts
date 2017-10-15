@@ -41,13 +41,14 @@ export class JsonPointer {
       throw new Error('Invalid input object.');
     }
     if (this.pointer.length === 0) {
-      return value;
+      throw new Error(`setting via root JSON pointer is not allowed.`);
     }
 
     const len = this.pointer.length - 1;
     let node = input;
     let nextnode: any;
     let part: string;
+
     for (let idx = 0; idx < len;) {
       if (node === null || typeof node !== 'object') {
         throw new Error(`Invalid JSON pointer reference (level ${idx}).`);
@@ -66,7 +67,7 @@ export class JsonPointer {
           } else {
             let i = parseInt(part, 10);
             if (isNaN(i)) {
-              throw Error('Invalid JSON pointer array index reference (level ${idx}).');
+              throw Error(`Invalid JSON pointer array index reference (level ${idx}).`);
             }
             node[i] = nextnode;
           }
@@ -80,13 +81,25 @@ export class JsonPointer {
     if (value === undefined) {
       delete node[this.pointer[len]];
     } else {
-      node[this.pointer[len]] = value;
+      if (Array.isArray(node)) {
+        let i = parseInt(this.pointer[len], 10);
+        if (isNaN(i)) {
+          throw Error(`Invalid JSON pointer array index reference at end of pointer.`);
+        }
+        node[i] = value;
+      } else {
+        if (typeof node !== 'object') {
+          throw new Error(`Invalid JSON pointer reference at end of pointer.`);
+        }
+        node[this.pointer[len]] = value;
+      }
     }
     return input;
   }
 
   concat(p: JsonPointer): JsonPointer { return new JsonPointer(this.pointer.concat(p.pointer)); }
-  concatKey(name: string): JsonPointer { return new JsonPointer(this.pointer.concat(JsonPointer.escapeKey(name))); }
+  concatKey(name: string): JsonPointer { return new JsonPointer(this.pointer.concat(name)); }
+  concatPointer(pointer: string): JsonPointer { return this.concat(JsonPointer.compile(pointer)); }
 
   toString(): string {
     return '/'.concat(
@@ -111,10 +124,6 @@ export class JsonPointer {
     }
     return new JsonPointer(
         compiled.map((v: string) => v.replace(JsonPointer.escapedMatcher, JsonPointer.escapedReplacer)));
-  }
-
-  static escapeKey(name: string): string {
-    return name.replace(JsonPointer.unescapedMatcher, JsonPointer.unescapedReplacer);
   }
 
   static escapedReplacer(v: string): string {
