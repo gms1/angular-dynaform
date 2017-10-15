@@ -5,14 +5,13 @@ pushd "${DN}" &>/dev/null
 
   rm -rf node_modules/
   rm -f package-lock.json
-  rm -rf platforms/android/
+  rm -rf platforms/*
   rm -rf hooks/
-  rm -rf ../nativescript/hooks
   
   npm link '@angular-dynaform/core'
   npm link '@angular-dynaform/nativescript'
 
-  npm i
+  npm install
 
   tns prepare android
 

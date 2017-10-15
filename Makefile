@@ -79,10 +79,11 @@ material-example: material-example-depsonly
 .PHONY: nativescript-example-nodeps nativescript-example-depsonly nativescript-example
 
 nativescript-example-nodeps:
-	cd packages/nativescript-example && gulp rebuild $(BUILDFLAGS)
+	cd packages/nativescript-example && npm run build
 	
 nativescript-example-depsonly: nativescript
 
 nativescript-example: nativescript-example-depsonly
-#	@$(MAKE) nativescript-example-nodeps --no-print-directory
+	@$(MAKE) nativescript-example-nodeps --no-print-directory
+
 

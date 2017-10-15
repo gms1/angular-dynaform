@@ -1,0 +1,28 @@
+#!/bin/bash
+
+DN=$(dirname "$0")
+BN=$(basename "$0")
+
+PROJ_HOME=$(cd "${DN}/.."; pwd)
+
+#---------------------------------------------------------
+errormsg() {
+  echo "$@" >&2
+}
+
+#---------------------------------------------------------
+die() {
+  errormsg "$@"
+  exit 1
+}
+
+#---------------------------------------------------------
+
+pushd "${PROJ_HOME}" &>/dev/null        || die "failed to cwd '${PROJ_HOME}'"
+
+  # --- core package
+  pushd "packages/core" &>/dev/null     || die "failed to cwd 'packages/core'"
+    echo "*** TODO travis test"
+  popd &>/dev/null
+  
+popd &>/dev/null

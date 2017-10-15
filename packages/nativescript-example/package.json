@@ -53,6 +53,8 @@
     "webpack-sources": "~1.0.1"
   },
   "scripts": {
+    "clean": "",
+    "build": "tns build android",
     "ngc": "ngc -p ./tsconfig.aot.json",
     "ns-bundle": "ns-bundle",
     "publish-ios-bundle": "npm run ns-bundle --ios --publish-app",

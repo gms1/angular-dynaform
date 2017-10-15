@@ -1,0 +1,74 @@
+#!/bin/bash
+
+DN=$(dirname "$0")
+BN=$(basename "$0")
+
+PROJ_HOME=$(cd "${DN}/.."; pwd)
+
+#---------------------------------------------------------
+errormsg() {
+  echo "$@" >&2
+}
+
+#---------------------------------------------------------
+die() {
+  errormsg "$@"
+  exit 1
+}
+
+#---------------------------------------------------------
+
+pushd "${PROJ_HOME}" &>/dev/null        || die "failed to cwd '${PROJ_HOME}'"
+
+echo "*** install main..."
+npm install &>/dev/null                 || die "failed to install package 'root'"
+echo "*** install main: done"
+
+  # --- core package
+  pushd "packages/core" &>/dev/null     || die "failed to cwd 'packages/core'"
+
+    echo "*** install package/core..."
+    npm install &>/dev/null             || die "failed to install package 'core'"
+    echo "*** install package/core: done"
+    echo "*** build   package/core..."
+    gulp rebuild                        || die "failed to build package 'core'"
+    echo "*** build   package/core: done"
+    pushd "dist" &>/dev/null            || die "failed to cwd 'packages/core/dist'"
+      npm link . &>/dev/null            || die "failed to create npm-link for package 'core'"
+    popd &>/dev/null
+  popd &>/dev/null
+
+  # --- basic package
+  pushd "packages/basic" &>/dev/null    || die "failed to cwd 'packages/basic'"
+
+    echo "*** install package/basic..."
+    npm link "@angular-dynaform/core" &>/dev/null \
+                                        || die "failed to npm-link package 'core'"
+    npm install &>/dev/null             || die "failed to install package 'basic'"
+    echo "*** install package/basic: done"
+    echo "*** build   package/basic..."
+    gulp rebuild                        || die "failed to build package 'basic'"
+    echo "*** build   package/basic: done"
+    pushd "dist" &>/dev/null            || die "failed to cwd 'packages/basic/dist'"
+      npm link . &>/dev/null            || die "failed to create npm-link for package 'basic'"
+    popd &>/dev/null
+  popd &>/dev/null
+
+  # --- basic-example package
+  pushd "packages/basic-example" &>/dev/null \
+                                        || die "failed to cwd 'packages/basic-example'"
+
+    echo "*** install package/basic-example..."
+    npm link "@angular-dynaform/core" &>/dev/null \
+                                        || die "failed to npm-link package 'core'"
+    npm link "@angular-dynaform/basic" &>/dev/null \
+                                        || die "failed to npm-link package 'basic'"
+    npm install &>/dev/null             || die "failed to install package 'basic-example'"
+    echo "*** install package/basic-example: done"
+    echo "*** build   package/basic-example..."
+    gulp rebuild                        || die "failed to build package 'basic-example'"
+    echo "*** build   package/basic-example: done"
+  popd &>/dev/null
+  
+  
+popd &>/dev/null
