@@ -1,0 +1,19 @@
+#!/bin/bash
+DN=$(dirname "$0")
+
+pushd "${DN}" &>/dev/null
+
+  rm -rf node_modules/
+  rm -f package-lock.json
+  rm -rf platforms/android/
+  rm -rf hooks/
+  rm -rf ../nativescript/hooks
+  
+  npm link '@angular-dynaform/core'
+  npm link '@angular-dynaform/nativescript'
+
+  npm i
+
+  tns prepare android
+
+popd

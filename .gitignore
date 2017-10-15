@@ -1,0 +1,12 @@
+
+.vscode
+node_modules
+dist
+tmp
+coverage
+
+npm-debug.log*
+*.ngfactory.ts
+*.css.shim.ts
+*.ngsummary.json
+*.shim.ngstyle.ts

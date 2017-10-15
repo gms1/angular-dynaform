@@ -1,0 +1,106 @@
+import {ModuleWithProviders, NgModule, Optional, SkipSelf} from '@angular/core';
+import {CommonModule} from '@angular/common';
+import {ReactiveFormsModule} from '@angular/forms';
+
+
+import {
+  DynamicFormControlComponentBase,
+  DynamicFormControlComponent
+} from './components/dynamic-form-control.component';
+import {DynamicFormErrorContainerComponent} from './components/dynamic-form-error-container.component';
+import {DynamicFormErrorComponent} from './components/dynamic-form-error.component';
+import {DynamicFormFormControlComponent} from './components/dynamic-form-form-control.component';
+import {DynamicFormGroupContainerComponent} from './components/dynamic-form-group-container.component';
+import {DynamicFormComponent} from './components/dynamic-form.component';
+
+import {DynamicFormControlComponentDirective} from './directives/dynamic-form-control-component.directive';
+import {DynamicFormDomElementDirective} from './directives/dynamic-form-dom-element.directive';
+import {DynamicFormHTMLDomElementDirective} from './directives/dynamic-form-html-dom-element.directive';
+import {DynamicFormErrorComponentDirective} from './directives/dynamic-form-error-component.directive';
+import {DynamicFormFormControlComponentDirective} from './directives/dynamic-form-form-control-component.directive';
+
+import {DynamicFormComponentFactoryService} from './services/dynamic-form-component-factory.service';
+import {DynamicFormModelFactoryService} from './services/dynamic-form-model-factory.service';
+import {DynamicFormService} from './services/dynamic-form.service';
+
+import {
+  ArrayButtonAddAction,
+  ArrayButtonDeleteAction,
+  ArrayButtonInsertAction,
+  SubmitButtonAction,
+  ResetButtonAction,
+  ClearButtonAction
+} from './actions';
+
+import {
+  ControlEmailValidator,
+  ControlMaxLengthValidator,
+  ControlMinLengthValidator,
+  ControlMaxValidator,
+  ControlMinValidator,
+  ControlPatternValidator,
+  ControlRequiredTrueValidator,
+  ControlRequiredValidator
+} from './validations/dynamic-form.validator';
+
+const dynamicFormValidators = [
+  ControlRequiredValidator, ControlRequiredTrueValidator, ControlMinLengthValidator, ControlMaxLengthValidator,
+  ControlMinValidator, ControlMaxValidator, ControlPatternValidator, ControlEmailValidator
+];
+
+const dynamicFormExportDirectives = [DynamicFormHTMLDomElementDirective, DynamicFormDomElementDirective];
+
+const dynamicFormDirectives = [
+  dynamicFormExportDirectives, DynamicFormControlComponentDirective, DynamicFormFormControlComponentDirective,
+  DynamicFormErrorComponentDirective
+];
+
+const dynamicFormEntryComponents =
+    [DynamicFormControlComponentBase, DynamicFormFormControlComponent, DynamicFormErrorComponent];
+
+const dynamicFormExportComponents = [
+  DynamicFormComponent, DynamicFormControlComponent, DynamicFormGroupContainerComponent,
+  DynamicFormErrorContainerComponent
+];
+
+const dynamicFormComponents = [dynamicFormEntryComponents, dynamicFormExportComponents];
+
+@NgModule({
+  imports: [CommonModule, ReactiveFormsModule],
+  declarations: [dynamicFormDirectives, dynamicFormComponents],
+  entryComponents: dynamicFormEntryComponents,
+  exports: [dynamicFormExportDirectives, dynamicFormExportComponents],
+  providers: [DynamicFormComponentFactoryService, DynamicFormModelFactoryService, dynamicFormValidators]
+})
+export class DynamicFormModule {
+  constructor(private dynamicFormService: DynamicFormService, @Optional() @SkipSelf() parentModule: DynamicFormModule) {
+    if (parentModule) {
+      throw new Error('DynamicFormModule is already loaded. Import it in the AppModule only');
+    }
+    this.dynamicFormService.validatorTypes.setType('required', ControlRequiredValidator);
+    this.dynamicFormService.validatorTypes.setType('requiredTrue', ControlRequiredTrueValidator);
+    this.dynamicFormService.validatorTypes.setType('minLength', ControlMinLengthValidator);
+    this.dynamicFormService.validatorTypes.setType('maxLength', ControlMaxLengthValidator);
+    this.dynamicFormService.validatorTypes.setType('min', ControlMinValidator);
+    this.dynamicFormService.validatorTypes.setType('max', ControlMaxValidator);
+    this.dynamicFormService.validatorTypes.setType('pattern', ControlPatternValidator);
+    this.dynamicFormService.validatorTypes.setType('email', ControlEmailValidator);
+
+    this.dynamicFormService.actionTypes.setType('submit', SubmitButtonAction);
+    this.dynamicFormService.actionTypes.setType('reset', ResetButtonAction);
+    this.dynamicFormService.actionTypes.setType('clear', ClearButtonAction);
+    this.dynamicFormService.actionTypes.setType('arrayAddItem', ArrayButtonAddAction);
+    this.dynamicFormService.actionTypes.setType('arrayInsertItem', ArrayButtonInsertAction);
+    this.dynamicFormService.actionTypes.setType('arrayDeleteItem', ArrayButtonDeleteAction);
+  }
+
+  static forRoot(): ModuleWithProviders {
+    return {
+      ngModule: DynamicFormModule,
+      providers: [
+        // our singleton service:
+        DynamicFormService
+      ]
+    };
+  }
+}

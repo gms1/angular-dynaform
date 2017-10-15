@@ -1,0 +1,13 @@
+/* You can add global styles to this file */
+body { font-family: Roboto, Arial, sans-serif; margin: 10 }
+
+.button-division-content {
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: flex-end;
+}
+
+.button-separator {
+  width: 30px
+}
+

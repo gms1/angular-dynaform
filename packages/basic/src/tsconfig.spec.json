@@ -1,0 +1,21 @@
+{
+  "extends": "../tsconfig.json",
+  "compilerOptions": {
+    "target": "es2015",
+    "module": "commonjs",
+    "moduleResolution": "node",
+    "rootDir": "adf-basic",
+    "outDir": "../tmp/spec",
+    "types": [
+      "jasmine",
+      "node"
+    ]
+  },
+  "files": [
+    "adf-basic/test.ts"
+  ],
+  "include": [
+    "**/*.spec.ts",
+    "adf-basic/spec/**/*.ts"
+  ]
+}

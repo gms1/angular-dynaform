@@ -1,0 +1,46 @@
+{
+  "compilerOptions": {
+    "outDir": "./tmp/unused",
+    "inlineSources": true,
+    "inlineSourceMap": true,
+    "declaration": true,
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true,
+    "noImplicitAny": true,
+    "noImplicitReturns": true,
+    "noImplicitThis": false,
+    "preserveConstEnums": true,
+    "removeComments": false,
+    "strict": true,
+    "skipLibCheck": true,
+    "strictNullChecks": true,
+    "lib": [
+      "es2015",
+      "es2016",
+      "es2017",
+      "dom",
+      "es6",
+      "es2015.iterable"
+    ],
+    "typeRoots": [
+      "./node_modules/@types/"
+    ],
+    "baseUrl": ".",
+    "paths": {
+      "*": [
+        "./node_modules/tns-core-modules/*",
+        "./node_modules/*"
+      ]
+    }
+  },
+  "exclude": [
+    "./dist/**/*",
+    "./node_modules/**/*"
+  ],
+  "angularCompilerOptions": {
+    "genDir": "./tmp/unused",
+    "annotateForClosureCompiler": false,
+    "skipMetadataEmit": true,
+    "skipTemplateCodegen": true
+  }
+}

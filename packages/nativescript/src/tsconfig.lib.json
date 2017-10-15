@@ -1,0 +1,22 @@
+{
+  "extends": "../tsconfig.json",
+  "compilerOptions": {
+    "target": "es2015",
+    "module": "es2015",
+    "moduleResolution": "node",
+    "rootDir": "adf-ns",
+    "outDir": "../dist/lib"
+  },
+  "include": [
+    "adf-ns/public_api.ts"
+  ],
+  "angularCompilerOptions": {
+    "genDir": "../dist/lib",
+    "annotateForClosureCompiler": true,
+    "skipMetadataEmit": false,
+    "skipTemplateCodegen": true,
+    "strictMetadataEmit": true,
+    "flatModuleOutFile": "index.js",
+    "flatModuleId": "@angular-dynaform/nativescript"
+  }
+}

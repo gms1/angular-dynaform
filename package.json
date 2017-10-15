@@ -1,0 +1,30 @@
+{
+  "name": "@angular-dynaform/root",
+  "version": "0.0.2",
+  "description": "angular-dynaform - development",
+  "author": "Guenter Sandner <www.gms@gmx.at>",
+  "license": "MIT",
+  "private": false,
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/gms1/angular-dynaform.git"
+  },
+  "scripts": {
+    "clean": "node build/multi.js clean",
+    "build": "node build/multi.js build",
+    "rebuild": "node build/multi.js rebuild",
+    "test": "node build/multi.js test",
+    "release:build": "node build/multi.js releaseBuild",
+    "bootstrap": "node build/multi.js bootstrap",
+    "reinstall": "node build/multi.js reinstall",
+    "list:packages": "node build/multi.js listPackages",
+    "list:outdated": "node build/multi.js listOutdated",
+    "prepublishOnly": "echo \"ERROR: do not publish this package\" && exit 1"
+  },
+  "dependencies": {},
+  "devDependencies": {
+    "rimraf": "^2.6.2",
+    "shelljs": "^0.7.8",
+    "shx": "^0.2.2"
+  }
+}

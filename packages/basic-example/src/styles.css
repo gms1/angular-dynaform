@@ -1,0 +1,17 @@
+/* You can add global styles to this file */
+
+.button-division-content {
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: flex-end;
+}
+
+.button-separator {
+  width: 30px
+}
+
+.adf-error {
+  font-size: 75%;
+  /* font-weight: bold; */
+  color: red;
+}
