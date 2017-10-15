@@ -1,4 +1,4 @@
-import {TestBed, async} from '@angular/core/testing';
+import {TestBed} from '@angular/core/testing';
 
 import {DynamicFormModule} from '../dynamic-form.module';
 import {DynamicFormService} from './dynamic-form.service';

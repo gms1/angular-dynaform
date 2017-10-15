@@ -1,5 +1,5 @@
 import {APP_BASE_HREF} from '@angular/common';
-import {TestBed, ComponentFixture, async} from '@angular/core/testing';
+import {TestBed, ComponentFixture} from '@angular/core/testing';
 
 import {DynamicFormModule} from '@angular-dynaform/core';
 import {DynamicBasicFormModule} from './public_api';
