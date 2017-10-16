@@ -104,6 +104,11 @@ describe('jsonpointer', () => {
     expect(() => JsonPointer.compile('/foo/unknown2').set(rfcExample, setValue))
         .toThrowError('Invalid JSON pointer array index reference at end of pointer.');
 
+    rfcExample.grz = {brz: { mau: 'dau'}};
+
+    JsonPointer.compile('/grz/brz').set(rfcExample);
+    expect(rfcExample.grz.brz).toBeUndefined('set failed for "/grz/brz"');
+
   });
 
   it('concat', () => {

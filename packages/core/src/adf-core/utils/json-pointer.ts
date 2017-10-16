@@ -30,13 +30,13 @@ export class JsonPointer {
    * set value
    *
    * @param {*} input
-   * @param {*} value
+   * @param {*} [value]
    * @returns {*}       returns 'value' if pointer.length === 1 or 'input' otherwise
    *
    * throws if 'input' is not an object
    * throws if one of the ancestors is a scalar
    */
-  set(input: any, value: any): any {
+  set(input: any, value?: any): any {
     if (typeof input !== 'object') {
       throw new Error('Invalid input object.');
     }
