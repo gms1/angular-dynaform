@@ -233,12 +233,12 @@ export const formLanguages = {
     address: {label: 'Address'},
     street: {label: 'Street', placeholder: 'Enter street'},
     postcode: {label: 'Postcode', placeholder: 'Bitte postcode'},
-    contacts: {label: 'contacts'},
+    contacts: {label: 'Contacts'},
     addContact: {label: 'add'},
     insertContact: {label: 'insert'},
     deleteContact: {label: 'delete'},
     contactType: {
-      label: 'type',
+      label: 'Type',
       placeholder: 'Select an option',
       valueOptions: [{value: 'phone', label: 'Telephone'}, {value: 'email', label: 'Email'}]
     },
