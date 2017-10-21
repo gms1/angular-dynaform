@@ -1,7 +1,6 @@
 // tslint:disable max-classes-per-file no-null-keyword
 import {Injectable} from '@angular/core';
-import {AbstractControl} from '@angular/forms';
-import {AsyncValidatorFn, ValidatorFn, Validators} from '@angular/forms';
+import {AbstractControl, AsyncValidatorFn, ValidatorFn, Validators} from '@angular/forms';
 
 import {ValueControlModel} from '../models/control-model';
 import {ControlModel} from '../models/control-model.interface';

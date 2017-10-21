@@ -15,5 +15,6 @@ import {AppComponent} from './app.component';
   providers: [],
   bootstrap: [AppComponent]
 })
+// tslint:disable-next-line no-unnecessary-class
 export class AppModule {
 }

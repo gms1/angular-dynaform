@@ -1,4 +1,5 @@
 // tslint:disable: no-import-side-effect
+// tslint:disable no-implicit-dependencies
 import 'core-js';
 import 'reflect-metadata';
 import 'zone.js/dist/zone';

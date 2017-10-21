@@ -1,5 +1,4 @@
-import {OnChanges, OnDestroy} from '@angular/core';
-import {ComponentRef, Directive, Input, SimpleChanges, ViewContainerRef} from '@angular/core';
+import {ComponentRef, Directive, Input, OnChanges, OnDestroy, SimpleChanges, ViewContainerRef} from '@angular/core';
 
 // tslint:disable-next-line no-unused-variable  ?
 import {DynamicFormError} from '../components/dynamic-form-error.interface';

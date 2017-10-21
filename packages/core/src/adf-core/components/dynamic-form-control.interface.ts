@@ -1,5 +1,4 @@
-import {OnChanges, OnDestroy, OnInit} from '@angular/core';
-import {EventEmitter} from '@angular/core';
+import {EventEmitter, OnChanges, OnDestroy, OnInit} from '@angular/core';
 
 import {ControlOptions} from '../config/control-options.interface';
 import {ControlModel} from '../models/control-model.interface';

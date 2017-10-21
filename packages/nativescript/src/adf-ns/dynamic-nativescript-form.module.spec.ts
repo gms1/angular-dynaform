@@ -1,4 +1,4 @@
-
+// tslint:disable no-implicit-dependencies
 import {DynamicFormComponent} from '@angular-dynaform/core/components/dynamic-form.component';
 import {DynamicFormModule} from '@angular-dynaform/core/dynamic-form.module';
 import {APP_BASE_HREF} from '@angular/common';

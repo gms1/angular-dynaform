@@ -1,5 +1,4 @@
-import {Injectable, Type} from '@angular/core';
-import {ComponentFactory, ComponentFactoryResolver} from '@angular/core';
+import {ComponentFactory, ComponentFactoryResolver, Injectable, Type} from '@angular/core';
 
 // tslint:disable-next-line no-unused-variable  ?
 import {DynamicFormControlComponentBase} from '../components/dynamic-form-control.component';

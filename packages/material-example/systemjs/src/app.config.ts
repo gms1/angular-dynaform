@@ -249,7 +249,7 @@ export const formLanguages = {
     clear: {label: 'Clear'},
     reset: {label: 'Reset'},
     submit: {label: 'Submit'}
-  } as FormI18n,
+  },
   de: {
     salutation: {valueOptions: [{value: 'mr', label: 'Herr'}, {value: 'ms', label: 'Frau'}]},
     title: {label: 'Titel', placeholder: 'Bitte geben Sie Ihren Titel ein'},
@@ -274,7 +274,7 @@ export const formLanguages = {
     clear: {label: 'Leeren'},
     reset: {label: 'Zurücksetzen'},
     submit: {label: 'Ok'}
-  } as FormI18n
+  }
 };
 
 

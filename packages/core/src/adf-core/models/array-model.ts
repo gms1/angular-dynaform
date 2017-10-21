@@ -38,8 +38,8 @@ export class ArrayModel extends AbstractControlModel<NgFormArray, ArrayOptions> 
       dynamicFormService: DynamicFormService, config: ControlConfig, formModel: FormModel, parentGroup: GroupModelBase,
       parentArray?: ArrayModel, parentArrayIdx?: number) {
     super(
-        dynamicFormService, config, (config.options || {item: {} as GroupOptions}) as ArrayOptions, new NgFormArray([]),
-        formModel, parentGroup, parentArray, parentArrayIdx);
+        dynamicFormService, config, (config.options || {item: {}}) as ArrayOptions, new NgFormArray([]), formModel,
+        parentGroup, parentArray, parentArrayIdx);
     this.setCSSClasses(this.css.container, 'adf-array-container');
     this.setCSSClasses(this.css.control, 'adf-array-control');
     this.setCSSClasses(this.css.content, 'adf-array-content');

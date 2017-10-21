@@ -1,4 +1,4 @@
-import {OnChanges, SimpleChanges} from '@angular/core';
+import {Component, OnChanges, SimpleChanges} from '@angular/core';
 
 // TODO: create a custom component using ValueControlAccessor and use it here to modify the form model
 
@@ -11,7 +11,6 @@ import {
   DynamicFormService,
   ValueControlModel
 } from '@angular-dynaform/core';
-import {Component} from '@angular/core';
 
 @Component({
   selector: 'adf-nativescript-select-component',

@@ -72,7 +72,7 @@
     "run-sequence": "^2.2.0",
     "sorcery": "^0.10.0",
     "ts-node": "~3.3.0",
-    "tslint": "~5.7.0",
+    "tslint": "~5.8.0",
     "typedoc": "^0.9.0",
     "typescript": "^2.5.3"
   }
