@@ -16,3 +16,4 @@ getTestBed().initTestEnvironment(BrowserDynamicTestingModule, platformBrowserDyn
 
 import './services/dynamic-form.service.spec';
 import './utils/json-pointer.spec';
+import './utils/js-expression.spec';

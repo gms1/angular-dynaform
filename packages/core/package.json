@@ -29,6 +29,7 @@
     "@angular/core": "~4.4.6",
     "@angular/forms": "~4.4.6",
     "core-js": "^2.5.1",
+    "jsep": "^0.3.2",
     "rxjs": "^5.5.0",
     "zone.js": "^0.8.18"
   },

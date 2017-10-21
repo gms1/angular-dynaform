@@ -11,8 +11,9 @@
 export class JsonPointer {
   static escapedMatcher: RegExp = /~[01]/g;
   static unescapedMatcher: RegExp = /[~\/]/g;
+  private pointer: string[];
 
-  private constructor(private pointer: string[]) {}
+  constructor(pointer?: string[]) { this.pointer = pointer || []; }
 
   get(input: any): any {
     let node = input;
