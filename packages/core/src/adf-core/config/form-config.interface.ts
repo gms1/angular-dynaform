@@ -6,20 +6,14 @@ export interface FormConfig {
   name?: string;
   /**
    * validators
-   *
-   * @type {string | string[]}
    */
   validators?: string|string[];
   /**
    * async validators
-   *
-   * @type {string | string[]}
    */
   asyncValidators?: string|string[];
   /**
    * group options
-   *
-   * @type {GroupOptions}
    */
   options: GroupOptions;
 
@@ -29,8 +23,6 @@ export interface FormConfig {
 
   /**
    * additional user data
-   *
-   * @type {*}
    */
   user?: any;
 }

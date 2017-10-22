@@ -12,7 +12,6 @@ export interface ControlBaseOptions {
   /**
    * The label of the control
    * ignore for MODEL_SUBSET (TODO?)
-   * @type {string}
    */
   label?: string;
 
@@ -35,15 +34,11 @@ export interface GroupOptions extends ControlBaseOptions { group: ControlConfig[
 export interface ControlValueOptions extends ControlBaseOptions {
   /**
    * The initial value for the control
-   *
-   * @type {*}
    */
   value?: any;
 
   /**
    * The placeholder of the control
-   *
-   * @type {string}
    */
   placeholder?: string;
 
@@ -58,7 +53,7 @@ export interface ControlInputOptions extends ControlValueOptions {
   /**
    * The type of the input control
    *
-   * @type {string} [inputType="text"] - the type (equivalent to the type attribute of the <input> HTML tag)
+   * the type (equivalent to the type attribute of the <input> HTML tag)
    * WARN: not all types may be supported by all ui libraries
    * TODO: we should at least provide a fallback (using *ngSwitchCase?) for: 'number' and 'password'
    * TODO: for other types, creating a seperate component should be the way to go
@@ -75,8 +70,6 @@ export interface ControlInputOptions extends ControlValueOptions {
 export interface ControlSelectOptions extends ControlValueOptions {
   /**
    * The options for a select control
-   *
-   * @type {ControlSelectOption[]}
    */
   valueOptions?: ValueOptions[];
   multiple?: boolean;
