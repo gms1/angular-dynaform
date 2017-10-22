@@ -16,6 +16,7 @@
     "skipTemplateCodegen": true,
     "strictMetadataEmit": true,
     "flatModuleOutFile": "index.js",
-    "flatModuleId": "@angular-dynaform/core"
+    "flatModuleId": "@angular-dynaform/core",
+    "fullTemplateTypeCheck": true
   }
 }

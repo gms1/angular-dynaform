@@ -35,8 +35,6 @@
 
 ## TODO list
 
-* angular v5.0 upgrade
-  * enable fullTemplateTypeCheck? (basic-example, material-example, ...)
 * nativescript templates
 * generate JSON Patch (RFC 6902) for changes applied to the form/application data
 * enable/disable or show/hide fields based on conditions defined on related field values
@@ -48,6 +46,7 @@
 * autocomplete
 * form(Config/Model)Builder?
 * improve documentation and tests
+* enable option fullTemplateTypeCheck for remaining packages (already enabled in 'core')
 
 > NOTE: Asking for any help! Your contribution is highly welcome!
 
