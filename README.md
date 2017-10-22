@@ -8,11 +8,6 @@
 
 **angular-dynaform** is a library for rapid development of model-driven reactive forms for mobile and web.
 
-## supported UI-Frameworks
-
-* [Material](https://github.com/angular/material2)
-* [TODO: Nativescript](https://www.nativescript.org/)
-
 ## Features
 
 * generic, expressive and extendable form library
@@ -24,21 +19,25 @@
 * easily extensible through:
   * custom components
   * custom validators
-  * custom actions (can be triggered by blur/focus/click events and/or value/status changes)
+  * custom actions (triggered by blur/focus/click events)
 
 > NOTE: development is in early stage!
 
+## Supported UI-Frameworks
+
+* [Material](https://github.com/angular/material2)
+* [TODO: Nativescript](https://www.nativescript.org/)
+
 ## Links
 
-[Plunker for basic HTML](http://plnkr.co/edit/OES85TVO33XHM725fpBg?p=preview)
-
-[Plunker for Material2](http://plnkr.co/edit/CNZQPDm4ygfHgQLJG9Eo?p=preview)
+* [Plunker for basic HTML](http://plnkr.co/edit/OES85TVO33XHM725fpBg?p=preview)
+* [Plunker for Material2](http://plnkr.co/edit/CNZQPDm4ygfHgQLJG9Eo?p=preview)
 
 ## TODO list
 
 * nativescript templates
 * generate JSON Patch (RFC 6902) for changes applied to the form/application data
-* action to enable/disable or show/hide fields based on conditions defined on field values
+* enable/disable or show/hide fields based on conditions defined on related field values
 * multi-page/step forms
 * support for angular's internationalization
   (depends on angular v5.x [#11405](https://github.com/angular/angular/issues/11405))
