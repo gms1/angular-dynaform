@@ -1,18 +1,16 @@
-# 0.0.3
+# CHANGELOG
 
-## **Features**
+## 0.0.3
 
-* angular v5 updateOn option support
+* **Features**
+  * angular v5 updateOn option support
 
+## 0.0.2
 
-# 0.0.2
+* **Features**
+  * angular v5 upgrade
 
-## **Features**
+## 0.0.1
 
-* angular v5 upgrade
-
-# 0.0.1
-
-## **Features**
-
-* initial release
+* **Features**
+  * initial release
