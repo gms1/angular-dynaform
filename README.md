@@ -181,3 +181,7 @@ call 'dynaForm.initValueFromAppModel' instead of 'dynaForm.initValue' and 'dynaF
 * custom validators (DI)
 * custom components (DI)
 * custom form actions (no DI)
+
+## ChangeLog
+
+[CHANGELOG](./CHANGELOG.md)
