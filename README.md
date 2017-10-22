@@ -30,8 +30,8 @@
 
 ## Links
 
-* [Plunker for basic HTML](http://plnkr.co/edit/OES85TVO33XHM725fpBg?p=preview)
-* [Plunker for Material2](http://plnkr.co/edit/CNZQPDm4ygfHgQLJG9Eo?p=preview)
+* [Plunker for basic HTML](http://plnkr.co/edit/x8elnFR7fgDWIjvn8OZF?p=preview)
+* [Plunker for Material2](http://plnkr.co/edit/ZZuywOIH92FtsmHRp6ks?p=preview)
 
 ## TODO list
 
