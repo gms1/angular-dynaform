@@ -86,8 +86,8 @@ export abstract class AbstractControlModel<C extends AbstractControl, O extends 
   private _parentArrayIdx?: number;
   get parentArrayIdx(): number|undefined { return this._parentArrayIdx; }
 
-  private validatorFns: ValidatorFn[] = [];
-  private asyncValidatorFns: AsyncValidatorFn[] = [];
+  private validatorFns: ValidatorFn[];
+  private asyncValidatorFns: AsyncValidatorFn[];
 
   private _id: string;
   get id(): string { return this._id; }
@@ -117,7 +117,7 @@ export abstract class AbstractControlModel<C extends AbstractControl, O extends 
   get css(): CSSModel { return this._css; }
 
 
-  local: ControlI18n = {};
+  local: ControlI18n;
 
   constructor(
       dynamicFormService: DynamicFormService, config: ControlConfig, options: O, ngControl: C, formModel: FormModel,
@@ -132,6 +132,9 @@ export abstract class AbstractControlModel<C extends AbstractControl, O extends 
     this._parentArray = parentArray;
     this._parentArrayIdx = parentArrayIdx;
     this._key = this.config.key || this.config.id;
+    this.local = {};
+    this.validatorFns = [];
+    this.asyncValidatorFns = [];
     this.initId();
     this.initJpForm();
     this.initJpApp();

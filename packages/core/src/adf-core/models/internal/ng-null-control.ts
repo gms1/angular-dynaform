@@ -10,6 +10,7 @@ import {FormControl} from '@angular/forms';
 export class NgNullControl extends FormControl {
   constructor(formState?: any) { super(formState); }
   get value(): any { return undefined; }
+  set value(value: any) {}
   patchValue(value: any, options: {onlySelf?: boolean, emitEvent?: boolean} = {}): void {}
   setValue(value: any, options: {onlySelf?: boolean, emitEvent?: boolean} = {}): void {}
   reset(value?: any, options?: {onlySelf?: boolean; emitEvent?: boolean}): void {}

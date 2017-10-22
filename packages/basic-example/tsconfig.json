@@ -23,7 +23,6 @@
     ]
   },
   "angularCompilerOptions": {
-    "genDir": "./tmp/unused",
     "skipMetadataEmit": true,
     "skipTemplateCodegen": true
   }

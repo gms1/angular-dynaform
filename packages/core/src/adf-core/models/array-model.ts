@@ -22,7 +22,7 @@ const FOOTER_IDX = -2;
 
 export class ArrayModel extends AbstractControlModel<NgFormArray, ArrayOptions> {
   header?: GroupModelBase;
-  items: GroupModelBase[] = [];
+  items: GroupModelBase[];
   footer?: GroupModelBase;
 
   private _currIndex: number;
@@ -40,6 +40,7 @@ export class ArrayModel extends AbstractControlModel<NgFormArray, ArrayOptions> 
     super(
         dynamicFormService, config, (config.options || {item: {}}) as ArrayOptions, new NgFormArray([]), formModel,
         parentGroup, parentArray, parentArrayIdx);
+    this.items = [];
     this.setCSSClasses(this.css.container, 'adf-array-container');
     this.setCSSClasses(this.css.control, 'adf-array-control');
     this.setCSSClasses(this.css.content, 'adf-array-content');

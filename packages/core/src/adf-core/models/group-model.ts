@@ -19,7 +19,7 @@ import {JsonPointer} from '../utils/json-pointer';
 //   so child items will be registered for the parent FormGroup
 
 export class GroupModelBase extends AbstractControlModel<FormGroup, GroupOptions> {
-  _items: ControlModel[] = [];
+  _items: ControlModel[];
   get items(): ControlModel[] { return this._items; }
 
   constructor(
@@ -28,6 +28,7 @@ export class GroupModelBase extends AbstractControlModel<FormGroup, GroupOptions
     super(
         dynamicFormService, config, (config.options || {group: []}) as GroupOptions, ngControl, formModel, parentGroup,
         parentArray, parentArrayIdx);
+    this._items = [];
     this.setCSSClasses(this.css.container, 'adf-group-container');
     this.setCSSClasses(this.css.control, 'adf-group-control');
     this.setCSSClasses(this.css.content, 'adf-group-content');

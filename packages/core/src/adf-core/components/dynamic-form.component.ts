@@ -42,12 +42,17 @@ export class DynamicFormComponent extends DynamicForm {
   formControlRef: ComponentRef<DynamicFormFormControl>|undefined;
 
   private _model: FormModel;
-  private _submit: EventEmitter<any> = new EventEmitter<any>(false);
-  private _reset: EventEmitter<any> = new EventEmitter<any>(false);
+  private _submit: EventEmitter<any>;
+  private _reset: EventEmitter<any>;
 
-  private mapIdToControl: Map<string, DynamicFormControl> = new Map<string, DynamicFormControl>();
+  private mapIdToControl: Map<string, DynamicFormControl>;
 
-  constructor() { super(); }
+  constructor() {
+    super();
+    this._submit = new EventEmitter<any>(false);
+    this._reset = new EventEmitter<any>(false);
+    this.mapIdToControl = new Map<string, DynamicFormControl>();
+  }
 
   initValue(value?: any): void { this.model.initValue(value); }
   resetValue(): void { this.model.resetValue(); }

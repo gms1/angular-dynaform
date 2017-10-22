@@ -8,8 +8,13 @@ import {Subject} from 'rxjs/Subject';
 import {DynamicFormAction} from './dynamic-form.action';
 
 export class ResetButtonAction extends DynamicFormAction {
-  private unsubscribe: Subject<any> = new Subject<any>();
+  private unsubscribe: Subject<any>;
   private rootFormGroup: FormGroup;
+
+  constructor() {
+    super();
+    this.unsubscribe = new Subject<any>();
+  }
 
   ngOnInit(): void {
     super.ngOnInit();
