@@ -7,10 +7,10 @@
 //
 // 2) wanted to have a JSON pointer implementation which supports the concatenation of compiled JSON pointers
 
+const escapedMatcher: RegExp = /~[01]/g;
+const unescapedMatcher: RegExp = /[~\/]/g;
 
 export class JsonPointer {
-  static escapedMatcher: RegExp = /~[01]/g;
-  static unescapedMatcher: RegExp = /[~\/]/g;
   private pointer: string[];
 
   constructor(pointer?: string[]) { this.pointer = pointer || []; }
@@ -30,9 +30,9 @@ export class JsonPointer {
   /**
    * set value
    *
-   * @param {*} input
-   * @param {*} [value]
-   * @returns {*}       returns 'value' if pointer.length === 1 or 'input' otherwise
+   * @param input
+   * @param [value]
+   * @returns       returns 'value' if pointer.length === 1 or 'input' otherwise
    *
    * throws if 'input' is not an object
    * throws if one of the ancestors is a scalar
@@ -104,8 +104,7 @@ export class JsonPointer {
 
   toString(): string {
     return '/'.concat(
-        this.pointer.map((v: string) => v.replace(JsonPointer.unescapedMatcher, JsonPointer.unescapedReplacer))
-            .join('/'));
+        this.pointer.map((v: string) => v.replace(unescapedMatcher, JsonPointer.unescapedReplacer)).join('/'));
   }
 
   static get(obj: any, pointer: string): any {
@@ -123,8 +122,7 @@ export class JsonPointer {
     if (firstPart !== '') {
       throw new Error(`JSON pointer '${pointer}' is invalid.`);
     }
-    return new JsonPointer(
-        compiled.map((v: string) => v.replace(JsonPointer.escapedMatcher, JsonPointer.escapedReplacer)));
+    return new JsonPointer(compiled.map((v: string) => v.replace(escapedMatcher, JsonPointer.escapedReplacer)));
   }
 
   static escapedReplacer(v: string): string {
