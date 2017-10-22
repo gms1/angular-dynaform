@@ -1,6 +1,8 @@
 import {AbstractControl, AsyncValidatorFn, FormArray, ValidatorFn} from '@angular/forms';
 
+
 import {ArrayModel} from '../array-model';
+import {AbstractControlOptions} from './ng-abstract';
 
 // ==============================================================================================================================
 // FormArray subclass to be able to adjust the length of the array to the input value of setValue/patchValue
@@ -9,8 +11,9 @@ export class NgFormArray extends FormArray {
   model: ArrayModel;
 
   constructor(
-      controls: AbstractControl[], validator?: ValidatorFn|undefined, asyncValidator?: AsyncValidatorFn|undefined) {
-    super(controls, validator, asyncValidator);
+      controls: AbstractControl[], validatorOrOpts?: ValidatorFn|ValidatorFn[]|AbstractControlOptions|null,
+      asyncValidator?: AsyncValidatorFn|AsyncValidatorFn[]|null) {
+    super(controls, validatorOrOpts, asyncValidator);
   }
 
   setValue(value: any[], options: {onlySelf?: boolean, emitEvent?: boolean} = {}): void {

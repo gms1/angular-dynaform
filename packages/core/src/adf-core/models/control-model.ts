@@ -8,6 +8,8 @@ import {ArrayModel} from './array-model';
 import {AbstractControlModel} from './control-model.interface';
 import {FormModel} from './form-model';
 import {GroupModelBase} from './group-model';
+
+import {AbstractControlOptions} from './internal/ng-abstract';
 import {NgNullControl} from './internal/ng-null-control';
 
 import {JsonPointer} from '../utils/json-pointer';
@@ -44,12 +46,15 @@ export class ValueControlModel extends ControlModelBase<ControlValueOptions> {
       dynamicFormService: DynamicFormService, config: ControlConfig, formModel: FormModel, parentGroup: GroupModelBase,
       parentArray?: ArrayModel, parentArrayIdx?: number) {
     super(
-        dynamicFormService, config, (config.options || {}) as ControlValueOptions, new FormControl({
-          disabled: config.disabled,
-          value: config.options && (config.options as ControlValueOptions).value ?
-              (config.options as ControlValueOptions).value :
-              ''
-        }),
+        dynamicFormService, config, (config.options || {}) as ControlValueOptions,
+        new FormControl(
+            {
+              disabled: config.disabled,
+              value: config.options && (config.options as ControlValueOptions).value ?
+                  (config.options as ControlValueOptions).value :
+                  ''
+            },
+            {updateOn: config.updateOn}),
         formModel, parentGroup, parentArray, parentArrayIdx);
     this.createValidators();
     this.createAsyncValidators();

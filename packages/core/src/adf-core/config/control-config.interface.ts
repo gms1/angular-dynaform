@@ -30,9 +30,16 @@ export interface ControlConfig {
   key?: string;
 
   /**
-   * The disable flag to disable this control
+   * The disable flag to disable this control (FormControls only)
    */
   disabled?: boolean;
+
+  /**
+   * update strategy of the control
+   * (the event on which this control will update itself)
+   * default: 'change'
+   */
+  updateOn?: 'change'|'blur'|'submit';
   /**
    * validators
    * TODO: validators for MODEL_SUBSET

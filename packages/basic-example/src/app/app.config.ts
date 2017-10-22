@@ -13,6 +13,7 @@ import {
 
 export const formConfig: FormConfig = {
   id: 'exampleForm',
+  updateOn: 'blur',
   options: {
     group: [
       {

@@ -4,6 +4,11 @@ export interface FormConfig {
   id: string;
 
   name?: string;
+
+  /**
+   * default update strategy of the form
+   */
+  updateOn?: 'change'|'blur'|'submit';
   /**
    * validators
    */

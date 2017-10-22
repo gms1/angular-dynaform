@@ -25,6 +25,7 @@ export class FormModel {
       id: config.id,
       modelType: ModelType.MODEL_GROUP,
       controlType: ControlType.CONTROL_UNKNOWN,  // this model has no corresponding control component
+      updateOn: config.updateOn,
       validators: config.validators,
       asyncValidators: config.asyncValidators,
       options: config.options,

@@ -5,7 +5,9 @@ import {DynamicFormService} from '../services/dynamic-form.service';
 import {AbstractControlModel} from './control-model.interface';
 import {FormModel} from './form-model';
 import {GroupModelBase} from './group-model';
+
 import {NgFormArray} from './internal/ng-form-array';
+import {AbstractControlOptions} from './internal/ng-abstract';
 
 import {JsonPointer} from '../utils/json-pointer';
 
@@ -38,8 +40,8 @@ export class ArrayModel extends AbstractControlModel<NgFormArray, ArrayOptions> 
       dynamicFormService: DynamicFormService, config: ControlConfig, formModel: FormModel, parentGroup: GroupModelBase,
       parentArray?: ArrayModel, parentArrayIdx?: number) {
     super(
-        dynamicFormService, config, (config.options || {item: {}}) as ArrayOptions, new NgFormArray([]), formModel,
-        parentGroup, parentArray, parentArrayIdx);
+        dynamicFormService, config, (config.options || {item: {}}) as ArrayOptions,
+        new NgFormArray([], {updateOn: config.updateOn}), formModel, parentGroup, parentArray, parentArrayIdx);
     this.items = [];
     this.setCSSClasses(this.css.container, 'adf-array-container');
     this.setCSSClasses(this.css.control, 'adf-array-control');

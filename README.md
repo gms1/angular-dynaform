@@ -36,7 +36,6 @@
 ## TODO list
 
 * angular v5.0 upgrade
-  * support for 'updateOn'
   * enable fullTemplateTypeCheck? (basic-example, material-example, ...)
 * nativescript templates
 * generate JSON Patch (RFC 6902) for changes applied to the form/application data

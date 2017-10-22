@@ -8,6 +8,8 @@ import {DynamicFormService} from '../services/dynamic-form.service';
 import {ArrayModel} from './array-model';
 import {ControlModel, AbstractControlModel} from './control-model.interface';
 import {FormModel} from './form-model';
+
+import {AbstractControlOptions} from './internal/ng-abstract';
 import {NgFormGroup} from './internal/ng-form-group';
 
 import {JsonPointer} from '../utils/json-pointer';
@@ -69,7 +71,9 @@ export class GroupModel extends GroupModelBase {
   constructor(
       dynamicFormService: DynamicFormService, config: ControlConfig, formModel: FormModel, parentGroup?: GroupModelBase,
       parentArray?: ArrayModel, parentArrayIdx?: number) {
-    super(dynamicFormService, config, new NgFormGroup({}), formModel, parentGroup, parentArray, parentArrayIdx);
+    super(
+        dynamicFormService, config, new NgFormGroup({}, {updateOn: config.updateOn}), formModel, parentGroup,
+        parentArray, parentArrayIdx);
     this.createItems();
     this.createValidators();
     this.createAsyncValidators();
