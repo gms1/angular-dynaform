@@ -1,6 +1,6 @@
 {
   "name": "@angular-dynaform/material",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "angular-dynaform - material",
   "author": "Guenter Sandner <www.gms@gmx.at>",
   "license": "MIT",
@@ -25,7 +25,7 @@
     "release:publish": "cd dist && npm --access public publish"
   },
   "dependencies": {
-    "@angular-dynaform/core": "0.0.1",
+    "@angular-dynaform/core": "file:../core/dist",
     "@angular/cdk": "^2.0.0-beta.12",
     "@angular/common": "^5.0.0-rc.3",
     "@angular/core": "^5.0.0-rc.3",
@@ -59,12 +59,12 @@
     "gulp-tslint": "^8.1.2",
     "gulp-typescript": "^3.2.2",
     "gulp-watch": "^4.3.11",
-    "jasmine-core": "~2.8.0",
-    "jasmine-spec-reporter": "~4.2.1",
-    "karma": "~1.7.1",
-    "karma-chrome-launcher": "~2.2.0",
-    "karma-cli": "~1.0.1",
-    "karma-jasmine": "~1.1.0",
+    "jasmine-core": "^2.8.0",
+    "jasmine-spec-reporter": "^4.2.1",
+    "karma": "^1.7.1",
+    "karma-chrome-launcher": "^2.2.0",
+    "karma-cli": "^1.0.1",
+    "karma-jasmine": "^1.1.0",
     "karma-jasmine-html-reporter": "^0.2.2",
     "karma-typescript": "^3.0.8",
     "merge-stream": "^1.0.1",
@@ -75,9 +75,9 @@
     "rollup-plugin-uglify": "^2.0.1",
     "run-sequence": "^2.2.0",
     "sorcery": "^0.10.0",
-    "ts-node": "~3.3.0",
-    "tslint": "~5.8.0",
+    "ts-node": "^3.3.0",
+    "tslint": "^5.8.0",
     "typedoc": "^0.9.0",
-    "typescript": "^2.5.3"
+    "typescript": "<2.5"
   }
 }

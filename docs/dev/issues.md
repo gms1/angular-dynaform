@@ -21,6 +21,9 @@
   [15325](https://github.com/angular/angular/issues/15325) and
   [15127: tracking bug](https://github.com/angular/angular/issues/15127)
 
+* Using Angular 5 (tested with 5.0.0-rc.3) and Typescript > 2.5 (tested with 2.5.3)
+  causes: Can't resolve all parameters for DynamicFormService
+
 ## nativescript-angular:
 
 * FIXED in 4.2: broken 'ngDefaultControl' directive

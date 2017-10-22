@@ -1,6 +1,6 @@
 {
   "name": "@angular-dynaform/material-example",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "license": "MIT",
   "main": "bundle.js",
   "scripts": {
@@ -18,8 +18,8 @@
   },
   "private": true,
   "dependencies": {
-    "@angular-dynaform/core": "0.0.1",
-    "@angular-dynaform/material": "0.0.1",
+    "@angular-dynaform/core": "file:../core/dist",
+    "@angular-dynaform/material": "file:../material/dist",
     "@angular/animations": "^5.0.0-rc.3",
     "@angular/cdk": "^2.0.0-beta.12",
     "@angular/common": "^5.0.0-rc.3",
@@ -59,10 +59,10 @@
     "rollup-plugin-uglify": "^2.0.1",
     "run-sequence": "^2.2.0",
     "sorcery": "^0.10.0",
-    "systemjs": "^0.20.19",
-    "ts-node": "~3.3.0",
-    "tslint": "~5.8.0",
+    "systemjs": "<0.20",
+    "ts-node": "^3.3.0",
+    "tslint": "^5.8.0",
     "typedoc": "^0.9.0",
-    "typescript": "^2.5.3"
+    "typescript": "<2.5"
   }
 }

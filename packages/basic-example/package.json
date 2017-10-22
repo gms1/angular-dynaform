@@ -1,6 +1,6 @@
 {
   "name": "@angular-dynaform/basic-example",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "license": "MIT",
   "main": "bundle.js",
   "scripts": {
@@ -18,8 +18,8 @@
   },
   "private": true,
   "dependencies": {
-    "@angular-dynaform/basic": "0.0.1",
-    "@angular-dynaform/core": "0.0.1",
+    "@angular-dynaform/basic": "file:../basic/dist",
+    "@angular-dynaform/core": "file:../core/dist",
     "@angular/animations": "^5.0.0-rc.3",
     "@angular/common": "^5.0.0-rc.3",
     "@angular/compiler": "^5.0.0-rc.3",
@@ -59,9 +59,9 @@
     "run-sequence": "^2.2.0",
     "sorcery": "^0.10.0",
     "systemjs": "<0.20",
-    "ts-node": "~3.3.0",
-    "tslint": "~5.8.0",
+    "ts-node": "^3.3.0",
+    "tslint": "^5.8.0",
     "typedoc": "^0.9.0",
-    "typescript": "^2.5.3"
+    "typescript": "<2.5"
   }
 }
