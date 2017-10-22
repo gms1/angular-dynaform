@@ -37,7 +37,7 @@
 
 * angular v5 upgrade
   * why angular 5 depends on typescript <2.5
-  * aot: basic-example works after fixing wrong export manually (see below)
+  * aot: basic-example/material-example works after fixing wrong export manually (see below)
   * jit: Can't resolve all parameters for DynamicFormService
   * wrong export in packages/basic-example/tmp/aot/node_modules/@angular-dynaform/basic/lib/index.ngfactory.js
   * enable fullTemplateTypeCheck (basic-example, material-example, ...)
