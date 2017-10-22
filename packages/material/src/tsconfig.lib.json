@@ -11,7 +11,6 @@
     "adf-material/public_api.ts"
   ],
   "angularCompilerOptions": {
-    "genDir": "../dist/lib",
     "annotateForClosureCompiler": true,
     "skipMetadataEmit": false,
     "skipTemplateCodegen": true,

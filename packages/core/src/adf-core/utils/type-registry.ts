@@ -3,9 +3,11 @@ import {Type, Injector} from '@angular/core';
 
 
 export class TypeRegistry<T> {
-  private _reg: Map<string, Type<T>> = new Map<string, Type<T>>();
+  private _reg: Map<string, Type<T>>;
 
   get snapshot(): Map<string, Type<T>> { return new Map<string, Type<T>>(this._reg); }
+
+  constructor() { this._reg = new Map<string, Type<T>>(); }
 
   hasType(name: string): boolean { return this._reg.has(name); }
 

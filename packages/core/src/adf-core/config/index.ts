@@ -10,5 +10,4 @@ export * from './form-i18n.interface';
 import * as modelTypes from './model-type.enum';
 export {modelTypes as ModelType};
 
-import * as controlTypes from './control-types.enum';
-export {controlTypes as ControlType};
+export * from './control-types.enum';

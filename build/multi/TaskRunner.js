@@ -1,4 +1,3 @@
-// clang-format off
 'use strict';
 var sh = require('shelljs');
 
@@ -18,7 +17,7 @@ var TaskRunner = (function() {
     if (!config.rootDir) {
       throw new Error(`property 'rootDir' is not defined in config`);
     }
-    if (!Array.isArray(config.packageDirectories) ) {
+    if (!Array.isArray(config.packageDirectories)) {
       throw new Error(`no 'packageDirectories' defined in config`);
     }
     this.config = config;
@@ -39,7 +38,8 @@ var TaskRunner = (function() {
           this.config.build = Object.assign(this.config.build || {}, hostConfig);
         }
       }
-    } catch (ignore) { }
+    } catch (ignore) {
+    }
 
     this.tasks = {
       clean: () => { this.clean(); },
@@ -53,7 +53,6 @@ var TaskRunner = (function() {
       listPackages: () => { this.listPackages(); },
       listOutdated: () => { this.listOutdated(); },
     };
-
   };
 
   // ========================================================
@@ -86,10 +85,13 @@ var TaskRunner = (function() {
 
       this._packages.push(pkgDef);
     });
-  }
+  };
+
+
   // ========================================================
 
-  TaskRunner.prototype.execTask = function(task, options, callback) {
+  TaskRunner.prototype.execTask =
+      function(task, options, callback) {
     sh.config.fatal = false;
     if (sh.exec(task, options, callback).code !== 0) {
       sh.config.fatal = true;
@@ -99,16 +101,16 @@ var TaskRunner = (function() {
     return 0;
   }
 
-  // ========================================================
-  // runTasksForPackage
-  // runs specified tasks for specified package
-  //------------------------------------------------------
-  TaskRunner.prototype.runTasksForPackage = function(pkg, tasks, taskOptions) {
+      // ========================================================
+      // runTasksForPackage
+      //------------------------------------------------------
+      // run provided tasks for provided package
+      TaskRunner.prototype.runTasksForPackage = function(pkg, tasks, taskOptions) {
     let prompt = `${pkg.name}$`;
     let relDir;
     try {
       sh.cd(pkg.dir);
-      console.log("____________________________________________________________");
+      console.log('____________________________________________________________');
       tasks.forEach((task) => {
         console.log(`${prompt} ${task}`);
         let matches = task.match(/^\s*cd(\s+([\S]+))?\s*$/);
@@ -134,13 +136,15 @@ var TaskRunner = (function() {
       });
     } catch (err) {
       err.message = `${prompt} ${err.message}`;
-      throw (err);
+      throw(err);
     }
-  }
+  };
+
+
   // ========================================================
   // runTasksForPackages
-  // runs specified tasks for all specified packages
   //------------------------------------------------------
+  // run provided tasks for all provided packages
   TaskRunner.prototype.runTasksForPackages = function(packages, tasks, taskOptions) {
     let rc = 0;
     packages.forEach((pkg) => {
@@ -156,79 +160,65 @@ var TaskRunner = (function() {
     if (rc) {
       throw new Error('failed');
     }
-  }
+  };
 
   // ========================================================
   // runTasksForAllPackages
-  // runs specified tasks for all known packages
   //------------------------------------------------------
-
   TaskRunner.prototype.runTasksForAllPackages = function(tasks, taskOptions) {
     this.runTasksForPackages(this._packages, tasks, taskOptions);
-  }
+  };
 
   // ========================================================
-  // npmRunScriptForAllPackages
-  // runs specified script for all known packages
+  // npm run-script
   //------------------------------------------------------
-  TaskRunner.prototype.npmRunScriptForAllPackages = function (script) {
-    this.runTasksForPackages(this._packages.filter((pkg) => { return pkg.json && pkg.json.scripts && pkg.json.scripts[script]; }),
-      [`npm run-script ${script}`]);
-  }
+  TaskRunner.prototype.npmRunScriptForAllPackages = function(script) {
+    this.runTasksForPackages(
+        this._packages.filter((pkg) => { return pkg.json && pkg.json.scripts && pkg.json.scripts[script]; }),
+        [`npm run-script ${script}`]);
+  };
 
   // ========================================================
   // clean
   //------------------------------------------------------
   // run 'clean' on all projects except for the 'main' project
-  TaskRunner.prototype.clean = function() {
-    this.npmRunScriptForAllPackages('clean');
-  }
+  TaskRunner.prototype.clean = function() { this.npmRunScriptForAllPackages('clean'); };
 
   // ========================================================
   // build
   //------------------------------------------------------
   // run 'build' on all projects except for the 'main' project
-  TaskRunner.prototype.build = function() {
-    this.npmRunScriptForAllPackages('build');
-  }
+  TaskRunner.prototype.build = function() { this.npmRunScriptForAllPackages('build'); };
 
   // ========================================================
   // rebuild
   //------------------------------------------------------
   // run 'rebuild' all projects except for the 'main' project
-  TaskRunner.prototype.rebuild = function () {
-    this.npmRunScriptForAllPackages('rebuild');
-  }
+  TaskRunner.prototype.rebuild = function() { this.npmRunScriptForAllPackages('rebuild'); };
 
   // ========================================================
   // test
   //------------------------------------------------------
   // run 'test' on all projects except for the 'main' project
-  TaskRunner.prototype.test = function() {
-    this.npmRunScriptForAllPackages('test');
-  }
+  TaskRunner.prototype.test = function() { this.npmRunScriptForAllPackages('test'); };
 
   // ========================================================
   // releaseBuild
   //------------------------------------------------------
   // run 'release:build' on all projects except for the 'main' project
-  TaskRunner.prototype.releaseBuild = function() {
-    this.npmRunScriptForAllPackages('release:build');
-  }
+  TaskRunner.prototype.releaseBuild = function() { this.npmRunScriptForAllPackages('release:build'); };
 
   // ========================================================
   // releasePublish
   //------------------------------------------------------
   // run 'release:publish' on all projects except for the 'main' project
-  TaskRunner.prototype.releasePublish = function() {
-    this.npmRunScriptForAllPackages('release:publish');
-  }
+  TaskRunner.prototype.releasePublish = function() { this.npmRunScriptForAllPackages('release:publish'); };
 
 
   // ========================================================
   // bootstrap
   //------------------------------------------------------
-  // npm link and npm install for all projects
+  // npm install for all projects
   // TODO: install global packages
   //		GLOBALS=$$(npm -g ls -depth 0 2>/dev/null);\
   //		echo $$GLOBALS | grep -qw gulp-cli    || { echo "global gulp-cli is not installed" >&2; exit 1; }; \
@@ -245,34 +235,28 @@ var TaskRunner = (function() {
       let tasks = [];
       let depPackages = [];
       this._packages.forEach((otherPkg) => {
-        if (pkg.json.dependencies && pkg.json.dependencies[otherPkg.name]
-          || pkg.json.devDependencies && pkg.json.devDependencies[otherPkg.name]
-          || pkg.json.optionalDependencies && pkg.json.optionalDependencies[otherPkg.name]
-        ) {
+        if (pkg.json.dependencies && pkg.json.dependencies[otherPkg.name] ||
+            pkg.json.devDependencies && pkg.json.devDependencies[otherPkg.name] ||
+            pkg.json.optionalDependencies && pkg.json.optionalDependencies[otherPkg.name]) {
           depPackages.push(otherPkg);
         }
       });
       // link dependencies
-      depPackages.forEach((depPkg) => {
-        tasks.push(`npm link ${depPkg.name}`);
-      });
+      // we are using file: instead because link gets overwritten by 'npm install'
+      // depPackages.forEach((depPkg) => { tasks.push(`npm link ${depPkg.name}`); });
       // install and build
       tasks.push(`npm install`);
       if (!pkg.isMain) {
         tasks.push(`npm run-script clean`);
         tasks.push(`npm run-script build`);
         // handle dist package
-        tasks.push(`cd dist`);
-        // link dist dependencies
-        depPackages.forEach((depPkg) => {
-          tasks.push(`npm link ${depPkg.name}`);
-        });
+        // tasks.push(`cd dist`);
         // create link for this project
-        tasks.push(`npm link .`);
+        // tasks.push(`npm link .`);
       }
       this.runTasksForPackage(pkg, tasks);
     });
-  }
+  };
 
 
 
@@ -282,12 +266,10 @@ var TaskRunner = (function() {
   // delete all node_modules directory and run bootstrap
   TaskRunner.prototype.reinstall = function() {
     let rimrafpath = path.join(this.packageBinPath, 'rimraf');
-    this.runTasksForAllPackages([
-      `${rimrafpath} node_modules package-lock.json`,
-      `${rimrafpath} dist/node_modules dist/package-lock.json`
-    ]);
+    this.runTasksForAllPackages(
+        [`${rimrafpath} node_modules package-lock.json`, `${rimrafpath} dist/node_modules dist/package-lock.json`]);
     this.bootstrap();
-  }
+  };
 
 
   // ========================================================
@@ -307,26 +289,21 @@ var TaskRunner = (function() {
         }
       });
     }
-  }
+  };
 
   // ========================================================
   // listOutdated
   //------------------------------------------------------
-  // list outdated npm-packages for all non-optional and selected optional packages
+  // list outdated npm-packages for all non-optional and selected
+  // optional packages
 
   TaskRunner.prototype.listOutdated = function() {
     // npm-check-updates provides 'ncu' and must be installed globally
-    this.runTasksForAllPackages([
-      'echo "" | ncu '
-    ]);
-  }
+    this.runTasksForAllPackages(['echo "" | ncu ']);
+  };
 
   // ========================================================
 
   return TaskRunner;
 }());
 module.exports.TaskRunner = TaskRunner;
-
-
-
-

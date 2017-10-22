@@ -29,14 +29,16 @@ export class DynamicFormFormControlComponent extends DynamicFormControlComponent
   options: GroupOptions;
 
   @Output()
-  submit: EventEmitter<any> = new EventEmitter<any>(false);
+  submit: EventEmitter<any>;
 
   @Output()
-  reset: EventEmitter<any> = new EventEmitter<any>(false);
+  reset: EventEmitter<any>;
 
 
   constructor(public form: DynamicForm, public dynamicFormService: DynamicFormService) {
     super(form, dynamicFormService);
+    this.submit = new EventEmitter<any>(false);
+    this.reset = new EventEmitter<any>(false);
   }
 
   ngOnChanges(changes: SimpleChanges): void { super.ngOnChanges(changes); }

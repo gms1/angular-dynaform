@@ -33,25 +33,17 @@ echo "*** install main: done"
     echo "*** build   package/core..."
     gulp rebuild                        || die "failed to build package 'core'"
     echo "*** build   package/core: done"
-    pushd "dist" &>/dev/null            || die "failed to cwd 'packages/core/dist'"
-      npm link . &>/dev/null            || die "failed to create npm-link for package 'core'"
-    popd &>/dev/null
   popd &>/dev/null
 
   # --- basic package
   pushd "packages/basic" &>/dev/null    || die "failed to cwd 'packages/basic'"
 
     echo "*** install package/basic..."
-    npm link "@angular-dynaform/core" &>/dev/null \
-                                        || die "failed to npm-link package 'core'"
     npm install &>/dev/null             || die "failed to install package 'basic'"
     echo "*** install package/basic: done"
     echo "*** build   package/basic..."
     gulp rebuild                        || die "failed to build package 'basic'"
     echo "*** build   package/basic: done"
-    pushd "dist" &>/dev/null            || die "failed to cwd 'packages/basic/dist'"
-      npm link . &>/dev/null            || die "failed to create npm-link for package 'basic'"
-    popd &>/dev/null
   popd &>/dev/null
 
   # --- basic-example package
@@ -59,10 +51,6 @@ echo "*** install main: done"
                                         || die "failed to cwd 'packages/basic-example'"
 
     echo "*** install package/basic-example..."
-    npm link "@angular-dynaform/core" &>/dev/null \
-                                        || die "failed to npm-link package 'core'"
-    npm link "@angular-dynaform/basic" &>/dev/null \
-                                        || die "failed to npm-link package 'basic'"
     npm install &>/dev/null             || die "failed to install package 'basic-example'"
     echo "*** install package/basic-example: done"
     echo "*** build   package/basic-example..."

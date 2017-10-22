@@ -1,3 +1,3 @@
 export * from './dynamic-nativescript-form.module';
-export * from './components';
-export * from './models';
+export * from './components/index';
+export * from './models/index';

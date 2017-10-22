@@ -6,7 +6,7 @@ import {DynamicFormErrorComponent} from '../components/dynamic-form-error.compon
 // tslint:disable-next-line no-unused-variable  ?
 import {DynamicFormFormControlComponent} from '../components/dynamic-form-form-control.component';
 import {ControlConfig} from '../config/control-config.interface';
-import * as ControlType from '../config/control-types.enum';
+import {ControlType} from '../config/control-types.enum';
 
 import {DynamicFormService} from './dynamic-form.service';
 

@@ -1,6 +1,6 @@
 {
   "name": "@angular-dynaform/nativescript",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "angular-dynaform - NativeScript",
   "author": "Guenter Sandner <www.gms@gmx.at>",
   "license": "MIT",
@@ -29,10 +29,10 @@
     "release:publish": "cd dist && npm --access public publish"
   },
   "dependencies": {
-    "@angular-dynaform/core": "0.0.1",
-    "@angular/common": "~4.4.6",
-    "@angular/core": "~4.4.6",
-    "@angular/forms": "~4.4.6",
+    "@angular-dynaform/core": "file:../core/dist",
+    "@angular/common": "^5.0.0-rc.3",
+    "@angular/core": "^5.0.0-rc.3",
+    "@angular/forms": "^5.0.0-rc.3",
     "core-js": "^2.5.1",
     "nativescript-angular": "^4.4.1",
     "rxjs": "^5.5.0",
@@ -40,11 +40,11 @@
     "zone.js": "^0.8.18"
   },
   "devDependencies": {
-    "@angular/compiler": "~4.4.6",
-    "@angular/compiler-cli": "~4.4.6",
-    "@angular/http": "^4.4.6",
-    "@angular/platform-browser": "^4.4.6",
-    "@angular/router": "^4.4.6",
+    "@angular/compiler": "^5.0.0-rc.3",
+    "@angular/compiler-cli": "^5.0.0-rc.3",
+    "@angular/http": "^5.0.0-rc.3",
+    "@angular/platform-browser": "^5.0.0-rc.3",
+    "@angular/router": "^5.0.0-rc.3",
     "@types/gulp": "^4.0.4",
     "@types/jasmine": "^2.6.0",
     "@types/node": "^8.0.46",
@@ -78,9 +78,9 @@
     "rollup-plugin-uglify": "^2.0.1",
     "run-sequence": "^2.2.0",
     "sorcery": "^0.10.0",
-    "ts-node": "~3.3.0",
-    "tslint": "~5.8.0",
+    "ts-node": "^3.3.0",
+    "tslint": "^5.8.0",
     "typedoc": "^0.9.0",
-    "typescript": "^2.5.3"
+    "typescript": "<2.5"
   }
 }

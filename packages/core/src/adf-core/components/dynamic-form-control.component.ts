@@ -29,15 +29,19 @@ export class DynamicFormControlComponentBase implements DynamicFormControl {
   options: ControlOptions;
 
   @Output()
-  focusChanges: EventEmitter<any> = new EventEmitter<any>();
+  focusChanges: EventEmitter<any>;
 
   @Output()
-  click: EventEmitter<any> = new EventEmitter<any>();
+  click: EventEmitter<any>;
 
   action?: DynamicFormAction;
   buttonType: string;
 
-  constructor(public form: DynamicForm, public dynamicFormService: DynamicFormService) { this.buttonType = 'button'; }
+  constructor(public form: DynamicForm, public dynamicFormService: DynamicFormService) {
+    this.focusChanges = new EventEmitter<any>();
+    this.click = new EventEmitter<any>();
+    this.buttonType = 'button';
+  }
 
   ngOnChanges(changes: SimpleChanges): void {}
 

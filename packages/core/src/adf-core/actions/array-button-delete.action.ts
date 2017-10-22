@@ -9,7 +9,12 @@ import {DynamicFormAction} from './dynamic-form.action';
 // delete array item
 
 export class ArrayButtonDeleteAction extends DynamicFormAction {
-  private unsubscribe: Subject<any> = new Subject<any>();
+  private unsubscribe: Subject<any>;
+
+  constructor() {
+    super();
+    this.unsubscribe = new Subject<any>();
+  }
 
   ngOnInit(): void {
     super.ngOnInit();

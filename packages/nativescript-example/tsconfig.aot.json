@@ -2,12 +2,12 @@
   "extends": "./tsconfig",
   "compilerOptions": {
     "baseUrl": ".",
-        "paths": {
-            "*": [
-                "./node_modules/tns-core-modules/*",
-                "./node_modules/*"
-            ]
-        },
+    "paths": {
+      "*": [
+        "./node_modules/tns-core-modules/*",
+        "./node_modules/*"
+      ]
+    },
     "skipLibCheck": true
   },
   "exclude": [
@@ -15,7 +15,6 @@
     "platforms"
   ],
   "angularCompilerOptions": {
-    "skipMetadataEmit": true,
-    "genDir": "./"
+    "skipMetadataEmit": true
   }
 }

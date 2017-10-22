@@ -10,8 +10,13 @@ import {DynamicFormAction} from './dynamic-form.action';
 // enable the submit button if form is valid, disable otherwise
 
 export class SubmitButtonAction extends DynamicFormAction {
-  private unsubscribe: Subject<any> = new Subject<any>();
+  private unsubscribe: Subject<any>;
   private rootFormGroup: FormGroup;
+
+  constructor() {
+    super();
+    this.unsubscribe = new Subject<any>();
+  }
 
   ngOnInit(): void {
     super.ngOnInit();

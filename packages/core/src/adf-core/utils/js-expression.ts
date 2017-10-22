@@ -9,8 +9,8 @@ interface JsVariable {
 
 
 export class JsExpression {
-  private _variables: JsVariable[] = [];
-  private _compiling: boolean = false;
+  private _variables: JsVariable[];
+  private _compiling: boolean;
   private _context: any;
   private _thisArg: any;
 
@@ -19,7 +19,10 @@ export class JsExpression {
   get thisArg(): any { return this._thisArg; }
   set thisArg(thisArg: any) { this._thisArg = thisArg; }
 
-  constructor() {}
+  constructor() {
+    this._variables = [];
+    this._compiling = false;
+  }
 
 
   private _fn: () => any = () => {};

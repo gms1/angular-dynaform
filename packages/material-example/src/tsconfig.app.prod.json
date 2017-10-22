@@ -17,7 +17,6 @@
     "**/*.jit.ts"
   ],
   "angularCompilerOptions": {
-    "genDir": "./aot",
     "skipMetadataEmit": true,
     "skipTemplateCodegen": false,
     "debug": false

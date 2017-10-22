@@ -1,6 +1,6 @@
 {
   "name": "@angular-dynaform/basic-example",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "license": "MIT",
   "main": "bundle.js",
   "scripts": {
@@ -18,17 +18,17 @@
   },
   "private": true,
   "dependencies": {
-    "@angular-dynaform/basic": "0.0.1",
-    "@angular-dynaform/core": "0.0.1",
-    "@angular/animations": "~4.4.6",
-    "@angular/common": "~4.4.6",
-    "@angular/compiler": "~4.4.6",
-    "@angular/core": "~4.4.6",
-    "@angular/forms": "~4.4.6",
-    "@angular/http": "~4.4.6",
-    "@angular/platform-browser": "~4.4.6",
-    "@angular/platform-browser-dynamic": "~4.4.6",
-    "@angular/router": "~4.4.6",
+    "@angular-dynaform/basic": "file:../basic/dist",
+    "@angular-dynaform/core": "file:../core/dist",
+    "@angular/animations": "^5.0.0-rc.3",
+    "@angular/common": "^5.0.0-rc.3",
+    "@angular/compiler": "^5.0.0-rc.3",
+    "@angular/core": "^5.0.0-rc.3",
+    "@angular/forms": "^5.0.0-rc.3",
+    "@angular/http": "^5.0.0-rc.3",
+    "@angular/platform-browser": "^5.0.0-rc.3",
+    "@angular/platform-browser-dynamic": "^5.0.0-rc.3",
+    "@angular/router": "^5.0.0-rc.3",
     "core-js": "^2.5.1",
     "hammerjs": "^2.0.8",
     "reflect-metadata": "^0.1.10",
@@ -36,8 +36,8 @@
     "zone.js": "^0.8.18"
   },
   "devDependencies": {
-    "@angular/compiler-cli": "~4.4.6",
-    "@angular/platform-server": "~4.4.6",
+    "@angular/compiler-cli": "^5.0.0-rc.3",
+    "@angular/platform-server": "^5.0.0-rc.3",
     "@types/gulp": "^4.0.4",
     "@types/node": "^8.0.46",
     "child_process": "^1.0.2",
@@ -59,9 +59,9 @@
     "run-sequence": "^2.2.0",
     "sorcery": "^0.10.0",
     "systemjs": "<0.20",
-    "ts-node": "~3.3.0",
-    "tslint": "~5.8.0",
+    "ts-node": "^3.3.0",
+    "tslint": "^5.8.0",
     "typedoc": "^0.9.0",
-    "typescript": "^2.5.3"
+    "typescript": "<2.5"
   }
 }

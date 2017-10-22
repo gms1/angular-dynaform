@@ -35,6 +35,10 @@
 
 ## TODO list
 
+* angular v5 upgrade
+  * aot: basic-example/material-example works after fixing wrong export manually (see below)
+  * wrong export in packages/basic-example/tmp/aot/node_modules/@angular-dynaform/basic/lib/index.ngfactory.js
+  * enable fullTemplateTypeCheck (basic-example, material-example, ...)
 * nativescript templates
 * generate JSON Patch (RFC 6902) for changes applied to the form/application data
 * enable/disable or show/hide fields based on conditions defined on related field values
