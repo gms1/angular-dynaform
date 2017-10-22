@@ -24,6 +24,14 @@
 * Using Angular 5 (tested with 5.0.0-rc.3) and Typescript > 2.5 (tested with 2.5.3)
   causes: Can't resolve all parameters for DynamicFormService
 
+* building the AOT examples using Angular 5 (tested with 5.0.0-rc.3) I got wrong exports:
+
+  e.g packages/material-example/tmp/aot/node_modules/@angular-dynaform/material/lib/index.ngfactory.js
+
+    export { MaterialControlType as MaterialControlType_1 } from "./models/index";
+
+ appending '/index' to the exports from public_api.ts in the library solved this issue
+
 ## nativescript-angular:
 
 * FIXED in 4.2: broken 'ngDefaultControl' directive

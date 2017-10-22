@@ -8,9 +8,6 @@ pushd "${DN}" &>/dev/null
   rm -rf platforms/*
   rm -rf hooks/
   
-  npm link '@angular-dynaform/core'
-  npm link '@angular-dynaform/nativescript'
-
   npm install
 
   tns prepare android

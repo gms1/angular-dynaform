@@ -1,3 +1,3 @@
 export * from './dynamic-basic-form.module';
-export * from './components';
-export * from './models/control-types.enum';
+export * from './components/index';
+export * from './models/index';
