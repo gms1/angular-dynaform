@@ -17,7 +17,7 @@ import {BasicSeparatorComponent} from './components/basic-separator.component';
 import {BasicSliderComponent} from './components/basic-slider.component';
 import {BasicSwitchComponent} from './components/basic-switch.component';
 import {BasicTextareaComponent} from './components/basic-textarea.component';
-import {BasicControlType} from './models';
+import {BasicControlType} from './models/control-types.enum';
 
 const moduleDeclarations: any[] = [
   BasicFormComponent, BasicErrorComponent, BasicArrayComponent, BasicDivisionComponent, BasicFieldsetComponent,

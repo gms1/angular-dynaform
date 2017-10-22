@@ -27,7 +27,7 @@ import {MaterialSeparatorComponent} from './components/material-separator.compon
 import {MaterialSliderComponent} from './components/material-slider.component';
 import {MaterialSwitchComponent} from './components/material-switch.component';
 import {MaterialTextareaComponent} from './components/material-textarea.component';
-import {MaterialControlType} from './models';
+import {MaterialControlType} from './models/control-types.enum';
 
 const moduleDeclarations: any[] = [
   MaterialFormComponent, MaterialErrorComponent, MaterialArrayComponent, MaterialDivisionComponent,

@@ -24,7 +24,7 @@ import {NativeScriptSliderComponent} from './components/nativescript-slider.comp
 
 import {NativeScriptSwitchComponent} from './components/nativescript-switch.component';
 import {NativeScriptTextViewComponent} from './components/nativescript-textview.component';
-import {NativeScriptControlType} from './models';
+import {NativeScriptControlType} from './models/control-types.enum';
 
 const entryComponents: any[] = [
   NativeScriptFormComponent, NativeScriptErrorComponent, NativeScriptArrayComponent, NativeScriptDivisionComponent,
