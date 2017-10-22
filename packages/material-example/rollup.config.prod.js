@@ -7,7 +7,7 @@ const pkg = require('./package.json');
 const externalGlobals = require('./rollup-external-globals.json');
 
 module.exports = {
-  input: 'tmp/aot/main.aot.js',
+  input: 'tmp/aot/src/main.aot.js',
   output: {
     file: `dist/${pkg.main}`,
     format: 'iife',
