@@ -35,17 +35,15 @@
 
 ## TODO list
 
-* angular v5 upgrade
-  * aot: basic-example/material-example works after fixing wrong export manually (see below)
-  * wrong export in packages/basic-example/tmp/aot/node_modules/@angular-dynaform/basic/lib/index.ngfactory.js
-  * enable fullTemplateTypeCheck (basic-example, material-example, ...)
+* angular v5.0 upgrade
+  * support for 'updateOn'
+  * enable fullTemplateTypeCheck? (basic-example, material-example, ...)
 * nativescript templates
 * generate JSON Patch (RFC 6902) for changes applied to the form/application data
 * enable/disable or show/hide fields based on conditions defined on related field values
 * multi-page/step forms
 * support for angular's internationalization
   (depends on angular v5.x [#11405](https://github.com/angular/angular/issues/11405))
-* support for validation on blur event (depends on angular v5 [#18514](https://github.com/angular/angular/pull/18514))
 * observable select options
 * advanced formatting/parsing of form values
 * autocomplete
