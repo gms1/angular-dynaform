@@ -31,7 +31,7 @@ echo "*** install main: done"
     npm install &>/dev/null             || die "failed to install package 'core'"
     echo "*** install package/core: done"
     echo "*** build   package/core..."
-    gulp rebuild                        || die "failed to build package 'core'"
+    gulp rebuild --prod                 || die "failed to build package 'core'"
     echo "*** build   package/core: done"
   popd &>/dev/null
 
@@ -42,7 +42,7 @@ echo "*** install main: done"
     npm install &>/dev/null             || die "failed to install package 'basic'"
     echo "*** install package/basic: done"
     echo "*** build   package/basic..."
-    gulp rebuild                        || die "failed to build package 'basic'"
+    gulp rebuild --prod                 || die "failed to build package 'basic'"
     echo "*** build   package/basic: done"
   popd &>/dev/null
 
@@ -54,7 +54,7 @@ echo "*** install main: done"
     npm install &>/dev/null             || die "failed to install package 'basic-example'"
     echo "*** install package/basic-example: done"
     echo "*** build   package/basic-example..."
-    gulp rebuild                        || die "failed to build package 'basic-example'"
+    gulp rebuild --prod                 || die "failed to build package 'basic-example'"
     echo "*** build   package/basic-example: done"
   popd &>/dev/null
   

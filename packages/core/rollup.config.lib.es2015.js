@@ -3,7 +3,8 @@ const commonjs = require('rollup-plugin-commonjs');
 const path = require('path');
 
 const pkg = require('./package.json');
-const externalGlobals = require('./rollup-external-globals.json');
+const globals = require('./rollup-globals.json');
+const externals = require('./rollup-externals.json');
 
 const utc = new Date().toJSON();
 const moduleName = 'adf.core';
@@ -17,13 +18,12 @@ module.exports = {
   output: {
     name: moduleName,
     file: `dist/${pkg.es2015}`,
-    format: 'es',
-    globals: externalGlobals,
+    format: 'es', globals,
     banner: `/*!\n${pkg.name} ${pkg.version} ${utc} \n*/`,
     sourcemap: true,
   },
 
-  external: Object.keys(externalGlobals).filter((glob) => glob !== 'tslib'),
+  external: Object.keys(externals),
   context: 'this',
   plugins: [
     nodeResolve({es2015: true, jsnext: true, module: true, main: true}),

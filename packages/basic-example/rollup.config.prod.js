@@ -4,14 +4,13 @@ const commonjs = require('rollup-plugin-commonjs');
 const uglify = require('rollup-plugin-uglify');
 
 const pkg = require('./package.json');
-const externalGlobals = require('./rollup-external-globals.json');
+const globals = require('./rollup-globals.json');
 
 module.exports = {
   input: 'tmp/aot/src/main.aot.js',
   output: {
     file: `dist/${pkg.main}`,
-    format: 'iife',
-    globals: externalGlobals,
+    format: 'iife', globals,
     sourcemap: true,
   },
   plugins: [

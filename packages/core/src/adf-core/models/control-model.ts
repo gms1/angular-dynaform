@@ -12,7 +12,7 @@ import {GroupModelBase} from './group-model';
 import {AbstractControlOptions} from './internal/ng-abstract';
 import {NgNullControl} from './internal/ng-null-control';
 
-import {JsonPointer} from '../utils/json-pointer';
+import {JsonPointer} from 'jsonpointerx';
 
 // basic controls for MODEL_VALUE, MODEL_NULL
 //   having a ngControl property of type FormControl

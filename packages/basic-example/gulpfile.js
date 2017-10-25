@@ -70,18 +70,11 @@ function config(target /* 'production' or 'development' */) {
             }
           },
           {
-            name: 'sorcery:main',
-            operation: {
-              type: 'sorcery',
-              file: `dist/${pkg.main}`,
-            }
-          },
-          {
             name: 'rollup:app',
             deps: [taskAppTranspile],
             operation: {
               type: 'sequence',
-              sequence: ['rollup:main', 'sorcery:main'],
+              sequence: ['rollup:main'],
             }
           },
           {name: 'build', deps: ['dist:files', 'ts:lint', 'rollup:app']}, {

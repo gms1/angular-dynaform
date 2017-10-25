@@ -12,7 +12,7 @@ import {FormModel} from './form-model';
 import {AbstractControlOptions} from './internal/ng-abstract';
 import {NgFormGroup} from './internal/ng-form-group';
 
-import {JsonPointer} from '../utils/json-pointer';
+import {JsonPointer} from 'jsonpointerx';
 
 // groups for model type MODEL_GROUP (GroupModel)
 //   have their own FormGroup assigned to the ngControl property

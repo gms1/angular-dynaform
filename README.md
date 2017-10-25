@@ -35,6 +35,7 @@
 
 ## TODO list
 
+* TODO: disable config option should work for groups and arrays
 * nativescript templates
 * generate JSON Patch (RFC 6902) for changes applied to the form/application data
 * enable/disable or show/hide fields based on conditions defined on related field values
@@ -181,6 +182,12 @@ call 'dynaForm.initValueFromAppModel' instead of 'dynaForm.initValue' and 'dynaF
 * custom components (DI)
 * custom form actions (no DI)
 
-## ChangeLog
+## License
+
+**angular-dynaform** is licensed under the MIT 
+
+[LICENSE](./LICENSE)
+
+## Release Notes
 
 [CHANGELOG](./CHANGELOG.md)

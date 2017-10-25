@@ -12,7 +12,7 @@ import {GroupModelBase} from './group-model';
 
 import {CSSModel} from './css-model';
 
-import {JsonPointer} from '../utils/json-pointer';
+import {JsonPointer} from 'jsonpointerx';
 
 
 // the root node of the model-tree is of type GroupModel without a parentGroup property
@@ -191,10 +191,10 @@ export abstract class AbstractControlModel<C extends AbstractControl, O extends 
 
   private initJpForm(): void {
     if (this.parentGroup) {
-      this._jpForm = this.parentGroup.jpForm.concatKey(this.key);
+      this._jpForm = this.parentGroup.jpForm.concatSegment(this.key);
     } else if (this.parentArray) {
       // this is the root of an array item => point to the array index (ignoring the key)
-      this._jpForm = this.parentArray.jpForm.concatKey((this.parentArrayIdx as number).toString());
+      this._jpForm = this.parentArray.jpForm.concatSegment((this.parentArrayIdx as number).toString());
     } else {
       // this is the root of the form model => point to the whole document (ignoring the key)
       // note: '/' would point to { '': 'here' }

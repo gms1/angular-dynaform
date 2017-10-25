@@ -9,7 +9,7 @@ import {GroupModelBase} from './group-model';
 import {NgFormArray} from './internal/ng-form-array';
 import {AbstractControlOptions} from './internal/ng-abstract';
 
-import {JsonPointer} from '../utils/json-pointer';
+import {JsonPointer} from 'jsonpointerx';
 
 const HEADER_IDX = -1;
 const FOOTER_IDX = -2;

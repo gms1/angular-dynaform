@@ -48,6 +48,7 @@ System.config({
 
     'tslib': 'npm-ext:tslib',
     'rxjs': 'npm-ext:rxjs',
+    'jsonpointerx': 'npm-ext:jsonpointerx/bundles/jsonpointerx.umd.js',
 
     '@angular-dynaform/core': 'npm-int:@angular-dynaform/core/bundles/adf.core.umd.js',
     '@angular-dynaform/material': 'npm-int:@angular-dynaform/material/bundles/adf.material.umd.js',

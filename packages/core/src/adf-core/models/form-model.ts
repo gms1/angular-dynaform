@@ -8,7 +8,7 @@ import {DynamicFormService} from '../services/dynamic-form.service';
 
 import {GroupModel} from './group-model';
 
-import {JsonPointer} from '../utils/json-pointer';
+import {JsonPointer} from 'jsonpointerx';
 
 export class FormModel {
   dynamicFormService: DynamicFormService;

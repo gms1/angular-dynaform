@@ -87,20 +87,13 @@ function config(target /* 'production' or 'development' */) {
             }
           },
           {
-            name: 'sorcery:es2015',
-            operation: {
-              type: 'sorcery',
-              file: `dist/${pkg.es2015}`,
-            }
-          },
-          {
             name: 'ts:tsc:esm:input',
             // deps: ['rollup:es2015'],
             operation: {
               type: 'copyFile',
               src: `dist/${pkg.es2015}`,
               base: `dist/${pkg.es2015}`,
-              out: `dist/${srcModulePath}`,
+              out: `dist/${srcModulePath}`,  // TODO: delete temporary file
             }
           },
           {
@@ -119,13 +112,6 @@ function config(target /* 'production' or 'development' */) {
             }
           },
           {
-            name: 'sorcery:module',
-            operation: {
-              type: 'sorcery',
-              file: `dist/${pkg.module}`,
-            }
-          },
-          {
             // main / umd module (ES5)
             name: 'rollup:main',
             // deps: ['ts:tsc:esm'],
@@ -136,21 +122,11 @@ function config(target /* 'production' or 'development' */) {
             }
           },
           {
-            name: 'sorcery:main',
-            operation: {
-              type: 'sorcery',
-              file: `dist/${pkg.main}`,
-            }
-          },
-          {
             name: 'rollup:lib',
             deps: ['ts:ngc'],
             operation: {
               type: 'sequence',
-              sequence: [
-                'rollup:es2015', 'sorcery:es2015', 'ts:tsc:esm:input', 'ts:tsc:esm', 'sorcery:module', 'rollup:main',
-                'sorcery:main'
-              ],
+              sequence: ['rollup:es2015', 'ts:tsc:esm:input', 'ts:tsc:esm', 'rollup:main'],
             }
           },
           {
