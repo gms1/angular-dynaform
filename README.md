@@ -65,6 +65,12 @@ npm install @angular-dynaform/core --save
 npm install @angular-dynaform/material --save
 ```
 
+> NOTE: please install required peer dependencies if they are not already installed
+
+```shell
+npm install @angular/common @angular/core @angular/forms rxjs jsep jsonpointerx
+```
+
 ## Basic Usage
 
 * import the form modules in the root NgModule of your application:
