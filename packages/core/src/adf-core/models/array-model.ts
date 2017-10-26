@@ -58,7 +58,7 @@ export class ArrayModel extends AbstractControlModel<NgFormArray, ArrayOptions> 
     this.createValidators();
     this.createAsyncValidators();
     if (config.disabled) {
-      this.ngControl.disable();
+      this.disable();
     }
   }
 

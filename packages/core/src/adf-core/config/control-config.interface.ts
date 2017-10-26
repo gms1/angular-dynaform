@@ -3,6 +3,23 @@ import {ControlOptions} from './control-options.interface';
 
 // tslint:disable: no-empty-interface
 
+/**
+ * define conditions (javascript expressions) based
+ * on predicate values of related form controls
+ *
+ * a child with the key 'foo' in the root-FormGroup
+ * can be referenced as 'foo'. If this child is a FormGroup
+ * having a child 'bar', the later can be referenced by 'foo.bar'
+ *
+ * additional the 'this' keyword will be bound to the AbstractControl
+ * where this expression is defined
+ *
+ */
+export interface RelationExpressions {
+  enable?: string;
+  show?: string;
+}
+
 
 export interface ControlConfig {
   /**
@@ -31,7 +48,6 @@ export interface ControlConfig {
 
   /**
    * The disable flag to disable this control
-   * ignore for MODEL_SUBSET
    */
   disabled?: boolean;
 
@@ -53,6 +69,13 @@ export interface ControlConfig {
    * ignore for MODEL_NULL
    */
   asyncValidators?: string|string[];
+
+  /**
+   * relations
+   * javascript expressions to enable/disabe and show/hide controls
+   *
+   */
+  relations?: RelationExpressions;
 
   /**
    * action

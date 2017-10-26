@@ -1,6 +1,5 @@
 // tslint:disable use-life-cycle-interface
-// tslint:disable-next-line no-import-side-effect
-import 'rxjs/add/operator/takeUntil';
+import {takeUntil} from 'rxjs/operators';
 
 import {FormGroup} from '@angular/forms';
 import {Subject} from 'rxjs/Subject';
@@ -22,7 +21,9 @@ export class SubmitButtonAction extends DynamicFormAction {
     super.ngOnInit();
     this.rootFormGroup = this.model.formModel.group.ngControl;
     this.updateState(this.rootFormGroup.status);
-    this.rootFormGroup.statusChanges.takeUntil(this.unsubscribe).subscribe((status) => { this.updateState(status); });
+    this.rootFormGroup.statusChanges.pipe(takeUntil(this.unsubscribe)).subscribe((status) => {
+      this.updateState(status);
+    });
   }
 
   ngOnDestroy(): void {

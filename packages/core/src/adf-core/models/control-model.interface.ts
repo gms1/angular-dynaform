@@ -13,7 +13,7 @@ import {GroupModelBase} from './group-model';
 import {CSSModel} from './css-model';
 
 import {JsonPointer} from 'jsonpointerx';
-
+import {JsExpression} from '../utils/js-expression';
 
 // the root node of the model-tree is of type GroupModel without a parentGroup property
 // (similar to the child nodes of the ArrayModel, see below)
@@ -46,6 +46,11 @@ export interface ControlModel {
   readonly jpForm: JsonPointer;
   readonly jpApp?: JsonPointer;
 
+  readonly hidden: boolean;
+
+  readonly enableIf?: JsExpression;
+  readonly showIf?: JsExpression;
+
   setValue(value: any, options?: {onlySelf?: boolean; emitEvent?: boolean}): void;
   patchValue(value: any, options?: {onlySelf?: boolean; emitEvent?: boolean}): void;
   reset(value?: any, options?: {onlySelf?: boolean; emitEvent?: boolean}): void;
@@ -56,6 +61,12 @@ export interface ControlModel {
   setParentGroup(parentGroup: GroupModelBase): void;
   reTranslate(): void;
   setCSSClasses(classes: {[key: string]: boolean}, setClasses: string|string[]|undefined, value: boolean): void;
+
+  disable(): void;
+  enable(): void;
+
+  show(): void;
+  hide(): void;
 }
 
 // NOTES: currently this must be in the same source file as the ControlModel interface
@@ -116,6 +127,14 @@ export abstract class AbstractControlModel<C extends AbstractControl, O extends 
   private _css: CSSModel;
   get css(): CSSModel { return this._css; }
 
+  private _hidden: boolean;
+  get hidden(): boolean { return this._hidden; }
+
+  private _enableIf?: JsExpression;
+  get enableIf(): JsExpression|undefined { return this._enableIf; }
+
+  private _showIf?: JsExpression;
+  get showIf(): JsExpression|undefined { return this._showIf; }
 
   local: ControlI18n;
 
@@ -135,10 +154,12 @@ export abstract class AbstractControlModel<C extends AbstractControl, O extends 
     this.local = {};
     this.validatorFns = [];
     this.asyncValidatorFns = [];
+    this._hidden = false;
     this.initId();
     this.initJpForm();
     this.initJpApp();
     this.initCSSModel();
+    this.initRelations();
     this.initTranslate();
   }
 
@@ -295,7 +316,25 @@ export abstract class AbstractControlModel<C extends AbstractControl, O extends 
     }
   }
 
+  initRelations(): void {
+    if (!this.config.relations) {
+      return;
+    }
+    if (this.config.relations.enable) {
+      this._enableIf = JsExpression.compile(this.config.relations.enable);
+    }
+    if (this.config.relations.show) {
+      this._showIf = JsExpression.compile(this.config.relations.show);
+    }
+  }
+
   valueFromAppModel(formData: any, appData: any, appPointerPrefix?: JsonPointer): any { return formData; }
 
   valueToAppModel(appData: any, appPointerPrefix?: JsonPointer): any { return appData; }
+
+  disable(): void { this.ngControl.disable(); }
+  enable(): void { this.ngControl.enable(); }
+
+  show(): void { this._hidden = false; }
+  hide(): void { this._hidden = true; }
 }

@@ -1,4 +1,10 @@
+// tslint:disable-next-line no-require-imports no-var-requires
+// const jsep = require('jsep')(true);
 import * as jsep from 'jsep';
+
+// to make rollup happy: (should normally be able to use imported 'jsep' instead)
+const jsepCall = (jsep as any).default || jsep;
+
 import {JsonPointer} from 'jsonpointerx';
 
 
@@ -34,7 +40,7 @@ export class JsExpression {
     this._contextMembers = [];
     this._thisMembers = [];
     this._resolveVariable = (variable: JsMemberVariable) => variable;
-    this._fnJsExpression = this.consumeAST(jsep(expression));
+    this._fnJsExpression = this.consumeAST(jsepCall(expression));
     this._resolveVariable = (variable: JsMemberVariable) =>
         variable.jp ? variable.jp.get(variable.getObject()) : undefined;
     this._contextMembers.forEach((variable) => { variable.jp = new JsonPointer(variable.keys); });

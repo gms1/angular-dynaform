@@ -15,6 +15,7 @@ import {Component} from '@angular/core';
     <div
       [formGroup]="model.ngGroup"
       [ngClass]="model.css.container"
+      [hidden]="model.hidden"
     >
       <label
         *ngIf="model.local.label"

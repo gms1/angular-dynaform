@@ -1,5 +1,6 @@
 {
   "tslib": "tslib",
+  "jsep": "jsep",
   "jsonpointerx": "jsonpointerx",
   "@angular/animations": "ng.animations",
   "@angular/cdk": "ng.cdk",

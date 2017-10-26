@@ -9,6 +9,7 @@ import {DynamicFormService} from '../services/dynamic-form.service';
 import {ControlOptions} from '../config/control-options.interface';
 import {ControlModel} from '../models/control-model.interface';
 import {DynamicFormAction} from '../actions/dynamic-form.action';
+import {RelationAction} from '../actions/relation.action';
 
 @Component({
   selector: 'adf-contol-component-base',
@@ -37,6 +38,8 @@ export class DynamicFormControlComponentBase implements DynamicFormControl {
   action?: DynamicFormAction;
   buttonType: string;
 
+  private relationAction?: RelationAction;
+
   constructor(public form: DynamicForm, public dynamicFormService: DynamicFormService) {
     this.focusChanges = new EventEmitter<any>();
     this.click = new EventEmitter<any>();
@@ -47,6 +50,10 @@ export class DynamicFormControlComponentBase implements DynamicFormControl {
 
 
   ngOnInit(): void {
+    if (this.model.enableIf || this.model.showIf) {
+      this.relationAction = new RelationAction(this.model);
+      this.relationAction.ngOnInit();
+    }
     if (this.model.config.action) {
       let type: Type<DynamicFormAction>|undefined =
           this.dynamicFormService.actionTypes.getType(this.model.config.action);
@@ -67,6 +74,9 @@ export class DynamicFormControlComponentBase implements DynamicFormControl {
   ngOnDestroy(): void {
     if (this.action) {
       this.action.ngOnDestroy();
+    }
+    if (this.relationAction) {
+      this.relationAction.ngOnDestroy();
     }
   }
 

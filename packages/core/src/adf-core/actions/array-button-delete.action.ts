@@ -1,7 +1,5 @@
 // tslint:disable use-life-cycle-interface
-// tslint:disable-next-line no-import-side-effect
-import 'rxjs/add/operator/takeUntil';
-
+import {takeUntil} from 'rxjs/operators';
 import {Subject} from 'rxjs/Subject';
 
 import {DynamicFormAction} from './dynamic-form.action';
@@ -19,7 +17,7 @@ export class ArrayButtonDeleteAction extends DynamicFormAction {
   ngOnInit(): void {
     super.ngOnInit();
     if (this.model.parentArray) {
-      this.model.parentArray.valueChanges.takeUntil(this.unsubscribe).subscribe(() => { this.updateState(); });
+      this.model.parentArray.valueChanges.pipe(takeUntil(this.unsubscribe)).subscribe(() => { this.updateState(); });
     }
   }
 
@@ -44,10 +42,10 @@ export class ArrayButtonDeleteAction extends DynamicFormAction {
       return;
     }
     if (this.model.parentArray.items.length && this.model.ngControl.disabled) {
-      this.model.ngControl.enable();
+      this.model.enable();
     }
     if (!this.model.parentArray.items.length && this.model.ngControl.enabled) {
-      this.model.ngControl.disable();
+      this.model.disable();
     }
   }
 }

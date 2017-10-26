@@ -15,6 +15,7 @@
 * shared forms for mobile(not finished yet) and web
 * observable form values and form value updates using angulars form model as a tree of FormGroups/FormArrays/FormControls
 * application data model to form data model mapping
+* enable/disable or show/hide fields based on conditions defined on related field values
 * generic internationalization (labels, placeholders, options (select/radiobutton))
 * easily extensible through:
   * custom components
@@ -37,7 +38,6 @@
 
 * nativescript templates
 * generate JSON Patch (RFC 6902) for changes applied to the form/application data
-* enable/disable or show/hide fields based on conditions defined on related field values
 * multi-page/step forms
 * support for angular's internationalization
   (depends on angular v5.x [#11405](https://github.com/angular/angular/issues/11405))

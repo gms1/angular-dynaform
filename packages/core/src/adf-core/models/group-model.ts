@@ -78,7 +78,7 @@ export class GroupModel extends GroupModelBase {
     this.createValidators();
     this.createAsyncValidators();
     if (config.disabled) {
-      this.ngControl.disable();
+      this.disable();
     }
   }
 }
@@ -96,5 +96,16 @@ export class SubsetModel extends GroupModelBase {
     this.createItems();
     this.createValidators();
     this.createAsyncValidators();
+    if (config.disabled) {
+      this.disable();
+    }
+  }
+
+  disable(): void {
+    this.items.forEach((item) => { item.ngControl.disable(); });
+  }
+
+  enable(): void {
+    this.items.forEach((item) => { item.ngControl.enable(); });
   }
 }

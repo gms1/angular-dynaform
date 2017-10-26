@@ -15,7 +15,8 @@ import {Component} from '@angular/core';
     <div
       [formGroup]="model.ngGroup"
       [ngClass]="model.css.container"
-    >
+      [hidden]="model.hidden"
+      >
       <button
         [formControlName]="model.key"
         [id]="model.id"

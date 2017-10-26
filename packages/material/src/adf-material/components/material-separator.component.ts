@@ -15,6 +15,7 @@ import {Component} from '@angular/core';
     <div
       [formGroup]="model.ngGroup"
       [ngClass]="model.css.container"
+      [hidden]="model.hidden"
     >
       <span [ngClass]="model.css.control"
         [innerHTML]="model.local.label"

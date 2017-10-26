@@ -172,7 +172,8 @@ export const formConfig: FormConfig = {
               modelType: ModelType.MODEL_VALUE,
               controlType: ControlType.CONTROL_CHECKBOX,
               options: {label: 'Accept Terms and conditions', value: false},
-              jp: 'atc'
+              jp: 'atc',
+              updateOn: 'change'
             },
             {
               key: 'newsletter',
@@ -180,7 +181,8 @@ export const formConfig: FormConfig = {
               modelType: ModelType.MODEL_VALUE,
               controlType: ControlType.CONTROL_CHECKBOX,
               options: {label: 'Subscribe to newsletter', value: true},
-              jp: 'newsletter'
+              jp: 'newsletter',
+              relations: {enable: 'atc'}
             }
           ]
         }
