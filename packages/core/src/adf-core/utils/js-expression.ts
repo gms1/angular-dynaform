@@ -1,16 +1,14 @@
 import * as jsep from 'jsep';
-import {JsonPointer} from './json-pointer';
+import {JsonPointer} from 'jsonpointerx';
 
-interface JsVariable {
+
+interface JsMemberVariable {
   keys: string[];
   jp?: JsonPointer;
-  getter(): any;
+  getObject(): any;
 }
 
-
 export class JsExpression {
-  private _variables: JsVariable[];
-  private _compiling: boolean;
   private _context: any;
   private _thisArg: any;
 
@@ -19,34 +17,32 @@ export class JsExpression {
   get thisArg(): any { return this._thisArg; }
   set thisArg(thisArg: any) { this._thisArg = thisArg; }
 
+  private _contextMembers: JsMemberVariable[];
+  private _thisMembers: JsMemberVariable[];
+  private _resolveVariable: (variable: JsMemberVariable) => any;
+  private _fnJsExpression: () => any;
+
   constructor() {
-    this._variables = [];
-    this._compiling = false;
+    this._contextMembers = [];
+    this._thisMembers = [];
+    this._fnJsExpression = () => undefined;
   }
 
+  run(): any { return this._fnJsExpression(); }
 
-  private _fn: () => any = () => {};
-
-
-  run(): any { return this._fn(); }
-
-  private getContext(): any { return this.context; }
-  private getThisArg(): any { return this.thisArg; }
-
-  private resolveVariable(variable: JsVariable): any {
-    return this._compiling ? variable : (variable.jp ? variable.jp.get(variable.getter()) : undefined);
-  }
-
-  private compile(expression: string): void {
-    this._variables = [];
-    this._compiling = true;
-    this._fn = this.consumeAst(jsep(expression));
-    this._compiling = false;
-    this._variables.forEach((variable) => { variable.jp = new JsonPointer(variable.keys); });
+  compile(expression: string): void {
+    this._contextMembers = [];
+    this._thisMembers = [];
+    this._resolveVariable = (variable: JsMemberVariable) => variable;
+    this._fnJsExpression = this.consumeAst(jsep(expression));
+    this._resolveVariable = (variable: JsMemberVariable) =>
+        variable.jp ? variable.jp.get(variable.getObject()) : undefined;
+    this._contextMembers.forEach((variable) => { variable.jp = new JsonPointer(variable.keys); });
+    this._thisMembers.forEach((variable) => { variable.jp = new JsonPointer(variable.keys); });
   }
 
   private consumeAst(node: jsep.IExpression): () => any {
-    // NOTES: make sure the AST expression is consumed before/outside of the returned function
+    // NOTES: make sure the AST is consumed before/outside of the returned function
     //   see arg1, arg2 in BinaryExpression
     if (node.type === 'BinaryExpression' || node.type === 'LogicalExpression') {
       const binaryNode = node as jsep.IBinaryExpression;
@@ -89,19 +85,20 @@ export class JsExpression {
       } else {
         variable.keys.push((memberNode.property as jsep.IIdentifier).name);
       }
-      return this.resolveVariable.bind(this, variable);
+      return this.consumeVariable.bind(this, variable);
     } else if (node.type === 'Identifier') {
-      let variable: JsVariable = {keys: [(node as jsep.IIdentifier).name], getter: this.getContext.bind(this)};
-      this._variables.push(variable);
-      return this.resolveVariable.bind(this, variable);
+      let variable: JsMemberVariable = {getObject: () => this.context, keys: [(node as jsep.IIdentifier).name]};
+      this._contextMembers.push(variable);
+      return this.consumeVariable.bind(this, variable);
     } else if (node.type === 'ThisExpression') {
-      let variable: JsVariable = {keys: [], getter: this.getThisArg.bind(this)};
-      this._variables.push(variable);
-      return this.resolveVariable.bind(this, variable);
+      let variable: JsMemberVariable = {getObject: () => this.thisArg, keys: []};
+      this._thisMembers.push(variable);
+      return this.consumeVariable.bind(this, variable);
     }
     throw new Error(`unsupported expression type ${node.type}`);
   }
 
+  private consumeVariable(variable: JsMemberVariable): any { return this._resolveVariable(variable); }
 
   static compile(expression: string): JsExpression {
     let self = new JsExpression();
