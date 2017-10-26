@@ -9,7 +9,6 @@ import {AbstractControlModel} from './control-model.interface';
 import {FormModel} from './form-model';
 import {GroupModelBase} from './group-model';
 
-import {AbstractControlOptions} from './internal/ng-abstract';
 import {NgNullControl} from './internal/ng-null-control';
 
 import {JsonPointer} from 'jsonpointerx';

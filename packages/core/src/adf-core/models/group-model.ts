@@ -9,7 +9,6 @@ import {ArrayModel} from './array-model';
 import {ControlModel, AbstractControlModel} from './control-model.interface';
 import {FormModel} from './form-model';
 
-import {AbstractControlOptions} from './internal/ng-abstract';
 import {NgFormGroup} from './internal/ng-form-group';
 
 import {JsonPointer} from 'jsonpointerx';

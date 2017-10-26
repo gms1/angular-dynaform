@@ -7,7 +7,6 @@ import {FormModel} from './form-model';
 import {GroupModelBase} from './group-model';
 
 import {NgFormArray} from './internal/ng-form-array';
-import {AbstractControlOptions} from './internal/ng-abstract';
 
 import {JsonPointer} from 'jsonpointerx';
 

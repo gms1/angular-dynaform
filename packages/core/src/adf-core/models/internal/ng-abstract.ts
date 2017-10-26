@@ -1,4 +1,4 @@
-import {AbstractControl, AsyncValidatorFn, FormArray, ValidatorFn} from '@angular/forms';
+import {AsyncValidatorFn, ValidatorFn} from '@angular/forms';
 
 
 // TODO: this types should be provided by @angular/forms

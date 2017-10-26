@@ -5,12 +5,10 @@
 import {distinctUntilChanged, map, takeUntil} from 'rxjs/operators';
 import {Observable} from 'rxjs/Observable';
 import {Subject} from 'rxjs/Subject';
-import {AbstractControl} from '@angular/forms';
 
 import {DynamicFormAction} from './dynamic-form.action';
-import {ArrayModel, ControlModel, GroupModelBase} from '../models';
+import {ControlModel, GroupModelBase} from '../models';
 import {JsExpression} from '../utils/js-expression';
-import {JsonPointer} from 'jsonpointerx';
 
 export class RelationAction extends DynamicFormAction {
   private unsubscribe: Subject<any>;
