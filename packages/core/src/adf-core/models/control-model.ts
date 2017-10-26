@@ -35,8 +35,8 @@ export class NullControlModel extends ControlModelBase<ControlBaseOptions> {
       dynamicFormService: DynamicFormService, config: ControlConfig, formModel: FormModel, parentGroup: GroupModelBase,
       parentArray?: ArrayModel, parentArrayIdx?: number) {
     super(
-        dynamicFormService, config, (config.options || {}) as ControlBaseOptions, new NgNullControl(), formModel,
-        parentGroup, parentArray, parentArrayIdx);
+        dynamicFormService, config, (config.options || {}) as ControlBaseOptions,
+        new NgNullControl({disabled: config.disabled}), formModel, parentGroup, parentArray, parentArrayIdx);
   }
 }
 

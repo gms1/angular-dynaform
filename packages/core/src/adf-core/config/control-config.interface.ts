@@ -30,7 +30,8 @@ export interface ControlConfig {
   key?: string;
 
   /**
-   * The disable flag to disable this control (FormControls only)
+   * The disable flag to disable this control
+   * ignore for MODEL_SUBSET
    */
   disabled?: boolean;
 

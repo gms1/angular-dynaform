@@ -77,6 +77,9 @@ export class GroupModel extends GroupModelBase {
     this.createItems();
     this.createValidators();
     this.createAsyncValidators();
+    if (config.disabled) {
+      this.ngControl.disable();
+    }
   }
 }
 

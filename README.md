@@ -35,7 +35,6 @@
 
 ## TODO list
 
-* TODO: disable config option should work for groups and arrays
 * nativescript templates
 * generate JSON Patch (RFC 6902) for changes applied to the form/application data
 * enable/disable or show/hide fields based on conditions defined on related field values
