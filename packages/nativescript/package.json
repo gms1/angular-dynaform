@@ -1,6 +1,6 @@
 {
   "name": "@angular-dynaform/nativescript",
-  "version": "0.0.2",
+  "version": "0.1.0",
   "description": "angular-dynaform - NativeScript",
   "author": "Guenter Sandner <www.gms@gmx.at>",
   "license": "MIT",
@@ -34,6 +34,8 @@
     "@angular/core": "^5.0.0-rc.3",
     "@angular/forms": "^5.0.0-rc.3",
     "core-js": "^2.5.1",
+    "jsep": "^0.3.2",
+    "jsonpointerx": "^1.0.3",
     "nativescript-angular": "^4.4.1",
     "rxjs": "^5.5.2",
     "tns-core-modules": "^3.3.0",

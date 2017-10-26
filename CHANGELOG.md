@@ -1,5 +1,10 @@
 # CHANGELOG
 
+## 0.1.0
+
+* **Features**
+  * enable/disable or show/hide fields based on conditions defined on related field values
+
 ## 0.0.3
 
 * **Features**
