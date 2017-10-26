@@ -1,4 +1,5 @@
 import {JsExpression} from './js-expression';
+import {JsonPointer} from 'jsonpointerx';
 
 function newTestExpression(expression: string, context?: any, thisArg?: any): JsExpression {
   let res = JsExpression.compile(expression);
@@ -18,7 +19,7 @@ describe('js-expression', () => {
   let thisArg: any;
   let compiled: JsExpression;
 
-  it('variable identifier', () => {
+  it('context members', () => {
     context = {a: 42, b: {c: {d: 9}}};
     thisArg = undefined;
 
@@ -49,6 +50,10 @@ describe('js-expression', () => {
     compiled = newTestExpression(expr, context, thisArg);
     expect(compiled.run()).toBeUndefined(`expr ${expr} failed for member of undefined variable`);
 
+    expr = 'a.b.c && a.b.d';
+    compiled = newTestExpression(expr, context, thisArg);
+    let jp = new JsonPointer(compiled.getContextMembersRoot(), false);
+    expect(jp.toString()).toEqual('/a/b', `wrong context members root for expr ${expr}`);
   });
 
   it('this members', () => {
@@ -82,6 +87,12 @@ describe('js-expression', () => {
     expr = 'this.r.s';
     compiled = newTestExpression(expr, context, thisArg);
     expect(compiled.run()).toBeUndefined(`expr ${expr} failed for member of undefined member`);
+
+    expr = 'this.a.b.c && this.a.x.y';
+    compiled = newTestExpression(expr, context, thisArg);
+    let jp = new JsonPointer(compiled.getThisMembersRoot(), false);
+    expect(jp.toString()).toEqual('/a', `wrong this members root for expr ${expr}`);
+
   });
 
   it('expressions', () => {
