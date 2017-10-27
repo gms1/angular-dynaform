@@ -14,13 +14,14 @@
 * JSON serializable form configuration
 * shared forms for mobile(not finished yet) and web
 * observable form values and form value updates using angulars form model as a tree of FormGroups/FormArrays/FormControls
+* observable focus changes
 * application data model to form data model mapping
 * enable/disable or show/hide fields based on conditions defined on related field values
 * generic internationalization (labels, placeholders, options (select/radiobutton))
 * easily extensible through:
   * custom components
   * custom validators
-  * custom actions (triggered by blur/focus/click events)
+  * custom actions (triggered by blur/focus/click events) and/or observing value/status changes
 
 > NOTE: development is in early stage!
 
@@ -126,7 +127,9 @@ export class MyFormComponent {
 
   * JSON configuration:
 
-  [Sample](./packages/material-example/src/app/app.config.ts)
+  [Configuration of the plunker example:](./packages/material-example/src/app/app.config.ts)
+
+  [ControlConfig Interface](./packages/core/src/adf-core/config/control-config.interface.ts)
 
 * observable form value and form value update:
 
@@ -165,7 +168,7 @@ export class MyFormComponent {
     dynaControl.model.setValue(value);
 ```
 
-* observable control events:
+* observable focus changes:
 
 ```typescript
     DnamicControl dynaControl = dynaForm.findComponentById(id);
@@ -181,15 +184,57 @@ export class MyFormComponent {
 
 call 'dynaForm.initValueFromAppModel' instead of 'dynaForm.initValue' and 'dynaForm.valueToAppModel({})' instead of 'dynaForm.value'
 
-## TODO: Customization
+* enable/disable or show/hide fields based on conditions defined on related field values
 
-* custom validators (DI)
-* custom components (DI)
-* custom form actions (no DI)
+In the relations expressions, you can combine all common arithmetic, comparison, and logical operators, as well as references to form control values. 'foo.bar' would reference the value of the 'bar' control in the 'foo' group;
+In this example, the 'newsletter' checkbox will only be enabled if the 'atc' checkbox has been selected:
+
+```typescript
+          group: [
+            {
+              key: 'atc',
+              controlType: ControlType.CONTROL_CHECKBOX,
+              ...
+            },
+            {
+              key: 'newsletter',
+              controlType: ControlType.CONTROL_CHECKBOX,
+              ...
+              relations: {enable: 'atc'}
+            }
+          ]
+```
+
+## Customization
+
+### custom components (DI)
+
+you can subclass the base class **DynamicFormControlComponentBase**, the generic subclass **DynamicFormControlComponent** or any of the UI-specific subclasses to create your own custom control.
+
+To be able to refer to this class from the form configuration, your class type must be registered with a new or existing name, which can then be used for the **ControlConfig.controlType** property.
+Please see **DynamicFormService.setControlComponent** for the registration.
+
+Angulars dependency injection will be used to instantiate your component, so please do not forget to provide **DynamicFormControlComponentBase** using your existing class.
+
+### custom validators (DI)
+
+you can subclass either **DynamicFormValidator** or **DynamicFormAsyncValidator** to create your own validator.
+
+To be able to refer to this validator from the form configuration, your class type must be registered with a new or existing name, which can then be configured using the **ControlConfig.validators** or **ControlConfig.asyncValidators** poperties.
+Please see **DynamicFormService.validatorTypes.setType** for the registration.
+
+Angulars dependency injection will be used to instantiate your validation class.
+
+### custom form actions (no DI)
+
+you can subclass **DynamicFormAction** to create your own dynamic form action.
+Please see **DynamicFormService.actionTypes.setType** for the registration.
+
+To be able to refer to this action from the form configuration, your class type must be registered with a new or existing name, which can then be configured using the **ControlConfig.action** poperty.
 
 ## License
 
-**angular-dynaform** is licensed under the MIT 
+**angular-dynaform** is licensed under the MIT
 
 [LICENSE](./LICENSE)
 
