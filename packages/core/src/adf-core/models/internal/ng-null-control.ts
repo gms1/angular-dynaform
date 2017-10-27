@@ -2,7 +2,8 @@ import {AsyncValidatorFn, FormControl, ValidatorFn} from '@angular/forms';
 import {AbstractControlOptions} from './ng-abstract';
 
 // ==============================================================================================================================
-// NgNullControls always have an undefined value (for e.g Buttons, which should not influence the form data model)
+// NgNullControls always have an undefined value
+// for e.g Buttons, Separators,..., which should not influence the form data model)
 //
 // TODO:
 // on the other hand, it might have been better to not even create a FormControl for such controls or, as we did for the
