@@ -63,6 +63,9 @@ export class ArrayModel extends AbstractControlModel<NgFormArray, ArrayOptions> 
 
   addItem(): void { this.updateLength(this.items.length + 1); }
 
+  // NOTE: the insert operation increases the array length and moves the values
+  // of the items with a larger index to the end.
+  // Neither components nor model items are moved during this operation
   insertItem(index: number = this._currIndex): void {
     if (index < 0) {
       index = 0;
@@ -77,6 +80,9 @@ export class ArrayModel extends AbstractControlModel<NgFormArray, ArrayOptions> 
     this.items[index].reset();
   }
 
+  // NOTE: the delete operation moves the items with a larger index forward by one position
+  // and decreases the array length afterwards
+  // Neither components nor model items are moved during this operation
   deleteItem(index: number = this._currIndex): void {
     if (index < 0 || index >= this.items.length) {
       return;
