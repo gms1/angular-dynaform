@@ -22,7 +22,8 @@
     "testwatch": "gulp watch --task=test",
     "prepublishOnly": "echo \"ERROR: please use the dist-folder for publishing\" && exit 1",
     "release:build": "gulp clean && gulp build test --prod",
-    "release:publish": "cd dist && npm --access public publish"
+    "release:publish": "cd dist && npm --access public publish",
+    "typedoc": "typedoc --options typedoc.json --out ../../docs/typedoc/core --tsconfig src/tsconfig.lib.json src/"
   },
   "dependencies": {
     "@angular/common": "^5.0.0-rc.6",
