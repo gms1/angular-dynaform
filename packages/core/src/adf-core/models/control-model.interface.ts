@@ -8,7 +8,7 @@ import {DynamicFormService} from '../services/dynamic-form.service';
 
 import {ArrayModel} from './array-model';
 import {FormModel} from './form-model';
-import {GroupModelBase, SubsetModel} from './group-model';
+import {GroupModelBase} from './group-model';
 
 import {CSSModel} from './css-model';
 
