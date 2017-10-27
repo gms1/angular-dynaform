@@ -8,12 +8,14 @@ import {DynamicFormService} from '../services/dynamic-form.service';
 
 import {ArrayModel} from './array-model';
 import {FormModel} from './form-model';
-import {GroupModelBase} from './group-model';
+import {GroupModelBase, SubsetModel} from './group-model';
 
 import {CSSModel} from './css-model';
 
 import {JsonPointer} from 'jsonpointerx';
 import {JsExpression} from '../utils/js-expression';
+
+export interface ControlGroup { [key: string]: ControlModel; }
 
 // the root node of the model-tree is of type GroupModel without a parentGroup property
 // (similar to the child nodes of the ArrayModel, see below)
@@ -21,6 +23,7 @@ import {JsExpression} from '../utils/js-expression';
 export interface ControlModel {
   readonly id: string;
   readonly key: string;
+  readonly path?: string[];
   readonly config: ControlConfig;
   readonly options: ControlBaseOptions;
   readonly ngControl: AbstractControl;
@@ -43,7 +46,7 @@ export interface ControlModel {
   readonly pristine: boolean;
   readonly touched: boolean;
 
-  readonly jpForm: JsonPointer;
+  readonly jpForm?: JsonPointer;
   readonly jpApp?: JsonPointer;
 
   readonly hidden: boolean;
@@ -51,12 +54,16 @@ export interface ControlModel {
   readonly enableIf?: JsExpression;
   readonly showIf?: JsExpression;
 
+  readonly controls: ControlGroup;
+
   setValue(value: any, options?: {onlySelf?: boolean; emitEvent?: boolean}): void;
   patchValue(value: any, options?: {onlySelf?: boolean; emitEvent?: boolean}): void;
   reset(value?: any, options?: {onlySelf?: boolean; emitEvent?: boolean}): void;
 
   valueFromAppModel(formData: any, appData: any, appPointerPrefix?: JsonPointer): any;
   valueToAppModel(appData: any, appPointerPrefix?: JsonPointer): any;
+
+  getControl(key: string): ControlModel|undefined;
 
   setParentGroup(parentGroup: GroupModelBase): void;
   reTranslate(): void;
@@ -68,6 +75,8 @@ export interface ControlModel {
   show(): void;
   hide(): void;
 }
+
+
 
 // NOTES: currently this must be in the same source file as the ControlModel interface
 export abstract class AbstractControlModel<C extends AbstractControl, O extends ControlBaseOptions> implements
@@ -106,8 +115,19 @@ export abstract class AbstractControlModel<C extends AbstractControl, O extends 
   private _key: string;
   get key(): string { return this._key; }
 
-  private _jpForm: JsonPointer;
-  get jpForm(): JsonPointer { return this._jpForm; }
+  private _path?: string[];
+  get path(): string[]|undefined { return this._path; }
+
+  private _jpForm?: JsonPointer;
+  get jpForm(): JsonPointer|undefined {
+    if (this._jpForm) {
+      return this._jpForm;
+    }
+    if (this.path) {
+      this._jpForm = new JsonPointer(this.path);
+    }
+    return this._jpForm;
+  }
 
   private _jpApp: JsonPointer|undefined;
   get jpApp(): JsonPointer|undefined { return this._jpApp; }
@@ -138,9 +158,12 @@ export abstract class AbstractControlModel<C extends AbstractControl, O extends 
 
   local: ControlI18n;
 
+  private _controls: ControlGroup;
+  get controls(): ControlGroup { return this._controls; }
+
   constructor(
       dynamicFormService: DynamicFormService, config: ControlConfig, options: O, ngControl: C, formModel: FormModel,
-      parentGroup?: GroupModelBase, parentArray?: ArrayModel, parentArrayIdx?: number) {
+      parentPath?: string[], parentGroup?: GroupModelBase, parentArray?: ArrayModel, parentArrayIdx?: number) {
     this._dynamicFormService = dynamicFormService;
     this._config = config;
     this._options = options;
@@ -155,13 +178,15 @@ export abstract class AbstractControlModel<C extends AbstractControl, O extends 
     this.validatorFns = [];
     this.asyncValidatorFns = [];
     this._hidden = false;
+    this._controls = {};
+    this.initPath(parentPath);
     this.initId();
-    this.initJpForm();
     this.initJpApp();
     this.initCSSModel();
     this.initRelations();
     this.initTranslate();
   }
+
 
   setValue(value: any, options?: {onlySelf?: boolean; emitEvent?: boolean}): void {
     this.ngControl.setValue(value, options);
@@ -172,6 +197,8 @@ export abstract class AbstractControlModel<C extends AbstractControl, O extends 
   reset(value?: any, options?: {onlySelf?: boolean; emitEvent?: boolean}): void {
     this.ngControl.reset(value, options);
   }
+
+  getControl(key: string): ControlModel|undefined { return this.controls[key]; }
 
   setParentGroup(parentGroup: GroupModelBase): void {
     this._parentGroup = parentGroup;
@@ -202,6 +229,22 @@ export abstract class AbstractControlModel<C extends AbstractControl, O extends 
     }
   }
 
+  private initPath(parentPath?: string[]): void {
+    if (!parentPath) {
+      if (!this.parentGroup && !this.parentArray) {
+        // root GroupModel
+        this._path = [];
+      }
+      return;
+    }
+    if (this.parentGroup && this.ngControl as AbstractControl === this.parentGroup.ngControl) {
+      // SubsetModel
+      this._path = parentPath;
+    } else {
+      this._path = parentPath.concat(this.key);
+    }
+  }
+
   private initId(): void {
     if (this.parentArray) {
       this._id = this.parentArray.getId(this.config.id, this.parentArrayIdx as number, this.parentGroup);
@@ -210,18 +253,6 @@ export abstract class AbstractControlModel<C extends AbstractControl, O extends 
     }
   }
 
-  private initJpForm(): void {
-    if (this.parentGroup) {
-      this._jpForm = this.parentGroup.jpForm.concatSegment(this.key);
-    } else if (this.parentArray) {
-      // this is the root of an array item => point to the array index (ignoring the key)
-      this._jpForm = this.parentArray.jpForm.concatSegment((this.parentArrayIdx as number).toString());
-    } else {
-      // this is the root of the form model => point to the whole document (ignoring the key)
-      // note: '/' would point to { '': 'here' }
-      this._jpForm = JsonPointer.compile('');
-    }
-  }
 
   private initJpApp(): void {
     if (this.config.jp) {
@@ -329,7 +360,6 @@ export abstract class AbstractControlModel<C extends AbstractControl, O extends 
   }
 
   valueFromAppModel(formData: any, appData: any, appPointerPrefix?: JsonPointer): any { return formData; }
-
   valueToAppModel(appData: any, appPointerPrefix?: JsonPointer): any { return appData; }
 
   disable(): void { this.ngControl.disable(); }

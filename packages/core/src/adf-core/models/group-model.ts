@@ -25,10 +25,10 @@ export class GroupModelBase extends AbstractControlModel<FormGroup, GroupOptions
 
   constructor(
       dynamicFormService: DynamicFormService, config: ControlConfig, ngControl: FormGroup, formModel: FormModel,
-      parentGroup?: GroupModelBase, parentArray?: ArrayModel, parentArrayIdx?: number) {
+      parentPath?: string[], parentGroup?: GroupModelBase, parentArray?: ArrayModel, parentArrayIdx?: number) {
     super(
-        dynamicFormService, config, (config.options || {group: []}) as GroupOptions, ngControl, formModel, parentGroup,
-        parentArray, parentArrayIdx);
+        dynamicFormService, config, (config.options || {group: []}) as GroupOptions, ngControl, formModel, parentPath,
+        parentGroup, parentArray, parentArrayIdx);
     this._items = [];
     this.setCSSClasses(this.css.container, 'adf-group-container');
     this.setCSSClasses(this.css.control, 'adf-group-control');
@@ -45,11 +45,13 @@ export class GroupModelBase extends AbstractControlModel<FormGroup, GroupOptions
 
   protected createItem(itemConfig: ControlConfig): ControlModel {
     let control = this.dynamicFormService.modelFactory.createControl(
-        itemConfig, this.formModel, this, this.parentArray, this.parentArrayIdx);
+        itemConfig, this.formModel, this.path, this, this.parentArray, this.parentArrayIdx);
     this.items.push(control);
     if (!(control instanceof SubsetModel)) {
       // NOTES: SubsetModel is using the same ngControl (FormGroup) as the parentGroup, so adding a subset to the
       // ngControl of the parent, would lead to 'Maximum call stack size exceeded'
+
+      // TODO: error handling for duplicate key values
       this.ngControl.addControl(control.key, control.ngControl);
     }
     return control;
@@ -68,11 +70,11 @@ export class GroupModelBase extends AbstractControlModel<FormGroup, GroupOptions
 
 export class GroupModel extends GroupModelBase {
   constructor(
-      dynamicFormService: DynamicFormService, config: ControlConfig, formModel: FormModel, parentGroup?: GroupModelBase,
-      parentArray?: ArrayModel, parentArrayIdx?: number) {
+      dynamicFormService: DynamicFormService, config: ControlConfig, formModel: FormModel, parentPath?: string[],
+      parentGroup?: GroupModelBase, parentArray?: ArrayModel, parentArrayIdx?: number) {
     super(
-        dynamicFormService, config, new NgFormGroup({}, {updateOn: config.updateOn}), formModel, parentGroup,
-        parentArray, parentArrayIdx);
+        dynamicFormService, config, new NgFormGroup({}, {updateOn: config.updateOn}), formModel, parentPath,
+        parentGroup, parentArray, parentArrayIdx);
     this.createItems();
     this.createValidators();
     this.createAsyncValidators();
@@ -80,24 +82,49 @@ export class GroupModel extends GroupModelBase {
       this.disable();
     }
   }
+
+  protected createItem(itemConfig: ControlConfig): ControlModel {
+    let control = super.createItem(itemConfig);
+    if (control.path) {
+      this.controls[control.key] = control;
+    }
+    return control;
+  }
 }
 
-
-// TODO: only items defined for this group should be used for get/set value,.... and for validation
-
 export class SubsetModel extends GroupModelBase {
+  superGroup: GroupModel;
   constructor(
-      dynamicFormService: DynamicFormService, config: ControlConfig, formModel: FormModel, parentGroup: GroupModelBase,
-      parentArray?: ArrayModel, parentArrayIdx?: number) {
+      dynamicFormService: DynamicFormService, config: ControlConfig, formModel: FormModel, parentPath?: string[],
+      parentGroup?: GroupModelBase, parentArray?: ArrayModel, parentArrayIdx?: number) {
     super(
-        dynamicFormService, config, parentGroup.ngControl as FormGroup, formModel, parentGroup, parentArray,
-        parentArrayIdx);
+        dynamicFormService, config, (parentGroup as GroupModelBase).ngControl as FormGroup, formModel, parentPath,
+        parentGroup, parentArray, parentArrayIdx);
+    this.initSuperGroup();
     this.createItems();
     this.createValidators();
     this.createAsyncValidators();
     if (config.disabled) {
       this.disable();
     }
+  }
+
+  private initSuperGroup(): void {
+    let ancestor = this.parentGroup;
+    while (ancestor && !(ancestor instanceof GroupModel)) {
+      ancestor = ancestor.parentGroup;
+    }
+    if (ancestor) {
+      this.superGroup = ancestor;
+    }
+  }
+
+  protected createItem(itemConfig: ControlConfig): ControlModel {
+    let control = super.createItem(itemConfig);
+    if (control.path) {
+      this.superGroup.controls[control.key] = control;
+    }
+    return control;
   }
 
   disable(): void {

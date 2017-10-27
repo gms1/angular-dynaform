@@ -94,12 +94,11 @@ export interface ControlConfig {
  * define conditions (javascript expressions) based
  * on predicate values of related form controls
  *
- * a child with the key 'foo' in the root-FormGroup
- * can be referenced as 'foo'. If this child is a FormGroup
- * having a child 'bar', the later can be referenced by 'foo.bar'
- *
- * additional the 'this' keyword will be bound to the AbstractControl
- * where this expression is defined
+ * A control with the key 'foo' in the root-FormGroup
+ * can be referenced as 'foo'. If this control is a FormGroup
+ * having a child 'bar', the later can be referenced as 'foo.bar'.
+ * All of this referenced values will be observed for changes so a recalculation
+ * of the expression can be performed
  *
  */
 export interface RelationExpressions {

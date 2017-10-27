@@ -2,7 +2,7 @@ import {ControlConfig} from '../config/control-config.interface';
 import {ArrayOptions, GroupOptions} from '../config/control-options.interface';
 import {DynamicFormService} from '../services/dynamic-form.service';
 
-import {AbstractControlModel} from './control-model.interface';
+import {AbstractControlModel, ControlModel} from './control-model.interface';
 import {FormModel} from './form-model';
 import {GroupModelBase} from './group-model';
 
@@ -36,11 +36,12 @@ export class ArrayModel extends AbstractControlModel<NgFormArray, ArrayOptions> 
   }
 
   constructor(
-      dynamicFormService: DynamicFormService, config: ControlConfig, formModel: FormModel, parentGroup: GroupModelBase,
-      parentArray?: ArrayModel, parentArrayIdx?: number) {
+      dynamicFormService: DynamicFormService, config: ControlConfig, formModel: FormModel, parentPath?: string[],
+      parentGroup?: GroupModelBase, parentArray?: ArrayModel, parentArrayIdx?: number) {
     super(
         dynamicFormService, config, (config.options || {item: {}}) as ArrayOptions,
-        new NgFormArray([], {updateOn: config.updateOn}), formModel, parentGroup, parentArray, parentArrayIdx);
+        new NgFormArray([], {updateOn: config.updateOn}), formModel, parentPath, parentGroup, parentArray,
+        parentArrayIdx);
     this.items = [];
     this.setCSSClasses(this.css.container, 'adf-array-container');
     this.setCSSClasses(this.css.control, 'adf-array-control');
@@ -59,6 +60,14 @@ export class ArrayModel extends AbstractControlModel<NgFormArray, ArrayOptions> 
     if (config.disabled) {
       this.disable();
     }
+  }
+
+  getControl(key: string): ControlModel|undefined {
+    let idx = parseInt(key, 10);
+    if (isNaN(idx) || this.items.length <= idx) {
+      return undefined;
+    }
+    return this.items[idx];
   }
 
   addItem(): void { this.updateLength(this.items.length + 1); }
@@ -105,7 +114,7 @@ export class ArrayModel extends AbstractControlModel<NgFormArray, ArrayOptions> 
     if (this.items.length < length) {
       while (this.items.length < length) {
         this.items.push(this.dynamicFormService.modelFactory.createArrayGroup(
-            'ItEmS', this.formModel, this, this.items.length, this.options.item));
+            '' + this.items.length, this.formModel, this, this.items.length, this.options.item, this.path));
       }
     }
     while (this.ngControl.length < length) {
@@ -115,14 +124,23 @@ export class ArrayModel extends AbstractControlModel<NgFormArray, ArrayOptions> 
 
 
   getId(id: string, idx: number, parentGroup?: GroupModelBase): string {
-    let suffix = parentGroup ? `.${id}` : '';
-    switch (idx) {
-      case HEADER_IDX:
-        return `${this.id}:HEADER${suffix}`;
-      case FOOTER_IDX:
-        return `${this.id}:FOOTER${suffix}`;
-      default:
-        return `${this.id}[${idx}]${suffix}`;
+    if (parentGroup) {
+      switch (idx) {
+        case HEADER_IDX:
+          return `${this.id}:HEADER.${id}`;
+        case FOOTER_IDX:
+          return `${this.id}:FOOTER.${id}`;
+        default:
+          return `${this.id}[${idx}].${id}`;
+      }
+    } else {
+      switch (idx) {
+        case HEADER_IDX:
+        case FOOTER_IDX:
+          return `${this.id}:${id}`;
+        default:
+          return `${this.id}[${idx}]`;
+      }
     }
   }
 
@@ -141,7 +159,7 @@ export class ArrayModel extends AbstractControlModel<NgFormArray, ArrayOptions> 
   protected createHeader(): GroupModelBase|undefined {
     if (this.options.header) {
       this.header = this.dynamicFormService.modelFactory.createArrayGroup(
-          'HeAdEr', this.formModel, this, HEADER_IDX, this.options.header as GroupOptions);
+          'HEADER', this.formModel, this, HEADER_IDX, this.options.header as GroupOptions);
     }
     return this.header;
   }
@@ -149,14 +167,14 @@ export class ArrayModel extends AbstractControlModel<NgFormArray, ArrayOptions> 
   protected createFooter(): GroupModelBase|undefined {
     if (this.options.footer) {
       this.footer = this.dynamicFormService.modelFactory.createArrayGroup(
-          'FoOtEr', this.formModel, this, FOOTER_IDX, this.options.footer as GroupOptions);
+          'FOOTER', this.formModel, this, FOOTER_IDX, this.options.footer as GroupOptions);
     }
     return this.footer;
   }
 
 
   valueFromAppModel(formData: any, appData: any, appPointerPrefix?: JsonPointer): any {
-    if (!this.jpApp) {
+    if (!this.jpApp || !this.jpForm) {
       return formData;
     }
     let appValue = (appPointerPrefix ? appPointerPrefix.concat(this.jpApp) : this.jpApp).get(appData);

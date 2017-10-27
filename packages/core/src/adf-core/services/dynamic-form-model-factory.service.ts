@@ -26,39 +26,41 @@ export class DynamicFormModelFactoryService {
   }
 
   createControl(
-      config: ControlConfig, formModel: FormModel, parentGroup?: GroupModelBase, parentArray?: ArrayModel,
-      parentArrayIdx?: number): ControlModel {
-    if (config.modelType === ModelType.MODEL_GROUP) {
-      return new GroupModel(formModel.dynamicFormService, config, formModel, parentGroup, parentArray, parentArrayIdx);
-    }
+      config: ControlConfig, formModel: FormModel, parentPath?: string[], parentGroup?: GroupModelBase,
+      parentArray?: ArrayModel, parentArrayIdx?: number): ControlModel {
     if (!parentGroup) {
       throw new Error(`internal error: no parentGroup defined for control '${config.id}'`);
     }
-    // TODO: error handling for duplicate key values using parentGroup.ngControl which should be fine, even for subsets
     switch (config.modelType) {
+      case ModelType.MODEL_GROUP:
+        return new GroupModel(
+            formModel.dynamicFormService, config, formModel, parentPath, parentGroup, parentArray, parentArrayIdx);
       case ModelType.MODEL_ARRAY:
         return new ArrayModel(
-            formModel.dynamicFormService, config, formModel, parentGroup, parentArray, parentArrayIdx);
+            formModel.dynamicFormService, config, formModel, parentPath, parentGroup, parentArray, parentArrayIdx);
       case ModelType.MODEL_SUBSET:
         return new SubsetModel(
-            formModel.dynamicFormService, config, formModel, parentGroup, parentArray, parentArrayIdx);
+            formModel.dynamicFormService, config, formModel, parentPath, parentGroup, parentArray, parentArrayIdx);
       case ModelType.MODEL_VALUE:
         return new ValueControlModel(
-            formModel.dynamicFormService, config, formModel, parentGroup, parentArray, parentArrayIdx);
+            formModel.dynamicFormService, config, formModel, parentPath, parentGroup, parentArray, parentArrayIdx);
       case ModelType.MODEL_NULL:
         return new NullControlModel(
-            formModel.dynamicFormService, config, formModel, parentGroup, parentArray, parentArrayIdx);
+            formModel.dynamicFormService, config, formModel, undefined, parentGroup, parentArray, parentArrayIdx);
       default:
         throw new Error(`model type '${config.modelType}' defined for '${config.id}' is unknown`);
     }
   }
 
-
+  // create the root GroupModel
+  createRootGroup(config: ControlConfig, formModel: FormModel): GroupModel {
+    return new GroupModel(formModel.dynamicFormService, config, formModel);
+  }
 
   // create a GroupModel (for header, footer or an array items) for a given array
   createArrayGroup(
-      id: string, formModel: FormModel, parentArray: ArrayModel, parentArrayIdx: number,
-      options: GroupOptions): GroupModel {
+      id: string, formModel: FormModel, parentArray: ArrayModel, parentArrayIdx: number, options: GroupOptions,
+      parentPath?: string[]): GroupModel {
     let groupConfig: ControlConfig = {
       id,
       modelType: ModelType.MODEL_GROUP,
@@ -67,6 +69,7 @@ export class DynamicFormModelFactoryService {
       options
     };
 
-    return new GroupModel(formModel.dynamicFormService, groupConfig, formModel, undefined, parentArray, parentArrayIdx);
+    return new GroupModel(
+        formModel.dynamicFormService, groupConfig, formModel, parentPath, undefined, parentArray, parentArrayIdx);
   }
 }

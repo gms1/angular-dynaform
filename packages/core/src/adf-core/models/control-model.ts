@@ -19,8 +19,11 @@ import {JsonPointer} from 'jsonpointerx';
 export abstract class ControlModelBase<O> extends AbstractControlModel<FormControl, O> {
   constructor(
       dynamicFormService: DynamicFormService, config: ControlConfig, options: O, ngControl: FormControl,
-      formModel: FormModel, parentGroup?: GroupModelBase, parentArray?: ArrayModel, parentArrayIdx?: number) {
-    super(dynamicFormService, config, options, ngControl, formModel, parentGroup, parentArray, parentArrayIdx);
+      formModel: FormModel, parentPath?: string[], parentGroup?: GroupModelBase, parentArray?: ArrayModel,
+      parentArrayIdx?: number) {
+    super(
+        dynamicFormService, config, options, ngControl, formModel, parentPath, parentGroup, parentArray,
+        parentArrayIdx);
     this.setCSSClasses(this.css.container, 'adf-control-container');
     this.setCSSClasses(this.css.control, 'adf-control-control');
     this.setCSSClasses(this.css.label, 'adf-control-label');
@@ -31,19 +34,20 @@ export abstract class ControlModelBase<O> extends AbstractControlModel<FormContr
 
 export class NullControlModel extends ControlModelBase<ControlBaseOptions> {
   constructor(
-      dynamicFormService: DynamicFormService, config: ControlConfig, formModel: FormModel, parentGroup: GroupModelBase,
-      parentArray?: ArrayModel, parentArrayIdx?: number) {
+      dynamicFormService: DynamicFormService, config: ControlConfig, formModel: FormModel, parentPath?: string[],
+      parentGroup?: GroupModelBase, parentArray?: ArrayModel, parentArrayIdx?: number) {
     super(
         dynamicFormService, config, (config.options || {}) as ControlBaseOptions,
-        new NgNullControl({disabled: config.disabled}), formModel, parentGroup, parentArray, parentArrayIdx);
+        new NgNullControl({disabled: config.disabled}), formModel, parentPath, parentGroup, parentArray,
+        parentArrayIdx);
   }
 }
 
 
 export class ValueControlModel extends ControlModelBase<ControlValueOptions> {
   constructor(
-      dynamicFormService: DynamicFormService, config: ControlConfig, formModel: FormModel, parentGroup: GroupModelBase,
-      parentArray?: ArrayModel, parentArrayIdx?: number) {
+      dynamicFormService: DynamicFormService, config: ControlConfig, formModel: FormModel, parentPath?: string[],
+      parentGroup?: GroupModelBase, parentArray?: ArrayModel, parentArrayIdx?: number) {
     super(
         dynamicFormService, config, (config.options || {}) as ControlValueOptions,
         new FormControl(
@@ -54,27 +58,29 @@ export class ValueControlModel extends ControlModelBase<ControlValueOptions> {
                   ''
             },
             {updateOn: config.updateOn}),
-        formModel, parentGroup, parentArray, parentArrayIdx);
+        formModel, parentPath, parentGroup, parentArray, parentArrayIdx);
     this.createValidators();
     this.createAsyncValidators();
   }
 
 
   valueFromAppModel(formData: any, appData: any, appPointerPrefix?: JsonPointer): any {
-    if (this.jpApp) {
-      let appValue = (appPointerPrefix ? appPointerPrefix.concat(this.jpApp) : this.jpApp).get(appData);
-      // tslint:disable-next-line triple-equals
-      this.jpForm.set(formData, appValue == undefined ? undefined : appValue);
+    if (!this.jpApp || !this.jpForm) {
+      return formData;
     }
+    let appValue = (appPointerPrefix ? appPointerPrefix.concat(this.jpApp) : this.jpApp).get(appData);
+    // tslint:disable-next-line triple-equals
+    this.jpForm.set(formData, appValue == undefined ? undefined : appValue);
     return appData;
   }
 
   valueToAppModel(appData: any, appPointerPrefix?: JsonPointer): any {
-    if (this.jpApp) {
-      (appPointerPrefix ? appPointerPrefix.concat(this.jpApp) : this.jpApp)
-          // tslint:disable-next-line triple-equals
-          .set(appData, this.value == undefined ? undefined : this.value);
+    if (!this.jpApp) {
+      return appData;
     }
+    (appPointerPrefix ? appPointerPrefix.concat(this.jpApp) : this.jpApp)
+        // tslint:disable-next-line triple-equals
+        .set(appData, this.value == undefined ? undefined : this.value);
     return appData;
   }
 }

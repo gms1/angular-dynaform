@@ -31,7 +31,7 @@ export class FormModel {
       options: config.options,
       user: config.user
     };
-    this.group = this.dynamicFormService.modelFactory.createControl(groupConfig, this) as GroupModel;
+    this.group = this.dynamicFormService.modelFactory.createRootGroup(groupConfig, this);
     this.group.setCSSClasses(this.group.css.container, 'adf-form-container');
     this.group.setCSSClasses(this.group.css.control, 'adf-form-control');
     this.group.setCSSClasses(this.group.css.content, 'adf-form-content');
@@ -89,9 +89,6 @@ export class FormModel {
 
   initValueFromAppModel(appData: any, appPointerPrefix?: string): any {
     let newVal = this.valueFromAppModel(appData, appPointerPrefix);
-
-    console.log(`init new value from application data: `, JSON.stringify(newVal, undefined, 2));
-
     this.initValue(newVal);
   }
 
