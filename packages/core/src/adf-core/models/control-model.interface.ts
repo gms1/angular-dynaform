@@ -347,7 +347,7 @@ export abstract class AbstractControlModel<C extends AbstractControl, O extends 
     }
   }
 
-  initRelations(): void {
+  private initRelations(): void {
     if (!this.config.relations) {
       return;
     }

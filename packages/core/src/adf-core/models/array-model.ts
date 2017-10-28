@@ -5,7 +5,7 @@ import {DynamicFormService} from '../services/dynamic-form.service';
 import {AbstractControlModel, ControlModel} from './control-model.interface';
 import {FormModel} from './form-model';
 import {GroupModelBase} from './group-model';
-
+import {ModelHelper} from './model-helper';
 import {NgFormArray} from './internal/ng-form-array';
 
 import {JsonPointer} from 'jsonpointerx';
@@ -84,7 +84,7 @@ export class ArrayModel extends AbstractControlModel<NgFormArray, ArrayOptions> 
     }
     this.addItem();
     for (let idx = this.items.length - 1; idx > index; idx--) {
-      this.items[idx].value = this.items[idx - 1].value;
+      ArrayModel.copyItem(this.items[idx - 1], this.items[idx]);
     }
     this.items[index].reset();
   }
@@ -98,7 +98,7 @@ export class ArrayModel extends AbstractControlModel<NgFormArray, ArrayOptions> 
     }
     let lastIdx = this.items.length - 1;
     for (let idx = index; idx < lastIdx; idx++) {
-      this.items[idx].value = this.items[idx + 1].value;
+      ArrayModel.copyItem(this.items[idx + 1], this.items[idx]);
     }
     this.updateLength(lastIdx);
   }
@@ -200,5 +200,11 @@ export class ArrayModel extends AbstractControlModel<NgFormArray, ArrayOptions> 
 
     this.items.forEach((item, idx) => { item.valueToAppModel(appData, appPointerPrefix); });
     return appData;
+  }
+
+
+  static copyItem(fromItem: GroupModelBase, toItem: GroupModelBase): void {
+    toItem.value = fromItem.value;
+    ModelHelper.copyStates(fromItem, toItem);
   }
 }

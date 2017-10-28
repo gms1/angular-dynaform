@@ -6,6 +6,7 @@ import {Observable} from 'rxjs/Observable';
 import {FormConfig, FormI18n, ControlConfig, ModelType, ControlType} from '../config';
 import {DynamicFormService} from '../services/dynamic-form.service';
 
+import {ModelHelper} from './model-helper';
 import {GroupModel} from './group-model';
 
 import {JsonPointer} from 'jsonpointerx';
@@ -55,14 +56,12 @@ export class FormModel {
   get touched(): boolean { return this.group.touched; }
 
   private _initValue: any;
-  private _emptyValue: any;
 
   constructor(dynamicFormService: DynamicFormService, injector: Injector, config: FormConfig, i18n?: FormI18n) {
     this.dynamicFormService = dynamicFormService;
     this.injector = injector;
     this._i18n = i18n;
     this.config = config;  // create the group control
-    this._emptyValue = this.value;
   }
 
 
@@ -73,11 +72,9 @@ export class FormModel {
   resetValue(): void { this.group.reset(this._initValue); }
   clearValue(): void {
     if (this.initValue) {
-      this.group.ngControl.markAsUntouched();
-      this.group.ngControl.setValue(this._emptyValue);
-      this.group.ngControl.markAsDirty();
-      // TODO: don't know why the dirty flag gets cleared somehow
-      FormModel.deepMarkAsDirty(this.group.ngControl);
+      let prevValue = this.group.ngControl.value;
+      this.group.ngControl.reset();
+      ModelHelper.setDirtyIfChanged(this.group, prevValue);
       // emit event to notify controls
       (this.valueChanges as EventEmitter<any>).emit(this.value);
     } else {
@@ -99,21 +96,5 @@ export class FormModel {
 
   valueToAppModel(appData: any, appPointerPrefix?: string): any {
     return this.group.valueToAppModel(appData, appPointerPrefix ? JsonPointer.compile(appPointerPrefix) : undefined);
-  }
-
-
-  static deepMarkAsDirty(control: AbstractControl): void {
-    // Mark this control as dirty.
-    control.markAsDirty();
-    if (control instanceof FormArray) {
-      let array: FormArray = control;
-      array.controls.forEach((child: AbstractControl) => { FormModel.deepMarkAsDirty(child); });
-      return;
-    }
-    if (control instanceof FormGroup) {
-      let group: FormGroup = control;
-      Object.values(group.controls).forEach((child: AbstractControl) => { FormModel.deepMarkAsDirty(child); });
-      return;
-    }
   }
 }
