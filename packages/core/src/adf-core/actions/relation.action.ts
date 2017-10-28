@@ -58,6 +58,8 @@ export class RelationAction extends DynamicFormAction {
       };
     } else {
       run = (v: any) => {
+        // type assertion is not necessary, but tsc wants it
+        // tslint:disable-next-line no-unnecessary-type-assertion
         (model.jpForm as JsonPointer).set(expr.context, v);
         return !!expr.run();
       };

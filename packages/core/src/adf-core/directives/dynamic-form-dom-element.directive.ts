@@ -1,6 +1,6 @@
 // TODO: remove tslint:disable
 // tslint:disable
-import {Directive, ElementRef, Renderer} from '@angular/core';
+import {Directive, ElementRef, Renderer2} from '@angular/core';
 
 import {DynamicFormControlComponentBase} from '../components/dynamic-form-control.component';
 
@@ -11,7 +11,7 @@ import {DynamicFormControlComponentBase} from '../components/dynamic-form-contro
 })
 export class DynamicFormDomElementDirective {
   constructor(
-      protected elementRef: ElementRef, protected renderer: Renderer,
+      protected elementRef: ElementRef, protected renderer: Renderer2,
       protected component: DynamicFormControlComponentBase) {}
 
   onBlur(event?: Event): void { this.component.onElementBlur(event); }

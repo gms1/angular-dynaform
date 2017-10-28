@@ -98,8 +98,10 @@ export class SubsetModel extends GroupModelBase {
       dynamicFormService: DynamicFormService, config: ControlConfig, formModel: FormModel, parentPath?: string[],
       parentGroup?: GroupModelBase, parentArray?: ArrayModel, parentArrayIdx?: number) {
     super(
-        dynamicFormService, config, (parentGroup as GroupModelBase).ngControl as FormGroup, formModel, parentPath,
-        parentGroup, parentArray, parentArrayIdx);
+        // type assertion is necessary:
+        // tslint:disable-next-line no-unnecessary-type-assertion
+        dynamicFormService, config, (parentGroup as GroupModelBase).ngControl, formModel, parentPath, parentGroup,
+        parentArray, parentArrayIdx);
     this.initSuperGroup();
     this.createItems();
     this.createValidators();

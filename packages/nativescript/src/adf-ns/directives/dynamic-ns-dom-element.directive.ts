@@ -1,6 +1,6 @@
 // TODO: remove tslint:disable
 // tslint:disable
-import {Directive, ElementRef, Renderer} from '@angular/core';
+import {Directive, ElementRef, Renderer2} from '@angular/core';
 
 import {DynamicFormControlComponentBase, DynamicFormDomElementDirective} from '@angular-dynaform/core';
 
@@ -15,7 +15,7 @@ import {DynamicFormControlComponentBase, DynamicFormDomElementDirective} from '@
   }
 })
 export class DynamicNSDomElementDirective extends DynamicFormDomElementDirective {
-  constructor(elementRef: ElementRef, renderer: Renderer, component: DynamicFormControlComponentBase) {
+  constructor(elementRef: ElementRef, renderer: Renderer2, component: DynamicFormControlComponentBase) {
     super(elementRef, renderer, component);
   }
 

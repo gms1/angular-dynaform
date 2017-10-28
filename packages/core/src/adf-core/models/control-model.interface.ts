@@ -247,6 +247,8 @@ export abstract class AbstractControlModel<C extends AbstractControl, O extends 
 
   private initId(): void {
     if (this.parentArray) {
+      // type assertion is necessary:
+      // tslint:disable-next-line no-unnecessary-type-assertion
       this._id = this.parentArray.getId(this.config.id, this.parentArrayIdx as number, this.parentGroup);
     } else {
       this._id = this.config.id;
@@ -319,7 +321,9 @@ export abstract class AbstractControlModel<C extends AbstractControl, O extends 
       this.local.placeholder = this.options.placeholder;
       this.local.valueOptions = [];
       if (this.options.valueOptions) {
-        (this.options.valueOptions as ValueOptions[]).forEach((opt) => {
+        this.options.valueOptions.forEach((opt: ValueOptions) => {
+          // type assertion is not necessary, but tsc wants it
+          // tslint:disable-next-line no-unnecessary-type-assertion
           (this.local.valueOptions as ValueOptions[]).push({value: opt.value, label: opt.label});
         });
       }
@@ -338,9 +342,13 @@ export abstract class AbstractControlModel<C extends AbstractControl, O extends 
       }
       (this.options.valueOptions as ValueOptions[]).forEach((opt) => {
         if (optionsMap.has(opt.value)) {
+          // type assertion is not necessary, but tsc wants it
+          // tslint:disable-next-line no-unnecessary-type-assertion
           (this.local.valueOptions as ValueOptions[])
               .push({value: opt.value, label: optionsMap.get(opt.value) as string});
         } else {
+          // type assertion is not necessary, but tsc wants it
+          // tslint:disable-next-line no-unnecessary-type-assertion
           (this.local.valueOptions as ValueOptions[]).push({value: opt.value, label: opt.label});
         }
       });

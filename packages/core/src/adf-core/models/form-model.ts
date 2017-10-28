@@ -1,6 +1,4 @@
-
 import {Injector, EventEmitter} from '@angular/core';
-import {AbstractControl, FormGroup, FormArray} from '@angular/forms';
 import {Observable} from 'rxjs/Observable';
 
 import {FormConfig, FormI18n, ControlConfig, ModelType, ControlType} from '../config';

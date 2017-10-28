@@ -1,3 +1,4 @@
+// tslint:disable no-use-before-declare
 // tslint:disable-next-line no-require-imports no-var-requires
 // const jsep = require('jsep')(true);
 import * as jsep from 'jsep';
@@ -133,7 +134,7 @@ export class JsExpression {
 
 
 
-// tslint:disable only-arrow-functions object-literal-shorthand no-bitwise triple-equals
+// tslint:disable only-arrow-functions object-literal-shorthand no-bitwise triple-equals restrict-plus-operands
 // NOTES: we avoid using arrow functions here, which would force us to bind them to this in 'consumeAST'
 
 type BinaryFunction = (a: any, b: any) => any;

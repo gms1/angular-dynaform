@@ -15,6 +15,7 @@ import {RelationAction} from '../actions/relation.action';
   selector: 'adf-contol-component-base',
   template: `Please provide a control-component for '{{model.config.controlType}}!'`
 })
+// tslint:disable-next-line component-class-suffix
 export class DynamicFormControlComponentBase implements DynamicFormControl {
   @Input()
   get model(): ControlModel { return this._model; }
@@ -107,7 +108,7 @@ export class DynamicFormControlComponentBase implements DynamicFormControl {
   }
 }
 
-
+// tslint:disable use-input-property-decorator use-output-property-decorator
 @Component({
   selector: 'adf-contol-component',
   inputs: ['model'],

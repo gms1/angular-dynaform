@@ -32,7 +32,7 @@ export class TypeRegistry<T> {
     if (Array.isArray(names)) {
       names.forEach((name) => { types.push({name, instance: this.getInstance(injector, name)}); });
     } else {
-      types.push({name, instance: this.getInstance(injector, names as string)});
+      types.push({name, instance: this.getInstance(injector, names)});
     }
     return types;
   }

@@ -1,5 +1,5 @@
 import {ControlConfig} from '../config/control-config.interface';
-import {ArrayOptions, GroupOptions} from '../config/control-options.interface';
+import {ArrayOptions} from '../config/control-options.interface';
 import {DynamicFormService} from '../services/dynamic-form.service';
 
 import {AbstractControlModel, ControlModel} from './control-model.interface';
@@ -114,7 +114,7 @@ export class ArrayModel extends AbstractControlModel<NgFormArray, ArrayOptions> 
     if (this.items.length < length) {
       while (this.items.length < length) {
         this.items.push(this.dynamicFormService.modelFactory.createArrayGroup(
-            '' + this.items.length, this.formModel, this, this.items.length, this.options.item, this.path));
+            `${this.items.length}`, this.formModel, this, this.items.length, this.options.item, this.path));
       }
     }
     while (this.ngControl.length < length) {
@@ -159,7 +159,7 @@ export class ArrayModel extends AbstractControlModel<NgFormArray, ArrayOptions> 
   protected createHeader(): GroupModelBase|undefined {
     if (this.options.header) {
       this.header = this.dynamicFormService.modelFactory.createArrayGroup(
-          'HEADER', this.formModel, this, HEADER_IDX, this.options.header as GroupOptions);
+          'HEADER', this.formModel, this, HEADER_IDX, this.options.header);
     }
     return this.header;
   }
@@ -167,7 +167,7 @@ export class ArrayModel extends AbstractControlModel<NgFormArray, ArrayOptions> 
   protected createFooter(): GroupModelBase|undefined {
     if (this.options.footer) {
       this.footer = this.dynamicFormService.modelFactory.createArrayGroup(
-          'FOOTER', this.formModel, this, FOOTER_IDX, this.options.footer as GroupOptions);
+          'FOOTER', this.formModel, this, FOOTER_IDX, this.options.footer);
     }
     return this.footer;
   }
