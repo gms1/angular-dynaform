@@ -115,7 +115,7 @@ export class SubsetModel extends GroupModelBase {
       ancestor = ancestor.parentGroup;
     }
     if (ancestor) {
-      this.superGroup = ancestor;
+      this.superGroup = ancestor as GroupModel;
     }
   }
 
