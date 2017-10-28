@@ -51,7 +51,6 @@ export namespace ModelHelper {
       // tslint:disable-next-line triple-equals
       if (cmpValue != item.value) {
         item.ngControl.markAsDirty();
-      } else {
       }
     }
   }
