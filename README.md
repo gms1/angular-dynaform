@@ -171,11 +171,13 @@ export class MyFormComponent {
 * observable focus changes and click events:
 
 ```typescript
+    ctrlComp = dynaForm.findComponentById(id);
+
     // subscribe to focus changes:
-    ctrlModel.focusChanges.subscribe((focus) => { console.log(focus ? 'got focus' : 'lost focus');});
+    ctrlComp.focusChanges.subscribe((focus) => { console.log(focus ? 'got focus' : 'lost focus');});
 
     // subscribe to click event:
-    ctrlModel.click.subscribe(...);
+    ctrlComp.click.subscribe(...);
 ```
 
 * get/set form data using an application data model to form data model mapping

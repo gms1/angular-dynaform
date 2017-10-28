@@ -17,19 +17,8 @@ import {DynamicForm, DynamicFormService, FormConfig, FormModel} from '@angular-d
   styles: []
 })
 export class TestFormContainerComponent {
-  @ViewChild(DynamicForm) form?: DynamicForm;
-
-  model?: FormModel;
-
-  _formConfig?: FormConfig;
-  get formConfig(): FormConfig|undefined { return this._formConfig; }
-  set formConfig(formConfig: FormConfig|undefined) {
-    this._formConfig = formConfig;
-    this.model = undefined;
-    if (this._formConfig) {
-      this.model = this.dynamicFormService.createFormModel(this._formConfig);
-    }
-  }
+  @ViewChild(DynamicForm) form: DynamicForm;
+  model: FormModel;
 
   constructor(public dynamicFormService: DynamicFormService) {}
 

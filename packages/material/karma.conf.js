@@ -7,7 +7,10 @@ module.exports = function(config) {
       require('karma-typescript')
     ],
     client: {clearContext: false},
-    files: [{pattern: '**/test.ts'}, {pattern: '**/*.+(ts|html)'}],
+    files: [
+      {pattern: '**/test.ts'}, {pattern: '**/*.+(ts|html)'},
+      {pattern: '../node_modules/@angular/material/prebuilt-themes/indigo-pink.css'}
+    ],
     exclude: ['aot/**/*'],
     preprocessors: {
       '**/*.ts': ['karma-typescript'],

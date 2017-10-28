@@ -9,6 +9,10 @@ export * from './actions/index';
 export * from './services/dynamic-form.service';
 
 export * from './components/dynamic-form.interface';
+export * from './components/dynamic-form-form-control.interface';
+export * from './components/dynamic-form-control.interface';
+export * from './components/dynamic-form-error.interface';
+
 export * from './components/dynamic-form-control.component';
 export * from './components/dynamic-form-form-control.component';
 export * from './components/dynamic-form-error.component';

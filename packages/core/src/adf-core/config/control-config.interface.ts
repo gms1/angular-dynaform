@@ -17,7 +17,7 @@ export interface ControlConfig {
   /**
    * The unique id (for the DOM element)
    *
-   * all ids of array (DOM) child elements will be prefixed by 'arrayId[index].' to be unique
+   * all ids of array (DOM) child elements will be prefixed by 'arrayId-index-' to be unique
    */
   id: string;
   /**

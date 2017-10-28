@@ -17,7 +17,7 @@ const FOOTER_IDX = -2;
 //   they do not have a parentGroup propery set, because their parent is the ArrayModel
 
 // the IDs of the hole control-model tree of an array item with array id 'arrayid' and index 'idx' will be prefixed by
-// 'arrayid[idx].'
+// 'arrayid-idx_'
 // In case of delete/insert operations this prefix stays the same, because we only delete/add such item nodes at the end
 // of the array and are moving the values of the item nodes around
 
@@ -127,19 +127,19 @@ export class ArrayModel extends AbstractControlModel<NgFormArray, ArrayOptions> 
     if (parentGroup) {
       switch (idx) {
         case HEADER_IDX:
-          return `${this.id}:HEADER.${id}`;
+          return `${this.id}-HEADER-${id}`;
         case FOOTER_IDX:
-          return `${this.id}:FOOTER.${id}`;
+          return `${this.id}-FOOTER-${id}`;
         default:
-          return `${this.id}[${idx}].${id}`;
+          return `${this.id}-${idx}-${id}`;
       }
     } else {
       switch (idx) {
         case HEADER_IDX:
         case FOOTER_IDX:
-          return `${this.id}:${id}`;
+          return `${this.id}-${id}`;
         default:
-          return `${this.id}[${idx}]`;
+          return `${this.id}-${idx}`;
       }
     }
   }
