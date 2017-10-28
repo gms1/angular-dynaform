@@ -39,12 +39,13 @@
 
 * nativescript templates
 * generate JSON Patch (RFC 6902) for changes applied to the form/application data
+* advanced formatting/parsing of form values
+  we could use https://github.com/text-mask/text-mask
+* autocomplete
 * multi-page/step forms
 * support for angular's internationalization
   (depends on angular v5.x [#11405](https://github.com/angular/angular/issues/11405))
 * observable select options
-* advanced formatting/parsing of form values
-* autocomplete
 * form(Config/Model)Builder?
 * improve documentation and tests
 * enable option fullTemplateTypeCheck for remaining packages (already enabled in 'core')
@@ -182,7 +183,8 @@ export class MyFormComponent {
 
 * get/set form data using an application data model to form data model mapping
 
-call 'dynaForm.initValueFromAppModel' instead of 'dynaForm.initValue' and 'dynaForm.valueToAppModel({})' instead of 'dynaForm.value'
+In your form configuration define the JSON pointer to the application data model **ControlConfig.jp** and
+use 'dynaForm.initValueFromAppModel' instead of 'dynaForm.initValue' and 'dynaForm.valueToAppModel' instead of 'dynaForm.value'
 
 * enable/disable or show/hide fields based on conditions defined on related field values
 
@@ -204,6 +206,10 @@ In this example, the 'newsletter' checkbox will only be enabled if the 'atc' che
             }
           ]
 ```
+
+* layout/styling
+
+you can optionally assign additional CSS classes using **ControlConfig.options.css** and let **angular-dynaform** add them to the container, control, label sections of the corresponding component
 
 ## Customization
 
