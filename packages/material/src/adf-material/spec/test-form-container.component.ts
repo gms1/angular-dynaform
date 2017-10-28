@@ -1,6 +1,6 @@
 import {Component, ViewChild} from '@angular/core';
 
-import {DynamicForm, DynamicFormService, FormConfig, FormModel} from '@angular-dynaform/core';
+import {DynamicForm, DynamicFormService, FormModel} from '@angular-dynaform/core';
 
 @Component({
   selector: 'form-container-test-component',

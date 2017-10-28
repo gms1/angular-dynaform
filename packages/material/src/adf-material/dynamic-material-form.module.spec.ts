@@ -1,7 +1,7 @@
 // tslint:disable no-null-keyword
 import {APP_BASE_HREF} from '@angular/common';
 import {DebugElement} from '@angular/core';
-import {TestBed, ComponentFixture, tick} from '@angular/core/testing';
+import {TestBed, ComponentFixture} from '@angular/core/testing';
 import {By} from '@angular/platform-browser';
 
 import {
@@ -198,7 +198,7 @@ describe('test suite', () => {
     // expect(newsLetterEl.nativeElement.getAttribute('disabled'))
     //     .toBeNull('newsletter field is not enabled after atc has been selected');
 
-    // TODO: even the model is wrong, but testing this functionality by hand works...
+    // TODO: even the model is wrong, but testing this functionality by hand works
     // expect(newsLetterComp.model.ngControl.disabled)
     //     .toBe(false, 'newsletter component is not enabled after atc has been selected');
   });
@@ -209,7 +209,7 @@ describe('test suite', () => {
     let lastNameEl = findDebugElementById('lastName');
 
     let hasFocus;
-    let subscription = lastNameComp.focusChanges.subscribe((v: boolean) => { hasFocus = v; });
+    lastNameComp.focusChanges.subscribe((v: boolean) => { hasFocus = v; });
 
     lastNameEl.triggerEventHandler('focus', null);
     expect(hasFocus).toBe(true, 'focus change not triggered the focus event');
