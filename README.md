@@ -105,17 +105,16 @@ export class SharedModule {
 @Component({
   selector: 'my-form-component',
   template: `
-    <adf-form [model]="model" (adfSubmit)="onSubmit($event)" (adfReset)="onReset($event)">
+    <adf-form [model]="formModel" (adfSubmit)="onSubmit($event)" (adfReset)="onReset($event)">
     </adf-form>
-  `,
-  styleUrls: []
+  `
 })
 export class MyFormComponent {
   @ViewChild(DynamicFormComponent) dynaForm: DynamicFormComponent;
-  model: FormModel;
+  formModel: FormModel;
 
   constructor(private dynamicFormService: DynamicFormService) {
-    this.model = this.dynamicFormService.createFormModel(formConfig);
+    this.formModel = this.dynamicFormService.createFormModel(formConfig);
   }
 
   onSubmit(event: Event): void { }
@@ -154,31 +153,30 @@ export class MyFormComponent {
 
 * observable control values and control value updates:
 
+
 ```typescript
-    DnamicControl dynaControl = dynaForm.findComponentById(id);
+    ctrlModel = dynaForm.findComponentById(id).model;
+    ctrlModel = dynaForm.model.findControlByPath(path);
 
     // subscribe to form value changes:
-    dynaControl.model.valueChanges.subscribe(...);
+    ctrlModel.valueChanges.subscribe(...);
 
-    // get/set form value:
-    value = dynaControl.model.value;
-    dynaControl.model.value = value;
+    // get form value:
+    value = ctrlModel.value;
 
     // patch/set form value:
-    dynaControl.model.patchValue(value);
-    dynaControl.model.setValue(value);
+    ctrlModel.patchValue(value);
+    ctrlModel.setValue(value);
 ```
 
-* observable focus changes:
+* observable focus changes and click events:
 
 ```typescript
-    DnamicControl dynaControl = dynaForm.findComponentById(id);
-
     // subscribe to focus changes:
-    dynaControl.model.focusChanges.subscribe((focus) => { console.log(focus ? 'got focus' : 'lost focus');});
+    ctrlModel.focusChanges.subscribe((focus) => { console.log(focus ? 'got focus' : 'lost focus');});
 
     // subscribe to click event:
-    dynaControl.model.click.subscribe(...);
+    ctrlModel.click.subscribe(...);
 ```
 
 * get/set form data using an application data model to form data model mapping

@@ -8,6 +8,7 @@ import {DynamicFormService} from '../services/dynamic-form.service';
 
 import {ModelHelper} from './model-helper';
 import {GroupModel} from './group-model';
+import {ControlModel} from './control-model.interface';
 
 import {JsonPointer} from 'jsonpointerx';
 
@@ -96,5 +97,20 @@ export class FormModel {
 
   valueToAppModel(appData: any, appPointerPrefix?: string): any {
     return this.group.valueToAppModel(appData, appPointerPrefix ? JsonPointer.compile(appPointerPrefix) : undefined);
+  }
+
+  findControlByPath(path: string|string[]): ControlModel|undefined {
+    let searchPath = Array.isArray(path) ? path : path.split('.');
+
+    let resModel: ControlModel = this.group;
+
+    for (let segment of searchPath) {
+      let foundModel = resModel.getControl(segment);
+      if (!foundModel) {
+        return undefined;
+      }
+      resModel = foundModel;
+    }
+    return resModel;
   }
 }
