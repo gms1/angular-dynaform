@@ -1,10 +1,10 @@
+# angular-dynaform
+
 [![npm version](https://badge.fury.io/js/%40angular-dynaform%2Fcore.svg)](https://badge.fury.io/js/%40angular-dynaform%2Fcore)
 [![Build Status](https://api.travis-ci.org/gms1/angular-dynaform.svg?branch=master)](https://travis-ci.org/gms1/angular-dynaform)
 [![Known Vulnerabilities](https://snyk.io/test/github/gms1/angular-dynaform/badge.svg)](https://snyk.io/test/github/gms1/angular-dynaform)
 [![DeepScan Grade](https://deepscan.io/api/projects/698/branches/1106/badge/grade.svg)](https://deepscan.io/dashboard/#view=project&pid=698&bid=1106)
 [![Greenkeeper badge](https://badges.greenkeeper.io/gms1/angular-dynaform.svg)](https://greenkeeper.io/)
-
-# angular-dynaform
 
 **angular-dynaform** is a library for rapid development of model-driven reactive forms for mobile and web.
 
@@ -40,7 +40,7 @@
 * nativescript templates
 * generate JSON Patch (RFC 6902) for changes applied to the form/application data
 * advanced formatting/parsing of form values
-  we could use https://github.com/text-mask/text-mask
+  we could use the **text-mask** library
 * autocomplete
 * multi-page/step forms
 * support for angular's internationalization
@@ -127,7 +127,7 @@ export class MyFormComponent {
 
   * JSON configuration:
 
-  [Configuration of the plunker example:](./packages/material-example/src/app/app.config.ts)
+  [Configuration of the plunker example](./packages/material-example/src/app/app.config.ts)
 
   [ControlConfig Interface](./packages/core/src/adf-core/config/control-config.interface.ts)
 
@@ -152,7 +152,6 @@ export class MyFormComponent {
 ```
 
 * observable control values and control value updates:
-
 
 ```typescript
     ctrlModel = dynaForm.findComponentById(id).model;
@@ -232,9 +231,9 @@ Angulars dependency injection will be used to instantiate your validation class.
 ### custom form actions (no DI)
 
 you can subclass **DynamicFormAction** to create your own dynamic form action.
-Please see **DynamicFormService.actionTypes.setType** for the registration.
 
 To be able to refer to this action from the form configuration, your class type must be registered with a new or existing name, which can then be configured using the **ControlConfig.action** poperty.
+Please see **DynamicFormService.actionTypes.setType** for the registration.
 
 ## License
 
@@ -245,3 +244,7 @@ To be able to refer to this action from the form configuration, your class type 
 ## Release Notes
 
 [CHANGELOG](./CHANGELOG.md)
+
+## Contributing
+
+[CONTRIBUTING](./CONTRIBUTING.md)

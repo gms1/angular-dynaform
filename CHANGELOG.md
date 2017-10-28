@@ -1,5 +1,11 @@
 # CHANGELOG
 
+## 0.1.1
+
+* **Features**
+  * find control model by path
+  * improved documentation
+
 ## 0.1.0
 
 * **Features**

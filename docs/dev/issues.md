@@ -32,12 +32,12 @@
 
  appending '/index' to the exports from public_api.ts in the library solved this issue
 
-## nativescript-angular:
+## nativescript-angular
 
 * FIXED in 4.2: broken 'ngDefaultControl' directive
   [831](https://github.com/NativeScript/nativescript-angular/issues/831)
 
-* aot:  building example using aot (npm run build-android-bundle), I got 
+* aot:  building example using aot (npm run build-android-bundle), I got
       "ERROR in Template parse errors: 'XXX' is not a known element" for components defined in nativescript-core-module.
       Had to add "schemas: [NO_ERRORS_SCHEMA]" to DynamicNativeScriptFormModule
 
@@ -54,14 +54,13 @@
       :asbg:generateBindings FAILED
 ```
 
-  * workaround: ignore this exception
+    * workaround: ignore this exception
 
 ## karma
 
 I have a similar issue, but this is alread closed:
 Karma doesn't exit properly when using public api with the finish callback #1035
 [1035](https://github.com/karma-runner/karma/issues/1035)
-
 
 ## commonjs
 
