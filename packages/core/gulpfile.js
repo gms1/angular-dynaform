@@ -27,6 +27,8 @@ function config(target /* 'production' or 'development' */) {
   if (srcModulePath === pkg.module) {
     throw new Error(`property 'module' in package.json does not have a '.js' extension`);
   }
+  
+  var tsLintTask = target === 'production' ? 'ts:lint:all' : 'ts:lint';
 
   return {
     rootDir, outDir,
@@ -65,6 +67,30 @@ function config(target /* 'production' or 'development' */) {
               type: 'tslint',
               src: './src/**/*.ts',
               tsLintFile: 'tslint.json',
+            }
+          },
+          {
+            name: 'ts:lint:full',
+            operation: {
+              type: 'tslint',
+              src: './src/**/*.ts',
+              tsLintFile: 'tslint.full.json',
+              typeChecking: true,
+            }
+          },
+          {
+            name: 'ts:lint:ng',
+            operation: {
+              type: 'tslint',
+              src: './src/**/*.ts',
+              tsLintFile: 'tslint.ng.json'
+            }
+          },
+          {
+            name: 'ts:lint:all',
+            operation: {
+              type: 'sequence',
+              sequence: ['ts:lint:full', 'ts:lint:ng'],
             }
           },
           {
@@ -136,7 +162,7 @@ function config(target /* 'production' or 'development' */) {
               tsConfigFile: 'src/tsconfig.spec.json',
             }
           },
-          {name: 'build', deps: ['dist:files', 'ts:lint', 'rollup:lib']}, {
+          {name: 'build', deps: ['dist:files', tsLintTask, 'rollup:lib']}, {
             name: 'watch',
             watch: ['./src/**/*.*'],
           },
