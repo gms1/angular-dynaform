@@ -152,7 +152,7 @@ function config(target /* 'production' or 'development' */) {
             deps: [],
             operation: {
               type: 'karma',
-              karmaConfigFile: './karma.conf.js',
+              karmaConfigFile: './karma.conf.headless.js',
             }
           }
         ]
