@@ -4,13 +4,13 @@ TYPE ?= prod
 BUILDFLAGS = --$(TYPE) 
 
 #-------------------------------------------------------------
-.PHONY: all basic-example material-example nativescript-example
+.PHONY: all
 
-all: basic-example material-example nativescript-example
-
+all: basic-example material-example nativescript
+test-all: test-core test-basic test-material
 
 #-------------------------------------------------------------
-.PHONY: core-nodeps core-depsonly core
+.PHONY: core-nodeps core-depsonly core test-core
 
 core-nodeps:
 	cd packages/core && gulp rebuild $(BUILDFLAGS)
@@ -19,9 +19,12 @@ core-depsonly:
 
 core: core-depsonly
 	@$(MAKE) core-nodeps --no-print-directory
+	
+test-core:
+	cd packages/core && gulp test $(BUILDFLAGS)
 
 #-------------------------------------------------------------
-.PHONY: basic-nodeps basic-depsonly basic
+.PHONY: basic-nodeps basic-depsonly basic test-basic
 
 basic-nodeps:
 	cd packages/basic && gulp rebuild $(BUILDFLAGS)
@@ -30,9 +33,12 @@ basic-depsonly: core
 
 basic: basic-depsonly
 	@$(MAKE) basic-nodeps --no-print-directory
+	
+test-basic:
+	cd packages/basic && gulp test $(BUILDFLAGS)
 
 #-------------------------------------------------------------
-.PHONY: material-nodeps material-depsonly material
+.PHONY: material-nodeps material-depsonly material test-material
 
 material-nodeps:
 	cd packages/material && gulp rebuild $(BUILDFLAGS)
@@ -41,6 +47,9 @@ material-depsonly: core
 
 material: material-depsonly
 	@$(MAKE) material-nodeps --no-print-directory
+
+test-material:
+	cd packages/material && gulp test $(BUILDFLAGS)
 
 #-------------------------------------------------------------
 .PHONY: nativescript-nodeps nativescript-depsonly nativescript

@@ -5,7 +5,7 @@ import {DynamicFormError} from '../components/dynamic-form-error.interface';
 import {DynamicFormComponent} from '../components/dynamic-form.component';
 import {ControlModel} from '../models/control-model.interface';
 import {DynamicFormComponentFactoryService} from '../services/dynamic-form-component-factory.service';
-import {ValidationError} from '../validations/validation-error.interface';
+import {DynamicValidationError} from '../validations/dynamic-validation-error.interface';
 
 // this directive creates, updates and destroys the error control component dynamically
 
@@ -15,7 +15,7 @@ export class DynamicFormErrorComponentDirective implements OnChanges, OnDestroy 
   model: ControlModel;
 
   @Input()
-  error: ValidationError;
+  error: DynamicValidationError;
 
   private componentRef: ComponentRef<DynamicFormError>|undefined;
 

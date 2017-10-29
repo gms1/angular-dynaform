@@ -36,7 +36,9 @@ describe('test suite', () => {
 
   function findComponentById(id: string): DynamicFormControl {
     let res = form.findComponentById(id);
-    expect(res).toBeDefined(`component with id "${id}" not found`);
+    if (!res) {
+      throw new Error(`component with id "${id}" not found`);
+    }
     return res;
   }
 
@@ -335,9 +337,10 @@ describe('test suite', () => {
 
   });
 
+  // --------------------------------------------------------------------------------------------------
+  it('should be able to use a custom validator', () => {
+    form.initValue(formModelData);
 
-  // TODO: test form array
-  // insert
-
+  });
 
 });

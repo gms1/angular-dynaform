@@ -4,7 +4,7 @@ import {Component, Input, SimpleChanges} from '@angular/core';
 
 import {ControlOptions} from '../config/control-options.interface';
 import {ControlModel} from '../models/control-model.interface';
-import {ValidationError} from '../validations/validation-error.interface';
+import {DynamicValidationError} from '../validations/dynamic-validation-error.interface';
 
 import {DynamicFormError} from './dynamic-form-error.interface';
 import {DynamicForm} from './dynamic-form.interface';
@@ -19,7 +19,7 @@ export class DynamicFormErrorComponent implements DynamicFormError {
   }
 
   @Input()
-  error: ValidationError;
+  error: DynamicValidationError;
 
   private _model: ControlModel;
   options: ControlOptions;

@@ -1,0 +1,10 @@
+// tslint:disable no-null-keyword triple-equals
+import {ControlModel, DynamicFormValidator, DynamicValidationError} from '@angular-dynaform/core';
+import {AbstractControl, ValidationErrors, ValidatorFn} from '@angular/forms';
+
+export class TestHexDigitsValidator extends DynamicFormValidator {
+  validate(control: ControlModel, key: string, order?: number): ValidatorFn {
+    return (c: AbstractControl): ValidationErrors | null =>
+               (c.value == undefined || c.value.match(/^\xdd+$/)) ? null : {[key]: true};
+  }
+}

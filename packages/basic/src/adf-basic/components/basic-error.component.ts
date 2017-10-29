@@ -4,7 +4,7 @@ import {
   ControlOptions,
   DynamicFormErrorComponent,
   DynamicForm,
-  ValidationError
+  DynamicValidationError
 } from '@angular-dynaform/core';
 
 // tslint:disable use-input-property-decorator use-output-property-decorator no-access-missing-member
@@ -21,7 +21,7 @@ import {Component} from '@angular/core';
 export class BasicErrorComponent extends DynamicFormErrorComponent {
   model: ControlModel;
   options: ControlOptions;
-  error: ValidationError;
+  error: DynamicValidationError;
 
   constructor(public form: DynamicForm) { super(form); }
 }

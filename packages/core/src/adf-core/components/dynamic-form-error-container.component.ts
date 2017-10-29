@@ -1,7 +1,7 @@
 import {Component, DoCheck, Input} from '@angular/core';
 
 import {ControlModel} from '../models/control-model.interface';
-import {ValidationError} from '../validations/validation-error.interface';
+import {DynamicValidationError} from '../validations/dynamic-validation-error.interface';
 
 import {DynamicFormErrorContainer} from './dynamic-form-error-container.interface';
 import {DynamicForm} from './dynamic-form.interface';
@@ -19,7 +19,7 @@ export class DynamicFormErrorContainerComponent implements DynamicFormErrorConta
   @Input()
   model: ControlModel;
 
-  errors: ValidationError[];
+  errors: DynamicValidationError[];
 
   constructor(public form: DynamicForm) {}
 
@@ -31,10 +31,9 @@ export class DynamicFormErrorContainerComponent implements DynamicFormErrorConta
       return;
     }
     this.errors = [];
-    let sortedErrors: ValidationError[] =
-        Object.values(this.model.ngControl.errors)
-            .filter((v) => v.message)
-            .sort((a, b) => ((a as ValidationError).order || 0) - ((b as ValidationError).order || 0));
+    let sortedErrors: DynamicValidationError[] = Object.values(this.model.ngControl.errors)
+                                                     .filter((v) => v.message)
+                                                     .sort((a, b) => (a.order || 0) - (b.order || 0));
 
     if (this.form.config.showMultipleErrors) {
       this.errors = sortedErrors;

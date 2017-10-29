@@ -4,7 +4,7 @@ import {
   ControlOptions,
   DynamicFormErrorComponent,
   DynamicForm,
-  ValidationError
+  DynamicValidationError
 } from '@angular-dynaform/core';
 // TODO: add class 'mat-input-error'
 
@@ -22,7 +22,7 @@ import {Component} from '@angular/core';
 export class MaterialErrorComponent extends DynamicFormErrorComponent {
   model: ControlModel;
   options: ControlOptions;
-  error: ValidationError;
+  error: DynamicValidationError;
 
   constructor(public form: DynamicForm) { super(form); }
 }

@@ -36,7 +36,9 @@ describe('test suite', () => {
 
   function findComponentById(id: string): DynamicFormControl {
     let res = form.findComponentById(id);
-    expect(res).toBeDefined(`component with id "${id}" not found`);
+    if (!res) {
+      throw new Error(`component with id "${id}" not found`);
+    }
     return res;
   }
 
@@ -337,10 +339,5 @@ describe('test suite', () => {
     expect(contacts1ValueEl.nativeElement.value).toBe(contactValue, 'got wrong contact value after inserting item');
 
   });
-
-
-  // TODO: test form array
-  // insert
-
 
 });
