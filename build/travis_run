@@ -22,7 +22,16 @@ pushd "${PROJ_HOME}" &>/dev/null        || die "failed to cwd '${PROJ_HOME}'"
 
   # --- core package
   pushd "packages/core" &>/dev/null     || die "failed to cwd 'packages/core'"
-    echo "*** TODO travis test"
+    # gulp test --prod                    || die "test 'packages/core' failed"
+    ./node_modules/.bin/karma start --single-run --retryLimit 0 karma.conf.headless.js \
+                                        || die "test 'packages/core' failed"
   popd &>/dev/null
-  
+
+  # --- basic package
+  pushd "packages/basic" &>/dev/null    || die "failed to cwd 'packages/basic'"
+    # gulp test --prod                    || die "test 'packages/basic' failed"
+    ./node_modules/.bin/karma start --single-run --retryLimit 0 karma.conf.headless.js \
+                                        || die "test 'packages/core' failed"
+  popd &>/dev/null
+
 popd &>/dev/null
