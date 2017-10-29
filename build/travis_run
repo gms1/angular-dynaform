@@ -38,4 +38,13 @@ pushd "${PROJ_HOME}" &>/dev/null        || die "failed to cwd '${PROJ_HOME}'"
     echo "*** test    package/basic: done"
   popd &>/dev/null
 
+  # --- material package
+  pushd "packages/material" &>/dev/null || die "failed to cwd 'packages/material'"
+    echo "*** test    package/material..."
+    # gulp test --prod                    || die "test 'packages/material' failed"
+    ./node_modules/.bin/karma start --single-run --retryLimit 0 karma.conf.headless.js \
+                                        || die "test 'packages/core' failed"
+    echo "*** test    package/material: done"
+  popd &>/dev/null
+
 popd &>/dev/null
