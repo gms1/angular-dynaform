@@ -47,7 +47,7 @@
   (depends on angular v5.x [#11405](https://github.com/angular/angular/issues/11405))
 * observable select options
 * form(Config/Model)Builder?
-* improve documentation and tests
+* improve documentation
 * enable option fullTemplateTypeCheck for remaining packages (already enabled in 'core')
 
 > NOTE: Asking for any help! Your contribution is highly welcome!

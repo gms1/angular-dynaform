@@ -57,6 +57,30 @@ echo "*** install main: done"
     gulp rebuild --prod                 || die "failed to build package 'basic-example'"
     echo "*** build   package/basic-example: done"
   popd &>/dev/null
-  
-  
+
+
+  # --- material package
+  pushd "packages/material" &>/dev/null || die "failed to cwd 'packages/material'"
+
+    echo "*** install package/material..."
+    npm install &>/dev/null             || die "failed to install package 'material'"
+    echo "*** install package/material: done"
+    echo "*** build   package/material..."
+    gulp rebuild --prod                 || die "failed to build package 'material'"
+    echo "*** build   package/material: done"
+  popd &>/dev/null
+
+  # --- material-example package
+  pushd "packages/material-example" &>/dev/null \
+                                        || die "failed to cwd 'packages/material-example'"
+
+    echo "*** install package/material-example..."
+    npm install &>/dev/null             || die "failed to install package 'material-example'"
+    echo "*** install package/material-example: done"
+    echo "*** build   package/material-example..."
+    gulp rebuild --prod                 || die "failed to build package 'material-example'"
+    echo "*** build   package/material-example: done"
+  popd &>/dev/null
+
+
 popd &>/dev/null
