@@ -224,8 +224,7 @@ Angulars dependency injection will be used to instantiate your component, so ple
 
 you can subclass either **DynamicFormValidator** or **DynamicFormAsyncValidator** to create your own validator.
 
-To be able to refer to this validator from the form configuration, your class type must be registered with a new or existing name, which can then be configured using the **ControlConfig.validators** or **ControlConfig.asyncValidators** poperties.
-Please see **DynamicFormService.validatorTypes.setType** for the registration.
+To be able to refer to this validator from the form configuration, your class type must be registered with a new or existing name, which can then be configured using the **ControlConfig.validators** or **ControlConfig.asyncValidators** poperties. Please register your class with all the validator names which should be handled by this class; see **DynamicFormService.validatorTypes.setType** for the registration.
 
 Angulars dependency injection will be used to instantiate your validation class.
 

@@ -5,6 +5,18 @@
   "author": "Guenter Sandner <www.gms@gmx.at>",
   "license": "MIT",
   "private": false,
+  "keywords": [
+    "angular",
+    "generic",
+    "json",
+    "rad",
+    "rapid application development",
+    "dynamic forms",
+    "reactive forms",
+    "generic forms",
+    "model-driven forms",
+    "nativescript"
+  ],
   "repository": {
     "type": "git",
     "url": "git+https://github.com/gms1/angular-dynaform.git"
@@ -35,7 +47,7 @@
     "@angular/forms": "^5.0.0-rc.6",
     "core-js": "^2.5.1",
     "jsep": "^0.3.2",
-    "jsonpointerx": "^1.0.3",
+    "jsonpointerx": "^1.0.4",
     "nativescript-angular": "^4.4.1",
     "rxjs": "^5.5.2",
     "tns-core-modules": "^3.3.0",
@@ -75,7 +87,7 @@
     "merge-stream": "^1.0.1",
     "protractor": "^5.2.0",
     "rollup": "^0.50.0",
-    "rollup-plugin-commonjs": "^8.2.5",
+    "rollup-plugin-commonjs": "^8.2.6",
     "rollup-plugin-node-resolve-angular": "^2.0.3",
     "rollup-plugin-uglify": "^2.0.1",
     "run-sequence": "^2.2.0",
