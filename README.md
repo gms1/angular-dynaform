@@ -37,14 +37,13 @@
 ## TODO list
 
 * nativescript templates
-* generate JSON Patch (RFC 6902) for changes applied to the form/application data
 * advanced formatting/parsing of form values
-  we could use the **text-mask** library
-* autocomplete
 * multi-page/step forms
+* autocomplete
 * support for angular's internationalization
   (depends on angular v5.x [#11405](https://github.com/angular/angular/issues/11405))
 * observable select options
+* generate JSON Patch (RFC 6902) for changes applied to the form/application data
 * form(Config/Model)Builder?
 * improve documentation
 * enable option fullTemplateTypeCheck for remaining packages (already enabled in 'core')
