@@ -1,5 +1,11 @@
 # CHANGELOG
 
+## 0.2.0
+
+* **Features**
+  * custom validators support improved
+  * support for generic i18n error messages
+
 ## 0.1.2
 
 maintenance release
