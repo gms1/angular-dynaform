@@ -219,20 +219,17 @@ Please see **DynamicFormService.setControlComponent** for the registration.
 
 Angulars dependency injection will be used to instantiate your component, so please do not forget to provide **DynamicFormControlComponentBase** using your existing class.
 
-### custom validators (DI)
-
-you can subclass either **DynamicFormValidator** or **DynamicFormAsyncValidator** to create your own validator.
-
-To be able to refer to this validator from the form configuration, your class type must be registered with a new or existing name, which can then be configured using the **ControlConfig.validators** or **ControlConfig.asyncValidators** poperties. Please register your class with all the validator names which should be handled by this class; see **DynamicFormService.validatorTypes.setType** for the registration.
-
-Angulars dependency injection will be used to instantiate your validation class.
-
 ### custom form actions (no DI)
 
 you can subclass **DynamicFormAction** to create your own dynamic form action.
 
 To be able to refer to this action from the form configuration, your class type must be registered with a new or existing name, which can then be configured using the **ControlConfig.action** poperty.
 Please see **DynamicFormService.actionTypes.setType** for the registration.
+
+### custom validators
+
+implement either **DynamicFormValidatorFn** or **DynamicFormAsyncValidator** and register this function using
+**DynamicFormService.validatorFn.setFn** or **DynamicFormService.asyncValidatorFn.setFn**
 
 ## License
 

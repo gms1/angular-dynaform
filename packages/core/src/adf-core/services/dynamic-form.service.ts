@@ -9,7 +9,7 @@ import {DynamicFormControlComponentBase} from '../components/dynamic-form-contro
 import {DynamicFormErrorComponent} from '../components/dynamic-form-error.component';
 import {DynamicFormFormControlComponent} from '../components/dynamic-form-form-control.component';
 
-import {DynamicFormValidator, DynamicFormAsyncValidator} from '../validations/dynamic-form.validator';
+import {DynamicFormValidatorRegistry, DynamicFormAsyncValidatorRegistry} from '../validations/dynamic-form.validator';
 
 import {DynamicFormModelFactoryService} from './dynamic-form-model-factory.service';
 
@@ -32,10 +32,10 @@ export class DynamicFormService {
     return this._controlComponentTypes.snapshot;
   }
 
-  // validator registry:
-  // inject these validators by resolving the registered type for a particular name
-  validatorTypes: TypeRegistry<DynamicFormValidator>;
-  asyncValidatorTypes: TypeRegistry<DynamicFormAsyncValidator>;
+  // validator function registry:
+  // register your validation functions
+  validatorFn: DynamicFormValidatorRegistry;
+  asyncValidatorFn: DynamicFormAsyncValidatorRegistry;
 
   // action registry:
   // instantiate actions for the registered type for a particular name
@@ -44,8 +44,9 @@ export class DynamicFormService {
 
   // constructor
   constructor(private _modelFactory: DynamicFormModelFactoryService) {
-    this.validatorTypes = new TypeRegistry<DynamicFormValidator>();
-    this.asyncValidatorTypes = new TypeRegistry<DynamicFormAsyncValidator>();
+    this.validatorFn = new DynamicFormValidatorRegistry();
+    this.asyncValidatorFn = new DynamicFormAsyncValidatorRegistry();
+
     this.actionTypes = new TypeRegistry<DynamicFormAction>();
     this._controlComponentTypes = new TypeRegistry<DynamicFormControlComponentBase>();
   }

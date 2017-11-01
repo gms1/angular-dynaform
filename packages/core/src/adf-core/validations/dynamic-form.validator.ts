@@ -1,5 +1,4 @@
 // tslint:disable max-classes-per-file no-null-keyword
-import {Injectable} from '@angular/core';
 import {AbstractControl, AsyncValidatorFn, ValidatorFn, Validators, ValidationErrors} from '@angular/forms';
 import {Observable} from 'rxjs/Observable';
 import {map} from 'rxjs/operators';
@@ -8,6 +7,7 @@ import {ValueControlModel} from '../models/control-model';
 import {ControlModel} from '../models/control-model.interface';
 
 import {DynamicValidationError} from './dynamic-validation-error.interface';
+import {FnRegistry} from '../utils/fn-registry';
 
 // tslint:disable-next-line interface-over-type-literal
 export declare type DynamicValidationErrorResult = {
@@ -15,17 +15,14 @@ export declare type DynamicValidationErrorResult = {
 };
 
 
-// tslint:disable-next-line no-empty-interface
-export interface DynamicValidatorFn extends ValidatorFn { (c: AbstractControl): DynamicValidationErrorResult|null; }
-// tslint:disable-next-line no-empty-interface
-export interface DynamicAsyncValidatorFn extends AsyncValidatorFn {
-  (c: AbstractControl): Promise<DynamicValidationErrorResult|null>|Observable<DynamicValidationErrorResult|null>;
-}
+export type DynamicFormValidatorFn = (key: string, control: ControlModel) => ValidatorFn;
+export type DynamicFormAsyncValidatorFn = (key: string, control: ControlModel) => AsyncValidatorFn;
 
-export abstract class DynamicFormValidatorBase<DFn extends Fn, Fn> {
-  abstract validateWrap(control: ControlModel, key: string, order?: number): DFn;
 
-  abstract validate(control: ControlModel, key: string, order: number): Fn;
+export abstract class DynamicFormValidationBase<Fn> {
+  abstract validateWrap(control: ControlModel, key: string|string[], order?: number): Fn[];
+
+  abstract validate(key: string, control: ControlModel): Fn;
 
   protected buildError(control: ControlModel, key: string, order: number, error: ValidationErrors):
       DynamicValidationErrorResult {
@@ -34,10 +31,19 @@ export abstract class DynamicFormValidatorBase<DFn extends Fn, Fn> {
   }
 }
 
+export abstract class DynamicFormValidation extends DynamicFormValidationBase<ValidatorFn> {
+  validateWrap(control: ControlModel, key: string|string[], order?: number): ValidatorFn[] {
+    let res: ValidatorFn[] = [];
+    if (Array.isArray(key)) {
+      key.forEach((keyItem) => { res.push(this.validateKey(control, keyItem, order)); });
+    } else {
+      res.push(this.validateKey(control, key, order));
+    }
+    return res;
+  }
 
-export abstract class DynamicFormValidator extends DynamicFormValidatorBase<DynamicValidatorFn, ValidatorFn> {
-  validateWrap(control: ControlModel, key: string, order?: number): DynamicValidatorFn {
-    let fn: ValidatorFn = this.validate(control, key, order || 0);
+  private validateKey(control: ControlModel, key: string, order?: number): ValidatorFn {
+    let fn: ValidatorFn = this.validate(key, control);
     return (c: AbstractControl): DynamicValidationErrorResult | null => {
       let res = fn(c);
       return res === null ? res : super.buildError(control, key, order || 0, res);
@@ -45,10 +51,19 @@ export abstract class DynamicFormValidator extends DynamicFormValidatorBase<Dyna
   }
 }
 
-export abstract class DynamicFormAsyncValidator extends
-    DynamicFormValidatorBase<DynamicAsyncValidatorFn, AsyncValidatorFn> {
-  validateWrap(control: ControlModel, key: string, order?: number): DynamicAsyncValidatorFn {
-    let fn: AsyncValidatorFn = this.validate(control, key, order || 0);
+export abstract class DynamicFormAsyncValidation extends DynamicFormValidationBase<AsyncValidatorFn> {
+  validateWrap(control: ControlModel, key: string|string[], order?: number): AsyncValidatorFn[] {
+    let res: AsyncValidatorFn[] = [];
+    if (Array.isArray(key)) {
+      key.forEach((keyItem) => { res.push(this.validateKey(control, keyItem, order)); });
+    } else {
+      res.push(this.validateKey(control, key, order));
+    }
+    return res;
+  }
+
+  private validateKey(control: ControlModel, key: string, order?: number): AsyncValidatorFn {
+    let fn: AsyncValidatorFn = this.validate(key, control);
     return (c: AbstractControl): Promise<DynamicValidationErrorResult|null>|
         Observable<DynamicValidationErrorResult|null> => {
       // tslint:disable-next-line
@@ -64,76 +79,91 @@ export abstract class DynamicFormAsyncValidator extends
   }
 }
 
+export class DynamicFormValidatorRegistry extends DynamicFormValidation {
+  reg: FnRegistry<DynamicFormValidatorFn>;
 
-@Injectable()
-export class ControlRequiredValidator extends DynamicFormValidator {
-  validate(control: ValueControlModel, key: string, order?: number): ValidatorFn { return Validators.required; }
-}
+  constructor() {
+    super();
+    this.reg = new FnRegistry();
+    // tslint:disable no-unbound-method
+    this.setFn('required', DynamicFormValidatorRegistry.required);
+    this.setFn('requiredTrue', DynamicFormValidatorRegistry.requiredTrue);
+    this.setFn('minLength', DynamicFormValidatorRegistry.minLength);
+    this.setFn('maxLength', DynamicFormValidatorRegistry.maxLength);
+    this.setFn('min', DynamicFormValidatorRegistry.min);
+    this.setFn('max', DynamicFormValidatorRegistry.max);
+    this.setFn('pattern', DynamicFormValidatorRegistry.pattern);
+    this.setFn('email', DynamicFormValidatorRegistry.email);
+    // tslint:enable no-unbound-method
+  }
 
-@Injectable()
-export class ControlRequiredTrueValidator extends DynamicFormValidator {
-  validate(control: ValueControlModel, key: string, order?: number): ValidatorFn { return Validators.requiredTrue; }
-}
+  setFn(key: string, fn: DynamicFormValidatorFn, ifNotExist?: boolean): void { this.reg.setFn(key, fn, false); }
 
-@Injectable()
-export class ControlMinLengthValidator extends DynamicFormValidator {
-  validate(control: ValueControlModel, key: string, order?: number): ValidatorFn {
+  validate(key: string, control: ControlModel): ValidatorFn {
+    let dffn = this.reg.getFn(key);
+    if (!dffn) {
+      return () => null;
+    }
+    return dffn(key, control);
+  }
+
+  static required(key: string, control: ValueControlModel): ValidatorFn { return Validators.required; }
+  static requiredTrue(key: string, control: ValueControlModel): ValidatorFn { return Validators.requiredTrue; }
+  static minLength(key: string, control: ValueControlModel): ValidatorFn {
     const minLength = control.options && control.options.minLength ? control.options.minLength : 0;
     if (!minLength) {
       return () => null;
     }
     return Validators.minLength(minLength);
   }
-}
-
-@Injectable()
-export class ControlMaxLengthValidator extends DynamicFormValidator {
-  validate(control: ValueControlModel, key: string, order?: number): ValidatorFn {
+  static maxLength(key: string, control: ValueControlModel): ValidatorFn {
     const maxLength = control.options && control.options.maxLength ? control.options.maxLength : 0;
     if (!maxLength) {
       return () => null;
     }
     return Validators.maxLength(maxLength);
   }
-}
-
-
-@Injectable()
-export class ControlMinValidator extends DynamicFormValidator {
-  validate(control: ValueControlModel, key: string, order?: number): ValidatorFn {
+  static min(key: string, control: ValueControlModel): ValidatorFn {
     const min = control.options && control.options.min ? control.options.min : 0;
     if (min === undefined) {
       return () => null;
     }
     return Validators.min(min);
   }
-}
-
-@Injectable()
-export class ControlMaxValidator extends DynamicFormValidator {
-  validate(control: ValueControlModel, key: string, order?: number): ValidatorFn {
+  static max(key: string, control: ValueControlModel): ValidatorFn {
     const max = control.options && control.options.max ? control.options.max : 0;
     if (max === undefined) {
       return () => null;
     }
     return Validators.max(max);
   }
-}
-
-
-
-@Injectable()
-export class ControlPatternValidator extends DynamicFormValidator {
-  validate(control: ValueControlModel, key: string, order?: number): ValidatorFn {
+  static pattern(key: string, control: ValueControlModel): ValidatorFn {
     const pattern = control.options && control.options.pattern ? control.options.pattern : undefined;
     if (!pattern) {
       return () => null;
     }
     return Validators.pattern(pattern);
   }
+  static email(key: string, control: ValueControlModel): ValidatorFn { return Validators.email; }
 }
 
-@Injectable()
-export class ControlEmailValidator extends DynamicFormValidator {
-  validate(control: ValueControlModel, key: string, order?: number): ValidatorFn { return Validators.email; }
+
+export class DynamicFormAsyncValidatorRegistry extends DynamicFormAsyncValidation {
+  reg: FnRegistry<DynamicFormAsyncValidatorFn>;
+
+
+  constructor() {
+    super();
+    this.reg = new FnRegistry();
+  }
+
+  setFn(key: string, fn: DynamicFormAsyncValidatorFn, ifNotExist?: boolean): void { this.reg.setFn(key, fn, false); }
+
+  validate(key: string, control: ControlModel): AsyncValidatorFn {
+    let dffn = this.reg.getFn(key);
+    if (!dffn) {
+      return () => Promise.resolve(null);
+    }
+    return dffn(key, control);
+  }
 }

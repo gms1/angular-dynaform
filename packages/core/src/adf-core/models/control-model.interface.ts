@@ -213,8 +213,7 @@ export abstract class AbstractControlModel<C extends AbstractControl, O extends 
     this.ngControl.clearValidators();
     if (this.config.validators) {
       let order: number = 0;
-      this.dynamicFormService.validatorTypes.getInstances(this.formModel.injector, this.config.validators)
-          .forEach(({name, instance}) => { this.validatorFns.push(instance.validateWrap(this, name, order++)); });
+      this.validatorFns = this.dynamicFormService.validatorFn.validateWrap(this, this.config.validators, order++);
       this.ngControl.setValidators(this.validatorFns);
     }
   }
@@ -223,8 +222,8 @@ export abstract class AbstractControlModel<C extends AbstractControl, O extends 
     this.ngControl.clearAsyncValidators();
     if (this.config.asyncValidators) {
       let order: number = 0;
-      this.dynamicFormService.asyncValidatorTypes.getInstances(this.formModel.injector, this.config.asyncValidators)
-          .forEach(({name, instance}) => { this.asyncValidatorFns.push(instance.validateWrap(this, name, order++)); });
+      this.asyncValidatorFns =
+          this.dynamicFormService.asyncValidatorFn.validateWrap(this, this.config.asyncValidators, order++);
       this.ngControl.setAsyncValidators(this.asyncValidatorFns);
     }
   }

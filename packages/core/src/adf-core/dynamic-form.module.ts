@@ -32,21 +32,6 @@ import {
   ClearButtonAction
 } from './actions';
 
-import {
-  ControlEmailValidator,
-  ControlMaxLengthValidator,
-  ControlMinLengthValidator,
-  ControlMaxValidator,
-  ControlMinValidator,
-  ControlPatternValidator,
-  ControlRequiredTrueValidator,
-  ControlRequiredValidator
-} from './validations/dynamic-form.validator';
-
-const dynamicFormValidators = [
-  ControlRequiredValidator, ControlRequiredTrueValidator, ControlMinLengthValidator, ControlMaxLengthValidator,
-  ControlMinValidator, ControlMaxValidator, ControlPatternValidator, ControlEmailValidator
-];
 
 const dynamicFormExportDirectives = [DynamicFormHTMLDomElementDirective, DynamicFormDomElementDirective];
 
@@ -70,22 +55,13 @@ const dynamicFormComponents = [dynamicFormEntryComponents, dynamicFormExportComp
   declarations: [dynamicFormDirectives, dynamicFormComponents],
   entryComponents: dynamicFormEntryComponents,
   exports: [dynamicFormExportDirectives, dynamicFormExportComponents],
-  providers: [DynamicFormComponentFactoryService, DynamicFormModelFactoryService, dynamicFormValidators]
+  providers: [DynamicFormComponentFactoryService, DynamicFormModelFactoryService]
 })
 export class DynamicFormModule {
   constructor(private dynamicFormService: DynamicFormService, @Optional() @SkipSelf() parentModule: DynamicFormModule) {
     if (parentModule) {
       throw new Error('DynamicFormModule is already loaded. Import it in the AppModule only');
     }
-    this.dynamicFormService.validatorTypes.setType('required', ControlRequiredValidator);
-    this.dynamicFormService.validatorTypes.setType('requiredTrue', ControlRequiredTrueValidator);
-    this.dynamicFormService.validatorTypes.setType('minLength', ControlMinLengthValidator);
-    this.dynamicFormService.validatorTypes.setType('maxLength', ControlMaxLengthValidator);
-    this.dynamicFormService.validatorTypes.setType('min', ControlMinValidator);
-    this.dynamicFormService.validatorTypes.setType('max', ControlMaxValidator);
-    this.dynamicFormService.validatorTypes.setType('pattern', ControlPatternValidator);
-    this.dynamicFormService.validatorTypes.setType('email', ControlEmailValidator);
-
     this.dynamicFormService.actionTypes.setType('submit', SubmitButtonAction);
     this.dynamicFormService.actionTypes.setType('reset', ResetButtonAction);
     this.dynamicFormService.actionTypes.setType('clear', ClearButtonAction);
