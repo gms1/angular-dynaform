@@ -26,8 +26,10 @@ export abstract class DynamicFormValidationBase<Fn> {
 
   protected buildError(control: ControlModel, key: string, order: number, error: ValidationErrors):
       DynamicValidationErrorResult {
-    // TODO: internationalization
-    return {[key]: {key, order, message: key}};
+    let msg = (control.local.errors && control.local.errors[key]) ||
+        (control.formModel.i18n && control.formModel.i18n.errors && control.formModel.i18n.errors[key]) ||
+        control.formModel.config.errors && control.formModel.config.errors[key] || key;
+    return {[key]: {key, order, message: msg || key}};
   }
 }
 

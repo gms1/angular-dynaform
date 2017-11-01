@@ -18,13 +18,16 @@ export interface FormConfig {
    */
   asyncValidators?: string|string[];
   /**
+   * error messages for the validators
+   */
+  errors?: {[key: string]: string};
+
+  showMultipleErrors?: boolean;
+
+  /**
    * group options
    */
   options: GroupOptions;
-
-
-
-  showMultipleErrors?: boolean;
 
   /**
    * additional user data

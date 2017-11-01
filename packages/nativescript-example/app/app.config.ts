@@ -42,9 +42,7 @@ export const formConfig: FormConfig = {
         options: {label: 'First name', placeholder: 'Enter your first name', maxLength: 30, minLength: 4},
         validators: ['required', 'minLength', 'maxLength'],
         jp: '/name/first'
-      }
-/*      
-      ,
+      },
       {
         key: 'lastName',
         id: 'lastName',
@@ -174,7 +172,8 @@ export const formConfig: FormConfig = {
               modelType: ModelType.MODEL_VALUE,
               controlType: ControlType.CONTROL_CHECKBOX,
               options: {label: 'Accept Terms and conditions', value: false},
-              jp: 'atc'
+              jp: 'atc',
+              updateOn: 'change'
             },
             {
               key: 'newsletter',
@@ -182,7 +181,8 @@ export const formConfig: FormConfig = {
               modelType: ModelType.MODEL_VALUE,
               controlType: ControlType.CONTROL_CHECKBOX,
               options: {label: 'Subscribe to newsletter', value: true},
-              jp: 'newsletter'
+              jp: 'newsletter',
+              relations: {enable: 'atc'}
             }
           ]
         }
@@ -193,6 +193,14 @@ export const formConfig: FormConfig = {
         controlType: [ControlType.CONTROL_DIVISION],
         options: {
           group: [
+            {
+              key: 'clearButton',
+              id: 'clear',
+              modelType: ModelType.MODEL_NULL,
+              controlType: ControlType.CONTROL_BUTTON,
+              options: {label: 'Clear'},
+              action: 'clear'
+            },
             {
               key: 'resetButton',
               id: 'reset',
@@ -213,7 +221,6 @@ export const formConfig: FormConfig = {
           css: {content: 'button-division-content'}
         }
       }
-*/      
     ]
   }
 };
@@ -222,53 +229,65 @@ export const formConfig: FormConfig = {
 
 export const formLanguages = {
   en: {
-    salutation: {valueOptions: [{value: 'mr', label: 'Mr.'}, {value: 'ms', label: 'Ms.'}]},
-    title: {label: 'Title', placeholder: 'Enter your title'},
-    firstName: {label: 'First name', placeholder: 'Enter your first name'},
-    lastName: {label: 'Last name', placeholder: 'Enter your last name'},
-    address: {label: 'Address'},
-    street: {label: 'Street', placeholder: 'Enter street'},
-    postcode: {label: 'Postcode', placeholder: 'Bitte postcode'},
-    contacts: {label: 'contacts'},
-    addContact: {label: 'add'},
-    insertContact: {label: 'insert'},
-    deleteContact: {label: 'delete'},
-    contactType: {
-      label: 'type',
-      placeholder: 'Select an option',
-      valueOptions: [{value: 'phone', label: 'Telephone'}, {value: 'email', label: 'Email'}]
+    controls: {
+      salutation: {valueOptions: [{value: 'mr', label: 'Mr.'}, {value: 'ms', label: 'Ms.'}]},
+      title: {label: 'Title', placeholder: 'Enter your title'},
+      firstName: {label: 'First name', placeholder: 'Enter your first name'},
+      lastName: {label: 'Last name', placeholder: 'Enter your last name'},
+      address: {label: 'Address'},
+      street: {label: 'Street', placeholder: 'Enter street'},
+      postcode: {label: 'Postcode', placeholder: 'Bitte postcode'},
+      contacts: {label: 'Contacts'},
+      addContact: {label: 'add'},
+      insertContact: {label: 'insert'},
+      deleteContact: {label: 'delete'},
+      contactType: {
+        label: 'Type',
+        placeholder: 'Select an option',
+        valueOptions: [{value: 'phone', label: 'Telephone'}, {value: 'email', label: 'Email'}]
+      },
+      contactValue: {label: 'Tel/Email', placeholder: 'Enter a value'},
+      memo: {label: 'Memo'},
+      atc: {label: 'Accept Terms and conditions'},
+      newsletter: {label: 'Subscribe to newsletter'},
+      clear: {label: 'Clear'},
+      reset: {label: 'Reset'},
+      submit: {label: 'Submit'}
     },
-    contactValue: {label: 'Tel/Email', placeholder: 'Enter a value'},
-    memo: {label: 'Memo'},
-    atc: {label: 'Accept Terms and conditions'},
-    newsletter: {label: 'Subscribe to newsletter'},
-    reset: {label: 'Reset'},
-    submit: {label: 'Submit'}
-  } as FormI18n,
+    errors: {required: `is required`, minLength: `minimum length`, maxLength: `maximum length`}
+  },
   de: {
-    salutation: {valueOptions: [{value: 'mr', label: 'Herr'}, {value: 'ms', label: 'Frau'}]},
-    title: {label: 'Titel', placeholder: 'Bitte geben Sie Ihren Titel ein'},
-    firstName: {label: 'Vorname', placeholder: 'Bitte geben Sie Ihren Vornamen ein'},
-    lastName: {label: 'Nachname', placeholder: 'Bitte geben Sie Ihren Nachnamen ein'},
-    address: {label: 'Adresse'},
-    street: {label: 'Straße', placeholder: 'Bitte geben Sie Ihre Straße ein'},
-    postcode: {label: 'PLZ./Ort', placeholder: 'Bitte geben Sie Postleitzahl und Ort ein'},
-    contacts: {label: 'Kontakte'},
-    addContact: {label: 'neu'},
-    insertContact: {label: 'einfügen'},
-    deleteContact: {label: 'löschen'},
-    contactType: {
-      label: 'Kontaktart',
-      placeholder: 'Bitte geben Sie die gewünschte Kontaktart ein',
-      valueOptions: [{value: 'phone', label: 'Telephon'}, {value: 'email', label: 'Email'}]
-    },
-    contactValue: {label: 'Tel/Email', placeholder: ''},
-    memo: {label: 'Notiz'},
-    atc: {label: 'AGB akzeptiert'},
-    newsletter: {label: 'Newsletter abonnieren'},
-    reset: {label: 'Zurücksetzen'},
-    submit: {label: 'Ok'}
-  } as FormI18n
+    controls: {
+      salutation: {valueOptions: [{value: 'mr', label: 'Herr'}, {value: 'ms', label: 'Frau'}]},
+      title: {label: 'Titel', placeholder: 'Bitte geben Sie Ihren Titel ein'},
+      firstName: {label: 'Vorname', placeholder: 'Bitte geben Sie Ihren Vornamen ein'},
+      lastName: {label: 'Nachname', placeholder: 'Bitte geben Sie Ihren Nachnamen ein'},
+      address: {label: 'Adresse'},
+      street: {label: 'Straße', placeholder: 'Bitte geben Sie Ihre Straße ein'},
+      postcode: {label: 'PLZ./Ort', placeholder: 'Bitte geben Sie Postleitzahl und Ort ein'},
+      contacts: {label: 'Kontakte'},
+      addContact: {label: 'neu'},
+      insertContact: {label: 'einfügen'},
+      deleteContact: {label: 'löschen'},
+      contactType: {
+        label: 'Kontaktart',
+        placeholder: 'Bitte geben Sie die gewünschte Kontaktart ein',
+        valueOptions: [{value: 'phone', label: 'Telephon'}, {value: 'email', label: 'Email'}]
+      },
+      contactValue: {label: 'Tel/Email', placeholder: ''},
+      memo: {label: 'Notiz'},
+      atc: {label: 'AGB akzeptiert'},
+      newsletter: {label: 'Newsletter abonnieren'},
+      clear: {label: 'Leeren'},
+      reset: {label: 'Zurücksetzen'},
+      submit: {label: 'Ok'}
+    }
+  },
+  errors: {
+    required: `wird benötigt`,
+    minLength: `minimale Länge unterschritten`,
+    maxLength: `maximale Länge überschritten`
+  }
 };
 
 

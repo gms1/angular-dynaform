@@ -52,7 +52,10 @@ export interface ControlConfig {
    * ignore for MODEL_NULL
    */
   asyncValidators?: string|string[];
-
+  /**
+   * error messages for the validators
+   */
+  errors?: {[key: string]: string};
   /**
    * relations
    * javascript expressions to enable/disabe and show/hide controls

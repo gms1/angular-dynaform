@@ -56,6 +56,8 @@ export interface ControlModel {
 
   readonly controls: ControlGroup;
 
+  local: ControlI18n;
+
   setValue(value: any, options?: {onlySelf?: boolean; emitEvent?: boolean}): void;
   patchValue(value: any, options?: {onlySelf?: boolean; emitEvent?: boolean}): void;
   reset(value?: any, options?: {onlySelf?: boolean; emitEvent?: boolean}): void;
@@ -314,8 +316,9 @@ export abstract class AbstractControlModel<C extends AbstractControl, O extends 
   }
 
   protected initTranslate(): void {
-    if (!this._formModel.i18n || !this._formModel.i18n[this.config.id]) {
+    if (!this._formModel.i18n || !this._formModel.i18n.controls[this.config.id]) {
       // initialize using the defaults from the form configuration
+      this.local.errors = this.config.errors;
       this.local.label = this.options.label;
       this.local.placeholder = this.options.placeholder;
       this.local.valueOptions = [];
@@ -329,7 +332,8 @@ export abstract class AbstractControlModel<C extends AbstractControl, O extends 
       return;
     }
     // initialize using the i18n translations
-    const i18n = this._formModel.i18n[this.config.id];
+    const i18n = this._formModel.i18n.controls[this.config.id];
+    this.local.errors = i18n.errors;
     this.local.label = i18n.label;
     this.local.placeholder = i18n.placeholder;
     this.local.valueOptions = [];
