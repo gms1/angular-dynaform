@@ -1,0 +1,39 @@
+#!/bin/bash
+
+DN=$(dirname "$0")
+BN=$(basename "$0")
+
+PROJ_HOME=$(cd "${DN}/.."; pwd)
+. "${DN}/_lib.sh"
+
+
+#---------------------------------------------------------
+
+PKGJSON=(
+  package.json
+  packages/core/package.json
+  packages/basic/package.json
+  packages/basic-example/package.json
+  packages/nativescript/package.json
+  packages/nativescript-example/package.json
+  packages/material/package.json
+  packages/material-example/package.json
+)
+
+#---------------------------------------------------------
+if [ $# -ne 1 ]; then
+  errormsg "${BN}: usage error: usage: ${BN} version"
+  exit 1
+fi
+VER=$1
+
+pushd "${PROJ_HOME}" &>/dev/null        || die "failed to cwd '${PROJ_HOME}'"
+
+  for file in "${PKGJSON[@]}"; do
+    perl -i.bak -pe "!\$x && s/(\"version\": *\")[^\"]*(\")/\"version\": \"${VER}\"/ && (\$x=1)" "${file}" || \
+      die "failed to update '${file}'"
+    rm -f "${file}.bak"
+  done
+
+
+popd &>/dev/null

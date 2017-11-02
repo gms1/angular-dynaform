@@ -1,0 +1,24 @@
+#!/bin/bash
+
+DN=$(dirname "$0")
+BN=$(basename "$0")
+
+PROJ_HOME=$(cd "${DN}/.."; pwd)
+. "${DN}/_lib.sh"
+
+#---------------------------------------------------------
+
+CFGS=(
+  packages/basic-example/src/app/app.config.ts
+  packages/basic-example/systemjs/src/app.config.ts
+  packages/nativescript-example/app/app.config.ts
+  packages/material-example/src/app/app.config.ts
+  packages/material-example/systemjs/src/app.config.ts
+  packages/basic/src/adf-basic/spec/test.config.ts
+  packages/material/src/adf-material/spec/test.config.ts
+  
+)
+
+#---------------------------------------------------------
+syncfileset "${CFGS[@]}" || exit 1
+exit 0
