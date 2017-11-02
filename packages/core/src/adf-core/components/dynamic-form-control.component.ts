@@ -13,7 +13,7 @@ import {RelationAction} from '../actions/relation.action';
 
 @Component({
   selector: 'adf-contol-component-base',
-  template: `Please provide a control-component for '{{model.config.controlType}}!'`
+  template: `Please provide a control-component for '{{ model.config.controlType }}!'`
 })
 // tslint:disable-next-line component-class-suffix
 export class DynamicFormControlComponentBase implements DynamicFormControl {
@@ -113,7 +113,7 @@ export class DynamicFormControlComponentBase implements DynamicFormControl {
   selector: 'adf-contol-component',
   inputs: ['model'],
   outputs: ['focusChanges', 'click'],
-  template: `Please provide a control-component for '{{model.config.controlType}}!'`
+  template: `Please provide a control-component for '{{ model.config.controlType }}!'`
 })
 export class DynamicFormControlComponent<M extends ControlModel> extends DynamicFormControlComponentBase {
   @Input()
