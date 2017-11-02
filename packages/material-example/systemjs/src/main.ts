@@ -11,8 +11,6 @@ import {DynamicMaterialFormModule} from '@angular-dynaform/material';
 import {AppComponent} from './app.component';
 
 
-// TODO: importing DynamicMaterialFormModule I got error 'no provider for DynamicFormService'
-
 @NgModule({
   declarations: [AppComponent],
   imports: [
