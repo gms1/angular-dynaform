@@ -11,6 +11,12 @@
     "e2e": "ng e2e"
   },
   "private": true,
+  "scripts": {
+    "clean": "",
+    "build": "ng build -aot",
+    "rebuild": "ng build -aot",
+    "prepublishOnly": "echo \"ERROR: please use the dist-folder for publishing\" && exit 1"
+  },
   "dependencies": {
     "@angular-dynaform/core": "file:../core/dist",
     "@angular-dynaform/material": "file:../material/dist",

@@ -3,12 +3,12 @@ import {DynamicForm, DynamicFormService, FormModel} from '@angular-dynaform/core
 import {formConfig, formLanguages, formModelData, appModelData} from './app.config';
 
 @Component({
-  selector: 'app-root',
+  selector: 'main',
   template: `
 <div class="main-example">
   <mat-card class="mat-card">
     <mat-card-header>
-      <mat-card-title><h2>{{title}}</h2></mat-card-title>
+      <mat-card-title><h2>Example Form</h2></mat-card-title>
     </mat-card-header>
     <mat-card-content>
       <adf-form
@@ -23,10 +23,9 @@ import {formConfig, formLanguages, formModelData, appModelData} from './app.conf
   `,
   styles: []
 })
-export class AppComponent implements AfterViewInit {
+export class MainExampleComponent implements AfterViewInit {
   @ViewChild(DynamicForm) form: DynamicForm;
 
-  title: string = 'Angular DynaForm for Material2';
   model: FormModel;
 
   constructor(private dynamicFormService: DynamicFormService) {

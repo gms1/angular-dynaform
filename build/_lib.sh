@@ -40,9 +40,8 @@ syncfileset() {
     fi
     srcfile=${SRC_SET[0]}
     for file in "${TRG_SET[@]}"; do
-      git diff "${srcfile}" | patch --dry-run -s -i - "${file}" 
+      cp -a "${srcfile}" "${file}"
       if [ $? -eq 0 ]; then
-        git diff "${srcfile}" | patch -s -i - "${file}" 
         echo "  ${file} updated"
       else
         echo "! ${file} SKIPPED"

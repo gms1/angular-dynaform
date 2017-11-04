@@ -8,6 +8,7 @@ const config = {
     'packages/basic-example',
     'packages/material',
     'packages/material-example',
+    'packages/material-cli',
     'packages/nativescript',
     'packages/nativescript-example'
   ],
