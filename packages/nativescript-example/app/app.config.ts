@@ -108,7 +108,7 @@ export const formConfig: FormConfig = {
               },
               {
                 key: 'separator',
-                id: 'separatorContact',
+                id: 'separatorContactButtons',
                 modelType: ModelType.MODEL_NULL,
                 controlType: ControlType.CONTROL_SEPARATOR,
                 options: {css: {container: 'button-separator'}}
@@ -209,6 +209,13 @@ export const formConfig: FormConfig = {
               controlType: ControlType.CONTROL_BUTTON,
               options: {label: 'Clear'},
               action: 'clear'
+            },
+            {
+              key: 'separator',
+              id: 'separatorMainButtons',
+              modelType: ModelType.MODEL_NULL,
+              controlType: ControlType.CONTROL_SEPARATOR,
+              options: {css: {container: 'button-separator'}}
             },
             {
               key: 'resetButton',
