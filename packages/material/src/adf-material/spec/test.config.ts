@@ -156,7 +156,16 @@ export const formConfig: FormConfig = {
         id: 'memo',
         modelType: ModelType.MODEL_VALUE,
         controlType: ControlType.CONTROL_TEXTAREA,
-        options: {label: 'Memo', maxLength: 250, minLength: 0, readOnly: false, cols: 60, rows: 7, wrap: true},
+        options: {
+          label: 'Memo',
+          placeholder: 'Memo',
+          maxLength: 250,
+          minLength: 0,
+          readOnly: false,
+          cols: 60,
+          rows: 7,
+          wrap: true
+        },
         jp: '/notes'
       },
       {
@@ -247,7 +256,7 @@ export const formLanguages = {
         valueOptions: [{value: 'phone', label: 'Telephone'}, {value: 'email', label: 'Email'}]
       },
       contactValue: {label: 'Tel/Email', placeholder: 'Enter a value'},
-      memo: {label: 'Memo'},
+      memo: {label: 'Memo', placeholder: 'Memo'},
       atc: {label: 'Accept Terms and conditions'},
       newsletter: {label: 'Subscribe to newsletter'},
       clear: {label: 'Clear'},
@@ -275,7 +284,7 @@ export const formLanguages = {
         valueOptions: [{value: 'phone', label: 'Telephon'}, {value: 'email', label: 'Email'}]
       },
       contactValue: {label: 'Tel/Email', placeholder: ''},
-      memo: {label: 'Notiz'},
+      memo: {label: 'Notiz', placeholder: 'Notiz'},
       atc: {label: 'AGB akzeptiert'},
       newsletter: {label: 'Newsletter abonnieren'},
       clear: {label: 'Leeren'},
