@@ -228,7 +228,7 @@ Please see **DynamicFormService.actionTypes.setType** for the registration.
 
 ### custom validators
 
-implement either **DynamicFormValidatorFn** or **DynamicFormAsyncValidator** and register this function using
+implement either **DynamicFormValidatorFn** or **DynamicFormAsyncValidatorFn** and register your function using
 **DynamicFormService.validatorFn.setFn** or **DynamicFormService.asyncValidatorFn.setFn**
 
 ## License
