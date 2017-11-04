@@ -17,7 +17,7 @@ import {Component} from '@angular/core';
       [ngClass]="model.css.container"
       [hidden]="model.hidden"
     >
-        <button mat-raised-button
+      <button mat-raised-button
         [formControlName]="model.key"
         [id]="model.id"
         [ngClass]="model.css.control"
@@ -26,9 +26,9 @@ import {Component} from '@angular/core';
         adfHTMLDomElement
         ngDefaultControl
       >
-      <span [ngClass]="model.css.control"
-        [innerHTML]="model.local.label"
-      ></span>
+        <span [ngClass]="model.css.control"
+          [innerHTML]="model.local.label"
+        ></span>
       </button>
     </div>
   `,

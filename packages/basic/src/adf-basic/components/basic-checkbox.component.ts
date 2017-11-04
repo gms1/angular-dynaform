@@ -26,6 +26,7 @@ import {Component} from '@angular/core';
       />
       <label
         [attr.for]="model.id"
+        class="adf-back-label"
         [ngClass]="model.css.label"
       >
         <span [ngClass]="model.css.label"

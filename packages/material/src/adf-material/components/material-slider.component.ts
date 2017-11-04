@@ -20,6 +20,7 @@ import {Component} from '@angular/core';
       <label
         *ngIf="model.local.label"
         [attr.for]="model.id"
+        class="adf-front-label"
         [ngClass]="model.css.label"
         [innerHTML]="model.local.label"
       ></label>
