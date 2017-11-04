@@ -1,6 +1,6 @@
 {
   "name": "@angular-dynaform/nativescript",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "description": "angular-dynaform - NativeScript",
   "author": "Guenter Sandner <www.gms@gmx.at>",
   "license": "MIT",

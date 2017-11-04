@@ -1,22 +1,19 @@
 {
   "name": "material-cli",
-  "version": "0.0.0",
+  "version": "0.2.1",
   "license": "MIT",
   "scripts": {
+    "prepublishOnly": "echo \"ERROR: please use the dist-folder for publishing\" && exit 1",
     "ng": "ng",
-    "start": "ng serve",
-    "build": "ng build",
+    "clean": "",
+    "start": "ng serve -aot",
+    "build": "ng build -aot",
+    "rebuild": "ng build -aot",
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e"
   },
   "private": true,
-  "scripts": {
-    "clean": "",
-    "build": "ng build -aot",
-    "rebuild": "ng build -aot",
-    "prepublishOnly": "echo \"ERROR: please use the dist-folder for publishing\" && exit 1"
-  },
   "dependencies": {
     "@angular-dynaform/core": "file:../core/dist",
     "@angular-dynaform/material": "file:../material/dist",
