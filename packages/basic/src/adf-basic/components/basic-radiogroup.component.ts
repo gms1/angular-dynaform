@@ -21,21 +21,23 @@ import {Component} from '@angular/core';
         [id]="model.id"
         ngDefaultControl
         adfHTMLDomElement
+        [ngClass]="model.css.control"
       >
-        <legend
-          *ngIf="model.local.label"
-          [ngClass]="model.css.label"
-          [innerHTML]="model.local.label"
-        ></legend>
         <label *ngFor="let opt of model.local.valueOptions">
           <input
             [formControlName]="model.key"
             type="radio"
-            [ngClass]="model.css.control"
             [value]="opt.value"
-          /><span [innerHTML]="opt.label"></span>
+          />
+          <span [innerHTML]="opt.label"></span>
         </label>
       </fieldset>
+      <label
+        *ngIf="model.local.label"
+        [attr.for]="model.id"
+        [ngClass]="model.css.label"
+        [innerHTML]="model.local.label"
+      ></label>
       <adf-error-container [model]="model">
       </adf-error-container>
     </div>

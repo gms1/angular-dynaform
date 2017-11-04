@@ -17,17 +17,17 @@ import {Component} from '@angular/core';
       [ngClass]="model.css.container"
       [hidden]="model.hidden"
     >
-        <label
+      <mat-checkbox
+        [formControlName]="model.key"
+        [id]="model.id"
+        [ngClass]="model.css.control"
+        adfHTMLDomElement
+      >
+      </mat-checkbox>
+      <label
         [attr.for]="model.id"
         [ngClass]="model.css.label"
       >
-        <mat-checkbox
-          [formControlName]="model.key"
-          [id]="model.id"
-          [ngClass]="model.css.control"
-          adfHTMLDomElement
-        >
-        </mat-checkbox>
         <span [ngClass]="model.css.label"
           [innerHTML]="model.local.label">
         </span>

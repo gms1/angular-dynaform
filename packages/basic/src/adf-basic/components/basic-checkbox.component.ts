@@ -17,17 +17,17 @@ import {Component} from '@angular/core';
       [ngClass]="model.css.container"
       [hidden]="model.hidden"
     >
+      <input
+        [formControlName]="model.key"
+        [id]="model.id"
+        type="checkbox"
+        [ngClass]="model.css.control"
+        adfHTMLDomElement
+      />
       <label
         [attr.for]="model.id"
         [ngClass]="model.css.label"
       >
-        <input
-          [formControlName]="model.key"
-          [id]="model.id"
-          type="checkbox"
-          [ngClass]="model.css.control"
-          adfHTMLDomElement
-        />
         <span [ngClass]="model.css.label"
           [innerHTML]="model.local.label">
         </span>

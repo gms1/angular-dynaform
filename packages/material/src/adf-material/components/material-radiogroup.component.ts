@@ -17,25 +17,25 @@ import {Component} from '@angular/core';
       [ngClass]="model.css.container"
       [hidden]="model.hidden"
     >
+      <mat-radio-group
+        [id]="model.id"
+        [formControlName]="model.key"
+        ngDefaultControl
+        adfHTMLDomElement
+        [ngClass]="model.css.control"
+      >
+        <mat-radio-button *ngFor="let opt of model.local.valueOptions"
+          [value]="opt.value"
+        >
+          <span [innerHTML]="opt.label"></span>
+        </mat-radio-button>
+      </mat-radio-group>
       <label
         *ngIf="model.local.label"
         [attr.for]="model.id"
         [ngClass]="model.css.label"
         [innerHTML]="model.local.label"
       ></label>
-      <mat-radio-group
-        [id]="model.id"
-        [formControlName]="model.key"
-        ngDefaultControl
-        adfHTMLDomElement
-      >
-        <mat-radio-button *ngFor="let opt of model.local.valueOptions"
-          [ngClass]="model.css.control"
-          [value]="opt.value"
-        >
-          <span [innerHTML]="opt.label"></span>
-        </mat-radio-button>
-      </mat-radio-group>
       <adf-error-container [model]="model">
       </adf-error-container>
     </div>
