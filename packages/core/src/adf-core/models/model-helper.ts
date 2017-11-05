@@ -13,22 +13,22 @@ export namespace ModelHelper {
         copyStates(fromItem.items[i], toItem.items[i]);
       }
     } else {
-      if (fromItem.ngControl.dirty) {
-        if (toItem.ngControl.pristine) {
-          toItem.ngControl.markAsDirty();
-        }
-      } else {
-        if (toItem.ngControl.dirty) {
-          toItem.ngControl.markAsPristine();
-        }
-      }
       if (fromItem.ngControl.touched) {
         if (toItem.ngControl.untouched) {
-          toItem.ngControl.markAsTouched();
+          toItem.ngControl.markAsTouched({onlySelf: true});
         }
       } else {
         if (toItem.ngControl.touched) {
           toItem.ngControl.markAsUntouched();
+        }
+      }
+      if (fromItem.ngControl.dirty) {
+        if (toItem.ngControl.pristine) {
+          toItem.ngControl.markAsDirty({onlySelf: true});
+        }
+      } else {
+        if (toItem.ngControl.dirty) {
+          toItem.ngControl.markAsPristine();
         }
       }
     }

@@ -70,7 +70,16 @@ export class ArrayModel extends AbstractControlModel<NgFormArray, ArrayOptions> 
     return this.items[idx];
   }
 
-  addItem(): void { this.updateLength(this.items.length + 1); }
+  addItem(): void {
+    let length = this.items.length;
+    // NOTE: dirty/pristine is not observable, so as a praktical workaround some code
+    // may rely on the correct dirty/pristine state if valueChanges
+    // to keep this code working, we have to set the dirty flag before updating any value
+    this.ngControl.markAsDirty();
+    this.ngControl.markAsTouched();
+    this.updateLength(length + 1);
+    this.items[length].ngControl.markAsDirty();
+  }
 
   // NOTE: the insert operation increases the array length and moves the values
   // of the items with a larger index to the end.
@@ -82,11 +91,17 @@ export class ArrayModel extends AbstractControlModel<NgFormArray, ArrayOptions> 
     if (index > this.items.length) {
       index = this.items.length;
     }
-    this.addItem();
+    // NOTE: dirty/pristine is not observable, so as a praktical workaround some code
+    // may rely on the correct dirty/pristine state if valueChanges
+    // to keep this code working, we have to set the dirty flag before updating any value
+    this.ngControl.markAsDirty();
+    this.ngControl.markAsTouched();
+    this.updateLength(this.items.length + 1);
     for (let idx = this.items.length - 1; idx > index; idx--) {
       ArrayModel.copyItem(this.items[idx - 1], this.items[idx]);
     }
     this.items[index].reset();
+    this.items[index].ngControl.markAsDirty();
   }
 
   // NOTE: the delete operation moves the items with a larger index forward by one position
@@ -96,6 +111,11 @@ export class ArrayModel extends AbstractControlModel<NgFormArray, ArrayOptions> 
     if (index < 0 || index >= this.items.length) {
       return;
     }
+    // NOTE: dirty/pristine is not observable, so as a praktical workaround some code
+    // may rely on the correct dirty/pristine state if valueChanges
+    // to keep this code working, we have to set the dirty flag before updating any value
+    this.ngControl.markAsDirty();
+    this.ngControl.markAsTouched();
     let lastIdx = this.items.length - 1;
     for (let idx = index; idx < lastIdx; idx++) {
       ArrayModel.copyItem(this.items[idx + 1], this.items[idx]);
