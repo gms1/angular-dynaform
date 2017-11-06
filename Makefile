@@ -1,7 +1,10 @@
 
 TYPE ?= prod
 
-BUILDFLAGS = --$(TYPE) 
+BUILDFLAGS = --$(TYPE)
+ifeq (${TYPE},prod)
+  BUILDFLAGS_NG_CLI += -aot
+endif
 
 #-------------------------------------------------------------
 .PHONY: all
@@ -14,12 +17,12 @@ test-all: test-core test-basic test-material
 
 core-nodeps:
 	cd packages/core && gulp rebuild $(BUILDFLAGS)
-	
+
 core-depsonly:
 
 core: core-depsonly
 	@$(MAKE) core-nodeps --no-print-directory
-	
+
 test-core:
 	cd packages/core && gulp test $(BUILDFLAGS)
 
@@ -28,12 +31,12 @@ test-core:
 
 basic-nodeps:
 	cd packages/basic && gulp rebuild $(BUILDFLAGS)
-	
+
 basic-depsonly: core
 
 basic: basic-depsonly
 	@$(MAKE) basic-nodeps --no-print-directory
-	
+
 test-basic:
 	cd packages/basic && gulp test $(BUILDFLAGS)
 
@@ -42,7 +45,7 @@ test-basic:
 
 material-nodeps:
 	cd packages/material && gulp rebuild $(BUILDFLAGS)
-	
+
 material-depsonly: core
 
 material: material-depsonly
@@ -56,7 +59,7 @@ test-material:
 
 nativescript-nodeps:
 	cd packages/nativescript && gulp rebuild $(BUILDFLAGS)
-	
+
 nativescript-depsonly: core
 
 nativescript: nativescript-depsonly
@@ -66,8 +69,8 @@ nativescript: nativescript-depsonly
 .PHONY: basic-example-nodeps basic-example-depsonly basic-example
 
 basic-example-nodeps:
-	cd packages/basic-example && gulp rebuild $(BUILDFLAGS)
-	
+	cd packages/basic-example && ng build $(BUILDFLAGS_NG_CLI)
+
 basic-example-depsonly: basic
 
 basic-example: basic-example-depsonly
@@ -77,8 +80,8 @@ basic-example: basic-example-depsonly
 .PHONY: material-example-nodeps material-example-depsonly material-example
 
 material-example-nodeps:
-	cd packages/material-example && gulp rebuild $(BUILDFLAGS)
-	
+	cd packages/material-example && ng build $(BUILDFLAGS_NG_CLI)
+
 material-example-depsonly: material
 
 material-example: material-example-depsonly
@@ -89,7 +92,7 @@ material-example: material-example-depsonly
 
 nativescript-example-nodeps:
 	cd packages/nativescript-example && npm run build
-	
+
 nativescript-example-depsonly: nativescript
 
 nativescript-example: nativescript-example-depsonly
