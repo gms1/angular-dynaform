@@ -18,17 +18,15 @@ import {DynamicFormModule} from '@angular-dynaform/core';
 import {DynamicMaterialFormModule} from '@angular-dynaform/material';
 import {AppComponent} from './app.component';
 import {HomeComponent} from './home.component';
-import {MainExampleComponent} from './main-example.component';
 
-export const DEMO_ROUTES: Routes =
-    [{path: '', component: HomeComponent}, {path: 'main', component: MainExampleComponent}];
+export const DEMO_ROUTES: Routes = [{path: '', component: HomeComponent}];
 
 
 export const APP_ROUTES: Routes = DEMO_ROUTES;
 
 
 @NgModule({
-  declarations: [AppComponent, HomeComponent, MainExampleComponent],
+  declarations: [AppComponent, HomeComponent],
   imports: [
     BrowserModule, BrowserAnimationsModule, DynamicFormModule.forRoot(), DynamicMaterialFormModule,
     RouterModule.forRoot(APP_ROUTES), MatIconModule, MatSidenavModule, MatToolbarModule, MatListModule

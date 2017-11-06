@@ -25,7 +25,7 @@ import {Routes} from '@angular/router';
     <mat-toolbar color="primary">
       <button mat-icon-button (click)="start.open('mouse')"><mat-icon>menu</mat-icon></button>
       <div class="app-toolbar">
-        <h1>Angular Dynaform Demos</h1>
+        <h1>Angular Dynaform for Material2 - Demos</h1>
       </div>
     </mat-toolbar>
     <div class="app-content">
@@ -38,7 +38,7 @@ import {Routes} from '@angular/router';
   preserveWhitespaces: false
 })
 export class AppComponent {
-  navItems: {name: string, route: string}[] = [{name: 'Home', route: '/'}, {name: 'Main', route: '/main'}];
+  navItems: {name: string, route: string}[] = [{name: 'Home', route: '/'}];
 
   constructor() {}
 }

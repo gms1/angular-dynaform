@@ -15,11 +15,9 @@ CFGS=(
   packages/basic-example/systemjs/src/app.config.ts
 
   packages/material/src/adf-material/spec/test.config.ts
-  
+
   packages/material-example/src/app/app.config.ts
   packages/material-example/systemjs/src/app.config.ts
-  
-  packages/material-cli/src/app/app.config.ts  
 
   packages/nativescript-example/app/app.config.ts
 )

@@ -26,8 +26,6 @@ PKGJSON=(
   packages/material/package-lock.json
   packages/material-example/package.json
   packages/material-example/package-lock.json
-  packages/material-cli/package.json
-  packages/material-cli/package-lock.json
 )
 
 #---------------------------------------------------------
