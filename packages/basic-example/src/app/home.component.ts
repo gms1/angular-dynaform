@@ -3,10 +3,10 @@ import {DynamicForm, DynamicFormService, FormModel} from '@angular-dynaform/core
 import {formConfig, formLanguages, formModelData, appModelData} from './app.config';
 
 @Component({
-  selector: 'app-root',
+  selector: 'main',
   template: `
-<div class="basic-example">
-  <h1>{{title}}</h1>
+  <div class="basic-example">
+  <h2>Example Form</h2>
   <adf-form
     [model]="model"
     (adfSubmit)="onSubmit()"
@@ -17,10 +17,9 @@ import {formConfig, formLanguages, formModelData, appModelData} from './app.conf
   `,
   styles: []
 })
-export class AppComponent implements AfterViewInit {
+export class HomeComponent implements AfterViewInit {
   @ViewChild(DynamicForm) form: DynamicForm;
 
-  title: string = 'Angular DynaForm for basic HTML';
   model: FormModel;
 
   constructor(private dynamicFormService: DynamicFormService) {
@@ -39,7 +38,7 @@ export class AppComponent implements AfterViewInit {
 
   ngAfterViewInit(): void {
     setTimeout(() => {
-      // this.form.initValue(formModelData);
+      // this.form.initValue(formModelData));
       this.form.initValueFromAppModel(appModelData);
     });
   }

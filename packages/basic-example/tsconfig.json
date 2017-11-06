@@ -2,28 +2,18 @@
   "compileOnSave": false,
   "compilerOptions": {
     "outDir": "./dist/out-tsc",
-    "inlineSources": true,
-    "inlineSourceMap": true,
+    "sourceMap": true,
     "declaration": false,
     "moduleResolution": "node",
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
-    "noImplicitAny": true,
-    "suppressImplicitAnyIndexErrors": true,
     "target": "es5",
+    "typeRoots": [
+      "node_modules/@types"
+    ],
     "lib": [
-      "es2016",
       "es2017",
       "dom"
-    ],
-    "baseUrl": ".",
-    "paths": {},
-    "typeRoots": [
-      "node_modules/@types/!node"
     ]
-  },
-  "angularCompilerOptions": {
-    "skipMetadataEmit": true,
-    "skipTemplateCodegen": true
   }
 }
