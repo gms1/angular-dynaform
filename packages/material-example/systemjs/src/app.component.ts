@@ -1,52 +1,44 @@
-import {Component, AfterViewInit, ViewChild} from '@angular/core';
-import {DynamicForm, DynamicFormService, FormModel} from '@angular-dynaform/core';
-import {formConfig, formLanguages, formModelData, appModelData} from './app.config';
+import {Component} from '@angular/core';
+import {Routes} from '@angular/router';
 
 @Component({
   selector: 'app-root',
   template: `
-<div class="main-example">
-  <mat-card class="mat-card">
-    <mat-card-header>
-      <mat-card-title><h2>{{title}}</h2></mat-card-title>
-    </mat-card-header>
-    <mat-card-content>
-      <adf-form
-        [model]="model"
-        (adfSubmit)="onSubmit()"
-        (adfReset)="onReset()"
-      >
-      </adf-form>
-    </mat-card-content>
-  </mat-card>
-</div>
-  `,
-  styles: []
+  <mat-sidenav-container class="app-root">
+    <mat-sidenav #start mode="over">
+      <mat-nav-list>
+        <a *ngFor="let navItem of navItems"
+          mat-list-item
+          (click)="start.close()"
+          routerLinkActive
+          #routerLinkActiveInstance="routerLinkActive"
+          [attr.tabindex]="routerLinkActiveInstance.isActive ? 0 : -1"
+          [routerLink]="[navItem.route]">
+          {{navItem.name}}
+        </a>
+      </mat-nav-list>
+      <!-- button mat-icon-button tabindex="-1" (click)="start.close()">
+        <mat-icon>close</mat-icon>
+      </button -->
+    </mat-sidenav>
+  <div>
+    <mat-toolbar color="primary">
+      <button mat-icon-button (click)="start.open('mouse')"><mat-icon>menu</mat-icon></button>
+      <div class="app-toolbar">
+        <h1>Angular Dynaform for Material2 - Demos</h1>
+      </div>
+    </mat-toolbar>
+    <div class="app-content">
+      <router-outlet></router-outlet>
+    </div>
+  </div>
+</mat-sidenav-container>
+`,
+  styles: [],
+  preserveWhitespaces: false
 })
-export class AppComponent implements AfterViewInit {
-  @ViewChild(DynamicForm) form: DynamicForm;
+export class AppComponent {
+  navItems: {name: string, route: string}[] = [{name: 'Home', route: '/'}];
 
-  title: string = 'Angular DynaForm for Material2';
-  model: FormModel;
-
-  constructor(private dynamicFormService: DynamicFormService) {
-    this.model = this.dynamicFormService.createFormModel(formConfig, formLanguages.en);
-  }
-
-  onSubmit(): void {
-    console.log('SUBMITTED');
-    console.log('  form model: [', JSON.stringify(this.form.value, undefined, 2), ']');
-    console.log('  app model: [', JSON.stringify(this.form.valueToAppModel({}), undefined, 2), ']');
-  }
-  onReset(): void {
-    console.log('RESETTED');
-    console.log('  form model: [', JSON.stringify(this.form.value, undefined, 2), ']');
-  }
-
-  ngAfterViewInit(): void {
-    setTimeout(() => {
-      // this.form.initValue(formModelData));
-      this.form.initValueFromAppModel(appModelData);
-    });
-  }
+  constructor() {}
 }

@@ -14,7 +14,12 @@ import {
 } from '@angular-dynaform/core';
 import {DynamicBasicFormModule} from './public_api';
 import {TestFormContainerComponent} from './spec/test-form-container.component';
-import {formConfig, formLanguages, formModelData, appModelData} from './spec/test.config';
+import {
+  mainExampleConfig,
+  mainExampleFormLanguages,
+  mainExampleFormModelData,
+  mainExampleAppModelData
+} from './spec/test.config';
 
 function cleanValue(value: any): any {
   return JSON.parse(JSON.stringify(value, (k, v) => (v === null) ? undefined : v, 2));
@@ -61,7 +66,7 @@ describe('test suite', () => {
     expect(service instanceof DynamicFormService).toBe(true, 'service is not defined');
     form = container.form as DynamicForm;
     expect(form instanceof DynamicForm).toBe(true, 'form is not defined');
-    model = service.createFormModel(formConfig, formLanguages.en);
+    model = service.createFormModel(mainExampleConfig, mainExampleFormLanguages.en);
     expect(model instanceof FormModel).toBe(true, 'model is not defined');
     container.model = model;
     fixture.detectChanges();
@@ -94,7 +99,7 @@ describe('test suite', () => {
   // --------------------------------------------------------------------------------------------------
   it('submit should be enabled on valid (properly initialized) form', () => {
     // initialized form should be valid
-    form.initValue(formModelData);
+    form.initValue(mainExampleFormModelData);
     expect(form.valid).toBe(true, 'form is not valid but should be');
 
     let resetEl = findDebugElementById('reset');
@@ -111,13 +116,13 @@ describe('test suite', () => {
     expect(container.onSubmit).toHaveBeenCalledTimes(1);
 
     // submitted value should be same as initial value
-    expect(cleanValue(form.value)).toEqual(formModelData, 'submitted value is different to initial value');
+    expect(cleanValue(form.value)).toEqual(mainExampleFormModelData, 'submitted value is different to initial value');
   });
 
   // --------------------------------------------------------------------------------------------------
   it('submit should be enabled on valid (properly initialized) form', () => {
     // initialized form should be valid and pristine
-    form.initValue(formModelData);
+    form.initValue(mainExampleFormModelData);
     expect(form.valid).toBe(true, 'form is not valid but should be');
     expect(form.model.group.pristine).toBe(true, 'newly initialized form should be pristine');
 
@@ -155,13 +160,13 @@ describe('test suite', () => {
     expect(container.onSubmit).toHaveBeenCalledTimes(1);
 
     // submitted value should be same as initial value
-    expect(cleanValue(form.value)).toEqual(formModelData, 'submitted value is different to initial value');
+    expect(cleanValue(form.value)).toEqual(mainExampleFormModelData, 'submitted value is different to initial value');
   });
 
   // --------------------------------------------------------------------------------------------------
   it('should init and submit mapped application model data', () => {
     // initialized form should be valid and pristine
-    form.initValueFromAppModel(appModelData);
+    form.initValueFromAppModel(mainExampleAppModelData);
     expect(form.valid).toBe(true, 'form is not valid but should be');
 
     let submitEl = findDebugElementById('submit');
@@ -169,7 +174,7 @@ describe('test suite', () => {
 
     // submitted value should be same as initial value
     // dirty hack to provide 'options' propert as empty object
-    let cmpAppData = Object.assign(appModelData);
+    let cmpAppData = Object.assign(mainExampleAppModelData);
     if (!cmpAppData.options) {
       cmpAppData.options = {};
     }
@@ -179,7 +184,7 @@ describe('test suite', () => {
 
   // --------------------------------------------------------------------------------------------------
   it('should enable a field if related field has been checked', () => {
-    form.initValue(formModelData);
+    form.initValue(mainExampleFormModelData);
     expect(form.valid).toBe(true, 'form is not valid but should be');
 
     let newsLetterComp = findComponentById('newsletter');
@@ -237,7 +242,7 @@ describe('test suite', () => {
 
   // --------------------------------------------------------------------------------------------------
   it('should be able to delete array item', () => {
-    form.initValue(formModelData);
+    form.initValue(mainExampleFormModelData);
 
     let contactsComp = findComponentById('contacts');
     let contactsModel: ArrayModel;
@@ -266,7 +271,7 @@ describe('test suite', () => {
 
   // --------------------------------------------------------------------------------------------------
   it('should be able to add array item', () => {
-    form.initValue(formModelData);
+    form.initValue(mainExampleFormModelData);
 
     let contactsComp = findComponentById('contacts');
     let contactsModel: ArrayModel;
@@ -305,7 +310,7 @@ describe('test suite', () => {
 
   // --------------------------------------------------------------------------------------------------
   it('should be able to insert array item', () => {
-    form.initValue(formModelData);
+    form.initValue(mainExampleFormModelData);
 
     let contactsComp = findComponentById('contacts');
     let contactsModel: ArrayModel;
@@ -339,7 +344,7 @@ describe('test suite', () => {
 
   // --------------------------------------------------------------------------------------------------
   it('should be able to use a custom validator', () => {
-    form.initValue(formModelData);
+    form.initValue(mainExampleFormModelData);
 
   });
 

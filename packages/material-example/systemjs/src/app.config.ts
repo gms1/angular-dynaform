@@ -11,7 +11,7 @@ import {
   ModelType
 } from '@angular-dynaform/core';
 
-export const formConfig: FormConfig = {
+export const mainExampleConfig: FormConfig = {
   id: 'exampleForm',
   updateOn: 'blur',
   options: {
@@ -243,7 +243,7 @@ export const formConfig: FormConfig = {
 
 
 
-export const formLanguages = {
+export const mainExampleFormLanguages = {
   en: {
     controls: {
       salutation: {valueOptions: [{value: 'mr', label: 'Mr.'}, {value: 'ms', label: 'Ms.'}]},
@@ -307,7 +307,7 @@ export const formLanguages = {
 };
 
 
-export const formModelData = {
+export const mainExampleFormModelData = {
   salutation: 'mr',
   firstName: 'Chuck',
   lastName: 'Norris',
@@ -315,7 +315,7 @@ export const formModelData = {
   contacts: [{type: 'email', value: 'chuck@norris.com'}]
 };
 
-export const appModelData = {
+export const mainExampleAppModelData = {
   greeting: 'mr',
   name: {first: 'Chuck', last: 'Norris'},
   address: {street: 'P.O. Box 872', postcode: 'TX 77868'},

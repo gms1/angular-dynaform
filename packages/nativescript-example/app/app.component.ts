@@ -1,7 +1,12 @@
 
 import {Component, AfterViewInit, ViewChild} from '@angular/core';
 import {DynamicForm, DynamicFormService, FormModel} from '@angular-dynaform/core';
-import {formConfig, formLanguages, formModelData, appModelData} from './app.config';
+import {
+  mainExampleConfig,
+  mainExampleFormLanguages,
+  mainExampleFormModelData,
+  mainExampleAppModelData
+} from './app.config';
 
 @Component({
   selector: 'ns-app',

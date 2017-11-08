@@ -1,46 +1,28 @@
-import {Component, AfterViewInit, ViewChild} from '@angular/core';
-import {DynamicForm, DynamicFormService, FormModel} from '@angular-dynaform/core';
-import {formConfig, formLanguages, formModelData, appModelData} from './app.config';
+import {Component} from '@angular/core';
+import {Routes} from '@angular/router';
 
+// TODO: improve sidenav menu experience
 @Component({
   selector: 'app-root',
   template: `
-<div class="basic-example">
-  <h1>{{title}}</h1>
-  <adf-form
-    [model]="model"
-    (adfSubmit)="onSubmit()"
-    (adfReset)="onReset()"
-  >
-  </adf-form>
+<div class="sidenav">
+  <a *ngFor="let navItem of navItems"
+    routerLinkActive
+    #routerLinkActiveInstance="routerLinkActive"
+    [attr.tabindex]="routerLinkActiveInstance.isActive ? 0 : -1"
+    [routerLink]="[navItem.route]">
+    {{navItem.name}}
+  </a>
 </div>
-  `,
-  styles: []
+<div class="app-content">
+  <router-outlet></router-outlet>
+</div>
+`,
+  styles: [],
+  preserveWhitespaces: false
 })
-export class AppComponent implements AfterViewInit {
-  @ViewChild(DynamicForm) form: DynamicForm;
+export class AppComponent {
+  navItems: {name: string, route: string}[] = [{name: 'Home', route: '/'}];
 
-  title: string = 'Angular DynaForm for basic HTML';
-  model: FormModel;
-
-  constructor(private dynamicFormService: DynamicFormService) {
-    this.model = this.dynamicFormService.createFormModel(formConfig, formLanguages.en);
-  }
-
-  onSubmit(): void {
-    console.log('SUBMITTED');
-    console.log('  form model: [', JSON.stringify(this.form.value, undefined, 2), ']');
-    console.log('  app model: [', JSON.stringify(this.form.valueToAppModel({}), undefined, 2), ']');
-  }
-  onReset(): void {
-    console.log('RESETTED');
-    console.log('  form model: [', JSON.stringify(this.form.value, undefined, 2), ']');
-  }
-
-  ngAfterViewInit(): void {
-    setTimeout(() => {
-      // this.form.initValue(formModelData);
-      this.form.initValueFromAppModel(appModelData);
-    });
-  }
+  constructor() {}
 }
