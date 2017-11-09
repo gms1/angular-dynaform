@@ -1,25 +1,31 @@
 
 export enum MaterialControlType {
-  CONTROL_UNKNOWN = 'md:unknown',
+  CONTROL_UNKNOWN = 'mat:unknown',
 
   // controls for group or subset model:
-  CONTROL_DIVISION = 'md:division',
-  CONTROL_FIELDSET = 'md:fieldset',
+  CONTROL_DIVISION = 'mat:division',
+  CONTROL_FIELDSET = 'mat:fieldset',
+  CONTROL_TABS = 'mat:tabs',
+  CONTROL_STEPS = 'mat:steps',
 
   // controls for array model:
-  CONTROL_ARRAY = 'md:array',
+  CONTROL_ARRAY = 'mat:array',
 
   // controls for value model:
-  CONTROL_CHECKBOX = 'md:checkbox',
-  CONTROL_INPUT = 'md:input',
-  CONTROL_RADIOGROUP = 'md:radiogroup',
-  CONTROL_SELECT = 'md:select',
-  CONTROL_SLIDER = 'md:slider',
-  CONTROL_SWITCH = 'md:switch',
-  CONTROL_TEXTAREA = 'md:textarea',
+  CONTROL_CHECKBOX = 'mat:checkbox',
+  CONTROL_INPUT = 'mat:input',
+  CONTROL_RADIOGROUP = 'mat:radiogroup',
+  CONTROL_SELECT = 'mat:select',
+  CONTROL_SLIDER = 'mat:slider',
+  CONTROL_SWITCH = 'mat:switch',
+  CONTROL_TEXTAREA = 'mat:textarea',
+  CONTROL_DATEPICKER = 'mat:datepicker',
+  CONTROL_TIMEPICKER = 'mat:timepicker',
+  CONTROL_LISTPICKER = 'mat:listpicker',
+  CONTROL_UPLOAD = 'mat:upload',
 
   // controls for null model:
-  CONTROL_BUTTON = 'md:button',
-  CONTROL_SEPARATOR = 'md:separator'
+  CONTROL_BUTTON = 'mat:button',
+  CONTROL_SEPARATOR = 'mat:separator'
 
 }
