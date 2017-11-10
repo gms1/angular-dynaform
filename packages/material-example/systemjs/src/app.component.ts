@@ -38,7 +38,8 @@ import {Routes} from '@angular/router';
   preserveWhitespaces: false
 })
 export class AppComponent {
-  navItems: {name: string, route: string}[] = [{name: 'Home', route: '/'}];
+  navItems: {name: string, route: string}[] =
+      [{name: 'Home', route: '/'}, {name: 'TabGroup', route: 'tabgroup'}, {name: 'Stepper', route: 'stepper'}];
 
   constructor() {}
 }

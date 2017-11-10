@@ -33,12 +33,12 @@ import {
 } from './actions';
 
 
-const dynamicFormExportDirectives = [DynamicFormHTMLDomElementDirective, DynamicFormDomElementDirective];
-
-const dynamicFormDirectives = [
-  dynamicFormExportDirectives, DynamicFormControlComponentDirective, DynamicFormFormControlComponentDirective,
-  DynamicFormErrorComponentDirective
+const dynamicFormExportDirectives = [
+  DynamicFormHTMLDomElementDirective, DynamicFormControlComponentDirective, DynamicFormFormControlComponentDirective,
+  DynamicFormErrorComponentDirective, DynamicFormDomElementDirective
 ];
+
+const dynamicFormDirectives = [dynamicFormExportDirectives];
 
 const dynamicFormEntryComponents =
     [DynamicFormControlComponentBase, DynamicFormFormControlComponent, DynamicFormErrorComponent];

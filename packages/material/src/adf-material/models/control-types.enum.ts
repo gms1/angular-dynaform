@@ -5,8 +5,8 @@ export enum MaterialControlType {
   // controls for group or subset model:
   CONTROL_DIVISION = 'mat:division',
   CONTROL_FIELDSET = 'mat:fieldset',
-  CONTROL_TABS = 'mat:tabs',
-  CONTROL_STEPS = 'mat:steps',
+  CONTROL_TABGROUP = 'mat:tabgroup',
+  CONTROL_STEPPER  = 'mat:stepper',
 
   // controls for array model:
   CONTROL_ARRAY = 'mat:array',

@@ -5,8 +5,8 @@ export enum ControlType {
   // controls for group or subset model:
   CONTROL_DIVISION = 'type:division',
   CONTROL_FIELDSET = 'type:fieldset',
-  CONTROL_TABS = 'type:tabs',
-  CONTROL_STEPS = 'type:steps',
+  CONTROL_TABGROUP = 'type:tabgroup',
+  CONTROL_STEPPER  = 'type:stepper',
 
   // controls for array model:
   CONTROL_ARRAY = 'type:array',

@@ -53,6 +53,15 @@ export const mainExampleConfig: FormConfig = {
         jp: '/name/last'
       },
       {
+        key: 'birthday',
+        id: 'birthday',
+        modelType: ModelType.MODEL_VALUE,
+        controlType: [ControlType.CONTROL_DATEPICKER, ControlType.CONTROL_INPUT],
+        options: {label: 'Birthday name', placeholder: 'Enter your birthday', inputType: 'date'},
+        validators: ['required'],
+        jp: '/birthday'
+      },
+      {
         key: 'address',
         id: 'address',
         modelType: ModelType.MODEL_GROUP,
@@ -250,6 +259,7 @@ export const mainExampleFormLanguages = {
       title: {label: 'Title', placeholder: 'Enter your title'},
       firstName: {label: 'First name', placeholder: 'Enter your first name'},
       lastName: {label: 'Last name', placeholder: 'Enter your last name'},
+      birthday: {label: 'Birthday', placeholder: 'Enter your birthday'},
       address: {label: 'Address'},
       street: {label: 'Street', placeholder: 'Enter street'},
       postcode: {label: 'Postcode', placeholder: 'Bitte postcode'},
@@ -278,6 +288,7 @@ export const mainExampleFormLanguages = {
       title: {label: 'Titel', placeholder: 'Bitte geben Sie Ihren Titel ein'},
       firstName: {label: 'Vorname', placeholder: 'Bitte geben Sie Ihren Vornamen ein'},
       lastName: {label: 'Nachname', placeholder: 'Bitte geben Sie Ihren Nachnamen ein'},
+      birthday: {label: 'Geburtstag', placeholder: 'Bitte geben Sie Ihren Geburtstag ein'},
       address: {label: 'Adresse'},
       street: {label: 'Straße', placeholder: 'Bitte geben Sie Ihre Straße ein'},
       postcode: {label: 'PLZ./Ort', placeholder: 'Bitte geben Sie Postleitzahl und Ort ein'},
@@ -311,6 +322,7 @@ export const mainExampleFormModelData = {
   salutation: 'mr',
   firstName: 'Chuck',
   lastName: 'Norris',
+  birthday: '1940-03-10',
   address: {street: 'P.O. Box 872', postcode: 'TX 77868'},
   contacts: [{type: 'email', value: 'chuck@norris.com'}]
 };
@@ -318,6 +330,7 @@ export const mainExampleFormModelData = {
 export const mainExampleAppModelData = {
   greeting: 'mr',
   name: {first: 'Chuck', last: 'Norris'},
+  birthday: '1940-03-10',
   address: {street: 'P.O. Box 872', postcode: 'TX 77868'},
   contacts: [{carrier: 'email', value: 'chuck@norris.com'}]
 };

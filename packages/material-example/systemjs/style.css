@@ -14,23 +14,25 @@ html, body, .mat-sidenav-container {
 
 /* main example */
 
-div.main-example {
+div.main-example, div.tabgroup-example {
   display: block;
   margin: 10px;
 }
 
-.main-example mat-card {
+mat-card {
   display: block;
   max-width: 768px;
-  margin: 20px;
   box-shadow: 0 3px 1px -2px rgba(0,0,0,.2), 0 2px 2px 0 rgba(0,0,0,.14), 0 1px 5px 0 rgba(0,0,0,.12);
 }
 
-.main-example mat-card-content, .main-example mat-card-title {
+mat-card-content, mat-card-header {
   display: block;
   margin: 20px;
 }
 
+mat-card-content {
+  padding: 20px;
+}
 /* form specific */
 
 .adf-front-label {
@@ -50,6 +52,10 @@ fieldset.adf-control, legend.adf-label {
 
 .button-separator {
   width: 30px
+}
+
+mat-tab-group, mat-horizontal-stepper, mat-vertical-stepper, div.mat-horizontal-content-container {
+  padding: 10px
 }
 
 
