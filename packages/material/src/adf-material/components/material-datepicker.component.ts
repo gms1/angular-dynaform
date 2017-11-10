@@ -31,18 +31,13 @@ import {Component} from '@angular/core';
           [formControlName]="model.key"
           [id]="model.id"
           type="text"
+          [readonly]="options.readOnly"
           [maxlength]="options.maxLength"
           [placeholder]="model.local.placeholder"
           [ngClass]="model.css.control"
           adfHTMLDomElement
           [matDatepicker]="myDatepicker"
         />
-        <!--
-          [minlength]="options.minLength"
-          [min]="options.min"
-          [max]="options.max"
-          [step]="options.step"
-        -->
           <mat-datepicker-toggle matSuffix [for]="myDatepicker"></mat-datepicker-toggle>
           <mat-datepicker #myDatepicker></mat-datepicker>
           <adf-error-container [model]="model">

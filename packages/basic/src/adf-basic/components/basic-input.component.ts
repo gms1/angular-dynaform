@@ -28,6 +28,7 @@ import {Component} from '@angular/core';
         [formControlName]="model.key"
         [id]="model.id"
         [type]="options.inputType || 'text'"
+        [readonly]="options.readOnly"
         [maxlength]="options.maxLength"
         [attr.placeholder]="model.local.placeholder"
         [ngClass]="model.css.control"

@@ -71,11 +71,11 @@ export interface ControlModel {
   reTranslate(): void;
   setCSSClasses(classes: {[key: string]: boolean}, setClasses: string|string[]|undefined, value: boolean): void;
 
-  disable(): void;
-  enable(): void;
-
   show(): void;
   hide(): void;
+
+  enable(): void;
+  disable(): void;
 }
 
 
@@ -149,6 +149,8 @@ export abstract class AbstractControlModel<C extends AbstractControl, O extends 
   private _css: CSSModel;
   get css(): CSSModel { return this._css; }
 
+  get disabled(): boolean { return this.ngControl.disabled; }
+
   private _hidden: boolean;
   get hidden(): boolean { return this._hidden; }
 
@@ -157,6 +159,7 @@ export abstract class AbstractControlModel<C extends AbstractControl, O extends 
 
   private _showIf?: JsExpression;
   get showIf(): JsExpression|undefined { return this._showIf; }
+
 
   local: ControlI18n;
 
@@ -187,6 +190,7 @@ export abstract class AbstractControlModel<C extends AbstractControl, O extends 
     this.initCSSModel();
     this.initRelations();
     this.initTranslate();
+    this._hidden = !!this.config.hidden;
   }
 
 
@@ -356,24 +360,24 @@ export abstract class AbstractControlModel<C extends AbstractControl, O extends 
     }
   }
 
-  private initRelations(): void {
+  protected initRelations(): void {
     if (!this.config.relations) {
       return;
     }
-    if (this.config.relations.enable) {
-      this._enableIf = JsExpression.compile(this.config.relations.enable);
-    }
     if (this.config.relations.show) {
       this._showIf = JsExpression.compile(this.config.relations.show);
+    }
+    if (this.config.relations.enable) {
+      this._enableIf = JsExpression.compile(this.config.relations.enable);
     }
   }
 
   valueFromAppModel(formData: any, appData: any, appPointerPrefix?: JsonPointer): any { return formData; }
   valueToAppModel(appData: any, appPointerPrefix?: JsonPointer): any { return appData; }
 
-  disable(): void { this.ngControl.disable(); }
-  enable(): void { this.ngControl.enable(); }
-
   show(): void { this._hidden = false; }
   hide(): void { this._hidden = true; }
+
+  enable(): void { this.ngControl.enable(); }
+  disable(): void { this.ngControl.disable(); }
 }

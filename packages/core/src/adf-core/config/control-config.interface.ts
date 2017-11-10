@@ -30,6 +30,11 @@ export interface ControlConfig {
   key?: string;
 
   /**
+   * The hide this control
+   */
+  hidden?: boolean;
+
+  /**
    * The disable flag to disable this control
    */
   disabled?: boolean;
@@ -40,6 +45,7 @@ export interface ControlConfig {
    * default: 'change'
    */
   updateOn?: 'change'|'blur'|'submit';
+
   /**
    * validators
    * TODO: validators for MODEL_SUBSET
@@ -105,6 +111,6 @@ export interface ControlConfig {
  *
  */
 export interface RelationExpressions {
-  enable?: string;
   show?: string;
+  enable?: string;
 }

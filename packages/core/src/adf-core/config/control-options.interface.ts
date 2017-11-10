@@ -47,6 +47,7 @@ export interface ControlValueOptions extends ControlBaseOptions {
   min?: number;
   max?: number;
   pattern?: string;
+  readOnly?: boolean;
 }
 
 export interface ControlInputOptions extends ControlValueOptions {
@@ -88,7 +89,6 @@ export interface ControlSwitchOptions extends ControlValueOptions {}
 
 
 export interface ControlTextareaOptions extends ControlValueOptions {
-  readOnly?: boolean;
   cols?: number;
   rows?: number;
   wrap?: boolean;
