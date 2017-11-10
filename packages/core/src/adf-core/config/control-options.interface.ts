@@ -42,12 +42,23 @@ export interface ControlValueOptions extends ControlBaseOptions {
    */
   placeholder?: string;
 
+  /**
+   * indicates that the user cannot modify the value
+   */
+  readOnly?: boolean;
+
+  /**
+   * as boolean, this property indicates if autocomplete should be enabled or disabled
+   * as string, it should be either 'on', 'off', or a valid autofill keyword
+   * see https://html.spec.whatwg.org/multipage/form-control-infrastructure.html#inappropriate-for-the-control
+   */
+  autoComplete?: string|boolean;
+
   minLength?: number;
   maxLength?: number;
   min?: number;
   max?: number;
   pattern?: string;
-  readOnly?: boolean;
 }
 
 export interface ControlInputOptions extends ControlValueOptions {

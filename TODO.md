@@ -1,11 +1,9 @@
 # TODO LIST
 
+* sequelize should be reenabled
+
 * nativescript templates
 * finalize stepper and add dynamicHeight attribute for tabgroup
-* add missing readonly attribute
-* autocomplete: provide configuration property to disable autocomplete
-        https://html.spec.whatwg.org/multipage/form-control-infrastructure.html#autofill
-* sequelize should be reenabled
 * advanced formatting/parsing of form values
 * prepare examples on StackBlitz
 * observable select options

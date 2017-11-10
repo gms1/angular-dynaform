@@ -31,6 +31,7 @@ import {Component} from '@angular/core';
           [type]="options.inputType || 'text'"
           [readonly]="options.readOnly"
           [maxlength]="options.maxLength"
+          [attr.autocomplete]="model.autoComplete"
           [placeholder]="model.local.placeholder"
           [ngClass]="model.css.control"
           adfHTMLDomElement

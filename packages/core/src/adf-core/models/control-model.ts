@@ -44,6 +44,8 @@ export class NullControlModel extends ControlModelBase<ControlBaseOptions> {
 
 
 export class ValueControlModel extends ControlModelBase<ControlValueOptions> {
+  readonly autoComplete: string;
+
   constructor(
       dynamicFormService: DynamicFormService, config: ControlConfig, formModel: FormModel, parentPath?: string[],
       parentGroup?: GroupModelBase, parentArray?: ArrayModel, parentArrayIdx?: number) {
@@ -60,6 +62,16 @@ export class ValueControlModel extends ControlModelBase<ControlValueOptions> {
         formModel, parentPath, parentGroup, parentArray, parentArrayIdx);
     this.createValidators();
     this.createAsyncValidators();
+    if (this.config.options) {
+      if (typeof this.config.options.autoComplete === 'boolean') {
+        this.autoComplete = this.config.options.autoComplete;
+      } else if (typeof this.config.options.autoComplete === 'string') {
+        this.autoComplete = this.config.options.autoComplete;
+      } else {
+        this.autoComplete = 'on';
+      }
+      console.log(`${this.id}: autocomplete: '${this.autoComplete}' config:'${this.config.options.autoComplete}'`);
+    }
   }
 
 

@@ -1,5 +1,19 @@
 # CHANGELOG
 
+## 0.2.2
+
+* **Features**
+  * support for material datepicker, tabs and initial support for stepper
+  * autocomplete/autofill
+  * readonly for input/textarea
+
+* **Fixes**
+  * form not set to dirty after array insert/add/delete operations
+
+## 0.2.1
+
+maintenance release
+
 ## 0.2.0
 
 * **Features**
