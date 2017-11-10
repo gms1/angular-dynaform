@@ -34,19 +34,9 @@
 * [Plunker for basic HTML](http://plnkr.co/edit/x8elnFR7fgDWIjvn8OZF?p=preview)
 * [Plunker for Material2](http://plnkr.co/edit/ZZuywOIH92FtsmHRp6ks?p=preview)
 
-## TODO list
+## TODO
 
-* nativescript templates
-* advanced formatting/parsing of form values
-* multi-page/step forms
-* autocomplete
-* support for angular's internationalization
-  (depends on angular v5.x [#11405](https://github.com/angular/angular/issues/11405))
-* observable select options
-* generate JSON Patch (RFC 6902) for changes applied to the form/application data
-* form(Config/Model)Builder?
-* improve documentation
-* enable option fullTemplateTypeCheck for remaining packages (already enabled in 'core')
+[TODO](./TODO.md)
 
 > NOTE: Asking for any help! Your contribution is highly welcome!
 
@@ -55,6 +45,10 @@
 * [Getting Started](#getting-started)
 * [Basic Usage](#basic-usage)
 * [Customization](#customization)
+* [Control-types](#control-types)
+* [License](#license)
+* [Release Notes](#release-notes)
+* [Contributing](#contributing)
 
 ## Getting Started
 
@@ -231,9 +225,37 @@ Please see **DynamicFormService.actionTypes.setType** for the registration.
 implement either **DynamicFormValidatorFn** or **DynamicFormAsyncValidatorFn** and register your function using
 **DynamicFormService.validatorFn.setFn** or **DynamicFormService.asyncValidatorFn.setFn**
 
+## Control-types
+
+| Model                     | Control    | HTML  | Material | Nativescript     |
+|---------------------------|------------|-------|----------|------------------|
+|  ArrayModel:
+|                           | Array      |  yes  |  yes     |                  |
+|  Group- or Subset-Model:
+|                           | Fieldset   |  yes  |  yes     |                  |
+|                           | Division   |  yes  |  yes     |                  |
+|                           | Tabgroup   |       |  yes     |                  |
+|                           | Stepper    |       |  yes     |                  |
+|  ValueControlModel:
+|                           | Checkbox   |  yes  |  yes     |                  |
+|                           | Datepicker |  *    |  yes     |                  |
+|                           | Input      |  yes  |  yes     |  yes (TextField) |
+|                           | Radiogroup |  yes  |  yes     |                  |
+|                           | Select     |  yes  |  yes     |                  |
+|                           | Slider     |  yes  |  yes     |                  |
+|                           | Switch     |  yes  |  yes     |                  |
+|                           | Textarea   |  yes  |  yes     |  yes (TextView)  |
+|                           | Listpicker |       |          |  yes             |
+|  NullControlModel:
+|                           | Button     |  yes  |  yes     |                  |
+|                           | Separator  |  yes  |  yes     |                  |
+|                           |            |       |          |                  |
+
+*) you can use "input type='date'" as replacement for a datepicker
+
 ## License
 
-**angular-dynaform** is licensed under the MIT
+**angular-dynaform** is licensed under the MIT license
 
 [LICENSE](./LICENSE)
 
