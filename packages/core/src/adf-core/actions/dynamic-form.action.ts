@@ -2,11 +2,17 @@
 import {OnDestroy, OnInit} from '@angular/core';
 
 import {ControlModel} from '../models/control-model.interface';
+import {DynamicFormControlComponentBase} from '../components/dynamic-form-control.component';
 
 
 export class DynamicFormAction implements OnInit, OnDestroy {
+  public component: DynamicFormControlComponentBase;
   public model: ControlModel;
-  public name: string;
+
+  constructor(component: DynamicFormControlComponentBase) {
+    this.component = component;
+    this.model = component.model;
+  }
 
   ngOnInit(): void {}
   ngOnDestroy(): void {}

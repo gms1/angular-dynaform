@@ -5,13 +5,14 @@ import {FormGroup} from '@angular/forms';
 import {Subject} from 'rxjs/Subject';
 
 import {DynamicFormAction} from './dynamic-form.action';
+import {DynamicFormControlComponentBase} from '../components/dynamic-form-control.component';
 
 export class ResetButtonAction extends DynamicFormAction {
   private unsubscribe: Subject<any>;
   private rootFormGroup: FormGroup;
 
-  constructor() {
-    super();
+  constructor(component: DynamicFormControlComponentBase) {
+    super(component);
     this.unsubscribe = new Subject<any>();
   }
 

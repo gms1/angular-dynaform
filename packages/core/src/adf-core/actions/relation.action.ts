@@ -9,6 +9,7 @@ import {Observable} from 'rxjs/Observable';
 import {Subject} from 'rxjs/Subject';
 
 import {DynamicFormAction} from './dynamic-form.action';
+import {DynamicFormControlComponentBase} from '../components/dynamic-form-control.component';
 import {ControlModel, ArrayModel} from '../models';
 import {JsExpression} from '../utils/js-expression';
 import {JsonPointer} from 'jsonpointerx';
@@ -16,9 +17,8 @@ import {JsonPointer} from 'jsonpointerx';
 export class RelationAction extends DynamicFormAction {
   private unsubscribe: Subject<any>;
 
-  constructor(model: ControlModel) {
-    super();
-    this.model = model;
+  constructor(component: DynamicFormControlComponentBase) {
+    super(component);
     this.unsubscribe = new Subject<any>();
   }
 

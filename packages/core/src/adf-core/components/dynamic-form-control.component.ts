@@ -52,7 +52,7 @@ export class DynamicFormControlComponentBase implements DynamicFormControl {
 
   ngOnInit(): void {
     if (this.model.enableIf || this.model.showIf) {
-      this.relationAction = new RelationAction(this.model);
+      this.relationAction = new RelationAction(this);
       this.relationAction.ngOnInit();
     }
     if (this.model.config.action) {
@@ -61,9 +61,7 @@ export class DynamicFormControlComponentBase implements DynamicFormControl {
       if (!type) {
         throw new Error(`no type registered for '${this.model.config.action}'`);
       }
-      this.action = new type();  // DI not supported, because we may need multiple instances for the same type
-      this.action.name = this.model.config.action;
-      this.action.model = this.model;
+      this.action = new type(this);  // DI not supported, because we may need multiple instances for the same type
       if (this.model.config.action === 'submit' || this.model.config.action === 'reset') {
         this.buttonType = this.model.config.action;
       }

@@ -3,14 +3,15 @@ import {takeUntil} from 'rxjs/operators/takeUntil';
 import {Subject} from 'rxjs/Subject';
 
 import {DynamicFormAction} from './dynamic-form.action';
+import {DynamicFormControlComponentBase} from '../components/dynamic-form-control.component';
 
 // delete array item
 
 export class ArrayButtonDeleteAction extends DynamicFormAction {
   private unsubscribe: Subject<any>;
 
-  constructor() {
-    super();
+  constructor(component: DynamicFormControlComponentBase) {
+    super(component);
     this.unsubscribe = new Subject<any>();
   }
 
