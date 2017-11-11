@@ -70,7 +70,6 @@ export class ValueControlModel extends ControlModelBase<ControlValueOptions> {
       } else {
         this.autoComplete = 'on';
       }
-      console.log(`${this.id}: autocomplete: '${this.autoComplete}' config:'${this.config.options.autoComplete}'`);
     }
   }
 
