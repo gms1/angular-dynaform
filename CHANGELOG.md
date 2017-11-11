@@ -4,8 +4,8 @@
 
 * **Features**
   * support for material datepicker, tabs and initial support for stepper
-  * autocomplete/autofill
-  * readonly for input/textarea
+  * autocomplete/autofill support
+  * support for readonly attribute for input/textarea
 
 * **Fixes**
   * form not set to dirty after array insert/add/delete operations
