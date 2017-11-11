@@ -15,6 +15,7 @@
   "rxjs/Observable": "Rx",
   "rxjs/Observer": "Rx",
   "rxjs/Subject": "Rx",
-  "rxjs/add/operator/map": "Rx",
-  "rxjs/add/operator/takeUntil": "Rx"
+  "rxjs/operators/map": "Rx.operators.map",
+  "rxjs/operators/takeUntil": "Rx.operators.takeUntil",
+  "rxjs/operators/distinctUntilChanged": "Rx.operators.distinctUntilChanged"
 }

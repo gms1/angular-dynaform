@@ -1,7 +1,7 @@
 // tslint:disable max-classes-per-file no-null-keyword
 import {AbstractControl, AsyncValidatorFn, ValidatorFn, Validators, ValidationErrors} from '@angular/forms';
 import {Observable} from 'rxjs/Observable';
-import {map} from 'rxjs/operators';
+import {map} from 'rxjs/operators/map';
 
 import {ValueControlModel} from '../models/control-model';
 import {ControlModel} from '../models/control-model.interface';

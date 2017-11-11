@@ -14,8 +14,9 @@
   "rxjs/Observable": "Rx",
   "rxjs/Observer": "Rx",
   "rxjs/Subject": "Rx",
-  "rxjs/add/operator/map": "Rx",
-  "rxjs/add/operator/takeUntil": "Rx",
+  "rxjs/operators/map": "Rx.map",
+  "rxjs/operators/takeUntil": "Rx.takeUntil",
+  "rxjs/operators/distinctUntilChanged": "Rx.distinctUntilChanged",
   "nativescript-angular": "nativescript-angular",
   "nativescript-angular/forms": "nativescript-angular.forms",
   "@angular-dynaform/core": "adf.core"

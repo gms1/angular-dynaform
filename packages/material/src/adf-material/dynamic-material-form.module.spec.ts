@@ -193,7 +193,7 @@ describe('test suite', () => {
         .toBe(true, 'newsletter component is not disabled on initialization');
 
     let atcEl = findDebugElementById('atc');
-    let newsLetterEl = findDebugElementById('newsletter');
+    // let newsLetterEl = findDebugElementById('newsletter');
 
     // TODO: does not work in material2?
     // expect(newsLetterEl.nativeElement.getAttribute('disabled') === null)

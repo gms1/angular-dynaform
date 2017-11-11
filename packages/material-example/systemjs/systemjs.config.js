@@ -47,7 +47,12 @@ System.config({
 
 
     'tslib': 'npm-ext:tslib',
+
     'rxjs': 'npm-ext:rxjs',
+    'rxjs/operators/map': 'npm-ext:rxjs/operators/map.js',
+    'rxjs/operators/takeUntil': 'npm-ext:rxjs/operators/takeUntil.js',
+    'rxjs/operators/distinctUntilChanged': 'npm-ext:rxjs/operators/distinctUntilChanged.js',
+
     'jsonpointerx': 'npm-ext:jsonpointerx/bundles/jsonpointerx.umd.js',
     'jsep': 'npm-ext:jsep/build/jsep.js',
 

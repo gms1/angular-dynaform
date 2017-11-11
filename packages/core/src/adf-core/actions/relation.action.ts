@@ -2,7 +2,9 @@
 // RelationExpressions has be defined for a control
 
 // tslint:disable use-life-cycle-interface
-import {distinctUntilChanged, map, takeUntil} from 'rxjs/operators';
+import {takeUntil} from 'rxjs/operators/takeUntil';
+import {map} from 'rxjs/operators/map';
+import {distinctUntilChanged} from 'rxjs/operators/distinctUntilChanged';
 import {Observable} from 'rxjs/Observable';
 import {Subject} from 'rxjs/Subject';
 

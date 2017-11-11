@@ -1,17 +1,5 @@
 import {Component, AfterViewInit, ViewChild} from '@angular/core';
-import {
-  DynamicForm,
-  DynamicFormService,
-  FormModel,
-  GroupModelBase,
-  DynamicFormControlComponentBase,
-  DynamicFormControlComponent,
-  GroupOptions,
-  ControlConfig,
-  ControlType,
-  FormConfig,
-  ModelType
-} from '@angular-dynaform/core';
+import {DynamicForm, DynamicFormService, FormModel, ControlType, FormConfig, ModelType} from '@angular-dynaform/core';
 
 
 export const stepperExampleConfig: FormConfig = {

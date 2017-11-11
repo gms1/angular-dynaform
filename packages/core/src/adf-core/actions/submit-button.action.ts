@@ -1,5 +1,5 @@
 // tslint:disable use-life-cycle-interface
-import {takeUntil} from 'rxjs/operators';
+import {takeUntil} from 'rxjs/operators/takeUntil';
 
 import {FormGroup} from '@angular/forms';
 import {Subject} from 'rxjs/Subject';
