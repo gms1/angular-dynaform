@@ -1,9 +1,7 @@
 # TODO LIST
 
-* sequelize should be reenabled
-
 * nativescript templates
-* finalize stepper and add dynamicHeight attribute for tabgroup
+* finalize stepper and add dynamicHeight attribute to tabgroup
 * advanced formatting/parsing of form values
 * prepare examples on StackBlitz
 * observable select options

@@ -5,20 +5,20 @@ export enum NativeScriptControlType {
   // controls for group or subset model:
   CONTROL_DIVISION = 'tns:division',
   CONTROL_FIELDSET = 'tns:fieldset',
-  CONTROL_TABS = 'tns:tabs',
-  CONTROL_STEPS = 'tns:steps',
+  CONTROL_TABGROUP = 'tns:tabgroup',
+  CONTROL_STEPPER  = 'tns:stepper',
 
   // controls for array model:
   CONTROL_ARRAY = 'tns:array',
 
   // controls for value model:
   CONTROL_CHECKBOX = 'tns:checkbox',
-  CONTROL_INPUT = 'tns:input',
+  CONTROL_TEXTFIELD = 'tns:textfield',
   CONTROL_RADIOGROUP = 'tns:radiogroup',
   CONTROL_SELECT = 'tns:select',
   CONTROL_SLIDER = 'tns:slider',
   CONTROL_SWITCH = 'tns:switch',
-  CONTROL_TEXTAREA = 'tns:textarea',
+  CONTROL_TEXTVIEW = 'tns:textview',
   CONTROL_DATEPICKER = 'tns:datepicker',
   CONTROL_TIMEPICKER = 'tns:timepicker',
   CONTROL_LISTPICKER = 'tns:listpicker',

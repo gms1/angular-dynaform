@@ -22,18 +22,20 @@
     "@angular/forms": "^5.0.0",
     "@angular/http": "^5.0.0",
     "@angular/platform-browser": "^5.0.0",
+    "@angular/platform-browser-dynamic": "^5.0.0",
     "@angular/router": "^5.0.0",
     "jsep": "^0.3.2",
     "jsonpointerx": "^1.0.4",
-    "nativescript-angular": "^4.4.1",
+    "nativescript-angular": "^5.1.0-2017-11-6-1",
     "reflect-metadata": "^0.1.10",
     "rxjs": "^5.5.2",
     "tns-core-modules": "^3.3.0",
+    "tslint": "^5.8.0",
     "zone.js": "^0.8.18"
   },
   "devDependencies": {
     "@angular/compiler-cli": "^5.0.0",
-    "@ngtools/webpack": "1.7.4",
+    "@ngtools/webpack": "1.8.0",
     "babel-traverse": "6.26.0",
     "babel-types": "6.26.0",
     "babylon": "6.18.0",
@@ -44,7 +46,7 @@
     "lazy": "1.0.11",
     "nativescript-css-loader": "^0.26.1",
     "nativescript-dev-typescript": "^0.5.1",
-    "nativescript-dev-webpack": "^0.8.0",
+    "nativescript-dev-webpack": "^0.9.0-2017-10-25-3",
     "nativescript-theme-core": "^1.0.4",
     "nativescript-worker-loader": "^0.8.1",
     "raw-loader": "^0.5.1",
@@ -52,7 +54,7 @@
     "typescript": "<2.5",
     "webpack": "^3.8.1",
     "webpack-bundle-analyzer": "^2.9.0",
-    "webpack-sources": "^1.0.1"
+    "webpack-sources": "^1.0.2"
   },
   "scripts": {
     "clean": "",

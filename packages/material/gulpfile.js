@@ -84,6 +84,7 @@ function config(target /* 'production' or 'development' */) {
               type: 'rollup',
               rollupConfigFile: './rollup.config.lib.es2015.js',
               addMinified: false,
+              sorcery: true,
             }
           },
           {
@@ -97,17 +98,42 @@ function config(target /* 'production' or 'development' */) {
             }
           },
           {
-            name: 'ts:tsc:esm',
+            name: 'ts:tsc:esm:trans',
             // deps: ['ts:tsc:esm:input'],
             operation: {
               type: 'execute',
               bin: 'node',
               silent: true,
-              options: {continue: true},
+              options: {
+                continue: true,
+              },
               args: [
                 'node_modules/typescript/lib/tsc.js', '--target', 'es5', '--module', 'es2015', '--noLib', '--sourceMap',
                 `dist/${srcModulePath}`
               ],
+            }
+          },
+          {
+            name: 'ts:tsc:esm:sorcery',
+            operation: {
+              type: 'sorcery',
+              file: `dist/${pkg.module}`,
+            }
+          },
+          {
+            name: 'ts:tsc:esm:cleanup',
+            // deps: ['ts:tsc:esm:trans'],
+            operation: {
+              type: 'delete',
+              src: `dist/${srcModulePath}`,
+            }
+          },
+          {
+            name: 'ts:tsc:esm',
+            // deps: ['rollup:es2015'],
+            operation: {
+              type: 'sequence',
+              sequence: ['ts:tsc:esm:input', 'ts:tsc:esm:trans', 'ts:tsc:esm:sorcery', 'ts:tsc:esm:cleanup'],
             }
           },
           {
@@ -118,6 +144,7 @@ function config(target /* 'production' or 'development' */) {
               type: 'rollup',
               rollupConfigFile: './rollup.config.lib.umd.js',
               addMinified: false,
+              sorcery: true,
             }
           },
           {
@@ -125,7 +152,7 @@ function config(target /* 'production' or 'development' */) {
             deps: ['ts:ngc'],
             operation: {
               type: 'sequence',
-              sequence: ['rollup:es2015', 'ts:tsc:esm:input', 'ts:tsc:esm', 'rollup:main'],
+              sequence: ['rollup:es2015', 'ts:tsc:esm', 'rollup:main'],
             }
           },
           {

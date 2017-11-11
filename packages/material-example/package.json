@@ -44,6 +44,7 @@
     "lite-server": "^2.3.0",
     "node-sass": "^4.5.3",
     "rimraf": "^2.6.2",
+    "sorcery": "^0.10.0",
     "systemjs": "<0.20",
     "typescript": "<2.5"
   }
