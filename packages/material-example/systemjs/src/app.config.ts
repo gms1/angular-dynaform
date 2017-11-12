@@ -1,3 +1,4 @@
+// tslint:disable no-unused-variable
 import {
   ArrayOptions,
   ControlConfig,
@@ -39,13 +40,7 @@ export const mainExampleConfig: FormConfig = {
         id: 'firstName',
         modelType: ModelType.MODEL_VALUE,
         controlType: ControlType.CONTROL_INPUT,
-        options: {
-          label: 'First name',
-          placeholder: 'Enter your first name',
-          maxLength: 30,
-          minLength: 4,
-          autoComplete: 'given-name'
-        },
+        options: {label: 'First name', placeholder: 'Enter your first name', maxLength: 30, minLength: 4},
         validators: ['required', 'minLength', 'maxLength'],
         jp: '/name/first'
       },
@@ -54,13 +49,7 @@ export const mainExampleConfig: FormConfig = {
         id: 'lastName',
         modelType: ModelType.MODEL_VALUE,
         controlType: ControlType.CONTROL_INPUT,
-        options: {
-          label: 'Last name',
-          placeholder: 'Enter your last name',
-          maxLength: 30,
-          minLength: 4,
-          autoComplete: 'family-name'
-        },
+        options: {label: 'Last name', placeholder: 'Enter your last name', maxLength: 30, minLength: 4},
         validators: ['required', 'minLength', 'maxLength'],
         jp: '/name/last'
       },

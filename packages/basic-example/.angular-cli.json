@@ -37,15 +37,18 @@
   "lint": [
     {
       "project": "src/tsconfig.app.json",
-      "exclude": "**/node_modules/**"
+      "exclude": "**/node_modules/**",
+      "tslintConfig": "./tslint.full.json"
     },
     {
       "project": "src/tsconfig.spec.json",
-      "exclude": "**/node_modules/**"
+      "exclude": "**/node_modules/**",
+      "tslintConfig": "./tslint.full.json"
     },
     {
       "project": "e2e/tsconfig.e2e.json",
-      "exclude": "**/node_modules/**"
+      "exclude": "**/node_modules/**",
+      "tslintConfig": "./tslint.full.json"
     }
   ],
   "test": {
