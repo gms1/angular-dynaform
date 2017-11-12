@@ -18,7 +18,10 @@ export class ArrayButtonDeleteAction extends DynamicFormAction {
   ngOnInit(): void {
     super.ngOnInit();
     if (this.model.parentArray) {
-      this.model.parentArray.valueChanges.pipe(takeUntil(this.unsubscribe)).subscribe(() => { this.updateState(); });
+      this.updateState((this.model.parentArray.selectedIndex));
+      this.model.parentArray.selectionChange.pipe(takeUntil(this.unsubscribe)).subscribe((newIndex) => {
+        this.updateState(newIndex);
+      });
     }
   }
 
@@ -34,19 +37,21 @@ export class ArrayButtonDeleteAction extends DynamicFormAction {
       return true;
     }
     this.model.parentArray.deleteItem();
-    this.updateState();
     return true;
   }
 
-  protected updateState(): void {
+  protected updateState(newIndex: number): void {
     if (!this.model.parentArray) {
       return;
     }
-    if (this.model.parentArray.items.length && this.model.ngControl.disabled) {
-      this.model.enable();
-    }
-    if (!this.model.parentArray.items.length && this.model.ngControl.enabled) {
-      this.model.disable();
+    if (newIndex >= 0) {
+      if (this.model.ngControl.disabled) {
+        this.model.enable();
+      }
+    } else {
+      if (this.model.ngControl.enabled) {
+        this.model.disable();
+      }
     }
   }
 }

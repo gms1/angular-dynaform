@@ -91,7 +91,7 @@ export class DynamicFormControlComponentBase implements DynamicFormControl {
       this.action.onFocus(event);
     }
     if (this.model.parentArray && this.model.parentArrayIdx !== undefined) {
-      this.model.parentArray.currIndex = this.model.parentArrayIdx;
+      this.model.parentArray.selectedIndex = this.model.parentArrayIdx;
     }
     this.focusChanges.emit(true);
   }

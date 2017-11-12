@@ -1,3 +1,4 @@
+import {EventEmitter} from '@angular/core';
 import {ControlConfig} from '../config/control-config.interface';
 import {ArrayOptions} from '../config/control-options.interface';
 import {DynamicFormService} from '../services/dynamic-form.service';
@@ -26,14 +27,25 @@ export class ArrayModel extends AbstractControlModel<NgFormArray, ArrayOptions> 
   items: GroupModelBase[];
   footer?: GroupModelBase;
 
-  private _currIndex: number;
-  get currIndex(): number { return this._currIndex; }
-  set currIndex(currIndex: number) {
-    if (currIndex < 0) {
+  selectionChange: EventEmitter<number>;
+
+  private _selectedIndex: number;
+  get selectedIndex(): number { return this._selectedIndex; }
+  set selectedIndex(newIndex: number) {
+    // tslint:disable-next-line triple-equals
+    if (newIndex == undefined || newIndex < 0) {
+      newIndex = HEADER_IDX;
+    }
+    if (newIndex === HEADER_IDX && this._selectedIndex < this.items.length) {
+      // keep valid selectedIndex if new index is out of range
       return;
     }
-    this._currIndex = currIndex;
+    if (this._selectedIndex !== newIndex) {
+      this._selectedIndex = newIndex;
+      this.selectionChange.emit(this._selectedIndex);
+    }
   }
+
 
   constructor(
       dynamicFormService: DynamicFormService, config: ControlConfig, formModel: FormModel, parentPath?: string[],
@@ -43,13 +55,14 @@ export class ArrayModel extends AbstractControlModel<NgFormArray, ArrayOptions> 
         new NgFormArray([], {updateOn: config.updateOn}), formModel, parentPath, parentGroup, parentArray,
         parentArrayIdx);
     this.items = [];
+    this._selectedIndex = HEADER_IDX;
+    this.selectionChange = new EventEmitter<number>();
     this.setCSSClasses(this.css.container, 'adf-array-container');
     this.setCSSClasses(this.css.control, 'adf-array-control');
     this.setCSSClasses(this.css.content, 'adf-array-content');
     this.setCSSClasses(this.css.label, 'adf-array-label');
     this.setCSSClasses(this.css.error, 'adf-array-error');
     this.ngControl.model = this;
-    this._currIndex = -1;
     this.createHeader();
     this.createFooter();
     if (this.options.initialItemCount) {
@@ -84,7 +97,7 @@ export class ArrayModel extends AbstractControlModel<NgFormArray, ArrayOptions> 
   // NOTE: the insert operation increases the array length and moves the values
   // of the items with a larger index to the end.
   // Neither components nor model items are moved during this operation
-  insertItem(index: number = this._currIndex): void {
+  insertItem(index: number = this.selectedIndex): void {
     if (index < 0) {
       index = 0;
     }
@@ -107,7 +120,7 @@ export class ArrayModel extends AbstractControlModel<NgFormArray, ArrayOptions> 
   // NOTE: the delete operation moves the items with a larger index forward by one position
   // and decreases the array length afterwards
   // Neither components nor model items are moved during this operation
-  deleteItem(index: number = this._currIndex): void {
+  deleteItem(index: number = this.selectedIndex): void {
     if (index < 0 || index >= this.items.length) {
       return;
     }
@@ -116,11 +129,11 @@ export class ArrayModel extends AbstractControlModel<NgFormArray, ArrayOptions> 
     // to keep this code working, we have to set the dirty flag before updating any value
     this.ngControl.markAsDirty();
     this.ngControl.markAsTouched();
-    let lastIdx = this.items.length - 1;
-    for (let idx = index; idx < lastIdx; idx++) {
+    let newLength = this.items.length - 1;
+    for (let idx = index; idx < newLength; idx++) {
       ArrayModel.copyItem(this.items[idx + 1], this.items[idx]);
     }
-    this.updateLength(lastIdx);
+    this.updateLength(newLength);
   }
 
 
@@ -139,6 +152,9 @@ export class ArrayModel extends AbstractControlModel<NgFormArray, ArrayOptions> 
     }
     while (this.ngControl.length < length) {
       this.ngControl.push(this.items[this.ngControl.length].ngControl);
+    }
+    if (this.selectedIndex >= this.items.length) {
+      this.selectedIndex = HEADER_IDX;
     }
   }
 
