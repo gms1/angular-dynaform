@@ -1,0 +1,30 @@
+#!/bin/bash
+
+DN=$(dirname "$0")
+BN=$(basename "$0")
+
+PROJ_HOME=$(cd "${DN}/.."; pwd)
+. "${DN}/_lib.sh"
+
+
+#---------------------------------------------------------
+
+echo 'Are you shure you want to publish to npm registry (yes|no)?'
+read answer
+if [ "${answer}" != "yes" ]; then
+  exit 0
+fi
+
+pushd "${PROJ_HOME}/packages/core/dist" &>/dev/null
+  npm publish
+popd &>/dev/null
+
+pushd "${PROJ_HOME}/packages/basic/dist" &>/dev/null
+  npm publish
+popd &>/dev/null
+
+pushd "${PROJ_HOME}/packages/material/dist" &>/dev/null
+  npm publish
+popd &>/dev/null
+
+all_plunker_build && all_plunker_publish
