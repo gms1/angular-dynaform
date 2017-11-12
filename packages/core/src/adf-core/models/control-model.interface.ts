@@ -73,9 +73,6 @@ export interface ControlModel {
 
   show(): void;
   hide(): void;
-
-  enable(): void;
-  disable(): void;
 }
 
 

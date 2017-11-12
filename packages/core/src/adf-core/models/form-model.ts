@@ -56,19 +56,34 @@ export class FormModel {
 
   private _initValue: any;
 
+  // see ModelHelper.repairDisabledState why this dirty hack is currently required:
+  private _dirtyHackForDisabledStateCalled: boolean;
+
   constructor(dynamicFormService: DynamicFormService, injector: Injector, config: FormConfig, i18n?: FormI18n) {
     this.dynamicFormService = dynamicFormService;
     this.injector = injector;
     this._i18n = i18n;
     this.config = config;  // create the group control
+    this._dirtyHackForDisabledStateCalled = false;
   }
-
 
   initValue(value?: any): void {
     this.group.reset(value);
     this._initValue = this.value;
+    if (!this._dirtyHackForDisabledStateCalled) {
+      ModelHelper.repairDisabledState(this.group);
+      this._dirtyHackForDisabledStateCalled = true;
+    }
   }
-  resetValue(): void { this.group.reset(this._initValue); }
+
+  resetValue(): void {
+    this.group.reset(this._initValue);
+    if (!this._dirtyHackForDisabledStateCalled) {
+      ModelHelper.repairDisabledState(this.group);
+      this._dirtyHackForDisabledStateCalled = true;
+    }
+  }
+
   clearValue(): void {
     if (this.initValue) {
       let prevValue = this.group.ngControl.value;
@@ -78,6 +93,10 @@ export class FormModel {
       (this.valueChanges as EventEmitter<any>).emit(this.value);
     } else {
       this.group.ngControl.reset();
+    }
+    if (!this._dirtyHackForDisabledStateCalled) {
+      ModelHelper.repairDisabledState(this.group);
+      this._dirtyHackForDisabledStateCalled = true;
     }
   }
 

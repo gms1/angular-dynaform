@@ -27,7 +27,17 @@ export class RelationAction extends DynamicFormAction {
     if (this.model.enableIf) {
       let observable = this.getObservable(this.model.enableIf);
       if (observable) {
-        observable.subscribe((v) => { v ? this.model.enable() : this.model.disable(); });
+        observable.subscribe((v) => {
+          if (v) {
+            if (this.model.ngControl.disabled) {
+              this.model.ngControl.enable();
+            }
+          } else {
+            if (this.model.ngControl.enabled) {
+              this.model.ngControl.disable();
+            }
+          }
+        });
       }
     }
     if (this.model.showIf) {

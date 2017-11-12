@@ -36,11 +36,11 @@ export class ArrayModel extends AbstractControlModel<NgFormArray, ArrayOptions> 
     if (newIndex == undefined || newIndex < 0) {
       newIndex = HEADER_IDX;
     }
-    if (newIndex === HEADER_IDX && this._selectedIndex < this.items.length) {
-      // keep valid selectedIndex if new index is out of range
-      return;
-    }
     if (this._selectedIndex !== newIndex) {
+      if (newIndex === HEADER_IDX && this._selectedIndex >= 0 && this._selectedIndex < this.items.length) {
+        // keep valid selectedIndex if new index is out of range
+        return;
+      }
       this._selectedIndex = newIndex;
       this.selectionChange.emit(this._selectedIndex);
     }
@@ -137,7 +137,7 @@ export class ArrayModel extends AbstractControlModel<NgFormArray, ArrayOptions> 
   }
 
 
-  updateLength(length: number): void {
+  updateLength(length: number, initializing?: boolean): void {
     while (this.ngControl.length > length) {
       this.ngControl.removeAt(this.ngControl.length - 1);
     }
@@ -153,8 +153,13 @@ export class ArrayModel extends AbstractControlModel<NgFormArray, ArrayOptions> 
     while (this.ngControl.length < length) {
       this.ngControl.push(this.items[this.ngControl.length].ngControl);
     }
-    if (this.selectedIndex >= this.items.length) {
+    if (initializing) {
+      this._selectedIndex = FOOTER_IDX;  // force a selectionChange event
       this.selectedIndex = HEADER_IDX;
+    } else {
+      if (this.selectedIndex >= this.items.length) {
+        this.selectedIndex = HEADER_IDX;
+      }
     }
   }
 
@@ -237,7 +242,6 @@ export class ArrayModel extends AbstractControlModel<NgFormArray, ArrayOptions> 
     this.items.forEach((item, idx) => { item.valueToAppModel(appData, appPointerPrefix); });
     return appData;
   }
-
 
   static copyItem(fromItem: GroupModelBase, toItem: GroupModelBase): void {
     toItem.value = fromItem.value;

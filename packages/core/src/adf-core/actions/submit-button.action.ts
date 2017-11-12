@@ -1,5 +1,7 @@
 // tslint:disable use-life-cycle-interface
 import {takeUntil} from 'rxjs/operators/takeUntil';
+import {map} from 'rxjs/operators/map';
+import {distinctUntilChanged} from 'rxjs/operators/distinctUntilChanged';
 
 import {FormGroup} from '@angular/forms';
 import {Subject} from 'rxjs/Subject';
@@ -21,10 +23,10 @@ export class SubmitButtonAction extends DynamicFormAction {
   ngOnInit(): void {
     super.ngOnInit();
     this.rootFormGroup = this.model.formModel.group.ngControl;
-    this.updateState(this.rootFormGroup.status);
-    this.rootFormGroup.statusChanges.pipe(takeUntil(this.unsubscribe)).subscribe((status) => {
-      this.updateState(status);
-    });
+    this.model.ngControl.disable();
+    this.rootFormGroup.statusChanges.pipe(map((status) => status === 'VALID'), distinctUntilChanged())
+        .pipe(takeUntil(this.unsubscribe))
+        .subscribe((valid) => { this.updateState(valid); });
   }
 
   ngOnDestroy(): void {
@@ -50,14 +52,14 @@ export class SubmitButtonAction extends DynamicFormAction {
   }
 
   // enable button on valid and disable button on invalid state
-  protected updateState(status: string): void {
-    if (status === 'VALID') {
+  protected updateState(valid: boolean): void {
+    if (valid) {
       if (this.model.ngControl.disabled) {
-        this.model.ngControl.enable({emitEvent: false});
+        this.model.ngControl.enable();
       }
     } else {
-      if (!this.model.ngControl.disabled) {
-        this.model.ngControl.disable({emitEvent: false});
+      if (this.model.ngControl.enabled) {
+        this.model.ngControl.disable();
       }
     }
   }

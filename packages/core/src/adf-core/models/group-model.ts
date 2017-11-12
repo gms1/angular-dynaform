@@ -128,12 +128,4 @@ export class SubsetModel extends GroupModelBase {
     }
     return control;
   }
-
-  disable(): void {
-    this.items.forEach((item) => { item.ngControl.disable(); });
-  }
-
-  enable(): void {
-    this.items.forEach((item) => { item.ngControl.enable(); });
-  }
 }

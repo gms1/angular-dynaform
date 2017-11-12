@@ -261,7 +261,7 @@ describe('test suite', () => {
     let contactsTypeEl = findDebugElementById('contacts-0-contactType');
 
     contactsTypeEl.triggerEventHandler('focus', null);
-    expect(contactsModel.currIndex).toBe(0, 'current index has not been set by focus on contactType field');
+    expect(contactsModel.selectedIndex).toBe(0, 'current index has not been set by focus on contactType field');
 
     let contactsDeleteEl = findDebugElementById('contacts-HEADER-deleteContact');
     contactsDeleteEl.nativeElement.click();
@@ -292,7 +292,7 @@ describe('test suite', () => {
 
     contacts0ValueEl.triggerEventHandler('focus', null);
     contacts0ValueEl.triggerEventHandler('blur', null);
-    expect(contactsModel.currIndex).toBe(0, 'current index has not been set by focus on contactType field');
+    expect(contactsModel.selectedIndex).toBe(0, 'current index has not been set by focus on contactType field');
 
     let contactsAddEl = findDebugElementById('contacts-HEADER-addContact');
     contactsAddEl.nativeElement.click();
@@ -331,7 +331,7 @@ describe('test suite', () => {
 
     contacts0ValueEl.triggerEventHandler('focus', null);
     contacts0ValueEl.triggerEventHandler('blur', null);
-    expect(contactsModel.currIndex).toBe(0, 'current index has not been set by focus on contactValue field');
+    expect(contactsModel.selectedIndex).toBe(0, 'current index has not been set by focus on contactValue field');
 
     let contactsInsertEl = findDebugElementById('contacts-HEADER-insertContact');
     contactsInsertEl.nativeElement.click();

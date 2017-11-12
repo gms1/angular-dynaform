@@ -34,5 +34,5 @@ export class NgFormArray extends FormArray {
     super.reset(value, options);
   }
 
-  updateLength(length: number): void { this.model.updateLength(length); }
+  updateLength(length: number): void { this.model.updateLength(length, true); }
 }

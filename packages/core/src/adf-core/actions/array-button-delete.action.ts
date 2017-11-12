@@ -18,7 +18,7 @@ export class ArrayButtonDeleteAction extends DynamicFormAction {
   ngOnInit(): void {
     super.ngOnInit();
     if (this.model.parentArray) {
-      this.updateState((this.model.parentArray.selectedIndex));
+      this.model.ngControl.disable();
       this.model.parentArray.selectionChange.pipe(takeUntil(this.unsubscribe)).subscribe((newIndex) => {
         this.updateState(newIndex);
       });
@@ -46,11 +46,11 @@ export class ArrayButtonDeleteAction extends DynamicFormAction {
     }
     if (newIndex >= 0) {
       if (this.model.ngControl.disabled) {
-        this.model.enable();
+        this.model.ngControl.enable();
       }
     } else {
       if (this.model.ngControl.enabled) {
-        this.model.disable();
+        this.model.ngControl.disable();
       }
     }
   }

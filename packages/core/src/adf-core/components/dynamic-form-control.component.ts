@@ -47,7 +47,11 @@ export class DynamicFormControlComponentBase implements DynamicFormControl {
     this.buttonType = 'button';
   }
 
-  ngOnChanges(changes: SimpleChanges): void {}
+  ngOnChanges(changes: SimpleChanges): void {
+    if (this.action) {
+      this.action.ngOnChanges(changes);
+    }
+  }
 
 
   ngOnInit(): void {

@@ -1,5 +1,7 @@
 // tslint:disable use-life-cycle-interface
 import {takeUntil} from 'rxjs/operators/takeUntil';
+import {map} from 'rxjs/operators/map';
+import {distinctUntilChanged} from 'rxjs/operators/distinctUntilChanged';
 
 import {FormGroup} from '@angular/forms';
 import {Subject} from 'rxjs/Subject';
@@ -19,8 +21,10 @@ export class ResetButtonAction extends DynamicFormAction {
   ngOnInit(): void {
     super.ngOnInit();
     this.rootFormGroup = this.model.formModel.group.ngControl;
-    this.updateState();
-    this.rootFormGroup.valueChanges.pipe(takeUntil(this.unsubscribe)).subscribe(() => { this.updateState(); });
+    this.model.ngControl.disable();
+    this.rootFormGroup.valueChanges.pipe(map(() => this.rootFormGroup.dirty ? true : false), distinctUntilChanged())
+        .pipe(takeUntil(this.unsubscribe))
+        .subscribe((dirty) => { this.updateState(dirty); });
   }
 
   ngOnDestroy(): void {
@@ -46,14 +50,14 @@ export class ResetButtonAction extends DynamicFormAction {
   }
 
   // enable button on dirty and disable button on pristine state
-  protected updateState(): void {
-    if (this.rootFormGroup.dirty) {
+  protected updateState(dirty: boolean): void {
+    if (dirty) {
       if (this.model.ngControl.disabled) {
-        this.model.ngControl.enable({emitEvent: false});
+        this.model.ngControl.enable();
       }
     } else {
       if (this.model.ngControl.enabled) {
-        this.model.ngControl.disable({emitEvent: false});
+        this.model.ngControl.disable();
       }
     }
   }
