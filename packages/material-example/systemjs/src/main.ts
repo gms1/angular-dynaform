@@ -4,7 +4,7 @@ import {NgModule} from '@angular/core';
 import {RouterModule, Routes} from '@angular/router';
 
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
-import {MatListModule, MatSidenavModule, MatToolbarModule, MatIconModule} from '@angular/material';
+import {MatListModule, MatSidenavModule, MatToolbarModule, MatIconModule, MatCardModule} from '@angular/material';
 
 import {DynamicFormModule} from '@angular-dynaform/core';
 import {DynamicMaterialFormModule} from '@angular-dynaform/material';
@@ -26,7 +26,7 @@ export const APP_ROUTES: Routes = DEMO_ROUTES;
   declarations: [AppComponent, HomeComponent, TabGroupExampleComponent, StepperExampleComponent],
   imports: [
     BrowserModule, BrowserAnimationsModule, DynamicFormModule.forRoot(), DynamicMaterialFormModule,
-    RouterModule.forRoot(APP_ROUTES), MatIconModule, MatSidenavModule, MatToolbarModule, MatListModule
+    RouterModule.forRoot(APP_ROUTES), MatIconModule, MatSidenavModule, MatToolbarModule, MatListModule, MatCardModule
   ],
   providers: [],
   bootstrap: [AppComponent]
