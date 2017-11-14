@@ -16,6 +16,7 @@ System.config({
 
     '@angular/core': 'npm-ext:@angular/core/bundles/core.umd.js',
     '@angular/common': 'npm-ext:@angular/common/bundles/common.umd.js',
+    '@angular/common/http': 'npm-ext:@angular/common/bundles/common-http.umd.js',
     '@angular/compiler': 'npm-ext:@angular/compiler/bundles/compiler.umd.js',
     '@angular/platform-browser': 'npm-ext:@angular/platform-browser/bundles/platform-browser.umd.js',
     '@angular/platform-browser-dynamic':
@@ -30,10 +31,12 @@ System.config({
 
     '@angular/material': 'npm-ext:@angular/material/bundles/material.umd.js',
     '@angular/cdk': 'npm-ext:@angular/cdk/bundles/cdk.umd.js',
+    '@angular/cdk/accordion': 'npm-ext:@angular/cdk/bundles/cdk-accordion.umd.js',
     '@angular/cdk/a11y': 'npm-ext:@angular/cdk/bundles/cdk-a11y.umd.js',
     '@angular/cdk/bidi': 'npm-ext:@angular/cdk/bundles/cdk-bidi.umd.js',
     '@angular/cdk/coercion': 'npm-ext:@angular/cdk/bundles/cdk-coercion.umd.js',
     '@angular/cdk/keycodes': 'npm-ext:@angular/cdk/bundles/cdk-keycodes.umd.js',
+    '@angular/cdk/layout': 'npm-ext:@angular/cdk/bundles/cdk-layout.umd.js',
     '@angular/cdk/observers': 'npm-ext:@angular/cdk/bundles/cdk-observers.umd.js',
     '@angular/cdk/platform': 'npm-ext:@angular/cdk/bundles/cdk-platform.umd.js',
     '@angular/cdk/portal': 'npm-ext:@angular/cdk/bundles/cdk-portal.umd.js',
@@ -46,7 +49,7 @@ System.config({
     '@angular/cdk/stepper': 'npm-ext:@angular/cdk/bundles/cdk-stepper.umd.js',
 
 
-    'tslib': 'npm-ext:tslib',
+    'tslib': 'npm-ext:tslib/tslib',
 
     'rxjs': 'npm-ext:rxjs',
     'rxjs/operators/map': 'npm-ext:rxjs/operators/map.js',
