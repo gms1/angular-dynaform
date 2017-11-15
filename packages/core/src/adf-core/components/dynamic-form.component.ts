@@ -2,6 +2,7 @@
 import {Component, ComponentRef, EventEmitter, Input, Output} from '@angular/core';
 import {Observable} from 'rxjs/Observable';
 
+import {FormConfig} from '../config/form-config.interface';
 import {FormModel} from '../models/form-model';
 
 import {DynamicFormControl} from './dynamic-form-control.interface';
@@ -16,6 +17,8 @@ import {DynamicForm} from './dynamic-form.interface';
   providers: [{provide: DynamicForm, useExisting: DynamicFormComponent}]
 })
 export class DynamicFormComponent extends DynamicForm {
+  config: FormConfig;
+
   @Input()
   get model(): FormModel { return this._model; }
   set model(model: FormModel) {

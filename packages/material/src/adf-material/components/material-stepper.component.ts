@@ -31,10 +31,7 @@ import {
             [stepControl]="item.ngControl"
           >
             <ng-template matStepLabel>{{item.local.label}}</ng-template>
-            <ng-template
-              adfControlComponent
-              [model]="item"
-            >
+            <ng-template adfControlComponent [model]="item" >
             </ng-template>
           </mat-step>
         </mat-horizontal-stepper>

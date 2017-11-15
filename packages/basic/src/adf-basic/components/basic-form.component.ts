@@ -27,8 +27,8 @@ import {Component} from '@angular/core';
         novalidate
       >
         <adf-group-container
-          [ngClass]="model.css.content"
           [model]="model"
+          [ngClass]="model.css.content"
         >
         </adf-group-container>
       </form>

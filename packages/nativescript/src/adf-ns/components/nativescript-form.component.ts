@@ -25,8 +25,8 @@ import {Component} from '@angular/core';
       adfNSDomElement
     >
       <adf-group-container
-        [ngClass]="model.css.content"
         [model]="model"
+        [ngClass]="model.css.content"
       >
       </adf-group-container>
     </StackLayout>

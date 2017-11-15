@@ -37,10 +37,6 @@ export class ArrayModel extends AbstractControlModel<NgFormArray, ArrayOptions> 
       newIndex = HEADER_IDX;
     }
     if (this._selectedIndex !== newIndex) {
-      if (newIndex === HEADER_IDX && this._selectedIndex >= 0 && this._selectedIndex < this.items.length) {
-        // keep valid selectedIndex if new index is out of range
-        return;
-      }
       this._selectedIndex = newIndex;
       this.selectionChange.emit(this._selectedIndex);
     }
@@ -153,13 +149,8 @@ export class ArrayModel extends AbstractControlModel<NgFormArray, ArrayOptions> 
     while (this.ngControl.length < length) {
       this.ngControl.push(this.items[this.ngControl.length].ngControl);
     }
-    if (initializing) {
-      this._selectedIndex = FOOTER_IDX;  // force a selectionChange event
-      this.selectedIndex = HEADER_IDX;
-    } else {
-      if (this.selectedIndex >= this.items.length) {
-        this.selectedIndex = HEADER_IDX;
-      }
+    if (this.selectedIndex >= this.items.length) {
+      this.selectedIndex = this.items.length - 1;
     }
   }
 

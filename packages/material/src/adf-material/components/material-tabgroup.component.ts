@@ -28,10 +28,7 @@ import {
         <mat-tab-group adfHTMLDomElement [ngClass]="model.css.content">
           <mat-tab *ngFor="let item of model.items;" >
             <ng-template mat-tab-label>{{item.local.label}}</ng-template>
-            <ng-template
-              adfControlComponent
-              [model]="item"
-            >
+            <ng-template adfControlComponent [model]="item" >
             </ng-template>
           </mat-tab>
         </mat-tab-group>

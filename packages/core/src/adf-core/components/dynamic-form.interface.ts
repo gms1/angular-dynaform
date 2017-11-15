@@ -3,11 +3,12 @@ import {ComponentRef, EventEmitter, Injectable} from '@angular/core';
 import {Observable} from 'rxjs/Observable';
 
 import {FormConfig} from '../config/form-config.interface';
-
 import {FormModel} from '../models/form-model';
 
 import {DynamicFormControl} from './dynamic-form-control.interface';
 import {DynamicFormFormControl} from './dynamic-form-form-control.interface';
+
+// TODO: changed from interface to injectable abstract class
 
 @Injectable()
 export abstract class DynamicForm {

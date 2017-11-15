@@ -29,8 +29,8 @@ import {Component} from '@angular/core';
         ></legend>
         <adf-group-container
           *ngIf="model.header"
-          [ngClass]="model.header.css.content"
           [model]="model.header"
+          [ngClass]="model.header.css.content"
         >
         </adf-group-container>
         <adf-error-container [model]="model">
@@ -44,16 +44,16 @@ import {Component} from '@angular/core';
             [formGroupName]="i"
           >
             <adf-group-container
-              [ngClass]="item.css.content"
               [model]="item"
+              [ngClass]="item.css.content"
             >
             </adf-group-container>
           </ng-container>
         </div>
         <adf-group-container
           *ngIf="model.footer"
-          [ngClass]="model.footer.css.content"
           [model]="model.footer"
+          [ngClass]="model.footer.css.content"
         >
         </adf-group-container>
       </fieldset>

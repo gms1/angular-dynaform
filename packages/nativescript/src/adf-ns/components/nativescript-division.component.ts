@@ -23,8 +23,8 @@ import {Component} from '@angular/core';
       <adf-error-container [model]="model">
       </adf-error-container>
       <adf-group-container
-        [ngClass]="model.css.content"
         [model]="model"
+        [ngClass]="model.css.content"
       >
       </adf-group-container>
     </StackLayout>
