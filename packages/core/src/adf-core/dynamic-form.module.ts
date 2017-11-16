@@ -10,7 +10,6 @@ import {
 import {DynamicFormErrorContainerComponent} from './components/dynamic-form-error-container.component';
 import {DynamicFormErrorComponent} from './components/dynamic-form-error.component';
 import {DynamicFormFormControlComponent} from './components/dynamic-form-form-control.component';
-import {DynamicFormGroupContainerComponent} from './components/dynamic-form-group-container.component';
 import {DynamicFormComponent} from './components/dynamic-form.component';
 
 import {DynamicFormControlComponentDirective} from './directives/dynamic-form-control-component.directive';
@@ -44,8 +43,7 @@ const dynamicFormEntryComponents =
     [DynamicFormControlComponentBase, DynamicFormFormControlComponent, DynamicFormErrorComponent];
 
 const dynamicFormExportComponents = [
-  DynamicFormComponent, DynamicFormControlComponent, DynamicFormGroupContainerComponent,
-  DynamicFormErrorContainerComponent
+  DynamicFormComponent, DynamicFormControlComponent, DynamicFormErrorContainerComponent
 ];
 
 const dynamicFormComponents = [dynamicFormEntryComponents, dynamicFormExportComponents];

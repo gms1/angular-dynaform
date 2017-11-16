@@ -25,11 +25,10 @@ import {Component} from '@angular/core';
       >
         <adf-error-container [model]="model">
         </adf-error-container>
-        <adf-group-container
-          [model]="model"
-          [ngClass]="model.css.content"
-        >
-        </adf-group-container>
+        <div [ngClass]="model.css.content">
+          <ng-container *ngFor="let item of model.items;" adfControlComponent [model]="item" >
+          </ng-container>
+        </div>
       </div>
     </div>
   `,

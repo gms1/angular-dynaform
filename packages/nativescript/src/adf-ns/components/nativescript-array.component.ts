@@ -26,12 +26,12 @@ import {Component} from '@angular/core';
         [ngClass]="model.css.label"
         [innerHTML]="model.local.label"
       ></StackLayout>
-      <adf-group-container
-        *ngIf="model.header"
-        [model]="model.header"
-        [ngClass]="model.header.css.content"
-      >
-      </adf-group-container>
+      <ng-container *ngIf="model.header" >
+        <StackLayout [ngClass]="model.header.css.content">
+          <ng-container *ngFor="let item of model.header.items;" adfControlComponent [model]="item" >
+          </ng-container>
+        </StackLayout>
+      </ng-container>
       <adf-error-container [model]="model">
       </adf-error-container>
       <StackLayout
@@ -39,22 +39,21 @@ import {Component} from '@angular/core';
         [ngClass]="model.css.content"
       >
         <ng-container
-          *ngFor="let item of model.items; let i=index"
+          *ngFor="let arrayItem of model.items; let i=index"
           [formGroupName]="i"
         >
-          <adf-group-container
-            [model]="item"
-            [ngClass]="item.css.content"
-          >
-          </adf-group-container>
+          <StackLayout *ngFor="let item of arrayItem.items;"  [ngClass]="item.css.content">
+              <ng-container adfControlComponent [model]="item" >
+              </ng-container>
+          </StackLayout>
         </ng-container>
       </StackLayout>
-      <adf-group-container
-        *ngIf="model.footer"
-        [model]="model.footer"
-        [ngClass]="model.footer.css.content"
-      >
-      </adf-group-container>
+      <ng-container *ngIf="model.footer" >
+        <StackLayout [ngClass]="model.footer.css.content">
+          <ng-container *ngFor="let item of model.footer.items;" adfControlComponent [model]="item" >
+          </ng-container>
+        </StackLayout>
+      </ng-container>
     </StackLayout>
   </StackLayout>
 `,
