@@ -12,9 +12,7 @@ import {Component} from '@angular/core';
 @Component({
   selector: 'adf-nativescript-form-component',
   template: `
-  <StackLayout
-    [ngClass]="model.css.container"
-  >
+  <StackLayout>
     <StackLayout
       [formGroup]="model.ngControl"
       [id]="model.id"

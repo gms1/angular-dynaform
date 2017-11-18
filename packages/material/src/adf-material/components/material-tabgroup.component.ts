@@ -14,7 +14,6 @@ import {
   template: `
     <div
       [formGroup]="model.ngGroup"
-      [ngClass]="model.css.container"
       [hidden]="model.hidden"
     >
       <div

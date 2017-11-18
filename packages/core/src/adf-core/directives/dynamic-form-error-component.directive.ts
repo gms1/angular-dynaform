@@ -1,4 +1,15 @@
-import {ComponentRef, Directive, Input, DoCheck, OnDestroy, OnInit, ViewContainerRef} from '@angular/core';
+import {
+  ComponentRef,
+  Directive,
+  Input,
+  DoCheck,
+  OnDestroy,
+  OnInit,
+  ViewContainerRef,
+  ElementRef,
+  KeyValueDiffers,
+  Renderer2
+} from '@angular/core';
 
 // tslint:disable-next-line no-unused-variable  ?
 import {DynamicFormError} from '../components/dynamic-form-error.interface';
@@ -6,6 +17,8 @@ import {DynamicFormComponent} from '../components/dynamic-form.component';
 import {ControlModel} from '../models/control-model.interface';
 import {DynamicFormComponentFactoryService} from '../services/dynamic-form-component-factory.service';
 import {DynamicValidationError} from '../validations/dynamic-validation-error.interface';
+
+import {DynamicClass} from '../utils/dynamic-class';
 
 // this directive creates, updates and destroys the error control component dynamically
 
@@ -18,10 +31,12 @@ export class DynamicFormErrorComponentDirective implements OnInit, DoCheck, OnDe
   error: DynamicValidationError;
 
   private componentRef: ComponentRef<DynamicFormError>|undefined;
+  private dynamicClass: DynamicClass|undefined;
 
   constructor(
       public form: DynamicFormComponent, private componentsFactoryService: DynamicFormComponentFactoryService,
-      private viewContainerRef: ViewContainerRef) {}
+      private viewContainerRef: ViewContainerRef, private renderer: Renderer2,
+      private keyValueDiffers: KeyValueDiffers) {}
 
   ngOnInit(): void { this.createComponent(); }
 
@@ -38,9 +53,20 @@ export class DynamicFormErrorComponentDirective implements OnInit, DoCheck, OnDe
       e.message = `failed to create error component: ${e.message}`;
       throw(e);
     }
+
+    // tslint:disable no-unnecessary-type-assertion
+    if ((this.componentRef.instance as any).elementRef) {
+      // TODO: test for instanceof ElementRef
+      this.dynamicClass = new DynamicClass(
+          this.keyValueDiffers, (this.componentRef.instance as any).elementRef as ElementRef, this.renderer);
+      this.dynamicClass.classes = this.model.css.error;
+    }
   }
 
   private checkComponent(): void {
+    if (this.dynamicClass) {
+      this.dynamicClass.ngDoCheck();
+    }
     if (this.componentRef) {
       this.componentRef.instance.model = this.model;
       this.componentRef.instance.error = this.error;
@@ -49,6 +75,7 @@ export class DynamicFormErrorComponentDirective implements OnInit, DoCheck, OnDe
   }
 
   private destroyComponent(): void {
+    this.dynamicClass = undefined;
     if (this.componentRef) {
       this.componentRef.instance.ngOnDestroy();
       this.componentRef.destroy();

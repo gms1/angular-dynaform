@@ -12,9 +12,7 @@ import {Component} from '@angular/core';
 @Component({
   selector: 'adf-material-form-component',
   template: `
-    <div
-      [ngClass]="model.css.container"
-    >
+    <div>
       <form
         [formGroup]="model.ngControl"
         [id]="model.id"

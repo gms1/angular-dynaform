@@ -14,9 +14,9 @@ import {Component} from '@angular/core';
   template: `
   <StackLayout
     [formGroup]="model.ngGroup"
-    [ngClass]="model.css.container"
+    [visibility]="model.hidden ? 'collapsed' : 'visible'"
   >
-    <Label
+      <Label
       [attr.for]="model.id"
       [ngClass]="model.css.label"
     >

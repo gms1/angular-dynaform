@@ -12,9 +12,9 @@ import {Component} from '@angular/core';
   template: `
   <StackLayout
     [formGroup]="model.ngGroup"
-    [ngClass]="model.css.container"
+    [visibility]="model.hidden ? 'collapsed' : 'visible'"
   >
-    <StackLayout
+      <StackLayout
       [id]="model.id"
       [ngClass]="model.css.control"
       adfNSDomElement

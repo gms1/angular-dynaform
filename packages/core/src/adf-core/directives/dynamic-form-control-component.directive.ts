@@ -1,10 +1,23 @@
-import {ComponentRef, Directive, Input, DoCheck, OnDestroy, OnInit, ViewContainerRef} from '@angular/core';
+import {
+  ComponentRef,
+  Directive,
+  Input,
+  DoCheck,
+  OnDestroy,
+  OnInit,
+  ViewContainerRef,
+  ElementRef,
+  KeyValueDiffers,
+  Renderer2
+} from '@angular/core';
 
 // tslint:disable-next-line no-unused-variable  ?
 import {DynamicFormControl} from '../components/dynamic-form-control.interface';
 import {DynamicFormComponent} from '../components/dynamic-form.component';
 import {ControlModel} from '../models/control-model.interface';
 import {DynamicFormComponentFactoryService} from '../services/dynamic-form-component-factory.service';
+
+import {DynamicClass} from '../utils/dynamic-class';
 
 // this directive creates/destroys the DynamicFormControls dynamically
 // and initializes the model (input-)property of the DynamicFormControls
@@ -15,10 +28,12 @@ export class DynamicFormControlComponentDirective implements OnInit, DoCheck, On
   model: ControlModel;
 
   private componentRef: ComponentRef<DynamicFormControl>|undefined;
+  private dynamicClass: DynamicClass|undefined;
 
   constructor(
       public form: DynamicFormComponent, private componentsFactoryService: DynamicFormComponentFactoryService,
-      private viewContainerRef: ViewContainerRef) {}
+      private viewContainerRef: ViewContainerRef, private renderer: Renderer2,
+      private keyValueDiffers: KeyValueDiffers) {}
 
   ngOnInit(): void { this.createComponent(); }
 
@@ -37,9 +52,20 @@ export class DynamicFormControlComponentDirective implements OnInit, DoCheck, On
       throw(e);
     }
     this.form.registerComponent(this.model.id, this.componentRef.instance);
+
+    // tslint:disable no-unnecessary-type-assertion
+    if ((this.componentRef.instance as any).elementRef) {
+      // TODO: test for instanceof ElementRef
+      this.dynamicClass = new DynamicClass(
+          this.keyValueDiffers, (this.componentRef.instance as any).elementRef as ElementRef, this.renderer);
+      this.dynamicClass.classes = this.model.css.container;
+    }
   }
 
   private checkComponent(): void {
+    if (this.dynamicClass) {
+      this.dynamicClass.ngDoCheck();
+    }
     if (this.componentRef) {
       this.componentRef.instance.model = this.model;
       this.componentRef.changeDetectorRef.detectChanges();
@@ -47,6 +73,7 @@ export class DynamicFormControlComponentDirective implements OnInit, DoCheck, On
   }
 
   private destroyComponent(): void {
+    this.dynamicClass = undefined;
     if (this.componentRef) {
       this.componentRef.instance.ngOnDestroy();
       this.form.unRegisterComponent(this.model.id);

@@ -42,9 +42,8 @@ const dynamicFormDirectives = [dynamicFormExportDirectives];
 const dynamicFormEntryComponents =
     [DynamicFormControlComponentBase, DynamicFormFormControlComponent, DynamicFormErrorComponent];
 
-const dynamicFormExportComponents = [
-  DynamicFormComponent, DynamicFormControlComponent, DynamicFormErrorContainerComponent
-];
+const dynamicFormExportComponents =
+    [DynamicFormComponent, DynamicFormControlComponent, DynamicFormErrorContainerComponent];
 
 const dynamicFormComponents = [dynamicFormEntryComponents, dynamicFormExportComponents];
 

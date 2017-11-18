@@ -11,9 +11,7 @@ import {Component} from '@angular/core';
 @Component({
   selector: 'adf-basic-form-component',
   template: `
-    <div
-      [ngClass]="model.css.container"
-    >
+    <div>
       <form
         [formGroup]="model.ngControl"
         [id]="model.id"

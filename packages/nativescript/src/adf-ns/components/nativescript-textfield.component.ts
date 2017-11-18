@@ -12,7 +12,7 @@ import {Component} from '@angular/core';
   template: `
   <StackLayout
     [formGroup]="model.ngGroup"
-    [ngClass]="model.css.container"
+    [visibility]="model.hidden ? 'collapsed' : 'visible'"
   >
     <Label
       *ngIf="model.local.label"

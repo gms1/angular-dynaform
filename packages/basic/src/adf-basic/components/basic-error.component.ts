@@ -7,7 +7,7 @@ import {Component} from '@angular/core';
 @Component({
   selector: 'adf-basic-error-component',
   template: `
-    <div [ngClass]="model.css.error" [innerHTML]="error.message"></div>
+    <div [innerHTML]="error.message"></div>
   `,
   inputs: ['model', 'error'],
   providers: [{provide: DynamicFormErrorComponent, useExisting: BasicErrorComponent}]

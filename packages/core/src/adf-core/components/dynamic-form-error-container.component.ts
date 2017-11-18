@@ -1,4 +1,4 @@
-import {Component, DoCheck, ElementRef, Input} from '@angular/core';
+import {Component, DoCheck, Input} from '@angular/core';
 
 import {ControlModel} from '../models/control-model.interface';
 import {DynamicValidationError} from '../validations/dynamic-validation-error.interface';
@@ -21,10 +21,7 @@ export class DynamicFormErrorContainerComponent implements DynamicFormErrorConta
 
   errors: DynamicValidationError[];
 
-  private _elementRef: ElementRef;
-  get elementRef(): ElementRef { return this._elementRef; }
-
-  constructor(public form: DynamicForm, elRef: ElementRef) { this._elementRef = elRef; }
+  constructor(public form: DynamicForm) {}
 
   ngDoCheck(): void {
     if (!this.model.ngControl.errors) {

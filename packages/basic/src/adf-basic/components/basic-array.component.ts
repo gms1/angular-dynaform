@@ -12,7 +12,6 @@ import {Component} from '@angular/core';
   template: `
     <div
       [formGroup]="model.ngGroup"
-      [ngClass]="model.css.container"
       [hidden]="model.hidden"
     >
       <fieldset
@@ -41,11 +40,11 @@ import {Component} from '@angular/core';
             *ngFor="let arrayItem of model.items; let i=index"
             [formGroupName]="i"
           >
-          <div *ngFor="let item of arrayItem.items;"  [ngClass]="item.css.content">
-            <ng-container adfControlComponent [model]="item" >
-            </ng-container>
-          </div>
-        </ng-container>
+            <div *ngFor="let item of arrayItem.items;"  [ngClass]="item.css.content">
+              <ng-container adfControlComponent [model]="item" >
+              </ng-container>
+            </div>
+          </ng-container>
         </div>
         <ng-container *ngIf="model.footer" >
           <div [ngClass]="model.footer.css.content">

@@ -1,6 +1,6 @@
 // tslint:disable use-life-cycle-interface
 //   codelyzer does not recognize that the DynamicFormError extends the interfaces for the lify-cycle hooks
-import {Component, Input, SimpleChanges} from '@angular/core';
+import {Component, ElementRef, Input, SimpleChanges} from '@angular/core';
 
 import {ControlOptions} from '../config/control-options.interface';
 import {ControlModel} from '../models/control-model.interface';
@@ -24,7 +24,9 @@ export class DynamicFormErrorComponent implements DynamicFormError {
   private _model: ControlModel;
   options: ControlOptions;
 
-  constructor(public form: DynamicForm) {}
+  get elementRef(): ElementRef { return this._elementRef; }
+
+  constructor(public form: DynamicForm, private _elementRef: ElementRef) {}
 
   ngOnChanges(changes: SimpleChanges): void {}
 
