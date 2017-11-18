@@ -31,7 +31,7 @@
 
 ## Links
 
-* [Plunker for Material2](http://plnkr.co/edit/ZZuywOIH92FtsmHRp6ks?p=preview)
+* [Plunker for Material](http://plnkr.co/edit/ZZuywOIH92FtsmHRp6ks?p=preview)
 * [Plunker for basic HTML](http://plnkr.co/edit/x8elnFR7fgDWIjvn8OZF?p=preview)
 
 ## TODO

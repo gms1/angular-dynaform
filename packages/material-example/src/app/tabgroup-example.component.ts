@@ -8,10 +8,17 @@ export const tabGroupExampleConfig: FormConfig = {
   options: {
     group: [
       {
-        id: 'name',
-        modelType: ModelType.MODEL_VALUE,
-        controlType: ControlType.CONTROL_INPUT,
-        options: {label: 'Name', placeholder: 'Enter the name'}
+        id: 'header',
+        modelType: ModelType.MODEL_SUBSET,
+        controlType: ControlType.CONTROL_DIVISION,
+        options: {
+          group: [{
+            id: 'name',
+            modelType: ModelType.MODEL_VALUE,
+            controlType: ControlType.CONTROL_INPUT,
+            options: {label: 'Name', placeholder: 'Enter the name'}
+          }]
+        }
       },
       {
         id: 'tabGroup',
@@ -31,19 +38,19 @@ export const tabGroupExampleConfig: FormConfig = {
                     id: 'tab1Field1',
                     modelType: ModelType.MODEL_VALUE,
                     controlType: ControlType.CONTROL_CHECKBOX,
-                    options: {label: 'Field1'}
+                    options: {label: 'Field 1'}
                   },
                   {
                     id: 'tab1Field2',
                     modelType: ModelType.MODEL_VALUE,
                     controlType: ControlType.CONTROL_CHECKBOX,
-                    options: {label: 'Field2'}
+                    options: {label: 'Field 2'}
                   },
                   {
                     id: 'tab1Field3',
                     modelType: ModelType.MODEL_VALUE,
                     controlType: ControlType.CONTROL_CHECKBOX,
-                    options: {label: 'Field3'}
+                    options: {label: 'Field 3'}
                   }
                 ]
               }
@@ -59,19 +66,19 @@ export const tabGroupExampleConfig: FormConfig = {
                     id: 'tab2Field1',
                     modelType: ModelType.MODEL_VALUE,
                     controlType: ControlType.CONTROL_CHECKBOX,
-                    options: {label: 'Field1'}
+                    options: {label: 'Field 4'}
                   },
                   {
                     id: 'tab2Field2',
                     modelType: ModelType.MODEL_VALUE,
                     controlType: ControlType.CONTROL_CHECKBOX,
-                    options: {label: 'Field2'}
+                    options: {label: 'Field 5'}
                   },
                   {
                     id: 'tab2Field3',
                     modelType: ModelType.MODEL_VALUE,
                     controlType: ControlType.CONTROL_CHECKBOX,
-                    options: {label: 'Field3'}
+                    options: {label: 'Field 6'}
                   }
                 ]
               }
@@ -87,19 +94,19 @@ export const tabGroupExampleConfig: FormConfig = {
                     id: 'tab3Field1',
                     modelType: ModelType.MODEL_VALUE,
                     controlType: ControlType.CONTROL_CHECKBOX,
-                    options: {label: 'Field1'}
+                    options: {label: 'Field 7'}
                   },
                   {
                     id: 'tab3Field2',
                     modelType: ModelType.MODEL_VALUE,
                     controlType: ControlType.CONTROL_CHECKBOX,
-                    options: {label: 'Field2'}
+                    options: {label: 'Field 8'}
                   },
                   {
                     id: 'tab3Field3',
                     modelType: ModelType.MODEL_VALUE,
                     controlType: ControlType.CONTROL_CHECKBOX,
-                    options: {label: 'Field3'}
+                    options: {label: 'Field 9'}
                   }
                 ]
               }

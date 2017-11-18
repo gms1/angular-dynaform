@@ -1,7 +1,9 @@
 # TODO LIST
 
+* visualize selectedIndex from FormArrays
+* material: form array comonent based on data table?
+* material: finalize stepper and tabgroup
 * nativescript templates
-* finalize stepper and add dynamicHeight attribute to tabgroup
 * advanced formatting/parsing of form values
 * prepare examples on StackBlitz
 * observable select options

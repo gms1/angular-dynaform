@@ -18,52 +18,55 @@ export const mainExampleConfig: FormConfig = {
   options: {
     group: [
       {
-        key: 'salutation',
-        id: 'salutation',
-        modelType: ModelType.MODEL_VALUE,
-        controlType: ControlType.CONTROL_RADIOGROUP,
-        options: {valueOptions: [{value: 'mr', label: 'Mr.'}, {value: 'ms', label: 'Ms.'}]},
-        validators: ['required'],
-        jp: '/greeting'
+        id: 'person',
+        modelType: ModelType.MODEL_SUBSET,
+        controlType: ControlType.CONTROL_DIVISION,
+        options: {
+          group: [
+            {
+              id: 'salutation',
+              modelType: ModelType.MODEL_VALUE,
+              controlType: ControlType.CONTROL_RADIOGROUP,
+              options: {valueOptions: [{value: 'mr', label: 'Mr.'}, {value: 'ms', label: 'Ms.'}]},
+              validators: ['required'],
+              jp: '/greeting'
+            },
+            {
+              id: 'title',
+              modelType: ModelType.MODEL_VALUE,
+              controlType: ControlType.CONTROL_INPUT,
+              options: {label: 'Title', placeholder: 'Enter your title', maxLength: 30, minLength: 2},
+              validators: ['minLength', 'maxLength'],
+              jp: '/title'
+            },
+            {
+              id: 'firstName',
+              modelType: ModelType.MODEL_VALUE,
+              controlType: ControlType.CONTROL_INPUT,
+              options: {label: 'First name', placeholder: 'Enter your first name', maxLength: 30, minLength: 4},
+              validators: ['required', 'minLength', 'maxLength'],
+              jp: '/name/first'
+            },
+            {
+              id: 'lastName',
+              modelType: ModelType.MODEL_VALUE,
+              controlType: ControlType.CONTROL_INPUT,
+              options: {label: 'Last name', placeholder: 'Enter your last name', maxLength: 30, minLength: 4},
+              validators: ['required', 'minLength', 'maxLength'],
+              jp: '/name/last'
+            },
+            {
+              id: 'birthday',
+              modelType: ModelType.MODEL_VALUE,
+              controlType: [ControlType.CONTROL_DATEPICKER, ControlType.CONTROL_INPUT],
+              options: {label: 'Birthday name', placeholder: 'Enter your birthday', inputType: 'date'},
+              validators: ['required'],
+              jp: '/birthday'
+            }
+          ]
+        }
       },
       {
-        key: 'title',
-        id: 'title',
-        modelType: ModelType.MODEL_VALUE,
-        controlType: ControlType.CONTROL_INPUT,
-        options: {label: 'Title', placeholder: 'Enter your title', maxLength: 30, minLength: 2},
-        validators: ['minLength', 'maxLength'],
-        jp: '/title'
-      },
-      {
-        key: 'firstName',
-        id: 'firstName',
-        modelType: ModelType.MODEL_VALUE,
-        controlType: ControlType.CONTROL_INPUT,
-        options: {label: 'First name', placeholder: 'Enter your first name', maxLength: 30, minLength: 4},
-        validators: ['required', 'minLength', 'maxLength'],
-        jp: '/name/first'
-      },
-      {
-        key: 'lastName',
-        id: 'lastName',
-        modelType: ModelType.MODEL_VALUE,
-        controlType: ControlType.CONTROL_INPUT,
-        options: {label: 'Last name', placeholder: 'Enter your last name', maxLength: 30, minLength: 4},
-        validators: ['required', 'minLength', 'maxLength'],
-        jp: '/name/last'
-      },
-      {
-        key: 'birthday',
-        id: 'birthday',
-        modelType: ModelType.MODEL_VALUE,
-        controlType: [ControlType.CONTROL_DATEPICKER, ControlType.CONTROL_INPUT],
-        options: {label: 'Birthday name', placeholder: 'Enter your birthday', inputType: 'date'},
-        validators: ['required'],
-        jp: '/birthday'
-      },
-      {
-        key: 'address',
         id: 'address',
         modelType: ModelType.MODEL_GROUP,
         controlType: ControlType.CONTROL_FIELDSET,
@@ -71,7 +74,6 @@ export const mainExampleConfig: FormConfig = {
           label: 'Address',
           group: [
             {
-              key: 'street',
               id: 'street',
               modelType: ModelType.MODEL_VALUE,
               controlType: ControlType.CONTROL_INPUT,
@@ -79,7 +81,6 @@ export const mainExampleConfig: FormConfig = {
               jp: '/address/street'
             },
             {
-              key: 'postcode',
               id: 'postcode',
               modelType: ModelType.MODEL_VALUE,
               controlType: ControlType.CONTROL_INPUT,
@@ -90,7 +91,6 @@ export const mainExampleConfig: FormConfig = {
         }
       },
       {
-        key: 'contacts',
         id: 'contacts',
         modelType: ModelType.MODEL_ARRAY,
         controlType: ControlType.CONTROL_ARRAY,
@@ -101,7 +101,6 @@ export const mainExampleConfig: FormConfig = {
           header: {
             group: [
               {
-                key: 'add',
                 id: 'addContact',
                 modelType: ModelType.MODEL_NULL,
                 controlType: ControlType.CONTROL_BUTTON,
@@ -109,7 +108,6 @@ export const mainExampleConfig: FormConfig = {
                 action: 'arrayAddItem'
               },
               {
-                key: 'insert',
                 id: 'insertContact',
                 modelType: ModelType.MODEL_NULL,
                 controlType: ControlType.CONTROL_BUTTON,
@@ -117,14 +115,12 @@ export const mainExampleConfig: FormConfig = {
                 action: 'arrayInsertItem'
               },
               {
-                key: 'separator',
                 id: 'separatorContactButtons',
                 modelType: ModelType.MODEL_NULL,
                 controlType: ControlType.CONTROL_SEPARATOR,
                 options: {css: {container: 'button-separator'}}
               },
               {
-                key: 'delete',
                 id: 'deleteContact',
                 modelType: ModelType.MODEL_NULL,
                 controlType: ControlType.CONTROL_BUTTON,
@@ -138,8 +134,8 @@ export const mainExampleConfig: FormConfig = {
           item: {
             group: [
               {
-                key: 'type',
                 id: 'contactType',
+                key: 'type',
                 modelType: ModelType.MODEL_VALUE,
                 controlType: ControlType.CONTROL_SELECT,
                 options: {
@@ -150,8 +146,8 @@ export const mainExampleConfig: FormConfig = {
                 jp: 'carrier'
               },
               {
-                key: 'value',
                 id: 'contactValue',
+                key: 'value',
                 modelType: ModelType.MODEL_VALUE,
                 controlType: ControlType.CONTROL_INPUT,
                 options: {label: 'Value', placeholder: 'Enter a value'},
@@ -162,89 +158,91 @@ export const mainExampleConfig: FormConfig = {
         }
       },
       {
-        key: 'memo',
-        id: 'memo',
-        modelType: ModelType.MODEL_VALUE,
-        controlType: ControlType.CONTROL_TEXTAREA,
-        options: {
-          label: 'Memo',
-          placeholder: 'Memo',
-          maxLength: 250,
-          minLength: 0,
-          readOnly: false,
-          cols: 60,
-          rows: 7,
-          wrap: true
-        },
-        jp: '/notes'
-      },
-      {
-        id: 'checkboxdivision',
+        id: 'info',
         modelType: ModelType.MODEL_SUBSET,
         controlType: ControlType.CONTROL_DIVISION,
-        jp: '/options',
         options: {
           group: [
             {
-              key: 'atc',
-              id: 'atc',
+              id: 'memo',
               modelType: ModelType.MODEL_VALUE,
-              controlType: ControlType.CONTROL_CHECKBOX,
-              options: {label: 'Accept Terms and conditions', value: false},
-              jp: 'atc',
-              updateOn: 'change'
+              controlType: ControlType.CONTROL_TEXTAREA,
+              options: {
+                label: 'Memo',
+                placeholder: 'Memo',
+                maxLength: 250,
+                minLength: 0,
+                readOnly: false,
+                cols: 60,
+                rows: 7,
+                wrap: true
+              },
+              jp: '/notes'
             },
             {
-              key: 'newsletter',
-              id: 'newsletter',
-              modelType: ModelType.MODEL_VALUE,
-              controlType: ControlType.CONTROL_CHECKBOX,
-              options: {label: 'Subscribe to newsletter', value: true},
-              jp: 'newsletter',
-              relations: {enable: 'atc'}
+              id: 'checkboxdivision',
+              modelType: ModelType.MODEL_SUBSET,
+              controlType: ControlType.CONTROL_DIVISION,
+              jp: '/options',
+              options: {
+                group: [
+                  {
+                    id: 'atc',
+                    modelType: ModelType.MODEL_VALUE,
+                    controlType: ControlType.CONTROL_CHECKBOX,
+                    options: {label: 'Accept Terms and conditions', value: false},
+                    jp: 'atc',
+                    updateOn: 'change'
+                  },
+                  {
+                    id: 'newsletter',
+                    modelType: ModelType.MODEL_VALUE,
+                    controlType: ControlType.CONTROL_CHECKBOX,
+                    options: {label: 'Subscribe to newsletter', value: true},
+                    jp: 'newsletter',
+                    relations: {enable: 'atc'}
+                  }
+                ]
+              }
+            },
+            {
+              id: 'buttondivision',
+              modelType: ModelType.MODEL_SUBSET,
+              controlType: [ControlType.CONTROL_DIVISION],
+              options: {
+                group: [
+                  {
+                    id: 'clear',
+                    modelType: ModelType.MODEL_NULL,
+                    controlType: ControlType.CONTROL_BUTTON,
+                    options: {label: 'Clear'},
+                    action: 'clear'
+                  },
+                  {
+                    id: 'separatorMainButtons',
+                    modelType: ModelType.MODEL_NULL,
+                    controlType: ControlType.CONTROL_SEPARATOR,
+                    options: {css: {container: 'button-separator'}}
+                  },
+                  {
+                    id: 'reset',
+                    modelType: ModelType.MODEL_NULL,
+                    controlType: ControlType.CONTROL_BUTTON,
+                    options: {label: 'Reset'},
+                    action: 'reset'
+                  },
+                  {
+                    id: 'submit',
+                    modelType: ModelType.MODEL_NULL,
+                    controlType: ControlType.CONTROL_BUTTON,
+                    options: {label: 'Submit'},
+                    action: 'submit'
+                  }
+                ],
+                css: {content: 'button-division-content'}
+              }
             }
           ]
-        }
-      },
-      {
-        id: 'buttondivision',
-        modelType: ModelType.MODEL_SUBSET,
-        controlType: [ControlType.CONTROL_DIVISION],
-        options: {
-          group: [
-            {
-              key: 'clearButton',
-              id: 'clear',
-              modelType: ModelType.MODEL_NULL,
-              controlType: ControlType.CONTROL_BUTTON,
-              options: {label: 'Clear'},
-              action: 'clear'
-            },
-            {
-              key: 'separator',
-              id: 'separatorMainButtons',
-              modelType: ModelType.MODEL_NULL,
-              controlType: ControlType.CONTROL_SEPARATOR,
-              options: {css: {container: 'button-separator'}}
-            },
-            {
-              key: 'resetButton',
-              id: 'reset',
-              modelType: ModelType.MODEL_NULL,
-              controlType: ControlType.CONTROL_BUTTON,
-              options: {label: 'Reset'},
-              action: 'reset'
-            },
-            {
-              key: 'submitButon',
-              id: 'submit',
-              modelType: ModelType.MODEL_NULL,
-              controlType: ControlType.CONTROL_BUTTON,
-              options: {label: 'Submit'},
-              action: 'submit'
-            }
-          ],
-          css: {content: 'button-division-content'}
         }
       }
     ]
