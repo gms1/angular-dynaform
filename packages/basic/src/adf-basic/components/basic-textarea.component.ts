@@ -48,8 +48,4 @@ import {Component} from '@angular/core';
 export class BasicTextareaComponent extends DynamicFormControlComponent<ValueControlModel> {
   model: ValueControlModel;
   options: ControlTextareaOptions;
-
-  constructor(public form: DynamicForm, public dynamicFormService: DynamicFormService) {
-    super(form, dynamicFormService);
-  }
 }

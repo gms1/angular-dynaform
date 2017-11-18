@@ -1,13 +1,4 @@
-import {
-  ComponentRef,
-  Directive,
-  Input,
-  OnChanges,
-  OnDestroy,
-  OnInit,
-  SimpleChanges,
-  ViewContainerRef
-} from '@angular/core';
+import {ComponentRef, Directive, Input, DoCheck, OnDestroy, OnInit, ViewContainerRef} from '@angular/core';
 
 // tslint:disable-next-line no-unused-variable  ?
 import {DynamicFormFormControl} from '../components/dynamic-form-form-control.interface';
@@ -21,7 +12,7 @@ import {DynamicFormComponentFactoryService} from '../services/dynamic-form-compo
 // to the DynamicFormComponent
 
 @Directive({selector: '[adfFormControlComponent]'})
-export class DynamicFormFormControlComponentDirective implements OnChanges, OnInit, OnDestroy {
+export class DynamicFormFormControlComponentDirective implements OnInit, DoCheck, OnDestroy {
   @Input()
   model: GroupModel;
 
@@ -31,45 +22,32 @@ export class DynamicFormFormControlComponentDirective implements OnChanges, OnIn
       public form: DynamicFormComponent, private componentsFactoryService: DynamicFormComponentFactoryService,
       private viewContainerRef: ViewContainerRef) {}
 
-  ngOnChanges(changes: SimpleChanges): void {
-    if (!this.componentRef) {
-      this.createComponent();
-    }
-    this.updateComponent();
-  }
+  ngOnInit(): void { this.createComponent(); }
 
-  ngOnInit(): void {}
+  ngDoCheck(): void { this.checkComponent(); }
 
-
-  ngOnDestroy(): void {
-    if (this.componentRef) {
-      this.componentRef.instance.ngOnDestroy();
-      this.destroyComponent();
-    }
-  }
+  ngOnDestroy(): void { this.destroyComponent(); }
 
   private createComponent(): void {
     let formControlFactory = this.componentsFactoryService.getFormControlComponentFactory();
     if (!formControlFactory) {
       throw new Error('failed to resolve factory for DynamicFormFormControl');
     }
-    let componentRef: ComponentRef<DynamicFormFormControl>;
     try {
-      componentRef = this.viewContainerRef.createComponent<DynamicFormFormControl>(
+      this.componentRef = this.viewContainerRef.createComponent<DynamicFormFormControl>(
           formControlFactory, undefined, this.viewContainerRef.injector);
     } catch (e) {
       e.message = `failed to create form control component: ${e.message}`;
       throw(e);
     }
 
-    componentRef.instance.submit.subscribe(() => this.form.adfSubmit.emit());
-    componentRef.instance.reset.subscribe(() => this.form.adfReset.emit());
+    this.componentRef.instance.submit.subscribe(() => this.form.adfSubmit.emit());
+    this.componentRef.instance.reset.subscribe(() => this.form.adfReset.emit());
 
-    this.componentRef = componentRef;
     this.form.formControlRef = this.componentRef;
   }
 
-  private updateComponent(): void {
+  private checkComponent(): void {
     if (this.componentRef) {
       this.componentRef.instance.model = this.model;
       this.componentRef.changeDetectorRef.detectChanges();
@@ -78,6 +56,7 @@ export class DynamicFormFormControlComponentDirective implements OnChanges, OnIn
 
   private destroyComponent(): void {
     if (this.componentRef) {
+      this.componentRef.instance.ngOnDestroy();
       this.form.formControlRef = undefined;
       this.componentRef.instance.submit.unsubscribe();
       this.componentRef.instance.reset.unsubscribe();

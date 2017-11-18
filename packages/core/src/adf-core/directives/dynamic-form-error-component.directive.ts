@@ -1,4 +1,4 @@
-import {ComponentRef, Directive, Input, OnChanges, OnDestroy, SimpleChanges, ViewContainerRef} from '@angular/core';
+import {ComponentRef, Directive, Input, DoCheck, OnDestroy, OnInit, ViewContainerRef} from '@angular/core';
 
 // tslint:disable-next-line no-unused-variable  ?
 import {DynamicFormError} from '../components/dynamic-form-error.interface';
@@ -10,7 +10,7 @@ import {DynamicValidationError} from '../validations/dynamic-validation-error.in
 // this directive creates, updates and destroys the error control component dynamically
 
 @Directive({selector: '[adfErrorComponent]'})
-export class DynamicFormErrorComponentDirective implements OnChanges, OnDestroy {
+export class DynamicFormErrorComponentDirective implements OnInit, DoCheck, OnDestroy {
   @Input()
   model: ControlModel;
 
@@ -23,34 +23,24 @@ export class DynamicFormErrorComponentDirective implements OnChanges, OnDestroy 
       public form: DynamicFormComponent, private componentsFactoryService: DynamicFormComponentFactoryService,
       private viewContainerRef: ViewContainerRef) {}
 
-  ngOnChanges(changes: SimpleChanges): void {
-    if (!this.componentRef) {
-      this.createComponent();
-    }
-    this.updateComponent();
-  }
+  ngOnInit(): void { this.createComponent(); }
 
-  ngOnDestroy(): void {
-    if (this.componentRef) {
-      this.componentRef.instance.ngOnDestroy();
-      this.destroyComponent();
-    }
-  }
+  ngDoCheck(): void { this.checkComponent(); }
+
+  ngOnDestroy(): void { this.destroyComponent(); }
 
   private createComponent(): void {
     let componentFactory = this.componentsFactoryService.getErrorComponentFactory();
-    let componentRef: ComponentRef<DynamicFormError>;
     try {
-      componentRef = this.viewContainerRef.createComponent<DynamicFormError>(
+      this.componentRef = this.viewContainerRef.createComponent<DynamicFormError>(
           componentFactory, undefined, this.viewContainerRef.injector);
     } catch (e) {
       e.message = `failed to create error component: ${e.message}`;
       throw(e);
     }
-    this.componentRef = componentRef;
   }
 
-  private updateComponent(): void {
+  private checkComponent(): void {
     if (this.componentRef) {
       this.componentRef.instance.model = this.model;
       this.componentRef.instance.error = this.error;
@@ -60,6 +50,7 @@ export class DynamicFormErrorComponentDirective implements OnChanges, OnDestroy 
 
   private destroyComponent(): void {
     if (this.componentRef) {
+      this.componentRef.instance.ngOnDestroy();
       this.componentRef.destroy();
       this.componentRef = undefined;
     }

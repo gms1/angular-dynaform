@@ -23,6 +23,4 @@ export class MaterialErrorComponent extends DynamicFormErrorComponent {
   model: ControlModel;
   options: ControlOptions;
   error: DynamicValidationError;
-
-  constructor(public form: DynamicForm) { super(form); }
 }

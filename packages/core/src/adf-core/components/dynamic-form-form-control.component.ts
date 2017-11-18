@@ -3,7 +3,7 @@
 //   for the
 //   lify-cycle hooks
 // tslint:disable use-input-property-decorator use-output-property-decorator
-import {Component, EventEmitter, Input, Output, SimpleChanges} from '@angular/core';
+import {Component, ElementRef, EventEmitter, Input, Output, SimpleChanges} from '@angular/core';
 
 import {GroupOptions} from '../config/control-options.interface';
 import {GroupModel} from '../models/group-model';
@@ -35,8 +35,8 @@ export class DynamicFormFormControlComponent extends DynamicFormControlComponent
   reset: EventEmitter<any>;
 
 
-  constructor(public form: DynamicForm, public dynamicFormService: DynamicFormService) {
-    super(form, dynamicFormService);
+  constructor(form: DynamicForm, dynamicFormService: DynamicFormService, elRef: ElementRef) {
+    super(form, dynamicFormService, elRef);
     this.submit = new EventEmitter<any>(false);
     this.reset = new EventEmitter<any>(false);
   }

@@ -41,8 +41,4 @@ import {
 export class MaterialTabGroupComponent extends DynamicFormControlComponent<GroupModelBase> {
   model: GroupModelBase;
   options: GroupOptions;
-
-  constructor(public form: DynamicForm, public dynamicFormService: DynamicFormService) {
-    super(form, dynamicFormService);
-  }
 }

@@ -1,6 +1,6 @@
 // tslint:disable use-life-cycle-interface
 //   codelyzer does not recognize that the DynamicFormControl extends the interfaces for the lify-cycle hooks
-import {Component, EventEmitter, Input, Output, SimpleChanges, Type} from '@angular/core';
+import {Component, ElementRef, EventEmitter, Input, Output, SimpleChanges, Type} from '@angular/core';
 
 import {DynamicFormControl} from './dynamic-form-control.interface';
 import {DynamicForm} from './dynamic-form.interface';
@@ -11,12 +11,17 @@ import {ControlModel} from '../models/control-model.interface';
 import {DynamicFormAction} from '../actions/dynamic-form.action';
 import {RelationAction} from '../actions/relation.action';
 
+const defaultButtonType = 'button';
+
 @Component({
   selector: 'adf-contol-component-base',
   template: `Please provide a control-component for '{{ model.config.controlType }}!'`
 })
 // tslint:disable-next-line component-class-suffix
 export class DynamicFormControlComponentBase implements DynamicFormControl {
+  private _model: ControlModel;
+  options: ControlOptions;
+
   @Input()
   get model(): ControlModel { return this._model; }
   set model(model: ControlModel) {
@@ -27,24 +32,24 @@ export class DynamicFormControlComponentBase implements DynamicFormControl {
     }
   }
 
-  private _model: ControlModel;
-  options: ControlOptions;
-
   @Output()
   focusChanges: EventEmitter<any>;
 
   @Output()
   click: EventEmitter<any>;
 
-  action?: DynamicFormAction;
+  get elementRef(): ElementRef { return this._elementRef; }
+
   buttonType: string;
 
+  private action?: DynamicFormAction;
   private relationAction?: RelationAction;
 
-  constructor(public form: DynamicForm, public dynamicFormService: DynamicFormService) {
+  constructor(
+      public form: DynamicForm, public dynamicFormService: DynamicFormService, private _elementRef: ElementRef) {
     this.focusChanges = new EventEmitter<any>();
     this.click = new EventEmitter<any>();
-    this.buttonType = 'button';
+    this.buttonType = defaultButtonType;
   }
 
   ngOnChanges(changes: SimpleChanges): void {
@@ -121,5 +126,7 @@ export class DynamicFormControlComponent<M extends ControlModel> extends Dynamic
   @Input()
   model: M;
 
-  constructor(form: DynamicForm, public dynamicFormService: DynamicFormService) { super(form, dynamicFormService); }
+  constructor(form: DynamicForm, dynamicFormService: DynamicFormService, elRef: ElementRef) {
+    super(form, dynamicFormService, elRef);
+  }
 }

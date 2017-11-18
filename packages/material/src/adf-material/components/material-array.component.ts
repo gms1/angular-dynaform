@@ -64,8 +64,4 @@ import {Component} from '@angular/core';
 export class MaterialArrayComponent extends DynamicFormControlComponent<ArrayModel> {
   model: ArrayModel;
   options: ArrayOptions;
-
-  constructor(public form: DynamicForm, public dynamicFormService: DynamicFormService) {
-    super(form, dynamicFormService);
-  }
 }

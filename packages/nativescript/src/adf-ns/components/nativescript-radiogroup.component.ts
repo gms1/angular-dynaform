@@ -46,8 +46,4 @@ import {Component} from '@angular/core';
 export class NativeScriptRadioGroupComponent extends DynamicFormControlComponent<ValueControlModel> {
   model: ValueControlModel;
   options: ControlSelectOptions;
-
-  constructor(public form: DynamicForm, public dynamicFormService: DynamicFormService) {
-    super(form, dynamicFormService);
-  }
 }

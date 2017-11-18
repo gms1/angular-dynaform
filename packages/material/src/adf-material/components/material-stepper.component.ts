@@ -44,8 +44,4 @@ import {
 export class MaterialStepperComponent extends DynamicFormControlComponent<GroupModelBase> {
   model: GroupModelBase;
   options: GroupOptions;
-
-  constructor(public form: DynamicForm, public dynamicFormService: DynamicFormService) {
-    super(form, dynamicFormService);
-  }
 }

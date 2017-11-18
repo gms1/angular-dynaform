@@ -47,8 +47,4 @@ import {Component} from '@angular/core';
 export class MaterialFormComponent extends DynamicFormFormControlComponent {
   model: GroupModel;
   options: GroupOptions;
-
-  constructor(public form: DynamicForm, public dynamicFormService: DynamicFormService) {
-    super(form, dynamicFormService);
-  }
 }

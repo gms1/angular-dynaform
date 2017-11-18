@@ -51,8 +51,4 @@ import {Component} from '@angular/core';
 export class MaterialDatepickerComponent extends DynamicFormControlComponent<ValueControlModel> {
   model: ValueControlModel;
   options: ControlInputOptions;
-
-  constructor(public form: DynamicForm, public dynamicFormService: DynamicFormService) {
-    super(form, dynamicFormService);
-  }
 }

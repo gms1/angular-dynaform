@@ -48,10 +48,6 @@ export class NativeScriptListPickerComponent extends DynamicFormControlComponent
 
   listPickerItems: Array<string>;
 
-  constructor(public form: DynamicForm, public dynamicFormService: DynamicFormService) {
-    super(form, dynamicFormService);
-  }
-
   public ngOnChanges(changes: SimpleChanges): void {
     if (!this.model.local || !this.model.local.valueOptions) {
       this.listPickerItems = [];

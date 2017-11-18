@@ -42,8 +42,4 @@ import {Component} from '@angular/core';
 export class NativeScriptFieldsetComponent extends DynamicFormControlComponent<GroupModelBase> {
   model: GroupModelBase;
   options: GroupOptions;
-
-  constructor(public form: DynamicForm, public dynamicFormService: DynamicFormService) {
-    super(form, dynamicFormService);
-  }
 }

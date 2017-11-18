@@ -46,8 +46,4 @@ export class NativeScriptFormComponent extends DynamicFormFormControlComponent {
   options: GroupOptions;
 
   // TODO: onSubmit/onReset
-
-  constructor(public form: DynamicForm, public dynamicFormService: DynamicFormService) {
-    super(form, dynamicFormService);
-  }
 }

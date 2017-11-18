@@ -39,8 +39,4 @@ import {Component} from '@angular/core';
 export class NativeScriptSwitchComponent extends DynamicFormControlComponent<ValueControlModel> {
   model: ValueControlModel;
   options: ControlSwitchOptions;
-
-  constructor(public form: DynamicForm, public dynamicFormService: DynamicFormService) {
-    super(form, dynamicFormService);
-  }
 }

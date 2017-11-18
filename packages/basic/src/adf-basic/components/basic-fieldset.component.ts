@@ -45,8 +45,4 @@ import {Component} from '@angular/core';
 export class BasicFieldsetComponent extends DynamicFormControlComponent<GroupModelBase> {
   model: GroupModelBase;
   options: GroupOptions;
-
-  constructor(public form: DynamicForm, public dynamicFormService: DynamicFormService) {
-    super(form, dynamicFormService);
-  }
 }
