@@ -7,8 +7,6 @@ import {
   ControlSelectOptions,
   DynamicFormControlComponentBase,
   DynamicFormControlComponent,
-  DynamicForm,
-  DynamicFormService,
   ValueControlModel
 } from '@angular-dynaform/core';
 

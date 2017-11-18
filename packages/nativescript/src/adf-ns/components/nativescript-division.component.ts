@@ -3,8 +3,6 @@ import {
   GroupModelBase,
   DynamicFormControlComponentBase,
   DynamicFormControlComponent,
-  DynamicForm,
-  DynamicFormService,
   GroupOptions
 } from '@angular-dynaform/core';
 import {Component} from '@angular/core';

@@ -3,9 +3,7 @@ import {
   ArrayModel,
   ArrayOptions,
   DynamicFormControlComponentBase,
-  DynamicFormControlComponent,
-  DynamicForm,
-  DynamicFormService
+  DynamicFormControlComponent
 } from '@angular-dynaform/core';
 import {Component} from '@angular/core';
 
