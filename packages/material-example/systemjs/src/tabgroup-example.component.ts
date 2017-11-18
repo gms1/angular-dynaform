@@ -144,7 +144,7 @@ export const tabGroupExampleConfig: FormConfig = {
               action: 'reset'
             },
             {
-              key: 'submitButon',
+              key: 'submitButton',
               id: 'submit',
               modelType: ModelType.MODEL_NULL,
               controlType: ControlType.CONTROL_BUTTON,

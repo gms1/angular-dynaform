@@ -64,8 +64,8 @@ export class DynamicFormModelFactoryService {
     let groupConfig: ControlConfig = {
       id,
       modelType: ModelType.MODEL_GROUP,
-      controlType:
-          ControlType.CONTROL_UNKNOWN,  // this is part of the parent array and does not have a own control component
+      controlType: ControlType.CONTROL_UNKNOWN,  // does not have a corresponding control component, will be shown as
+                                                 // part of the parent array component
       options
     };
 

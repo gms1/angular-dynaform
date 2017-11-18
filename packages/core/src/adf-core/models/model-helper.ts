@@ -45,33 +45,4 @@ export namespace ModelHelper {
       }
     }
   }
-
-  /*
-   * TODO: this is a dirty hack which requires further investigation!
-   * using material2 the disabled state of the model somehow gets lost and the DOM elements, specially buttons,
-   * are showing up as enabled.
-   * I havn't seen this behaviour for other elements; it never happend for an initialially disabled checkbox (see
-   * 'newsletter' in our material example form)
-   * Also the same form in basic-HTML (see our basic HTM example form) worked as expected!
-   * As soon as the form was filled with initial values (from the parent view inside ngAfterViewInit using setTimeout )
-   * all worked fine
-   */
-  export function repairDisabledState(item: ControlModel): void {
-    if (item instanceof GroupModelBase) {
-      item.items.forEach((childItem: ControlModel) => { repairDisabledState(childItem); });
-    } else if (item instanceof ArrayModel) {
-      if (item.header) {
-        repairDisabledState(item.header);
-      }
-      item.items.forEach((childItem: ControlModel) => { repairDisabledState(childItem); });
-      if (item.footer) {
-        repairDisabledState(item.footer);
-      }
-    } else {
-      if (item.ngControl.disabled) {
-        item.ngControl.enable({emitEvent: false});
-        item.ngControl.disable({emitEvent: false});
-      }
-    }
-  }
 }

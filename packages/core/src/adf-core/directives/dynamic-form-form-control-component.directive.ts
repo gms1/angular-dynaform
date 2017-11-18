@@ -60,6 +60,7 @@ export class DynamicFormFormControlComponentDirective implements OnInit, DoCheck
     this.componentRef.instance.reset.subscribe(() => this.form.adfReset.emit());
 
     this.form.formControlRef = this.componentRef;
+    this.form.registerComponent(this.model.id, this.componentRef.instance);
 
     // tslint:disable no-unnecessary-type-assertion
     if ((this.componentRef.instance as any).elementRef) {
@@ -85,6 +86,7 @@ export class DynamicFormFormControlComponentDirective implements OnInit, DoCheck
     if (this.componentRef) {
       this.componentRef.instance.ngOnDestroy();
       this.form.formControlRef = undefined;
+      this.form.unRegisterComponent(this.model.id);
       this.componentRef.instance.submit.unsubscribe();
       this.componentRef.instance.reset.unsubscribe();
       this.componentRef.destroy();

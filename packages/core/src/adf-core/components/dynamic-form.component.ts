@@ -9,6 +9,7 @@ import {DynamicFormControl} from './dynamic-form-control.interface';
 import {DynamicFormFormControl} from './dynamic-form-form-control.interface';
 import {DynamicForm} from './dynamic-form.interface';
 
+import {Stepper} from '../models/stepper.interface';
 
 
 @Component({
@@ -43,6 +44,7 @@ export class DynamicFormComponent extends DynamicForm {
   get touched(): boolean { return this.model.touched; }
 
   formControlRef: ComponentRef<DynamicFormFormControl>|undefined;
+  stepper?: Stepper;
 
   private _model: FormModel;
   private _submit: EventEmitter<any>;
@@ -79,4 +81,17 @@ export class DynamicFormComponent extends DynamicForm {
   unRegisterComponent(id: string): void { this.mapIdToControl.delete(id); }
 
   findComponentById(id: string): DynamicFormControl|undefined { return this.mapIdToControl.get(id); }
+
+  findParentComponent(control: DynamicFormControl): DynamicFormControl|undefined {
+    let parentId: string|undefined;
+    let found: DynamicFormControl|undefined;
+
+    parentId = control.model.parentGroup ? control.model.parentGroup.id : undefined;
+    found = parentId ? this.findComponentById(parentId) : undefined;
+    if (!found) {
+      parentId = control.model.parentArray ? control.model.parentArray.id : undefined;
+      found = parentId ? this.findComponentById(parentId) : undefined;
+    }
+    return found;
+  }
 }

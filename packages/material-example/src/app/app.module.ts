@@ -12,18 +12,19 @@ import {DynamicMaterialFormModule} from '@angular-dynaform/material';
 import {AppComponent} from './app.component';
 import {HomeComponent} from './home.component';
 import {TabGroupExampleComponent} from './tabgroup-example.component';
-import {StepperExampleComponent} from './stepper-example.component';
+import {StepperExamplesComponent, StepperExampleComponent} from './stepper-example.component';
 
 export const DEMO_ROUTES: Routes = [
   {path: '', component: HomeComponent}, {path: 'tabgroup', component: TabGroupExampleComponent},
-  {path: 'stepper', component: StepperExampleComponent}
+  {path: 'stepper', component: StepperExamplesComponent}
 ];
 
 export const APP_ROUTES: Routes = DEMO_ROUTES;
 
 
 @NgModule({
-  declarations: [AppComponent, HomeComponent, TabGroupExampleComponent, StepperExampleComponent],
+  declarations:
+      [AppComponent, HomeComponent, TabGroupExampleComponent, StepperExamplesComponent, StepperExampleComponent],
   imports: [
     BrowserModule, BrowserAnimationsModule, DynamicFormModule.forRoot(), DynamicMaterialFormModule,
     RouterModule.forRoot(APP_ROUTES), MatIconModule, MatSidenavModule, MatToolbarModule, MatListModule, MatCardModule

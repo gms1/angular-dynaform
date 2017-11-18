@@ -28,7 +28,9 @@ import {
   ArrayButtonInsertAction,
   SubmitButtonAction,
   ResetButtonAction,
-  ClearButtonAction
+  ClearButtonAction,
+  StepperButtonPrevAction,
+  StepperButtonNextAction
 } from './actions';
 
 
@@ -65,6 +67,8 @@ export class DynamicFormModule {
     this.dynamicFormService.actionTypes.setType('arrayAddItem', ArrayButtonAddAction);
     this.dynamicFormService.actionTypes.setType('arrayInsertItem', ArrayButtonInsertAction);
     this.dynamicFormService.actionTypes.setType('arrayDeleteItem', ArrayButtonDeleteAction);
+    this.dynamicFormService.actionTypes.setType('stepperPrev', StepperButtonPrevAction);
+    this.dynamicFormService.actionTypes.setType('stepperNext', StepperButtonNextAction);
   }
 
   static forRoot(): ModuleWithProviders {

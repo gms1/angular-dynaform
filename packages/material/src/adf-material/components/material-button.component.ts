@@ -35,4 +35,16 @@ import {Component} from '@angular/core';
 export class MaterialButtonComponent extends DynamicFormControlComponent<NullControlModel> {
   model: NullControlModel;
   options: ControlBaseOptions;
+
+  ngAfterViewInit(): void {
+    setTimeout(() => {
+      if (this.model.ngControl.disabled) {
+        this.model.ngControl.enable({emitEvent: false});
+        this.model.ngControl.disable();
+      } else {
+        this.model.ngControl.disable({emitEvent: false});
+        this.model.ngControl.enable();
+      }
+    });
+  }
 }
