@@ -1,6 +1,6 @@
 {
   "name": "@angular-dynaform/basic-example",
-  "version": "0.2.3",
+  "version": "0.2.4",
   "license": "MIT",
   "scripts": {
     "prepublishOnly": "echo \"ERROR: please use the dist-folder for publishing\" && exit 1",

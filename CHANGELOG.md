@@ -1,5 +1,12 @@
 # CHANGELOG
 
+## 0.2.4
+
+* **Features**
+  * material: mat-tab-group: added support for all known properties
+  * material: mat-horizontal/vertical-stepper and mat-step: added support for all known properties
+  * material: mat-horizontal/vertical-stepper: added support for prev/next buttons
+
 ## 0.2.3
 
 maintenance release

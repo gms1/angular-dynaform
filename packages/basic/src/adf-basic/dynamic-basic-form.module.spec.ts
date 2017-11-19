@@ -342,10 +342,5 @@ describe('test suite', () => {
 
   });
 
-  // --------------------------------------------------------------------------------------------------
-  it('should be able to use a custom validator', () => {
-    form.initValue(mainExampleFormModelData);
-
-  });
 
 });
