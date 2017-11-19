@@ -12,10 +12,8 @@ import {
 } from '@angular-dynaform/core';
 import {MatStepper} from '@angular/material';
 
-// TODO: vertical stepper
-// TODO: support for prev/next buttons/actions
-// TODO(?): attributes on stepper: linear
-// TODO(?): attributes on step: optional, editable, completed?
+// TODO: using the #steps template didn't work
+//   may be related to https://github.com/angular/material2/issues/8014
 @Component({
   selector: 'adf-material-tab-component',
   template: `
@@ -29,15 +27,41 @@ import {MatStepper} from '@angular/material';
       >
         <adf-error-container [model]="model">
         </adf-error-container>
-        <mat-horizontal-stepper [ngClass]="model.css.content" #stepper>
-          <mat-step *ngFor="let item of model.items; let i=index"
-            [stepControl]="item.ngControl"
-          >
-            <ng-template matStepLabel>{{item.local.label}}</ng-template>
-            <ng-template adfControlComponent [model]="item" >
-            </ng-template>
-          </mat-step>
+
+        <!--ng-template #steps>
+            <mat-step *ngFor="let item of model.items; let i=index"
+              [stepControl]="item.ngControl"
+            >
+              <ng-template matStepLabel>{{item.local.label}}</ng-template>
+              <ng-template adfControlComponent [model]="item"></ng-template>
+            </mat-step>
+        </ng-template-->
+
+        <ng-container *ngIf="options.matStepperVertical; else horizontalStepper" >
+          <mat-vertical-stepper [ngClass]="model.css.content" [linear]="options.matStepperLinear" #stepper>
+            <!--ng-container *ngTemplateOutlet="steps"></ng-container-->
+            <mat-step *ngFor="let item of model.items; let i=index"
+              [stepControl]="item.ngControl"
+              [optional]="options.matStepOptional" [editable]="options.matStepEditable" [completed]="options.matStepCompleted"
+            >
+              <ng-template matStepLabel>{{item.local.label}}</ng-template>
+              <ng-template adfControlComponent [model]="item"></ng-template>
+            </mat-step>
+        </mat-vertical-stepper>
+        </ng-container>
+
+        <ng-template #horizontalStepper >
+          <mat-horizontal-stepper [ngClass]="model.css.content" [linear]="options.matStepperLinear" #stepper>
+            <!--ng-container *ngTemplateOutlet="steps"></ng-container-->
+            <mat-step *ngFor="let item of model.items; let i=index"
+              [stepControl]="item.ngControl"
+              [optional]="options.matStepOptional" [editable]="options.matStepEditable" [completed]="options.matStepCompleted"
+            >
+              <ng-template matStepLabel>{{item.local.label}}</ng-template>
+              <ng-template adfControlComponent [model]="item"></ng-template>
+            </mat-step>
         </mat-horizontal-stepper>
+        </ng-template>
       </div>
     </div>
   `,

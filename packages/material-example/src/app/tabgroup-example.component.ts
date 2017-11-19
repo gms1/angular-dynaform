@@ -26,6 +26,7 @@ export const tabGroupExampleConfig: FormConfig = {
         controlType: ControlType.CONTROL_TABGROUP,
         options: {
           label: 'TabGroup',
+          matTabGroupDynamicHeight: true,
           group: [
             {
               id: 'tab1',
@@ -144,7 +145,7 @@ export const tabGroupExampleConfig: FormConfig = {
               action: 'reset'
             },
             {
-              key: 'submitButon',
+              key: 'submitButton',
               id: 'submit',
               modelType: ModelType.MODEL_NULL,
               controlType: ControlType.CONTROL_BUTTON,

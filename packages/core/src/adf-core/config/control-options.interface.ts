@@ -1,7 +1,9 @@
 import {ControlConfig} from './control-config.interface';
 import {ControlCssOptions} from './control-css-options.interface';
 
-
+/*
+  value options for the select-control
+*/
 export interface ValueOptions {
   value: any;
   label: string;
@@ -11,14 +13,29 @@ export interface ValueOptions {
 export interface ControlBaseOptions {
   /**
    * The label of the control
-   * ignore for MODEL_SUBSET (TODO?)
    */
   label?: string;
 
   css?: ControlCssOptions;
 
+  /**
+   * user defined options or special options for specific ui-frameworks:
+   *
+   * mat-stepper: see https://github.com/angular/material2/blob/master/src/lib/stepper/stepper.md
+   *   matStepperVertical: boolean
+   *   matStepperLinear: boolean
+   *
+   *   mat-step:
+   *     matStepOptional: boolean
+   *     matStepEditable: boolean
+   *     matStepCompleted: boolean
+   *
+   * mat-tab-group: see https://github.com/angular/material2/blob/master/src/lib/tabs/tabs.md
+   *   matTabGroupDynamicHeight: boolean
+   */
   [key: string]: any;
 }
+
 
 
 export interface ArrayOptions extends ControlBaseOptions {

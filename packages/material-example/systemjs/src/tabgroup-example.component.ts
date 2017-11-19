@@ -26,6 +26,7 @@ export const tabGroupExampleConfig: FormConfig = {
         controlType: ControlType.CONTROL_TABGROUP,
         options: {
           label: 'TabGroup',
+          matTabGroupDynamicHeight: true,
           group: [
             {
               id: 'tab1',

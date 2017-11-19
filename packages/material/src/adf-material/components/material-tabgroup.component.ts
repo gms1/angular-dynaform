@@ -22,7 +22,9 @@ import {
       >
         <adf-error-container [model]="model">
         </adf-error-container>
-        <mat-tab-group adfHTMLDomElement [ngClass]="model.css.content">
+        <mat-tab-group adfHTMLDomElement [ngClass]="model.css.content"
+          [dynamicHeight]="options.matTabGroupDynamicHeight"
+        >
           <mat-tab *ngFor="let item of model.items;" >
             <ng-template mat-tab-label>{{item.local.label}}</ng-template>
             <ng-template adfControlComponent [model]="item" >
