@@ -58,3 +58,12 @@ fieldset.adf-control, legend.adf-label {
   width: 30px
 }
 
+.adf-array-item-selected {
+  background-color: AliceBlue;
+}
+
+.adf-array-content {
+  overflow-y: auto;
+  height:200px;
+}
+

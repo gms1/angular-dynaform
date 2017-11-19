@@ -37,7 +37,9 @@ export class ArrayModel extends AbstractControlModel<NgFormArray, ArrayOptions> 
       newIndex = HEADER_IDX;
     }
     if (this._selectedIndex !== newIndex) {
+      this.updateSelectedItemClass(false);
       this._selectedIndex = newIndex;
+      this.updateSelectedItemClass(true);
       this.selectionChange.emit(this._selectedIndex);
     }
   }
@@ -142,8 +144,10 @@ export class ArrayModel extends AbstractControlModel<NgFormArray, ArrayOptions> 
     }
     if (this.items.length < length) {
       while (this.items.length < length) {
-        this.items.push(this.dynamicFormService.modelFactory.createArrayGroup(
-            `${this.items.length}`, this.formModel, this, this.items.length, this.options.item, this.path));
+        let item = this.dynamicFormService.modelFactory.createArrayGroup(
+            `${this.items.length}`, this.formModel, this, this.items.length, this.options.item, this.path);
+        item.setCSSClasses(item.css.content, 'adf-array-item');
+        this.items.push(item);
       }
     }
     while (this.ngControl.length < length) {
@@ -192,6 +196,7 @@ export class ArrayModel extends AbstractControlModel<NgFormArray, ArrayOptions> 
     if (this.options.header) {
       this.header = this.dynamicFormService.modelFactory.createArrayGroup(
           'HEADER', this.formModel, this, HEADER_IDX, this.options.header);
+      this.header.setCSSClasses(this.header.css.content, 'adf-array-header-content');
     }
     return this.header;
   }
@@ -200,6 +205,7 @@ export class ArrayModel extends AbstractControlModel<NgFormArray, ArrayOptions> 
     if (this.options.footer) {
       this.footer = this.dynamicFormService.modelFactory.createArrayGroup(
           'FOOTER', this.formModel, this, FOOTER_IDX, this.options.footer);
+      this.footer.setCSSClasses(this.footer.css.content, 'adf-array-footer-content');
     }
     return this.footer;
   }
@@ -232,6 +238,14 @@ export class ArrayModel extends AbstractControlModel<NgFormArray, ArrayOptions> 
 
     this.items.forEach((item, idx) => { item.valueToAppModel(appData, appPointerPrefix); });
     return appData;
+  }
+
+  private updateSelectedItemClass(value: boolean): void {
+    if (this._selectedIndex < 0 || this._selectedIndex >= this.items.length) {
+      return;
+    }
+    let item: GroupModelBase = this.items[this._selectedIndex];
+    item.setCSSClasses(item.css.content, 'adf-array-item-selected', value);
   }
 
   static copyItem(fromItem: GroupModelBase, toItem: GroupModelBase): void {

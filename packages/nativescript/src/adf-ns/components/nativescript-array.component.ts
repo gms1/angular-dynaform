@@ -40,9 +40,11 @@ import {Component} from '@angular/core';
           *ngFor="let arrayItem of model.items; let i=index"
           [formGroupName]="i"
         >
-          <StackLayout *ngFor="let item of arrayItem.items;"  [ngClass]="item.css.content">
+          <StackLayout [ngClass]="arrayItem.css.content">
+            <ng-container *ngFor="let item of arrayItem.items;" >
               <ng-container adfControlComponent [model]="item" >
               </ng-container>
+            </ng-container>
           </StackLayout>
         </ng-container>
       </StackLayout>

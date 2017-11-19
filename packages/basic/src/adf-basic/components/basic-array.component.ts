@@ -40,8 +40,10 @@ import {Component} from '@angular/core';
             *ngFor="let arrayItem of model.items; let i=index"
             [formGroupName]="i"
           >
-            <div *ngFor="let item of arrayItem.items;"  [ngClass]="item.css.content">
-              <ng-container adfControlComponent [model]="item" >
+            <div [ngClass]="arrayItem.css.content">
+              <ng-container *ngFor="let item of arrayItem.items;" >
+                <ng-container adfControlComponent [model]="item" >
+                </ng-container>
               </ng-container>
             </div>
           </ng-container>

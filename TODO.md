@@ -1,7 +1,5 @@
 # TODO LIST
 
-* visualize selectedIndex from FormArrays
-* material: form array comonent based on data table?
 * nativescript templates
 * advanced formatting/parsing of form values
 * prepare examples on StackBlitz
