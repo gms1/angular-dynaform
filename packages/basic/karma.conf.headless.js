@@ -16,6 +16,7 @@ module.exports = function(config) {
     colors: true,
     autoWatch: false,
     browsers: ['ChromeHeadless'],
+    browserNoActivityTimeout: 30000,
     singleRun: false,
     // logLevel: 'LOG_DEBUG',
     karmaTypescriptConfig: {
