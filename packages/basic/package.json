@@ -37,10 +37,10 @@
   },
   "dependencies": {
     "@angular-dynaform/core": "file:../core/dist",
-    "@angular/common": "^5.0.1",
-    "@angular/core": "^5.0.1",
-    "@angular/forms": "^5.0.1",
-    "@angular/platform-browser": "^5.0.1",
+    "@angular/common": "^5.0.2",
+    "@angular/core": "^5.0.2",
+    "@angular/forms": "^5.0.2",
+    "@angular/platform-browser": "^5.0.2",
     "core-js": "^2.5.1",
     "jsep": "^0.3.2",
     "jsonpointerx": "^1.0.4",
@@ -48,12 +48,12 @@
     "zone.js": "^0.8.18"
   },
   "devDependencies": {
-    "@angular/compiler": "^5.0.1",
-    "@angular/compiler-cli": "^5.0.1",
-    "@angular/platform-browser-dynamic": "^5.0.1",
+    "@angular/compiler": "^5.0.2",
+    "@angular/compiler-cli": "^5.0.2",
+    "@angular/platform-browser-dynamic": "^5.0.2",
     "@types/gulp": "^4.0.5",
-    "@types/jasmine": "^2.6.3",
-    "@types/node": "^8.0.51",
+    "@types/jasmine": "^2.8.2",
+    "@types/node": "^8.0.53",
     "child_process": "^1.0.2",
     "codelyzer": "^4.0.1",
     "del": "^3.0.0",
@@ -77,7 +77,7 @@
     "karma-typescript": "^3.0.8",
     "merge-stream": "^1.0.1",
     "protractor": "^5.2.0",
-    "rollup": "^0.51.5",
+    "rollup": "^0.51.7",
     "rollup-plugin-commonjs": "^8.2.6",
     "rollup-plugin-node-resolve-angular": "^2.0.3",
     "rollup-plugin-uglify": "^2.0.1",
@@ -86,6 +86,6 @@
     "ts-node": "^3.3.0",
     "tslint": "^5.8.0",
     "typedoc": "^0.9.0",
-    "typescript": "<2.5"
+    "typescript": "^2.4.2"
   }
 }
