@@ -10,6 +10,7 @@ import {ControlModel, AbstractControlModel} from './control-model.interface';
 import {FormModel} from './form-model';
 
 import {NgFormGroup} from './internal/ng-form-group';
+import {createNgFormGroupSubset} from './internal/ng-form-group-subset';
 
 import {JsonPointer} from 'jsonpointerx';
 
@@ -85,9 +86,11 @@ export class GroupModel extends GroupModelBase {
 
   protected createItem(itemConfig: ControlConfig): ControlModel {
     let control = super.createItem(itemConfig);
-    if (control.path) {
-      this.controls[control.key] = control;
+    if (!control.path || control instanceof SubsetModel) {
+      // not part of the form data model
+      return control;
     }
+    this.controls[control.key] = control;
     return control;
   }
 }
@@ -98,32 +101,39 @@ export class SubsetModel extends GroupModelBase {
       dynamicFormService: DynamicFormService, config: ControlConfig, formModel: FormModel, parentPath?: string[],
       parentGroup?: GroupModelBase, parentArray?: ArrayModel, parentArrayIdx?: number) {
     super(
-        // type assertion is necessary:
+        dynamicFormService, config,
         // tslint:disable-next-line no-unnecessary-type-assertion
-        dynamicFormService, config, (parentGroup as GroupModelBase).ngControl, formModel, parentPath, parentGroup,
+        SubsetModel.getSuperGroup(parentGroup as GroupModelBase).ngControl, formModel, parentPath, parentGroup,
         parentArray, parentArrayIdx);
-    this.initSuperGroup();
+    // tslint:disable-next-line no-unnecessary-type-assertion
+    this.superGroup = SubsetModel.getSuperGroup(this.parentGroup as GroupModelBase) as GroupModel;
+    this._ngSubsetControl = createNgFormGroupSubset(this.superGroup.ngControl, this.controls);
     this.createItems();
     if (config.disabled) {
       this.disable();
     }
   }
 
-  private initSuperGroup(): void {
-    let ancestor = this.parentGroup;
-    while (ancestor && !(ancestor instanceof GroupModel)) {
-      ancestor = ancestor.parentGroup;
-    }
-    if (ancestor) {
-      this.superGroup = ancestor as GroupModel;
-    }
-  }
 
   protected createItem(itemConfig: ControlConfig): ControlModel {
     let control = super.createItem(itemConfig);
-    if (control.path) {
-      this.superGroup.controls[control.key] = control;
+    if (!control.path || control instanceof SubsetModel) {
+      // not part of the form data model
+      return control;
     }
+    // registering child control as child of super group:
+    this.superGroup.controls[control.key] = control;
+    // registering child control as our child:
+    this.controls[control.key] = control;
     return control;
+  }
+
+
+  static getSuperGroup(parent: GroupModelBase): GroupModel {
+    let ancestor: GroupModelBase = parent;
+    while (!(ancestor instanceof GroupModel) && ancestor.parentGroup) {
+      ancestor = ancestor.parentGroup;
+    }
+    return ancestor as GroupModel;
   }
 }

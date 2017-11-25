@@ -9,7 +9,8 @@ export interface NgArrayModelHandler { updateLength(length: number, isMinimum?: 
 
 /**
  * @description NgFormArray extends FormArray
- * in the setValue/patchValue/reset calls, the length of the array can be updated on-the-fly
+ * In the setValue/patchValue/reset calls, the length of the array can be updated on-the-fly
+ * using the NgArrayModelHandler interface
  *
  * @internal
  * @export

@@ -1,11 +1,11 @@
 // tslint:disable max-classes-per-file
-import {OnDestroy, OnInit, OnChanges, SimpleChanges} from '@angular/core';
+import {AfterViewInit, OnDestroy, OnInit, OnChanges, SimpleChanges} from '@angular/core';
 
 import {ControlModel} from '../models/control-model.interface';
 import {DynamicFormControlComponentBase} from '../components/dynamic-form-control.component';
 
 
-export abstract class DynamicFormAction implements OnInit, OnDestroy, OnChanges {
+export abstract class DynamicFormAction implements OnInit, AfterViewInit, OnDestroy, OnChanges {
   public component: DynamicFormControlComponentBase;
   public model: ControlModel;
 
@@ -15,6 +15,7 @@ export abstract class DynamicFormAction implements OnInit, OnDestroy, OnChanges 
   }
 
   ngOnInit(): void {}
+  ngAfterViewInit(): void {}
   ngOnChanges(changes: SimpleChanges): void {}
   ngOnDestroy(): void {}
 

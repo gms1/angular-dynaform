@@ -15,28 +15,31 @@ import {CSSModel} from './css-model';
 import {JsonPointer} from 'jsonpointerx';
 import {JsExpression} from '../utils/js-expression';
 
-export interface ControlGroup { [key: string]: ControlModel; }
-
 // the root node of the model-tree is of type GroupModel without a parentGroup property
 // (similar to the child nodes of the ArrayModel, see below)
 
 export interface ControlModel {
   readonly id: string;
   readonly key: string;
+
+  // full path as array of path segments:
+  // based on the form data model (ignoring subsets)
   readonly path?: string[];
+
   readonly config: ControlConfig;
   readonly options: ControlBaseOptions;
   readonly ngControl: AbstractControl;
+  readonly ngSubsetControl?: AbstractControl;
   readonly ngGroup?: FormGroup;
 
   readonly css: CSSModel;
 
-  formModel: FormModel;
+  readonly formModel: FormModel;
   readonly parentGroup?: GroupModelBase;
   readonly parentArray?: ArrayModel;
   readonly parentArrayIdx?: number;
 
-  value: any;
+  readonly value: any;
   readonly valueChanges: Observable<any>;
 
   readonly valid: boolean;
@@ -54,25 +57,30 @@ export interface ControlModel {
   readonly enableIf?: JsExpression;
   readonly showIf?: JsExpression;
 
-  readonly controls: ControlGroup;
+  readonly local: ControlI18n;
 
-  local: ControlI18n;
+  // all child controls by key:
+  // based on the form data model (ignoring subsets)
+  readonly controls: {[key: string]: ControlModel};
+
 
   setValue(value: any, options?: {onlySelf?: boolean; emitEvent?: boolean}): void;
   patchValue(value: any, options?: {onlySelf?: boolean; emitEvent?: boolean}): void;
   reset(value?: any, options?: {onlySelf?: boolean; emitEvent?: boolean}): void;
 
+  show(): void;
+  hide(): void;
+
   valueFromAppModel(formData: any, appData: any, appPointerPrefix?: JsonPointer): any;
   valueToAppModel(appData: any, appPointerPrefix?: JsonPointer): any;
 
+  // get control by key:
+  // based on the form data model (ignoring subsets)
   getControl(key: string): ControlModel|undefined;
 
   setParentGroup(parentGroup: GroupModelBase): void;
   reTranslate(): void;
   setCSSClasses(classes: {[key: string]: boolean}, setClasses: string|string[]|undefined, value: boolean): void;
-
-  show(): void;
-  hide(): void;
 }
 
 
@@ -91,6 +99,9 @@ export abstract class AbstractControlModel<C extends AbstractControl, O extends 
 
   private _ngControl: C;
   get ngControl(): C { return this._ngControl; }
+
+  protected _ngSubsetControl: C;
+  get ngSubsetControl(): C { return this._ngControl; }
 
   private _formModel: FormModel;
   get formModel(): FormModel { return this._formModel; }
@@ -114,6 +125,7 @@ export abstract class AbstractControlModel<C extends AbstractControl, O extends 
   private _key: string;
   get key(): string { return this._key; }
 
+  // data model path
   private _path?: string[];
   get path(): string[]|undefined { return this._path; }
 
@@ -133,7 +145,6 @@ export abstract class AbstractControlModel<C extends AbstractControl, O extends 
 
   // getters/setters from ngControl:
   get value(): any { return this.ngControl.value; }
-  set value(value: any) { this.ngControl.setValue(value); }
   get valueChanges(): Observable<any> { return this.ngControl.valueChanges; }
 
   get valid(): boolean { return this.ngControl.valid; }
@@ -158,10 +169,11 @@ export abstract class AbstractControlModel<C extends AbstractControl, O extends 
   get showIf(): JsExpression|undefined { return this._showIf; }
 
 
-  local: ControlI18n;
+  private _local: ControlI18n;
+  get local(): ControlI18n { return this._local; }
 
-  private _controls: ControlGroup;
-  get controls(): ControlGroup { return this._controls; }
+  private _controls: {[key: string]: ControlModel};
+  get controls(): {[key: string]: ControlModel} { return this._controls; }
 
   constructor(
       dynamicFormService: DynamicFormService, config: ControlConfig, options: O, ngControl: C, formModel: FormModel,
@@ -176,7 +188,7 @@ export abstract class AbstractControlModel<C extends AbstractControl, O extends 
     this._parentArray = parentArray;
     this._parentArrayIdx = parentArrayIdx;
     this._key = this.config.key || this.config.id;
-    this.local = {};
+    this._local = {};
     this.validatorFns = [];
     this.asyncValidatorFns = [];
     this._hidden = false;

@@ -78,6 +78,14 @@ export class DynamicFormControlComponentBase implements DynamicFormControl {
     }
   }
 
+  ngAfterViewInit(): void {
+    if (this.relationAction) {
+      this.relationAction.ngAfterViewInit();
+    }
+    if (this.action) {
+      this.action.ngAfterViewInit();
+    }
+  }
 
   ngOnDestroy(): void {
     if (this.action) {

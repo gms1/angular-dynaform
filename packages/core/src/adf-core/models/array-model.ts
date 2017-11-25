@@ -251,7 +251,7 @@ export class ArrayModel extends AbstractControlModel<NgFormArray, ArrayOptions> 
   }
 
   static copyItem(fromItem: GroupModelBase, toItem: GroupModelBase): void {
-    toItem.value = fromItem.value;
+    toItem.ngControl.setValue(fromItem.ngControl.value);
     ModelHelper.copyStates(fromItem, toItem);
   }
 }

@@ -31,6 +31,7 @@ export class DynamicFormErrorContainerComponent implements DynamicFormErrorConta
       return;
     }
     this.errors = [];
+    // TODO: we may want to filter errors for subset and form groups having subsets
     let sortedErrors: DynamicValidationError[] = Object.values(this.model.ngControl.errors)
                                                      .filter((v) => v.message)
                                                      .sort((a, b) => (a.order || 0) - (b.order || 0));

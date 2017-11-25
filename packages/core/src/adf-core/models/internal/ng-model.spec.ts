@@ -1,6 +1,10 @@
 import {NgFormGroup} from './ng-form-group';
 import {NgNullControl} from './ng-null-control';
 import {NgFormArray, NgArrayModelHandler} from './ng-form-array';
+import {FormControl} from '@angular/forms';
+import {createNgFormGroupSubset, NgFormGroupSubset} from './ng-form-group-subset';
+
+
 
 class NgFormArrayWrapper implements NgArrayModelHandler {
   ngControl: NgFormArray;
@@ -62,5 +66,24 @@ describe('ng-model', () => {
 
   });
 
+  it('NgFormGroup and Subset', () => {
+    let grp: NgFormGroup = new NgFormGroup({a: new FormControl(), b: new FormControl(), c: new FormControl()});
+    let subsetGroup1: NgFormGroupSubset = createNgFormGroupSubset(grp);
+    let subsetGroup2: NgFormGroupSubset = createNgFormGroupSubset(grp, {c: grp.controls.c});
+    subsetGroup1.subset = {b: grp.controls.b};
+
+    grp.setValue({a: 1, b: 2, c: 3});
+    grp.controls.b.reset();
+    grp.controls.b.setErrors({required: true});
+    expect(grp.valid).toBeFalsy();
+    expect(grp.invalid).toBeTruthy();
+    expect(subsetGroup1.valid).toBeFalsy();
+    expect(subsetGroup1.invalid).toBeTruthy();
+    expect(subsetGroup2.valid).toBeTruthy();
+    expect(subsetGroup2.invalid).toBeFalsy();
+    expect(subsetGroup1 instanceof NgFormGroup).toBeTruthy();
+    expect(subsetGroup2 instanceof NgFormGroup).toBeTruthy();
+
+  });
 
 });
