@@ -15,5 +15,6 @@ import {BrowserDynamicTestingModule, platformBrowserDynamicTesting} from '@angul
 
 getTestBed().initTestEnvironment(BrowserDynamicTestingModule, platformBrowserDynamicTesting());
 
+import './models/internal/ng-model.spec';
 import './services/dynamic-form.service.spec';
 import './utils/js-expression.spec';

@@ -1,14 +1,10 @@
-// TODO: remove tslint:disable
-// tslint:disable
 import {Directive, ElementRef, Renderer2} from '@angular/core';
 
 import {DynamicFormControlComponentBase} from '../components/dynamic-form-control.component';
 
 // forwards blur/focus/click events on the element to the component
 
-@Directive({
-  selector: '[adfDomElement]',
-})
+@Directive({selector: '[adfDomElement]'})
 export class DynamicFormDomElementDirective {
   constructor(
       protected elementRef: ElementRef, protected renderer: Renderer2,

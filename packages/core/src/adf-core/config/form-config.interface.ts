@@ -1,16 +1,16 @@
 import {GroupOptions} from './control-options.interface';
 
 export interface FormConfig {
+  /**
+   */
   id: string;
-
-  name?: string;
 
   /**
    * default update strategy of the form
    */
   updateOn?: 'change'|'blur'|'submit';
   /**
-   * validators
+   * sync validators
    */
   validators?: string|string[];
   /**
@@ -22,6 +22,8 @@ export interface FormConfig {
    */
   errors?: {[key: string]: string};
 
+  /**
+   */
   showMultipleErrors?: boolean;
 
   /**

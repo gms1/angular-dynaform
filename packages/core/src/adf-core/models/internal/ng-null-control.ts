@@ -2,13 +2,19 @@ import {AsyncValidatorFn, FormControl, ValidatorFn} from '@angular/forms';
 import {AbstractControlOptions} from './ng-abstract';
 
 // ==============================================================================================================================
-// NgNullControls always have an undefined value
-// for e.g Buttons, Separators,..., which should not influence the form data model)
-//
-// TODO:
-// on the other hand, it might have been better to not even create a FormControl for such controls or, as we did for the
-// FormArray headers/footers, to register such controls as childs of an independent FormGroup
-
+/**
+ * @description NgNullControl extends FormControl
+ * This class does not provide a value (is always undefined) and so does not participate in the aggregated value
+ * of its ancestors. It can be used for buttons/separators,..which can then be treated exactly the same as any other
+ * FormControl (e.g inside of templates, to enable/disable the control,...)
+ *
+ * another possible use-case:
+ * together with our NgFormGroup, a hidden NgNullControl can be used to filter obsolete values, which would otherwise
+ * throw if a 'setValue' call would provide a value for a no longer existing FormControl
+ *
+ * @internal
+ * @export
+ */
 export class NgNullControl extends FormControl {
   constructor(
       formState?: any, validatorOrOpts?: ValidatorFn|ValidatorFn[]|AbstractControlOptions|null,

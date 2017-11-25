@@ -1,9 +1,11 @@
 import {ControlOptions} from './control-options.interface';
 // tslint:disable: no-empty-interface
 
-/*
-*
-*/
+
+/**
+ *
+ * @export
+ */
 export interface ControlConfig {
   /**
    * The form model type
@@ -24,8 +26,8 @@ export interface ControlConfig {
    * The key of the control
    *
    * will be used to sync a FormControl in the FormGroup to the form control (DOM) element
-   * ignore for MODEL_SUBSET
-   * required otherwise, but using 'id' as default
+   * required, but using 'id' as default
+   * if parent is a MODEL_SUBSET this control will be added to the ancestor FormGroup
    */
   key?: string;
 
@@ -47,15 +49,13 @@ export interface ControlConfig {
   updateOn?: 'change'|'blur'|'submit';
 
   /**
-   * validators
-   * TODO: validators for MODEL_SUBSET
-   * ignore for MODEL_NULL
+   * sync validators
+   * ignore for MODEL_NULL or MODEL_SUBSET
    */
   validators?: string|string[];
   /**
    * async validators
-   * TODO: async validators for MODEL_SUBSET
-   * ignore for MODEL_NULL
+   * ignore for MODEL_NULL or MODEL_SUBSET
    */
   asyncValidators?: string|string[];
   /**

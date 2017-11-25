@@ -2,9 +2,13 @@ import {AbstractControl, AsyncValidatorFn, FormGroup, ValidatorFn} from '@angula
 import {NgNullControl} from './ng-null-control';
 import {AbstractControlOptions} from './ng-abstract';
 
-// ==============================================================================================================================
-// NgFormGroups should not throw an exception if a value for NgNullControls is not provided to the setValue method
-//
+/**
+ * @description NgFormGroup extends FormGroup
+ * in the 'setValue' call, it does not throw if no value is provided for a child of type NgNullControl
+ *
+ * @internal
+ * @export
+ */
 export class NgFormGroup extends FormGroup {
   constructor(
       controls: {[key: string]: AbstractControl},
@@ -12,6 +16,13 @@ export class NgFormGroup extends FormGroup {
       asyncValidator?: AsyncValidatorFn|AsyncValidatorFn[]|null) {
     super(controls, validatorOrOpts, asyncValidator);
   }
+
+
+  /**
+   * provides default values for all childs of instance NgNullControl
+   * before calling the parent setValue method.
+   * So the strict check for other controls is kept, but NgNullControls do not need to be initialized
+   */
   setValue(value: any, options: {onlySelf?: boolean, emitEvent?: boolean} = {}): void {
     let v: any;
     v = Object.assign({}, value);

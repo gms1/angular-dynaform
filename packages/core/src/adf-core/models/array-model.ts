@@ -7,7 +7,7 @@ import {AbstractControlModel, ControlModel} from './control-model.interface';
 import {FormModel} from './form-model';
 import {GroupModelBase} from './group-model';
 import {ModelHelper} from './model-helper';
-import {NgFormArray} from './internal/ng-form-array';
+import {NgFormArray, NgArrayModelHandler} from './internal/ng-form-array';
 
 import {JsonPointer} from 'jsonpointerx';
 
@@ -22,7 +22,7 @@ const FOOTER_IDX = -2;
 // In case of delete/insert operations this prefix stays the same, because we only delete/add such item nodes at the end
 // of the array and are moving the values of the item nodes around
 
-export class ArrayModel extends AbstractControlModel<NgFormArray, ArrayOptions> {
+export class ArrayModel extends AbstractControlModel<NgFormArray, ArrayOptions> implements NgArrayModelHandler {
   header?: GroupModelBase;
   items: GroupModelBase[];
   footer?: GroupModelBase;
@@ -88,7 +88,7 @@ export class ArrayModel extends AbstractControlModel<NgFormArray, ArrayOptions> 
     // to keep this code working, we have to set the dirty flag before updating any value
     this.ngControl.markAsDirty();
     this.ngControl.markAsTouched();
-    this.updateLength(length + 1);
+    this.ngControl.updateLength(length + 1);
     this.items[length].ngControl.markAsDirty();
   }
 
@@ -107,7 +107,7 @@ export class ArrayModel extends AbstractControlModel<NgFormArray, ArrayOptions> 
     // to keep this code working, we have to set the dirty flag before updating any value
     this.ngControl.markAsDirty();
     this.ngControl.markAsTouched();
-    this.updateLength(this.items.length + 1);
+    this.ngControl.updateLength(this.items.length + 1);
     for (let idx = this.items.length - 1; idx > index; idx--) {
       ArrayModel.copyItem(this.items[idx - 1], this.items[idx]);
     }
@@ -131,16 +131,18 @@ export class ArrayModel extends AbstractControlModel<NgFormArray, ArrayOptions> 
     for (let idx = index; idx < newLength; idx++) {
       ArrayModel.copyItem(this.items[idx + 1], this.items[idx]);
     }
-    this.updateLength(newLength);
+    this.ngControl.updateLength(newLength);
   }
 
 
-  updateLength(length: number, initializing?: boolean): void {
-    while (this.ngControl.length > length) {
-      this.ngControl.removeAt(this.ngControl.length - 1);
-    }
-    if (this.items.length > length) {
-      this.items.splice(length);
+  updateLength(length: number, isMinLength?: boolean): void {
+    if (!isMinLength) {
+      while (this.ngControl.length > length) {
+        this.ngControl.removeAt(this.ngControl.length - 1);
+      }
+      if (this.items.length > length) {
+        this.items.splice(length);
+      }
     }
     if (this.items.length < length) {
       while (this.items.length < length) {
