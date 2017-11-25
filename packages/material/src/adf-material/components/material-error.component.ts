@@ -11,6 +11,7 @@ import {Component} from '@angular/core';
     <mat-error [innerHTML]="error.message"></mat-error>
   `,
   inputs: ['model', 'error'],
+  host: {class: 'mat-input-error'},
   providers: [{provide: DynamicFormErrorComponent, useExisting: MaterialErrorComponent}]
 })
 export class MaterialErrorComponent extends DynamicFormErrorComponent {

@@ -7,8 +7,6 @@ import {
 } from '@angular-dynaform/core';
 
 
-// TODO: dynamicHeight attribute
-
 @Component({
   selector: 'adf-material-tab-component',
   template: `
