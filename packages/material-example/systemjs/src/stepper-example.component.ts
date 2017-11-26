@@ -53,12 +53,8 @@ export class StepperExampleComponent implements OnInit {
 
 
 
-// TODO: to be able to correctly check the validity of a step, each step should have a correspondent modelType of
-// 'MODEL_GROUP','MODEL_ARRAY' or 'MODEL_VALUE'!
-// MODEL_SUBSET can (currently) not be used to check the validity of a step
-
 export const stepperHorizantalExample1Config: FormConfig = {
-  id: 'stepperExampleForm',
+  id: 'stepperExampleForm1',
   updateOn: 'blur',
   options: {
     group: [
@@ -163,7 +159,7 @@ export const stepperHorizantalExample1Config: FormConfig = {
 
 
 export const stepperHorizantalExample2Config: FormConfig = {
-  id: 'stepperExampleForm',
+  id: 'stepperExampleForm2',
   updateOn: 'blur',
   options: {
     group: [{

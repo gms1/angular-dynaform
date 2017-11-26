@@ -1,4 +1,4 @@
-import {OnDestroy, OnInit} from '@angular/core';
+import {AfterViewInit, OnDestroy, OnInit} from '@angular/core';
 import {takeUntil} from 'rxjs/operators/takeUntil';
 import {Subject} from 'rxjs/Subject';
 
@@ -9,7 +9,7 @@ import {Stepper} from '../models/stepper.interface';
 
 // base class for actions on a stepper component
 
-export abstract class StepperButtonBaseAction extends DynamicFormAction implements OnInit, OnDestroy {
+export abstract class StepperButtonBaseAction extends DynamicFormAction implements AfterViewInit, OnInit, OnDestroy {
   stepper?: Stepper;
   private unsubscribe: Subject<any>;
 
@@ -21,9 +21,8 @@ export abstract class StepperButtonBaseAction extends DynamicFormAction implemen
   abstract onClick(event?: Event): boolean;
   abstract onIndexChange(index: number): void;
 
-
-  ngOnInit(): void {
-    super.ngOnInit();
+  ngAfterViewInit(): void {
+    super.ngAfterViewInit();
     this.stepper = this.findStepper();
     if (this.stepper) {
       this.onIndexChange(0);
