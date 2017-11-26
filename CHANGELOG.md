@@ -1,5 +1,10 @@
 # CHANGELOG
 
+## 0.2.5
+
+* **Fixes**
+  * material: non-functional prev/next stepper buttons
+
 ## 0.2.4
 
 * **Features**
