@@ -26,6 +26,6 @@
     "rimraf": "^2.6.2",
     "shelljs": "^0.7.8",
     "shx": "^0.2.2",
-    "typescript": "<2.5"
+    "typescript": "2.6.2"
   }
 }
