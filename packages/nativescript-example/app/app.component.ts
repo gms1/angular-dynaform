@@ -31,7 +31,7 @@ export class AppComponent implements AfterViewInit {
   model: FormModel;
 
   constructor(private dynamicFormService: DynamicFormService) {
-    this.model = this.dynamicFormService.createFormModel(formConfig);
+    this.model = this.dynamicFormService.createFormModel(mainExampleConfig);
   }
 
   onSubmit(): void {
@@ -47,7 +47,7 @@ export class AppComponent implements AfterViewInit {
   ngAfterViewInit(): void {
     setTimeout(() => {
       // this.form.initValue(formModelData));
-      this.form.initValueFromAppModel(appModelData);
+      this.form.initValueFromAppModel(mainExampleAppModelData);
     });
   }
 }
