@@ -16,7 +16,7 @@ import {Component} from '@angular/core';
       [formGroup]="model.ngGroup"
       [hidden]="model.hidden"
     >
-        <div
+      <div
         [ngClass]="model.css.control"
         adfHTMLDomElement
       >

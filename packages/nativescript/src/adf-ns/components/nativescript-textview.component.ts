@@ -16,7 +16,7 @@ import {Component} from '@angular/core';
   >
     <Label
       *ngIf="model.local.label"
-      [attr.for]="model.id"
+      class="adf-front-label"
       [ngClass]="model.css.label"
       [innerHTML]="model.local.label"
     ></Label>
@@ -25,15 +25,14 @@ import {Component} from '@angular/core';
       [id]="model.id"
       [maxLength]="options.maxLength"
       [editable]="!options.readOnly"
+      [textWrap]="options.wrap"
       [col]="options.cols"
       [row]="options.rows"
       [ngClass]="model.css.control"
       adfNSDomElement
     >
-    <!-- TODO: properties:
-    [minlength]="options.minLength"
-    [wrap]="options.wrap"
-    [attr.placeholder]="model.local.placeholder"
+    <!--
+    [hint]="options.local.placeholder"
     -->
     </TextView>
     <adf-error-container [model]="model">

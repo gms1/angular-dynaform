@@ -14,7 +14,7 @@ import {Component} from '@angular/core';
     [formGroup]="model.ngGroup"
     [visibility]="model.hidden ? 'collapsed' : 'visible'"
   >
-      <StackLayout
+    <StackLayout
       [id]="model.id"
       [ngClass]="model.css.control"
       adfNSDomElement

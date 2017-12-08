@@ -14,9 +14,9 @@ import {Component} from '@angular/core';
     [formGroup]="model.ngGroup"
     [visibility]="model.hidden ? 'collapsed' : 'visible'"
   >
-      <Label
+    <Label
       *ngIf="model.local.label"
-      [attr.for]="model.id"
+      class="adf-front-label"
       [ngClass]="model.css.label"
       [innerHTML]="model.local.label"
     ></Label>

@@ -25,7 +25,6 @@ import {Component} from '@angular/core';
         [formControlName]="model.key"
         [id]="model.id"
         [maxlength]="options.maxLength"
-        [minlength]="options.minLength"
         [readonly]="options.readOnly"
         [wrap]="options.wrap"
         [cols]="options.cols"

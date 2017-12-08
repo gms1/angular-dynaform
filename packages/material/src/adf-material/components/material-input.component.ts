@@ -33,12 +33,6 @@ import {Component} from '@angular/core';
           [ngClass]="model.css.control"
           adfHTMLDomElement
         />
-        <!--
-          [minlength]="options.minLength"
-          [min]="options.min"
-          [max]="options.max"
-          [step]="options.step"
-        -->
           <adf-error-container [model]="model">
           </adf-error-container>
         </mat-form-field>

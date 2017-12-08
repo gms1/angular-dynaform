@@ -1,11 +1,15 @@
 // tslint:disable use-input-property-decorator use-output-property-decorator no-access-missing-member
 import {
   ControlInputOptions,
+  DynamicForm,
   DynamicFormControlComponentBase,
   DynamicFormControlComponent,
+  DynamicFormService,
   ValueControlModel
 } from '@angular-dynaform/core';
-import {Component} from '@angular/core';
+import {Component, ElementRef, OnChanges} from '@angular/core';
+
+// TODO: implement CustomTextView to support numeric input
 
 @Component({
   selector: 'adf-nativescript-textfield-component',
@@ -16,25 +20,22 @@ import {Component} from '@angular/core';
   >
     <Label
       *ngIf="model.local.label"
-      [attr.for]="model.id"
+      class="adf-front-label"
       [ngClass]="model.css.label"
       [innerHTML]="model.local.label"
     ></Label>
     <TextField
       [formControlName]="model.key"
       [id]="model.id"
+      [secureproperty]="opts.secureProperty"
+      [editable]="!options.readOnly"
       [maxLength]="options.maxLength"
       [ngClass]="model.css.control"
       adfNSDomElement
     >
-    <!-- TODO: properties:
-    [type]="options.inputType || 'text'"
-    [minlength]="options.minLength"
-    [min]="options.min"
-    [max]="options.max"
-    [step]="options.step"
-    [attr.placeholder]="model.local.placeholder"
-  -->
+    <!--
+    [hint]="options.local.placeholder"
+    -->
     </TextField>
     <adf-error-container [model]="model">
     </adf-error-container>
@@ -43,7 +44,22 @@ import {Component} from '@angular/core';
   inputs: ['model'],
   providers: [{provide: DynamicFormControlComponentBase, useExisting: NativeScriptTextFieldComponent}]
 })
-export class NativeScriptTextFieldComponent extends DynamicFormControlComponent<ValueControlModel> {
+export class NativeScriptTextFieldComponent extends DynamicFormControlComponent<ValueControlModel> implements
+    OnChanges {
   model: ValueControlModel;
   options: ControlInputOptions;
+  opts: {[key: string]: any};
+
+  constructor(form: DynamicForm, dynamicFormService: DynamicFormService, elRef: ElementRef) {
+    super(form, dynamicFormService, elRef);
+    this.opts = {};
+    this.opts.secureProperty = false;
+  }
+
+  ngOnChanges(): void {
+    if (this.options) {
+      this.opts.secureProperty = this.options.inputType === 'password' ? true : false;
+    }
+    console.log(`'${this.model.id}': `, JSON.stringify(this.options.local, undefined, 2));
+  }
 }

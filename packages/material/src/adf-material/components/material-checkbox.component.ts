@@ -23,7 +23,7 @@ import {Component} from '@angular/core';
       </mat-checkbox>
       <label
         [attr.for]="model.id"
-        class="adf-back"
+        class="adf-back-label"
         [ngClass]="model.css.label"
       >
         <span [ngClass]="model.css.label"

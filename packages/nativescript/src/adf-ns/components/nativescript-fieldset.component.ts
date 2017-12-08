@@ -21,16 +21,17 @@ import {Component} from '@angular/core';
     >
       <StackLayout
         *ngIf="model.local.label"
+        class="adf-front-label"
         [ngClass]="model.css.label"
         [innerHTML]="model.local.label"
       >
       </StackLayout>
       <adf-error-container [model]="model">
       </adf-error-container>
-      <div [ngClass]="model.css.content">
+      <StackLayout [ngClass]="model.css.content">
         <ng-container *ngFor="let item of model.items;" adfControlComponent [model]="item" >
         </ng-container>
-      </div>
+      </StackLayout>
     </StackLayout>
   </StackLayout>
 `,

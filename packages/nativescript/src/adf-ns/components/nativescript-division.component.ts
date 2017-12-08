@@ -14,16 +14,17 @@ import {Component} from '@angular/core';
     [formGroup]="model.ngGroup"
     [visibility]="model.hidden ? 'collapsed' : 'visible'"
   >
-      <StackLayout
+    <StackLayout
+      [id]="model.id"
       [ngClass]="model.css.control"
       adfNSDomElement
     >
       <adf-error-container [model]="model">
       </adf-error-container>
-      <div [ngClass]="model.css.content">
+      <StackLayout [ngClass]="model.css.content">
         <ng-container *ngFor="let item of model.items;" adfControlComponent [model]="item" >
         </ng-container>
-      </div>
+      </StackLayout>
     </StackLayout>
   </StackLayout>
 `,

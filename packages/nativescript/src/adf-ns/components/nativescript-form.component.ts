@@ -20,10 +20,10 @@ import {Component} from '@angular/core';
 
       adfNSDomElement
     >
-      <div [ngClass]="model.css.content">
+      <StackLayout [ngClass]="model.css.content">
         <ng-container *ngFor="let item of model.items;" adfControlComponent [model]="item" >
         </ng-container>
-      </div>
+      </StackLayout>
     </StackLayout>
   </StackLayout>
 `,

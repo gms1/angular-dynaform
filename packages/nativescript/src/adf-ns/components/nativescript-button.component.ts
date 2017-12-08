@@ -14,16 +14,16 @@ import {Component} from '@angular/core';
     [formGroup]="model.ngGroup"
     [visibility]="model.hidden ? 'collapsed' : 'visible'"
   >
-      <Button
+    <Button
       [formControlName]="model.key"
       [id]="model.id"
       [ngClass]="model.css.control"
       adfNSDomElement
       ngDefaultControl
     >
-    <Span [ngClass]="model.css.control"
-      [innerHTML]="model.local.label"
-    ></Span>
+      <Span [ngClass]="model.css.control"
+        [innerHTML]="model.local.label"
+      ></Span>
     </Button>
   </StackLayout>
 `,

@@ -7,6 +7,8 @@ import {
 } from '@angular-dynaform/core';
 import {Component} from '@angular/core';
 
+// TODO: step is currently not supported
+
 @Component({
   selector: 'adf-nativescript-input-component',
   template: `
@@ -14,9 +16,9 @@ import {Component} from '@angular/core';
     [formGroup]="model.ngGroup"
     [visibility]="model.hidden ? 'collapsed' : 'visible'"
   >
-      <Label
+    <Label
       *ngIf="model.local.label"
-      [attr.for]="model.id"
+      class="adf-front-label"
       [ngClass]="model.css.label"
       [innerHTML]="model.local.label"
     ></Label>
@@ -28,9 +30,7 @@ import {Component} from '@angular/core';
       [ngClass]="model.css.control"
       adfNSDomElement
     >
-    <!-- TODO: property:   [step]="options.step" -->
     </Slider>
-
     <adf-error-container [model]="model">
     </adf-error-container>
   </StackLayout>

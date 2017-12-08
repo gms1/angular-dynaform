@@ -13,7 +13,7 @@ import {Component} from '@angular/core';
     <div
       [formGroup]="model.ngGroup"
       [hidden]="model.hidden"
-      >
+    >
       <button
         [formControlName]="model.key"
         [id]="model.id"

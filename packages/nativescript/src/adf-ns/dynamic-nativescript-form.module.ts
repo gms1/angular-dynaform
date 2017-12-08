@@ -8,6 +8,7 @@ import {NativeScriptFormsModule} from 'nativescript-angular/forms';
 import {DynamicNSDomElementDirective} from './directives/dynamic-ns-dom-element.directive';
 
 import {CustomListPicker} from './components/custom-listpicker.component';
+import {CustomCheckBox} from './components/custom-checkbox.component';
 
 import {NativeScriptArrayComponent} from './components/nativescript-array.component';
 import {NativeScriptButtonComponent} from './components/nativescript-button.component';
@@ -34,7 +35,7 @@ const entryComponents: any[] = [
   NativeScriptTextViewComponent
 ];
 
-const declarations: any[] = [DynamicNSDomElementDirective, CustomListPicker, entryComponents];
+const declarations: any[] = [DynamicNSDomElementDirective, CustomListPicker, CustomCheckBox, entryComponents];
 
 @NgModule({
   imports: [CommonModule, ReactiveFormsModule, DynamicFormModule, NativeScriptFormsModule],
@@ -55,8 +56,7 @@ export class DynamicNativeScriptFormModule {
     this.dynamicFormService.setControlComponent(ControlType.CONTROL_BUTTON, NativeScriptButtonComponent, true);
     this.dynamicFormService.setControlComponent(ControlType.CONTROL_SEPARATOR, NativeScriptSeparatorComponent, true);
 
-    this.dynamicFormService.setControlComponent(
-        ControlType.CONTROL_CHECKBOX, NativeScriptSwitchComponent, /* TODO: NativeScriptCheckboxComponent, */ true);
+    this.dynamicFormService.setControlComponent(ControlType.CONTROL_CHECKBOX, NativeScriptCheckboxComponent, true);
     this.dynamicFormService.setControlComponent(ControlType.CONTROL_INPUT, NativeScriptTextFieldComponent, true);
     this.dynamicFormService.setControlComponent(
         ControlType.CONTROL_RADIOGROUP, NativeScriptListPickerComponent,
@@ -79,8 +79,8 @@ export class DynamicNativeScriptFormModule {
     this.dynamicFormService.setControlComponent(
         NativeScriptControlType.CONTROL_SEPARATOR, NativeScriptSeparatorComponent, true);
 
-    // TODO: this.dynamicFormService.setControlComponent(
-    //     NativeScriptControlType.CONTROL_CHECKBOX, NativeScriptCheckboxComponent, true);
+    this.dynamicFormService.setControlComponent(
+        NativeScriptControlType.CONTROL_CHECKBOX, NativeScriptCheckboxComponent, true);
     this.dynamicFormService.setControlComponent(
         NativeScriptControlType.CONTROL_TEXTFIELD, NativeScriptTextFieldComponent, true);
     // TODO: this.dynamicFormService.setControlComponent(

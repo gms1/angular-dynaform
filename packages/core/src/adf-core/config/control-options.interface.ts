@@ -84,7 +84,8 @@ export interface ControlInputOptions extends ControlValueOptions {
    *
    * the type (equivalent to the type attribute of the <input> HTML tag)
    * WARN: not all types may be supported by all ui libraries
-   * TODO: we should at least provide a fallback (using *ngSwitchCase?) for: 'number' and 'password'
+   * TODO: we should at least provide a fallback (using *ngSwitchCase? or implementing a custom control) for: 'number'
+   * and 'password'
    * TODO: for other types, creating a seperate component should be the way to go
    * e.g for:  date/datetime-local/time/...
    */

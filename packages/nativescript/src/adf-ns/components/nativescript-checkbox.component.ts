@@ -7,8 +7,6 @@ import {
 } from '@angular-dynaform/core';
 import {Component} from '@angular/core';
 
-// TODO: currently we are using the switch component instead of the checkbox component
-
 @Component({
   selector: 'adf-nativescript-checkbox-component',
   template: `
@@ -16,21 +14,18 @@ import {Component} from '@angular/core';
     [formGroup]="model.ngGroup"
     [visibility]="model.hidden ? 'collapsed' : 'visible'"
   >
-      <Label
-      [attr.for]="model.id"
-      [ngClass]="model.css.label"
+    <adf-custom-checkbox
+      [formControlName]="model.key"
+      [id]="model.id"
+      [ngClass]="model.css.control"
+      adfNSDomElement
     >
-      <CheckBox
-        [formControlName]="model.key"
-        [id]="model.id"
-        [ngClass]="model.css.control"
-        adfNSDomElement
-      >
-        <Span [ngClass]="model.css.label"
-          [innerHTML]="model.local.label">
-        </Span>
-      </CheckBox>
-    </Label>
+      <Span
+        class="adf-back-label"
+        [ngClass]="model.css.label"
+        [innerHTML]="model.local.label">
+      </Span>
+    </adf-custom-checkbox>
     <adf-error-container [model]="model">
     </adf-error-container>
   </StackLayout>

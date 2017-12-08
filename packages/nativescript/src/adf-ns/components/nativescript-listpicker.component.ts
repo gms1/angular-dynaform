@@ -1,7 +1,5 @@
 import {Component, OnChanges, SimpleChanges} from '@angular/core';
 
-// TODO: create a custom component using ValueControlAccessor and use it here to modify the form model
-
 // tslint:disable use-input-property-decorator use-output-property-decorator no-access-missing-member
 import {
   ControlSelectOptions,
@@ -11,15 +9,15 @@ import {
 } from '@angular-dynaform/core';
 
 @Component({
-  selector: 'adf-nativescript-select-component',
+  selector: 'adf-nativescript-listpicker-component',
   template: `
   <StackLayout
     [formGroup]="model.ngGroup"
     [visibility]="model.hidden ? 'collapsed' : 'visible'"
   >
-      <Label
+    <Label
       *ngIf="model.local.label"
-      [attr.for]="model.id"
+      class="adf-front-label"
       [ngClass]="model.css.label"
       [innerHTML]="model.local.label"
     ></Label>
