@@ -118,7 +118,7 @@ export class MaterialStepperComponent extends DynamicFormControlComponent<GroupM
  *
  *
  */
-class MatStepperWrapper implements Stepper {
+export class MatStepperWrapper implements Stepper {
   private _selectionChange: EventEmitter<number>;
 
   private _matStepper?: MatStepper;
@@ -128,8 +128,8 @@ class MatStepperWrapper implements Stepper {
   private unsubscribe: Subject<any>;
 
   constructor(matStepper?: MatStepper) {
-    this.matStepper = matStepper;
     this._selectionChange = new EventEmitter<number>();
+    this.matStepper = matStepper;
   }
 
   // TODO: currently we are not able to test if stepping forward/backward is allowed
