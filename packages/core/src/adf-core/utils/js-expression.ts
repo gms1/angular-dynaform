@@ -53,11 +53,11 @@ export class JsExpression {
   getThisMembersRoot(): string[] { return this.getMembersRoot(this._thisMembers); }
 
 
-  private consumeAST(node: jsep.IExpression): () => any {
+  private consumeAST(node: jsep.Expression): () => any {
     // NOTES: make sure the AST is consumed before/outside of the returned function
     //   see arg1, arg2 in BinaryExpression
     if (node.type === 'BinaryExpression' || node.type === 'LogicalExpression') {
-      const binaryNode = node as jsep.IBinaryExpression;
+      const binaryNode = node as jsep.BinaryExpression;
       let binaryOp = (BINARYOPS)[binaryNode.operator];
       if (!binaryOp) {
         throw new Error(`unsupported expression: ${binaryNode.operator}(arg1, arg2)`);
@@ -66,7 +66,7 @@ export class JsExpression {
       let arg2 = this.consumeAST(binaryNode.right);
       return () => binaryOp(arg1(), arg2());
     } else if (node.type === 'UnaryExpression') {
-      const unaryNode = node as jsep.IUnaryExpression;
+      const unaryNode = node as jsep.UnaryExpression;
       let unaryOp = UNARYOPS[unaryNode.operator];
       if (!unaryOp) {
         throw new Error(`unsupported expression: ${unaryNode.operator}(arg)`);
@@ -87,19 +87,19 @@ export class JsExpression {
         return res;
       };
     } else if (node.type === 'Literal') {
-      return () => (node as jsep.ILiteral).value;
+      return () => (node as jsep.Literal).value;
     } else if (node.type === 'MemberExpression') {
-      const memberNode = node as jsep.IMemberExpression;
+      const memberNode = node as jsep.MemberExpression;
       let variable = this.consumeAST(memberNode.object)();
       if (memberNode.computed) {
         let keys = this.consumeAST(memberNode.property)();
         variable.keys.push(keys);
       } else {
-        variable.keys.push((memberNode.property as jsep.IIdentifier).name);
+        variable.keys.push((memberNode.property as jsep.Identifier).name);
       }
       return this.consumeVariable.bind(this, variable);
     } else if (node.type === 'Identifier') {
-      let variable: JsMemberVariable = {getObject: () => this.context, keys: [(node as jsep.IIdentifier).name]};
+      let variable: JsMemberVariable = {getObject: () => this.context, keys: [(node as jsep.Identifier).name]};
       this._contextMembers.push(variable);
       return this.consumeVariable.bind(this, variable);
     } else if (node.type === 'ThisExpression') {
