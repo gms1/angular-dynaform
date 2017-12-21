@@ -15,27 +15,27 @@
 
 ## angular
 
-### JIT is broken
-
-* "TypeError: Cannot convert undefined or null to object" in Function.getPrototypeOf
-  [15325](https://github.com/angular/angular/issues/15325) and
-  [15127: tracking bug](https://github.com/angular/angular/issues/15127)
-
-* Using Angular 5 (tested with 5.0.0-rc.3) and Typescript > 2.5 (tested with 2.5.3)
+* Using Angular 5 (tested with 5.0.0-rc.3) and unsupported Typescript version >= 2.5 (tested with 2.5.3)
   causes: Can't resolve all parameters for DynamicFormService
 
-* building the AOT examples using Angular 5 (tested with 5.0.0-rc.3) I got wrong exports:
+but with Typescript 2.4.2 I another error:
 
-  e.g packages/material-example/tmp/aot/node_modules/@angular-dynaform/material/lib/index.ngfactory.js
+```shell
+gms@sirius:~/work/HOT/angular-dynaform/packages/material (master)$ ./node_modules/.bin/tsc -version
+Version 2.4.2
+gms@sirius:~/work/HOT/angular-dynaform/packages/material (master)$ ./node_modules/.bin/tsc -p src/tsconfig.spec.json | grep unrelated
+ src/adf-material/components/material-stepper.component.ts(93,5): error TS2322: Type 'MatStepperWrapper' is not assignable to type 'Stepper | undefined'.
+      Type '() => Observable<number>' is not assignable to type '() => Observable<number>'. Two different types with this name exist, but they are unrelated.
 
-    export { MaterialControlType as MaterialControlType_1 } from "./models/index";
+gms@sirius:~/work/HOT/angular-dynaform/packages/material (master)$ tsc -version
+Version 2.6.2
+gms@sirius:~/work/HOT/angular-dynaform/packages/material (master)$ tsc -p src/tsconfig.spec.json
+gms@sirius:~/work/HOT/angular-dynaform/packages/material (master)$ 
+```
 
- appending '/index' to the exports from public_api.ts in the library solved this issue
+    * workaround: ignore these errors and do not upgrade karma-typescript to 3.0.9. the later would terminate the tests, because of above errors
 
 ## nativescript-angular
-
-* FIXED in 4.2: broken 'ngDefaultControl' directive
-  [831](https://github.com/NativeScript/nativescript-angular/issues/831)
 
 * aot:  building example using aot (npm run build-android-bundle), I got
       "ERROR in Template parse errors: 'XXX' is not a known element" for components defined in nativescript-core-module.

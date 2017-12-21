@@ -216,9 +216,9 @@ describe('test suite', () => {
     lastNameComp.focusChanges.subscribe((v: boolean) => { hasFocus = v; });
 
     lastNameEl.triggerEventHandler('focus', null);
-    expect(hasFocus).toBe(true, 'focus change not triggered the focus event');
+    expect(hasFocus).toBeTruthy('focus change not triggered the focus event');
     lastNameEl.triggerEventHandler('blur', null);
-    expect(hasFocus).toBe(false, 'focus change not triggered the blur event');
+    expect(hasFocus).toBeFalsy('focus change not triggered the blur event');
 
     lastNameComp.focusChanges.unsubscribe();
 
