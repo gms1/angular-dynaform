@@ -5,7 +5,7 @@ import {
   DynamicFormControlComponent,
   ValueControlModel
 } from '@angular-dynaform/core';
-import {Component} from '@angular/core';
+import {Component, SimpleChanges} from '@angular/core';
 
 @Component({
   selector: 'adf-nativescript-checkbox-component',

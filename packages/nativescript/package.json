@@ -21,9 +21,7 @@
     "type": "git",
     "url": "git+https://github.com/gms1/angular-dynaform.git"
   },
-  "main": "bundles/adf.nativescript.umd.js",
-  "module": "index.es5.js",
-  "es2015": "index.js",
+  "main": "./lib/index.js",
   "typings": "./lib/index.d.ts",
   "nativescript": {
     "platforms": {
@@ -38,7 +36,8 @@
     "watch": "gulp watch",
     "prepublishOnly": "echo \"ERROR: please use the dist-folder for publishing\" && exit 1",
     "release:build": "gulp clean && gulp build --prod",
-    "release:publish": "cd dist && npm --access public publish"
+    "release:publish": "cd dist && npm --access public publish",
+    "ngc": "ngc -p ./src/tsconfig.lib.json"
   },
   "dependencies": {
     "@angular-dynaform/core": "file:../core/dist",
@@ -87,10 +86,6 @@
     "karma-typescript-es6-transform": "^1.0.3",
     "merge-stream": "^1.0.1",
     "protractor": "^5.2.2",
-    "rollup": "^0.52.3",
-    "rollup-plugin-commonjs": "^8.2.6",
-    "rollup-plugin-node-resolve-angular": "^2.0.3",
-    "rollup-plugin-uglify": "^2.0.1",
     "run-sequence": "^2.2.0",
     "sorcery": "^0.10.0",
     "ts-node": "^4.0.2",

@@ -1,9 +1,10 @@
 import {ControlType, DynamicFormModule, DynamicFormService} from '@angular-dynaform/core';
 import {CommonModule} from '@angular/common';
-import {NgModule /*, NO_ERRORS_SCHEMA*/} from '@angular/core';
+import {NgModule, NO_ERRORS_SCHEMA} from '@angular/core';
 import {ReactiveFormsModule} from '@angular/forms';
 
 import {NativeScriptFormsModule} from 'nativescript-angular/forms';
+import {TNSCheckBoxModule} from 'nativescript-checkbox/angular';
 
 import {DynamicNSDomElementDirective} from './directives/dynamic-ns-dom-element.directive';
 
@@ -38,11 +39,11 @@ const entryComponents: any[] = [
 const declarations: any[] = [DynamicNSDomElementDirective, CustomListPicker, CustomCheckBox, entryComponents];
 
 @NgModule({
-  imports: [CommonModule, ReactiveFormsModule, DynamicFormModule, NativeScriptFormsModule],
+  imports: [CommonModule, ReactiveFormsModule, DynamicFormModule, NativeScriptFormsModule, TNSCheckBoxModule],
   declarations,
   entryComponents,
-  exports: entryComponents /*,
-  schemas: [NO_ERRORS_SCHEMA]*/
+  exports: entryComponents,
+  schemas: [NO_ERRORS_SCHEMA]
 })
 export class DynamicNativeScriptFormModule {
   constructor(private dynamicFormService: DynamicFormService) {

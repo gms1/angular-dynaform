@@ -19,13 +19,8 @@ function config(target /* 'production' or 'development' */) {
   tmpDirs.forEach((value) => cleanGlobs.push(`${value}/**/*`));
   cleanGlobs.push(`${outDir}/**/*`);
 
-  if (!pkg.module) {
-    throw new Error(`property 'module' not defined in package.json`);
-  }
-
-  let srcModulePath = pkg.module.replace(/\.js$/, '.ts');
-  if (srcModulePath === pkg.module) {
-    throw new Error(`property 'module' in package.json does not have a '.js' extension`);
+  if (!pkg.main) {
+    throw new Error(`property 'main' not defined in package.json`);
   }
 
   return {
@@ -77,93 +72,13 @@ function config(target /* 'production' or 'development' */) {
             }
           },
           {
-            // dist/${packageJson.es2015} ESM+ES2015 (FESM15)
-            name: 'rollup:es2015',
-            // deps: ['ts:ngc'],
-            operation: {
-              type: 'rollup',
-              rollupConfigFile: './rollup.config.lib.es2015.js',
-              addMinified: false,
-              sorcery: true,
-            }
-          },
-          {
-            name: 'ts:tsc:esm:input',
-            // deps: ['rollup:es2015'],
-            operation: {
-              type: 'copyFile',
-              src: `dist/${pkg.es2015}`,
-              base: `dist/${pkg.es2015}`,
-              out: `dist/${srcModulePath}`,
-            }
-          },
-          {
-            // dist/${packageJson.module} ESM+ES5 (FESM5)
-            name: 'ts:tsc:esm:trans',
-            // deps: ['ts:tsc:esm:input'],
-            operation: {
-              type: 'execute',
-              bin: 'node',
-              silent: true,
-              options: {
-                continue: true,
-              },
-              args: [
-                'node_modules/typescript/lib/tsc.js', '--target', 'es5', '--module', 'es2015', '--noLib', '--sourceMap',
-                `dist/${srcModulePath}`
-              ],
-            }
-          },
-          {
-            name: 'ts:tsc:esm:sorcery',
-            operation: {
-              type: 'sorcery',
-              file: `dist/${pkg.module}`,
-            }
-          },
-          {
-            name: 'ts:tsc:esm:cleanup',
-            // deps: ['ts:tsc:esm:trans'],
-            operation: {
-              type: 'delete',
-              src: `dist/${srcModulePath}`,
-            }
-          },
-          {
-            name: 'ts:tsc:esm',
-            // deps: ['rollup:es2015'],
-            operation: {
-              type: 'sequence',
-              sequence: ['ts:tsc:esm:input', 'ts:tsc:esm:trans', 'ts:tsc:esm:sorcery', 'ts:tsc:esm:cleanup'],
-            }
-          },
-          {
-            // main / umd module (ES5)
-            name: 'rollup:main',
-            // deps: ['ts:tsc:esm'],
-            operation: {
-              type: 'rollup',
-              rollupConfigFile: './rollup.config.lib.umd.js',
-              addMinified: false,
-              sorcery: true,
-            }
-          },
-          {
-            name: 'rollup:lib',
-            deps: ['ts:ngc'],
-            operation: {
-              type: 'sequence',
-              sequence: ['rollup:es2015', 'ts:tsc:esm', 'rollup:main'],
-            }
-          },
-          {
             name: 'ts:tsc:spec',
             operation: {
               type: 'typescript',
               tsConfigFile: 'src/tsconfig.spec.json',
             }
           },
-          {name: 'build', deps: ['dist:files', 'ts:lint', 'rollup:lib']}, {
+          {name: 'build', deps: ['dist:files', 'ts:lint', 'ts:ngc']}, {
             name: 'watch',
             watch: ['./src/**/*.*'],
           },

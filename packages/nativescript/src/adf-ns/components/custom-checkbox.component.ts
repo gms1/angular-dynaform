@@ -1,13 +1,12 @@
 import {Component, Input} from '@angular/core';
 import {NG_VALUE_ACCESSOR, ControlValueAccessor} from '@angular/forms';
-import {TNSCheckBoxModule} from 'nativescript-checkbox/angular';
 
 
 @Component({
   selector: 'adf-custom-checkbox',
   template: `
     <CheckBox
-      [items]="items" [isEnabled]="isEnabled" [selectedIndex]="selectedIndex" (checkedChange)="checkedChange($event.value)" (touch)="onTouched()"
+      [isEnabled]="isEnabled" [checked]="checked" (checkedChange)="checkedChange($event.value)" (touch)="onTouched()"
       [id]="id"
       [ngClass]="ngClass"
     >
