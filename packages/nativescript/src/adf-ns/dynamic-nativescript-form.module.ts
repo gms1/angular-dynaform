@@ -1,6 +1,6 @@
 import {ControlType, DynamicFormModule, DynamicFormService} from '@angular-dynaform/core';
 import {CommonModule} from '@angular/common';
-import {NgModule, NO_ERRORS_SCHEMA} from '@angular/core';
+import {NgModule /*, NO_ERRORS_SCHEMA*/} from '@angular/core';
 import {ReactiveFormsModule} from '@angular/forms';
 
 import {NativeScriptFormsModule} from 'nativescript-angular/forms';
@@ -41,8 +41,8 @@ const declarations: any[] = [DynamicNSDomElementDirective, CustomListPicker, Cus
   imports: [CommonModule, ReactiveFormsModule, DynamicFormModule, NativeScriptFormsModule],
   declarations,
   entryComponents,
-  exports: entryComponents,
-  schemas: [NO_ERRORS_SCHEMA]
+  exports: entryComponents /*,
+  schemas: [NO_ERRORS_SCHEMA]*/
 })
 export class DynamicNativeScriptFormModule {
   constructor(private dynamicFormService: DynamicFormService) {
