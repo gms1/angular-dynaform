@@ -1,4 +1,4 @@
-import {Component, Input} from '@angular/core';
+import {Component, Input, NgModule, NO_ERRORS_SCHEMA} from '@angular/core';
 import {NG_VALUE_ACCESSOR, ControlValueAccessor} from '@angular/forms';
 // import {ListPicker} from 'ui/list-picker';
 
@@ -58,4 +58,13 @@ export class CustomListPicker implements ControlValueAccessor {
     console.log(`set index = ${this.selectedIndex}`);
   }
   setDisabledState(isDisabled: boolean): void { this.isEnabled = !isDisabled; }
+}
+
+
+
+const entryComponents: any[] = [CustomListPicker];
+
+@NgModule({entryComponents, exports: entryComponents, schemas: [NO_ERRORS_SCHEMA]})
+// tslint:disable-next-line no-unnecessary-class
+export class TNSListPickerModule {
 }
