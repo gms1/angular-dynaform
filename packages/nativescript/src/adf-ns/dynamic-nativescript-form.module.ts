@@ -1,15 +1,16 @@
 import {ControlType, DynamicFormModule, DynamicFormService} from '@angular-dynaform/core';
 import {CommonModule} from '@angular/common';
-import {NgModule} from '@angular/core';
+import {NgModule, NO_ERRORS_SCHEMA} from '@angular/core';
 import {ReactiveFormsModule} from '@angular/forms';
 
 import {NativeScriptFormsModule} from 'nativescript-angular/forms';
-import {TNSCheckBoxModule} from 'nativescript-checkbox/angular';
-import {TNSListPickerModule, CustomListPicker} from './components/custom-listpicker.component';
 
-import {DynamicNSDomElementDirective} from './directives/dynamic-ns-dom-element.directive';
+import {TNSCheckBoxModule} from 'nativescript-checkbox/angular';
 
 import {CustomCheckBox} from './components/custom-checkbox.component';
+import {CustomListPicker} from './components/custom-listpicker.component';
+
+import {DynamicNSDomElementDirective} from './directives/dynamic-ns-dom-element.directive';
 
 import {NativeScriptArrayComponent} from './components/nativescript-array.component';
 import {NativeScriptButtonComponent} from './components/nativescript-button.component';
@@ -36,16 +37,14 @@ const entryComponents: any[] = [
   NativeScriptTextViewComponent
 ];
 
-const declarations: any[] = [DynamicNSDomElementDirective, CustomListPicker, CustomCheckBox, entryComponents];
+const declarations: any[] = [DynamicNSDomElementDirective, CustomCheckBox, CustomListPicker, entryComponents];
 
 @NgModule({
-  imports: [
-    CommonModule, ReactiveFormsModule, DynamicFormModule, NativeScriptFormsModule, TNSCheckBoxModule,
-    TNSListPickerModule
-  ],
+  imports: [CommonModule, ReactiveFormsModule, DynamicFormModule, NativeScriptFormsModule, TNSCheckBoxModule],
   declarations,
   entryComponents,
-  exports: entryComponents
+  exports: entryComponents,
+  schemas: [NO_ERRORS_SCHEMA]  // TODO: is it possible to avoid the need for NO_ERRORS_SCHEMA?
 })
 export class DynamicNativeScriptFormModule {
   constructor(private dynamicFormService: DynamicFormService) {
