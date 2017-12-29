@@ -1,6 +1,6 @@
 import {ControlType, DynamicFormModule, DynamicFormService} from '@angular-dynaform/core';
 import {CommonModule} from '@angular/common';
-import {NgModule} from '@angular/core';
+import {NgModule, Optional, SkipSelf} from '@angular/core';
 import {ReactiveFormsModule} from '@angular/forms';
 import {
   MatButtonModule,
@@ -36,7 +36,7 @@ import {MaterialTabGroupComponent} from './components/material-tabgroup.componen
 import {MaterialTextareaComponent} from './components/material-textarea.component';
 import {MaterialControlType} from './models';
 
-const moduleDeclarations: any[] = [
+const entryComponents: any[] = [
   MaterialFormComponent, MaterialErrorComponent, MaterialArrayComponent, MaterialDivisionComponent,
   MaterialFieldsetComponent, MaterialButtonComponent, MaterialCheckboxComponent, MaterialInputComponent,
   MaterialRadioGroupComponent, MaterialSelectComponent, MaterialSeparatorComponent, MaterialSliderComponent,
@@ -44,18 +44,23 @@ const moduleDeclarations: any[] = [
   MaterialStepperComponent
 ];
 
+const moduleDeclarations: any[] = entryComponents;
+
 @NgModule({
   imports: [
     CommonModule, ReactiveFormsModule, DynamicFormModule, BrowserAnimationsModule, MatButtonModule, MatCheckboxModule,
     MatInputModule, MatRadioModule, MatSelectModule, MatSliderModule, MatSlideToggleModule, MatNativeDateModule,
     MatDatepickerModule, MatTabsModule, MatStepperModule
   ],
-  declarations: [moduleDeclarations],
-  entryComponents: [moduleDeclarations],
-  exports: [moduleDeclarations]
+  declarations: [moduleDeclarations], entryComponents,
+  exports: [DynamicFormModule, entryComponents]
 })
 export class DynamicMaterialFormModule {
-  constructor(private dynamicFormService: DynamicFormService) {
+  constructor(
+      private dynamicFormService: DynamicFormService, @Optional() @SkipSelf() parentModule: DynamicMaterialFormModule) {
+    if (parentModule) {
+      return;
+    }
     this.dynamicFormService.setFormControlComponent(MaterialFormComponent, true);
     this.dynamicFormService.setErrorComponent(MaterialErrorComponent, true);
 

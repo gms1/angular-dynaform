@@ -1,6 +1,6 @@
 import {ControlType, DynamicFormModule, DynamicFormService} from '@angular-dynaform/core';
 import {CommonModule} from '@angular/common';
-import {NgModule} from '@angular/core';
+import {NgModule, Optional, SkipSelf} from '@angular/core';
 import {ReactiveFormsModule} from '@angular/forms';
 
 import {BasicArrayComponent} from './components/basic-array.component';
@@ -19,20 +19,25 @@ import {BasicSwitchComponent} from './components/basic-switch.component';
 import {BasicTextareaComponent} from './components/basic-textarea.component';
 import {BasicControlType} from './models';
 
-const moduleDeclarations: any[] = [
+const entryComponents: any[] = [
   BasicFormComponent, BasicErrorComponent, BasicArrayComponent, BasicDivisionComponent, BasicFieldsetComponent,
   BasicButtonComponent, BasicCheckboxComponent, BasicInputComponent, BasicRadioGroupComponent, BasicSelectComponent,
   BasicSeparatorComponent, BasicSliderComponent, BasicSwitchComponent, BasicTextareaComponent
 ];
 
+const moduleDeclarations: any[] = entryComponents;
+
 @NgModule({
   imports: [CommonModule, ReactiveFormsModule, DynamicFormModule],
-  declarations: [moduleDeclarations],
-  entryComponents: [moduleDeclarations],
-  exports: [moduleDeclarations]
+  declarations: [moduleDeclarations], entryComponents,
+  exports: [DynamicFormModule, entryComponents]
 })
 export class DynamicBasicFormModule {
-  constructor(private dynamicFormService: DynamicFormService) {
+  constructor(
+      private dynamicFormService: DynamicFormService, @Optional() @SkipSelf() parentModule: DynamicBasicFormModule) {
+    if (parentModule) {
+      return;
+    }
     this.dynamicFormService.setFormControlComponent(BasicFormComponent, true);
     this.dynamicFormService.setErrorComponent(BasicErrorComponent, true);
 

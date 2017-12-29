@@ -1,6 +1,6 @@
 import {ControlType, DynamicFormModule, DynamicFormService} from '@angular-dynaform/core';
 import {CommonModule} from '@angular/common';
-import {NgModule, NO_ERRORS_SCHEMA} from '@angular/core';
+import {NgModule, NO_ERRORS_SCHEMA, Optional, SkipSelf} from '@angular/core';
 import {ReactiveFormsModule} from '@angular/forms';
 
 import {NativeScriptFormsModule} from 'nativescript-angular/forms';
@@ -37,17 +37,21 @@ const entryComponents: any[] = [
   NativeScriptTextViewComponent
 ];
 
-const declarations: any[] = [DynamicNSDomElementDirective, CustomCheckBox, CustomListPicker, entryComponents];
+const moduleDeclarations: any[] = [DynamicNSDomElementDirective, CustomCheckBox, CustomListPicker, entryComponents];
 
 @NgModule({
   imports: [CommonModule, ReactiveFormsModule, DynamicFormModule, NativeScriptFormsModule, TNSCheckBoxModule],
-  declarations,
-  entryComponents,
-  exports: entryComponents,
+  declarations: [moduleDeclarations], entryComponents,
+  exports: [DynamicFormModule, entryComponents],
   schemas: [NO_ERRORS_SCHEMA]  // TODO: is it possible to avoid the need for NO_ERRORS_SCHEMA?
 })
 export class DynamicNativeScriptFormModule {
-  constructor(private dynamicFormService: DynamicFormService) {
+  constructor(
+      private dynamicFormService: DynamicFormService,
+      @Optional() @SkipSelf() parentModule: DynamicNativeScriptFormModule) {
+    if (parentModule) {
+      return;
+    }
     this.dynamicFormService.setFormControlComponent(NativeScriptFormComponent, true);
     this.dynamicFormService.setErrorComponent(NativeScriptErrorComponent, true);
 
