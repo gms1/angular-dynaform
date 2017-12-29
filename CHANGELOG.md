@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## 0.2.6
+
+maintenance release
+
 ## 0.2.5
 
 * **Fixes**

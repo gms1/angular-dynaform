@@ -1,6 +1,6 @@
 {
   "name": "@angular-dynaform/basic-example",
-  "version": "0.2.5",
+  "version": "0.2.6",
   "license": "MIT",
   "scripts": {
     "prepublishOnly": "echo \"ERROR: please use the dist-folder for publishing\" && exit 1",
@@ -44,7 +44,7 @@
     "node-sass": "^4.7.2",
     "rimraf": "^2.6.2",
     "sorcery": "^0.10.0",
-    "systemjs": "~0.20.19",
+    "systemjs": "<0.20",
     "typescript": "~2.4.2"
   }
 }
