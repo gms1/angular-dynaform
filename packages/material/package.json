@@ -1,6 +1,6 @@
 {
   "name": "@angular-dynaform/material",
-  "version": "0.2.6",
+  "version": "0.2.7",
   "description": "angular-dynaform - material",
   "author": "Guenter Sandner <www.gms@gmx.at>",
   "license": "MIT",
@@ -80,7 +80,7 @@
     "karma-cli": "^1.0.1",
     "karma-jasmine": "^1.1.1",
     "karma-jasmine-html-reporter": "^0.2.2",
-    "karma-typescript": "^3.0.9",
+    "karma-typescript": "3.0.8",
     "merge-stream": "^1.0.1",
     "protractor": "^5.2.2",
     "rollup": "^0.53.3",
