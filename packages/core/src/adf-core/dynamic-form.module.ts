@@ -59,7 +59,8 @@ const dynamicFormComponents = [dynamicFormEntryComponents, dynamicFormExportComp
 export class DynamicFormModule {
   constructor(private dynamicFormService: DynamicFormService, @Optional() @SkipSelf() parentModule: DynamicFormModule) {
     if (parentModule) {
-      throw new Error('DynamicFormModule is already loaded. Import it in the AppModule');
+      console.warn('DynamicFormModule is already loaded. Import it in the AppModule');
+      return;
     }
     this.dynamicFormService.actionTypes.setType('submit', SubmitButtonAction);
     this.dynamicFormService.actionTypes.setType('reset', ResetButtonAction);
