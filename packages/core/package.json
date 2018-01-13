@@ -1,6 +1,6 @@
 {
   "name": "@angular-dynaform/core",
-  "version": "0.2.7",
+  "version": "0.3.0",
   "description": "angular-dynaform - core",
   "author": "Guenter Sandner <www.gms@gmx.at>",
   "license": "MIT",
@@ -37,23 +37,23 @@
     "typedoc": "typedoc --options typedoc.json --out ../../docs/typedoc/core --tsconfig src/tsconfig.lib.json src/"
   },
   "dependencies": {
-    "@angular/common": "5.1.x",
-    "@angular/core": "5.1.x",
-    "@angular/forms": "5.1.x",
+    "@angular/common": "5.2.x",
+    "@angular/core": "5.2.x",
+    "@angular/forms": "5.2.x",
     "core-js": "^2.5.3",
     "jsep": "^0.3.3",
     "jsonpointerx": "^1.0.7",
     "rxjs": "^5.5.6",
-    "zone.js": "^0.8.19"
+    "zone.js": "^0.8.20"
   },
   "devDependencies": {
-    "@angular/compiler": "5.1.x",
-    "@angular/compiler-cli": "5.1.x",
-    "@angular/platform-browser": "5.1.x",
-    "@angular/platform-browser-dynamic": "5.1.x",
+    "@angular/compiler": "5.2.x",
+    "@angular/compiler-cli": "5.2.x",
+    "@angular/platform-browser": "5.2.x",
+    "@angular/platform-browser-dynamic": "5.2.x",
     "@types/gulp": "^4.0.5",
-    "@types/jasmine": "^2.8.3",
-    "@types/node": "^8.5.7",
+    "@types/jasmine": "^2.8.4",
+    "@types/node": "^9.3.0",
     "child_process": "^1.0.2",
     "codelyzer": "^4.0.2",
     "del": "^3.0.0",
@@ -64,7 +64,7 @@
     "gulp-options": "^1.1.1",
     "gulp-sourcemaps": "^2.6.3",
     "gulp-tslint": "^8.1.2",
-    "gulp-typescript": "^3.2.3",
+    "gulp-typescript": "^4.0.0-alpha.1",
     "gulp-watch": "^5.0.0",
     "jasmine-core": "^2.8.0",
     "jasmine-spec-reporter": "^4.2.1",
@@ -73,17 +73,17 @@
     "karma-cli": "^1.0.1",
     "karma-jasmine": "^1.1.1",
     "karma-jasmine-html-reporter": "^0.2.2",
-    "karma-typescript": "3.0.8",
+    "karma-typescript": "3.0.9",
     "merge-stream": "^1.0.1",
-    "rollup": "^0.53.3",
+    "rollup": "^0.54.0",
     "rollup-plugin-commonjs": "^8.2.6",
     "rollup-plugin-node-resolve-angular": "^2.0.3",
     "rollup-plugin-uglify": "^2.0.1",
     "run-sequence": "^2.2.1",
     "sorcery": "^0.10.0",
     "ts-node": "^4.1.0",
-    "tslint": "^5.8.0",
+    "tslint": "^5.9.1",
     "typedoc": "^0.9.0",
-    "typescript": "2.4.x"
+    "typescript": "2.6.x"
   }
 }

@@ -3,7 +3,6 @@ import {AbstractControl, AsyncValidatorFn, ValidatorFn, Validators, ValidationEr
 import {Observable} from 'rxjs/Observable';
 import {map} from 'rxjs/operators/map';
 
-import {ValueControlModel} from '../models/control-model';
 import {ControlModel} from '../models/control-model.interface';
 
 import {DynamicValidationError} from './dynamic-validation-error.interface';
@@ -109,44 +108,44 @@ export class DynamicFormValidatorRegistry extends DynamicFormValidation {
     return dffn(key, control);
   }
 
-  static required(key: string, control: ValueControlModel): ValidatorFn { return Validators.required; }
-  static requiredTrue(key: string, control: ValueControlModel): ValidatorFn { return Validators.requiredTrue; }
-  static minLength(key: string, control: ValueControlModel): ValidatorFn {
+  static required(key: string, control: ControlModel): ValidatorFn { return Validators.required; }
+  static requiredTrue(key: string, control: ControlModel): ValidatorFn { return Validators.requiredTrue; }
+  static minLength(key: string, control: ControlModel): ValidatorFn {
     const minLength = control.options && control.options.minLength ? control.options.minLength : 0;
     if (!minLength) {
       return () => null;
     }
     return Validators.minLength(minLength);
   }
-  static maxLength(key: string, control: ValueControlModel): ValidatorFn {
+  static maxLength(key: string, control: ControlModel): ValidatorFn {
     const maxLength = control.options && control.options.maxLength ? control.options.maxLength : 0;
     if (!maxLength) {
       return () => null;
     }
     return Validators.maxLength(maxLength);
   }
-  static min(key: string, control: ValueControlModel): ValidatorFn {
+  static min(key: string, control: ControlModel): ValidatorFn {
     const min = control.options && control.options.min ? control.options.min : 0;
     if (min === undefined) {
       return () => null;
     }
     return Validators.min(min);
   }
-  static max(key: string, control: ValueControlModel): ValidatorFn {
+  static max(key: string, control: ControlModel): ValidatorFn {
     const max = control.options && control.options.max ? control.options.max : 0;
     if (max === undefined) {
       return () => null;
     }
     return Validators.max(max);
   }
-  static pattern(key: string, control: ValueControlModel): ValidatorFn {
+  static pattern(key: string, control: ControlModel): ValidatorFn {
     const pattern = control.options && control.options.pattern ? control.options.pattern : undefined;
     if (!pattern) {
       return () => null;
     }
     return Validators.pattern(pattern);
   }
-  static email(key: string, control: ValueControlModel): ValidatorFn { return Validators.email; }
+  static email(key: string, control: ControlModel): ValidatorFn { return Validators.email; }
 }
 
 
