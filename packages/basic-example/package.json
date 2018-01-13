@@ -13,7 +13,7 @@
     "lint": "ng lint",
     "e2e": "ng e2e",
     "start:systemjs": "lite-server -c ./systemjs/bs-config.json",
-    "release:build": "ng lint && ng build --aot --prod --build-optimizer"
+    "release:build": "ng lint && ng build --aot && echo 'TODO: ng --prod --build-optimizer is currently disabled'"
   },
   "private": true,
   "dependencies": {
