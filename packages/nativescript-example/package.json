@@ -35,7 +35,7 @@
   },
   "devDependencies": {
     "@angular/compiler-cli": "5.2.x",
-    "@ngtools/webpack": "1.9.3",
+    "@ngtools/webpack": "1.9.4",
     "babel-traverse": "6.26.0",
     "babel-types": "6.26.0",
     "babylon": "^6.18.0",
