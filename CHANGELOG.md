@@ -1,8 +1,12 @@
 # CHANGELOG
 
+## 0.3.0
+
+maintenance release based on angular 5.2
+
 ## 0.2.6-0.2.7
 
-maintenance release
+maintenance release based on angular 5.1
 
 ## 0.2.5
 
