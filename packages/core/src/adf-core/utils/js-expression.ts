@@ -4,7 +4,7 @@
 import * as jsep from 'jsep';
 
 // to make rollup happy: (should normally be able to use imported 'jsep' instead)
-const jsepCall = (jsep as any).default || jsep;
+const jsepCall = jsep;
 
 import {JsonPointer} from 'jsonpointerx';
 
