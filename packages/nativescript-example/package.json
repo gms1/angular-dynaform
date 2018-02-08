@@ -35,7 +35,7 @@
   },
   "devDependencies": {
     "@angular/compiler-cli": "5.2.x",
-    "@ngtools/webpack": "1.9.5",
+    "@ngtools/webpack": "1.9.8",
     "babel-traverse": "6.26.0",
     "babel-types": "6.26.0",
     "babylon": "^6.18.0",
@@ -56,12 +56,12 @@
     "typescript": "2.6.x",
     "tslint": "^5.9.1",
     "webpack": "^3.10.0",
-    "webpack-bundle-analyzer": "^2.9.2",
+    "webpack-bundle-analyzer": "^2.10.0",
     "webpack-sources": "^1.1.0",
-    "uglifyjs-webpack-plugin": "~1.1.6"
+    "uglifyjs-webpack-plugin": "~1.1.8"
   },
   "scripts": {
-    "clean": "",
+    "clean": "echo dummy-clean",
     "build": "npm run build-android-bundle",
     "start": "npm run start-android-bundle",
     "start-android-bundle": "tns run android --bundle --env.aot",
