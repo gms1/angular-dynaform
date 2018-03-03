@@ -60,6 +60,5 @@ export class NativeScriptTextFieldComponent extends DynamicFormControlComponent<
     if (this.options) {
       this.opts.secureProperty = this.options.inputType === 'password' ? true : false;
     }
-    console.log(`'${this.model.id}': `, JSON.stringify(this.options.local, undefined, 2));
   }
 }
