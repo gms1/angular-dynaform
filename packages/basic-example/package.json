@@ -1,6 +1,6 @@
 {
   "name": "@angular-dynaform/basic-example",
-  "version": "0.3.0",
+  "version": "0.3.1",
   "license": "MIT",
   "scripts": {
     "prepublishOnly": "echo \"ERROR: please use the dist-folder for publishing\" && exit 1",
@@ -13,7 +13,7 @@
     "lint": "ng lint",
     "e2e": "ng e2e",
     "start:systemjs": "lite-server -c ./systemjs/bs-config.json",
-    "release:build": "ng lint && ng build --aot && echo 'TODO: ng --prod --build-optimizer is currently disabled'"
+    "release:build": "ng lint && ng build --aot --prod --build-optimizer"
   },
   "private": true,
   "dependencies": {
@@ -31,8 +31,8 @@
     "core-js": "^2.5.3",
     "hammerjs": "^2.0.8",
     "jsep": "^0.3.3",
-    "jsonpointerx": "^1.0.7",
-    "rxjs": "^5.5.6",
+    "jsonpointerx": "^1.0.8",
+    "rxjs": "^5.5.7",
     "tslint": "^5.9.1",
     "zone.js": "^0.8.20"
   },

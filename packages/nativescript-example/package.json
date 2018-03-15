@@ -1,6 +1,6 @@
 {
   "name": "@angular-dynaform/nativescript-example",
-  "version": "0.3.0",
+  "version": "0.3.1",
   "license": "MIT",
   "private": true,
   "nativescript": {
@@ -25,11 +25,11 @@
     "@angular/platform-browser-dynamic": "5.2.x",
     "@angular/router": "5.2.x",
     "jsep": "^0.3.3",
-    "jsonpointerx": "^1.0.7",
+    "jsonpointerx": "^1.0.8",
     "nativescript-angular": "^5.1.0",
     "nativescript-checkbox": "^3.0.3",
     "reflect-metadata": "^0.1.12",
-    "rxjs": "^5.5.6",
+    "rxjs": "^5.5.7",
     "tns-core-modules": "~3.4.1",
     "zone.js": "^0.8.20"
   },
