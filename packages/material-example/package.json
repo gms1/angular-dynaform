@@ -39,11 +39,11 @@
     "zone.js": "^0.8.20"
   },
   "devDependencies": {
-    "@angular/cli": "1.7.2",
+    "@angular/cli": "1.7.3",
     "@angular/compiler-cli": "5.2.x",
     "@angular/language-service": "5.2.x",
     "lite-server": "^2.3.0",
-    "node-sass": "^4.7.2",
+    "node-sass": "^4.8.3",
     "rimraf": "^2.6.2",
     "sorcery": "^0.10.0",
     "systemjs": "<0.20",

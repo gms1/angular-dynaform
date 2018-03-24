@@ -40,9 +40,9 @@
     "babel-types": "6.26.0",
     "babylon": "^6.18.0",
     "copy-webpack-plugin": "^4.5.1",
-    "css-loader": "~0.28.10",
+    "css-loader": "~0.28.11",
     "extract-text-webpack-plugin": "^3.0.2",
-    "install": "^0.10.4",
+    "install": "^0.11.0",
     "json-pointer": "^0.6.0",
     "lazy": "1.0.11",
     "nativescript-angular": "^5.2.0",
@@ -55,10 +55,10 @@
     "resolve-url-loader": "^2.3.0",
     "typescript": "2.6.x",
     "tslint": "^5.9.1",
-    "webpack": "^4.1.1",
+    "webpack": "^4.2.0",
     "webpack-bundle-analyzer": "^2.11.1",
     "webpack-sources": "^1.1.0",
-    "uglifyjs-webpack-plugin": "~1.2.3"
+    "uglifyjs-webpack-plugin": "~1.2.4"
   },
   "scripts": {
     "clean": "echo dummy-clean",
