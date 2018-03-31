@@ -24,18 +24,18 @@
     "@angular/platform-browser": "5.2.x",
     "@angular/platform-browser-dynamic": "5.2.x",
     "@angular/router": "5.2.x",
-    "jsep": "^0.3.3",
+    "jsep": "^0.3.4",
     "jsonpointerx": "^1.0.8",
     "nativescript-angular": "^5.1.0",
     "nativescript-checkbox": "^3.0.3",
     "reflect-metadata": "^0.1.12",
-    "rxjs": "^5.5.7",
+    "rxjs": "^5.5.8",
     "tns-core-modules": "~3.4.1",
-    "zone.js": "^0.8.20"
+    "zone.js": "^0.8.21"
   },
   "devDependencies": {
     "@angular/compiler-cli": "5.2.x",
-    "@ngtools/webpack": "1.10.2",
+    "@ngtools/webpack": "6.0.0-beta.8",
     "babel-traverse": "6.26.0",
     "babel-types": "6.26.0",
     "babylon": "^6.18.0",
@@ -55,7 +55,7 @@
     "resolve-url-loader": "^2.3.0",
     "typescript": "2.6.x",
     "tslint": "^5.9.1",
-    "webpack": "^4.2.0",
+    "webpack": "^4.4.1",
     "webpack-bundle-analyzer": "^2.11.1",
     "webpack-sources": "^1.1.0",
     "uglifyjs-webpack-plugin": "~1.2.4"
