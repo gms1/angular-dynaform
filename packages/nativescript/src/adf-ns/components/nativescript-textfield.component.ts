@@ -46,8 +46,8 @@ import {Component, ElementRef, OnChanges} from '@angular/core';
 })
 export class NativeScriptTextFieldComponent extends DynamicFormControlComponent<ValueControlModel> implements
     OnChanges {
-  model: ValueControlModel;
-  options: ControlInputOptions;
+  model!: ValueControlModel;
+  options!: ControlInputOptions;
   opts: {[key: string]: any};
 
   constructor(form: DynamicForm, dynamicFormService: DynamicFormService, elRef: ElementRef) {

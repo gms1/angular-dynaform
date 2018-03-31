@@ -1,17 +1,15 @@
-// tslint:disable use-life-cycle-interface
-import {takeUntil} from 'rxjs/operators/takeUntil';
-import {map} from 'rxjs/operators/map';
-import {distinctUntilChanged} from 'rxjs/operators/distinctUntilChanged';
+import {Subject} from 'rxjs';
+import {distinctUntilChanged, map, takeUntil} from 'rxjs/operators';
 
 import {FormGroup} from '@angular/forms';
-import {Subject} from 'rxjs/Subject';
 
 import {DynamicFormAction} from './dynamic-form.action';
 import {DynamicFormControlComponentBase} from '../components/dynamic-form-control.component';
 
+// tslint:disable use-life-cycle-interface
 export class ResetButtonAction extends DynamicFormAction {
   private unsubscribe: Subject<any>;
-  private rootFormGroup: FormGroup;
+  private rootFormGroup!: FormGroup;
 
   constructor(component: DynamicFormControlComponentBase) {
     super(component);
@@ -24,7 +22,9 @@ export class ResetButtonAction extends DynamicFormAction {
     this.model.ngControl.disable();
     this.rootFormGroup.valueChanges.pipe(map(() => this.rootFormGroup.dirty ? true : false), distinctUntilChanged())
         .pipe(takeUntil(this.unsubscribe))
-        .subscribe((dirty) => { this.updateState(dirty); });
+        .subscribe((dirty) => {
+          this.updateState(dirty);
+        });
   }
 
   ngOnDestroy(): void {
@@ -40,7 +40,7 @@ export class ResetButtonAction extends DynamicFormAction {
       if (event) {
         event.stopImmediatePropagation();
         event.preventDefault();
-      }
+        }
       return false;
     } else {
       // bubble up: trigger the reset event on the form element

@@ -33,6 +33,7 @@ export class JsExpression {
     this._contextMembers = [];
     this._thisMembers = [];
     this._fnJsExpression = () => undefined;
+    this._resolveVariable = (variable: JsMemberVariable) => variable;
   }
 
   run(): any { return this._fnJsExpression(); }

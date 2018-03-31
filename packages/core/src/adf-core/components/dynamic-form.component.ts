@@ -1,6 +1,6 @@
 // tslint:disable no-forward-ref
 import {Component, ComponentRef, EventEmitter, Input, Output} from '@angular/core';
-import {Observable} from 'rxjs/Observable';
+import {Observable} from 'rxjs';
 
 import {FormConfig} from '../config/form-config.interface';
 import {FormModel} from '../models/form-model';
@@ -18,7 +18,7 @@ import {Stepper} from '../models/stepper.interface';
   providers: [{provide: DynamicForm, useExisting: DynamicFormComponent}]
 })
 export class DynamicFormComponent extends DynamicForm {
-  config: FormConfig;
+  config!: FormConfig;
 
   @Input()
   get model(): FormModel { return this._model; }
@@ -46,7 +46,7 @@ export class DynamicFormComponent extends DynamicForm {
   formControlRef: ComponentRef<DynamicFormFormControl>|undefined;
   stepper?: Stepper;
 
-  private _model: FormModel;
+  private _model!: FormModel;
   private _submit: EventEmitter<any>;
   private _reset: EventEmitter<any>;
 

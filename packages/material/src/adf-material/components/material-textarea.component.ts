@@ -45,6 +45,6 @@ import {Component} from '@angular/core';
   providers: [{provide: DynamicFormControlComponentBase, useExisting: MaterialTextareaComponent}]
 })
 export class MaterialTextareaComponent extends DynamicFormControlComponent<ValueControlModel> {
-  model: ValueControlModel;
-  options: ControlTextareaOptions;
+  model!: ValueControlModel;
+  options!: ControlTextareaOptions;
 }

@@ -16,10 +16,10 @@ import {NG_VALUE_ACCESSOR, ControlValueAccessor} from '@angular/forms';
 })
 export class CustomCheckBox implements ControlValueAccessor {
   @Input()
-  id: string;
+  id!: string;
 
   @Input()
-  ngClass: {[key: string]: boolean};
+  ngClass!: {[key: string]: boolean};
 
   checked: boolean;
   isEnabled: boolean;
@@ -39,8 +39,16 @@ export class CustomCheckBox implements ControlValueAccessor {
     this.onChange(this.checked);
   }
 
-  public registerOnChange(fn: any): void { this.onChange = fn; }
-  public registerOnTouched(fn: any): void { this.onTouched = fn; }
-  writeValue(value: any): void { this.checked = !!value; }
-  setDisabledState(isDisabled: boolean): void { this.isEnabled = !isDisabled; }
+  public registerOnChange(fn: any): void {
+    this.onChange = fn;
+  }
+  public registerOnTouched(fn: any): void {
+    this.onTouched = fn;
+  }
+  writeValue(value: any): void {
+    this.checked = !!value;
+  }
+  setDisabledState(isDisabled: boolean): void {
+    this.isEnabled = !isDisabled;
+  }
 }

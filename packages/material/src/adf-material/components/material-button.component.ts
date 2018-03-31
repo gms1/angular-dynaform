@@ -33,8 +33,8 @@ import {Component} from '@angular/core';
   providers: [{provide: DynamicFormControlComponentBase, useExisting: MaterialButtonComponent}]
 })
 export class MaterialButtonComponent extends DynamicFormControlComponent<NullControlModel> {
-  model: NullControlModel;
-  options: ControlBaseOptions;
+  model!: NullControlModel;
+  options!: ControlBaseOptions;
 
   ngAfterViewInit(): void {
     super.ngAfterViewInit();

@@ -43,6 +43,6 @@ import {Component} from '@angular/core';
   providers: [{provide: DynamicFormControlComponentBase, useExisting: NativeScriptTextViewComponent}]
 })
 export class NativeScriptTextViewComponent extends DynamicFormControlComponent<ValueControlModel> {
-  model: ValueControlModel;
-  options: ControlTextareaOptions;
+  model!: ValueControlModel;
+  options!: ControlTextareaOptions;
 }

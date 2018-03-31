@@ -30,12 +30,14 @@ export class ArrayModel extends AbstractControlModel<NgFormArray, ArrayOptions> 
   selectionChange: EventEmitter<number>;
 
   private _selectedIndex: number;
-  get selectedIndex(): number { return this._selectedIndex; }
+  get selectedIndex(): number {
+    return this._selectedIndex;
+  }
   set selectedIndex(newIndex: number) {
     // tslint:disable-next-line triple-equals
     if (newIndex == undefined || newIndex < 0) {
       newIndex = HEADER_IDX;
-    }
+      }
     if (this._selectedIndex !== newIndex) {
       this.updateSelectedItemClass(false);
       this._selectedIndex = newIndex;
@@ -77,7 +79,7 @@ export class ArrayModel extends AbstractControlModel<NgFormArray, ArrayOptions> 
     let idx = parseInt(key, 10);
     if (isNaN(idx) || this.items.length <= idx) {
       return undefined;
-    }
+      }
     return this.items[idx];
   }
 
@@ -98,7 +100,7 @@ export class ArrayModel extends AbstractControlModel<NgFormArray, ArrayOptions> 
   insertItem(index: number = this.selectedIndex): void {
     if (index < 0) {
       index = 0;
-    }
+      }
     if (index > this.items.length) {
       index = this.items.length;
     }
@@ -139,11 +141,11 @@ export class ArrayModel extends AbstractControlModel<NgFormArray, ArrayOptions> 
     if (!isMinLength) {
       while (this.ngControl.length > length) {
         this.ngControl.removeAt(this.ngControl.length - 1);
-      }
+        }
       if (this.items.length > length) {
         this.items.splice(length);
       }
-    }
+      }
     if (this.items.length < length) {
       while (this.items.length < length) {
         let item = this.dynamicFormService.modelFactory.createArrayGroup(
@@ -151,10 +153,10 @@ export class ArrayModel extends AbstractControlModel<NgFormArray, ArrayOptions> 
         item.setCSSClasses(item.css.content, 'adf-array-item');
         this.items.push(item);
       }
-    }
+      }
     while (this.ngControl.length < length) {
       this.ngControl.push(this.items[this.ngControl.length].ngControl);
-    }
+      }
     if (this.selectedIndex >= this.items.length) {
       this.selectedIndex = this.items.length - 1;
     }
@@ -186,11 +188,13 @@ export class ArrayModel extends AbstractControlModel<NgFormArray, ArrayOptions> 
   reTranslate(): void {
     if (this.header) {
       this.header.reTranslate();
-    }
+      }
     if (this.footer) {
       this.footer.reTranslate();
     }
-    this.items.forEach((item) => { item.reTranslate(); });
+    this.items.forEach((item) => {
+      item.reTranslate();
+    });
     super.reTranslate();
   }
 
@@ -199,7 +203,7 @@ export class ArrayModel extends AbstractControlModel<NgFormArray, ArrayOptions> 
       this.header = this.dynamicFormService.modelFactory.createArrayGroup(
           'HEADER', this.formModel, this, HEADER_IDX, this.options.header);
       this.header.setCSSClasses(this.header.css.content, 'adf-array-header-content');
-    }
+      }
     return this.header;
   }
 
@@ -208,7 +212,7 @@ export class ArrayModel extends AbstractControlModel<NgFormArray, ArrayOptions> 
       this.footer = this.dynamicFormService.modelFactory.createArrayGroup(
           'FOOTER', this.formModel, this, FOOTER_IDX, this.options.footer);
       this.footer.setCSSClasses(this.footer.css.content, 'adf-array-footer-content');
-    }
+      }
     return this.footer;
   }
 
@@ -216,36 +220,40 @@ export class ArrayModel extends AbstractControlModel<NgFormArray, ArrayOptions> 
   valueFromAppModel(formData: any, appData: any, appPointerPrefix?: JsonPointer): any {
     if (!this.jpApp || !this.jpForm) {
       return formData;
-    }
+      }
     let appValue = (appPointerPrefix ? appPointerPrefix.concat(this.jpApp) : this.jpApp).get(appData);
     if (!Array.isArray(appValue)) {
       this.jpForm.set(formData, undefined);
       return formData;
-    }
+      }
     let formValue: any[] = [];
     formValue.length = appValue.length;
     this.jpForm.set(formData, formValue);
-    this.items.forEach((item) => { item.valueFromAppModel(formData, appData, appPointerPrefix); });
+    this.items.forEach((item) => {
+      item.valueFromAppModel(formData, appData, appPointerPrefix);
+    });
     return formData;
   }
 
   valueToAppModel(appData: any, appPointerPrefix?: JsonPointer): any {
     if (!this.jpApp) {
       return appData;
-    }
+      }
     let jpCurr = appPointerPrefix ? appPointerPrefix.concat(this.jpApp) : this.jpApp;
     let appArray = jpCurr.get(appData) || [];
     appArray.length = this.items.length;
     jpCurr.set(appData, appArray);
 
-    this.items.forEach((item, idx) => { item.valueToAppModel(appData, appPointerPrefix); });
+    this.items.forEach((item, idx) => {
+      item.valueToAppModel(appData, appPointerPrefix);
+    });
     return appData;
   }
 
   private updateSelectedItemClass(value: boolean): void {
     if (this._selectedIndex < 0 || this._selectedIndex >= this.items.length) {
       return;
-    }
+      }
     let item: GroupModelBase = this.items[this._selectedIndex];
     item.setCSSClasses(item.css.content, 'adf-array-item-selected', value);
   }

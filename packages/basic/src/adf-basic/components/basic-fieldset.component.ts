@@ -40,6 +40,6 @@ import {Component} from '@angular/core';
   providers: [{provide: DynamicFormControlComponentBase, useExisting: BasicFieldsetComponent}]
 })
 export class BasicFieldsetComponent extends DynamicFormControlComponent<GroupModelBase> {
-  model: GroupModelBase;
-  options: GroupOptions;
+  model!: GroupModelBase;
+  options!: GroupOptions;
 }

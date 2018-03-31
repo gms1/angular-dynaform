@@ -17,13 +17,13 @@ import {NG_VALUE_ACCESSOR, ControlValueAccessor} from '@angular/forms';
 })
 export class CustomListPicker implements ControlValueAccessor {
   @Input()
-  items: string[];
+  items!: string[];
 
   @Input()
-  id: string;
+  id!: string;
 
   @Input()
-  ngClass: {[key: string]: boolean};
+  ngClass!: {[key: string]: boolean};
 
   selectedIndex: number;
   isEnabled: boolean;
@@ -50,12 +50,18 @@ export class CustomListPicker implements ControlValueAccessor {
     }
   }
 
-  public registerOnChange(fn: any): void { this.onChange = fn; }
-  public registerOnTouched(fn: any): void { this.onTouched = fn; }
+  public registerOnChange(fn: any): void {
+    this.onChange = fn;
+  }
+  public registerOnTouched(fn: any): void {
+    this.onTouched = fn;
+  }
   writeValue(value: any): void {
     console.log(`got value = ${value}`);
     this.selectedIndex = this.items ? this.items.indexOf(value) : -1;
     console.log(`set index = ${this.selectedIndex}`);
   }
-  setDisabledState(isDisabled: boolean): void { this.isEnabled = !isDisabled; }
+  setDisabledState(isDisabled: boolean): void {
+    this.isEnabled = !isDisabled;
+  }
 }

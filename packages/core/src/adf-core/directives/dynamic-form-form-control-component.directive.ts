@@ -27,7 +27,7 @@ import {DynamicClass} from '../utils/dynamic-class';
 @Directive({selector: '[adfFormControlComponent]'})
 export class DynamicFormFormControlComponentDirective implements OnInit, DoCheck, OnDestroy {
   @Input()
-  model: GroupModel;
+  model!: GroupModel;
 
   private componentRef: ComponentRef<DynamicFormFormControl>|undefined;
   private dynamicClass: DynamicClass|undefined;

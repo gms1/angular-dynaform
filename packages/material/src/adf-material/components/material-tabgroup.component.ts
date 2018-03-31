@@ -36,6 +36,6 @@ import {
   providers: [{provide: DynamicFormControlComponentBase, useExisting: MaterialTabGroupComponent}]
 })
 export class MaterialTabGroupComponent extends DynamicFormControlComponent<GroupModelBase> {
-  model: GroupModelBase;
-  options: GroupOptions;
+  model!: GroupModelBase;
+  options!: GroupOptions;
 }

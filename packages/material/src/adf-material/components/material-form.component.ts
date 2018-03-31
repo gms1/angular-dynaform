@@ -41,6 +41,6 @@ import {Component} from '@angular/core';
   ]
 })
 export class MaterialFormComponent extends DynamicFormFormControlComponent {
-  model: GroupModel;
-  options: GroupOptions;
+  model!: GroupModel;
+  options!: GroupOptions;
 }

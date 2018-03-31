@@ -39,10 +39,10 @@ import {
 })
 export class NativeScriptListPickerComponent extends DynamicFormControlComponent<ValueControlModel> implements
     OnChanges {
-  model: ValueControlModel;
-  options: ControlSelectOptions;
+  model!: ValueControlModel;
+  options!: ControlSelectOptions;
 
-  listPickerItems: Array<string>;
+  listPickerItems: Array<string> = [];
 
   public ngOnChanges(changes: SimpleChanges): void {
     if (!this.model.local || !this.model.local.valueOptions) {

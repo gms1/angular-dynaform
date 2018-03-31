@@ -23,8 +23,8 @@ export class DynamicFormService {
   // component registry:
 
   // inject these components by resolving the registered type
-  formControlComponentType: Type<DynamicFormFormControlComponent>;
-  errorComponentType: Type<DynamicFormErrorComponent>;
+  formControlComponentType!: Type<DynamicFormFormControlComponent>;
+  errorComponentType!: Type<DynamicFormErrorComponent>;
 
   // inject these components by resolving the registered type for a particular name
   _controlComponentTypes: TypeRegistry<DynamicFormControlComponentBase>;

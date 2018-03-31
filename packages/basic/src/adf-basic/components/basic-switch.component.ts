@@ -39,6 +39,6 @@ import {Component} from '@angular/core';
   providers: [{provide: DynamicFormControlComponentBase, useExisting: BasicSwitchComponent}]
 })
 export class BasicSwitchComponent extends DynamicFormControlComponent<ValueControlModel> {
-  model: ValueControlModel;
-  options: ControlSwitchOptions;
+  model!: ValueControlModel;
+  options!: ControlSwitchOptions;
 }

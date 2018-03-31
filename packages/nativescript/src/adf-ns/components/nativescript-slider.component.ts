@@ -40,6 +40,6 @@ import {Component} from '@angular/core';
   providers: [{provide: DynamicFormControlComponentBase, useExisting: NativeScriptSliderComponent}]
 })
 export class NativeScriptSliderComponent extends DynamicFormControlComponent<ValueControlModel> {
-  model: ValueControlModel;
-  options: ControlSliderOptions;
+  model!: ValueControlModel;
+  options!: ControlSliderOptions;
 }

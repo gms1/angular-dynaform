@@ -23,6 +23,6 @@ import {Component} from '@angular/core';
   providers: [{provide: DynamicFormControlComponentBase, useExisting: MaterialSeparatorComponent}]
 })
 export class MaterialSeparatorComponent extends DynamicFormControlComponent<NullControlModel> {
-  model: NullControlModel;
-  options: ControlBaseOptions;
+  model!: NullControlModel;
+  options!: ControlBaseOptions;
 }

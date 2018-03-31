@@ -39,6 +39,6 @@ import {Component} from '@angular/core';
   providers: [{provide: DynamicFormControlComponentBase, useExisting: BasicSelectComponent}]
 })
 export class BasicSelectComponent extends DynamicFormControlComponent<ValueControlModel> {
-  model: ValueControlModel;
-  options: ControlSelectOptions;
+  model!: ValueControlModel;
+  options!: ControlSelectOptions;
 }

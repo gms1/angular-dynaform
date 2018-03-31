@@ -40,6 +40,6 @@ import {Component} from '@angular/core';
   providers: [{provide: DynamicFormControlComponentBase, useExisting: BasicInputComponent}]
 })
 export class BasicInputComponent extends DynamicFormControlComponent<ValueControlModel> {
-  model: ValueControlModel;
-  options: ControlInputOptions;
+  model!: ValueControlModel;
+  options!: ControlInputOptions;
 }

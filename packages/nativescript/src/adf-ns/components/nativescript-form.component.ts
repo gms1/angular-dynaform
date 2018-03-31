@@ -38,8 +38,8 @@ import {Component} from '@angular/core';
   ]
 })
 export class NativeScriptFormComponent extends DynamicFormFormControlComponent {
-  model: GroupModel;
-  options: GroupOptions;
+  model!: GroupModel;
+  options!: GroupOptions;
 
   // TODO: onSubmit/onReset
 }

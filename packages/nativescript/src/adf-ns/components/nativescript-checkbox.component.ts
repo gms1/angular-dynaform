@@ -34,6 +34,6 @@ import {Component} from '@angular/core';
   providers: [{provide: DynamicFormControlComponentBase, useExisting: NativeScriptCheckboxComponent}]
 })
 export class NativeScriptCheckboxComponent extends DynamicFormControlComponent<ValueControlModel> {
-  model: ValueControlModel;
-  options: ControlSwitchOptions;
+  model!: ValueControlModel;
+  options!: ControlSwitchOptions;
 }

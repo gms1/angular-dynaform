@@ -16,7 +16,7 @@ export interface NgArrayModelHandler { updateLength(length: number, isMinimum?: 
  * @export
  */
 export class NgFormArray extends FormArray {
-  model: NgArrayModelHandler;
+  model!: NgArrayModelHandler;
 
   constructor(
       controls: AbstractControl[], validatorOrOpts?: ValidatorFn|ValidatorFn[]|AbstractControlOptions|null,

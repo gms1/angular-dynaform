@@ -1,6 +1,6 @@
 {
   "name": "@angular-dynaform/root",
-  "version": "0.3.2",
+  "version": "0.6.0",
   "description": "angular-dynaform - development",
   "author": "Guenter Sandner <www.gms@gmx.at>",
   "license": "MIT",
@@ -26,6 +26,6 @@
     "rimraf": "^2.6.2",
     "shelljs": "^0.8.1",
     "shx": "^0.2.2",
-    "typescript": "~2.4.2"
+    "typescript": "~2.8.1"
   }
 }

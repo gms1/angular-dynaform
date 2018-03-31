@@ -62,13 +62,12 @@ export class ValueControlModel extends ControlModelBase<ControlValueOptions> {
         formModel, parentPath, parentGroup, parentArray, parentArrayIdx);
     this.createValidators();
     this.createAsyncValidators();
+    this.autoComplete = 'on';
     if (this.config.options) {
       if (typeof this.config.options.autoComplete === 'boolean') {
-        this.autoComplete = this.config.options.autoComplete;
+        this.autoComplete = this.config.options.autoComplete ? 'on' : 'off';
       } else if (typeof this.config.options.autoComplete === 'string') {
         this.autoComplete = this.config.options.autoComplete;
-      } else {
-        this.autoComplete = 'on';
       }
     }
   }

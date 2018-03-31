@@ -44,6 +44,6 @@ import {Component} from '@angular/core';
   providers: [{provide: DynamicFormControlComponentBase, useExisting: BasicRadioGroupComponent}]
 })
 export class BasicRadioGroupComponent extends DynamicFormControlComponent<ValueControlModel> {
-  model: ValueControlModel;
-  options: ControlSelectOptions;
+  model!: ValueControlModel;
+  options!: ControlSelectOptions;
 }

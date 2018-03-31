@@ -1,19 +1,15 @@
 // THIS is an INTERNAL action, indirectly created if a
 // RelationExpressions has be defined for a control
 
-// tslint:disable use-life-cycle-interface
-import {takeUntil} from 'rxjs/operators/takeUntil';
-import {map} from 'rxjs/operators/map';
-import {distinctUntilChanged} from 'rxjs/operators/distinctUntilChanged';
-import {Observable} from 'rxjs/Observable';
-import {Subject} from 'rxjs/Subject';
+import {distinctUntilChanged, map, takeUntil} from 'rxjs/operators';
+import {Observable, Subject} from 'rxjs';
 
 import {DynamicFormAction} from './dynamic-form.action';
 import {DynamicFormControlComponentBase} from '../components/dynamic-form-control.component';
 import {ControlModel, ArrayModel} from '../models';
 import {JsExpression} from '../utils/js-expression';
-import {JsonPointer} from 'jsonpointerx';
 
+// tslint:disable use-life-cycle-interface
 export class RelationAction extends DynamicFormAction {
   private unsubscribe: Subject<any>;
 
@@ -39,11 +35,13 @@ export class RelationAction extends DynamicFormAction {
           }
         });
       }
-    }
+      }
     if (this.model.showIf) {
       let observable = this.getObservable(this.model.showIf);
       if (observable) {
-        observable.subscribe((v) => { v ? this.model.show() : this.model.hide(); });
+        observable.subscribe((v) => {
+          v ? this.model.show() : this.model.hide();
+        });
       }
     }
   }
@@ -61,21 +59,20 @@ export class RelationAction extends DynamicFormAction {
     let model = this.findRelatedRootModel(expr.getContextMembersRoot());
     if (!model || !model.jpForm) {
       return undefined;
-    }
+      }
+    let jpForm = model.jpForm;
     let run: (v: any) => any;
-    if (model.jpForm.root) {
+    if (jpForm.root) {
       run = (v: any) => {
         expr.context = v;
         return !!expr.run();
       };
     } else {
       run = (v: any) => {
-        // type assertion is not necessary, but tsc wants it
-        // tslint:disable-next-line no-unnecessary-type-assertion
-        (model.jpForm as JsonPointer).set(expr.context, v);
+        jpForm.set(expr.context, v);
         return !!expr.run();
       };
-    }
+      }
     return model.valueChanges.pipe(map(run), distinctUntilChanged()).pipe(takeUntil(this.unsubscribe));
   }
 
@@ -90,7 +87,7 @@ export class RelationAction extends DynamicFormAction {
         return relModel;
       }
       relModel = foundModel;
-    }
+      }
     return relModel;
   }
 }

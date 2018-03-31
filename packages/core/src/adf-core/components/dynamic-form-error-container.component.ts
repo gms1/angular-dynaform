@@ -17,11 +17,12 @@ import {DynamicForm} from './dynamic-form.interface';
 })
 export class DynamicFormErrorContainerComponent implements DynamicFormErrorContainer, DoCheck {
   @Input()
-  model: ControlModel;
+  model!: ControlModel;
 
-  errors: DynamicValidationError[];
+  errors?: DynamicValidationError[];
 
-  constructor(public form: DynamicForm) {}
+  constructor(public form: DynamicForm) {
+  }
 
   ngDoCheck(): void {
     if (!this.model.ngControl.errors) {

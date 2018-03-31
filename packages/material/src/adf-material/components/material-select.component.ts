@@ -41,6 +41,6 @@ import {Component} from '@angular/core';
   providers: [{provide: DynamicFormControlComponentBase, useExisting: MaterialSelectComponent}]
 })
 export class MaterialSelectComponent extends DynamicFormControlComponent<ValueControlModel> {
-  model: ValueControlModel;
-  options: ControlSelectOptions;
+  model!: ValueControlModel;
+  options!: ControlSelectOptions;
 }

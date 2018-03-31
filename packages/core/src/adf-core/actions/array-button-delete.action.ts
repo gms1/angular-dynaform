@@ -1,12 +1,12 @@
-// tslint:disable use-life-cycle-interface
-import {takeUntil} from 'rxjs/operators/takeUntil';
-import {Subject} from 'rxjs/Subject';
+import {takeUntil} from 'rxjs/operators';
+import {Subject} from 'rxjs';
 
 import {DynamicFormAction} from './dynamic-form.action';
 import {DynamicFormControlComponentBase} from '../components/dynamic-form-control.component';
 
 // delete array item
 
+// tslint:disable use-life-cycle-interface
 export class ArrayButtonDeleteAction extends DynamicFormAction {
   private unsubscribe: Subject<any>;
 
@@ -43,7 +43,7 @@ export class ArrayButtonDeleteAction extends DynamicFormAction {
   protected updateState(newIndex: number): void {
     if (!this.model.parentArray) {
       return;
-    }
+      }
     if (newIndex >= 0) {
       if (this.model.ngControl.disabled) {
         this.model.ngControl.enable();

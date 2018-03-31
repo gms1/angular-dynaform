@@ -1,19 +1,17 @@
-// tslint:disable use-life-cycle-interface
-import {takeUntil} from 'rxjs/operators/takeUntil';
-import {map} from 'rxjs/operators/map';
-import {distinctUntilChanged} from 'rxjs/operators/distinctUntilChanged';
+import {distinctUntilChanged, map, takeUntil} from 'rxjs/operators';
+import {Subject} from 'rxjs';
 
 import {FormGroup} from '@angular/forms';
-import {Subject} from 'rxjs/Subject';
 
 import {DynamicFormAction} from './dynamic-form.action';
 import {DynamicFormControlComponentBase} from '../components/dynamic-form-control.component';
 
 // enable the submit button if form is valid, disable otherwise
 
+// tslint:disable use-life-cycle-interface
 export class SubmitButtonAction extends DynamicFormAction {
   private unsubscribe: Subject<any>;
-  private rootFormGroup: FormGroup;
+  private rootFormGroup!: FormGroup;
 
   constructor(component: DynamicFormControlComponentBase) {
     super(component);
@@ -26,7 +24,9 @@ export class SubmitButtonAction extends DynamicFormAction {
     this.model.ngControl.disable();
     this.rootFormGroup.statusChanges.pipe(map((status) => status === 'VALID'), distinctUntilChanged())
         .pipe(takeUntil(this.unsubscribe))
-        .subscribe((valid) => { this.updateState(valid); });
+        .subscribe((valid) => {
+          this.updateState(valid);
+        });
   }
 
   ngOnDestroy(): void {
@@ -42,7 +42,7 @@ export class SubmitButtonAction extends DynamicFormAction {
       if (event) {
         event.stopImmediatePropagation();
         event.preventDefault();
-      }
+        }
       return false;
     } else {
       // bubble up: trigger the submit (ngSubmit) event on the form element:

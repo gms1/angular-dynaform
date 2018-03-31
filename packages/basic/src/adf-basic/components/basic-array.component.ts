@@ -62,6 +62,6 @@ import {Component} from '@angular/core';
   providers: [{provide: DynamicFormControlComponentBase, useExisting: BasicArrayComponent}]
 })
 export class BasicArrayComponent extends DynamicFormControlComponent<ArrayModel> {
-  model: ArrayModel;
-  options: ArrayOptions;
+  model!: ArrayModel;
+  options!: ArrayOptions;
 }

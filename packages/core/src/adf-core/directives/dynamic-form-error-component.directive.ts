@@ -25,10 +25,10 @@ import {DynamicClass} from '../utils/dynamic-class';
 @Directive({selector: '[adfErrorComponent]'})
 export class DynamicFormErrorComponentDirective implements OnInit, DoCheck, OnDestroy {
   @Input()
-  model: ControlModel;
+  model!: ControlModel;
 
   @Input()
-  error: DynamicValidationError;
+  error!: DynamicValidationError;
 
   private componentRef: ComponentRef<DynamicFormError>|undefined;
   private dynamicClass: DynamicClass|undefined;

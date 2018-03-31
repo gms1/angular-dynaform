@@ -1,5 +1,5 @@
 import {Injector, EventEmitter} from '@angular/core';
-import {Observable} from 'rxjs/Observable';
+import {Observable} from 'rxjs';
 
 import {FormConfig, FormI18n, ControlConfig, ModelType, ControlType} from '../config';
 import {DynamicFormService} from '../services/dynamic-form.service';
@@ -13,9 +13,9 @@ import {JsonPointer} from 'jsonpointerx';
 export class FormModel {
   dynamicFormService: DynamicFormService;
   injector: Injector;
-  group: GroupModel;
+  group!: GroupModel;
 
-  private _config: FormConfig;
+  private _config!: FormConfig;
   private _i18n?: FormI18n;
 
   get config(): FormConfig { return this._config; }

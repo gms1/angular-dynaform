@@ -15,7 +15,7 @@
     "annotateForClosureCompiler": true,
     "skipMetadataEmit": false,
     "skipTemplateCodegen": true,
-    "strictMetadataEmit": true,
+    "strictMetadataEmit": false,
     "flatModuleOutFile": "index.js",
     "flatModuleId": "@angular-dynaform/nativescript"
   }

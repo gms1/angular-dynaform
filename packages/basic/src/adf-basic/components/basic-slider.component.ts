@@ -39,6 +39,6 @@ import {Component} from '@angular/core';
   providers: [{provide: DynamicFormControlComponentBase, useExisting: BasicSliderComponent}]
 })
 export class BasicSliderComponent extends DynamicFormControlComponent<ValueControlModel> {
-  model: ValueControlModel;
-  options: ControlSliderOptions;
+  model!: ValueControlModel;
+  options!: ControlSliderOptions;
 }

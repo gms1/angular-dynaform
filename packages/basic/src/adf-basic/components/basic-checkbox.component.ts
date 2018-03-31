@@ -38,6 +38,6 @@ import {Component} from '@angular/core';
   providers: [{provide: DynamicFormControlComponentBase, useExisting: BasicCheckboxComponent}]
 })
 export class BasicCheckboxComponent extends DynamicFormControlComponent<ValueControlModel> {
-  model: ValueControlModel;
-  options: ControlSwitchOptions;
+  model!: ValueControlModel;
+  options!: ControlSwitchOptions;
 }

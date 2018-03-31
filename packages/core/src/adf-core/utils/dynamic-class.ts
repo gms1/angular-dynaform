@@ -17,7 +17,9 @@ export class DynamicClass implements DoCheck {
   }
 
 
-  constructor(private keyValueDiffers: KeyValueDiffers, private elRef: ElementRef, private renderer: Renderer2) {}
+  constructor(private keyValueDiffers: KeyValueDiffers, private elRef: ElementRef, private renderer: Renderer2) {
+    this._classes = {};
+  }
 
   ngDoCheck(): void {
     if (this.keyValueDiffer) {

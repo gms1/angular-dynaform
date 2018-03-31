@@ -1,6 +1,6 @@
 import {AfterViewInit, OnDestroy, OnInit} from '@angular/core';
-import {takeUntil} from 'rxjs/operators/takeUntil';
-import {Subject} from 'rxjs/Subject';
+import {takeUntil} from 'rxjs/operators';
+import {Subject} from 'rxjs';
 
 import {DynamicFormAction} from './dynamic-form.action';
 import {DynamicFormControlComponentBase} from '../components/dynamic-form-control.component';

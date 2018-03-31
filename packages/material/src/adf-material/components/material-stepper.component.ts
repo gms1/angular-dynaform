@@ -1,8 +1,6 @@
 import {Component, ElementRef, ViewChild, AfterViewInit, EventEmitter} from '@angular/core';
-import {map} from 'rxjs/operators/map';
-import {Observable} from 'rxjs/Observable';
-import {takeUntil} from 'rxjs/operators/takeUntil';
-import {Subject} from 'rxjs/Subject';
+import {map, takeUntil} from 'rxjs/operators';
+import {Observable, Subject} from 'rxjs';
 
 import {
   GroupModelBase,
@@ -78,10 +76,10 @@ import {MatStepper} from '@angular/material';
   providers: [{provide: DynamicFormControlComponentBase, useExisting: MaterialStepperComponent}]
 })
 export class MaterialStepperComponent extends DynamicFormControlComponent<GroupModelBase> implements AfterViewInit {
-  model: GroupModelBase;
-  options: GroupOptions;
+  model!: GroupModelBase;
+  options!: GroupOptions;
 
-  @ViewChild('stepper') private matStepper: MatStepper;
+  @ViewChild('stepper') private matStepper!: MatStepper;
 
   stepper?: Stepper;
 
@@ -112,7 +110,7 @@ export class MaterialStepperComponent extends DynamicFormControlComponent<GroupM
       (this.stepper as MatStepperWrapper).matStepper = undefined;
     }
   }
-}
+  }
 
 /*
  *
@@ -122,10 +120,14 @@ export class MatStepperWrapper implements Stepper {
   private _selectionChange: EventEmitter<number>;
 
   private _matStepper?: MatStepper;
-  get matStepper(): MatStepper|undefined { return this._matStepper; }
-  set matStepper(matStepper: MatStepper|undefined) { this.changeStepper(matStepper); }
+  get matStepper(): MatStepper|undefined {
+    return this._matStepper;
+  }
+  set matStepper(matStepper: MatStepper|undefined) {
+    this.changeStepper(matStepper);
+  }
 
-  private unsubscribe: Subject<any>;
+  private unsubscribe?: Subject<any>;
 
   constructor(matStepper?: MatStepper) {
     this._selectionChange = new EventEmitter<number>();
@@ -144,18 +146,22 @@ export class MatStepperWrapper implements Stepper {
     }
   }
 
-  selectionChange(): Observable<number> { return this._selectionChange; }
+  selectionChange(): Observable<number> {
+    return this._selectionChange;
+  }
 
-  length(): number { return this.matStepper && this.matStepper._steps ? this.matStepper._steps.length : 0; }
+  length(): number {
+    return this.matStepper && this.matStepper._steps ? this.matStepper._steps.length : 0;
+  }
 
   private changeStepper(matStepper?: MatStepper): void {
     if (this._matStepper === matStepper) {
       return;
-    }
-    if (this._matStepper) {
+      }
+    if (this._matStepper && this.unsubscribe) {
       this.unsubscribe.next();
       this.unsubscribe.complete();
-    }
+      }
     if (matStepper) {
       this.unsubscribe = new Subject<any>();
       matStepper.selectionChange.pipe(map((sc) => sc.selectedIndex))

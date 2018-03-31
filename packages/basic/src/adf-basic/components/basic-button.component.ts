@@ -33,6 +33,6 @@ import {Component} from '@angular/core';
   providers: [{provide: DynamicFormControlComponentBase, useExisting: BasicButtonComponent}]
 })
 export class BasicButtonComponent extends DynamicFormControlComponent<NullControlModel> {
-  model: NullControlModel;
-  options: ControlBaseOptions;
+  model!: NullControlModel;
+  options!: ControlBaseOptions;
 }

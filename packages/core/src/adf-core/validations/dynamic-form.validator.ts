@@ -1,7 +1,7 @@
 // tslint:disable max-classes-per-file no-null-keyword
 import {AbstractControl, AsyncValidatorFn, ValidatorFn, Validators, ValidationErrors} from '@angular/forms';
-import {Observable} from 'rxjs/Observable';
-import {map} from 'rxjs/operators/map';
+import {Observable} from 'rxjs';
+import {map} from 'rxjs/operators';
 
 import {ControlModel} from '../models/control-model.interface';
 
@@ -108,6 +108,7 @@ export class DynamicFormValidatorRegistry extends DynamicFormValidation {
     return dffn(key, control);
   }
 
+  // tslint:disable no-unbound-method
   static required(key: string, control: ControlModel): ValidatorFn { return Validators.required; }
   static requiredTrue(key: string, control: ControlModel): ValidatorFn { return Validators.requiredTrue; }
   static minLength(key: string, control: ControlModel): ValidatorFn {
@@ -146,6 +147,7 @@ export class DynamicFormValidatorRegistry extends DynamicFormValidation {
     return Validators.pattern(pattern);
   }
   static email(key: string, control: ControlModel): ValidatorFn { return Validators.email; }
+  // tslint:enable no-unbound-method
 }
 
 

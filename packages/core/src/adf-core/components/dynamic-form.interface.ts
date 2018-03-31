@@ -1,6 +1,6 @@
 // tslint:disable component-class-suffix
 import {ComponentRef, EventEmitter, Injectable} from '@angular/core';
-import {Observable} from 'rxjs/Observable';
+import {Observable} from 'rxjs';
 
 import {FormConfig} from '../config/form-config.interface';
 import {FormModel} from '../models/form-model';
@@ -14,8 +14,8 @@ import {Stepper} from '../models/stepper.interface';
 
 @Injectable()
 export abstract class DynamicForm {
-  model: FormModel;
-  config: FormConfig;
+  abstract model: FormModel;
+  abstract config: FormConfig;
 
   abstract get adfSubmit(): EventEmitter<any>;
   abstract get adfReset(): EventEmitter<any>;

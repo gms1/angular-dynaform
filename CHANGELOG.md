@@ -1,5 +1,10 @@
 # CHANGELOG
 
+## 0.6.0
+
+* **Features**
+  * angular 6.0
+
 ## 0.3.0-0.3.2
 
 maintenance release based on angular 5.2

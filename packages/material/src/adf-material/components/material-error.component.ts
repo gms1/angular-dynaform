@@ -14,7 +14,7 @@ import {Component} from '@angular/core';
   providers: [{provide: DynamicFormErrorComponent, useExisting: MaterialErrorComponent}]
 })
 export class MaterialErrorComponent extends DynamicFormErrorComponent {
-  model: ControlModel;
-  options: ControlOptions;
-  error: DynamicValidationError;
+  model!: ControlModel;
+  options!: ControlOptions;
+  error!: DynamicValidationError;
 }

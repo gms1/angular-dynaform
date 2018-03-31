@@ -28,6 +28,6 @@
     "annotateForClosureCompiler": true,
     "skipMetadataEmit": false,
     "skipTemplateCodegen": true,
-    "strictMetadataEmit": true
+    "strictMetadataEmit": false
   }
 }

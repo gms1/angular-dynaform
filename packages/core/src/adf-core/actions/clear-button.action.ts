@@ -1,5 +1,3 @@
-// tslint:disable use-life-cycle-interface
-
 import {DynamicFormAction} from './dynamic-form.action';
 
 export class ClearButtonAction extends DynamicFormAction {

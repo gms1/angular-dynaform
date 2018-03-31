@@ -13,7 +13,7 @@ import {Component} from '@angular/core';
   providers: [{provide: DynamicFormErrorComponent, useExisting: NativeScriptErrorComponent}]
 })
 export class NativeScriptErrorComponent extends DynamicFormErrorComponent {
-  model: ControlModel;
-  options: ControlOptions;
-  error: DynamicValidationError;
+  model!: ControlModel;
+  options!: ControlOptions;
+  error!: DynamicValidationError;
 }

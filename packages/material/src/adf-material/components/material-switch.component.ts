@@ -36,6 +36,6 @@ import {Component} from '@angular/core';
   providers: [{provide: DynamicFormControlComponentBase, useExisting: MaterialSwitchComponent}]
 })
 export class MaterialSwitchComponent extends DynamicFormControlComponent<ValueControlModel> {
-  model: ValueControlModel;
-  options: ControlSwitchOptions;
+  model!: ValueControlModel;
+  options!: ControlSwitchOptions;
 }

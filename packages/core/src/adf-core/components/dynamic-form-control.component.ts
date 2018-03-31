@@ -1,5 +1,3 @@
-// tslint:disable use-life-cycle-interface
-//   codelyzer does not recognize that the DynamicFormControl extends the interfaces for the lify-cycle hooks
 import {Component, ElementRef, EventEmitter, Input, Output, SimpleChanges, Type} from '@angular/core';
 
 import {DynamicFormControl} from './dynamic-form-control.interface';
@@ -17,13 +15,16 @@ const defaultButtonType = 'button';
   selector: 'adf-contol-component-base',
   template: `Please provide a control-component for '{{ model.config.controlType }}!'`
 })
+// tslint:disable use-life-cycle-interface
 // tslint:disable-next-line component-class-suffix
 export class DynamicFormControlComponentBase implements DynamicFormControl {
-  private _model: ControlModel;
-  options: ControlOptions;
+  private _model!: ControlModel;
+  options!: ControlOptions;
 
   @Input()
-  get model(): ControlModel { return this._model; }
+  get model(): ControlModel {
+    return this._model;
+  }
   set model(model: ControlModel) {
     this._model = model;
     this.options = this.model.options;
@@ -38,7 +39,9 @@ export class DynamicFormControlComponentBase implements DynamicFormControl {
   @Output()
   click: EventEmitter<any>;
 
-  get elementRef(): ElementRef { return this._elementRef; }
+  get elementRef(): ElementRef {
+    return this._elementRef;
+  }
 
   buttonType: string;
 
@@ -63,7 +66,7 @@ export class DynamicFormControlComponentBase implements DynamicFormControl {
     if (this.model.enableIf || this.model.showIf) {
       this.relationAction = new RelationAction(this);
       this.relationAction.ngOnInit();
-    }
+      }
     if (this.model.config.action) {
       let type: Type<DynamicFormAction>|undefined =
           this.dynamicFormService.actionTypes.getType(this.model.config.action);
@@ -81,7 +84,7 @@ export class DynamicFormControlComponentBase implements DynamicFormControl {
   ngAfterViewInit(): void {
     if (this.relationAction) {
       this.relationAction.ngAfterViewInit();
-    }
+      }
     if (this.action) {
       this.action.ngAfterViewInit();
     }
@@ -90,7 +93,7 @@ export class DynamicFormControlComponentBase implements DynamicFormControl {
   ngOnDestroy(): void {
     if (this.action) {
       this.action.ngOnDestroy();
-    }
+      }
     if (this.relationAction) {
       this.relationAction.ngOnDestroy();
     }
@@ -106,7 +109,7 @@ export class DynamicFormControlComponentBase implements DynamicFormControl {
   onElementFocus(event?: Event): void {
     if (this.action) {
       this.action.onFocus(event);
-    }
+      }
     if (this.model.parentArray && this.model.parentArrayIdx !== undefined && this.model.parentArrayIdx >= 0) {
       this.model.parentArray.selectedIndex = this.model.parentArrayIdx;
     }
@@ -132,7 +135,7 @@ export class DynamicFormControlComponentBase implements DynamicFormControl {
 })
 export class DynamicFormControlComponent<M extends ControlModel> extends DynamicFormControlComponentBase {
   @Input()
-  model: M;
+  model!: M;
 
   constructor(form: DynamicForm, dynamicFormService: DynamicFormService, elRef: ElementRef) {
     super(form, dynamicFormService, elRef);

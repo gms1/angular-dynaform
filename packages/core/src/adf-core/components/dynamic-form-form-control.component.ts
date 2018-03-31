@@ -1,7 +1,3 @@
-// tslint:disable use-life-cycle-interface
-//   codelyzer does not recognize that the DynamicFormFormControl extend DynamicFormControl which extends the interfaces
-//   for the
-//   lify-cycle hooks
 // tslint:disable use-input-property-decorator use-output-property-decorator
 import {Component, ElementRef, EventEmitter, Input, Output, SimpleChanges} from '@angular/core';
 
@@ -21,12 +17,13 @@ import {DynamicFormService} from '../services/dynamic-form.service';
   outputs: ['submit', 'reset'],
   providers: [{provide: DynamicFormControlComponentBase, useExisting: DynamicFormFormControlComponent}]
 })
+// tslint:disable use-life-cycle-interface
 export class DynamicFormFormControlComponent extends DynamicFormControlComponent<GroupModel> implements
     DynamicFormFormControl {
   @Input()
-  model: GroupModel;
+  model!: GroupModel;
 
-  options: GroupOptions;
+  options!: GroupOptions;
 
   @Output()
   submit: EventEmitter<any>;
@@ -41,11 +38,17 @@ export class DynamicFormFormControlComponent extends DynamicFormControlComponent
     this.reset = new EventEmitter<any>(false);
   }
 
-  ngOnChanges(changes: SimpleChanges): void { super.ngOnChanges(changes); }
+  ngOnChanges(changes: SimpleChanges): void {
+    super.ngOnChanges(changes);
+  }
 
-  ngOnInit(): void { super.ngOnInit(); }
+  ngOnInit(): void {
+    super.ngOnInit();
+  }
 
-  ngOnDestroy(): void { super.ngOnDestroy(); }
+  ngOnDestroy(): void {
+    super.ngOnDestroy();
+  }
 
   onSubmit(event: Event): void {
     // do not bubble up

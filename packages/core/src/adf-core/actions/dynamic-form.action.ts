@@ -1,4 +1,3 @@
-// tslint:disable max-classes-per-file
 import {AfterViewInit, OnDestroy, OnInit, OnChanges, SimpleChanges} from '@angular/core';
 
 import {ControlModel} from '../models/control-model.interface';

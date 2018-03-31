@@ -1,5 +1,5 @@
 import {AbstractControl, AsyncValidatorFn, FormGroup, ValidatorFn} from '@angular/forms';
-import {Observable} from 'rxjs/Observable';
+import {Observable} from 'rxjs';
 
 import {ControlConfig} from '../config/control-config.interface';
 import {ControlBaseOptions, ValueOptions} from '../config/control-options.interface';
@@ -100,8 +100,8 @@ export abstract class AbstractControlModel<C extends AbstractControl, O extends 
   private _ngControl: C;
   get ngControl(): C { return this._ngControl; }
 
-  protected _ngSubsetControl: C;
-  get ngSubsetControl(): C { return this._ngControl; }
+  protected _ngSubsetControl?: C;
+  get ngSubsetControl(): C|undefined { return this._ngSubsetControl; }
 
   private _formModel: FormModel;
   get formModel(): FormModel { return this._formModel; }
@@ -119,7 +119,7 @@ export abstract class AbstractControlModel<C extends AbstractControl, O extends 
   private validatorFns: ValidatorFn[];
   private asyncValidatorFns: AsyncValidatorFn[];
 
-  private _id: string;
+  private _id!: string;
   get id(): string { return this._id; }
 
   private _key: string;
@@ -154,7 +154,7 @@ export abstract class AbstractControlModel<C extends AbstractControl, O extends 
   get pristine(): boolean { return this.ngControl.pristine; }
   get touched(): boolean { return this.ngControl.touched; }
 
-  private _css: CSSModel;
+  private _css!: CSSModel;
   get css(): CSSModel { return this._css; }
 
   get disabled(): boolean { return this.ngControl.disabled; }
@@ -259,9 +259,7 @@ export abstract class AbstractControlModel<C extends AbstractControl, O extends 
 
   private initId(): void {
     if (this.parentArray) {
-      // type assertion is necessary:
-      // tslint:disable-next-line no-unnecessary-type-assertion
-      this._id = this.parentArray.getId(this.config.id, this.parentArrayIdx as number, this.parentGroup);
+      this._id = this.parentArray.getId(this.config.id, this.parentArrayIdx || 0, this.parentGroup);
     } else {
       this._id = this.config.id;
     }

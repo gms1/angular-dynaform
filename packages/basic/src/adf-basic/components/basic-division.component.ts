@@ -33,6 +33,6 @@ import {Component} from '@angular/core';
   providers: [{provide: DynamicFormControlComponentBase, useExisting: BasicDivisionComponent}]
 })
 export class BasicDivisionComponent extends DynamicFormControlComponent<GroupModelBase> {
-  model: GroupModelBase;
-  options: GroupOptions;
+  model!: GroupModelBase;
+  options!: GroupOptions;
 }

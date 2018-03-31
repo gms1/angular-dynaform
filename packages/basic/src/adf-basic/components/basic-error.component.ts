@@ -13,7 +13,7 @@ import {Component} from '@angular/core';
   providers: [{provide: DynamicFormErrorComponent, useExisting: BasicErrorComponent}]
 })
 export class BasicErrorComponent extends DynamicFormErrorComponent {
-  model: ControlModel;
-  options: ControlOptions;
-  error: DynamicValidationError;
+  model!: ControlModel;
+  options!: ControlOptions;
+  error!: DynamicValidationError;
 }
