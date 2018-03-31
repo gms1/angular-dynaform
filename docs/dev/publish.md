@@ -20,4 +20,3 @@ angular-dynaform (master)$ npm run release:build
 angular-dynaform (master)$ ./build/publish
 ```
 
-* update plunkr

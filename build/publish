@@ -15,16 +15,26 @@ if [ "${answer}" != "yes" ]; then
   exit 0
 fi
 
-pushd "${PROJ_HOME}/packages/core/dist" &>/dev/null
-  npm publish
+pushd "${PROJ_HOME}/packages/core/dist" &>/dev/null || \
+    die "directory '${PROJ_HOME}/packages/core/dist' not found"
+  npm publish || \
+      die "failed to publish 'core'"
 popd &>/dev/null
 
-pushd "${PROJ_HOME}/packages/basic/dist" &>/dev/null
-  npm publish
+pushd "${PROJ_HOME}/packages/basic/dist" &>/dev/null || \
+    die "directory '${PROJ_HOME}/packages/basic/dist' not found"
+  npm publish || \
+      die "failed to publish 'basic'"
 popd &>/dev/null
 
-pushd "${PROJ_HOME}/packages/material/dist" &>/dev/null
-  npm publish
+pushd "${PROJ_HOME}/packages/material/dist" &>/dev/null || \
+    die "directory '${PROJ_HOME}/packages/material/dist' not found"
+  npm publish || \
+      die "failed to publish 'material'"
 popd &>/dev/null
 
-all_plunker_build && all_plunker_publish
+all_plunker_build || \
+  die "failed to build plunkers"
+
+all_plunker_publish || \
+  die "failed to publish plunkers"
