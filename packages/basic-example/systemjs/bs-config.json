@@ -5,5 +5,5 @@
       "/node_modules": "./node_modules/"
     }
   },
-  "browser": "/usr/bin/chromium"
+  "browser": "/usr/bin/chromium-browser"
 }
