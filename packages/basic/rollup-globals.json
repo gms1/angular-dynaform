@@ -9,11 +9,7 @@
   "@angular/platform-browser/animations": "ng.platformBrowser.animations",
   "@angular/platform-browser-dynamic": "ng.platformBrowserDynamic",
   "@angular/router": "ng.router",
-  "rxjs/Observable": "Rx",
-  "rxjs/Observer": "Rx",
-  "rxjs/Subject": "Rx",
-  "rxjs/operators/map": "Rx.map",
-  "rxjs/operators/takeUntil": "Rx.takeUntil",
-  "rxjs/operators/distinctUntilChanged": "Rx.distinctUntilChanged",
+  "rxjs": "Rx",
+  "rxjs/operators": "Rx.Observable.prototype",
   "@angular-dynaform/core": "adf.core"
 }

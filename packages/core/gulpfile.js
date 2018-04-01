@@ -98,7 +98,12 @@ function config(target /* 'production' or 'development' */) {
             // dist/fesm2015: ESM2015 to FESM2015
             name: 'rollup:fesm2015',
             deps: ['ts:ngc:esm2015'],
-            operation: {type: 'rollup', rollupConfigFile: './rollup.config.lib.esm2015.js', addMinified: false}
+            operation: {
+              type: 'rollup',
+              rollupConfigFile: './rollup.config.lib.esm2015.js',
+              addMinified: false,
+              sorcery: true
+            }
           },
           {
             // dist/esm5: AOT to ESM5
@@ -113,14 +118,16 @@ function config(target /* 'production' or 'development' */) {
             // dist/fesm5: ESM5 to FESM5
             name: 'rollup:fesm5',
             deps: ['ts:ngc:esm5'],
-            operation: {type: 'rollup', rollupConfigFile: './rollup.config.lib.esm5.js', addMinified: false}
+            operation:
+                {type: 'rollup', rollupConfigFile: './rollup.config.lib.esm5.js', addMinified: false, sorcery: true}
           },
 
           {
             // main / umd module (ES5)
             name: 'rollup:main',
             // deps: ['ts:ngc:esm5'],
-            operation: {type: 'rollup', rollupConfigFile: './rollup.config.lib.umd.js', addMinified: false}
+            operation:
+                {type: 'rollup', rollupConfigFile: './rollup.config.lib.umd.js', addMinified: false, sorcery: true}
           },
           {
             name: 'rollup:lib',

@@ -51,7 +51,7 @@
     "nativescript-checkbox": "^3.0.3",
     "rxjs": ">=6.0.0-rc.0 <7.0.0",
     "tns-core-modules": "~3.4.1",
-    "zone.js": "^0.8.21"
+    "zone.js": "^0.8.23"
   },
   "devDependencies": {
     "@angular/compiler": ">=6.0.0-rc.0 <7.0.0",
@@ -85,6 +85,7 @@
     "karma-typescript": "3.0.12",
     "karma-typescript-es6-transform": "^1.0.4",
     "merge-stream": "^1.0.1",
+    "rollup-plugin-alias": "^1.4.0",
     "run-sequence": "^2.2.1",
     "sorcery": "^0.10.0",
     "ts-node": "^5.0.1",

@@ -5,6 +5,8 @@ const path = require('path');
 const pkg = require('./package.json');
 const globals = require('./rollup-globals.json');
 const externals = require('./rollup-externals.json');
+const alias = require('rollup-plugin-alias');
+const rxjsPathMapping = require('rxjs/_esm5/path-mapping')();
 
 const utc = new Date().toJSON();
 const moduleName = 'adf.basic';
@@ -21,11 +23,13 @@ module.exports = {
     format: 'umd', globals,
     banner: `/*!\n${pkg.name} ${pkg.version} ${utc} \n*/`,
     sourcemap: true,
+    exports: 'named',
   },
 
   external: Object.keys(externals),
   context: 'this',
   plugins: [
+    alias(rxjsPathMapping),
     nodeResolve({es2015: false, jsnext: false, module: true, main: true}),
     commonjs({include: 'node_modules/**'}),
   ],
