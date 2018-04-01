@@ -1,3 +1,4 @@
+// tslint:disable use-input-property-decorator use-output-property-decorator
 import {Component} from '@angular/core';
 import {
   GroupModelBase,
@@ -24,7 +25,7 @@ import {
           [dynamicHeight]="options.matTabGroupDynamicHeight"
         >
           <mat-tab *ngFor="let item of model.items;" >
-            <ng-template mat-tab-label>{{item.local.label}}</ng-template>
+            <ng-template mat-tab-label>{{ item.local.label }}</ng-template>
             <ng-template adfControlComponent [model]="item" >
             </ng-template>
           </mat-tab>

@@ -5,7 +5,7 @@
     "module": "es2015",
     "moduleResolution": "node",
     "rootDir": "adf-material",
-    "outDir": "../dist/lib"
+    "outDir": "../dist/esm2015"
   },
   "include": [
     "adf-material/public_api.ts"
@@ -16,6 +16,7 @@
     "skipTemplateCodegen": true,
     "strictMetadataEmit": false,
     "flatModuleOutFile": "index.js",
-    "flatModuleId": "@angular-dynaform/material"
+    "flatModuleId": "@angular-dynaform/material",
+    "fullTemplateTypeCheck": true
   }
 }

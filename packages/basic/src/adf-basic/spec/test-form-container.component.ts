@@ -1,3 +1,4 @@
+// tslint:disable component-selector
 import {Component, ViewChild} from '@angular/core';
 
 import {DynamicForm, DynamicFormService, FormModel} from '@angular-dynaform/core';

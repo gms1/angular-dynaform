@@ -1,3 +1,5 @@
+// tslint:disable use-input-property-decorator use-output-property-decorator use-life-cycle-interface
+// tslint:disable no-use-before-declare
 import {Component, ElementRef, ViewChild, AfterViewInit, EventEmitter} from '@angular/core';
 import {map, takeUntil} from 'rxjs/operators';
 import {Observable, Subject} from 'rxjs';
@@ -49,7 +51,7 @@ import {MatStepper} from '@angular/material';
               [optional]="options.matStepOptional"
               [completed]="options.matStepCompleted"
             >
-              <ng-template matStepLabel>{{item.local.label}}</ng-template>
+              <ng-template matStepLabel>{{ item.local.label }}</ng-template>
               <ng-template adfControlComponent [model]="item"></ng-template>
             </mat-step>
         </mat-vertical-stepper>
@@ -64,7 +66,7 @@ import {MatStepper} from '@angular/material';
               [optional]="options.matStepOptional"
               [completed]="options.matStepCompleted"
             >
-              <ng-template matStepLabel>{{item.local.label}}</ng-template>
+              <ng-template matStepLabel>{{ item.local.label }}</ng-template>
               <ng-template adfControlComponent [model]="item"></ng-template>
             </mat-step>
         </mat-horizontal-stepper>

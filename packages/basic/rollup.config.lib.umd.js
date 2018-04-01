@@ -21,7 +21,6 @@ module.exports = {
     format: 'umd', globals,
     banner: `/*!\n${pkg.name} ${pkg.version} ${utc} \n*/`,
     sourcemap: true,
-
   },
 
   external: Object.keys(externals),

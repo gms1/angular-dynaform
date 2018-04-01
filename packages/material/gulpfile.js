@@ -21,12 +21,14 @@ function config(target /* 'production' or 'development' */) {
 
   if (!pkg.module) {
     throw new Error(`property 'module' not defined in package.json`);
-  }
+    }
 
   let srcModulePath = pkg.module.replace(/\.js$/, '.ts');
   if (srcModulePath === pkg.module) {
     throw new Error(`property 'module' in package.json does not have a '.js' extension`);
-  }
+    }
+
+  var tsLintTask = target === 'production' ? 'ts:lint:all' : 'ts:lint';
 
   return {
     rootDir, outDir,
@@ -68,91 +70,64 @@ function config(target /* 'production' or 'development' */) {
             }
           },
           {
-            // AOT to es2015 (ES6)
-            name: 'ts:ngc',
+            name: 'ts:lint:full',
             operation: {
-              type: 'execute',
-              bin: 'node',
-              args: ['node_modules/@angular/compiler-cli/src/main.js', '-p', 'src/tsconfig.lib.json'],
+              type: 'tslint',
+              src: './src/**/*.ts',
+              tsLintFile: 'tslint.full.json',
+              typeChecking: true,
             }
           },
-          {
-            // es2015 module (ES6)
-            name: 'rollup:es2015',
-            // deps: ['ts:ngc'],
-            operation: {
-              type: 'rollup',
-              rollupConfigFile: './rollup.config.lib.es2015.js',
-              addMinified: false,
-              sorcery: true,
-            }
-          },
-          {
-            name: 'ts:tsc:esm:input',
-            // deps: ['rollup:es2015'],
-            operation: {
-              type: 'copyFile',
-              src: `dist/${pkg.es2015}`,
-              base: `dist/${pkg.es2015}`,
-              out: `dist/${srcModulePath}`,
-            }
-          },
-          {
-            name: 'ts:tsc:esm:trans',
-            // deps: ['ts:tsc:esm:input'],
-            operation: {
-              type: 'execute',
-              bin: 'node',
-              silent: true,
-              options: {
-                continue: true,
-              },
-              args: [
-                'node_modules/typescript/lib/tsc.js', '--target', 'es5', '--module', 'es2015', '--noLib', '--sourceMap',
-                `dist/${srcModulePath}`
-              ],
-            }
-          },
-          {
-            name: 'ts:tsc:esm:sorcery',
-            operation: {
-              type: 'sorcery',
-              file: `dist/${pkg.module}`,
-            }
-          },
-          {
-            name: 'ts:tsc:esm:cleanup',
-            // deps: ['ts:tsc:esm:trans'],
-            operation: {
-              type: 'delete',
-              src: `dist/${srcModulePath}`,
-            }
-          },
-          {
-            name: 'ts:tsc:esm',
-            // deps: ['rollup:es2015'],
+          {name: 'ts:lint:ng', operation: {type: 'tslint', src: './src/**/*.ts', tsLintFile: 'tslint.ng.json'}}, {
+            name: 'ts:lint:all',
             operation: {
               type: 'sequence',
-              sequence: ['ts:tsc:esm:input', 'ts:tsc:esm:trans', 'ts:tsc:esm:sorcery', 'ts:tsc:esm:cleanup'],
+              sequence: ['ts:lint:full', 'ts:lint:ng'],
             }
           },
+          {
+            // dist/esm2015: AOT to ESM2015
+            name: 'ts:ngc:esm2015',
+            operation: {
+              type: 'execute',
+              bin: 'node',
+              args: ['node_modules/@angular/compiler-cli/src/main.js', '-p', 'src/tsconfig.lib.esm2015.json'],
+            }
+          },
+          {
+            // dist/fesm2015: ESM2015 to FESM2015
+            name: 'rollup:fesm2015',
+            deps: ['ts:ngc:esm2015'],
+            operation: {type: 'rollup', rollupConfigFile: './rollup.config.lib.esm2015.js', addMinified: false}
+          },
+          {
+            // dist/esm5: AOT to ESM5
+            name: 'ts:ngc:esm5',
+            operation: {
+              type: 'execute',
+              bin: 'node',
+              args: ['node_modules/@angular/compiler-cli/src/main.js', '-p', 'src/tsconfig.lib.esm5.json'],
+            }
+          },
+          {
+            // dist/fesm5: ESM5 to FESM5
+            name: 'rollup:fesm5',
+            deps: ['ts:ngc:esm5'],
+            operation: {type: 'rollup', rollupConfigFile: './rollup.config.lib.esm5.js', addMinified: false}
+          },
+
           {
             // main / umd module (ES5)
             name: 'rollup:main',
-            // deps: ['ts:tsc:esm'],
-            operation: {
-              type: 'rollup',
-              rollupConfigFile: './rollup.config.lib.umd.js',
-              addMinified: false,
-              sorcery: true,
-            }
+            // deps: ['ts:ngc:esm5'],
+            operation: {type: 'rollup', rollupConfigFile: './rollup.config.lib.umd.js', addMinified: false}
           },
           {
             name: 'rollup:lib',
-            deps: ['ts:ngc'],
+            deps: [],
             operation: {
               type: 'sequence',
-              sequence: ['rollup:es2015', 'ts:tsc:esm', 'rollup:main'],
+              sequence: ['rollup:fesm2015', 'rollup:fesm5', 'rollup:main'],
             }
           },
           {
@@ -162,7 +137,7 @@ function config(target /* 'production' or 'development' */) {
               tsConfigFile: 'src/tsconfig.spec.json',
             }
           },
-          {name: 'build', deps: ['dist:files', 'ts:lint', 'rollup:lib']}, {
+          {name: 'build', deps: ['dist:files', tsLintTask, 'rollup:lib']}, {
             name: 'watch',
             watch: ['./src/**/*.*'],
           },

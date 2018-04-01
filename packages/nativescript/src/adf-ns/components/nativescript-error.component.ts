@@ -1,7 +1,7 @@
+// tslint:disable use-input-property-decorator use-output-property-decorator
 // tslint:disable use-life-cycle-interface
 import {ControlModel, ControlOptions, DynamicFormErrorComponent, DynamicValidationError} from '@angular-dynaform/core';
 
-// tslint:disable use-input-property-decorator use-output-property-decorator no-access-missing-member
 import {Component} from '@angular/core';
 
 @Component({

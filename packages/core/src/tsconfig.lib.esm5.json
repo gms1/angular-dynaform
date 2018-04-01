@@ -1,0 +1,22 @@
+{
+  "extends": "../tsconfig.json",
+  "compilerOptions": {
+    "target": "es5",
+    "module": "es2015",
+    "moduleResolution": "node",
+    "rootDir": "adf-core",
+    "outDir": "../dist/esm5"
+  },
+  "include": [
+    "adf-core/public_api.ts"
+  ],
+  "angularCompilerOptions": {
+    "annotateForClosureCompiler": true,
+    "skipMetadataEmit": false,
+    "skipTemplateCodegen": true,
+    "strictMetadataEmit": false,
+    "flatModuleOutFile": "index.js",
+    "flatModuleId": "@angular-dynaform/core",
+    "fullTemplateTypeCheck": true
+  }
+}

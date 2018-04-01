@@ -1,4 +1,4 @@
-// tslint:disable no-null-keyword
+// tslint:disable no-null-keyword no-unbound-method
 import {APP_BASE_HREF} from '@angular/common';
 import {DebugElement} from '@angular/core';
 import {TestBed, ComponentFixture} from '@angular/core/testing';
@@ -37,13 +37,13 @@ describe('test suite', () => {
     let res = debugElement.query(By.css(`#${id}`));
     expect(res instanceof DebugElement).toBe(true, `element with id "${id}" not found`);
     return res;
-  }
+    }
 
   function findComponentById(id: string): DynamicFormControl {
     let res = form.findComponentById(id);
     if (!res) {
       throw new Error(`component with id "${id}" not found`);
-    }
+      }
     return res;
   }
 
@@ -64,7 +64,7 @@ describe('test suite', () => {
     expect(container instanceof TestFormContainerComponent).toBe(true, 'container is not defined');
     service = container.dynamicFormService;
     expect(service instanceof DynamicFormService).toBe(true, 'service is not defined');
-    form = container.form as DynamicForm;
+    form = container.form;
     expect(form instanceof DynamicForm).toBe(true, 'form is not defined');
     model = service.createFormModel(mainExampleConfig, mainExampleFormLanguages.en);
     expect(model instanceof FormModel).toBe(true, 'model is not defined');
@@ -213,7 +213,9 @@ describe('test suite', () => {
     let lastNameEl = findDebugElementById('lastName');
 
     let hasFocus;
-    lastNameComp.focusChanges.subscribe((v: boolean) => { hasFocus = v; });
+    lastNameComp.focusChanges.subscribe((v: boolean) => {
+      hasFocus = v;
+    });
 
     lastNameEl.triggerEventHandler('focus', null);
     expect(hasFocus).toBeTruthy('focus change not triggered the focus event');
@@ -230,7 +232,9 @@ describe('test suite', () => {
     let lastNameEl = findDebugElementById('lastName');
 
     let clicked = 0;
-    lastNameComp.click.subscribe(() => { ++clicked; });
+    lastNameComp.click.subscribe(() => {
+      ++clicked;
+    });
 
     lastNameEl.nativeElement.click();
     lastNameEl.nativeElement.click();

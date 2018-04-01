@@ -21,7 +21,7 @@ function config(target /* 'production' or 'development' */) {
 
   if (!pkg.main) {
     throw new Error(`property 'main' not defined in package.json`);
-  }
+    }
 
   return {
     rootDir, outDir,
@@ -68,7 +68,7 @@ function config(target /* 'production' or 'development' */) {
             operation: {
               type: 'execute',
               bin: 'node',
-              args: ['node_modules/@angular/compiler-cli/src/main.js', '-p', 'src/tsconfig.lib.json'],
+              args: ['node_modules/@angular/compiler-cli/src/main.js', '-p', 'src/tsconfig.lib.es5cjs.json'],
             }
           },
           {

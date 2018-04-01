@@ -7,18 +7,21 @@ const globals = require('./rollup-globals.json');
 const externals = require('./rollup-externals.json');
 
 const utc = new Date().toJSON();
-const moduleName = 'adf.material';
+const moduleName = 'adf.basic';
 
-if (!pkg.module || !pkg.es2015 || !pkg.main) {
-  throw new Error(`property 'module' and/or 'es2015' and/or 'main' not defined in package.json`);
+if (!pkg.esm2015) {
+  throw new Error(`property 'esm2015' not defined in package.json`);
+  }
+if (!pkg.fesm2015) {
+  throw new Error(`property 'fesm2015' not defined in package.json`);
 }
 
 module.exports = {
-  input: `dist/${pkg.module}`,
+  input: `dist/${pkg.esm2015}`,
   output: {
     name: moduleName,
-    file: `dist/${pkg.main}`,
-    format: 'umd', globals,
+    file: `dist/${pkg.fesm2015}`,
+    format: 'es', globals,
     banner: `/*!\n${pkg.name} ${pkg.version} ${utc} \n*/`,
     sourcemap: true,
   },
@@ -26,10 +29,10 @@ module.exports = {
   external: Object.keys(externals),
   context: 'this',
   plugins: [
-    nodeResolve({es2015: false, jsnext: false, module: true, main: true}),
+    nodeResolve({es2015: true, jsnext: true, module: true, main: true}),
     commonjs({include: 'node_modules/**'}),
   ],
-  treeshake: true,
+  treeshake: false,
 
   onwarn: function(warning) {
     // Suppress this error message... there are hundreds of them. Angular team says to ignore it.

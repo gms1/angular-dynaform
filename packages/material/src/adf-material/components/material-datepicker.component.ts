@@ -1,4 +1,4 @@
-// tslint:disable use-input-property-decorator use-output-property-decorator no-access-missing-member
+// tslint:disable use-input-property-decorator use-output-property-decorator
 import {
   ControlInputOptions,
   DynamicFormControlComponentBase,

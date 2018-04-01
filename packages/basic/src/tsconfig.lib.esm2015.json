@@ -5,7 +5,7 @@
     "module": "es2015",
     "moduleResolution": "node",
     "rootDir": "adf-basic",
-    "outDir": "../dist/lib"
+    "outDir": "../dist/esm2015"
   },
   "include": [
     "adf-basic/public_api.ts"
@@ -15,6 +15,8 @@
     "skipMetadataEmit": false,
     "skipTemplateCodegen": true,
     "strictMetadataEmit": false,
-    "flatModuleOutFile": "index.js"
+    "flatModuleOutFile": "index.js",
+    "flatModuleId": "@angular-dynaform/basic",
+    "fullTemplateTypeCheck": true
   }
 }

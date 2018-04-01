@@ -21,9 +21,13 @@
     "url": "git+https://github.com/gms1/angular-dynaform.git"
   },
   "main": "bundles/adf.core.umd.js",
-  "module": "index.es5.js",
-  "es2015": "index.js",
-  "typings": "./lib/index.d.ts",
+  "module": "./fesm5/index.js",
+  "es2015": "./fesm2015/index.js",
+  "esm5": "./esm5/index.js",
+  "esm2015": "./esm2015/index.js",
+  "fesm5": "./fesm5/index.js",
+  "fesm2015": "./fesm2015/index.js",
+  "typings": "esm2015/index.d.ts",
   "scripts": {
     "clean": "gulp clean",
     "build": "gulp build",
