@@ -10,6 +10,7 @@ System.config({
 });
 
 
+
 System.config({
 
   map: {
@@ -28,12 +29,10 @@ System.config({
         'npm-ext:@angular/platform-browser/bundles/platform-browser-animations.umd.js',
     '@angular/animations/browser': 'npm-ext:@angular/animations/bundles/animations-browser.umd.js',
 
-    'tslib': 'npm-ext:tslib',
+    'tslib': 'npm-ext:tslib/tslib',
 
-    'rxjs': 'npm-ext:rxjs',
-    'rxjs/operators/map': 'npm-ext:rxjs/operators/map.js',
-    'rxjs/operators/takeUntil': 'npm-ext:rxjs/operators/takeUntil.js',
-    'rxjs/operators/distinctUntilChanged': 'npm-ext:rxjs/operators/distinctUntilChanged.js',
+    'rxjs': 'npm-ext:rxjs/bundles/rxjs.umd.js',
+    'rxjs/operators': 'npm-ext:rxjs/operators/index.js',
 
     'jsonpointerx': 'npm-ext:jsonpointerx/bundles/jsonpointerx.umd.js',
     'jsep': 'npm-ext:jsep/build/jsep.js',
@@ -45,6 +44,5 @@ System.config({
   },
   packages: {
     app: {main: './main.ts', defaultExtension: 'ts'},
-    'rxjs': {main: 'index'},
   }
 });

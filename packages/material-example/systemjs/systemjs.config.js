@@ -47,14 +47,14 @@ System.config({
     '@angular/cdk/scrolling': 'npm-ext:@angular/cdk/bundles/cdk-scrolling.umd.js',
     '@angular/cdk/collections': 'npm-ext:@angular/cdk/bundles/cdk-collections.umd.js',
     '@angular/cdk/stepper': 'npm-ext:@angular/cdk/bundles/cdk-stepper.umd.js',
+    '@angular/cdk/tree': 'npm-ext:@angular/cdk/bundles/cdk-tree.umd.js',
+    '@angular/cdk/text-field': 'npm-ext:@angular/cdk/bundles/cdk-text-field.umd.js',
 
 
     'tslib': 'npm-ext:tslib/tslib',
 
-    'rxjs': 'npm-ext:rxjs',
-    'rxjs/operators/map': 'npm-ext:rxjs/operators/map.js',
-    'rxjs/operators/takeUntil': 'npm-ext:rxjs/operators/takeUntil.js',
-    'rxjs/operators/distinctUntilChanged': 'npm-ext:rxjs/operators/distinctUntilChanged.js',
+    'rxjs': 'npm-ext:rxjs/bundles/rxjs.umd.js',
+    'rxjs/operators': 'npm-ext:rxjs/operators/index.js',
 
     'jsonpointerx': 'npm-ext:jsonpointerx/bundles/jsonpointerx.umd.js',
     'jsep': 'npm-ext:jsep/build/jsep.js',
@@ -66,6 +66,5 @@ System.config({
   },
   packages: {
     app: {main: './main.ts', defaultExtension: 'ts'},
-    'rxjs': {main: 'index'},
   }
 });
