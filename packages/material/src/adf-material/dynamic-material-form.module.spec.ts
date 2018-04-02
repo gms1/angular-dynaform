@@ -192,26 +192,30 @@ describe('test suite', () => {
     let atcEl = findDebugElementById('atc');
     let newsLetterEl = findDebugElementById('newsletter');
 
+    let atcInputEl: HTMLInputElement;
+    let newsLetterInputEl: HTMLInputElement;
+    atcInputEl = atcEl.nativeElement.querySelector('input');
+    newsLetterInputEl = newsLetterEl.nativeElement.querySelector('input');
+
     expect(newsLetterComp.model.ngControl.disabled)
         .toBe(true, 'newsletter component is not disabled on initialization');
 
-    // material: TODO: nativeElement.disabled not in sync?
-    // expect(newsLetterEl.nativeElement.disabled).toBeTruthy('newsletter element is not disabled on initialization');
-    // console.log(`before: newsletter attribute: ${newsLetterEl.nativeElement.disabled}`);
+    // material: TODO: nativeElement.disabled and inputElement.disabled are not in sync?
+    // expect(newsLetterInputEl.disabled).toBeTruthy('newsletter element is not disabled on initialization');
+    // console.log(`before: newsletter newsLetterInputEl.disabled: ${newsLetterInputEl.disabled}`);
+    // console.log(`before: newsletter newsLetterEl.nativeElement.disabled: ${newsLetterEl.nativeElement.disabled}`);
 
-    // material: TODO: nativeElement.click() does not update the model?
-    // atcEl.nativeElement.click();
-    atcComp.model.ngControl.setValue(true);
-
+    atcInputEl.click();
     fixture.detectChanges();
 
     expect(newsLetterComp.model.ngControl.disabled)
         .toBe(false, 'newsletter component is not enabled after atc has been selected');
 
-    // material: TODO: nativeElement.disabled not in sync?
-    // expect(newsLetterEl.nativeElement.disabled)
-    //     .toBeFalsy('newsletter element is not enabled after atc has been selected');
-    // console.log(`after: newsletter attribute: ${newsLetterEl.nativeElement.disabled}`);
+    // material: TODO: nativeElement.disabled and inputElement.disabled are not in sync?
+    // expect(newsLetterInputEl.disabled).toBeFalsy('newsletter element is not enabled after atc has been
+    // selected');
+    // console.log(`after: newsletter newsLetterInputEl.disabled: ${newsLetterInputEl.disabled}`);
+    // console.log(`after: newsletter newsLetterEl.nativeElement.disabled: ${newsLetterEl.nativeElement.disabled}`);
   });
 
   // --------------------------------------------------------------------------------------------------
