@@ -187,27 +187,31 @@ describe('test suite', () => {
     form.initValue(mainExampleFormModelData);
     expect(form.valid).toBe(true, 'form is not valid but should be');
 
+    let atcComp = findComponentById('atc');
     let newsLetterComp = findComponentById('newsletter');
+    let atcEl = findDebugElementById('atc');
+    let newsLetterEl = findDebugElementById('newsletter');
 
     expect(newsLetterComp.model.ngControl.disabled)
         .toBe(true, 'newsletter component is not disabled on initialization');
 
-    let atcEl = findDebugElementById('atc');
-    // let newsLetterEl = findDebugElementById('newsletter');
+    // material: TODO: nativeElement.disabled not in sync?
+    // expect(newsLetterEl.nativeElement.disabled).toBeTruthy('newsletter element is not disabled on initialization');
+    // console.log(`before: newsletter attribute: ${newsLetterEl.nativeElement.disabled}`);
 
-    // TODO: does not work in material2?
-    // expect(newsLetterEl.nativeElement.getAttribute('disabled') === null)
-    //     .toBeFalsy('newsletter field is not disabled on initialization');
+    // material: TODO: nativeElement.click() does not update the model?
+    // atcEl.nativeElement.click();
+    atcComp.model.ngControl.setValue(true);
 
-    atcEl.nativeElement.click();
+    fixture.detectChanges();
 
-    // TODO: does not work in material2?
-    // expect(newsLetterEl.nativeElement.getAttribute('disabled'))
-    //     .toBeNull('newsletter field is not enabled after atc has been selected');
+    expect(newsLetterComp.model.ngControl.disabled)
+        .toBe(false, 'newsletter component is not enabled after atc has been selected');
 
-    // TODO: even the model is wrong, but testing this functionality by hand works
-    // expect(newsLetterComp.model.ngControl.disabled)
-    //     .toBe(false, 'newsletter component is not enabled after atc has been selected');
+    // material: TODO: nativeElement.disabled not in sync?
+    // expect(newsLetterEl.nativeElement.disabled)
+    //     .toBeFalsy('newsletter element is not enabled after atc has been selected');
+    // console.log(`after: newsletter attribute: ${newsLetterEl.nativeElement.disabled}`);
   });
 
   // --------------------------------------------------------------------------------------------------
@@ -267,12 +271,16 @@ describe('test suite', () => {
     contactsTypeEl.triggerEventHandler('focus', null);
     expect(contactsModel.selectedIndex).toBe(0, 'current index has not been set by focus on contactType field');
 
+    let contactsDeleteComp = findComponentById('contacts-HEADER-deleteContact');
     let contactsDeleteEl = findDebugElementById('contacts-HEADER-deleteContact');
+
+    expect(contactsDeleteComp.model.ngControl.disabled).toBe(false, 'contact delete button not properly initialized');
+
     contactsDeleteEl.nativeElement.click();
     expect(contactsModel.items.length).toBe(0, 'contacts array item has not been deleted');
 
-    expect(contactsDeleteEl.nativeElement.getAttribute('disabled'))
-        .toBe('', 'contact delete button has not been disabled after deleting all items');
+    expect(contactsDeleteComp.model.ngControl.disabled)
+        .toBe(true, 'contact delete button has not been disabled after deleting all items');
   });
 
 

@@ -187,24 +187,22 @@ describe('test suite', () => {
     form.initValue(mainExampleFormModelData);
     expect(form.valid).toBe(true, 'form is not valid but should be');
 
+    let atcComp = findComponentById('atc');
     let newsLetterComp = findComponentById('newsletter');
-
-    expect(newsLetterComp.model.ngControl.disabled)
-        .toBe(true, 'newsletter component is not disabled on initialization');
-
     let atcEl = findDebugElementById('atc');
     let newsLetterEl = findDebugElementById('newsletter');
 
-    expect(newsLetterEl.nativeElement.getAttribute('disabled') === null)
-        .toBeFalsy('newsletter field is not disabled on initialization');
+    expect(newsLetterComp.model.ngControl.disabled)
+        .toBe(true, 'newsletter component is not disabled on initialization');
+    expect(newsLetterEl.nativeElement.disabled).toBeTruthy('newsletter element is not disabled on initialization');
 
     atcEl.nativeElement.click();
-
-    expect(newsLetterEl.nativeElement.getAttribute('disabled'))
-        .toBeNull('newsletter field is not enabled after atc has been selected');
+    fixture.detectChanges();
 
     expect(newsLetterComp.model.ngControl.disabled)
         .toBe(false, 'newsletter component is not enabled after atc has been selected');
+    expect(newsLetterEl.nativeElement.disabled)
+        .toBeFalsy('newsletter element is not enabled after atc has been selected');
   });
 
   // --------------------------------------------------------------------------------------------------
@@ -264,12 +262,16 @@ describe('test suite', () => {
     contactsTypeEl.triggerEventHandler('focus', null);
     expect(contactsModel.selectedIndex).toBe(0, 'current index has not been set by focus on contactType field');
 
+    let contactsDeleteComp = findComponentById('contacts-HEADER-deleteContact');
     let contactsDeleteEl = findDebugElementById('contacts-HEADER-deleteContact');
+
+    expect(contactsDeleteComp.model.ngControl.disabled).toBe(false, 'contact delete button not properly initialized');
+
     contactsDeleteEl.nativeElement.click();
     expect(contactsModel.items.length).toBe(0, 'contacts array item has not been deleted');
 
-    expect(contactsDeleteEl.nativeElement.getAttribute('disabled'))
-        .toBe('', 'contact delete button has not been disabled after deleting all items');
+    expect(contactsDeleteComp.model.ngControl.disabled)
+        .toBe(true, 'contact delete button has not been disabled after deleting all items');
   });
 
 
