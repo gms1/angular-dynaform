@@ -48,7 +48,7 @@
     "jsep": "^0.3.4",
     "jsonpointerx": "^1.0.8",
     "rxjs": ">=6.0.0-rc.0 <7.0.0",
-    "zone.js": "^0.8.23"
+    "zone.js": "^0.8.25"
   },
   "devDependencies": {
     "@angular/compiler": ">=6.0.0-rc.0 <7.0.0",
@@ -57,7 +57,7 @@
     "@angular/platform-browser-dynamic": ">=6.0.0-rc.0 <7.0.0",
     "@types/gulp": "^4.0.5",
     "@types/jasmine": "^2.8.6",
-    "@types/node": "^9.6.1",
+    "@types/node": "^9.6.2",
     "child_process": "^1.0.2",
     "codelyzer": "^4.2.1",
     "del": "^3.0.0",

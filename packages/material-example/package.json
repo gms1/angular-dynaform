@@ -36,7 +36,7 @@
     "jsonpointerx": "^1.0.8",
     "rxjs": ">=6.0.0-rc.0 <7.0.0",
     "tslint": "^5.9.1",
-    "zone.js": "^0.8.23"
+    "zone.js": "^0.8.25"
   },
   "devDependencies": {
     "@angular/cli": "1.7.3",

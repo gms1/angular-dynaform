@@ -1,4 +1,4 @@
-// tslint:disable no-null-keyword no-unbound-method
+// tslint:disable no-null-keyword no-unbound-method no-unused-variable
 import {APP_BASE_HREF} from '@angular/common';
 import {DebugElement} from '@angular/core';
 import {TestBed, ComponentFixture} from '@angular/core/testing';
@@ -187,7 +187,6 @@ describe('test suite', () => {
     form.initValue(mainExampleFormModelData);
     expect(form.valid).toBe(true, 'form is not valid but should be');
 
-    let atcComp = findComponentById('atc');
     let newsLetterComp = findComponentById('newsletter');
     let atcEl = findDebugElementById('atc');
     let newsLetterEl = findDebugElementById('newsletter');
