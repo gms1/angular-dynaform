@@ -29,7 +29,7 @@
     "./node_modules/**/*"
   ],
   "angularCompilerOptions": {
-    "strictMetadataEmit": false,
+    "strictMetadataEmit": true,
     "annotateForClosureCompiler": false,
     "skipMetadataEmit": true,
     "skipTemplateCodegen": true
