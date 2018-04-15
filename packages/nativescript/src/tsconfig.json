@@ -1,0 +1,10 @@
+// tsconfig to make vscode happy, otherwise the typeRoot will not be found
+{
+  "extends": "../tsconfig.json",
+  "compilerOptions": {
+    "target": "es2015",
+    "module": "es2015",
+    "moduleResolution": "node",
+    "outDir": "../tmp/unused"
+  }
+}
