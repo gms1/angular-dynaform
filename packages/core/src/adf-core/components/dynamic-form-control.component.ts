@@ -68,7 +68,7 @@ export class DynamicFormControlComponentBase implements DynamicFormControl {
       this.relationAction.ngOnInit();
       }
     if (this.model.config.action) {
-      let type: Type<DynamicFormAction>|undefined =
+      const type: Type<DynamicFormAction>|undefined =
           this.dynamicFormService.actionTypes.getType(this.model.config.action);
       if (!type) {
         throw new Error(`no type registered for '${this.model.config.action}'`);

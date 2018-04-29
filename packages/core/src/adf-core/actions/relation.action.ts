@@ -21,7 +21,7 @@ export class RelationAction extends DynamicFormAction {
   ngOnInit(): void {
     super.ngOnInit();
     if (this.model.enableIf) {
-      let observable = this.getObservable(this.model.enableIf);
+      const observable = this.getObservable(this.model.enableIf);
       if (observable) {
         observable.subscribe((v) => {
           if (v) {
@@ -37,7 +37,7 @@ export class RelationAction extends DynamicFormAction {
       }
       }
     if (this.model.showIf) {
-      let observable = this.getObservable(this.model.showIf);
+      const observable = this.getObservable(this.model.showIf);
       if (observable) {
         observable.subscribe((v) => {
           v ? this.model.show() : this.model.hide();
@@ -56,11 +56,11 @@ export class RelationAction extends DynamicFormAction {
     // and subject for changes in the future
     expr.thisArg = this.model.ngControl;
     expr.context = {};
-    let model = this.findRelatedRootModel(expr.getContextMembersRoot());
+    const model = this.findRelatedRootModel(expr.getContextMembersRoot());
     if (!model || !model.jpForm) {
       return undefined;
       }
-    let jpForm = model.jpForm;
+    const jpForm = model.jpForm;
     let run: (v: any) => any;
     if (jpForm.root) {
       run = (v: any) => {
@@ -81,8 +81,8 @@ export class RelationAction extends DynamicFormAction {
   private findRelatedRootModel(path: string[]): ControlModel {
     let relModel: ControlModel = this.model.formModel.group;
 
-    for (let segment of path) {
-      let foundModel = relModel.getControl(segment);
+    for (const segment of path) {
+      const foundModel = relModel.getControl(segment);
       if (!foundModel || foundModel instanceof ArrayModel) {
         return relModel;
       }

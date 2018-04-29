@@ -29,7 +29,7 @@ export abstract class ControlModelBase<O> extends AbstractControlModel<FormContr
     this.setCSSClasses(this.css.label, 'adf-control-label');
     this.setCSSClasses(this.css.error, 'adf-control-error');
   }
-}
+  }
 
 
 export class NullControlModel extends ControlModelBase<ControlBaseOptions> {
@@ -40,7 +40,7 @@ export class NullControlModel extends ControlModelBase<ControlBaseOptions> {
         dynamicFormService, config, config.options || {}, new NgNullControl({disabled: config.disabled}), formModel,
         parentPath, parentGroup, parentArray, parentArrayIdx);
   }
-}
+  }
 
 
 export class ValueControlModel extends ControlModelBase<ControlValueOptions> {
@@ -76,8 +76,8 @@ export class ValueControlModel extends ControlModelBase<ControlValueOptions> {
   valueFromAppModel(formData: any, appData: any, appPointerPrefix?: JsonPointer): any {
     if (!this.jpApp || !this.jpForm) {
       return formData;
-    }
-    let appValue = (appPointerPrefix ? appPointerPrefix.concat(this.jpApp) : this.jpApp).get(appData);
+      }
+    const appValue = (appPointerPrefix ? appPointerPrefix.concat(this.jpApp) : this.jpApp).get(appData);
     // tslint:disable-next-line triple-equals
     this.jpForm.set(formData, appValue == undefined ? undefined : appValue);
     return appData;

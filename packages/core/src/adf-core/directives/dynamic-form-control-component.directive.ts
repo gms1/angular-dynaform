@@ -35,14 +35,20 @@ export class DynamicFormControlComponentDirective implements OnInit, DoCheck, On
       private viewContainerRef: ViewContainerRef, private renderer: Renderer2,
       private keyValueDiffers: KeyValueDiffers) {}
 
-  ngOnInit(): void { this.createComponent(); }
+  ngOnInit(): void {
+    this.createComponent();
+  }
 
-  ngDoCheck(): void { this.checkComponent(); }
+  ngDoCheck(): void {
+    this.checkComponent();
+  }
 
-  ngOnDestroy(): void { this.destroyComponent(); }
+  ngOnDestroy(): void {
+    this.destroyComponent();
+  }
 
   private createComponent(): void {
-    let componentFactory = this.componentsFactoryService.getControlComponentFactory(this.model.config);
+    const componentFactory = this.componentsFactoryService.getControlComponentFactory(this.model.config);
 
     try {
       this.componentRef = this.viewContainerRef.createComponent<DynamicFormControl>(
@@ -65,7 +71,7 @@ export class DynamicFormControlComponentDirective implements OnInit, DoCheck, On
   private checkComponent(): void {
     if (this.dynamicClass) {
       this.dynamicClass.ngDoCheck();
-    }
+      }
     if (this.componentRef) {
       this.componentRef.instance.model = this.model;
       this.componentRef.changeDetectorRef.detectChanges();

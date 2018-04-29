@@ -30,7 +30,7 @@ export class DynamicFormModelFactoryService {
       parentArray?: ArrayModel, parentArrayIdx?: number): ControlModel {
     if (!parentGroup) {
       throw new Error(`internal error: no parentGroup defined for control '${config.id}'`);
-    }
+      }
     switch (config.modelType) {
       case ModelType.MODEL_GROUP:
         return new GroupModel(
@@ -61,7 +61,7 @@ export class DynamicFormModelFactoryService {
   createArrayGroup(
       id: string, formModel: FormModel, parentArray: ArrayModel, parentArrayIdx: number, options: GroupOptions,
       parentPath?: string[]): GroupModel {
-    let groupConfig: ControlConfig = {
+    const groupConfig: ControlConfig = {
       id,
       modelType: ModelType.MODEL_GROUP,
       controlType: ControlType.CONTROL_UNKNOWN,  // does not have a corresponding control component, will be shown as

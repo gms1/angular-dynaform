@@ -33,7 +33,7 @@ export class DynamicFormComponentFactoryService {
   getControlComponentFactory(config: ControlConfig): ComponentFactory<DynamicFormControlComponentBase>|never {
     let controlType: Type<DynamicFormControlComponentBase>|undefined;
     if (Array.isArray(config.controlType)) {
-      for (let typeName of config.controlType) {
+      for (const typeName of config.controlType) {
         controlType = this.controlComponentRegistry.get(typeName);
         if (controlType) {
           break;
@@ -42,10 +42,10 @@ export class DynamicFormComponentFactoryService {
     } else {
       controlType = this.controlComponentRegistry.get(config.controlType) ||
           this.controlComponentRegistry.get(ControlType.CONTROL_UNKNOWN);
-    }
+      }
     if (!controlType) {
       throw new Error(`control component '${config.controlType}' defined for '${config.id}' not found`);
-    }
+      }
     return this.resolver.resolveComponentFactory<DynamicFormControlComponentBase>(controlType);
   }
 

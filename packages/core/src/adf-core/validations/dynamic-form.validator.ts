@@ -25,46 +25,50 @@ export abstract class DynamicFormValidationBase<Fn> {
 
   protected buildError(control: ControlModel, key: string, order: number, error: ValidationErrors):
       DynamicValidationErrorResult {
-    let msg = (control.local.errors && control.local.errors[key]) ||
+    const msg = (control.local.errors && control.local.errors[key]) ||
         (control.formModel.i18n && control.formModel.i18n.errors && control.formModel.i18n.errors[key]) ||
         control.formModel.config.errors && control.formModel.config.errors[key] || key;
     return {[key]: {key, order, message: msg || key}};
   }
-}
+  }
 
 export abstract class DynamicFormValidation extends DynamicFormValidationBase<ValidatorFn> {
   validateWrap(control: ControlModel, key: string|string[], order: number): ValidatorFn[] {
-    let res: ValidatorFn[] = [];
+    const res: ValidatorFn[] = [];
     if (Array.isArray(key)) {
-      key.forEach((keyItem) => { res.push(this.validateKey(control, keyItem, order++)); });
+      key.forEach((keyItem) => {
+        res.push(this.validateKey(control, keyItem, order++));
+      });
     } else {
       res.push(this.validateKey(control, key, order));
-    }
+      }
     return res;
   }
 
   private validateKey(control: ControlModel, key: string, order: number): ValidatorFn {
-    let fn: ValidatorFn = this.validate(key, control);
+    const fn: ValidatorFn = this.validate(key, control);
     return (c: AbstractControl): DynamicValidationErrorResult | null => {
-      let res = fn(c);
+      const res = fn(c);
       return res === null ? res : super.buildError(control, key, order, res);
     };
   }
-}
+  }
 
 export abstract class DynamicFormAsyncValidation extends DynamicFormValidationBase<AsyncValidatorFn> {
   validateWrap(control: ControlModel, key: string|string[], order: number): AsyncValidatorFn[] {
-    let res: AsyncValidatorFn[] = [];
+    const res: AsyncValidatorFn[] = [];
     if (Array.isArray(key)) {
-      key.forEach((keyItem) => { res.push(this.validateKey(control, keyItem, order++)); });
+      key.forEach((keyItem) => {
+        res.push(this.validateKey(control, keyItem, order++));
+      });
     } else {
       res.push(this.validateKey(control, key, order));
-    }
+      }
     return res;
   }
 
   private validateKey(control: ControlModel, key: string, order: number): AsyncValidatorFn {
-    let fn: AsyncValidatorFn = this.validate(key, control);
+    const fn: AsyncValidatorFn = this.validate(key, control);
     return (c: AbstractControl): Promise<DynamicValidationErrorResult|null>|
         Observable<DynamicValidationErrorResult|null> => {
       // tslint:disable-next-line
@@ -78,7 +82,7 @@ export abstract class DynamicFormAsyncValidation extends DynamicFormValidationBa
       }
     };
   }
-}
+  }
 
 export class DynamicFormValidatorRegistry extends DynamicFormValidation {
   reg: FnRegistry<DynamicFormValidatorFn>;
@@ -98,57 +102,65 @@ export class DynamicFormValidatorRegistry extends DynamicFormValidation {
     // tslint:enable no-unbound-method
   }
 
-  setFn(key: string, fn: DynamicFormValidatorFn, ifNotExist?: boolean): void { this.reg.setFn(key, fn, false); }
+  setFn(key: string, fn: DynamicFormValidatorFn, ifNotExist?: boolean): void {
+    this.reg.setFn(key, fn, false);
+  }
 
   validate(key: string, control: ControlModel): ValidatorFn {
-    let dffn = this.reg.getFn(key);
+    const dffn = this.reg.getFn(key);
     if (!dffn) {
       return () => null;
-    }
+      }
     return dffn(key, control);
   }
 
   // tslint:disable no-unbound-method
-  static required(key: string, control: ControlModel): ValidatorFn { return Validators.required; }
-  static requiredTrue(key: string, control: ControlModel): ValidatorFn { return Validators.requiredTrue; }
+  static required(key: string, control: ControlModel): ValidatorFn {
+    return Validators.required;
+  }
+  static requiredTrue(key: string, control: ControlModel): ValidatorFn {
+    return Validators.requiredTrue;
+  }
   static minLength(key: string, control: ControlModel): ValidatorFn {
     const minLength = control.options && control.options.minLength ? control.options.minLength : 0;
     if (!minLength) {
       return () => null;
-    }
+      }
     return Validators.minLength(minLength);
   }
   static maxLength(key: string, control: ControlModel): ValidatorFn {
     const maxLength = control.options && control.options.maxLength ? control.options.maxLength : 0;
     if (!maxLength) {
       return () => null;
-    }
+      }
     return Validators.maxLength(maxLength);
   }
   static min(key: string, control: ControlModel): ValidatorFn {
     const min = control.options && control.options.min ? control.options.min : 0;
     if (min === undefined) {
       return () => null;
-    }
+      }
     return Validators.min(min);
   }
   static max(key: string, control: ControlModel): ValidatorFn {
     const max = control.options && control.options.max ? control.options.max : 0;
     if (max === undefined) {
       return () => null;
-    }
+      }
     return Validators.max(max);
   }
   static pattern(key: string, control: ControlModel): ValidatorFn {
     const pattern = control.options && control.options.pattern ? control.options.pattern : undefined;
     if (!pattern) {
       return () => null;
-    }
+      }
     return Validators.pattern(pattern);
   }
-  static email(key: string, control: ControlModel): ValidatorFn { return Validators.email; }
+  static email(key: string, control: ControlModel): ValidatorFn {
+    return Validators.email;
+  }
   // tslint:enable no-unbound-method
-}
+  }
 
 
 export class DynamicFormAsyncValidatorRegistry extends DynamicFormAsyncValidation {
@@ -160,13 +172,15 @@ export class DynamicFormAsyncValidatorRegistry extends DynamicFormAsyncValidatio
     this.reg = new FnRegistry();
   }
 
-  setFn(key: string, fn: DynamicFormAsyncValidatorFn, ifNotExist?: boolean): void { this.reg.setFn(key, fn, false); }
+  setFn(key: string, fn: DynamicFormAsyncValidatorFn, ifNotExist?: boolean): void {
+    this.reg.setFn(key, fn, false);
+  }
 
   validate(key: string, control: ControlModel): AsyncValidatorFn {
-    let dffn = this.reg.getFn(key);
+    const dffn = this.reg.getFn(key);
     if (!dffn) {
       return () => Promise.resolve(null);
-    }
+      }
     return dffn(key, control);
   }
 }

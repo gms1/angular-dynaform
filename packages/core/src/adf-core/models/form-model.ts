@@ -18,10 +18,12 @@ export class FormModel {
   private _config!: FormConfig;
   private _i18n?: FormI18n;
 
-  get config(): FormConfig { return this._config; }
+  get config(): FormConfig {
+    return this._config;
+  }
   set config(config: FormConfig) {
     this._config = config;
-    let groupConfig: ControlConfig = {
+    const groupConfig: ControlConfig = {
       id: config.id,
       modelType: ModelType.MODEL_GROUP,
       controlType: ControlType.CONTROL_UNKNOWN,  // this model has no corresponding control component
@@ -38,21 +40,37 @@ export class FormModel {
     this.group.setCSSClasses(this.group.css.error, 'adf-form-error');
   }
 
-  get i18n(): FormI18n|undefined { return this._i18n; }
+  get i18n(): FormI18n|undefined {
+    return this._i18n;
+  }
   set i18n(i18n: FormI18n|undefined) {
     this._i18n = i18n;
     this.group.reTranslate();
   }
 
-  get value(): any { return this.group.value; }
-  get valueChanges(): Observable<any> { return this.group.valueChanges; }
+  get value(): any {
+    return this.group.value;
+  }
+  get valueChanges(): Observable<any> {
+    return this.group.valueChanges;
+  }
 
-  get valid(): boolean { return this.group.valid; }
-  get status(): string { return this.group.status; }
-  get statusChanges(): Observable<string> { return this.group.statusChanges; }
+  get valid(): boolean {
+    return this.group.valid;
+  }
+  get status(): string {
+    return this.group.status;
+  }
+  get statusChanges(): Observable<string> {
+    return this.group.statusChanges;
+  }
 
-  get pristine(): boolean { return this.group.pristine; }
-  get touched(): boolean { return this.group.touched; }
+  get pristine(): boolean {
+    return this.group.pristine;
+  }
+  get touched(): boolean {
+    return this.group.touched;
+  }
 
   private _initValue: any;
 
@@ -68,11 +86,13 @@ export class FormModel {
     this._initValue = this.value;
   }
 
-  resetValue(): void { this.group.reset(this._initValue); }
+  resetValue(): void {
+    this.group.reset(this._initValue);
+  }
 
   clearValue(): void {
     if (this.initValue) {
-      let prevValue = this.group.ngControl.value;
+      const prevValue = this.group.ngControl.value;
       this.group.ngControl.reset();
       ModelHelper.setDirtyIfChanged(this.group, prevValue);
       // emit event to notify controls
@@ -85,7 +105,7 @@ export class FormModel {
 
 
   initValueFromAppModel(appData: any, appPointerPrefix?: string): any {
-    let newVal = this.valueFromAppModel(appData, appPointerPrefix);
+    const newVal = this.valueFromAppModel(appData, appPointerPrefix);
     this.initValue(newVal);
   }
 
@@ -99,17 +119,17 @@ export class FormModel {
   }
 
   findControlByPath(path: string|string[]): ControlModel|undefined {
-    let searchPath = Array.isArray(path) ? path : path.split('.');
+    const searchPath = Array.isArray(path) ? path : path.split('.');
 
     let resModel: ControlModel = this.group;
 
-    for (let segment of searchPath) {
-      let foundModel = resModel.getControl(segment);
+    for (const segment of searchPath) {
+      const foundModel = resModel.getControl(segment);
       if (!foundModel) {
         return undefined;
       }
       resModel = foundModel;
-    }
+      }
     return resModel;
   }
 }

@@ -22,7 +22,9 @@ import {JsonPointer} from 'jsonpointerx';
 
 export class GroupModelBase extends AbstractControlModel<FormGroup, GroupOptions> {
   _items: ControlModel[];
-  get items(): ControlModel[] { return this._items; }
+  get items(): ControlModel[] {
+    return this._items;
+  }
 
   constructor(
       dynamicFormService: DynamicFormService, config: ControlConfig, ngControl: FormGroup, formModel: FormModel,
@@ -38,14 +40,18 @@ export class GroupModelBase extends AbstractControlModel<FormGroup, GroupOptions
   }
 
   reTranslate(): void {
-    this.items.forEach((item) => { item.reTranslate(); });
+    this.items.forEach((item) => {
+      item.reTranslate();
+    });
     super.reTranslate();
   }
 
-  protected createItems(): void { this.options.group.forEach((itemConfig) => this.createItem(itemConfig)); }
+  protected createItems(): void {
+    this.options.group.forEach((itemConfig) => this.createItem(itemConfig));
+  }
 
   protected createItem(itemConfig: ControlConfig): ControlModel {
-    let control = this.dynamicFormService.modelFactory.createControl(
+    const control = this.dynamicFormService.modelFactory.createControl(
         itemConfig, this.formModel, this.path, this, this.parentArray, this.parentArrayIdx);
     this.items.push(control);
     if (!(control instanceof SubsetModel)) {
@@ -54,20 +60,24 @@ export class GroupModelBase extends AbstractControlModel<FormGroup, GroupOptions
 
       // TODO: error handling for duplicate key values
       this.ngControl.addControl(control.key, control.ngControl);
-    }
+      }
     return control;
   }
 
   valueFromAppModel(formData: any, appData: any, appPointerPrefix?: JsonPointer): any {
-    this.items.forEach((item) => { item.valueFromAppModel(formData, appData, appPointerPrefix); });
+    this.items.forEach((item) => {
+      item.valueFromAppModel(formData, appData, appPointerPrefix);
+    });
     return formData;
   }
 
   valueToAppModel(appData: any, appPointerPrefix?: JsonPointer): any {
-    this.items.forEach((item) => { item.valueToAppModel(appData, appPointerPrefix); });
+    this.items.forEach((item) => {
+      item.valueToAppModel(appData, appPointerPrefix);
+    });
     return appData;
   }
-}
+  }
 
 export class GroupModel extends GroupModelBase {
   constructor(
@@ -85,7 +95,7 @@ export class GroupModel extends GroupModelBase {
   }
 
   protected createItem(itemConfig: ControlConfig): ControlModel {
-    let control = super.createItem(itemConfig);
+    const control = super.createItem(itemConfig);
     if (!control.path || control instanceof SubsetModel) {
       // not part of the form data model
       return control;
@@ -93,7 +103,7 @@ export class GroupModel extends GroupModelBase {
     this.controls[control.key] = control;
     return control;
   }
-}
+  }
 
 export class SubsetModel extends GroupModelBase {
   superGroup: GroupModel;
@@ -116,7 +126,7 @@ export class SubsetModel extends GroupModelBase {
 
 
   protected createItem(itemConfig: ControlConfig): ControlModel {
-    let control = super.createItem(itemConfig);
+    const control = super.createItem(itemConfig);
     if (!control.path || control instanceof SubsetModel) {
       // not part of the form data model
       return control;
@@ -133,7 +143,7 @@ export class SubsetModel extends GroupModelBase {
     let ancestor: GroupModelBase = parent;
     while (!(ancestor instanceof GroupModel) && ancestor.parentGroup) {
       ancestor = ancestor.parentGroup;
-    }
+      }
     return ancestor as GroupModel;
   }
 }

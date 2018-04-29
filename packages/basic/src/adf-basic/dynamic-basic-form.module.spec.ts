@@ -1,4 +1,4 @@
-// tslint:disable no-null-keyword no-unbound-method no-unused-variable
+// tslint:disable no-null-keyword no-unbound-method no-unused-variable prefer-const
 import {APP_BASE_HREF} from '@angular/common';
 import {DebugElement} from '@angular/core';
 import {TestBed, ComponentFixture} from '@angular/core/testing';

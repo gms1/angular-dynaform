@@ -21,21 +21,20 @@ export class DynamicFormErrorContainerComponent implements DynamicFormErrorConta
 
   errors?: DynamicValidationError[];
 
-  constructor(public form: DynamicForm) {
-  }
+  constructor(public form: DynamicForm) {}
 
   ngDoCheck(): void {
     if (!this.model.ngControl.errors) {
       if (this.errors && this.errors.length) {
         this.errors = [];
-      }
+        }
       return;
     }
     this.errors = [];
     // TODO: we may want to filter errors for subset and form groups having subsets
-    let sortedErrors: DynamicValidationError[] = Object.values(this.model.ngControl.errors)
-                                                     .filter((v) => v.message)
-                                                     .sort((a, b) => (a.order || 0) - (b.order || 0));
+    const sortedErrors: DynamicValidationError[] = Object.values(this.model.ngControl.errors)
+                                                       .filter((v) => v.message)
+                                                       .sort((a, b) => (a.order || 0) - (b.order || 0));
 
     if (this.form.config.showMultipleErrors) {
       this.errors = sortedErrors;

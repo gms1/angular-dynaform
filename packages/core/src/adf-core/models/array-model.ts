@@ -76,7 +76,7 @@ export class ArrayModel extends AbstractControlModel<NgFormArray, ArrayOptions> 
   }
 
   getControl(key: string): ControlModel|undefined {
-    let idx = parseInt(key, 10);
+    const idx = parseInt(key, 10);
     if (isNaN(idx) || this.items.length <= idx) {
       return undefined;
       }
@@ -84,7 +84,7 @@ export class ArrayModel extends AbstractControlModel<NgFormArray, ArrayOptions> 
   }
 
   addItem(): void {
-    let length = this.items.length;
+    const length = this.items.length;
     // NOTE: dirty/pristine is not observable, so as a praktical workaround some code
     // may rely on the correct dirty/pristine state if valueChanges
     // to keep this code working, we have to set the dirty flag before updating any value
@@ -129,7 +129,7 @@ export class ArrayModel extends AbstractControlModel<NgFormArray, ArrayOptions> 
     // to keep this code working, we have to set the dirty flag before updating any value
     this.ngControl.markAsDirty();
     this.ngControl.markAsTouched();
-    let newLength = this.items.length - 1;
+    const newLength = this.items.length - 1;
     for (let idx = index; idx < newLength; idx++) {
       ArrayModel.copyItem(this.items[idx + 1], this.items[idx]);
     }
@@ -148,7 +148,7 @@ export class ArrayModel extends AbstractControlModel<NgFormArray, ArrayOptions> 
       }
     if (this.items.length < length) {
       while (this.items.length < length) {
-        let item = this.dynamicFormService.modelFactory.createArrayGroup(
+        const item = this.dynamicFormService.modelFactory.createArrayGroup(
             `${this.items.length}`, this.formModel, this, this.items.length, this.options.item, this.path);
         item.setCSSClasses(item.css.content, 'adf-array-item');
         this.items.push(item);
@@ -221,12 +221,12 @@ export class ArrayModel extends AbstractControlModel<NgFormArray, ArrayOptions> 
     if (!this.jpApp || !this.jpForm) {
       return formData;
       }
-    let appValue = (appPointerPrefix ? appPointerPrefix.concat(this.jpApp) : this.jpApp).get(appData);
+    const appValue = (appPointerPrefix ? appPointerPrefix.concat(this.jpApp) : this.jpApp).get(appData);
     if (!Array.isArray(appValue)) {
       this.jpForm.set(formData, undefined);
       return formData;
       }
-    let formValue: any[] = [];
+    const formValue: any[] = [];
     formValue.length = appValue.length;
     this.jpForm.set(formData, formValue);
     this.items.forEach((item) => {
@@ -239,8 +239,8 @@ export class ArrayModel extends AbstractControlModel<NgFormArray, ArrayOptions> 
     if (!this.jpApp) {
       return appData;
       }
-    let jpCurr = appPointerPrefix ? appPointerPrefix.concat(this.jpApp) : this.jpApp;
-    let appArray = jpCurr.get(appData) || [];
+    const jpCurr = appPointerPrefix ? appPointerPrefix.concat(this.jpApp) : this.jpApp;
+    const appArray = jpCurr.get(appData) || [];
     appArray.length = this.items.length;
     jpCurr.set(appData, appArray);
 
@@ -254,7 +254,7 @@ export class ArrayModel extends AbstractControlModel<NgFormArray, ArrayOptions> 
     if (this._selectedIndex < 0 || this._selectedIndex >= this.items.length) {
       return;
       }
-    let item: GroupModelBase = this.items[this._selectedIndex];
+    const item: GroupModelBase = this.items[this._selectedIndex];
     item.setCSSClasses(item.css.content, 'adf-array-item-selected', value);
   }
 

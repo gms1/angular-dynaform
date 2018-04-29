@@ -16,25 +16,25 @@ export declare type NgFormGroupSubset = NgFormGroup & {
 
 
 export function createNgFormGroupSubset(target: NgFormGroup, subset?: {[key: string]: any}): NgFormGroupSubset {
-  let controls = {subset: subset || {}};
+  const controls = {subset: subset || {}};
   return new Proxy(target, {
     get: (object: any, key, proxy): any => {
       switch (key) {
         case 'subset':
           return controls.subset;
         case 'valid':
-          for (let k of Object.keys(controls.subset)) {
+          for (const k of Object.keys(controls.subset)) {
             if (object.controls[k].invalid) {
               return false;
             }
-          }
+            }
           return true;
         case 'invalid':
-          for (let k of Object.keys(controls.subset)) {
+          for (const k of Object.keys(controls.subset)) {
             if (object.controls[k].valid) {
               return false;
             }
-          }
+            }
           return true;
         default:
           return object[key];
@@ -45,7 +45,7 @@ export function createNgFormGroupSubset(target: NgFormGroup, subset?: {[key: str
         controls.subset = value;
       } else {
         object[key] = value;
-      }
+        }
       return true;
     }
   });

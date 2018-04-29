@@ -1,3 +1,4 @@
+// tslint:disable prefer-const
 import {NgFormGroup} from './ng-form-group';
 import {NgNullControl} from './ng-null-control';
 import {NgFormArray, NgArrayModelHandler} from './ng-form-array';
@@ -17,12 +18,14 @@ class NgFormArrayWrapper implements NgArrayModelHandler {
       while (this.ngControl.length > length) {
         this.ngControl.removeAt(this.ngControl.length - 1);
       }
-    }
+      }
     while (this.ngControl.length < length) {
       this.ngControl.push(this.createItem());
     }
   }
-  createItem(): NgFormGroup { return new NgFormGroup({}); }
+  createItem(): NgFormGroup {
+    return new NgFormGroup({});
+  }
 }
 
 describe('ng-model', () => {

@@ -1,3 +1,4 @@
+// tslint:disable prefer-const
 import {JsExpression} from './js-expression';
 import {JsonPointer} from 'jsonpointerx';
 
@@ -6,7 +7,7 @@ function newTestExpression(expression: string, context?: any, thisArg?: any): Js
   res.context = context;
   res.thisArg = thisArg;
   return res;
-}
+  }
 
 function testExpression(expression: string, result: any, context?: any, thisArg?: any): boolean {
   let compiled = newTestExpression(expression, context, thisArg);
