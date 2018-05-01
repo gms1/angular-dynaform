@@ -4,37 +4,18 @@ DN=$(dirname "$0")
 BN=$(basename "$0")
 
 PROJ_HOME=$(cd "${DN}/.."; pwd)
-. "${DN}/_lib.sh"
+. "${DN}/sh/lib.sh"
 
 #---------------------------------------------------------
 
-pushd "${PROJ_HOME}" &>/dev/null        || die "failed to cwd '${PROJ_HOME}'"
+pushd "${PROJ_HOME}" &>/dev/null  || die "failed to cwd '${PROJ_HOME}'"
 
-  # --- core package
-  pushd "packages/core" &>/dev/null     || die "failed to cwd 'packages/core'"
-    echo "*** test    package/core..."
-    # gulp test --prod                    || die "test 'packages/core' failed"
-    ./node_modules/.bin/karma start --single-run --retryLimit 0 karma.conf.headless.js \
-                                        || die "test 'packages/core' failed"
-    echo "*** test    package/core: done"
-  popd &>/dev/null
+  echo "*** build..."
+  make                    || die "failed to build packages"
+  echo "*** build: done"
+  echo "*** build..."
+  make test               || die "failed to test packages"
+  echo "*** build: done"
 
-  # --- basic package
-  pushd "packages/basic" &>/dev/null    || die "failed to cwd 'packages/basic'"
-    echo "*** test    package/basic..."
-    # gulp test --prod                    || die "test 'packages/basic' failed"
-    ./node_modules/.bin/karma start --single-run --retryLimit 0 karma.conf.headless.js \
-                                        || die "test 'packages/basic' failed"
-    echo "*** test    package/basic: done"
-  popd &>/dev/null
-
-  # --- material package
-  pushd "packages/material" &>/dev/null || die "failed to cwd 'packages/material'"
-    echo "*** test    package/material..."
-    # gulp test --prod                    || die "test 'packages/material' failed"
-    ./node_modules/.bin/karma start --single-run --retryLimit 0 karma.conf.headless.js \
-                                        || die "test 'packages/material' failed"
-    echo "*** test    package/material: done"
-  popd &>/dev/null
 
 popd &>/dev/null

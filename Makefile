@@ -1,22 +1,21 @@
 
 TYPE ?= prod
 
-BUILDFLAGS = --$(TYPE)
-ifeq (${TYPE},prod)
-  BUILDFLAGS_NG_CLI += -aot
-endif
+BUILDFLAGS = -- --$(TYPE)
 
+all: build
 #-------------------------------------------------------------
-.PHONY: all
+.PHONY: build test e2e
 
-all: basic-example material-example nativescript
-test-all: test-core test-basic test-material
+build: basic-example material-example # nativescript
+test:  test-core test-basic test-material
+e2e:   e2e-basic-example e2e-material-example
 
 #-------------------------------------------------------------
 .PHONY: core-nodeps core-depsonly core test-core
 
 core-nodeps:
-	cd packages/core && gulp rebuild $(BUILDFLAGS)
+	npm run build:core $(BUILDFLAGS)
 
 core-depsonly:
 
@@ -24,13 +23,13 @@ core: core-depsonly
 	@$(MAKE) core-nodeps --no-print-directory
 
 test-core:
-	cd packages/core && gulp test $(BUILDFLAGS)
+	npm run test:core
 
 #-------------------------------------------------------------
 .PHONY: basic-nodeps basic-depsonly basic test-basic
 
 basic-nodeps:
-	cd packages/basic && gulp rebuild $(BUILDFLAGS)
+	npm run build:basic $(BUILDFLAGS)
 
 basic-depsonly: core
 
@@ -38,13 +37,13 @@ basic: basic-depsonly
 	@$(MAKE) basic-nodeps --no-print-directory
 
 test-basic:
-	cd packages/basic && gulp test $(BUILDFLAGS)
+	npm run test:basic
 
 #-------------------------------------------------------------
 .PHONY: material-nodeps material-depsonly material test-material
 
 material-nodeps:
-	cd packages/material && gulp rebuild $(BUILDFLAGS)
+	npm run build:material $(BUILDFLAGS)
 
 material-depsonly: core
 
@@ -52,13 +51,13 @@ material: material-depsonly
 	@$(MAKE) material-nodeps --no-print-directory
 
 test-material:
-	cd packages/material && gulp test $(BUILDFLAGS)
+	npm run test:material
 
 #-------------------------------------------------------------
 .PHONY: nativescript-nodeps nativescript-depsonly nativescript
 
 nativescript-nodeps:
-	cd packages/nativescript && gulp rebuild $(BUILDFLAGS)
+	npm run build:nativescript $(BUILDFLAGS)
 
 nativescript-depsonly: core
 
@@ -69,33 +68,28 @@ nativescript: nativescript-depsonly
 .PHONY: basic-example-nodeps basic-example-depsonly basic-example
 
 basic-example-nodeps:
-	cd packages/basic-example && ng build $(BUILDFLAGS_NG_CLI)
+	npm run build:basic-example $(BUILDFLAGS)
 
 basic-example-depsonly: basic
 
 basic-example: basic-example-depsonly
 	@$(MAKE) basic-example-nodeps --no-print-directory
 
+e2e-basic-example:
+	npm run e2e:basic-example
+
 #-------------------------------------------------------------
 .PHONY: material-example-nodeps material-example-depsonly material-example
 
 material-example-nodeps:
-	cd packages/material-example && ng build $(BUILDFLAGS_NG_CLI)
+	npm run build:material-example $(BUILDFLAGS)
 
 material-example-depsonly: material
 
 material-example: material-example-depsonly
 	@$(MAKE) material-example-nodeps --no-print-directory
 
+e2e-material-example:
+	npm run e2e:material-example
+
 #-------------------------------------------------------------
-.PHONY: nativescript-example-nodeps nativescript-example-depsonly nativescript-example
-
-nativescript-example-nodeps:
-	cd packages/nativescript-example && npm run build
-
-nativescript-example-depsonly: nativescript
-
-nativescript-example: nativescript-example-depsonly
-	@$(MAKE) nativescript-example-nodeps --no-print-directory
-
-

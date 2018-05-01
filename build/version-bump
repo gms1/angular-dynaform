@@ -4,7 +4,7 @@ DN=$(dirname "$0")
 BN=$(basename "$0")
 
 PROJ_HOME=$(cd "${DN}/.."; pwd)
-. "${DN}/_lib.sh"
+. "${DN}/sh/lib.sh"
 
 
 #---------------------------------------------------------
@@ -12,20 +12,10 @@ PROJ_HOME=$(cd "${DN}/.."; pwd)
 PKGJSON=(
   package.json
   package-lock.json
-  packages/core/package.json
-  packages/core/package-lock.json
-  packages/basic/package.json
-  packages/basic/package-lock.json
-  packages/basic-example/package.json
-  packages/basic-example/package-lock.json
-  packages/nativescript/package.json
-  packages/nativescript/package-lock.json
-  packages/nativescript-example/package.json
-  packages/nativescript-example/package-lock.json
-  packages/material/package.json
-  packages/material/package-lock.json
-  packages/material-example/package.json
-  packages/material-example/package-lock.json
+  projects/angular-dynaform/core/package.json
+  projects/angular-dynaform/basic/package.json
+  projects/angular-dynaform/material/package.json
+  projects/angular-dynaform/nativescript/package.json
 )
 
 #---------------------------------------------------------

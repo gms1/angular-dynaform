@@ -1,0 +1,31 @@
+{
+  "typescript.tsdk": "packages/core/node_modules/typescript/lib",
+  // Format a file on save. A formatter must be available, the file must not be auto-saved, and editor must not be shutting down.
+  "editor.formatOnSave": true,
+  // Configure glob patterns for excluding files and folders. For example, the files explorer decides which files and folders to show or hide based on this setting.
+  "files.exclude": {
+    "**/.git": true,
+    "**/node_modules": true,
+    "dist": true,
+    "hooks": true,
+    "out-tsc": true,
+    "**/tmp": true
+  },
+  "files.watcherExclude": {
+    "**/.git": true,
+    "**/node_modules": true,
+    "dist": true,
+    "hooks": true,
+    "out-tsc": true,
+    "**/tmp": true
+  },
+  // Configure glob patterns for excluding files and folders in searches. Inherits all glob patterns from the files.exclude setting.
+  "search.exclude": {
+    "**/.git": true,
+    "**/node_modules": true,
+    "dist": true,
+    "hooks": true,
+    "out-tsc": true,
+    "**/tmp": true
+  }
+}

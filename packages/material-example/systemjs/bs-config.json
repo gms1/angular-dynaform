@@ -1,9 +1,0 @@
-{
-  "server": {
-    "baseDir": "./systemjs",
-    "routes": {
-      "/node_modules": "./node_modules/"
-    }
-  },
-  "browser": "/usr/bin/chromium-browser"
-}

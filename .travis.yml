@@ -4,10 +4,6 @@ sudo: required
 node_js:
   - "8"
 
-before_script:
-   - ./build/travis_before
-
-
 script:
    - ./build/travis_run
 

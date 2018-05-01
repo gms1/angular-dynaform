@@ -4,7 +4,7 @@ DN=$(dirname "$0")
 BN=$(basename "$0")
 
 PROJ_HOME=$(cd "${DN}/.."; pwd)
-. "${DN}/_lib.sh"
+. "${DN}/sh/lib.sh"
 
 
 #---------------------------------------------------------
@@ -15,20 +15,20 @@ if [ "${answer}" != "yes" ]; then
   exit 0
 fi
 
-pushd "${PROJ_HOME}/packages/core/dist" &>/dev/null || \
-    die "directory '${PROJ_HOME}/packages/core/dist' not found"
+pushd "${PROJ_HOME}/dist/@angular-dynaform/core" &>/dev/null || \
+    die "directory '${PROJ_HOME}/dist/@angular-dynaform/core' not found"
   npm publish || \
       die "failed to publish 'core'"
 popd &>/dev/null
 
-pushd "${PROJ_HOME}/packages/basic/dist" &>/dev/null || \
-    die "directory '${PROJ_HOME}/packages/basic/dist' not found"
+pushd "${PROJ_HOME}/dist/@angular-dynaform/basic" &>/dev/null || \
+    die "directory '${PROJ_HOME}/dist/@angular-dynaform/basic' not found"
   npm publish || \
       die "failed to publish 'basic'"
 popd &>/dev/null
 
-pushd "${PROJ_HOME}/packages/material/dist" &>/dev/null || \
-    die "directory '${PROJ_HOME}/packages/material/dist' not found"
+pushd "${PROJ_HOME}/dist/@angular-dynaform/material" &>/dev/null || \
+    die "directory '${PROJ_HOME}/dist/@angular-dynaform/material' not found"
   npm publish || \
       die "failed to publish 'material'"
 popd &>/dev/null

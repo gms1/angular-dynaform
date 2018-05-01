@@ -1,0 +1,41 @@
+{
+  "name": "@angular-dynaform/basic",
+  "version": "0.6.0",
+  "description": "angular-dynaform - basic",
+  "author": "Guenter Sandner <www.gms@gmx.at>",
+  "license": "MIT",
+  "private": false,
+  "keywords": [
+    "angular",
+    "generic",
+    "json",
+    "rad",
+    "rapid application development",
+    "dynamic forms",
+    "reactive forms",
+    "generic forms",
+    "model-driven forms"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/gms1/angular-dynaform.git"
+  },
+  "scripts": {
+    "prepublishOnly": "echo \"ERROR: please use the production-build for publishing\" && exit 1"
+  },
+  "dependencies": {
+    "@angular-dynaform/core": "file:../../../dist/@angular-dynaform/core"
+  },
+  "peerDependencies": {
+    "@angular/common": ">=6.0.0-rc.0 <7.0.0",
+    "@angular/core": ">=6.0.0-rc.0 <7.0.0",
+    "@angular/forms": ">=6.0.0-rc.0 <7.0.0",
+    "@angular/platform-browser": ">=6.0.0-rc.0 <7.0.0",
+    "@angular-dynaform/core": "0.6.1",
+    "core-js": "^2.5.5",
+    "jsep": "^0.3.4",
+    "jsonpointerx": "^1.0.8",
+    "rxjs": "^6.0.0",
+    "zone.js": "^0.8.26"
+  }
+}

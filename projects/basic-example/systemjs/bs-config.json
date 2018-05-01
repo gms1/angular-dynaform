@@ -1,0 +1,10 @@
+{
+  "server": {
+    "baseDir": "projects/basic-example/systemjs",
+    "routes": {
+      "/node_modules": "./node_modules",
+      "/dist": "./dist"
+    }
+  },
+  "browser": "/usr/bin/chromium-browser"
+}

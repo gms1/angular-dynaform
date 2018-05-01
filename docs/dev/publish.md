@@ -1,20 +1,23 @@
 # publishing
 
+## TODO:
+we need a script to fix the generated package.json files:
+* remove dependency and script sections
+* change the @angular/core dependency from file-url to npm version
+
 ## tasks
 
 * bump the version for all packages (but not in the dependencies) and build the release
 
 ```shell
 angular-dynaform (master)$ ./build/version-bump x.y.z
-angular-dynaform (master)$ npm run release:build
+angular-dynaform (master)$ ./build/travis_run
 ```
 
-* 'source-map-explorer packages/core/dist/index.js' should not show any dependency on packages in 'node_modules'
-* test the systemjs examples (npm run start:systemjs) in the directory of the example packages
-* test the bundled aot examples
+* review generated bundles using 'source-map-explorer dist/path/to/js', which should not show any dependency on packages in 'node_modules'
+* test the systemjs examples (npm run systemjs:basic-example; npm run systemjs:material-example) 
 * update changelog
-* git commit and push all changes
-* npm publish from dist folder for each package
+* git commit and git push
 
 ```shell
 angular-dynaform (master)$ ./build/publish

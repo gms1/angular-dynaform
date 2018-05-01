@@ -1,0 +1,11 @@
+{
+  "$schema": "../../../node_modules/ng-packagr/ng-package.schema.json",
+  "dest": "../../../dist/@angular-dynaform/material",
+  "keepLifecycleScripts": true,
+  "whitelistedNonPeerDependencies": [
+    "@angular-dynaform/core"
+  ],
+  "lib": {
+    "entryFile": "src/public_api.ts"
+  }
+}
