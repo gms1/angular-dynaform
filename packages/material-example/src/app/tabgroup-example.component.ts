@@ -183,7 +183,7 @@ export const tabGroupExampleConfig: FormConfig = {
   styles: []
 })
 export class TabGroupExampleComponent implements AfterViewInit {
-  @ViewChild(DynamicForm) form: DynamicForm;
+  @ViewChild(DynamicForm) form!: DynamicForm;
 
   model: FormModel;
 
@@ -201,6 +201,8 @@ export class TabGroupExampleComponent implements AfterViewInit {
   }
 
   ngAfterViewInit(): void {
-    setTimeout(() => { this.form.initValue({}); });
+    setTimeout(() => {
+      this.form.initValue({});
+    });
   }
 }

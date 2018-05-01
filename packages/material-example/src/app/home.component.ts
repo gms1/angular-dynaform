@@ -24,7 +24,7 @@ import {mainExampleConfig, mainExampleFormLanguages, mainExampleAppModelData} fr
   styles: []
 })
 export class HomeComponent implements AfterViewInit {
-  @ViewChild(DynamicForm) form: DynamicForm;
+  @ViewChild(DynamicForm) form!: DynamicForm;
 
   model: FormModel;
 

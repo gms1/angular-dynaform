@@ -24,18 +24,18 @@ import {DynamicForm, DynamicFormService, FormModel, ControlType, FormConfig, Mod
   styles: []
 })
 export class StepperExampleComponent implements OnInit {
-  @ViewChild(DynamicForm) form: DynamicForm;
+  @ViewChild(DynamicForm) form!: DynamicForm;
 
   @Input()
-  title: string;
+  title!: string;
 
   @Input()
-  subTitle: string;
+  subTitle!: string;
 
   @Input()
-  config: FormConfig;
+  config!: FormConfig;
 
-  model: FormModel;
+  model!: FormModel;
 
   constructor(private dynamicFormService: DynamicFormService) {}
 
@@ -48,8 +48,10 @@ export class StepperExampleComponent implements OnInit {
     console.log('  form model: [', JSON.stringify(this.form.value, undefined, 2), ']');
   }
 
-  ngOnInit(): void { this.model = this.dynamicFormService.createFormModel(this.config); }
-}
+  ngOnInit(): void {
+    this.model = this.dynamicFormService.createFormModel(this.config);
+  }
+  }
 
 
 
