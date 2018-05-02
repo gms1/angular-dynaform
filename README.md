@@ -119,9 +119,9 @@ export class MyFormComponent {
 
   * JSON configuration:
 
-  [Configuration of the plunker example](./packages/material-example/src/app/app.config.ts)
+  [Configuration of the plunker example](./projects/material-example/src/app/app.config.ts)
 
-  [ControlConfig Interface](./packages/core/src/adf-core/config/control-config.interface.ts)
+  [ControlConfig Interface](./projects/angular-dynaform/core/src/lib/config/control-config.interface.ts)
 
 * observable form value and form value update:
 
