@@ -3,7 +3,7 @@
 ## TODO:
 we need a script to fix the generated package.json files:
 * remove dependency and script sections
-* change the @angular/core dependency from file-url to npm version
+* change the @angular-dynaform/core dependency from file-url to npm version
 
 ## tasks
 

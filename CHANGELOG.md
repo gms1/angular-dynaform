@@ -2,8 +2,7 @@
 
 ## 0.6.0
 
-* **Features**
-  * angular 6.0
+release based on angular 6.0 and angular/cli mono-repo
 
 ## 0.3.0-0.3.2
 

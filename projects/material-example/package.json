@@ -17,8 +17,6 @@
   },
   "private": true,
   "dependencies": {
-    "@angular-dynaform/core": "file:../core/dist",
-    "@angular-dynaform/material": "file:../material/dist",
     "@angular/animations": ">=6.0.0-rc.0 <7.0.0",
     "@angular/cdk": ">=6.0.0-rc.0 <7.0.0",
     "@angular/common": ">=6.0.0-rc.0 <7.0.0",
