@@ -31,8 +31,8 @@
 
 ## Links
 
-* [Plunker for Material](http://plnkr.co/edit/ZZuywOIH92FtsmHRp6ks?p=preview)
-* [Plunker for basic HTML](http://plnkr.co/edit/x8elnFR7fgDWIjvn8OZF?p=preview)
+* [Plunker for Material](https://embed.plnkr.co/ujsd2YaLsMT2Yc3EOiN3/)
+* [Plunker for basic HTML](https://embed.plnkr.co/7tqBasU5UswFvRYTAvm8/)
 
 ## TODO
 
