@@ -24,9 +24,6 @@
   "scripts": {
     "prepublishOnly": "echo \"ERROR: please use the production-build for publishing\" && exit 1"
   },
-  "dependencies": {
-    "@angular-dynaform/core": "file:../../../dist/@angular-dynaform/core"
-  },
   "peerDependencies": {
     "@angular/cdk": ">=6.0.0-rc.0 <7.0.0",
     "@angular/common": ">=6.0.0-rc.0 <7.0.0",

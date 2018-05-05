@@ -70,19 +70,22 @@ e2e-material-example:
 # * remove dependency and script sections
 # * change the @angular-dynaform/core dependency from file-url to npm version
 
-.PHONY: release
+.PHONY: release release-build release-doc
 
-release:
+release-doc:
+	@npm run typedoc 1>/dev/null
+
+release-build:
 	@-rm -rf dist
 	@npm run build:core -- --prod
 	@npm run build:basic -- --prod
 	@npm run build:material -- --prod
 	@npm run build:basic-example -- --prod
 	@npm run build:material-example -- --prod
-	@npm run typedoc 1>/dev/null
 	@npm run test:core
 	@npm run test:basic
 	@npm run test:material
 	@echo RELEASE BUILD SUCCEEDED
 	@echo TODO: update package.json files
 
+release: release-doc release-build

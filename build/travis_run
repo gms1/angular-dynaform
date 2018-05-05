@@ -13,9 +13,9 @@ pushd "${PROJ_HOME}" &>/dev/null  || die "failed to cwd '${PROJ_HOME}'"
   echo "*** build..."
   make                    || die "failed to build packages"
   echo "*** build: done"
-  echo "*** build..."
+  echo "*** test..."
   make test               || die "failed to test packages"
-  echo "*** build: done"
+  echo "*** test: done"
 
 
 popd &>/dev/null
