@@ -52,7 +52,6 @@
     "nativescript-checkbox": "^3.0.3",
     "rxjs": "^6.0.0",
     "tns-core-modules": "^4.0.0",
-    "typedoc": "^0.11.1",
     "zone.js": "^0.8.26"
   },
   "devDependencies": {
