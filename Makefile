@@ -65,11 +65,6 @@ e2e-material-example:
 #-------------------------------------------------------------
 # release build
 
-## TODO:
-# we need a script to fix the generated package.json files:
-# * remove dependency and script sections
-# * change the @angular-dynaform/core dependency from file-url to npm version
-
 .PHONY: release release-build release-doc
 
 release-doc:
@@ -86,6 +81,7 @@ release-build:
 	@npm run test:basic
 	@npm run test:material
 	@echo RELEASE BUILD SUCCEEDED
-	@echo TODO: update package.json files
 
 release: release-doc release-build
+	@./build/publish-prepare
+	@echo READY TO BE PUBLISHED

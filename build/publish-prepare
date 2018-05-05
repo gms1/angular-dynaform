@@ -11,25 +11,21 @@ BUILD_SH_HOME="${PROJ_HOME}/build/sh"
 #---------------------------------------------------------
 
 PKGJSON=(
-  package.json
-  package-lock.json
-  projects/angular-dynaform/core/package.json
-  projects/angular-dynaform/basic/package.json
-  projects/angular-dynaform/material/package.json
-  projects/angular-dynaform/nativescript/package.json
+dist/@angular-dynaform/core/package.json
+dist/@angular-dynaform/basic/package.json
+dist/@angular-dynaform/material/package.json
 )
 
 #---------------------------------------------------------
-if [ $# -ne 1 ]; then
-  errormsg "${BN}: usage error: usage: ${BN} version"
+if [ $# -ne 0 ]; then
+  errormsg "${BN}: usage error: usage: ${BN}"
   exit 1
 fi
-VER=$1
 
 pushd "${PROJ_HOME}" &>/dev/null        || die "failed to cwd '${PROJ_HOME}'"
 
   for file in "${PKGJSON[@]}"; do
-    ${BUILD_SH_HOME}/tsrun version-bump.ts "${file}" "${VER}"
+    ${BUILD_SH_HOME}/tsrun publish-prepare.ts "${file}"
   done
 
 popd &>/dev/null
