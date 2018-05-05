@@ -1,0 +1,11 @@
+{
+  "mode": "file",
+  "module": "commonjs",
+  "targert": "ES5",
+  "excludeExternals": true,
+  "excludeNotExported": true,
+  "excludePrivate": true,
+  "ignoreCompilerErrors": true,
+  "tsconfig": "projects/angular-dynaform/core/tsconfig.json",
+  "readme": "./README.md"
+}

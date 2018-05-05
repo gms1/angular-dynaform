@@ -8,7 +8,8 @@ import {ControlOptions} from './control-options.interface';
  */
 export interface ControlConfig {
   /**
-   * The form model type:
+   * The form model type
+   * ```
    * values:
    *   ModelType.MODEL_GROUP: a group of controls
    *     corresponds to Angular FormGroup
@@ -20,12 +21,14 @@ export interface ControlConfig {
    *     aggregated form value; use this for buttons/separators/...
    *   ModelType.MODEL_ARRAY: an array of MODEL_GROUP items all with the same structur
    *     corresponds to Angular FormArray
+   * ```
    */
   modelType: string;
   /**
    * The control type
    * if more types are specified, the first type which is found in the registry wins
    *
+   * ```
    * control types for MODEL_GROUP or MODEL_SUBSET:
    *   ControlType.CONTROL_DIVISION
    *   ControlType.CONTROL_FIELDSET
@@ -48,6 +51,7 @@ export interface ControlConfig {
    * controls for MODEL_NULL:
    *   ControlType.CONTROL_BUTTON
    *   ControlType.CONTROL_SEPARATOR
+   * ```
    */
   controlType: string|string[];
   /**
@@ -61,6 +65,7 @@ export interface ControlConfig {
    *
    * will be used to sync a FormControl in the FormGroup to the form control (DOM) element.
    * required, but using 'id' as default
+   *
    * if parent is a MODEL_SUBSET this control will be added to the ancestor FormGroup
    */
   key?: string;
@@ -77,6 +82,7 @@ export interface ControlConfig {
 
   /**
    * update strategy of the control
+   *
    * (the event on which this control will update itself)
    * default: 'change'
    */
@@ -84,11 +90,13 @@ export interface ControlConfig {
 
   /**
    * sync validators
+   *
    * ignore for MODEL_NULL or MODEL_SUBSET
    */
   validators?: string|string[];
   /**
    * async validators
+   *
    * ignore for MODEL_NULL or MODEL_SUBSET
    */
   asyncValidators?: string|string[];
@@ -98,6 +106,7 @@ export interface ControlConfig {
   errors?: {[key: string]: string};
   /**
    * relations
+   *
    * javascript expressions to enable/disabe and show/hide controls
    *
    */
@@ -106,12 +115,14 @@ export interface ControlConfig {
   /**
    * action
    *
+   * ```
    * predefined actions:
    * 'reset'           ... enable/disable a reset button ( based on pristine/dirty state )
    * 'submit'          ... enable/disable a submit button ( based on valid/invalid state )
    * 'arrayAddItem'    ... add an array item
    * 'arrayInsertItem' ... insert an array item at current selected position
    * 'arrayDeleteItem' ... delete array item at current selected position
+   * ```
    */
   action?: string;
 
@@ -130,7 +141,7 @@ export interface ControlConfig {
    * additional user data
    */
   user?: any;
-}
+  }
 
 
 /**

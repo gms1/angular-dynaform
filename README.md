@@ -121,7 +121,7 @@ export class MyFormComponent {
 
   [Configuration of the plunker example](./projects/material-example/src/app/app.config.ts)
 
-  [ControlConfig Interface](./projects/angular-dynaform/core/src/lib/config/control-config.interface.ts)
+  [ControlConfig Interface](docs/typedoc/angular-dynaform/interfaces/controlconfig.html)
 
 * observable form value and form value update:
 
