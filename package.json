@@ -76,8 +76,6 @@
     "ng-packagr": "^3.0.0-rc.2",
     "protractor": "~5.3.1",
     "rimraf": "^2.6.2",
-    "shelljs": "^0.8.1",
-    "shx": "^0.2.2",
     "systemjs": "<0.20",
     "ts-node": "~6.0.2",
     "tsickle": ">=0.25.5",
