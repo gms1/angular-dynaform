@@ -26,7 +26,11 @@
     "lint:material-example": "ng lint material-example",
     "lint:nativescript": "ng lint @angular-dynaform/nativescript",
     "typedoc": "typedoc --options typedoc.json --out docs/typedoc/angular-dynaform --exclude '**/internal/*.ts,**/*+(index|test|.spec|.e2e).ts'  projects/angular-dynaform/core/src/",
-    "postinstall": "node build/js/postinstall.js"
+    "postinstall": "node build/js/postinstall.js",
+    "release:build": "make release",
+    "release:publish": "./build/publish",
+    "plunker:build": "adf_plunker_build",
+    "plunker:publish": "adf_plunker_publish"
   },
   "private": true,
   "dependencies": {

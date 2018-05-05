@@ -28,6 +28,7 @@ VER=$1
 pushd "${PROJ_HOME}" &>/dev/null        || die "failed to cwd '${PROJ_HOME}'"
 
   for file in "${PKGJSON[@]}"; do
+    echo updating $file
     perl -i.bak -pe "!\$x && s/(\"version\": *\")[^\"]*(\")/\"version\": \"${VER}\"/ && (\$x=1)" "${file}" || \
       die "failed to update '${file}'"
     rm -f "${file}.bak"

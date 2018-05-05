@@ -12,84 +12,77 @@ test:  test-core test-basic test-material
 e2e:   e2e-basic-example e2e-material-example
 
 #-------------------------------------------------------------
-.PHONY: core-nodeps core-depsonly core test-core
+.PHONY: core test-core
 
-core-nodeps:
+core:
 	npm run build:core $(BUILDFLAGS)
-
-core-depsonly:
-
-core: core-depsonly
-	@$(MAKE) core-nodeps --no-print-directory
 
 test-core:
 	npm run test:core
 
 #-------------------------------------------------------------
-.PHONY: basic-nodeps basic-depsonly basic test-basic
+.PHONY: basic test-basic
 
-basic-nodeps:
+basic: core
 	npm run build:basic $(BUILDFLAGS)
-
-basic-depsonly: core
-
-basic: basic-depsonly
-	@$(MAKE) basic-nodeps --no-print-directory
 
 test-basic:
 	npm run test:basic
 
 #-------------------------------------------------------------
-.PHONY: material-nodeps material-depsonly material test-material
+.PHONY: material test-material
 
-material-nodeps:
+material: core
 	npm run build:material $(BUILDFLAGS)
-
-material-depsonly: core
-
-material: material-depsonly
-	@$(MAKE) material-nodeps --no-print-directory
 
 test-material:
 	npm run test:material
 
 #-------------------------------------------------------------
-.PHONY: nativescript-nodeps nativescript-depsonly nativescript
+.PHONY: nativescript
 
-nativescript-nodeps:
+nativescript:
 	npm run build:nativescript $(BUILDFLAGS)
 
-nativescript-depsonly: core
-
-nativescript: nativescript-depsonly
-	@$(MAKE) nativescript-nodeps --no-print-directory
-
 #-------------------------------------------------------------
-.PHONY: basic-example-nodeps basic-example-depsonly basic-example
+.PHONY: basic-example e2e-basic-example
 
-basic-example-nodeps:
+basic-example: basic
 	npm run build:basic-example $(BUILDFLAGS)
-
-basic-example-depsonly: basic
-
-basic-example: basic-example-depsonly
-	@$(MAKE) basic-example-nodeps --no-print-directory
 
 e2e-basic-example:
 	npm run e2e:basic-example
 
 #-------------------------------------------------------------
-.PHONY: material-example-nodeps material-example-depsonly material-example
+.PHONY: material-example e2e-material-example
 
-material-example-nodeps:
+material-example: material
 	npm run build:material-example $(BUILDFLAGS)
-
-material-example-depsonly: material
-
-material-example: material-example-depsonly
-	@$(MAKE) material-example-nodeps --no-print-directory
 
 e2e-material-example:
 	npm run e2e:material-example
 
 #-------------------------------------------------------------
+# release build
+
+## TODO:
+# we need a script to fix the generated package.json files:
+# * remove dependency and script sections
+# * change the @angular-dynaform/core dependency from file-url to npm version
+
+.PHONY: release
+
+release:
+	@-rm -rf dist
+	@npm run build:core -- --prod
+	@npm run build:basic -- --prod
+	@npm run build:material -- --prod
+	@npm run build:basic-example -- --prod
+	@npm run build:material-example -- --prod
+	@npm run typedoc 1>/dev/null
+	@npm run test:core
+	@npm run test:basic
+	@npm run test:material
+	@echo RELEASE BUILD SUCCEEDED
+	@echo TODO: update package.json files
+
