@@ -3,7 +3,8 @@
     "baseDir": "projects/material-example/systemjs",
     "routes": {
       "/node_modules": "./node_modules",
-      "/dist": "./dist"
+      "/dist": "./dist",
+      "/src": "projects/material-example/src"
     }
   },
   "browser": "/usr/bin/chromium-browser"

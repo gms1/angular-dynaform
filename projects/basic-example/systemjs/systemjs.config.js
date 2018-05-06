@@ -27,6 +27,8 @@ System.config({
         'npm-ext:@angular/platform-browser/bundles/platform-browser-animations.umd.js',
     '@angular/animations/browser': 'npm-ext:@angular/animations/bundles/animations-browser.umd.js',
 
+    'hammerjs': 'npm-ext:hammerjs/hammer.js',
+
     'tslib': 'npm-ext:tslib/tslib',
 
     'rxjs': 'npm-ext:rxjs/bundles/rxjs.umd.js',
@@ -38,7 +40,7 @@ System.config({
     '@angular-dynaform/core': 'npm-int:@angular-dynaform/core/bundles/angular-dynaform-core.umd.js',
     '@angular-dynaform/basic': 'npm-int:@angular-dynaform/basic/bundles/angular-dynaform-basic.umd.js',
 
-    'app': './src',
+    'app': '/src',
   },
   packages: {
     app: {main: './main.ts', defaultExtension: 'ts'},

@@ -30,7 +30,10 @@ System.config({
     '@angular/animations/browser': 'npm-ext:@angular/animations/bundles/animations-browser.umd.js',
 
     '@angular/material': 'npm-ext:@angular/material/bundles/material.umd.js',
-    '@angular/cdk': 'npm-ext:@angular/cdk/bundles/cdk.umd.js',
+
+    'hammerjs': 'npm-ext:hammerjs/hammer.js',
+
+    // '@angular/cdk': 'npm-ext:@angular/cdk/bundles/cdk.umd.js',
     '@angular/cdk/accordion': 'npm-ext:@angular/cdk/bundles/cdk-accordion.umd.js',
     '@angular/cdk/a11y': 'npm-ext:@angular/cdk/bundles/cdk-a11y.umd.js',
     '@angular/cdk/bidi': 'npm-ext:@angular/cdk/bundles/cdk-bidi.umd.js',
@@ -40,9 +43,9 @@ System.config({
     '@angular/cdk/observers': 'npm-ext:@angular/cdk/bundles/cdk-observers.umd.js',
     '@angular/cdk/platform': 'npm-ext:@angular/cdk/bundles/cdk-platform.umd.js',
     '@angular/cdk/portal': 'npm-ext:@angular/cdk/bundles/cdk-portal.umd.js',
-    '@angular/cdk/rxjs': 'npm-ext:@angular/cdk/bundles/cdk-rxjs.umd.js',
+    // '@angular/cdk/rxjs': 'npm-ext:@angular/cdk/bundles/cdk-rxjs.umd.js',
     '@angular/cdk/table': 'npm-ext:@angular/cdk/bundles/cdk-table.umd.js',
-    '@angular/cdk/testing': 'npm-ext:@angular/cdk/bundles/cdk-testing.umd.js',
+    // '@angular/cdk/testing': 'npm-ext:@angular/cdk/bundles/cdk-testing.umd.js',
     '@angular/cdk/overlay': 'npm-ext:@angular/cdk/bundles/cdk-overlay.umd.js',
     '@angular/cdk/scrolling': 'npm-ext:@angular/cdk/bundles/cdk-scrolling.umd.js',
     '@angular/cdk/collections': 'npm-ext:@angular/cdk/bundles/cdk-collections.umd.js',
@@ -62,7 +65,7 @@ System.config({
     '@angular-dynaform/core': 'npm-int:@angular-dynaform/core/bundles/angular-dynaform-core.umd.js',
     '@angular-dynaform/material': 'npm-int:@angular-dynaform/material/bundles/angular-dynaform-material.umd.js',
 
-    'app': './src',
+    'app': '/src',
   },
   packages: {
     app: {main: './main.ts', defaultExtension: 'ts'},

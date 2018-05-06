@@ -29,7 +29,9 @@
     "release:build": "make release",
     "release:publish": "./build/publish",
     "plunker:build": "adf_plunker_build",
-    "plunker:publish": "adf_plunker_publish"
+    "plunker:publish": "adf_plunker_publish",
+    "plunker:basic-example": "cd dist/plunkr/basic-example && lite-server",
+    "plunker:material-example": "cd dist/plunkr/material-example && lite-server"
   },
   "private": true,
   "dependencies": {

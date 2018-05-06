@@ -16,9 +16,6 @@ import {Component} from '@angular/core';
           {{navItem.name}}
         </a>
       </mat-nav-list>
-      <!-- button mat-icon-button tabindex="-1" (click)="start.close()">
-        <mat-icon>close</mat-icon>
-      </button -->
     </mat-sidenav>
   <div>
     <mat-toolbar color="primary">
