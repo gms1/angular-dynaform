@@ -5,7 +5,7 @@ import {Component} from '@angular/core';
   selector: 'app-root',
   template: `
 <div class="sidenav">
-  <a *ngFor="let navItem of navItems"
+  <a *ngFor="let navItem of navMainItems"
     routerLinkActive
     #routerLinkActiveInstance="routerLinkActive"
     [attr.tabindex]="routerLinkActiveInstance.isActive ? 0 : -1"
