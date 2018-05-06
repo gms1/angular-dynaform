@@ -1,6 +1,5 @@
 import {Component} from '@angular/core';
 
-
 // TODO: improve sidenav menu experience
 @Component({
   selector: 'app-root',
@@ -22,7 +21,7 @@ import {Component} from '@angular/core';
   preserveWhitespaces: false
 })
 export class AppComponent {
-  navItems: {name: string, route: string}[] = [{name: 'Home', route: '/'}];
+  readonly navMainItems: {name: string, route: string}[] = [{name: 'Home', route: '/'}];
 
   constructor() {}
 }

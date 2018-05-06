@@ -95,23 +95,48 @@ export class SharedModule {
 
 ```typescript
 @Component({
-  selector: 'my-form-component',
+  selector: 'app-basic-form',
   template: `
-    <adf-form [model]="formModel" (adfSubmit)="onSubmit($event)" (adfReset)="onReset($event)">
+    <adf-form [model]="formModel" (adfSubmit)="onSubmit($event)">
     </adf-form>
   `
 })
-export class MyFormComponent {
-  @ViewChild(DynamicFormComponent) dynaForm: DynamicFormComponent;
+export class BasicFormComponent {
+  @ViewChild(DynamicForm) dynaForm!: DynamicForm;
   formModel: FormModel;
 
+  readonly formConfig: FormConfig = {
+    id: 'basic',
+    updateOn: 'change',
+    options: {
+      group: [
+        {
+          id: 'name',
+          modelType: ModelType.MODEL_VALUE,
+          controlType: ControlType.CONTROL_INPUT,
+          options: {label: 'name', placeholder: 'Enter your name', maxLength: 30, minLength: 4},
+          validators: ['required', 'minLength', 'maxLength']
+        },
+        {
+          id: 'submit',
+          modelType: ModelType.MODEL_NULL,
+          controlType: ControlType.CONTROL_BUTTON,
+          options: {label: 'Submit'},
+          action: 'submit'
+        }
+      ]
+    }
+  };
+
+  name?: string;
+
   constructor(private dynamicFormService: DynamicFormService) {
-    this.formModel = this.dynamicFormService.createFormModel(formConfig);
+    this.formModel = this.dynamicFormService.createFormModel(this.formConfig);
   }
 
-  onSubmit(event: Event): void { }
-  onReset(event: Event): void { }
-
+  onSubmit(event: Event): void {
+    this.name = this.formModel.value.name;
+  }
 }
 ```
 
@@ -121,7 +146,7 @@ export class MyFormComponent {
 
   [Configuration of the plunker example](./projects/material-example/src/app/app.config.ts)
 
-  [ControlConfig Interface](docs/typedoc/angular-dynaform/interfaces/controlconfig.html)
+  [ControlConfig Interface](./docs/typedoc/angular-dynaform/interfaces/controlconfig.html)
 
 * observable form value and form value update:
 

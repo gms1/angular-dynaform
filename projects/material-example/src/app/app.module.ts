@@ -13,18 +13,23 @@ import {AppComponent} from './app.component';
 import {HomeComponent} from './home.component';
 import {TabGroupExampleComponent} from './tabgroup-example.component';
 import {StepperExamplesComponent, StepperExampleComponent} from './stepper-example.component';
+import {BasicFormComponent, BasicFormContainerComponent} from './codeSamples/basic-form.component';
 
 export const DEMO_ROUTES: Routes = [
   {path: '', component: HomeComponent}, {path: 'tabgroup', component: TabGroupExampleComponent},
   {path: 'stepper', component: StepperExamplesComponent}
 ];
 
-export const APP_ROUTES: Routes = DEMO_ROUTES;
+export const CODE_ROUTES: Routes = [{path: 'basic', component: BasicFormContainerComponent}];
+
+export const APP_ROUTES: Routes = [...DEMO_ROUTES, ...CODE_ROUTES];
 
 
 @NgModule({
-  declarations:
-      [AppComponent, HomeComponent, TabGroupExampleComponent, StepperExamplesComponent, StepperExampleComponent],
+  declarations: [
+    AppComponent, HomeComponent, TabGroupExampleComponent, StepperExamplesComponent, StepperExampleComponent,
+    BasicFormComponent, BasicFormContainerComponent
+  ],
   imports: [
     BrowserModule, BrowserAnimationsModule, DynamicFormModule.forRoot(), DynamicMaterialFormModule,
     RouterModule.forRoot(APP_ROUTES), MatIconModule, MatSidenavModule, MatToolbarModule, MatListModule, MatCardModule
