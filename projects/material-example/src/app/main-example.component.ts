@@ -3,7 +3,7 @@ import {DynamicForm, DynamicFormService, FormModel} from '@angular-dynaform/core
 import {mainExampleConfig, mainExampleFormLanguages, mainExampleAppModelData} from './app.config';
 
 @Component({
-  selector: 'main',
+  selector: 'app-main-example',
   template: `
 <div class="main-example">
   <mat-card class="mat-card">
@@ -23,7 +23,7 @@ import {mainExampleConfig, mainExampleFormLanguages, mainExampleAppModelData} fr
   `,
   styles: []
 })
-export class HomeComponent implements AfterViewInit {
+export class MainExampleComponent implements AfterViewInit {
   @ViewChild(DynamicForm) form!: DynamicForm;
 
   model: FormModel;

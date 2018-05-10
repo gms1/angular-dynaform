@@ -3,9 +3,9 @@ import {DynamicForm, DynamicFormService, FormModel} from '@angular-dynaform/core
 import {mainExampleConfig, mainExampleFormLanguages, mainExampleAppModelData} from './app.config';
 
 @Component({
-  selector: 'main',
+  selector: 'app-main-example',
   template: `
-  <div class="basic-example">
+<div class="main-example">
   <h2>Example Form</h2>
   <adf-form
     [model]="model"
@@ -17,7 +17,7 @@ import {mainExampleConfig, mainExampleFormLanguages, mainExampleAppModelData} fr
   `,
   styles: []
 })
-export class HomeComponent implements AfterViewInit {
+export class MainExampleComponent implements AfterViewInit {
   @ViewChild(DynamicForm) form!: DynamicForm;
 
   model: FormModel;

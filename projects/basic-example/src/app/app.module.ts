@@ -9,16 +9,16 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {DynamicFormModule} from '@angular-dynaform/core';
 import {DynamicBasicFormModule} from '@angular-dynaform/basic';
 import {AppComponent} from './app.component';
-import {HomeComponent} from './home.component';
+import {MainExampleComponent} from './main-example.component';
 
-export const DEMO_ROUTES: Routes = [{path: '', component: HomeComponent}];
+export const DEMO_ROUTES: Routes = [{path: '', component: MainExampleComponent}];
 
 
 export const APP_ROUTES: Routes = DEMO_ROUTES;
 
 
 @NgModule({
-  declarations: [AppComponent, HomeComponent],
+  declarations: [AppComponent, MainExampleComponent],
   imports: [
     BrowserModule, BrowserAnimationsModule, DynamicFormModule.forRoot(), DynamicBasicFormModule,
     RouterModule.forRoot(APP_ROUTES)
