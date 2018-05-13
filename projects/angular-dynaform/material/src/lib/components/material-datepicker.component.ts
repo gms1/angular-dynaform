@@ -10,7 +10,7 @@ import {Component} from '@angular/core';
 // TODO: make toggle optional
 
 @Component({
-  selector: 'adf-material-input-component',
+  selector: 'adf-material-datepicker-component',
   template: `
     <div
       [formGroup]="model.ngGroup"

@@ -4,7 +4,7 @@ import {Component, ViewChild} from '@angular/core';
 import {DynamicForm, DynamicFormService, FormModel} from '@angular-dynaform/core';
 
 @Component({
-  selector: 'form-container-test-component',
+  selector: 'adf-test-form-container-component',
   template: `
 <div>
   <adf-form

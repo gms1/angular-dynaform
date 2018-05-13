@@ -8,7 +8,7 @@ import {
 import {Component} from '@angular/core';
 
 @Component({
-  selector: 'adf-material-input-component',
+  selector: 'adf-material-slider-component',
   template: `
     <div
       [formGroup]="model.ngGroup"

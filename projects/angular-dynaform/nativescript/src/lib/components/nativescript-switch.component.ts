@@ -8,7 +8,7 @@ import {
 import {Component} from '@angular/core';
 
 @Component({
-  selector: 'adf-nativescript-input-component',
+  selector: 'adf-nativescript-switch-component',
   template: `
   <StackLayout
     [formGroup]="model.ngGroup"

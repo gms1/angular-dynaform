@@ -8,7 +8,7 @@ import {
 import {Component} from '@angular/core';
 
 @Component({
-  selector: 'adf-basic-input-component',
+  selector: 'adf-basic-switch-component',
   template: `
     <div
       [formGroup]="model.ngGroup"

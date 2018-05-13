@@ -10,7 +10,7 @@ import {Component} from '@angular/core';
 // TODO: step is currently not supported
 
 @Component({
-  selector: 'adf-nativescript-input-component',
+  selector: 'adf-nativescript-slider-component',
   template: `
   <StackLayout
     [formGroup]="model.ngGroup"
