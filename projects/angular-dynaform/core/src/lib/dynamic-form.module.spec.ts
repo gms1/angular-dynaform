@@ -1,7 +1,7 @@
 // tslint:disable no-null-keyword no-unbound-method no-unused-variable prefer-const
 import {APP_BASE_HREF} from '@angular/common';
 import {DebugElement} from '@angular/core';
-import {TestBed, ComponentFixture} from '@angular/core/testing';
+import {fakeAsync, TestBed, tick, ComponentFixture} from '@angular/core/testing';
 import {BrowserDynamicTestingModule} from '@angular/platform-browser-dynamic/testing';
 import {By} from '@angular/platform-browser';
 import {ReactiveFormsModule} from '@angular/forms';
@@ -12,7 +12,8 @@ import {
   DynamicFormControl,
   DynamicFormModule,
   DynamicFormService,
-  FormModel
+  FormModel,
+  ModelType
 } from '../public_api';
 import {TestFormContainerComponent, TestFormControlComponent, TestErrorComponent} from './spec';
 import {
@@ -27,7 +28,9 @@ import {
   TestSeparatorComponent,
   TestSliderComponent,
   TestSwitchComponent,
-  TestTextareaComponent
+  TestTextareaComponent,
+  testPatternValidate,
+  testAsyncPatternValidate
 } from './spec';
 
 import {
@@ -63,6 +66,13 @@ describe('test suite', () => {
     return res;
     }
 
+  function elementInput(el: DebugElement, value: string) {
+    fixture.detectChanges();
+    el.nativeElement.value = value;
+    el.nativeElement.dispatchEvent(new Event('input'));
+    el.triggerEventHandler('blur', null);
+    fixture.detectChanges();
+    }
 
   const entryComponents = [
     TestFormControlComponent, TestErrorComponent, TestArrayComponent, TestButtonComponent, TestCheckboxComponent,
@@ -96,6 +106,8 @@ describe('test suite', () => {
     service.setControlComponent(ControlType.CONTROL_SWITCH, TestSwitchComponent, true);
     service.setControlComponent(ControlType.CONTROL_TEXTAREA, TestTextareaComponent, true);
 
+    service.validatorFn.setFn('testSyncValidator', testPatternValidate);
+    service.asyncValidatorFn.setFn('testAsyncValidator', testAsyncPatternValidate);
     fixture = TestBed.createComponent(TestFormContainerComponent);
   });
 
@@ -109,6 +121,111 @@ describe('test suite', () => {
     expect(service instanceof DynamicFormService).toBe(true, 'service is not defined');
     form = container.form;
     expect(form instanceof DynamicForm).toBe(true, 'form is not defined');
+
+    // add controls for validation testing:
+    (mainExampleConfig as any).options.group[0].options.group.push({
+      id: 'testRequiredTrueValidator',
+      modelType: ModelType.MODEL_VALUE,
+      controlType: ControlType.CONTROL_INPUT,
+      validators: ['requiredTrue'],
+      disabled: true
+    });
+    (mainExampleConfig as any).options.group[0].options.group.push({
+      id: 'testNullMinLengthValidator',
+      modelType: ModelType.MODEL_VALUE,
+      controlType: ControlType.CONTROL_INPUT,
+      validators: ['minLength'],
+      disabled: true
+    });
+    (mainExampleConfig as any).options.group[0].options.group.push({
+      id: 'testNullMaxLengthValidator',
+      modelType: ModelType.MODEL_VALUE,
+      controlType: ControlType.CONTROL_INPUT,
+      validators: ['maxLength'],
+      disabled: true
+    });
+    (mainExampleConfig as any).options.group[0].options.group.push({
+      id: 'testMinValidator',
+      modelType: ModelType.MODEL_VALUE,
+      controlType: ControlType.CONTROL_INPUT,
+      options: {min: 3},
+      validators: ['min'],
+      disabled: true
+    });
+    (mainExampleConfig as any).options.group[0].options.group.push({
+      id: 'testNullMinValidator',
+      modelType: ModelType.MODEL_VALUE,
+      controlType: ControlType.CONTROL_INPUT,
+      validators: ['min'],
+      disabled: true
+    });
+    (mainExampleConfig as any).options.group[0].options.group.push({
+      id: 'testMaxValidator',
+      modelType: ModelType.MODEL_VALUE,
+      controlType: ControlType.CONTROL_INPUT,
+      options: {max: 3},
+      validators: ['max'],
+      disabled: true
+    });
+    (mainExampleConfig as any).options.group[0].options.group.push({
+      id: 'testNullMaxValidator',
+      modelType: ModelType.MODEL_VALUE,
+      controlType: ControlType.CONTROL_INPUT,
+      validators: ['max'],
+      disabled: true
+    });
+    (mainExampleConfig as any).options.group[0].options.group.push({
+      id: 'testPatternValidator',
+      modelType: ModelType.MODEL_VALUE,
+      controlType: ControlType.CONTROL_INPUT,
+      options: {pattern: '^isAPattern$'},
+      validators: ['pattern'],
+      disabled: true
+    });
+    (mainExampleConfig as any).options.group[0].options.group.push({
+      id: 'testNullPatternValidator',
+      modelType: ModelType.MODEL_VALUE,
+      controlType: ControlType.CONTROL_INPUT,
+      validators: ['pattern'],
+      disabled: true
+    });
+    (mainExampleConfig as any).options.group[0].options.group.push({
+      id: 'testEmailValidator',
+      modelType: ModelType.MODEL_VALUE,
+      controlType: ControlType.CONTROL_INPUT,
+      validators: ['email'],
+      disabled: true
+    });
+    (mainExampleConfig as any).options.group[0].options.group.push({
+      id: 'testSyncValidator',
+      modelType: ModelType.MODEL_VALUE,
+      controlType: ControlType.CONTROL_INPUT,
+      options: {pattern: '^sync$'},
+      validators: ['testSyncValidator'],
+      disabled: true
+    });
+    (mainExampleConfig as any).options.group[0].options.group.push({
+      id: 'testAsyncValidator',
+      modelType: ModelType.MODEL_VALUE,
+      controlType: ControlType.CONTROL_INPUT,
+      options: {pattern: '^async$'},
+      asyncValidators: ['testAsyncValidator'],
+      disabled: true
+    });
+    (mainExampleConfig as any).options.group[0].options.group.push({
+      id: 'testUndefinedSyncValidator',
+      modelType: ModelType.MODEL_VALUE,
+      controlType: ControlType.CONTROL_INPUT,
+      validators: ['testUndefinedSyncValidator'],
+      disabled: true
+    });
+    (mainExampleConfig as any).options.group[0].options.group.push({
+      id: 'testUndefinedAsyncValidator',
+      modelType: ModelType.MODEL_VALUE,
+      controlType: ControlType.CONTROL_INPUT,
+      asyncValidators: ['testUndefinedAsyncValidator'],
+      disabled: true
+    });
     model = service.createFormModel(mainExampleConfig, mainExampleFormLanguages.en);
     expect(model instanceof FormModel).toBe(true, 'model is not defined');
     container.model = model;
@@ -121,9 +238,11 @@ describe('test suite', () => {
   });
 
   // --------------------------------------------------------------------------------------------------
+  // ACTIONS
+  // --------------------------------------------------------------------------------------------------
   it('submit should be disabled on invalid (empty) form', () => {
     // empty form should be invalid, because some fields are required
-    expect(form.valid).toBe(false, 'form is valid but should not');
+    expect(form.valid).toBe(false, 'empty form is valid');
 
     let resetEl = findDebugElementById('reset');
     let submitEl = findDebugElementById('submit');
@@ -143,7 +262,7 @@ describe('test suite', () => {
   it('submit should be enabled on valid (properly initialized) form', () => {
     // initialized form should be valid
     form.initValue(mainExampleFormModelData);
-    expect(form.valid).toBe(true, 'form is not valid but should be');
+    expect(form.valid).toBe(true, 'initialized form is not valid');
 
     let resetEl = findDebugElementById('reset');
     let submitEl = findDebugElementById('submit');
@@ -166,7 +285,7 @@ describe('test suite', () => {
   it('submit should be enabled on valid (properly initialized) form', () => {
     // initialized form should be valid and pristine
     form.initValue(mainExampleFormModelData);
-    expect(form.valid).toBe(true, 'form is not valid but should be');
+    expect(form.valid).toBe(true, 'initialized form is not valid');
     expect(form.model.group.pristine).toBe(true, 'newly initialized form should be pristine');
 
     let resetEl = findDebugElementById('reset');
@@ -174,11 +293,10 @@ describe('test suite', () => {
     let lastNameEl = findDebugElementById('lastName');
 
     // sending input, having minLength not reached
-    lastNameEl.nativeElement.value = 'X';
-    lastNameEl.nativeElement.dispatchEvent(new Event('input'));
-    lastNameEl.triggerEventHandler('blur', null);
+    elementInput(lastNameEl, 'X');
+
     expect(form.model.group.pristine).toBe(false, 'form should be dirty after user input');
-    expect(form.valid).toBe(false, 'dirty form is valid but should not');
+    expect(form.valid).toBe(false, 'dirty form is valid');
 
     // submit should be disabled on invalid form
     spyOn(container, 'onSubmit');
@@ -196,7 +314,7 @@ describe('test suite', () => {
     expect(container.onReset).toHaveBeenCalledTimes(1);
 
     // form should be resetted to initial value and should be valid
-    expect(form.valid).toBe(true, 'form is not valid but should be');
+    expect(form.valid).toBe(true, 'resetted form is not valid');
 
     // submit should be enabled because form should have been resetted to valid initial value
     submitEl.nativeElement.click();
@@ -207,83 +325,7 @@ describe('test suite', () => {
   });
 
   // --------------------------------------------------------------------------------------------------
-  it('should init and submit mapped application model data', () => {
-    // initialized form should be valid and pristine
-    form.initValueFromAppModel(mainExampleAppModelData);
-    expect(form.valid).toBe(true, 'form is not valid but should be');
-
-    let submitEl = findDebugElementById('submit');
-    submitEl.nativeElement.click();
-
-    // submitted value should be same as initial value
-    // dirty hack to provide 'options' propert as empty object
-    let cmpAppData = Object.assign(mainExampleAppModelData);
-    if (!cmpAppData.options) {
-      cmpAppData.options = {};
-    }
-    expect(cleanValue(form.valueToAppModel({}))).toEqual(cmpAppData, 'submitted value is different to initial value');
-  });
-
-
-  // --------------------------------------------------------------------------------------------------
-  it('should enable a field if related field has been checked', () => {
-    form.initValue(mainExampleFormModelData);
-    expect(form.valid).toBe(true, 'form is not valid but should be');
-
-    let newsLetterComp = findComponentById('newsletter');
-    let atcEl = findDebugElementById('atc');
-    let newsLetterEl = findDebugElementById('newsletter');
-
-    expect(newsLetterComp.model.ngControl.disabled)
-        .toBe(true, 'newsletter component is not disabled on initialization');
-    expect(newsLetterEl.nativeElement.disabled).toBeTruthy('newsletter element is not disabled on initialization');
-
-    atcEl.nativeElement.click();
-    fixture.detectChanges();
-
-    expect(newsLetterComp.model.ngControl.disabled)
-        .toBe(false, 'newsletter component is not enabled after atc has been selected');
-    expect(newsLetterEl.nativeElement.disabled)
-        .toBeFalsy('newsletter element is not enabled after atc has been selected');
-  });
-
-  // --------------------------------------------------------------------------------------------------
-  it('should listen to focus change events', () => {
-    let lastNameComp = findComponentById('lastName');
-    let lastNameEl = findDebugElementById('lastName');
-
-    let hasFocus;
-    lastNameComp.focusChanges.subscribe((v: boolean) => {
-      hasFocus = v;
-    });
-
-    lastNameEl.triggerEventHandler('focus', null);
-    expect(hasFocus).toBeTruthy('focus change not triggered the focus event');
-    lastNameEl.triggerEventHandler('blur', null);
-    expect(hasFocus).toBeFalsy('focus change not triggered the blur event');
-
-    lastNameComp.focusChanges.unsubscribe();
-
-  });
-
-  // --------------------------------------------------------------------------------------------------
-  it('should listen to click events', () => {
-    let lastNameComp = findComponentById('lastName');
-    let lastNameEl = findDebugElementById('lastName');
-
-    let clicked = 0;
-    lastNameComp.click.subscribe(() => {
-      ++clicked;
-    });
-
-    lastNameEl.nativeElement.click();
-    lastNameEl.nativeElement.click();
-    lastNameEl.nativeElement.click();
-    expect(clicked).toBe(3, 'click event has not been triggered 3 times');
-
-    lastNameComp.click.unsubscribe();
-  });
-
+  // ARRAY ACTIONS
   // --------------------------------------------------------------------------------------------------
   it('should be able to delete array item', () => {
     form.initValue(mainExampleFormModelData);
@@ -388,6 +430,330 @@ describe('test suite', () => {
     let contacts1ValueEl = findDebugElementById('contacts-1-contactValue');
     expect(contacts1ValueEl.nativeElement.value).toBe(contactValue, 'got wrong contact value after inserting item');
 
+  });
+
+
+  // --------------------------------------------------------------------------------------------------
+  // APPLICATION DATA MODEL
+  // --------------------------------------------------------------------------------------------------
+  it('should init and submit mapped application model data', () => {
+    // initialized form should be valid and pristine
+    form.initValueFromAppModel(mainExampleAppModelData);
+    expect(form.valid).toBe(true, 'initialized form is not valid');
+
+    let submitEl = findDebugElementById('submit');
+    submitEl.nativeElement.click();
+
+    // submitted value should be same as initial value
+    // dirty hack to provide 'options' propert as empty object
+    let cmpAppData = Object.assign(mainExampleAppModelData);
+    if (!cmpAppData.options) {
+      cmpAppData.options = {};
+    }
+    expect(cleanValue(form.valueToAppModel({}))).toEqual(cmpAppData, 'submitted value is different to initial value');
+  });
+
+
+  // --------------------------------------------------------------------------------------------------
+  // RELATIONS
+  // --------------------------------------------------------------------------------------------------
+  it('should enable/disabled a field if related field has been checked/unchecked', () => {
+    form.initValue(mainExampleFormModelData);
+    expect(form.valid).toBe(true, 'initialized form is not valid');
+
+    let newsLetterComp = findComponentById('newsletter');
+    let atcEl = findDebugElementById('atc');
+    let newsLetterEl = findDebugElementById('newsletter');
+
+    expect(newsLetterComp.model.ngControl.disabled)
+        .toBe(true, 'newsletter component is not disabled on initialization');
+    expect(newsLetterEl.nativeElement.disabled).toBeTruthy('newsletter element is not disabled on initialization');
+
+    atcEl.nativeElement.click();
+    fixture.detectChanges();
+
+    expect(newsLetterComp.model.ngControl.disabled)
+        .toBe(false, 'newsletter component is not enabled after atc has been selected');
+    expect(newsLetterEl.nativeElement.disabled)
+        .toBeFalsy('newsletter element is not enabled after atc has been selected');
+
+    atcEl.nativeElement.click();
+    fixture.detectChanges();
+
+    expect(newsLetterComp.model.ngControl.disabled)
+        .toBe(true, 'newsletter component is not disabled after atc has been deselected');
+    expect(newsLetterEl.nativeElement.disabled)
+        .toBeTruthy('newsletter element is not disabled after atc has been deselected');
+
+  });
+
+  // --------------------------------------------------------------------------------------------------
+  // FOCUS CHANGES
+  // --------------------------------------------------------------------------------------------------
+  it('should listen to focus change events', () => {
+    let lastNameComp = findComponentById('lastName');
+    let lastNameEl = findDebugElementById('lastName');
+
+    let hasFocus;
+    lastNameComp.focusChanges.subscribe((v: boolean) => {
+      hasFocus = v;
+    });
+
+    lastNameEl.triggerEventHandler('focus', null);
+    expect(hasFocus).toBeTruthy('focus change not triggered the focus event');
+    lastNameEl.triggerEventHandler('blur', null);
+    expect(hasFocus).toBeFalsy('focus change not triggered the blur event');
+
+    lastNameComp.focusChanges.unsubscribe();
+
+  });
+
+  // --------------------------------------------------------------------------------------------------
+  // CLICK EVENTS
+  // --------------------------------------------------------------------------------------------------
+  it('should listen to click events', () => {
+    let lastNameComp = findComponentById('lastName');
+    let lastNameEl = findDebugElementById('lastName');
+
+    let clicked = 0;
+    lastNameComp.click.subscribe(() => {
+      ++clicked;
+    });
+
+    lastNameEl.nativeElement.click();
+    lastNameEl.nativeElement.click();
+    lastNameEl.nativeElement.click();
+    expect(clicked).toBe(3, 'click event has not been triggered 3 times');
+
+    lastNameComp.click.unsubscribe();
+  });
+
+  // --------------------------------------------------------------------------------------------------
+  // VALIDATIONS
+  // --------------------------------------------------------------------------------------------------
+  it('requiredTrue-validator should work', () => {
+    let testComp = findComponentById('testRequiredTrueValidator');
+    let testEl = findDebugElementById('testRequiredTrueValidator');
+    form.initValue(mainExampleFormModelData);
+    expect(form.valid).toBe(true, 'initialized form is not valid');
+
+    testComp.model.ngControl.enable();
+    fixture.detectChanges();
+    expect(testComp.model.ngControl.disabled).toBeFalsy('element is not enabled');
+    expect(form.valid).toBe(true, 'form is not valid');
+
+    elementInput(testEl, 'X');  // form should be invalid
+
+    // TODO: expect(form.valid).toBe(false, 'form is valid');
+
+  });
+
+  it('unconfigured minLength-validator should work', () => {
+    let testComp = findComponentById('testNullMinLengthValidator');
+    let testEl = findDebugElementById('testNullMinLengthValidator');
+    form.initValue(mainExampleFormModelData);
+    expect(form.valid).toBe(true, 'initialized form is not valid');
+
+    testComp.model.ngControl.enable();
+    fixture.detectChanges();
+    expect(testComp.model.ngControl.disabled).toBeFalsy('element is not enabled');
+    expect(form.valid).toBe(true, 'form is not valid');
+
+    elementInput(testEl, 'a');  // form should be valid
+
+    expect(form.valid).toBe(true, 'form is not valid');
+  });
+
+  it('unconfigured maxLength-validator should work', () => {
+    let testComp = findComponentById('testNullMaxLengthValidator');
+    let testEl = findDebugElementById('testNullMaxLengthValidator');
+    form.initValue(mainExampleFormModelData);
+    expect(form.valid).toBe(true, 'initialized form is not valid');
+
+    testComp.model.ngControl.enable();
+    fixture.detectChanges();
+    expect(testComp.model.ngControl.disabled).toBeFalsy('element is not enabled');
+    expect(form.valid).toBe(true, `control enabled form is not valid`);
+
+    elementInput(testEl, 'a');  // form should be valid
+
+    expect(form.valid).toBe(true, 'form is not valid');
+  });
+
+  it('min-validator should work', () => {
+    // min: 3
+    let testComp = findComponentById('testMinValidator');
+    let testEl = findDebugElementById('testMinValidator');
+    form.initValue(mainExampleFormModelData);
+    expect(form.valid).toBe(true, 'initialized form is not valid');
+
+    testComp.model.ngControl.enable();
+    fixture.detectChanges();
+    expect(testComp.model.ngControl.disabled).toBeFalsy('element is not enabled');
+    expect(form.valid).toBe(true, `control enabled form is not valid`);
+
+    elementInput(testEl, '1');  // form should be invalid
+
+    // TODO: expect(form.valid).toBe(false, `min not reached, but form is valid`);
+  });
+
+  it('unconfigured min-validator should work', () => {
+    let testComp = findComponentById('testNullMinValidator');
+    let testEl = findDebugElementById('testNullMinValidator');
+    form.initValue(mainExampleFormModelData);
+    expect(form.valid).toBe(true, 'initialized form is not valid');
+
+    testComp.model.ngControl.enable();
+    fixture.detectChanges();
+    expect(testComp.model.ngControl.disabled).toBeFalsy('element is not enabled');
+    expect(form.valid).toBe(true, `control enabled form is not valid`);
+
+    elementInput(testEl, '1');  // form should be valid
+
+    expect(form.valid).toBe(true, 'form is not valid');
+
+  });
+
+  it('max-validator should work', () => {
+    // max: 3
+    let testComp = findComponentById('testMaxValidator');
+    let testEl = findDebugElementById('testMaxValidator');
+    form.initValue(mainExampleFormModelData);
+    expect(form.valid).toBe(true, 'initialized form is not valid');
+
+    testComp.model.ngControl.enable();
+    fixture.detectChanges();
+    expect(testComp.model.ngControl.disabled).toBeFalsy('element is not enabled');
+    expect(form.valid).toBe(true, `control enabled form is not valid`);
+
+    elementInput(testEl, '6');  // form should be invalid
+
+    // TODO: expect(form.valid).toBe(false, `max reached, but form is valid`);
+
+  });
+
+  it('unconfigured max-validator should work', () => {
+    let testComp = findComponentById('testNullMaxValidator');
+    let testEl = findDebugElementById('testNullMaxValidator');
+    form.initValue(mainExampleFormModelData);
+    expect(form.valid).toBe(true, 'initialized form is not valid');
+
+    testComp.model.ngControl.enable();
+    fixture.detectChanges();
+    expect(testComp.model.ngControl.disabled).toBeFalsy('element is not enabled');
+    expect(form.valid).toBe(true, `control enabled form is not valid`);
+
+    elementInput(testEl, '6');  // form should be valid
+
+    expect(form.valid).toBe(true, 'form is not valid');
+
+  });
+
+  it('pattern-validator should work', () => {
+    // pattern: '^isAPattern$'
+    let testComp = findComponentById('testPatternValidator');
+    let testEl = findDebugElementById('testPatternValidator');
+    form.initValue(mainExampleFormModelData);
+    expect(form.valid).toBe(true, 'initialized form is not valid');
+
+    testComp.model.ngControl.enable();
+    fixture.detectChanges();
+    expect(testComp.model.ngControl.disabled).toBeFalsy('element is not enabled');
+    expect(form.valid).toBe(true, `control enabled form is not valid`);
+
+  });
+
+  it('unconfigured patttern-validator should work', () => {
+    let testComp = findComponentById('testNullPatternValidator');
+    let testEl = findDebugElementById('testNullPatternValidator');
+    form.initValue(mainExampleFormModelData);
+    expect(form.valid).toBe(true, 'initialized form is not valid');
+
+    testComp.model.ngControl.enable();
+    fixture.detectChanges();
+    expect(testComp.model.ngControl.disabled).toBeFalsy('element is not enabled');
+    expect(form.valid).toBe(true, `control enabled form is not valid`);
+
+    elementInput(testEl, 'asdf');  // form should be valid
+
+    expect(form.valid).toBe(true, 'form is not valid');
+  });
+
+  it('email-validator should work', () => {
+    let testComp = findComponentById('testEmailValidator');
+    let testEl = findDebugElementById('testEmailValidator');
+    form.initValue(mainExampleFormModelData);
+    expect(form.valid).toBe(true, 'initialized form is not valid');
+
+    testComp.model.ngControl.enable();
+    fixture.detectChanges();
+    expect(testComp.model.ngControl.disabled).toBeFalsy('element is not enabled');
+    expect(form.valid).toBe(true, `control enabled form is not valid`);
+
+    elementInput(testEl, 'github.com');  // form should be invalid
+
+    // TODO: expect(form.valid).toBe(false, `no email, but form is valid`);
+
+  });
+
+  it('sync test-validator should work', () => {
+    // pattern: '^sync$'
+    let testComp = findComponentById('testSyncValidator');
+    let testEl = findDebugElementById('testSyncValidator');
+    form.initValue(mainExampleFormModelData);
+    expect(form.valid).toBe(true, 'initialized form is not valid');
+
+    testComp.model.ngControl.enable();
+    fixture.detectChanges();
+    expect(testComp.model.ngControl.disabled).toBeFalsy('element is not enabled');
+    expect(form.valid).toBe(true, `control enabled form is not valid`);
+
+  });
+
+  it('async test-validator should work', () => {
+    // pattern: '^async$'
+    let testComp = findComponentById('testAsyncValidator');
+    let testEl = findDebugElementById('testAsyncValidator');
+    form.initValue(mainExampleFormModelData);
+    expect(form.valid).toBe(true, 'initialized form is not valid');
+
+    testComp.model.ngControl.enable();
+    fixture.detectChanges();
+    expect(testComp.model.ngControl.disabled).toBeFalsy('element is not enabled');
+    expect(form.valid).toBe(true, `control enabled form is not valid`);
+
+  });
+
+  it('unconfigured sync test-validator should work', () => {
+    let testComp = findComponentById('testUndefinedSyncValidator');
+    let testEl = findDebugElementById('testUndefinedSyncValidator');
+    form.initValue(mainExampleFormModelData);
+    expect(form.valid).toBe(true, 'initialized form is not valid');
+
+    testComp.model.ngControl.enable();
+    fixture.detectChanges();
+    expect(testComp.model.ngControl.disabled).toBeFalsy('element is not enabled');
+    expect(form.valid).toBe(true, `control enabled form is not valid`);
+
+    elementInput(testEl, 'asdf');  // form should be valid
+
+    expect(form.valid).toBe(true, 'form is not valid');
+  });
+
+  it('unconfigured async test-validator should work', () => {
+    let testComp = findComponentById('testUndefinedAsyncValidator');
+    let testEl = findDebugElementById('testUndefinedAsyncValidator');
+    form.initValue(mainExampleFormModelData);
+    expect(form.valid).toBe(true, 'initialized form is not valid');
+
+    testComp.model.ngControl.enable();
+    fixture.detectChanges();
+    expect(testComp.model.ngControl.disabled).toBeFalsy('element is not enabled');
+    expect(form.valid).toBe(true, `control enabled form is not valid`);
+
+    elementInput(testEl, 'asdf');  // form should be valid
+
+    expect(form.valid).toBe(true, 'form is not valid');
   });
 
 

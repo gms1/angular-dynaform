@@ -13,3 +13,4 @@ export {TestSeparatorComponent} from './test-separator.component';
 export {TestSliderComponent} from './test-slider.component';
 export {TestSwitchComponent} from './test-switch.component';
 export {TestTextareaComponent} from './test-textarea.component';
+export {testPatternValidate, testAsyncPatternValidate} from './test-validator';

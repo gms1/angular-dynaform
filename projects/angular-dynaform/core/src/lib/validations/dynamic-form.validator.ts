@@ -109,12 +109,14 @@ export class DynamicFormValidatorRegistry extends DynamicFormValidation {
   validate(key: string, control: ControlModel): ValidatorFn {
     const dffn = this.reg.getFn(key);
     if (!dffn) {
-      return DynamicFormValidatorRegistry.NullValidator;
+      return DynamicFormValidatorRegistry.nullValidator;
       }
     return dffn(key, control);
   }
 
-  static NullValidator = () => null;
+  static nullValidator(c: AbstractControl): ValidationErrors|null {
+    return null;
+  }
 
   // tslint:disable no-unbound-method
   static required(key: string, control: ControlModel): ValidatorFn {
@@ -125,31 +127,31 @@ export class DynamicFormValidatorRegistry extends DynamicFormValidation {
   }
   static minLength(key: string, control: ControlModel): ValidatorFn {
     if (!control.options || typeof control.options.minLength !== 'number') {
-      return DynamicFormValidatorRegistry.NullValidator;
+      return DynamicFormValidatorRegistry.nullValidator;
       }
     return Validators.minLength(control.options.minLength);
   }
   static maxLength(key: string, control: ControlModel): ValidatorFn {
     if (!control.options || typeof control.options.maxLength !== 'number') {
-      return DynamicFormValidatorRegistry.NullValidator;
+      return DynamicFormValidatorRegistry.nullValidator;
       }
     return Validators.maxLength(control.options.maxLength);
   }
   static min(key: string, control: ControlModel): ValidatorFn {
     if (!control.options || typeof control.options.min !== 'number') {
-      return DynamicFormValidatorRegistry.NullValidator;
+      return DynamicFormValidatorRegistry.nullValidator;
       }
     return Validators.min(control.options.min);
   }
   static max(key: string, control: ControlModel): ValidatorFn {
     if (!control.options || typeof control.options.max !== 'number') {
-      return DynamicFormValidatorRegistry.NullValidator;
+      return DynamicFormValidatorRegistry.nullValidator;
       }
     return Validators.max(control.options.max);
   }
   static pattern(key: string, control: ControlModel): ValidatorFn {
     if (!control.options || typeof control.options.pattern !== 'string') {
-      return DynamicFormValidatorRegistry.NullValidator;
+      return DynamicFormValidatorRegistry.nullValidator;
       }
     return Validators.pattern(control.options.pattern);
   }
@@ -176,10 +178,12 @@ export class DynamicFormAsyncValidatorRegistry extends DynamicFormAsyncValidatio
   validate(key: string, control: ControlModel): AsyncValidatorFn {
     const dffn = this.reg.getFn(key);
     if (!dffn) {
-      return DynamicFormAsyncValidatorRegistry.NullValidator;
+      return DynamicFormAsyncValidatorRegistry.nullValidator;
       }
     return dffn(key, control);
   }
 
-  static NullValidator = () => Promise.resolve(null);
+  static nullValidator(c: AbstractControl): Promise<ValidationErrors|null> {
+    return Promise.resolve(null);
+  }
 }

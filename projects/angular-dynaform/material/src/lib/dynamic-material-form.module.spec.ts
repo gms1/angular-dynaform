@@ -45,6 +45,14 @@ describe('test suite', () => {
       throw new Error(`component with id "${id}" not found`);
       }
     return res;
+    }
+
+  function elementInput(el: DebugElement, value: string) {
+    fixture.detectChanges();
+    el.nativeElement.value = value;
+    el.nativeElement.dispatchEvent(new Event('input'));
+    el.triggerEventHandler('blur', null);
+    fixture.detectChanges();
   }
 
   beforeEach(async() => {
@@ -78,9 +86,11 @@ describe('test suite', () => {
   });
 
   // --------------------------------------------------------------------------------------------------
+  // ACTIONS
+  // --------------------------------------------------------------------------------------------------
   it('submit should be disabled on invalid (empty) form', () => {
     // empty form should be invalid, because some fields are required
-    expect(form.valid).toBe(false, 'form is valid but should not');
+    expect(form.valid).toBe(false, 'empty form is valid');
 
     let resetEl = findDebugElementById('reset');
     let submitEl = findDebugElementById('submit');
@@ -100,7 +110,7 @@ describe('test suite', () => {
   it('submit should be enabled on valid (properly initialized) form', () => {
     // initialized form should be valid
     form.initValue(mainExampleFormModelData);
-    expect(form.valid).toBe(true, 'form is not valid but should be');
+    expect(form.valid).toBe(true, 'initialized form is not valid');
 
     let resetEl = findDebugElementById('reset');
     let submitEl = findDebugElementById('submit');
@@ -123,7 +133,7 @@ describe('test suite', () => {
   it('submit should be enabled on valid (properly initialized) form', () => {
     // initialized form should be valid and pristine
     form.initValue(mainExampleFormModelData);
-    expect(form.valid).toBe(true, 'form is not valid but should be');
+    expect(form.valid).toBe(true, 'initialized form is not valid');
     expect(form.model.group.pristine).toBe(true, 'newly initialized form should be pristine');
 
     let resetEl = findDebugElementById('reset');
@@ -131,11 +141,10 @@ describe('test suite', () => {
     let lastNameEl = findDebugElementById('lastName');
 
     // sending input, having minLength not reached
-    lastNameEl.nativeElement.value = 'X';
-    lastNameEl.nativeElement.dispatchEvent(new Event('input'));
-    lastNameEl.triggerEventHandler('blur', null);
+    elementInput(lastNameEl, 'X');
+
     expect(form.model.group.pristine).toBe(false, 'form should be dirty after user input');
-    expect(form.valid).toBe(false, 'dirty form is valid but should not');
+    expect(form.valid).toBe(false, 'dirty form is valid');
 
     // submit should be disabled on invalid form
     spyOn(container, 'onSubmit');
@@ -153,7 +162,7 @@ describe('test suite', () => {
     expect(container.onReset).toHaveBeenCalledTimes(1);
 
     // form should be resetted to initial value and should be valid
-    expect(form.valid).toBe(true, 'form is not valid but should be');
+    expect(form.valid).toBe(true, 'resetted form is not valid');
 
     // submit should be enabled because form should have been resetted to valid initial value
     submitEl.nativeElement.click();
@@ -164,94 +173,7 @@ describe('test suite', () => {
   });
 
   // --------------------------------------------------------------------------------------------------
-  it('should init and submit mapped application model data', () => {
-    // initialized form should be valid and pristine
-    form.initValueFromAppModel(mainExampleAppModelData);
-    expect(form.valid).toBe(true, 'form is not valid but should be');
-
-    let submitEl = findDebugElementById('submit');
-    submitEl.nativeElement.click();
-
-    // submitted value should be same as initial value
-    // dirty hack to provide 'options' propert as empty object
-    let cmpAppData = Object.assign(mainExampleAppModelData);
-    if (!cmpAppData.options) {
-      cmpAppData.options = {};
-    }
-    expect(cleanValue(form.valueToAppModel({}))).toEqual(cmpAppData, 'submitted value is different to initial value');
-  });
-
-
-  // --------------------------------------------------------------------------------------------------
-  it('should enable a field if related field has been checked', () => {
-    form.initValue(mainExampleFormModelData);
-    expect(form.valid).toBe(true, 'form is not valid but should be');
-
-    let newsLetterComp = findComponentById('newsletter');
-    let atcEl = findDebugElementById('atc');
-    let newsLetterEl = findDebugElementById('newsletter');
-
-    let atcInputEl: HTMLInputElement = atcEl.nativeElement.querySelector('input');
-    let newsLetterInputEl: HTMLInputElement = newsLetterEl.nativeElement.querySelector('input');
-
-    expect(newsLetterComp.model.ngControl.disabled)
-        .toBe(true, 'newsletter component is not disabled on initialization');
-
-    // material: TODO: nativeElement.disabled and inputElement.disabled are not in sync?
-    // expect(newsLetterInputEl.disabled).toBeTruthy('newsletter element is not disabled on initialization');
-    // console.log(`before: newsletter newsLetterInputEl.disabled: ${newsLetterInputEl.disabled}`);
-    // console.log(`before: newsletter newsLetterEl.nativeElement.disabled: ${newsLetterEl.nativeElement.disabled}`);
-
-    atcInputEl.click();
-    fixture.detectChanges();
-
-    expect(newsLetterComp.model.ngControl.disabled)
-        .toBe(false, 'newsletter component is not enabled after atc has been selected');
-
-    // material: TODO: nativeElement.disabled and inputElement.disabled are not in sync?
-    // expect(newsLetterInputEl.disabled).toBeFalsy('newsletter element is not enabled after atc has been
-    // selected');
-    // console.log(`after: newsletter newsLetterInputEl.disabled: ${newsLetterInputEl.disabled}`);
-    // console.log(`after: newsletter newsLetterEl.nativeElement.disabled: ${newsLetterEl.nativeElement.disabled}`);
-  });
-
-  // --------------------------------------------------------------------------------------------------
-  it('should listen to focus change events', () => {
-    let lastNameComp = findComponentById('lastName');
-    let lastNameEl = findDebugElementById('lastName');
-
-    let hasFocus;
-    lastNameComp.focusChanges.subscribe((v: boolean) => {
-      hasFocus = v;
-    });
-
-    lastNameEl.triggerEventHandler('focus', null);
-    expect(hasFocus).toBeTruthy('focus change not triggered the focus event');
-    lastNameEl.triggerEventHandler('blur', null);
-    expect(hasFocus).toBeFalsy('focus change not triggered the blur event');
-
-    lastNameComp.focusChanges.unsubscribe();
-
-  });
-
-  // --------------------------------------------------------------------------------------------------
-  it('should listen to click events', () => {
-    let lastNameComp = findComponentById('lastName');
-    let lastNameEl = findDebugElementById('lastName');
-
-    let clicked = 0;
-    lastNameComp.click.subscribe(() => {
-      ++clicked;
-    });
-
-    lastNameEl.nativeElement.click();
-    lastNameEl.nativeElement.click();
-    lastNameEl.nativeElement.click();
-    expect(clicked).toBe(3, 'click event has not been triggered 3 times');
-
-    lastNameComp.click.unsubscribe();
-  });
-
+  // ARRAY ACTIONS
   // --------------------------------------------------------------------------------------------------
   it('should be able to delete array item', () => {
     form.initValue(mainExampleFormModelData);
@@ -357,5 +279,103 @@ describe('test suite', () => {
     expect(contacts1ValueEl.nativeElement.value).toBe(contactValue, 'got wrong contact value after inserting item');
 
   });
+
+
+  // --------------------------------------------------------------------------------------------------
+  // APPLICATION DATA MODEL
+  // --------------------------------------------------------------------------------------------------
+  it('should init and submit mapped application model data', () => {
+    // initialized form should be valid and pristine
+    form.initValueFromAppModel(mainExampleAppModelData);
+    expect(form.valid).toBe(true, 'initialized form is not valid');
+
+    let submitEl = findDebugElementById('submit');
+    submitEl.nativeElement.click();
+
+    // submitted value should be same as initial value
+    // dirty hack to provide 'options' propert as empty object
+    let cmpAppData = Object.assign(mainExampleAppModelData);
+    if (!cmpAppData.options) {
+      cmpAppData.options = {};
+    }
+    expect(cleanValue(form.valueToAppModel({}))).toEqual(cmpAppData, 'submitted value is different to initial value');
+  });
+
+
+  // --------------------------------------------------------------------------------------------------
+  // RELATIONS
+  // --------------------------------------------------------------------------------------------------
+  it('should enable/disabled a field if related field has been checked/unchecked', () => {
+    form.initValue(mainExampleFormModelData);
+    expect(form.valid).toBe(true, 'form is not valid but should be');
+
+    let newsLetterComp = findComponentById('newsletter');
+    let atcEl = findDebugElementById('atc');
+    let newsLetterEl = findDebugElementById('newsletter');
+
+    let atcInputEl: HTMLInputElement = atcEl.nativeElement.querySelector('input');
+    let newsLetterInputEl: HTMLInputElement = newsLetterEl.nativeElement.querySelector('input');
+
+    expect(newsLetterComp.model.ngControl.disabled)
+        .toBe(true, 'newsletter component is not disabled on initialization');
+
+    // material: TODO: nativeElement.disabled and inputElement.disabled are not in sync?
+    // expect(newsLetterInputEl.disabled).toBeTruthy('newsletter element is not disabled on initialization');
+    // console.log(`before: newsletter newsLetterInputEl.disabled: ${newsLetterInputEl.disabled}`);
+    // console.log(`before: newsletter newsLetterEl.nativeElement.disabled: ${newsLetterEl.nativeElement.disabled}`);
+    atcInputEl.click();
+    fixture.detectChanges();
+
+    expect(newsLetterComp.model.ngControl.disabled)
+        .toBe(false, 'newsletter component is not enabled after atc has been selected');
+
+    // material: TODO: nativeElement.disabled and inputElement.disabled are not in sync?
+    // expect(newsLetterInputEl.disabled).toBeFalsy('newsletter element is not enabled after atc has been
+    // selected');
+    // console.log(`after: newsletter newsLetterInputEl.disabled: ${newsLetterInputEl.disabled}`);
+    // console.log(`after: newsletter newsLetterEl.nativeElement.disabled: ${newsLetterEl.nativeElement.disabled}`);
+  });
+
+  // --------------------------------------------------------------------------------------------------
+  // FOCUS CHANGES
+  // --------------------------------------------------------------------------------------------------
+  it('should listen to focus change events', () => {
+    let lastNameComp = findComponentById('lastName');
+    let lastNameEl = findDebugElementById('lastName');
+
+    let hasFocus;
+    lastNameComp.focusChanges.subscribe((v: boolean) => {
+      hasFocus = v;
+    });
+
+    lastNameEl.triggerEventHandler('focus', null);
+    expect(hasFocus).toBeTruthy('focus change not triggered the focus event');
+    lastNameEl.triggerEventHandler('blur', null);
+    expect(hasFocus).toBeFalsy('focus change not triggered the blur event');
+
+    lastNameComp.focusChanges.unsubscribe();
+
+  });
+
+  // --------------------------------------------------------------------------------------------------
+  // CLICK EVENTS
+  // --------------------------------------------------------------------------------------------------
+  it('should listen to click events', () => {
+    let lastNameComp = findComponentById('lastName');
+    let lastNameEl = findDebugElementById('lastName');
+
+    let clicked = 0;
+    lastNameComp.click.subscribe(() => {
+      ++clicked;
+    });
+
+    lastNameEl.nativeElement.click();
+    lastNameEl.nativeElement.click();
+    lastNameEl.nativeElement.click();
+    expect(clicked).toBe(3, 'click event has not been triggered 3 times');
+
+    lastNameComp.click.unsubscribe();
+  });
+
 
 });
