@@ -13,7 +13,7 @@ import {GroupModelBase} from './group-model';
 import {CSSModel} from './css-model';
 
 import {JsonPointer} from 'jsonpointerx';
-import {JsExpression} from '../utils/js-expression';
+import {JsExpression} from '../utils/jsec';
 
 // the root node of the model-tree is of type GroupModel without a parentGroup property
 // (similar to the child nodes of the ArrayModel, see below)

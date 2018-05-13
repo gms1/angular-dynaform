@@ -7,7 +7,7 @@ import {Observable, Subject} from 'rxjs';
 import {DynamicFormAction} from './dynamic-form.action';
 import {DynamicFormControlComponentBase} from '../components/dynamic-form-control.component';
 import {ControlModel, ArrayModel} from '../models';
-import {JsExpression} from '../utils/js-expression';
+import {JsExpression} from '../utils/jsec';
 
 // tslint:disable use-life-cycle-interface
 export class RelationAction extends DynamicFormAction {

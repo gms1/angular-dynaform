@@ -9,9 +9,9 @@ function newTestExpression(expression: string, context?: any, thisArg?: any): Js
   return res;
   }
 
-function testExpression(expression: string, result: any, context?: any, thisArg?: any): boolean {
+function testExpression(expression: string, result: any, context?: any, thisArg?: any): void {
   let compiled = newTestExpression(expression, context, thisArg);
-  return expect(compiled.run()).toEqual(result, `result of ${expression} is not ${result}`);
+  expect(compiled.run()).toEqual(result, `result of ${expression} is not ${result}`);
 }
 
 describe('js-expression', () => {
@@ -53,8 +53,12 @@ describe('js-expression', () => {
 
     expr = 'a.b.c && a.b.d';
     compiled = newTestExpression(expr, context, thisArg);
-    let jp = new JsonPointer(compiled.getContextMembersRoot(), false);
-    expect(jp.toString()).toEqual('/a/b', `wrong context members root for expr ${expr}`);
+    expect(compiled.getContextMembersRoot()).toEqual(['a', 'b']);
+
+    expr = 'a.b.c && b.c.d && c.d.e';
+    compiled = newTestExpression(expr, context, thisArg);
+    expect(compiled.getContextMembersRoot()).toEqual([]);
+
   });
 
   it('this members', () => {
@@ -91,8 +95,7 @@ describe('js-expression', () => {
 
     expr = 'this.a.b.c && this.a.x.y';
     compiled = newTestExpression(expr, context, thisArg);
-    let jp = new JsonPointer(compiled.getThisMembersRoot(), false);
-    expect(jp.toString()).toEqual('/a', `wrong this members root for expr ${expr}`);
+    expect(compiled.getThisMembersRoot()).toEqual(['a']);
 
   });
 
@@ -121,6 +124,81 @@ describe('js-expression', () => {
     context.c = 0;
     testExpression('c ? a : b', 0, context);
 
+    testExpression('[1,2]', [1, 2], undefined);
+
+  });
+
+  it('expect run to return undefined if no expression has been compiled', () => {
+    let jse = new JsExpression();
+    expect(jse.run()).toBeUndefined();
+  });
+
+  it('expect unknown variable to be undefined', () => {
+    context = {};
+    testExpression('a', undefined, context);
+  });
+
+  it('expect unsupported binary operation to throw', () => {
+    compiled = newTestExpression('5 % 3', undefined, undefined);
+    expect(compiled.run()).toEqual(2, `result of 5 % 3 is not 2`);
+    let modOp = JsExpression.binaryOps['%'];
+    delete JsExpression.binaryOps['%'];
+    expect(() => {
+      JsExpression.compile('5 % 3');
+    }).toThrow();
+    JsExpression.binaryOps['%'] = modOp;
+  });
+
+  it('expect unsupported unary operation to throw', () => {
+    context = {a: 4, b: 0};
+    compiled = newTestExpression('-a', context, undefined);
+    expect(compiled.run()).toEqual(-context.a, `result of '-a' is not -${context.a}`);
+    let negateOp = JsExpression.unaryOps['-'];
+    delete JsExpression.unaryOps['-'];
+    expect(() => {
+      JsExpression.compile('-a');
+    }).toThrow();
+    JsExpression.unaryOps['-'] = negateOp;
+  });
+
+  it('add and remove binary operation should work', () => {
+    JsExpression.addBinaryOp('^', 10, (a, b) => Math.pow(a, b));
+    compiled = newTestExpression('5 ^ 3', undefined, undefined);
+    expect(compiled.run()).toEqual(125, `result of 5 ^ 3 is not 125`);
+    JsExpression.removeBinaryOp('^');
+    expect(() => {
+      JsExpression.compile('5 ^ 3');
+    }).toThrow();
+  });
+
+  it('add and remove unary operation should work', () => {
+    // tslint:disable-next-line no-bitwise
+    JsExpression.addUnaryOp('~', (a) => ~a);
+    compiled = newTestExpression('~3', undefined, undefined);
+    expect(compiled.run()).toEqual(-4, `result of ~3 is not -4`);
+    JsExpression.removeUnaryOp('~');
+    expect(() => {
+      JsExpression.compile('~3');
+    }).toThrow();
+
+  });
+
+  it('expect compiledFn to work', () => {
+    let compiledFnd = JsExpression.compiledFn('(a % b) + this.c');
+    expect(compiledFnd({c: 7}, {a: 5, b: 3})).toEqual(9);
+  });
+
+  it('expect compiledFn to work', () => {
+    let compiledFnd = JsExpression.compiledFn('(a % b) + this.c');
+    class TestClass {
+      c = 7;
+      testFunc: (context: any) => any;
+      constructor() {
+        this.testFunc = compiledFnd.bind(this, this);
+      }
+      }
+    let testObj = new TestClass();
+    expect(testObj.testFunc({a: 5, b: 3})).toEqual(9);
   });
 
 
