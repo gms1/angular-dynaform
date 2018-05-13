@@ -21,6 +21,12 @@ export class DynamicFormComponentFactoryService {
   private errorComponent: Type<DynamicFormErrorComponent>;
 
   constructor(private dynamicFormService: DynamicFormService, private resolver: ComponentFactoryResolver) {
+    if (!this.dynamicFormService.formControlComponentType) {
+      throw new Error('FormControlComponent not set in DynamicFormService');
+      }
+    if (!this.dynamicFormService.errorComponentType) {
+      throw new Error('ErrorComponent not set in DynamicFormService');
+    }
     this.formControlComponent = this.dynamicFormService.formControlComponentType;
     this.controlComponentRegistry = this.dynamicFormService.controlComponentTypes;
     this.errorComponent = this.dynamicFormService.errorComponentType;

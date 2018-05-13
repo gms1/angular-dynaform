@@ -18,7 +18,7 @@ core:
 	npm run build:core $(BUILDFLAGS)
 
 test-core:
-	npm run test:core
+	npm run coverage:core
 
 #-------------------------------------------------------------
 .PHONY: basic test-basic
@@ -27,7 +27,7 @@ basic: core
 	npm run build:basic $(BUILDFLAGS)
 
 test-basic:
-	npm run test:basic
+	npm run coverage:basic
 
 #-------------------------------------------------------------
 .PHONY: material test-material
@@ -36,7 +36,7 @@ material: core
 	npm run build:material $(BUILDFLAGS)
 
 test-material:
-	npm run test:material
+	npm run coverage:material
 
 #-------------------------------------------------------------
 .PHONY: nativescript

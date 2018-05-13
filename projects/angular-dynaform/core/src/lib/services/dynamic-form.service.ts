@@ -18,13 +18,15 @@ import {DynamicFormAction} from '../actions/dynamic-form.action';
 @Injectable()
 export class DynamicFormService {
   // form model factory service
-  get modelFactory(): DynamicFormModelFactoryService { return this._modelFactory; }
+  get modelFactory(): DynamicFormModelFactoryService {
+    return this._modelFactory;
+  }
 
   // component registry:
 
   // inject these components by resolving the registered type
-  formControlComponentType!: Type<DynamicFormFormControlComponent>;
-  errorComponentType!: Type<DynamicFormErrorComponent>;
+  formControlComponentType?: Type<DynamicFormFormControlComponent>;
+  errorComponentType?: Type<DynamicFormErrorComponent>;
 
   // inject these components by resolving the registered type for a particular name
   _controlComponentTypes: TypeRegistry<DynamicFormControlComponentBase>;

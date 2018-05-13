@@ -34,6 +34,7 @@ yarn-error.log
 testem.log
 /typings
 /hooks
+.coveralls.yml
 
 # System Files
 .DS_Store
