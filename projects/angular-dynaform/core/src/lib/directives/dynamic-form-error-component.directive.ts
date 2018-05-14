@@ -55,7 +55,7 @@ export class DynamicFormErrorComponentDirective implements OnInit, DoCheck, OnDe
     try {
       this.componentRef = this.viewContainerRef.createComponent<DynamicFormError>(
           componentFactory, undefined, this.viewContainerRef.injector);
-    } catch (e) {
+    } catch (e) /* istanbul ignore next */ {
       e.message = `failed to create error component: ${e.message}`;
       throw(e);
       }

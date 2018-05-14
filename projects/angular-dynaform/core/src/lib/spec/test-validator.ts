@@ -18,7 +18,6 @@ export const testPatternValidate: DynamicFormValidatorFn = (key: string, control
       return null;
       }
     const res = regex.test(ctrl.value) ? null : {'pattern': {'requiredPattern': pattern, 'actualValue': ctrl.value}};
-    console.log(`!!!!!!!!!! in testPatternValidate ${key} ${control.id}: ${pattern} : ${ctrl.value} = ${res}`);
     return res;
   };
 
@@ -40,7 +39,6 @@ export const testAsyncPatternValidate: DynamicFormAsyncValidatorFn = (key: strin
       return Promise.resolve(null);
       }
     const res = regex.test(ctrl.value) ? null : {'pattern': {'requiredPattern': pattern, 'actualValue': ctrl.value}};
-    console.log(`!!!!!!!!!! in testAsyncPatternValidate ${key} ${control.id}: ${pattern} : ${ctrl.value} = ${res}`);
     return Promise.resolve(res);
   };
 

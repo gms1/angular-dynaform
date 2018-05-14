@@ -33,12 +33,6 @@ describe('test suite', () => {
   let service: DynamicFormService;
   let model: FormModel;
 
-  function findDebugElementById(id: string): DebugElement {
-    let res = debugElement.query(By.css(`#${id}`));
-    expect(res instanceof DebugElement).toBe(true, `element with id "${id}" not found`);
-    return res;
-    }
-
   function findComponentById(id: string): DynamicFormControl {
     let res = form.findComponentById(id);
     if (!res) {
@@ -47,13 +41,53 @@ describe('test suite', () => {
     return res;
     }
 
-  function elementInput(el: DebugElement, value: string) {
+  function setComponentValue(comp: DynamicFormControl, value: any) {
     fixture.detectChanges();
-    el.nativeElement.value = value;
-    el.nativeElement.dispatchEvent(new Event('input'));
-    el.triggerEventHandler('blur', null);
+    comp.model.ngControl.setValue(value);
+    fixture.detectChanges();
+    }
+
+  function findDebugElementById(id: string): DebugElement {
+    const dbgEl = debugElement.query(By.css(`#${id}`));
+    expect(dbgEl instanceof DebugElement).toBe(true, `element with id "${id}" not found`);
+    return dbgEl;
+    }
+
+  function findInputElement(dbgEl: DebugElement): HTMLInputElement {
+    const tagName = (dbgEl.nativeElement as HTMLElement).tagName;
+    if (tagName === 'INPUT') {
+      return dbgEl.nativeElement;
+      }
+    const htmlInput = dbgEl.nativeElement.querySelector('input');
+    expect(htmlInput).toBeTruthy(`element ${name} (${tagName}) does not have an input-element`);
+    return htmlInput;
+    }
+
+  function setElementInput(dbgEl: DebugElement, value: any) {
+    fixture.detectChanges();
+    const htmlInput: HTMLInputElement = findInputElement(dbgEl);
+    dbgEl.triggerEventHandler('focus', null);
+    htmlInput.value = value;
+    htmlInput.dispatchEvent(new Event('input'));
+    dbgEl.triggerEventHandler('blur', null);
+    fixture.detectChanges();
+    }
+
+  function clickElementInput(dbgEl: DebugElement) {
+    fixture.detectChanges();
+    const htmlInput: HTMLInputElement = findInputElement(dbgEl);
+    dbgEl.triggerEventHandler('focus', null);
+    htmlInput.click();
+    dbgEl.triggerEventHandler('blur', null);
+    fixture.detectChanges();
+    }
+
+  function clickElement(dbgEl: DebugElement) {
+    fixture.detectChanges();
+    dbgEl.nativeElement.click();
     fixture.detectChanges();
   }
+
 
   beforeEach(async() => {
     TestBed.configureTestingModule({
@@ -98,12 +132,12 @@ describe('test suite', () => {
 
     // reset should be disabled on pristine form
     spyOn(container, 'onReset');
-    resetEl.nativeElement.click();
+    clickElement(resetEl);
     expect(container.onReset).toHaveBeenCalledTimes(0);
 
     // submit should be disabled on invalid form
     spyOn(container, 'onSubmit');
-    submitEl.nativeElement.click();
+    clickElement(submitEl);
     expect(container.onSubmit).toHaveBeenCalledTimes(0);
   });
 
@@ -118,12 +152,12 @@ describe('test suite', () => {
 
     // reset should be disabled on pristine form
     spyOn(container, 'onReset');
-    resetEl.nativeElement.click();
+    clickElement(resetEl);
     expect(container.onReset).toHaveBeenCalledTimes(0);
 
     // submit should be enabled on valid form
     spyOn(container, 'onSubmit');
-    submitEl.nativeElement.click();
+    clickElement(submitEl);
     expect(container.onSubmit).toHaveBeenCalledTimes(1);
 
     // submitted value should be same as initial value
@@ -142,31 +176,31 @@ describe('test suite', () => {
     let lastNameEl = findDebugElementById('lastName');
 
     // sending input, having minLength not reached
-    elementInput(lastNameEl, 'X');
+    setElementInput(lastNameEl, 'X');
 
     expect(form.model.group.pristine).toBe(false, 'form should be dirty after user input');
     expect(form.valid).toBe(false, 'dirty form is valid');
 
     // submit should be disabled on invalid form
     spyOn(container, 'onSubmit');
-    submitEl.nativeElement.click();
+    clickElement(submitEl);
     expect(container.onSubmit).toHaveBeenCalledTimes(0);
 
     // reset should be enabled on dirty form
     spyOn(container, 'onReset');
-    resetEl.nativeElement.click();
+    clickElement(resetEl);
     expect(container.onReset).toHaveBeenCalledTimes(1);
     expect(form.model.group.pristine).toBe(true, 'form should be pristine after reset');
 
     // resetting twice should not be possible
-    resetEl.nativeElement.click();
+    clickElement(resetEl);
     expect(container.onReset).toHaveBeenCalledTimes(1);
 
     // form should be resetted to initial value and should be valid
     expect(form.valid).toBe(true, 'resetted form is not valid');
 
     // submit should be enabled because form should have been resetted to valid initial value
-    submitEl.nativeElement.click();
+    clickElement(submitEl);
     expect(container.onSubmit).toHaveBeenCalledTimes(1);
 
     // submitted value should be same as initial value
@@ -200,7 +234,7 @@ describe('test suite', () => {
 
     expect(contactsDeleteComp.model.ngControl.disabled).toBe(false, 'contact delete button not properly initialized');
 
-    contactsDeleteEl.nativeElement.click();
+    clickElement(contactsDeleteEl);
     expect(contactsModel.items.length).toBe(0, 'contacts array item has not been deleted');
 
     expect(contactsDeleteComp.model.ngControl.disabled)
@@ -231,9 +265,7 @@ describe('test suite', () => {
     expect(contactsModel.selectedIndex).toBe(0, 'current index has not been set by focus on contactType field');
 
     let contactsAddEl = findDebugElementById('contacts-HEADER-addContact');
-    contactsAddEl.nativeElement.click();
-
-    fixture.detectChanges();
+    clickElement(contactsAddEl);
 
     expect(contactsModel.items.length).toBe(2, 'contacts array item has not been added');
 
@@ -270,9 +302,7 @@ describe('test suite', () => {
     expect(contactsModel.selectedIndex).toBe(0, 'current index has not been set by focus on contactValue field');
 
     let contactsInsertEl = findDebugElementById('contacts-HEADER-insertContact');
-    contactsInsertEl.nativeElement.click();
-
-    fixture.detectChanges();
+    clickElement(contactsInsertEl);
 
     expect(contactsModel.items.length).toBe(2, 'contacts array item has not been inserted');
 
@@ -291,7 +321,7 @@ describe('test suite', () => {
     expect(form.valid).toBe(true, 'initialized form is not valid');
 
     let submitEl = findDebugElementById('submit');
-    submitEl.nativeElement.click();
+    clickElement(submitEl);
 
     // submitted value should be same as initial value
     // dirty hack to provide 'options' propert as empty object
@@ -312,27 +342,19 @@ describe('test suite', () => {
 
     let newsLetterComp = findComponentById('newsletter');
     let atcEl = findDebugElementById('atc');
-    let newsLetterEl = findDebugElementById('newsletter');
 
     expect(newsLetterComp.model.ngControl.disabled)
         .toBe(true, 'newsletter component is not disabled on initialization');
-    expect(newsLetterEl.nativeElement.disabled).toBeTruthy('newsletter element is not disabled on initialization');
 
-    atcEl.nativeElement.click();
-    fixture.detectChanges();
+    clickElementInput(atcEl);
 
     expect(newsLetterComp.model.ngControl.disabled)
         .toBe(false, 'newsletter component is not enabled after atc has been selected');
-    expect(newsLetterEl.nativeElement.disabled)
-        .toBeFalsy('newsletter element is not enabled after atc has been selected');
 
-    atcEl.nativeElement.click();
-    fixture.detectChanges();
+    clickElementInput(atcEl);
 
     expect(newsLetterComp.model.ngControl.disabled)
         .toBe(true, 'newsletter component is not disabled after atc has been deselected');
-    expect(newsLetterEl.nativeElement.disabled)
-        .toBeTruthy('newsletter element is not disabled after atc has been deselected');
 
   });
 
@@ -369,9 +391,9 @@ describe('test suite', () => {
       ++clicked;
     });
 
-    lastNameEl.nativeElement.click();
-    lastNameEl.nativeElement.click();
-    lastNameEl.nativeElement.click();
+    clickElement(lastNameEl);
+    clickElement(lastNameEl);
+    clickElement(lastNameEl);
     expect(clicked).toBe(3, 'click event has not been triggered 3 times');
 
     lastNameComp.click.unsubscribe();

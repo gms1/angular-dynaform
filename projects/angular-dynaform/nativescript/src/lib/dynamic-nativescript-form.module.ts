@@ -3,6 +3,7 @@ import {CommonModule} from '@angular/common';
 import {NgModule, NO_ERRORS_SCHEMA, Optional, SkipSelf} from '@angular/core';
 import {ReactiveFormsModule} from '@angular/forms';
 
+import {NativeScriptCommonModule} from 'nativescript-angular/common';
 import {NativeScriptFormsModule} from 'nativescript-angular/forms';
 
 import {TNSCheckBoxModule} from 'nativescript-checkbox/angular';
@@ -40,7 +41,7 @@ const entryComponents: any[] = [
 const moduleDeclarations: any[] = [DynamicNSDomElementDirective, CustomCheckBox, CustomListPicker, entryComponents];
 
 @NgModule({
-  imports: [CommonModule, ReactiveFormsModule, DynamicFormModule, NativeScriptFormsModule, TNSCheckBoxModule],
+  imports: [CommonModule, ReactiveFormsModule, DynamicFormModule, NativeScriptCommonModule, NativeScriptFormsModule, TNSCheckBoxModule],
   declarations: [moduleDeclarations], entryComponents,
   exports: [DynamicFormModule, entryComponents],
   schemas: [NO_ERRORS_SCHEMA]  // TODO: is it possible to avoid the need for NO_ERRORS_SCHEMA?

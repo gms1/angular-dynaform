@@ -27,6 +27,7 @@ export class TypeRegistry<T> {
     }
   }
 
+  /*
   getInstance(injector: Injector, name: string): T {
     const type = this.getType(name);
     if (!type) {
@@ -46,4 +47,5 @@ export class TypeRegistry<T> {
       }
     return types;
   }
+  */
 }

@@ -53,7 +53,7 @@ export class DynamicFormControlComponentDirective implements OnInit, DoCheck, On
     try {
       this.componentRef = this.viewContainerRef.createComponent<DynamicFormControl>(
           componentFactory, undefined, this.viewContainerRef.injector);
-    } catch (e) {
+    } catch (e) /* istanbul ignore next */ {
       e.message = `failed to create control component for '${this.model.id}': ${e.message}`;
       throw(e);
     }
