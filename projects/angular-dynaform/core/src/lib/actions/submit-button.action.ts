@@ -37,8 +37,10 @@ export class SubmitButtonAction extends DynamicFormAction {
 
   // the handler for the click event on the submit button element
   onClick(event?: Event): boolean {
+    /* istanbul ignore if */
     if (!this.rootFormGroup.valid) {
       // do not trigger the submit event on the form element:
+      // NOTE: this should not happen, submit button should be disabled if form is invalid
       if (event) {
         event.stopImmediatePropagation();
         event.preventDefault();
@@ -54,10 +56,12 @@ export class SubmitButtonAction extends DynamicFormAction {
   // enable button on valid and disable button on invalid state
   protected updateState(valid: boolean): void {
     if (valid) {
+      /* istanbul ignore else */
       if (this.model.ngControl.disabled) {
         this.model.ngControl.enable();
       }
     } else {
+      /* istanbul ignore else */
       if (this.model.ngControl.enabled) {
         this.model.ngControl.disable();
       }

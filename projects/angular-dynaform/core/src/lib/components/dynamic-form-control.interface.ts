@@ -5,6 +5,7 @@ import {ControlModel} from '../models/control-model.interface';
 import {Stepper} from '../models/stepper.interface';
 
 import {DynamicForm} from './dynamic-form.interface';
+import {DynamicFormAction} from '../actions/dynamic-form.action';
 
 export interface DynamicFormControl extends OnChanges, OnInit, OnDestroy, AfterViewInit {
   form: DynamicForm;
@@ -18,6 +19,7 @@ export interface DynamicFormControl extends OnChanges, OnInit, OnDestroy, AfterV
   focusChanges: EventEmitter<any>;
   click: EventEmitter<any>;
 
+  action?: DynamicFormAction;
 
   stepper?: Stepper;
 }

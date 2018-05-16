@@ -25,7 +25,7 @@ function cleanValue(value: any): any {
   return JSON.parse(JSON.stringify(value, (k, v) => (v === null) ? undefined : v, 2));
 }
 
-describe('test suite', () => {
+describe('material-module test suite', () => {
   let fixture: ComponentFixture<TestFormContainerComponent>;
   let debugElement: DebugElement;
   let container: TestFormContainerComponent;
@@ -34,11 +34,11 @@ describe('test suite', () => {
   let model: FormModel;
 
   function findComponentById(id: string): DynamicFormControl {
-    let res = form.findComponentById(id);
-    if (!res) {
+    const comp = form.findComponentById(id);
+    if (!comp) {
       throw new Error(`component with id "${id}" not found`);
       }
-    return res;
+    return comp;
     }
 
   function setComponentValue(comp: DynamicFormControl, value: any) {
@@ -121,49 +121,75 @@ describe('test suite', () => {
   // --------------------------------------------------------------------------------------------------
   // ACTIONS
   // --------------------------------------------------------------------------------------------------
-  it('submit should be disabled on invalid (empty) form', () => {
+  it('submit/reset should be disabled on invalid/pristine form', () => {
     // empty form should be invalid, because some fields are required
     expect(form.valid).toBe(false, 'empty form is valid');
 
+    let resetComp = findComponentById('reset');
+    let submitComp = findComponentById('submit');
+    let clearComp = findComponentById('clear');
     let resetEl = findDebugElementById('reset');
     let submitEl = findDebugElementById('submit');
+    let clearEl = findDebugElementById('clear');
 
     // reset should be disabled on pristine form
+    expect(resetComp.model.ngControl.disabled).toBeTruthy('reset button not disabled on pristine form');
     spyOn(container, 'onReset');
     clickElement(resetEl);
     expect(container.onReset).toHaveBeenCalledTimes(0);
 
     // submit should be disabled on invalid form
+    expect(submitComp.model.ngControl.disabled).toBeTruthy('submit button not disabled on invalid form');
     spyOn(container, 'onSubmit');
     clickElement(submitEl);
     expect(container.onSubmit).toHaveBeenCalledTimes(0);
+
+    // clear should be enabled
+    expect(clearComp.model.ngControl.disabled).toBeFalsy('clear button is not enabled');
+    spyOn(form.model, 'clearValue');
+    clickElement(clearEl);
+    expect(form.model.clearValue).toHaveBeenCalledTimes(1);
+
   });
 
   // --------------------------------------------------------------------------------------------------
-  it('submit should be enabled on valid (properly initialized) form', () => {
+  it('submit/reset should be enabled/disabled on valid and pristine form', () => {
     // initialized form should be valid
     form.initValue(mainExampleFormModelData);
     expect(form.valid).toBe(true, 'initialized form is not valid');
 
+    let resetComp = findComponentById('reset');
+    let submitComp = findComponentById('submit');
+    let clearComp = findComponentById('clear');
     let resetEl = findDebugElementById('reset');
     let submitEl = findDebugElementById('submit');
+    let clearEl = findDebugElementById('clear');
 
     // reset should be disabled on pristine form
+    expect(resetComp.model.ngControl.disabled).toBeTruthy('reset button not disabled on pristine form');
     spyOn(container, 'onReset');
     clickElement(resetEl);
     expect(container.onReset).toHaveBeenCalledTimes(0);
 
     // submit should be enabled on valid form
+    expect(submitComp.model.ngControl.disabled).toBeFalsy('submit button not enabled on valid form');
     spyOn(container, 'onSubmit');
     clickElement(submitEl);
     expect(container.onSubmit).toHaveBeenCalledTimes(1);
 
     // submitted value should be same as initial value
     expect(cleanValue(form.value)).toEqual(mainExampleFormModelData, 'submitted value is different to initial value');
+
+    // clear should be enabled
+    expect(clearComp.model.ngControl.disabled).toBeFalsy('clear button is not enabled');
+    spyOn(form.model, 'clearValue');
+    clickElement(clearEl);
+    expect(form.model.clearValue).toHaveBeenCalledTimes(1);
+    // expect(form.valid).toBe(false, 'cleared form is valid');
   });
 
   // --------------------------------------------------------------------------------------------------
-  it('submit should be enabled on valid (properly initialized) form', () => {
+  it('submit should be enabled on valid form', () => {
     // initialized form should be valid and pristine
     form.initValue(mainExampleFormModelData);
     expect(form.valid).toBe(true, 'initialized form is not valid');

@@ -13,16 +13,27 @@ export abstract class DynamicFormAction implements OnInit, AfterViewInit, OnDest
     this.model = component.model;
   }
 
+  /* istanbul ignore next */
   ngOnInit(): void {}
+
+  /* istanbul ignore next */
   ngAfterViewInit(): void {}
+
+  /* istanbul ignore next */
   ngOnChanges(changes: SimpleChanges): void {}
+
+  /* istanbul ignore next */
   ngOnDestroy(): void {}
 
+  /* istanbul ignore next */
   onClick(event?: Event): boolean {
     // return true to emit the output-click event of the control component
     return true;
   }
 
+  /* istanbul ignore next */
   onBlur(event?: Event): void {}
+
+  /* istanbul ignore next */
   onFocus(event?: Event): void {}
 }

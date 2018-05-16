@@ -45,7 +45,7 @@ export class DynamicFormControlComponentBase implements DynamicFormControl {
 
   buttonType: string;
 
-  private action?: DynamicFormAction;
+  action?: DynamicFormAction;
   private relationAction?: RelationAction;
 
   constructor(

@@ -11,6 +11,7 @@ PROJ_HOME=$(cd "${DN}/.."; pwd)
 CFGS=(
   projects/angular-dynaform/basic/src/lib/spec/test.config.ts
   projects/angular-dynaform/material/src/lib/spec/test.config.ts
+  projects/angular-dynaform/nativescript/src/lib/spec/test.config.ts
 
   projects/basic-example/src/app/app.config.ts
   projects/material-example/src/app/app.config.ts

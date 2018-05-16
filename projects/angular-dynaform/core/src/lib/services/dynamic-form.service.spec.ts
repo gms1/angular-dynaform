@@ -3,9 +3,7 @@ import {TestBed} from '@angular/core/testing';
 import {DynamicFormModule} from '../dynamic-form.module';
 import {DynamicFormService} from './dynamic-form.service';
 
-
-
-describe('test suite', () => {
+describe('dynamic-form-service test suite', () => {
   let dynaFormService: DynamicFormService;
 
   beforeEach(() => {
@@ -13,12 +11,12 @@ describe('test suite', () => {
     dynaFormService = TestBed.get(DynamicFormService);
   });
 
-  afterEach(() => { TestBed.resetTestingModule(); });
+  afterEach(() => {
+    TestBed.resetTestingModule();
+  });
 
-  it('should run test1', () => { expect(dynaFormService).toBeDefined('failed to resolve DynamicFormService'); });
-
-  it('should run test2', () => { expect(dynaFormService).toBeDefined('failed to resolve DynamicFormService'); });
-
-  it('should run test3', () => { expect(dynaFormService).toBeDefined('failed to resolve DynamicFormService'); });
+  it('should instantiate a DynamicFormService', () => {
+    expect(dynaFormService).toBeDefined('failed to resolve DynamicFormService');
+  });
 
 });

@@ -28,7 +28,7 @@ class NgFormArrayWrapper implements NgArrayModelHandler {
   }
 }
 
-describe('ng-model', () => {
+describe('ng-model test suite', () => {
   it('NgNullControl', () => {
     let ctrl = new NgNullControl();
     ctrl.setValue('asdf');

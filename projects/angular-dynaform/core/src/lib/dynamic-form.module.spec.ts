@@ -1,7 +1,7 @@
 // tslint:disable no-null-keyword no-unbound-method no-unused-variable prefer-const
 import {APP_BASE_HREF} from '@angular/common';
 import {DebugElement} from '@angular/core';
-import {fakeAsync, TestBed, tick, ComponentFixture} from '@angular/core/testing';
+import {TestBed, ComponentFixture} from '@angular/core/testing';
 import {BrowserDynamicTestingModule} from '@angular/platform-browser-dynamic/testing';
 import {By} from '@angular/platform-browser';
 import {ReactiveFormsModule} from '@angular/forms';
@@ -13,7 +13,10 @@ import {
   DynamicFormModule,
   DynamicFormService,
   FormModel,
-  ModelType
+  ModelType,
+  ArrayButtonAddAction,
+  ArrayButtonInsertAction,
+  ArrayButtonDeleteAction
 } from '../public_api';
 import {TestFormContainerComponent, TestFormControlComponent, TestErrorComponent} from './spec';
 import {
@@ -44,7 +47,7 @@ function cleanValue(value: any): any {
   return JSON.parse(JSON.stringify(value, (k, v) => (v === null) ? undefined : v, 2));
 }
 
-describe('test suite', () => {
+describe('core-module test suite', () => {
   let fixture: ComponentFixture<TestFormContainerComponent>;
   let debugElement: DebugElement;
   let container: TestFormContainerComponent;
@@ -53,11 +56,11 @@ describe('test suite', () => {
   let model: FormModel;
 
   function findComponentById(id: string): DynamicFormControl {
-    let res = form.findComponentById(id);
-    if (!res) {
+    const comp = form.findComponentById(id);
+    if (!comp) {
       throw new Error(`component with id "${id}" not found`);
       }
-    return res;
+    return comp;
     }
 
   function setComponentValue(comp: DynamicFormControl, value: any) {
@@ -260,6 +263,28 @@ describe('test suite', () => {
       asyncValidators: ['testUndefinedAsyncValidator'],
       disabled: true
     });
+
+    // add controls for array action testing:
+
+    (mainExampleConfig as any).options.group[0].options.group.push({
+      id: 'addContact2',
+      modelType: ModelType.MODEL_NULL,
+      controlType: ControlType.CONTROL_BUTTON,
+      action: 'arrayAddItem'
+    });
+    (mainExampleConfig as any).options.group[0].options.group.push({
+      id: 'insertContact2',
+      modelType: ModelType.MODEL_NULL,
+      controlType: ControlType.CONTROL_BUTTON,
+      action: 'arrayInsertItem'
+    });
+    (mainExampleConfig as any).options.group[0].options.group.push({
+      id: 'deleteContact2',
+      modelType: ModelType.MODEL_NULL,
+      controlType: ControlType.CONTROL_BUTTON,
+      action: 'arrayDeleteItem'
+    });
+
     model = service.createFormModel(mainExampleConfig, mainExampleFormLanguages.en);
     expect(model instanceof FormModel).toBe(true, 'model is not defined');
     container.model = model;
@@ -274,49 +299,75 @@ describe('test suite', () => {
   // --------------------------------------------------------------------------------------------------
   // ACTIONS
   // --------------------------------------------------------------------------------------------------
-  it('submit should be disabled on invalid (empty) form', () => {
+  it('submit/reset should be disabled on invalid/pristine form', () => {
     // empty form should be invalid, because some fields are required
     expect(form.valid).toBe(false, 'empty form is valid');
 
+    let resetComp = findComponentById('reset');
+    let submitComp = findComponentById('submit');
+    let clearComp = findComponentById('clear');
     let resetEl = findDebugElementById('reset');
     let submitEl = findDebugElementById('submit');
+    let clearEl = findDebugElementById('clear');
 
     // reset should be disabled on pristine form
+    expect(resetComp.model.ngControl.disabled).toBeTruthy('reset button not disabled on pristine form');
     spyOn(container, 'onReset');
     clickElement(resetEl);
     expect(container.onReset).toHaveBeenCalledTimes(0);
 
     // submit should be disabled on invalid form
+    expect(submitComp.model.ngControl.disabled).toBeTruthy('submit button not disabled on invalid form');
     spyOn(container, 'onSubmit');
     clickElement(submitEl);
     expect(container.onSubmit).toHaveBeenCalledTimes(0);
+
+    // clear should be enabled
+    expect(clearComp.model.ngControl.disabled).toBeFalsy('clear button is not enabled');
+    spyOn(form.model, 'clearValue');
+    clickElement(clearEl);
+    expect(form.model.clearValue).toHaveBeenCalledTimes(1);
+
   });
 
   // --------------------------------------------------------------------------------------------------
-  it('submit should be enabled on valid (properly initialized) form', () => {
+  it('submit/reset should be enabled/disabled on valid and pristine form', () => {
     // initialized form should be valid
     form.initValue(mainExampleFormModelData);
     expect(form.valid).toBe(true, 'initialized form is not valid');
 
+    let resetComp = findComponentById('reset');
+    let submitComp = findComponentById('submit');
+    let clearComp = findComponentById('clear');
     let resetEl = findDebugElementById('reset');
     let submitEl = findDebugElementById('submit');
+    let clearEl = findDebugElementById('clear');
 
     // reset should be disabled on pristine form
+    expect(resetComp.model.ngControl.disabled).toBeTruthy('reset button not disabled on pristine form');
     spyOn(container, 'onReset');
     clickElement(resetEl);
     expect(container.onReset).toHaveBeenCalledTimes(0);
 
     // submit should be enabled on valid form
+    expect(submitComp.model.ngControl.disabled).toBeFalsy('submit button not enabled on valid form');
     spyOn(container, 'onSubmit');
     clickElement(submitEl);
     expect(container.onSubmit).toHaveBeenCalledTimes(1);
 
     // submitted value should be same as initial value
     expect(cleanValue(form.value)).toEqual(mainExampleFormModelData, 'submitted value is different to initial value');
+
+    // clear should be enabled
+    expect(clearComp.model.ngControl.disabled).toBeFalsy('clear button is not enabled');
+    spyOn(form.model, 'clearValue');
+    clickElement(clearEl);
+    expect(form.model.clearValue).toHaveBeenCalledTimes(1);
+    // expect(form.valid).toBe(false, 'cleared form is valid');
   });
 
   // --------------------------------------------------------------------------------------------------
-  it('submit should be enabled on valid (properly initialized) form', () => {
+  it('submit should be enabled on valid form', () => {
     // initialized form should be valid and pristine
     form.initValue(mainExampleFormModelData);
     expect(form.valid).toBe(true, 'initialized form is not valid');
@@ -462,6 +513,19 @@ describe('test suite', () => {
 
   });
 
+  // --------------------------------------------------------------------------------------------------
+  it('array-button actions without target array should be disabled', () => {
+    form.initValue(mainExampleFormModelData);
+    let contactsInsert2Comp = findComponentById('insertContact2');
+    let contactsAddt2ElComp = findComponentById('addContact2');
+    let contactsDelete2ElComp = findComponentById('deleteContact2');
+
+    expect(contactsInsert2Comp.model.ngControl.disabled).toBeTruthy('button insertContact2 is enabled');
+    expect(contactsAddt2ElComp.model.ngControl.disabled).toBeTruthy('button addContact2 is enabled');
+    expect(contactsDelete2ElComp.model.ngControl.disabled).toBeTruthy('button deleteContact2 is enabled');
+
+  });
+
 
   // --------------------------------------------------------------------------------------------------
   // APPLICATION DATA MODEL
@@ -574,6 +638,7 @@ describe('test suite', () => {
   });
 
 
+  // --------------------------------------------------------------------------------------------------
   it('min-validator should work', () => {
     // min: 3
     let testComp = findComponentById('testMinValidator');
@@ -597,6 +662,7 @@ describe('test suite', () => {
 
   });
 
+  // --------------------------------------------------------------------------------------------------
   it('max-validator should work', () => {
     // max: 3
     let testComp = findComponentById('testMaxValidator');
@@ -621,6 +687,7 @@ describe('test suite', () => {
   });
 
 
+  // --------------------------------------------------------------------------------------------------
   it('pattern-validator should work', () => {
     // pattern: '^isAPattern$'
     let testComp = findComponentById('testPatternValidator');
@@ -645,6 +712,7 @@ describe('test suite', () => {
   });
 
 
+  // --------------------------------------------------------------------------------------------------
   it('email-validator should work', () => {
     let testComp = findComponentById('testEmailValidator');
     let testEl = findDebugElementById('testEmailValidator');
@@ -668,6 +736,7 @@ describe('test suite', () => {
 
   });
 
+  // --------------------------------------------------------------------------------------------------
   it('sync test-validator should work', () => {
     // pattern: '^sync$'
     let testComp = findComponentById('testSyncValidator');
@@ -692,6 +761,7 @@ describe('test suite', () => {
 
   });
 
+  // --------------------------------------------------------------------------------------------------
   it('async test-validator should work', () => {
     // pattern: '^async$'
     let testComp = findComponentById('testAsyncValidator');
@@ -715,6 +785,7 @@ describe('test suite', () => {
         .toBeFalsy(`fixed component is not valid: '${testComp.model.ngControl.value}'`);
   });
 
+  // --------------------------------------------------------------------------------------------------
   it('unconfigured minLength-validator should work', () => {
     let testComp = findComponentById('testNullMinLengthValidator');
     let testEl = findDebugElementById('testNullMinLengthValidator');
@@ -732,6 +803,7 @@ describe('test suite', () => {
         .toBeFalsy(`dirty component is not valid: '${testComp.model.ngControl.value}'`);
   });
 
+  // --------------------------------------------------------------------------------------------------
   it('unconfigured maxLength-validator should work', () => {
     let testComp = findComponentById('testNullMaxLengthValidator');
     let testEl = findDebugElementById('testNullMaxLengthValidator');
@@ -749,6 +821,7 @@ describe('test suite', () => {
         .toBeFalsy(`dirty component is not valid: '${testComp.model.ngControl.value}'`);
   });
 
+  // --------------------------------------------------------------------------------------------------
   it('unconfigured min-validator should work', () => {
     let testComp = findComponentById('testNullMinValidator');
     let testEl = findDebugElementById('testNullMinValidator');
@@ -767,6 +840,7 @@ describe('test suite', () => {
 
   });
 
+  // --------------------------------------------------------------------------------------------------
   it('unconfigured max-validator should work', () => {
     let testComp = findComponentById('testNullMaxValidator');
     let testEl = findDebugElementById('testNullMaxValidator');
@@ -785,6 +859,7 @@ describe('test suite', () => {
 
   });
 
+  // --------------------------------------------------------------------------------------------------
   it('unconfigured patttern-validator should work', () => {
     let testComp = findComponentById('testNullPatternValidator');
     let testEl = findDebugElementById('testNullPatternValidator');
@@ -802,6 +877,7 @@ describe('test suite', () => {
         .toBeFalsy(`dirty component is not valid: '${testComp.model.ngControl.value}'`);
   });
 
+  // --------------------------------------------------------------------------------------------------
   it('unconfigured sync test-validator should work', () => {
     let testComp = findComponentById('testUndefinedSyncValidator');
     let testEl = findDebugElementById('testUndefinedSyncValidator');
@@ -819,6 +895,7 @@ describe('test suite', () => {
         .toBeFalsy(`dirty component is not valid: '${testComp.model.ngControl.value}'`);
   });
 
+  // --------------------------------------------------------------------------------------------------
   it('unconfigured async test-validator should work', () => {
     let testComp = findComponentById('testUndefinedAsyncValidator');
     let testEl = findDebugElementById('testUndefinedAsyncValidator');

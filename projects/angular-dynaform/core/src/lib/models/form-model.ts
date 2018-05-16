@@ -91,7 +91,7 @@ export class FormModel {
   }
 
   clearValue(): void {
-    if (this.initValue) {
+    if (this._initValue) {
       const prevValue = this.group.ngControl.value;
       this.group.ngControl.reset();
       ModelHelper.setDirtyIfChanged(this.group, prevValue);

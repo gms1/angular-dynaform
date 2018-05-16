@@ -14,7 +14,7 @@ function testExpression(expression: string, result: any, context?: any, thisArg?
   expect(compiled.run()).toEqual(result, `result of ${expression} is not ${result}`);
 }
 
-describe('js-expression', () => {
+describe('js-expression test suite', () => {
   let expr: string;
   let context: any;
   let thisArg: any;

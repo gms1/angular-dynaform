@@ -10,7 +10,9 @@ export class ArrayButtonAddAction extends ArrayButtonAction {
 
   // the handler for the click event on the add button element
   onClick(event?: Event): boolean {
+    /* istanbul ignore if */
     if (!this.targetArray) {
+      // NOTE: this should not happen; button should be disabled
       return true;
     }
     this.targetArray.addItem();
