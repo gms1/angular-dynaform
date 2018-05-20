@@ -27,6 +27,9 @@ export abstract class DynamicForm {
   abstract get status(): string;
   abstract get statusChanges(): Observable<string>;
 
+  abstract get pristine(): boolean;
+  abstract get touched(): boolean;
+
   formControlRef: ComponentRef<DynamicFormFormControl>|undefined;
   stepper?: Stepper;
 

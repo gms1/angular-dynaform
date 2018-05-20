@@ -126,6 +126,9 @@ describe('basic-module test suite', () => {
   it('submit/reset should be disabled on invalid/pristine form', () => {
     // empty form should be invalid, because some fields are required
     expect(form.valid).toBe(false, 'empty form is valid');
+    expect(form.pristine).toBe(true, 'new empty form is not pristine');
+    expect(form.touched).toBe(false, 'new empty form is touched');
+    expect(form.status).toBe('INVALID', `empty form has status ${form.status}`);
 
     let resetComp = findComponentById('reset');
     let submitComp = findComponentById('submit');
@@ -148,9 +151,12 @@ describe('basic-module test suite', () => {
 
     // clear should be enabled
     expect(clearComp.model.ngControl.disabled).toBeFalsy('clear button is not enabled');
-    spyOn(form.model, 'clearValue');
     clickElement(clearEl);
-    expect(form.model.clearValue).toHaveBeenCalledTimes(1);
+    expect(cleanValue(form.value)).toEqual({address: {}, contacts: []}, '1st cleared value is not empty');
+    expect(form.valid).toBe(false, 'cleared form is valid');
+    expect(form.pristine).toBe(true, 'empty form should not be touched after clear');
+    form.clearValue();
+    expect(cleanValue(form.value)).toEqual({address: {}, contacts: []}, '2nd cleared value is not empty');
 
   });
 
@@ -159,6 +165,9 @@ describe('basic-module test suite', () => {
     // initialized form should be valid
     form.initValue(mainExampleFormModelData);
     expect(form.valid).toBe(true, 'initialized form is not valid');
+    expect(form.pristine).toBe(true, 'initialized form is not pristine');
+    expect(form.touched).toBe(false, 'initialized form is touched');
+    expect(form.status).toBe('VALID', `initialized form has status ${form.status}`);
 
     let resetComp = findComponentById('reset');
     let submitComp = findComponentById('submit');
@@ -184,10 +193,13 @@ describe('basic-module test suite', () => {
 
     // clear should be enabled
     expect(clearComp.model.ngControl.disabled).toBeFalsy('clear button is not enabled');
-    spyOn(form.model, 'clearValue');
     clickElement(clearEl);
-    expect(form.model.clearValue).toHaveBeenCalledTimes(1);
-    // expect(form.valid).toBe(false, 'cleared form is valid');
+    expect(cleanValue(form.value)).toEqual({address: {}, contacts: []}, '1st cleared value is not empty');
+    expect(form.valid).toBe(false, 'cleared form is valid');
+    // TODO: expect(form.pristine).toBe(true, 'initialized form should be touched after clear');
+
+    form.clearValue();
+    expect(cleanValue(form.value)).toEqual({address: {}, contacts: []}, '2nd cleared value is not empty');
   });
 
   // --------------------------------------------------------------------------------------------------
@@ -195,7 +207,9 @@ describe('basic-module test suite', () => {
     // initialized form should be valid and pristine
     form.initValue(mainExampleFormModelData);
     expect(form.valid).toBe(true, 'initialized form is not valid');
-    expect(form.model.group.pristine).toBe(true, 'newly initialized form should be pristine');
+    expect(form.pristine).toBe(true, 'initialized form is not pristine');
+    expect(form.touched).toBe(false, 'initialized form is touched');
+    expect(form.status).toBe('VALID', `initialized form has status ${form.status}`);
 
     let resetEl = findDebugElementById('reset');
     let submitEl = findDebugElementById('submit');
@@ -231,6 +245,30 @@ describe('basic-module test suite', () => {
 
     // submitted value should be same as initial value
     expect(cleanValue(form.value)).toEqual(mainExampleFormModelData, 'submitted value is different to initial value');
+  });
+
+
+  it('subscription to form.valueChanges and form.statusChanges', () => {
+    form.initValue(mainExampleFormModelData);
+    expect(form.valid).toBe(true, 'initialized form is not valid');
+    expect(form.status).toBe('VALID', `initialized form has status ${form.status}`);
+
+    const values: any[] = [];
+    const states: string[] = [];
+    let subValue = form.valueChanges.subscribe(val => values.push(val));
+    let subState = form.statusChanges.subscribe(state => states.push(state));
+
+    let lastNameEl = findDebugElementById('lastName');
+    setElementInput(lastNameEl, 'X');
+
+    subValue.unsubscribe();
+    subState.unsubscribe();
+
+    expect(values.length).toBeGreaterThan(0, 'got no valueChange event');
+    expect(states.length).toBeGreaterThan(0, 'got no statusChange event');
+
+    expect(values[values.length - 1].lastName).toBe('X', 'got wrong input from valueChange event');
+    expect(states[states.length - 1]).toBe('INVALID', 'got wrong state from valueChange event');
   });
 
   // --------------------------------------------------------------------------------------------------
@@ -284,11 +322,11 @@ describe('basic-module test suite', () => {
     expect(contactsModel.items.length).toBe(1, 'contacts array has not been initialized properly');
 
     let contacts0ValueEl = findDebugElementById('contacts-0-contactValue');
-    let contactValue = contacts0ValueEl.nativeElement.value;
+    let contact0Value = contacts0ValueEl.nativeElement.value;
 
     contacts0ValueEl.triggerEventHandler('focus', null);
     contacts0ValueEl.triggerEventHandler('blur', null);
-    expect(contactsModel.selectedIndex).toBe(0, 'current index has not been set by focus on contactType field');
+    expect(contactsModel.selectedIndex).toBe(0, 'current index has not been set to the 1st item of the contact array');
 
     let contactsAddEl = findDebugElementById('contacts-HEADER-addContact');
     clickElement(contactsAddEl);
@@ -297,10 +335,14 @@ describe('basic-module test suite', () => {
 
     contacts0ValueEl = findDebugElementById('contacts-0-contactValue');
     expect(contacts0ValueEl.nativeElement.value)
-        .toBe(contactValue, 'got wrong contact value for old item after adding new item');
+        .toBe(contact0Value, 'got wrong contact value for old item after adding new item');
 
     let contacts1ValueEl = findDebugElementById('contacts-1-contactValue');
     expect(contacts1ValueEl.nativeElement.value).toBe('', 'got wrong contact value for new item');
+
+    contacts1ValueEl.triggerEventHandler('focus', null);
+    contacts1ValueEl.triggerEventHandler('blur', null);
+    expect(contactsModel.selectedIndex).toBe(1, 'current index has not been set to the 2nd item of the contact array');
 
   });
 
@@ -345,6 +387,8 @@ describe('basic-module test suite', () => {
     // initialized form should be valid and pristine
     form.initValueFromAppModel(mainExampleAppModelData);
     expect(form.valid).toBe(true, 'initialized form is not valid');
+
+    expect(cleanValue(form.value)).toEqual(cleanValue(form.valueFromAppModel(mainExampleAppModelData)));
 
     let submitEl = findDebugElementById('submit');
     clickElement(submitEl);
