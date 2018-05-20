@@ -3,46 +3,7 @@
   "version": "0.6.0",
   "license": "MIT",
   "scripts": {
-    "prepublishOnly": "echo \"ERROR: please use the dist-folder for publishing\" && exit 1",
-    "ng": "ng",
-    "clean": "rimraf ./tmp/* ./dist/*",
-    "start": "ng serve -aot",
-    "build": "ng build -aot",
-    "rebuild": "ng build -aot",
-    "test": "ng test",
-    "lint": "ng lint",
-    "e2e": "ng e2e",
-    "start:systemjs": "lite-server -c ./systemjs/bs-config.json",
-    "release:build": "ng lint && ng build --aot --prod --build-optimizer"
+    "prepublishOnly": "echo \"ERROR: please use the dist-folder for publishing\" && exit 1"
   },
-  "private": true,
-  "dependencies": {
-    "@angular/animations": ">=6.0.0-rc.0 <7.0.0",
-    "@angular/common": ">=6.0.0-rc.0 <7.0.0",
-    "@angular/compiler": ">=6.0.0-rc.0 <7.0.0",
-    "@angular/core": ">=6.0.0-rc.0 <7.0.0",
-    "@angular/forms": ">=6.0.0-rc.0 <7.0.0",
-    "@angular/http": ">=6.0.0-rc.0 <7.0.0",
-    "@angular/platform-browser": ">=6.0.0-rc.0 <7.0.0",
-    "@angular/platform-browser-dynamic": ">=6.0.0-rc.0 <7.0.0",
-    "@angular/router": ">=6.0.0-rc.0 <7.0.0",
-    "core-js": "^2.5.5",
-    "hammerjs": "^2.0.8",
-    "jsep": "^0.3.4",
-    "jsonpointerx": "^1.0.8",
-    "rxjs": "^6.0.0",
-    "tslint": "^5.9.1",
-    "zone.js": "^0.8.26"
-  },
-  "devDependencies": {
-    "@angular/cli": "^1.7.4",
-    "@angular/compiler-cli": ">=6.0.0-rc.0 <7.0.0",
-    "@angular/language-service": ">=6.0.0-rc.0 <7.0.0",
-    "lite-server": "^2.3.0",
-    "node-sass": "^4.9.0",
-    "rimraf": "^2.6.2",
-    "sorcery": "^0.10.0",
-    "systemjs": "<0.20",
-    "typescript": "2.7.x"
-  }
+  "private": true
 }
