@@ -77,9 +77,9 @@ release-build:
 	@npm run build:material -- --prod
 	@npm run build:basic-example -- --prod
 	@npm run build:material-example -- --prod
-	@npm run test:core
-	@npm run test:basic
-	@npm run test:material
+	@npm run coverage:core
+	@npm run coverage:basic
+	@npm run coverage:material
 	@echo RELEASE BUILD SUCCEEDED
 
 release: release-doc release-build

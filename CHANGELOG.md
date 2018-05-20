@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## 0.6.1
+
+maintenance release
+
 ## 0.6.0
 
 release based on angular 6.0 and angular/cli mono-repo

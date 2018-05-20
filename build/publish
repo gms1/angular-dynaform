@@ -33,8 +33,4 @@ pushd "${PROJ_HOME}/dist/@angular-dynaform/material" &>/dev/null || \
       die "failed to publish 'material'"
 popd &>/dev/null
 
-all_plunker_build || \
-  die "failed to build plunkers"
 
-all_plunker_publish || \
-  die "failed to publish plunkers"

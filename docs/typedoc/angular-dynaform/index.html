@@ -61,11 +61,12 @@
 		<div class="col-8 col-content">
 			<div class="tsd-panel tsd-typography">
 				<h1 id="angular-dynaform">angular-dynaform</h1>
-				<p><a href="https://travis-ci.org/gms1/angular-dynaform"><img src="https://api.travis-ci.org/gms1/angular-dynaform.svg?branch=master" alt="Build Status"></a>
+				<p><a href="https://www.npmjs.com/package/%40angular-dynaform%2Fcore"><img src="https://img.shields.io/npm/v/@angular-dynaform/core.svg?colorB=007ec6" alt="npm (scoped)"></a>
+					<a href="https://travis-ci.org/gms1/angular-dynaform"><img src="https://api.travis-ci.org/gms1/angular-dynaform.svg?branch=master" alt="Build Status"></a>
+					<a href="https://coveralls.io/github/gms1/angular-dynaform?branch=master"><img src="https://img.shields.io/coveralls/github/gms1/angular-dynaform/master.svg" alt="Coverage Status"></a>
 					<a href="https://snyk.io/test/github/gms1/angular-dynaform"><img src="https://snyk.io/test/github/gms1/angular-dynaform/badge.svg" alt="Known Vulnerabilities"></a>
 					<a href="https://deepscan.io/dashboard/#view=project&amp;pid=698&amp;bid=1106"><img src="https://deepscan.io/api/projects/698/branches/1106/badge/grade.svg" alt="DeepScan Grade"></a>
-					<a href="https://greenkeeper.io/"><img src="https://badges.greenkeeper.io/gms1/angular-dynaform.svg" alt="Greenkeeper badge"></a>
-				<a href="https://www.npmjs.com/package/%40angular-dynaform%2Fcore"><img src="https://img.shields.io/npm/v/@angular-dynaform/core.svg?colorB=007ec6" alt="npm (scoped)"></a></p>
+				<a href="https://greenkeeper.io/"><img src="https://badges.greenkeeper.io/gms1/angular-dynaform.svg" alt="Greenkeeper badge"></a></p>
 				<p><strong>angular-dynaform</strong> is a library for rapid development of model-driven reactive forms for mobile and web.</p>
 				<h2 id="features">Features</h2>
 				<ul>
@@ -151,23 +152,48 @@ npm install @angular-dynaform/material --save
 					<li>implement a form:</li>
 				</ul>
 				<pre><code class="lang-typescript"><span class="hljs-meta">@Component</span>({
-  selector: <span class="hljs-string">'my-form-component'</span>,
+  selector: <span class="hljs-string">'app-basic-form'</span>,
   template: <span class="hljs-string">`
-    &lt;adf-form [model]="formModel" (adfSubmit)="onSubmit($event)" (adfReset)="onReset($event)"&gt;
+    &lt;adf-form [model]="formModel" (adfSubmit)="onSubmit($event)"&gt;
     &lt;/adf-form&gt;
   `</span>
 })
-<span class="hljs-keyword">export</span> <span class="hljs-keyword">class</span> MyFormComponent {
-  <span class="hljs-meta">@ViewChild</span>(DynamicFormComponent) dynaForm: DynamicFormComponent;
+<span class="hljs-keyword">export</span> <span class="hljs-keyword">class</span> BasicFormComponent {
+  <span class="hljs-meta">@ViewChild</span>(DynamicForm) dynaForm!: DynamicForm;
   formModel: FormModel;
 
+  readonly formConfig: FormConfig = {
+    id: <span class="hljs-string">'basic'</span>,
+    updateOn: <span class="hljs-string">'change'</span>,
+    options: {
+      group: [
+        {
+          id: <span class="hljs-string">'name'</span>,
+          modelType: ModelType.MODEL_VALUE,
+          controlType: ControlType.CONTROL_INPUT,
+          options: {label: <span class="hljs-string">'name'</span>, placeholder: <span class="hljs-string">'Enter your name'</span>, maxLength: <span class="hljs-number">30</span>, minLength: <span class="hljs-number">4</span>},
+          validators: [<span class="hljs-string">'required'</span>, <span class="hljs-string">'minLength'</span>, <span class="hljs-string">'maxLength'</span>]
+        },
+        {
+          id: <span class="hljs-string">'submit'</span>,
+          modelType: ModelType.MODEL_NULL,
+          controlType: ControlType.CONTROL_BUTTON,
+          options: {label: <span class="hljs-string">'Submit'</span>},
+          action: <span class="hljs-string">'submit'</span>
+        }
+      ]
+    }
+  };
+
+  name?: <span class="hljs-built_in">string</span>;
+
   <span class="hljs-keyword">constructor</span>(<span class="hljs-params"><span class="hljs-keyword">private</span> dynamicFormService: DynamicFormService</span>) {
-    <span class="hljs-keyword">this</span>.formModel = <span class="hljs-keyword">this</span>.dynamicFormService.createFormModel(formConfig);
+    <span class="hljs-keyword">this</span>.formModel = <span class="hljs-keyword">this</span>.dynamicFormService.createFormModel(<span class="hljs-keyword">this</span>.formConfig);
   }
 
-  onSubmit(event: Event): <span class="hljs-built_in">void</span> { }
-  onReset(event: Event): <span class="hljs-built_in">void</span> { }
-
+  onSubmit(event: Event): <span class="hljs-built_in">void</span> {
+    <span class="hljs-keyword">this</span>.name = <span class="hljs-keyword">this</span>.formModel.value.name;
+  }
 }
 </code></pre>
 				<ul>
@@ -176,7 +202,7 @@ npm install @angular-dynaform/material --save
 							<li>JSON configuration:</li>
 						</ul>
 						<p><a href="./projects/material-example/src/app/app.config.ts">Configuration of the plunker example</a></p>
-						<p><a href="docs/typedoc/angular-dynaform/interfaces/controlconfig.html">ControlConfig Interface</a></p>
+						<p><a href="./docs/typedoc/angular-dynaform/interfaces/controlconfig.html">ControlConfig Interface</a></p>
 					</li>
 					<li><p>observable form value and form value update:</p>
 					</li>
@@ -252,6 +278,17 @@ npm install @angular-dynaform/material --save
 					<li>layout/styling</li>
 				</ul>
 				<p>you can optionally assign additional CSS classes using <strong>ControlConfig.options.css</strong> and let <strong>angular-dynaform</strong> add them to the container, control, label sections of the corresponding component</p>
+				<p>The following CSS classes are predefined:</p>
+				<ul>
+					<li>on all components: &#39;adf-container&#39;, &#39;adf-control&#39;, &#39;adf-content&#39;, &#39;adf-error&#39; and &#39;adf-label&#39;</li>
+					<li>on the form-control-component: &#39;adf-form-container&#39;, &#39;adf-form-control&#39;, &#39;adf-form-content&#39;, &#39;adf-form-error&#39;</li>
+					<li>on all group-components: &#39;adf-group-container&#39;, &#39;adf-group-control&#39;, &#39;adf-group-content&#39;, &#39;adf-group-error&#39; and &#39;adf-group-label&#39;</li>
+					<li>on all array-components: &#39;adf-array-container&#39;, &#39;adf-array-control&#39;, &#39;adf-array-content&#39;, &#39;adf-array-error&#39; and &#39;adf-array-label&#39;</li>
+					<li>on all array-header sections: &#39;adf-header-content&#39;</li>
+					<li>on all array-footer sections: &#39;adf-footer-content&#39;</li>
+					<li>on the array-item sections: &#39;adf-array-item&#39; and if the item is selected: &#39;adf-array-item-selected&#39;</li>
+					<li>for all non-group and non-array-components: &#39;adf-control-container&#39;, &#39;adf-control-control&#39;, &#39;adf-control-content&#39;, &#39;adf-control-error&#39; and &#39;adf-control-label&#39;</li>
+				</ul>
 				<h2 id="customization">Customization</h2>
 				<h3 id="custom-components-di-">custom components (DI)</h3>
 				<p>you can subclass the base class <strong>DynamicFormControlComponentBase</strong>, the generic subclass <strong>DynamicFormControlComponent</strong> or any of the UI-specific subclasses to create your own custom control.</p>
@@ -439,6 +476,9 @@ npm install @angular-dynaform/material --save
 						<a href="classes/abstractcontrolmodel.html" class="tsd-kind-icon">Abstract<wbr>Control<wbr>Model</a>
 					</li>
 					<li class=" tsd-kind-class">
+						<a href="classes/arraybuttonaction.html" class="tsd-kind-icon">Array<wbr>Button<wbr>Action</a>
+					</li>
+					<li class=" tsd-kind-class">
 						<a href="classes/arraybuttonaddaction.html" class="tsd-kind-icon">Array<wbr>Button<wbr>Add<wbr>Action</a>
 					</li>
 					<li class=" tsd-kind-class">
@@ -564,6 +604,51 @@ npm install @angular-dynaform/material --save
 					<li class=" tsd-kind-class">
 						<a href="classes/subsetmodel.html" class="tsd-kind-icon">Subset<wbr>Model</a>
 					</li>
+					<li class=" tsd-kind-class">
+						<a href="classes/testarraycomponent.html" class="tsd-kind-icon">Test<wbr>Array<wbr>Component</a>
+					</li>
+					<li class=" tsd-kind-class">
+						<a href="classes/testbuttoncomponent.html" class="tsd-kind-icon">Test<wbr>Button<wbr>Component</a>
+					</li>
+					<li class=" tsd-kind-class">
+						<a href="classes/testcheckboxcomponent.html" class="tsd-kind-icon">Test<wbr>Checkbox<wbr>Component</a>
+					</li>
+					<li class=" tsd-kind-class">
+						<a href="classes/testdivisioncomponent.html" class="tsd-kind-icon">Test<wbr>Division<wbr>Component</a>
+					</li>
+					<li class=" tsd-kind-class">
+						<a href="classes/testerrorcomponent.html" class="tsd-kind-icon">Test<wbr>Error<wbr>Component</a>
+					</li>
+					<li class=" tsd-kind-class">
+						<a href="classes/testfieldsetcomponent.html" class="tsd-kind-icon">Test<wbr>Fieldset<wbr>Component</a>
+					</li>
+					<li class=" tsd-kind-class">
+						<a href="classes/testformcontainercomponent.html" class="tsd-kind-icon">Test<wbr>Form<wbr>Container<wbr>Component</a>
+					</li>
+					<li class=" tsd-kind-class">
+						<a href="classes/testformcontrolcomponent.html" class="tsd-kind-icon">Test<wbr>Form<wbr>Control<wbr>Component</a>
+					</li>
+					<li class=" tsd-kind-class">
+						<a href="classes/testinputcomponent.html" class="tsd-kind-icon">Test<wbr>Input<wbr>Component</a>
+					</li>
+					<li class=" tsd-kind-class">
+						<a href="classes/testradiogroupcomponent.html" class="tsd-kind-icon">Test<wbr>Radio<wbr>Group<wbr>Component</a>
+					</li>
+					<li class=" tsd-kind-class">
+						<a href="classes/testselectcomponent.html" class="tsd-kind-icon">Test<wbr>Select<wbr>Component</a>
+					</li>
+					<li class=" tsd-kind-class">
+						<a href="classes/testseparatorcomponent.html" class="tsd-kind-icon">Test<wbr>Separator<wbr>Component</a>
+					</li>
+					<li class=" tsd-kind-class">
+						<a href="classes/testslidercomponent.html" class="tsd-kind-icon">Test<wbr>Slider<wbr>Component</a>
+					</li>
+					<li class=" tsd-kind-class">
+						<a href="classes/testswitchcomponent.html" class="tsd-kind-icon">Test<wbr>Switch<wbr>Component</a>
+					</li>
+					<li class=" tsd-kind-class">
+						<a href="classes/testtextareacomponent.html" class="tsd-kind-icon">Test<wbr>Textarea<wbr>Component</a>
+					</li>
 					<li class=" tsd-kind-class tsd-has-type-parameter">
 						<a href="classes/typeregistry.html" class="tsd-kind-icon">Type<wbr>Registry</a>
 					</li>
@@ -572,6 +657,9 @@ npm install @angular-dynaform/material --save
 					</li>
 					<li class=" tsd-kind-interface">
 						<a href="interfaces/arrayoptions.html" class="tsd-kind-icon">Array<wbr>Options</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/binaryoperations.html" class="tsd-kind-icon">Binary<wbr>Operations</a>
 					</li>
 					<li class=" tsd-kind-interface">
 						<a href="interfaces/cssmodel.html" class="tsd-kind-icon">CSSModel</a>
@@ -640,7 +728,13 @@ npm install @angular-dynaform/material --save
 						<a href="interfaces/stepper.html" class="tsd-kind-icon">Stepper</a>
 					</li>
 					<li class=" tsd-kind-interface">
+						<a href="interfaces/unaryoperations.html" class="tsd-kind-icon">Unary<wbr>Operations</a>
+					</li>
+					<li class=" tsd-kind-interface">
 						<a href="interfaces/valueoptions.html" class="tsd-kind-icon">Value<wbr>Options</a>
+					</li>
+					<li class=" tsd-kind-type-alias">
+						<a href="globals.html#binaryfunction" class="tsd-kind-icon">Binary<wbr>Function</a>
 					</li>
 					<li class=" tsd-kind-type-alias">
 						<a href="globals.html#controloptions" class="tsd-kind-icon">Control<wbr>Options</a>
@@ -653,6 +747,9 @@ npm install @angular-dynaform/material --save
 					</li>
 					<li class=" tsd-kind-type-alias">
 						<a href="globals.html#dynamicvalidationerrorresult" class="tsd-kind-icon">Dynamic<wbr>Validation<wbr>Error<wbr>Result</a>
+					</li>
+					<li class=" tsd-kind-type-alias">
+						<a href="globals.html#unaryfunction" class="tsd-kind-icon">Unary<wbr>Function</a>
 					</li>
 					<li class=" tsd-kind-variable">
 						<a href="globals.html#model_array" class="tsd-kind-icon">MODEL_<wbr>ARRAY</a>
@@ -668,6 +765,30 @@ npm install @angular-dynaform/material --save
 					</li>
 					<li class=" tsd-kind-variable">
 						<a href="globals.html#model_value" class="tsd-kind-icon">MODEL_<wbr>VALUE</a>
+					</li>
+					<li class=" tsd-kind-function">
+						<a href="globals.html#testasyncpatternvalidate" class="tsd-kind-icon">test<wbr>Async<wbr>Pattern<wbr>Validate</a>
+					</li>
+					<li class=" tsd-kind-function">
+						<a href="globals.html#testpatternvalidate" class="tsd-kind-icon">test<wbr>Pattern<wbr>Validate</a>
+					</li>
+					<li class=" tsd-kind-object-literal">
+						<a href="globals.html#binaryops" class="tsd-kind-icon">BINARYOPS</a>
+					</li>
+					<li class=" tsd-kind-object-literal">
+						<a href="globals.html#unaryops" class="tsd-kind-icon">UNARYOPS</a>
+					</li>
+					<li class=" tsd-kind-object-literal">
+						<a href="globals.html#mainexampleappmodeldata" class="tsd-kind-icon">main<wbr>Example<wbr>App<wbr>Model<wbr>Data</a>
+					</li>
+					<li class=" tsd-kind-object-literal">
+						<a href="globals.html#mainexampleconfig" class="tsd-kind-icon">main<wbr>Example<wbr>Config</a>
+					</li>
+					<li class=" tsd-kind-object-literal">
+						<a href="globals.html#mainexampleformlanguages" class="tsd-kind-icon">main<wbr>Example<wbr>Form<wbr>Languages</a>
+					</li>
+					<li class=" tsd-kind-object-literal">
+						<a href="globals.html#mainexampleformmodeldata" class="tsd-kind-icon">main<wbr>Example<wbr>Form<wbr>Model<wbr>Data</a>
 					</li>
 				</ul>
 			</nav>

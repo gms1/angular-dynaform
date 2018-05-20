@@ -66,7 +66,7 @@
 				<h3>Hierarchy</h3>
 				<ul class="tsd-hierarchy">
 					<li>
-						<a href="dynamicformaction.html" class="tsd-signature-type">DynamicFormAction</a>
+						<a href="arraybuttonaction.html" class="tsd-signature-type">ArrayButtonAction</a>
 						<ul class="tsd-hierarchy">
 							<li>
 								<span class="target">ArrayButtonDeleteAction</span>
@@ -99,6 +99,7 @@
 							<ul class="tsd-index-list">
 								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-inherited"><a href="arraybuttondeleteaction.html#component" class="tsd-kind-icon">component</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-inherited"><a href="arraybuttondeleteaction.html#model" class="tsd-kind-icon">model</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-inherited"><a href="arraybuttondeleteaction.html#targetarray" class="tsd-kind-icon">target<wbr>Array</a></li>
 							</ul>
 						</section>
 						<section class="tsd-index-section ">
@@ -111,7 +112,9 @@
 								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-inherited"><a href="arraybuttondeleteaction.html#onblur" class="tsd-kind-icon">on<wbr>Blur</a></li>
 								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-overwrite"><a href="arraybuttondeleteaction.html#onclick" class="tsd-kind-icon">on<wbr>Click</a></li>
 								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-inherited"><a href="arraybuttondeleteaction.html#onfocus" class="tsd-kind-icon">on<wbr>Focus</a></li>
-								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-protected"><a href="arraybuttondeleteaction.html#updatestate" class="tsd-kind-icon">update<wbr>State</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-protected"><a href="arraybuttondeleteaction.html#selectionchanged" class="tsd-kind-icon">selection<wbr>Changed</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-protected"><a href="arraybuttondeleteaction.html#subscribeselectionchange" class="tsd-kind-icon">subscribe<wbr>Selection<wbr>Change</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-protected"><a href="arraybuttondeleteaction.html#unsubscribeselectionchange" class="tsd-kind-icon">unsubscribe<wbr>Selection<wbr>Change</a></li>
 							</ul>
 						</section>
 					</div>
@@ -128,9 +131,9 @@
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
-								<p>Overrides <a href="dynamicformaction.html">DynamicFormAction</a>.<a href="dynamicformaction.html#constructor">constructor</a></p>
+								<p>Overrides <a href="arraybuttonaction.html">ArrayButtonAction</a>.<a href="arraybuttonaction.html#constructor">constructor</a></p>
 								<ul>
-									<li>Defined in <a href="https://github.com/gms1/angular-dynaform/blob/0dc5cc6/projects/angular-dynaform/core/src/lib/actions/array-button-delete.action.ts#L11">lib/actions/array-button-delete.action.ts:11</a></li>
+									<li>Defined in <a href="https://github.com/gms1/angular-dynaform/blob/e8b32b3/projects/angular-dynaform/core/src/lib/actions/array-button-delete.action.ts#L12">lib/actions/array-button-delete.action.ts:12</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -153,7 +156,7 @@
 					<aside class="tsd-sources">
 						<p>Inherited from <a href="dynamicformaction.html">DynamicFormAction</a>.<a href="dynamicformaction.html#component">component</a></p>
 						<ul>
-							<li>Defined in <a href="https://github.com/gms1/angular-dynaform/blob/0dc5cc6/projects/angular-dynaform/core/src/lib/actions/dynamic-form.action.ts#L8">lib/actions/dynamic-form.action.ts:8</a></li>
+							<li>Defined in <a href="https://github.com/gms1/angular-dynaform/blob/e8b32b3/projects/angular-dynaform/core/src/lib/actions/dynamic-form.action.ts#L8">lib/actions/dynamic-form.action.ts:8</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -164,7 +167,18 @@
 					<aside class="tsd-sources">
 						<p>Inherited from <a href="dynamicformaction.html">DynamicFormAction</a>.<a href="dynamicformaction.html#model">model</a></p>
 						<ul>
-							<li>Defined in <a href="https://github.com/gms1/angular-dynaform/blob/0dc5cc6/projects/angular-dynaform/core/src/lib/actions/dynamic-form.action.ts#L9">lib/actions/dynamic-form.action.ts:9</a></li>
+							<li>Defined in <a href="https://github.com/gms1/angular-dynaform/blob/e8b32b3/projects/angular-dynaform/core/src/lib/actions/dynamic-form.action.ts#L9">lib/actions/dynamic-form.action.ts:9</a></li>
+						</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-inherited">
+					<a name="targetarray" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagOptional">Optional</span> target<wbr>Array</h3>
+					<div class="tsd-signature tsd-kind-icon">target<wbr>Array<span class="tsd-signature-symbol">:</span> <a href="arraymodel.html" class="tsd-signature-type">ArrayModel</a></div>
+					<aside class="tsd-sources">
+						<p>Inherited from <a href="arraybuttonaction.html">ArrayButtonAction</a>.<a href="arraybuttonaction.html#targetarray">targetArray</a></p>
+						<ul>
+							<li>Defined in <a href="https://github.com/gms1/angular-dynaform/blob/e8b32b3/projects/angular-dynaform/core/src/lib/actions/array-button.action.ts#L6">lib/actions/array-button.action.ts:6</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -182,7 +196,7 @@
 							<aside class="tsd-sources">
 								<p>Inherited from <a href="dynamicformaction.html">DynamicFormAction</a>.<a href="dynamicformaction.html#ngafterviewinit">ngAfterViewInit</a></p>
 								<ul>
-									<li>Defined in <a href="https://github.com/gms1/angular-dynaform/blob/0dc5cc6/projects/angular-dynaform/core/src/lib/actions/dynamic-form.action.ts#L17">lib/actions/dynamic-form.action.ts:17</a></li>
+									<li>Defined in <a href="https://github.com/gms1/angular-dynaform/blob/e8b32b3/projects/angular-dynaform/core/src/lib/actions/dynamic-form.action.ts#L20">lib/actions/dynamic-form.action.ts:20</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
@@ -200,7 +214,7 @@
 							<aside class="tsd-sources">
 								<p>Inherited from <a href="dynamicformaction.html">DynamicFormAction</a>.<a href="dynamicformaction.html#ngonchanges">ngOnChanges</a></p>
 								<ul>
-									<li>Defined in <a href="https://github.com/gms1/angular-dynaform/blob/0dc5cc6/projects/angular-dynaform/core/src/lib/actions/dynamic-form.action.ts#L18">lib/actions/dynamic-form.action.ts:18</a></li>
+									<li>Defined in <a href="https://github.com/gms1/angular-dynaform/blob/e8b32b3/projects/angular-dynaform/core/src/lib/actions/dynamic-form.action.ts#L23">lib/actions/dynamic-form.action.ts:23</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -224,7 +238,7 @@
 							<aside class="tsd-sources">
 								<p>Overrides <a href="dynamicformaction.html">DynamicFormAction</a>.<a href="dynamicformaction.html#ngondestroy">ngOnDestroy</a></p>
 								<ul>
-									<li>Defined in <a href="https://github.com/gms1/angular-dynaform/blob/0dc5cc6/projects/angular-dynaform/core/src/lib/actions/array-button-delete.action.ts#L28">lib/actions/array-button-delete.action.ts:28</a></li>
+									<li>Defined in <a href="https://github.com/gms1/angular-dynaform/blob/e8b32b3/projects/angular-dynaform/core/src/lib/actions/array-button-delete.action.ts#L24">lib/actions/array-button-delete.action.ts:24</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
@@ -240,9 +254,9 @@
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
-								<p>Overrides <a href="dynamicformaction.html">DynamicFormAction</a>.<a href="dynamicformaction.html#ngoninit">ngOnInit</a></p>
+								<p>Overrides <a href="arraybuttonaction.html">ArrayButtonAction</a>.<a href="arraybuttonaction.html#ngoninit">ngOnInit</a></p>
 								<ul>
-									<li>Defined in <a href="https://github.com/gms1/angular-dynaform/blob/0dc5cc6/projects/angular-dynaform/core/src/lib/actions/array-button-delete.action.ts#L18">lib/actions/array-button-delete.action.ts:18</a></li>
+									<li>Defined in <a href="https://github.com/gms1/angular-dynaform/blob/e8b32b3/projects/angular-dynaform/core/src/lib/actions/array-button-delete.action.ts#L19">lib/actions/array-button-delete.action.ts:19</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
@@ -260,7 +274,7 @@
 							<aside class="tsd-sources">
 								<p>Inherited from <a href="dynamicformaction.html">DynamicFormAction</a>.<a href="dynamicformaction.html#onblur">onBlur</a></p>
 								<ul>
-									<li>Defined in <a href="https://github.com/gms1/angular-dynaform/blob/0dc5cc6/projects/angular-dynaform/core/src/lib/actions/dynamic-form.action.ts#L26">lib/actions/dynamic-form.action.ts:26</a></li>
+									<li>Defined in <a href="https://github.com/gms1/angular-dynaform/blob/e8b32b3/projects/angular-dynaform/core/src/lib/actions/dynamic-form.action.ts#L35">lib/actions/dynamic-form.action.ts:35</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -284,7 +298,7 @@
 							<aside class="tsd-sources">
 								<p>Overrides <a href="dynamicformaction.html">DynamicFormAction</a>.<a href="dynamicformaction.html#onclick">onClick</a></p>
 								<ul>
-									<li>Defined in <a href="https://github.com/gms1/angular-dynaform/blob/0dc5cc6/projects/angular-dynaform/core/src/lib/actions/array-button-delete.action.ts#L35">lib/actions/array-button-delete.action.ts:35</a></li>
+									<li>Defined in <a href="https://github.com/gms1/angular-dynaform/blob/e8b32b3/projects/angular-dynaform/core/src/lib/actions/array-button-delete.action.ts#L30">lib/actions/array-button-delete.action.ts:30</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -308,7 +322,7 @@
 							<aside class="tsd-sources">
 								<p>Inherited from <a href="dynamicformaction.html">DynamicFormAction</a>.<a href="dynamicformaction.html#onfocus">onFocus</a></p>
 								<ul>
-									<li>Defined in <a href="https://github.com/gms1/angular-dynaform/blob/0dc5cc6/projects/angular-dynaform/core/src/lib/actions/dynamic-form.action.ts#L27">lib/actions/dynamic-form.action.ts:27</a></li>
+									<li>Defined in <a href="https://github.com/gms1/angular-dynaform/blob/e8b32b3/projects/angular-dynaform/core/src/lib/actions/dynamic-form.action.ts#L38">lib/actions/dynamic-form.action.ts:38</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -322,16 +336,16 @@
 					</ul>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-protected">
-					<a name="updatestate" class="tsd-anchor"></a>
-					<h3><span class="tsd-flag ts-flagProtected">Protected</span> update<wbr>State</h3>
+					<a name="selectionchanged" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagProtected">Protected</span> selection<wbr>Changed</h3>
 					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-protected">
-						<li class="tsd-signature tsd-kind-icon">update<wbr>State<span class="tsd-signature-symbol">(</span>newIndex<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+						<li class="tsd-signature tsd-kind-icon">selection<wbr>Changed<span class="tsd-signature-symbol">(</span>newIndex<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/gms1/angular-dynaform/blob/0dc5cc6/projects/angular-dynaform/core/src/lib/actions/array-button-delete.action.ts#L43">lib/actions/array-button-delete.action.ts:43</a></li>
+									<li>Defined in <a href="https://github.com/gms1/angular-dynaform/blob/e8b32b3/projects/angular-dynaform/core/src/lib/actions/array-button-delete.action.ts#L57">lib/actions/array-button-delete.action.ts:57</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -340,6 +354,40 @@
 									<h5>newIndex: <span class="tsd-signature-type">number</span></h5>
 								</li>
 							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-protected">
+					<a name="subscribeselectionchange" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagProtected">Protected</span> subscribe<wbr>Selection<wbr>Change</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-protected">
+						<li class="tsd-signature tsd-kind-icon">subscribe<wbr>Selection<wbr>Change<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/gms1/angular-dynaform/blob/e8b32b3/projects/angular-dynaform/core/src/lib/actions/array-button-delete.action.ts#L40">lib/actions/array-button-delete.action.ts:40</a></li>
+								</ul>
+							</aside>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-protected">
+					<a name="unsubscribeselectionchange" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagProtected">Protected</span> unsubscribe<wbr>Selection<wbr>Change</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-protected">
+						<li class="tsd-signature tsd-kind-icon">unsubscribe<wbr>Selection<wbr>Change<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/gms1/angular-dynaform/blob/e8b32b3/projects/angular-dynaform/core/src/lib/actions/array-button-delete.action.ts#L50">lib/actions/array-button-delete.action.ts:50</a></li>
+								</ul>
+							</aside>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
 						</li>
 					</ul>
@@ -370,6 +418,9 @@
 							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-inherited">
 								<a href="arraybuttondeleteaction.html#model" class="tsd-kind-icon">model</a>
 							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-inherited">
+								<a href="arraybuttondeleteaction.html#targetarray" class="tsd-kind-icon">target<wbr>Array</a>
+							</li>
 							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-inherited">
 								<a href="arraybuttondeleteaction.html#ngafterviewinit" class="tsd-kind-icon">ng<wbr>After<wbr>View<wbr>Init</a>
 							</li>
@@ -392,7 +443,13 @@
 								<a href="arraybuttondeleteaction.html#onfocus" class="tsd-kind-icon">on<wbr>Focus</a>
 							</li>
 							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-protected">
-								<a href="arraybuttondeleteaction.html#updatestate" class="tsd-kind-icon">update<wbr>State</a>
+								<a href="arraybuttondeleteaction.html#selectionchanged" class="tsd-kind-icon">selection<wbr>Changed</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-protected">
+								<a href="arraybuttondeleteaction.html#subscribeselectionchange" class="tsd-kind-icon">subscribe<wbr>Selection<wbr>Change</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-protected">
+								<a href="arraybuttondeleteaction.html#unsubscribeselectionchange" class="tsd-kind-icon">unsubscribe<wbr>Selection<wbr>Change</a>
 							</li>
 						</ul>
 					</li>

@@ -12,7 +12,7 @@ angular-dynaform (master)$ ./build/version-bump x.y.z
 angular-dynaform (master)$ npm run release:build
 ```
 
-* review generated bundles using 'source-map-explorer dist/path/to/js', which should not show any dependency on packages in 'node_modules'
+* review generated bundles using e.g 'source-map-explorer dist/@angular-dynaform/core/bundles/angular-dynaform-core.umd.js', which should not show any dependency on packages in 'node_modules'
 * test the systemjs examples
 
 ```shell
