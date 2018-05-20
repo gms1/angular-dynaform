@@ -11,13 +11,9 @@ trim_trailing_whitespace = true
 max_line_length = 250
 
 [*.md]
-max_line_length = off
+max_line_length = 0
 trim_trailing_whitespace = false
 
 [Makefile]
 indent_style = tab
-indent_size = 4
-
-[*.cmd]
-charset = latin1
-end_of_line = crlf
+indent_size = 2
