@@ -21,28 +21,25 @@ export class RelationAction extends DynamicFormAction {
   ngOnInit(): void {
     super.ngOnInit();
     if (this.model.enableIf) {
-      const observable = this.getObservable(this.model.enableIf);
-      if (observable) {
-        observable.subscribe((v) => {
-          if (v) {
-            if (this.model.ngControl.disabled) {
-              this.model.ngControl.enable();
-            }
-          } else {
-            if (this.model.ngControl.enabled) {
-              this.model.ngControl.disable();
-            }
+      this.subscribeToChanges(this.model.enableIf, (v) => {
+        if (v) {
+          /* istanbul ignore else */
+          if (this.model.ngControl.disabled) {
+            this.model.ngControl.enable();
           }
-        });
+        } else {
+          /* istanbul ignore else */
+          if (this.model.ngControl.enabled) {
+            this.model.ngControl.disable();
+          }
+        }
+      });
       }
-      }
+
     if (this.model.showIf) {
-      const observable = this.getObservable(this.model.showIf);
-      if (observable) {
-        observable.subscribe((v) => {
-          v ? this.model.show() : this.model.hide();
-        });
-      }
+      const observable = this.subscribeToChanges(this.model.showIf, (v) => {
+        v ? this.model.show() : this.model.hide();
+      });
     }
   }
 
@@ -51,14 +48,17 @@ export class RelationAction extends DynamicFormAction {
     this.unsubscribe.complete();
   }
 
-  private getObservable(expr: JsExpression): Observable<boolean>|undefined {
+  private subscribeToChanges(expr: JsExpression, next: ((v: boolean) => void)): void {
     // binding thisArg to the ngControl is not documented yet
     // and subject for changes in the future
     expr.thisArg = this.model.ngControl;
     expr.context = {};
     const model = this.findRelatedRootModel(expr.getContextMembersRoot());
+    /* istanbul ignore if */
     if (!model || !model.jpForm) {
-      return undefined;
+      // NOTE: this should not happen, we should always get a model (default formModel.group) and a corresponding
+      // json-pointer
+      return;
       }
     const jpForm = model.jpForm;
     let run: (v: any) => any;
@@ -72,8 +72,8 @@ export class RelationAction extends DynamicFormAction {
         jpForm.set(expr.context, v);
         return !!expr.run();
       };
-      }
-    return model.valueChanges.pipe(map(run), distinctUntilChanged()).pipe(takeUntil(this.unsubscribe));
+    }
+    model.valueChanges.pipe(map(run), distinctUntilChanged()).pipe(takeUntil(this.unsubscribe)).subscribe(next);
   }
 
 
