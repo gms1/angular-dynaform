@@ -17,6 +17,7 @@
     "debug:test:core": "ng test @angular-dynaform/core --browsers Chrome",
     "debug:test:basic": "ng test @angular-dynaform/basic --browsers Chrome",
     "debug:test:material": "ng test @angular-dynaform/material --browsers Chrome",
+    "test": "make test",
     "test:core": "ng test @angular-dynaform/core --browsers ChromeHeadless",
     "test:basic": "ng test @angular-dynaform/basic --browsers ChromeHeadless",
     "test:material": "ng test @angular-dynaform/material --browsers ChromeHeadless",
