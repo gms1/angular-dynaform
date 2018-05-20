@@ -35,11 +35,11 @@ export class ResetButtonAction extends DynamicFormAction {
 
   // the handler for the click event on the reset button element
   onClick(event?: Event): boolean {
+    /* istanbul ignore if */
     if (this.rootFormGroup.pristine) {
+      // NOTE: this should not happen; reset button should be disabled on pristine form
       // do not trigger the reset event on the form element:
-      /* istanbul ignore if */
       if (event) {
-        // NOTE: this should not happen; reset button should be disabled on pristine form
         event.stopImmediatePropagation();
         event.preventDefault();
         }
