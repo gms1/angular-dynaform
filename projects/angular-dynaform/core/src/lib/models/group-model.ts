@@ -37,6 +37,7 @@ export class GroupModelBase extends AbstractControlModel<FormGroup, GroupOptions
     this.setCSSClasses(this.css.control, 'adf-group-control');
     this.setCSSClasses(this.css.content, 'adf-group-content');
     this.setCSSClasses(this.css.error, 'adf-group-error');
+    this.setCSSClasses(this.css.label, 'adf-group-label');
   }
 
   reTranslate(): void {

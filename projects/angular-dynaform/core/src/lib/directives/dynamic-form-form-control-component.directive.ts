@@ -72,8 +72,8 @@ export class DynamicFormFormControlComponentDirective implements OnInit, DoCheck
     if ((this.componentRef.instance as any).elementRef) {
       // TODO: test for instanceof ElementRef
       this.dynamicClass = new DynamicClass(
-          this.keyValueDiffers, (this.componentRef.instance as any).elementRef as ElementRef, this.renderer);
-      this.dynamicClass.classes = this.model.css.container;
+          this.keyValueDiffers, (this.componentRef.instance as any).elementRef as ElementRef, this.renderer,
+          this.model.css.container);
     }
   }
 

@@ -13,6 +13,7 @@ export * from './lib/actions/index';
 export * from './lib/services/dynamic-form.service';
 
 export * from './lib/components/dynamic-form.interface';
+export * from './lib/components/dynamic-form.component';
 export * from './lib/components/dynamic-form-form-control.interface';
 export * from './lib/components/dynamic-form-control.interface';
 export * from './lib/components/dynamic-form-error.interface';

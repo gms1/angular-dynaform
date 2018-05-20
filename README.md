@@ -228,6 +228,17 @@ In this example, the 'newsletter' checkbox will only be enabled if the 'atc' che
 
 you can optionally assign additional CSS classes using **ControlConfig.options.css** and let **angular-dynaform** add them to the container, control, label sections of the corresponding component
 
+The following CSS classes are predefined:
+
+  * on all components: 'adf-container', 'adf-control', 'adf-content', 'adf-error' and 'adf-label'
+  * on the form-control-component: 'adf-form-container', 'adf-form-control', 'adf-form-content', 'adf-form-error'
+  * on all group-components: 'adf-group-container', 'adf-group-control', 'adf-group-content', 'adf-group-error' and 'adf-group-label'
+  * on all array-components: 'adf-array-container', 'adf-array-control', 'adf-array-content', 'adf-array-error' and 'adf-array-label'
+  * on all array-header sections: 'adf-header-content'
+  * on all array-footer sections: 'adf-footer-content'
+  * on the array-item sections: 'adf-array-item' and if the item is selected: 'adf-array-item-selected'
+  * for all non-group and non-array-components: 'adf-control-container', 'adf-control-control', 'adf-control-content', 'adf-control-error' and 'adf-control-label'
+
 ## Customization
 
 ### custom components (DI)
