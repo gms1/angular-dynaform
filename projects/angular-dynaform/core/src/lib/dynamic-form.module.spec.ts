@@ -7,6 +7,7 @@ import {By} from '@angular/platform-browser';
 import {ReactiveFormsModule} from '@angular/forms';
 import {
   ArrayModel,
+  ControlConfig,
   ControlType,
   DynamicForm,
   DynamicFormControl,
@@ -159,29 +160,31 @@ describe('core-module test suite', () => {
     form = container.form;
     expect(form instanceof DynamicForm).toBe(true, 'form is not defined');
 
+    const testControlGroup: ControlConfig[] = (mainExampleConfig as any).options.group[0].options.group;
+
     // add controls for validation testing:
-    (mainExampleConfig as any).options.group[0].options.group.push({
+    testControlGroup.push({
       id: 'testRequiredTrueValidator',
       modelType: ModelType.MODEL_VALUE,
       controlType: ControlType.CONTROL_INPUT,
       validators: ['requiredTrue'],
       disabled: true
     });
-    (mainExampleConfig as any).options.group[0].options.group.push({
+    testControlGroup.push({
       id: 'testNullMinLengthValidator',
       modelType: ModelType.MODEL_VALUE,
       controlType: ControlType.CONTROL_INPUT,
       validators: ['minLength'],
       disabled: true
     });
-    (mainExampleConfig as any).options.group[0].options.group.push({
+    testControlGroup.push({
       id: 'testNullMaxLengthValidator',
       modelType: ModelType.MODEL_VALUE,
       controlType: ControlType.CONTROL_INPUT,
       validators: ['maxLength'],
       disabled: true
     });
-    (mainExampleConfig as any).options.group[0].options.group.push({
+    testControlGroup.push({
       id: 'testMinValidator',
       modelType: ModelType.MODEL_VALUE,
       controlType: ControlType.CONTROL_INPUT,
@@ -189,14 +192,14 @@ describe('core-module test suite', () => {
       validators: ['min'],
       disabled: true
     });
-    (mainExampleConfig as any).options.group[0].options.group.push({
+    testControlGroup.push({
       id: 'testNullMinValidator',
       modelType: ModelType.MODEL_VALUE,
       controlType: ControlType.CONTROL_INPUT,
       validators: ['min'],
       disabled: true
     });
-    (mainExampleConfig as any).options.group[0].options.group.push({
+    testControlGroup.push({
       id: 'testMaxValidator',
       modelType: ModelType.MODEL_VALUE,
       controlType: ControlType.CONTROL_INPUT,
@@ -204,14 +207,14 @@ describe('core-module test suite', () => {
       validators: ['max'],
       disabled: true
     });
-    (mainExampleConfig as any).options.group[0].options.group.push({
+    testControlGroup.push({
       id: 'testNullMaxValidator',
       modelType: ModelType.MODEL_VALUE,
       controlType: ControlType.CONTROL_INPUT,
       validators: ['max'],
       disabled: true
     });
-    (mainExampleConfig as any).options.group[0].options.group.push({
+    testControlGroup.push({
       id: 'testPatternValidator',
       modelType: ModelType.MODEL_VALUE,
       controlType: ControlType.CONTROL_INPUT,
@@ -219,21 +222,21 @@ describe('core-module test suite', () => {
       validators: ['pattern'],
       disabled: true
     });
-    (mainExampleConfig as any).options.group[0].options.group.push({
+    testControlGroup.push({
       id: 'testNullPatternValidator',
       modelType: ModelType.MODEL_VALUE,
       controlType: ControlType.CONTROL_INPUT,
       validators: ['pattern'],
       disabled: true
     });
-    (mainExampleConfig as any).options.group[0].options.group.push({
+    testControlGroup.push({
       id: 'testEmailValidator',
       modelType: ModelType.MODEL_VALUE,
       controlType: ControlType.CONTROL_INPUT,
       validators: ['email'],
       disabled: true
     });
-    (mainExampleConfig as any).options.group[0].options.group.push({
+    testControlGroup.push({
       id: 'testSyncValidator',
       modelType: ModelType.MODEL_VALUE,
       controlType: ControlType.CONTROL_INPUT,
@@ -241,7 +244,7 @@ describe('core-module test suite', () => {
       validators: ['testSyncValidator'],
       disabled: true
     });
-    (mainExampleConfig as any).options.group[0].options.group.push({
+    testControlGroup.push({
       id: 'testAsyncValidator',
       modelType: ModelType.MODEL_VALUE,
       controlType: ControlType.CONTROL_INPUT,
@@ -249,14 +252,14 @@ describe('core-module test suite', () => {
       asyncValidators: ['testAsyncValidator'],
       disabled: true
     });
-    (mainExampleConfig as any).options.group[0].options.group.push({
+    testControlGroup.push({
       id: 'testUndefinedSyncValidator',
       modelType: ModelType.MODEL_VALUE,
       controlType: ControlType.CONTROL_INPUT,
       validators: ['testUndefinedSyncValidator'],
       disabled: true
     });
-    (mainExampleConfig as any).options.group[0].options.group.push({
+    testControlGroup.push({
       id: 'testUndefinedAsyncValidator',
       modelType: ModelType.MODEL_VALUE,
       controlType: ControlType.CONTROL_INPUT,
@@ -266,24 +269,40 @@ describe('core-module test suite', () => {
 
     // add controls for array action testing:
 
-    (mainExampleConfig as any).options.group[0].options.group.push({
+    testControlGroup.push({
       id: 'addContact2',
       modelType: ModelType.MODEL_NULL,
       controlType: ControlType.CONTROL_BUTTON,
       action: 'arrayAddItem'
     });
-    (mainExampleConfig as any).options.group[0].options.group.push({
+    testControlGroup.push({
       id: 'insertContact2',
       modelType: ModelType.MODEL_NULL,
       controlType: ControlType.CONTROL_BUTTON,
       action: 'arrayInsertItem'
     });
-    (mainExampleConfig as any).options.group[0].options.group.push({
+    testControlGroup.push({
       id: 'deleteContact2',
       modelType: ModelType.MODEL_NULL,
       controlType: ControlType.CONTROL_BUTTON,
       action: 'arrayDeleteItem'
     });
+
+    // add controls for relations-showIf testing:
+
+    testControlGroup.push({
+      id: 'newsletter2',
+      modelType: ModelType.MODEL_VALUE,
+      controlType: ControlType.CONTROL_CHECKBOX,
+      relations: {show: 'atc'}
+    });
+    testControlGroup.push({
+      id: 'newsletter3',
+      modelType: ModelType.MODEL_VALUE,
+      controlType: ControlType.CONTROL_CHECKBOX,
+      relations: {enable: 'unknown'}
+    });
+
 
     model = service.createFormModel(mainExampleConfig, mainExampleFormLanguages.en);
     expect(model instanceof FormModel).toBe(true, 'model is not defined');
@@ -572,6 +591,36 @@ describe('core-module test suite', () => {
         .toBe(true, 'newsletter component is not disabled after atc has been deselected');
 
   });
+
+  it('should show/hide a field if related field has been checked/unchecked', () => {
+    form.initValue(mainExampleFormModelData);
+    expect(form.valid).toBe(true, 'initialized form is not valid');
+
+    let newsLetterComp = findComponentById('newsletter2');
+    let atcEl = findDebugElementById('atc');
+
+    expect(newsLetterComp.model.hidden).toBe(true, 'newsletter2 component is not hidden on initialization');
+
+    clickElementInput(atcEl);
+
+    expect(newsLetterComp.model.hidden).toBe(false, 'newsletter2 component is not shown after atc has been selected');
+
+    clickElementInput(atcEl);
+
+    expect(newsLetterComp.model.hidden).toBe(true, 'newsletter2 component is not hidden after atc has been deselected');
+
+  });
+
+  it('should disable a field if related field is not undefined', () => {
+    form.initValue(mainExampleFormModelData);
+    expect(form.valid).toBe(true, 'initialized form is not valid');
+
+    let newsLetterComp = findComponentById('newsletter3');
+
+    expect(newsLetterComp.model.ngControl.disabled).toBe(true, 'newsletter3 component is enabled on initialization');
+
+  });
+
 
   // --------------------------------------------------------------------------------------------------
   // FOCUS CHANGES
