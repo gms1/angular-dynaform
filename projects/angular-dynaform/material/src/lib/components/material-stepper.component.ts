@@ -43,7 +43,8 @@ import {MatStepper} from '@angular/material';
         </ng-template-->
 
         <ng-container *ngIf="options.matStepperVertical; else horizontalStepper" >
-          <mat-vertical-stepper [ngClass]="model.css.content" [linear]="options.matStepperLinear === undefined ? false : options.matStepperLinear" #stepper>
+          <mat-vertical-stepper [ngClass]="model.css.content"
+              [linear]="options.matStepperLinear === undefined ? false : options.matStepperLinear" #stepper>
             <!--ng-container *ngTemplateOutlet="steps"></ng-container-->
             <mat-step *ngFor="let item of model.items; let i=index"
               [stepControl]="item.ngSubsetControl ? item.ngSubsetControl : item.ngControl"
@@ -58,7 +59,8 @@ import {MatStepper} from '@angular/material';
         </ng-container>
 
         <ng-template #horizontalStepper >
-          <mat-horizontal-stepper [ngClass]="model.css.content" [linear]="options.matStepperLinear === undefined ? false : options.matStepperLinear" #stepper>
+          <mat-horizontal-stepper [ngClass]="model.css.content"
+              [linear]="options.matStepperLinear === undefined ? false : options.matStepperLinear" #stepper>
             <!--ng-container *ngTemplateOutlet="steps"></ng-container-->
             <mat-step *ngFor="let item of model.items; let i=index"
               [stepControl]="item.ngSubsetControl ? item.ngSubsetControl : item.ngControl"

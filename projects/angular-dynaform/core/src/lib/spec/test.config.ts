@@ -204,45 +204,46 @@ export const mainExampleConfig: FormConfig = {
                   }
                 ]
               }
+            }
+
+          ]
+        }
+      },
+      {
+        id: 'buttondivision',
+        modelType: ModelType.MODEL_SUBSET,
+        controlType: [ControlType.CONTROL_DIVISION],
+        options: {
+          group: [
+            {
+              id: 'clear',
+              modelType: ModelType.MODEL_NULL,
+              controlType: ControlType.CONTROL_BUTTON,
+              options: {label: 'Clear'},
+              action: 'clear'
             },
             {
-              id: 'buttondivision',
-              modelType: ModelType.MODEL_SUBSET,
-              controlType: [ControlType.CONTROL_DIVISION],
-              options: {
-                group: [
-                  {
-                    id: 'clear',
-                    modelType: ModelType.MODEL_NULL,
-                    controlType: ControlType.CONTROL_BUTTON,
-                    options: {label: 'Clear'},
-                    action: 'clear'
-                  },
-                  {
-                    id: 'separatorMainButtons',
-                    modelType: ModelType.MODEL_NULL,
-                    controlType: ControlType.CONTROL_SEPARATOR,
-                    options: {css: {container: 'button-separator'}}
-                  },
-                  {
-                    id: 'reset',
-                    modelType: ModelType.MODEL_NULL,
-                    controlType: ControlType.CONTROL_BUTTON,
-                    options: {label: 'Reset'},
-                    action: 'reset'
-                  },
-                  {
-                    id: 'submit',
-                    modelType: ModelType.MODEL_NULL,
-                    controlType: ControlType.CONTROL_BUTTON,
-                    options: {label: 'Submit'},
-                    action: 'submit'
-                  }
-                ],
-                css: {content: 'button-division-content'}
-              }
+              id: 'separatorMainButtons',
+              modelType: ModelType.MODEL_NULL,
+              controlType: ControlType.CONTROL_SEPARATOR,
+              options: {css: {container: 'button-separator'}}
+            },
+            {
+              id: 'reset',
+              modelType: ModelType.MODEL_NULL,
+              controlType: ControlType.CONTROL_BUTTON,
+              options: {label: 'Reset'},
+              action: 'reset'
+            },
+            {
+              id: 'submit',
+              modelType: ModelType.MODEL_NULL,
+              controlType: ControlType.CONTROL_BUTTON,
+              options: {label: 'Submit'},
+              action: 'submit'
             }
-          ]
+          ],
+          css: {content: 'button-division-content'}
         }
       }
     ]

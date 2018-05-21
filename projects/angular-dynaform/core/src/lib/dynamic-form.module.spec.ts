@@ -18,7 +18,8 @@ import {
   ModelType,
   ArrayButtonAddAction,
   ArrayButtonInsertAction,
-  ArrayButtonDeleteAction
+  ArrayButtonDeleteAction,
+  FormConfig
 } from '../public_api';
 import {TestFormContainerComponent, TestFormControlComponent, TestErrorComponent} from './spec';
 import {
@@ -162,7 +163,8 @@ describe('core-module test suite', () => {
         .toBe(true, 'form is not an instance of DynamicFormComponent');
     form = container.form as DynamicFormComponent;
 
-    const testControlGroup: ControlConfig[] = (mainExampleConfig as any).options.group[0].options.group;
+    let testConfig: FormConfig = JSON.parse(JSON.stringify(mainExampleConfig));
+    const testControlGroup: ControlConfig[] = (testConfig as any).options.group[0].options.group;
 
     // add controls for validation testing:
     testControlGroup.push({
@@ -306,7 +308,7 @@ describe('core-module test suite', () => {
     });
 
 
-    model = service.createFormModel(mainExampleConfig, mainExampleFormLanguages.en);
+    model = service.createFormModel(testConfig, mainExampleFormLanguages.en);
     expect(model instanceof FormModel).toBe(true, 'model is not defined');
     container.model = model;
     fixture.detectChanges();
@@ -575,6 +577,8 @@ describe('core-module test suite', () => {
     expect(contacts1ValueEl.nativeElement.value).toBe(contactValue, 'got wrong contact value after inserting item');
 
   });
+
+
 
   // --------------------------------------------------------------------------------------------------
   it('array-button actions without target array should be disabled', () => {

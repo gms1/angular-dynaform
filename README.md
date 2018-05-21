@@ -144,6 +144,60 @@ export class BasicFormComponent {
 
 * create the form config:
 
+  * using the Form Builder:
+
+   inject `FormBuilder` into your component class. You can then call its method 'createForm' to create an instance of 'FormBuilderForm'
+
+```typescript
+
+    const form = formBuilder.createForm({id: 'exampleForm', updateOn: 'blur'});
+
+    // create divisions:
+    const persondiv = form.group.addSubset({id: 'person', controlType: ControlType.CONTROL_DIVISION});
+    const buttondiv = form.group.addSubset({
+      id: 'buttondivision',
+      controlType: [ControlType.CONTROL_DIVISION],
+      options: {css: {content: 'button-division-content'}}
+    });
+
+    // add controls to the persondiv division:
+    persondiv.group.addControl({
+      id: 'salutation',
+      controlType: ControlType.CONTROL_RADIOGROUP,
+      options: {valueOptions: [{value: 'mr', label: 'Mr.'}, {value: 'ms', label: 'Ms.'}]},
+      validators: ['required']
+    });
+    persondiv.group.addControl({
+      id: 'title',
+      controlType: ControlType.CONTROL_INPUT,
+      options: {label: 'Title', placeholder: 'Enter your title', maxLength: 30, minLength: 2},
+      validators: ['minLength', 'maxLength']
+    });
+    persondiv.group.addControl({
+      id: 'name',
+      controlType: ControlType.CONTROL_INPUT,
+      options: {label: 'name', placeholder: 'Enter your name', maxLength: 60, minLength: 4},
+      validators: ['required', 'minLength', 'maxLength']
+    });
+
+    // add controls to the button division:
+    buttondiv.group.addButton(
+        {id: 'clear', controlType: ControlType.CONTROL_BUTTON, options: {label: 'Clear'}, action: 'clear'});
+    buttondiv.group.addSeparator({
+      id: 'separatorMainButtons',
+      controlType: ControlType.CONTROL_SEPARATOR,
+      options: {css: {container: 'button-separator'}}
+    });
+    buttondiv.group.addButton(
+        {id: 'reset', controlType: ControlType.CONTROL_BUTTON, options: {label: 'Reset'}, action: 'reset'});
+    buttondiv.group.addButton(
+        {id: 'submit', controlType: ControlType.CONTROL_BUTTON, options: {label: 'Submit'}, action: 'submit'});
+
+    // create to form configuration:
+    const formConfig: FormConfig = form.toFormConfig();
+
+```
+
   * JSON configuration:
 
   [Configuration of the plunker example](./projects/material-example/src/app/app.config.ts)

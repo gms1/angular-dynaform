@@ -1,6 +1,6 @@
 import {GroupOptions} from './control-options.interface';
 
-export interface FormConfig {
+export interface FormBaseConfig {
   /**
    */
   id: string;
@@ -27,12 +27,14 @@ export interface FormConfig {
   showMultipleErrors?: boolean;
 
   /**
-   * group options
-   */
-  options: GroupOptions;
-
-  /**
    * additional user data
    */
   user?: any;
+  }
+
+export interface FormConfig extends FormBaseConfig {
+  /**
+   * group options
+   */
+  options: GroupOptions;
 }

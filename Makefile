@@ -67,11 +67,19 @@ e2e-material-example:
 
 .PHONY: release release-build release-doc
 
+lint:
+	@npm run lint:core
+	@npm run lint:basic
+	@npm run lint:material
+
 release-doc:
 	@npm run typedoc 1>/dev/null
 
-release-build:
+release-build: lint
 	@-rm -rf dist
+	@npm run lint:core
+	@npm run lint:basic
+	@npm run lint:material
 	@npm run build:core -- --prod
 	@npm run build:basic -- --prod
 	@npm run build:material -- --prod

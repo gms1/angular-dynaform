@@ -34,6 +34,9 @@ import {
 } from './actions';
 
 
+import {FormBuilder} from './form-builder/form-builder.service';
+
+
 const dynamicFormExportDirectives = [
   DynamicFormHTMLDomElementDirective, DynamicFormControlComponentDirective, DynamicFormFormControlComponentDirective,
   DynamicFormErrorComponentDirective, DynamicFormDomElementDirective
@@ -54,7 +57,7 @@ const dynamicFormComponents = [dynamicFormEntryComponents, dynamicFormExportComp
   declarations: [dynamicFormDirectives, dynamicFormComponents],
   entryComponents: dynamicFormEntryComponents,
   exports: [dynamicFormExportDirectives, dynamicFormExportComponents],
-  providers: [DynamicFormComponentFactoryService, DynamicFormModelFactoryService]
+  providers: [DynamicFormComponentFactoryService, DynamicFormModelFactoryService, FormBuilder]
 })
 export class DynamicFormModule {
   constructor(private dynamicFormService: DynamicFormService, @Optional() @SkipSelf() parentModule: DynamicFormModule) {

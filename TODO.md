@@ -1,8 +1,15 @@
 # TODO LIST
 
+## for 1.0
+
+* stepper tests
+* i18n tests
+
+## more
+
+* prepare examples on StackBlitz
 * nativescript templates
 * advanced formatting/parsing of form values
-* prepare examples on StackBlitz
 * observable select options
 * file-upload component
 * support for angular's internationalization

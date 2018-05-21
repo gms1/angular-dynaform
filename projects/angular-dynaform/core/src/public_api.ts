@@ -3,7 +3,6 @@
  */
 
 
-export * from './lib/dynamic-form.module';
 
 export * from './lib/config/index';
 export * from './lib/models/index';
@@ -24,3 +23,6 @@ export * from './lib/components/dynamic-form-error.component';
 
 export * from './lib/directives/dynamic-form-dom-element.directive';
 export * from './lib/directives/dynamic-form-html-dom-element.directive';
+
+export * from './lib/form-builder';
+export * from './lib/dynamic-form.module';

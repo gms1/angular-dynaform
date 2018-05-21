@@ -1,5 +1,10 @@
 # CHANGELOG
 
+## 1.0.0
+
+* **Feature**
+  * form-builder (see README)
+
 ## 0.6.1
 
 maintenance release
