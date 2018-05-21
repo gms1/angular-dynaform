@@ -6,10 +6,15 @@ import {DynamicFormService} from '../services/dynamic-form.service';
 import {AbstractControlModel, ControlModel} from './control-model.interface';
 import {FormModel} from './form-model';
 import {GroupModelBase} from './group-model';
-import {ModelHelper} from './model-helper';
 import {NgFormArray, NgArrayModelHandler} from './internal/ng-form-array';
 
 import {JsonPointer} from 'jsonpointerx';
+
+// import {ModelHelper} from './model-helper';
+declare namespace ModelHelper {
+  function copyStates(fromItem: ControlModel, toItem: ControlModel): void;
+  }
+
 
 const HEADER_IDX = -1;
 const FOOTER_IDX = -2;
