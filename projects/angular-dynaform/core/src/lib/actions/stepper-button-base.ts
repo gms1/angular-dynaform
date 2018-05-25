@@ -46,7 +46,7 @@ export abstract class StepperButtonBaseAction extends DynamicFormAction implemen
         return component.stepper;
       }
       component = this.component.form.findParentComponent(component);
-    }
+      }
     return this.component.form.stepper;
   }
 }

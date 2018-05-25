@@ -19,7 +19,7 @@ import {MatStepper} from '@angular/material';
 // TODO: using the #steps template didn't work
 //   may be related to https://github.com/angular/material2/issues/8014
 @Component({
-  selector: 'adf-material-tab-component',
+  selector: 'adf-material-stepper-component',
   template: `
     <div
       [formGroup]="model.ngGroup"

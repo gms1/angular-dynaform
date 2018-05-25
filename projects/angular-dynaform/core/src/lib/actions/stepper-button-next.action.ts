@@ -7,12 +7,13 @@ export class StepperButtonNextAction extends StepperButtonBaseAction implements 
   onClick(event?: Event): boolean {
     if (this.stepper) {
       this.stepper.next();
-    }
+      }
     return true;
   }
 
   onIndexChange(index: number): void {
     if (!this.stepper || index === this.stepper.length() - 1) {
+      /* istanbul ignore else */
       if (this.model.ngControl.enabled) {
         this.model.ngControl.disable();
       }

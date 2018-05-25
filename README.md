@@ -7,13 +7,12 @@
 [![DeepScan Grade](https://deepscan.io/api/projects/698/branches/1106/badge/grade.svg)](https://deepscan.io/dashboard/#view=project&pid=698&bid=1106)
 [![Greenkeeper badge](https://badges.greenkeeper.io/gms1/angular-dynaform.svg)](https://greenkeeper.io/)
 
-**angular-dynaform** is a library for rapid development of model-driven reactive forms for mobile and web.
+**angular-dynaform** is a library for rapid development of model-driven reactive forms
 
 ## Features
 
 * generic, expressive and extendable form library
 * JSON serializable form configuration
-* shared forms for mobile(not finished yet) and web
 * observable form values and form value updates using angulars form model as a tree of FormGroups/FormArrays/FormControls
 * observable focus changes
 * application data model to form data model mapping
@@ -80,7 +79,7 @@ export class AppModule {
 }
 ```
 
-* import the form modules for shared components (e.g for mobile and web): import only the 'DynamicFormModule' and do not import the UI specific modules (e.g 'DynamicMaterialFormModule'):
+* in other modules, import only the 'DynamicFormModule' and do not import the UI specific modules (e.g 'DynamicMaterialFormModule'):
 
 ```typescript
 @NgModule({

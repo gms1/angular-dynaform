@@ -19,7 +19,8 @@ import {
   ArrayButtonAddAction,
   ArrayButtonInsertAction,
   ArrayButtonDeleteAction,
-  FormConfig
+  FormConfig,
+  Stepper
 } from '../public_api';
 import {TestFormContainerComponent, TestFormControlComponent, TestErrorComponent} from './spec';
 import {
@@ -33,6 +34,7 @@ import {
   TestSelectComponent,
   TestSeparatorComponent,
   TestSliderComponent,
+  TestStepperComponent,
   TestSwitchComponent,
   TestTextareaComponent,
   testPatternValidate,
@@ -117,7 +119,7 @@ describe('core-module test suite', () => {
   const entryComponents = [
     TestFormControlComponent, TestErrorComponent, TestArrayComponent, TestButtonComponent, TestCheckboxComponent,
     TestDivisionComponent, TestFieldsetComponent, TestInputComponent, TestRadioGroupComponent, TestSelectComponent,
-    TestSeparatorComponent, TestSliderComponent, TestSwitchComponent, TestTextareaComponent
+    TestSeparatorComponent, TestSliderComponent, TestStepperComponent, TestSwitchComponent, TestTextareaComponent
   ];
 
   beforeEach(async() => {
@@ -143,6 +145,7 @@ describe('core-module test suite', () => {
     service.setControlComponent(ControlType.CONTROL_RADIOGROUP, TestRadioGroupComponent, true);
     service.setControlComponent(ControlType.CONTROL_SELECT, TestSelectComponent, true);
     service.setControlComponent(ControlType.CONTROL_SLIDER, TestSliderComponent, true);
+    service.setControlComponent(ControlType.CONTROL_STEPPER, TestStepperComponent, true);
     service.setControlComponent(ControlType.CONTROL_SWITCH, TestSwitchComponent, true);
     service.setControlComponent(ControlType.CONTROL_TEXTAREA, TestTextareaComponent, true);
 
@@ -307,6 +310,28 @@ describe('core-module test suite', () => {
       relations: {enable: 'unknown'}
     });
 
+    // add controls for stepper-button action testing:
+    testControlGroup.push({
+      id: 'stepper',
+      modelType: ModelType.MODEL_GROUP,
+      controlType: ControlType.CONTROL_STEPPER,
+      disabled: true,
+      options: {steps: 3}
+    });
+    testControlGroup.push({
+      id: 'stepperPrev',
+      modelType: ModelType.MODEL_NULL,
+      controlType: ControlType.CONTROL_BUTTON,
+      action: 'stepperPrev',
+      disabled: true
+    });
+    testControlGroup.push({
+      id: 'stepperNext',
+      modelType: ModelType.MODEL_NULL,
+      controlType: ControlType.CONTROL_BUTTON,
+      action: 'stepperNext',
+      disabled: true
+    });
 
     model = service.createFormModel(testConfig, mainExampleFormLanguages.en);
     expect(model instanceof FormModel).toBe(true, 'model is not defined');
@@ -473,7 +498,7 @@ describe('core-module test suite', () => {
   // --------------------------------------------------------------------------------------------------
   // ARRAY ACTIONS
   // --------------------------------------------------------------------------------------------------
-  it('should be able to delete array item', () => {
+  it('delete array item', () => {
     form.initValue(mainExampleFormModelData);
 
     let contactsComp = findComponentById('contacts');
@@ -506,7 +531,7 @@ describe('core-module test suite', () => {
 
 
   // --------------------------------------------------------------------------------------------------
-  it('should be able to add array item', () => {
+  it('add array item', () => {
     form.initValue(mainExampleFormModelData);
 
     let contactsComp = findComponentById('contacts');
@@ -547,7 +572,7 @@ describe('core-module test suite', () => {
 
 
   // --------------------------------------------------------------------------------------------------
-  it('should be able to insert array item', () => {
+  it('insert array item', () => {
     form.initValue(mainExampleFormModelData);
 
     let contactsComp = findComponentById('contacts');
@@ -716,7 +741,7 @@ describe('core-module test suite', () => {
   // --------------------------------------------------------------------------------------------------
   // VALIDATIONS
   // --------------------------------------------------------------------------------------------------
-  it('requiredTrue-validator should work', () => {
+  it('requiredTrue-validator', () => {
     let testComp = findComponentById('testRequiredTrueValidator');
     let testEl = findDebugElementById('testRequiredTrueValidator');
     form.initValue(mainExampleFormModelData);
@@ -738,7 +763,7 @@ describe('core-module test suite', () => {
 
 
   // --------------------------------------------------------------------------------------------------
-  it('min-validator should work', () => {
+  it('min-validator', () => {
     // min: 3
     let testComp = findComponentById('testMinValidator');
     let testEl = findDebugElementById('testMinValidator');
@@ -762,7 +787,7 @@ describe('core-module test suite', () => {
   });
 
   // --------------------------------------------------------------------------------------------------
-  it('max-validator should work', () => {
+  it('max-validator', () => {
     // max: 3
     let testComp = findComponentById('testMaxValidator');
     let testEl = findDebugElementById('testMaxValidator');
@@ -787,7 +812,7 @@ describe('core-module test suite', () => {
 
 
   // --------------------------------------------------------------------------------------------------
-  it('pattern-validator should work', () => {
+  it('pattern-validator', () => {
     // pattern: '^isAPattern$'
     let testComp = findComponentById('testPatternValidator');
     let testEl = findDebugElementById('testPatternValidator');
@@ -812,7 +837,7 @@ describe('core-module test suite', () => {
 
 
   // --------------------------------------------------------------------------------------------------
-  it('email-validator should work', () => {
+  it('email-validator', () => {
     let testComp = findComponentById('testEmailValidator');
     let testEl = findDebugElementById('testEmailValidator');
     form.initValue(mainExampleFormModelData);
@@ -836,7 +861,7 @@ describe('core-module test suite', () => {
   });
 
   // --------------------------------------------------------------------------------------------------
-  it('sync test-validator should work', () => {
+  it('sync test-validator', () => {
     // pattern: '^sync$'
     let testComp = findComponentById('testSyncValidator');
     let testEl = findDebugElementById('testSyncValidator');
@@ -861,7 +886,7 @@ describe('core-module test suite', () => {
   });
 
   // --------------------------------------------------------------------------------------------------
-  it('async test-validator should work', () => {
+  it('async test-validator', () => {
     // pattern: '^async$'
     let testComp = findComponentById('testAsyncValidator');
     let testEl = findDebugElementById('testAsyncValidator');
@@ -885,7 +910,7 @@ describe('core-module test suite', () => {
   });
 
   // --------------------------------------------------------------------------------------------------
-  it('unconfigured minLength-validator should work', () => {
+  it('unconfigured minLength-validator', () => {
     let testComp = findComponentById('testNullMinLengthValidator');
     let testEl = findDebugElementById('testNullMinLengthValidator');
     form.initValue(mainExampleFormModelData);
@@ -903,7 +928,7 @@ describe('core-module test suite', () => {
   });
 
   // --------------------------------------------------------------------------------------------------
-  it('unconfigured maxLength-validator should work', () => {
+  it('unconfigured maxLength-validator', () => {
     let testComp = findComponentById('testNullMaxLengthValidator');
     let testEl = findDebugElementById('testNullMaxLengthValidator');
     form.initValue(mainExampleFormModelData);
@@ -921,7 +946,7 @@ describe('core-module test suite', () => {
   });
 
   // --------------------------------------------------------------------------------------------------
-  it('unconfigured min-validator should work', () => {
+  it('unconfigured min-validator', () => {
     let testComp = findComponentById('testNullMinValidator');
     let testEl = findDebugElementById('testNullMinValidator');
     form.initValue(mainExampleFormModelData);
@@ -940,7 +965,7 @@ describe('core-module test suite', () => {
   });
 
   // --------------------------------------------------------------------------------------------------
-  it('unconfigured max-validator should work', () => {
+  it('unconfigured max-validator', () => {
     let testComp = findComponentById('testNullMaxValidator');
     let testEl = findDebugElementById('testNullMaxValidator');
     form.initValue(mainExampleFormModelData);
@@ -959,7 +984,7 @@ describe('core-module test suite', () => {
   });
 
   // --------------------------------------------------------------------------------------------------
-  it('unconfigured patttern-validator should work', () => {
+  it('unconfigured patttern-validator', () => {
     let testComp = findComponentById('testNullPatternValidator');
     let testEl = findDebugElementById('testNullPatternValidator');
     form.initValue(mainExampleFormModelData);
@@ -977,7 +1002,7 @@ describe('core-module test suite', () => {
   });
 
   // --------------------------------------------------------------------------------------------------
-  it('unconfigured sync test-validator should work', () => {
+  it('unconfigured sync test-validator', () => {
     let testComp = findComponentById('testUndefinedSyncValidator');
     let testEl = findDebugElementById('testUndefinedSyncValidator');
     form.initValue(mainExampleFormModelData);
@@ -995,7 +1020,7 @@ describe('core-module test suite', () => {
   });
 
   // --------------------------------------------------------------------------------------------------
-  it('unconfigured async test-validator should work', () => {
+  it('unconfigured async test-validator', () => {
     let testComp = findComponentById('testUndefinedAsyncValidator');
     let testEl = findDebugElementById('testUndefinedAsyncValidator');
     form.initValue(mainExampleFormModelData);
@@ -1013,5 +1038,44 @@ describe('core-module test suite', () => {
   });
 
 
+  // --------------------------------------------------------------------------------------------------
+  it('stepper actions', () => {
+    let stepperPrevComp = findComponentById('stepperPrev');
+    let stepperNextComp = findComponentById('stepperNext');
+    stepperPrevComp.model.ngControl.enable();
+    stepperNextComp.model.ngControl.enable();
+
+    let stepperComp = findComponentById('stepper');
+    stepperComp.model.ngControl.enable();
+
+    let stepperPrevEl = findDebugElementById('stepperPrev');
+    let stepperNextEl = findDebugElementById('stepperNext');
+
+    expect(form.stepper).toBeDefined('stepper is not defined');
+    let stepper = form.stepper as Stepper;
+    let index = 0;
+
+    stepper.selectionChange().subscribe(idx => index = idx);
+
+    expect(index).toBe(0, 'initial index is not 0');
+    expect(stepperNextComp.model.ngControl.disabled).toBe(false, 'next not enabled on initial index 0');
+
+    clickElement(stepperNextEl);
+    expect(index).toBe(1, 'first click on next didn\'t work');
+    clickElement(stepperNextEl);
+    expect(index).toBe(2, 'second click on next didn\'t work');
+    expect(stepperNextComp.model.ngControl.disabled).toBe(true, 'next not disabled on index 2');
+
+    clickElement(stepperPrevEl);
+    expect(index).toBe(1, 'first click on prev didn\'t work');
+    clickElement(stepperPrevEl);
+    expect(index).toBe(0, 'second click on prev didn\'t work');
+    expect(stepperNextComp.model.ngControl.disabled).toBe(false, 'next not enabled on index 0');
+    expect(stepperPrevComp.model.ngControl.disabled).toBe(true, 'prev not disabled on index 0');
+    clickElement(stepperNextEl);
+    expect(index).toBe(1, 'third click on next didn\'t work');
+    expect(stepperPrevComp.model.ngControl.disabled).toBe(false, 'prev not enabled on index 1');
+
+  });
 
 });

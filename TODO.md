@@ -2,8 +2,8 @@
 
 ## for 1.0
 
-* stepper tests
 * i18n tests
+* i18n for formbuilder?
 
 ## more
 

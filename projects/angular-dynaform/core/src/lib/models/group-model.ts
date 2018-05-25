@@ -48,7 +48,9 @@ export class GroupModelBase extends AbstractControlModel<FormGroup, GroupOptions
   }
 
   protected createItems(): void {
-    this.options.group.forEach((itemConfig) => this.createItem(itemConfig));
+    if (this.options.group) {
+      this.options.group.forEach((itemConfig) => this.createItem(itemConfig));
+    }
   }
 
   protected createItem(itemConfig: ControlConfig): ControlModel {
