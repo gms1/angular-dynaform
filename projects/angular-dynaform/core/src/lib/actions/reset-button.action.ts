@@ -54,6 +54,7 @@ export class ResetButtonAction extends DynamicFormAction {
   // enable button on dirty and disable button on pristine state
   protected updateState(dirty: boolean): void {
     if (dirty) {
+      /* istanbul ignore else */
       if (this.model.ngControl.disabled) {
         this.model.ngControl.enable();
       }

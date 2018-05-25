@@ -61,7 +61,6 @@ export class SubmitButtonAction extends DynamicFormAction {
         this.model.ngControl.enable();
       }
     } else {
-      /* istanbul ignore else */
       if (this.model.ngControl.enabled) {
         this.model.ngControl.disable();
       }

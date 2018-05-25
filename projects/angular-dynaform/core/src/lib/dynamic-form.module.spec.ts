@@ -1078,4 +1078,35 @@ describe('core-module test suite', () => {
 
   });
 
+  // --------------------------------------------------------------------------------------------------
+  it('array set/patch value', () => {
+    form.initValue(mainExampleFormModelData);
+
+    let contactsComp = findComponentById('contacts');
+    let contactsModel: ArrayModel;
+
+    if (contactsComp.model instanceof ArrayModel) {
+      contactsModel = contactsComp.model;
+    } else {
+      throw new Error(`resolved contacts component model is not an array model`);
+      }
+    let value = contactsComp.model.ngControl.value;
+    contactsModel.patchValue([{'type': 'email', 'value': 'chuck@gmx.net'}]);
+    expect(contactsComp.model.ngControl.value).toEqual([{'type': 'email', 'value': 'chuck@gmx.net'}]);
+
+    contactsModel.patchValue([]);
+    expect(contactsComp.model.ngControl.value).toEqual([{'type': 'email', 'value': 'chuck@gmx.net'}]);
+
+    contactsModel.setValue(
+        [{'type': 'email', 'value': 'chuck@norris.com'}, {'type': 'email', 'value': 'chuck@gmx.net'}]);
+    expect(contactsComp.model.ngControl.value).toEqual([
+      {'type': 'email', 'value': 'chuck@norris.com'}, {'type': 'email', 'value': 'chuck@gmx.net'}
+    ]);
+
+    contactsModel.setValue([{'type': 'email', 'value': 'chuck@norris.com'}]);
+    expect(contactsComp.model.ngControl.value).toEqual([{'type': 'email', 'value': 'chuck@norris.com'}]);
+
+  });
+
+
 });
