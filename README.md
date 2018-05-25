@@ -33,8 +33,7 @@
 
 ## Links
 
-* [Plunker for Material](https://embed.plnkr.co/ujsd2YaLsMT2Yc3EOiN3/)
-* [Plunker for basic HTML](https://embed.plnkr.co/7tqBasU5UswFvRYTAvm8/)
+* [Example on Stackblitz](https://stackblitz.com/edit/gms1-angular-dynaform-material)
 
 ## TODO
 

@@ -33,23 +33,5 @@ angular-dynaform (master)$ npm run start:material-example
 angular-dynaform (master)$ npm run release:publish
 ```
 
-### prepare and publish plunkers
+* update stackblitz example
 
-* build plunkers using the newly released npm packages
-
-```shell
-angular-dynaform (master)$ npm run plunker:build
-```
-
-* test the plunkr examples
-
-```shell
-angular-dynaform (master)$ npm run plunker:basic-example
-angular-dynaform (master)$ npm run plunker:material-example
-```
-
-* publish plunkers
-
-```shell
-angular-dynaform (master)$ npm run plunker:publish
-```
