@@ -67,12 +67,11 @@
 					<a href="https://snyk.io/test/github/gms1/angular-dynaform"><img src="https://snyk.io/test/github/gms1/angular-dynaform/badge.svg" alt="Known Vulnerabilities"></a>
 					<a href="https://deepscan.io/dashboard/#view=project&amp;pid=698&amp;bid=1106"><img src="https://deepscan.io/api/projects/698/branches/1106/badge/grade.svg" alt="DeepScan Grade"></a>
 				<a href="https://greenkeeper.io/"><img src="https://badges.greenkeeper.io/gms1/angular-dynaform.svg" alt="Greenkeeper badge"></a></p>
-				<p><strong>angular-dynaform</strong> is a library for rapid development of model-driven reactive forms for mobile and web.</p>
+				<p><strong>angular-dynaform</strong> is a library for rapid development of model-driven reactive forms</p>
 				<h2 id="features">Features</h2>
 				<ul>
 					<li>generic, expressive and extendable form library</li>
 					<li>JSON serializable form configuration</li>
-					<li>shared forms for mobile(not finished yet) and web</li>
 					<li>observable form values and form value updates using angulars form model as a tree of FormGroups/FormArrays/FormControls</li>
 					<li>observable focus changes</li>
 					<li>application data model to form data model mapping</li>
@@ -95,8 +94,7 @@
 				</ul>
 				<h2 id="links">Links</h2>
 				<ul>
-					<li><a href="https://embed.plnkr.co/ujsd2YaLsMT2Yc3EOiN3/">Plunker for Material</a></li>
-					<li><a href="https://embed.plnkr.co/7tqBasU5UswFvRYTAvm8/">Plunker for basic HTML</a></li>
+					<li><a href="https://stackblitz.com/edit/gms1-angular-dynaform-material">Example on Stackblitz</a></li>
 				</ul>
 				<h2 id="todo">TODO</h2>
 				<p><a href="./TODO.md">TODO</a></p>
@@ -138,7 +136,7 @@ npm install @angular-dynaform/material --save
 }
 </code></pre>
 				<ul>
-					<li>import the form modules for shared components (e.g for mobile and web): import only the &#39;DynamicFormModule&#39; and do not import the UI specific modules (e.g &#39;DynamicMaterialFormModule&#39;):</li>
+					<li>in other modules, import only the &#39;DynamicFormModule&#39; and do not import the UI specific modules (e.g &#39;DynamicMaterialFormModule&#39;):</li>
 				</ul>
 				<pre><code class="lang-typescript"><span class="hljs-meta">@NgModule</span>({
   ...
@@ -199,13 +197,68 @@ npm install @angular-dynaform/material --save
 				<ul>
 					<li><p>create the form config:</p>
 						<ul>
-							<li>JSON configuration:</li>
+							<li><p>using the Form Builder:</p>
+								<p>inject <code>FormBuilder</code> into your component class. You can then call its method &#39;createForm&#39; to create an instance of &#39;FormBuilderForm&#39;</p>
+							</li>
 						</ul>
+					</li>
+				</ul>
+				<pre><code class="lang-typescript">
+    <span class="hljs-keyword">const</span> form = formBuilder.createForm({id: <span class="hljs-string">'exampleForm'</span>, updateOn: <span class="hljs-string">'blur'</span>});
+
+    <span class="hljs-comment">// create divisions:</span>
+    <span class="hljs-keyword">const</span> persondiv = form.group.addSubset({id: <span class="hljs-string">'person'</span>, controlType: ControlType.CONTROL_DIVISION});
+    <span class="hljs-keyword">const</span> buttondiv = form.group.addSubset({
+      id: <span class="hljs-string">'buttondivision'</span>,
+      controlType: [ControlType.CONTROL_DIVISION],
+      options: {css: {content: <span class="hljs-string">'button-division-content'</span>}}
+    });
+
+    <span class="hljs-comment">// add controls to the persondiv division:</span>
+    persondiv.group.addControl({
+      id: <span class="hljs-string">'salutation'</span>,
+      controlType: ControlType.CONTROL_RADIOGROUP,
+      options: {valueOptions: [{value: <span class="hljs-string">'mr'</span>, label: <span class="hljs-string">'Mr.'</span>}, {value: <span class="hljs-string">'ms'</span>, label: <span class="hljs-string">'Ms.'</span>}]},
+      validators: [<span class="hljs-string">'required'</span>]
+    });
+    persondiv.group.addControl({
+      id: <span class="hljs-string">'title'</span>,
+      controlType: ControlType.CONTROL_INPUT,
+      options: {label: <span class="hljs-string">'Title'</span>, placeholder: <span class="hljs-string">'Enter your title'</span>, maxLength: <span class="hljs-number">30</span>, minLength: <span class="hljs-number">2</span>},
+      validators: [<span class="hljs-string">'minLength'</span>, <span class="hljs-string">'maxLength'</span>]
+    });
+    persondiv.group.addControl({
+      id: <span class="hljs-string">'name'</span>,
+      controlType: ControlType.CONTROL_INPUT,
+      options: {label: <span class="hljs-string">'name'</span>, placeholder: <span class="hljs-string">'Enter your name'</span>, maxLength: <span class="hljs-number">60</span>, minLength: <span class="hljs-number">4</span>},
+      validators: [<span class="hljs-string">'required'</span>, <span class="hljs-string">'minLength'</span>, <span class="hljs-string">'maxLength'</span>]
+    });
+
+    <span class="hljs-comment">// add controls to the button division:</span>
+    buttondiv.group.addButton(
+        {id: <span class="hljs-string">'clear'</span>, controlType: ControlType.CONTROL_BUTTON, options: {label: <span class="hljs-string">'Clear'</span>}, action: <span class="hljs-string">'clear'</span>});
+    buttondiv.group.addSeparator({
+      id: <span class="hljs-string">'separatorMainButtons'</span>,
+      controlType: ControlType.CONTROL_SEPARATOR,
+      options: {css: {container: <span class="hljs-string">'button-separator'</span>}}
+    });
+    buttondiv.group.addButton(
+        {id: <span class="hljs-string">'reset'</span>, controlType: ControlType.CONTROL_BUTTON, options: {label: <span class="hljs-string">'Reset'</span>}, action: <span class="hljs-string">'reset'</span>});
+    buttondiv.group.addButton(
+        {id: <span class="hljs-string">'submit'</span>, controlType: ControlType.CONTROL_BUTTON, options: {label: <span class="hljs-string">'Submit'</span>}, action: <span class="hljs-string">'submit'</span>});
+
+    <span class="hljs-comment">// create to form configuration:</span>
+    <span class="hljs-keyword">const</span> formConfig: FormConfig = form.toFormConfig();
+
+</code></pre>
+				<ul>
+					<li><p>JSON configuration:</p>
 						<p><a href="./projects/material-example/src/app/app.config.ts">Configuration of the plunker example</a></p>
 						<p><a href="./docs/typedoc/angular-dynaform/interfaces/controlconfig.html">ControlConfig Interface</a></p>
 					</li>
-					<li><p>observable form value and form value update:</p>
-					</li>
+				</ul>
+				<ul>
+					<li>observable form value and form value update:</li>
 				</ul>
 				<pre><code class="lang-typescript">    <span class="hljs-comment">// subscribe to form value changes:</span>
     dynaForm.valueChanges.subscribe(...);
@@ -569,6 +622,42 @@ npm install @angular-dynaform/material --save
 						<a href="classes/fnregistry.html" class="tsd-kind-icon">Fn<wbr>Registry</a>
 					</li>
 					<li class=" tsd-kind-class">
+						<a href="classes/formbuilder.html" class="tsd-kind-icon">Form<wbr>Builder</a>
+					</li>
+					<li class=" tsd-kind-class">
+						<a href="classes/formbuilderabstractcontrol.html" class="tsd-kind-icon">Form<wbr>Builder<wbr>Abstract<wbr>Control</a>
+					</li>
+					<li class=" tsd-kind-class">
+						<a href="classes/formbuilderarray.html" class="tsd-kind-icon">Form<wbr>Builder<wbr>Array</a>
+					</li>
+					<li class=" tsd-kind-class">
+						<a href="classes/formbuilderbuttoncontrol.html" class="tsd-kind-icon">Form<wbr>Builder<wbr>Button<wbr>Control</a>
+					</li>
+					<li class=" tsd-kind-class">
+						<a href="classes/formbuilderfactory.html" class="tsd-kind-icon">Form<wbr>Builder<wbr>Factory</a>
+					</li>
+					<li class=" tsd-kind-class">
+						<a href="classes/formbuilderform.html" class="tsd-kind-icon">Form<wbr>Builder<wbr>Form</a>
+					</li>
+					<li class=" tsd-kind-class">
+						<a href="classes/formbuildergroup.html" class="tsd-kind-icon">Form<wbr>Builder<wbr>Group</a>
+					</li>
+					<li class=" tsd-kind-class">
+						<a href="classes/formbuildergroupbuilder.html" class="tsd-kind-icon">Form<wbr>Builder<wbr>Group<wbr>Builder</a>
+					</li>
+					<li class=" tsd-kind-class">
+						<a href="classes/formbuilderobject.html" class="tsd-kind-icon">Form<wbr>Builder<wbr>Object</a>
+					</li>
+					<li class=" tsd-kind-class">
+						<a href="classes/formbuilderseparatorcontrol.html" class="tsd-kind-icon">Form<wbr>Builder<wbr>Separator<wbr>Control</a>
+					</li>
+					<li class=" tsd-kind-class">
+						<a href="classes/formbuildersubset.html" class="tsd-kind-icon">Form<wbr>Builder<wbr>Subset</a>
+					</li>
+					<li class=" tsd-kind-class">
+						<a href="classes/formbuildervaluecontrol.html" class="tsd-kind-icon">Form<wbr>Builder<wbr>Value<wbr>Control</a>
+					</li>
+					<li class=" tsd-kind-class">
 						<a href="classes/formmodel.html" class="tsd-kind-icon">Form<wbr>Model</a>
 					</li>
 					<li class=" tsd-kind-class">
@@ -644,6 +733,12 @@ npm install @angular-dynaform/material --save
 						<a href="classes/testslidercomponent.html" class="tsd-kind-icon">Test<wbr>Slider<wbr>Component</a>
 					</li>
 					<li class=" tsd-kind-class">
+						<a href="classes/teststepper.html" class="tsd-kind-icon">Test<wbr>Stepper</a>
+					</li>
+					<li class=" tsd-kind-class">
+						<a href="classes/teststeppercomponent.html" class="tsd-kind-icon">Test<wbr>Stepper<wbr>Component</a>
+					</li>
+					<li class=" tsd-kind-class">
 						<a href="classes/testswitchcomponent.html" class="tsd-kind-icon">Test<wbr>Switch<wbr>Component</a>
 					</li>
 					<li class=" tsd-kind-class">
@@ -711,6 +806,9 @@ npm install @angular-dynaform/material --save
 					</li>
 					<li class=" tsd-kind-interface">
 						<a href="interfaces/dynamicvalidationerror.html" class="tsd-kind-icon">Dynamic<wbr>Validation<wbr>Error</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/formbaseconfig.html" class="tsd-kind-icon">Form<wbr>Base<wbr>Config</a>
 					</li>
 					<li class=" tsd-kind-interface">
 						<a href="interfaces/formconfig.html" class="tsd-kind-icon">Form<wbr>Config</a>

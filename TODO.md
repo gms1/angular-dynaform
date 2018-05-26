@@ -1,13 +1,5 @@
 # TODO LIST
 
-## for 1.0
-
-* i18n tests
-* i18n for formbuilder?
-
-## more
-
-* prepare examples on StackBlitz
 * nativescript templates
 * advanced formatting/parsing of form values
 * observable select options
