@@ -169,6 +169,12 @@ describe('core-module test suite', () => {
     let testConfig: FormConfig = JSON.parse(JSON.stringify(mainExampleConfig));
     const testControlGroup: ControlConfig[] = (testConfig as any).options.group[0].options.group;
 
+    // add array footer
+    (testConfig as any).options.group[2].options.footer = {
+      group: [{id: 'footer', modelType: ModelType.MODEL_NULL, controlType: ControlType.CONTROL_SEPARATOR}]
+    };
+
+
     // add controls for validation testing:
     testControlGroup.push({
       id: 'testRequiredTrueValidator',
@@ -1105,6 +1111,26 @@ describe('core-module test suite', () => {
 
     contactsModel.setValue([{'type': 'email', 'value': 'chuck@norris.com'}]);
     expect(contactsComp.model.ngControl.value).toEqual([{'type': 'email', 'value': 'chuck@norris.com'}]);
+
+  });
+
+
+  // --------------------------------------------------------------------------------------------------
+  it('basic i18n', () => {
+    form.model.i18n = mainExampleFormLanguages.de;
+
+
+    form.initValue(mainExampleFormModelData);
+
+    const personModel = form.model.findControlByPath('person');
+    expect(personModel).toBeUndefined('found model by path "person", but this should be a subset');
+
+    const firstNameModel = form.model.findControlByPath('firstName');
+    expect(firstNameModel).toBeDefined('model not found for "firstName"');
+    expect(!firstNameModel || firstNameModel.local.label).toBe('Vorname');
+
+    const salutationModel = form.model.findControlByPath('salutation');
+    expect(!salutationModel || (salutationModel as any).local.valueOptions[0].label).toBe('Herr');
 
   });
 
