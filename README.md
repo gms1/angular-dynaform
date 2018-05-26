@@ -13,6 +13,7 @@
 
 * generic, expressive and extendable form library
 * JSON serializable form configuration
+* form builder
 * observable form values and form value updates using angulars form model as a tree of FormGroups/FormArrays/FormControls
 * observable focus changes
 * application data model to form data model mapping
@@ -22,8 +23,6 @@
   * custom components
   * custom validators
   * custom actions (triggered by blur/focus/click events) and/or observing value/status changes
-
-> NOTE: development is in early stage!
 
 ## Supported UI-Frameworks
 
