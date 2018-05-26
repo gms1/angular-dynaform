@@ -1,5 +1,5 @@
 // tslint:disable no-unused-variable
-import {Type, Injector} from '@angular/core';
+import {Type} from '@angular/core';
 
 
 export class TypeRegistry<T> {

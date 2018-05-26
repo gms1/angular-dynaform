@@ -1,11 +1,8 @@
 // tslint:disable no-use-before-declare
 import {
-  ArrayOptions,
   ControlBaseOptions,
   ControlConfig,
-  ControlOptions,
   ControlType,
-  ControlValueOptions,
   FormBaseConfig,
   FormConfig,
   GroupOptions,

@@ -3,7 +3,6 @@ import {Subject} from 'rxjs';
 
 import {ArrayButtonAction} from './array-button.action';
 import {DynamicFormControlComponentBase} from '../components/dynamic-form-control.component';
-import {ArrayModel} from '../models/array-model';
 
 // delete array item
 

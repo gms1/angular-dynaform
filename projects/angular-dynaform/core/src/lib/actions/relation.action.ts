@@ -2,7 +2,7 @@
 // RelationExpressions has be defined for a control
 
 import {distinctUntilChanged, map, takeUntil} from 'rxjs/operators';
-import {Observable, Subject} from 'rxjs';
+import {Subject} from 'rxjs';
 
 import {DynamicFormAction} from './dynamic-form.action';
 import {DynamicFormControlComponentBase} from '../components/dynamic-form-control.component';
@@ -37,7 +37,7 @@ export class RelationAction extends DynamicFormAction {
       }
 
     if (this.model.showIf) {
-      const observable = this.subscribeToChanges(this.model.showIf, (v) => {
+      this.subscribeToChanges(this.model.showIf, (v) => {
         v ? this.model.show() : this.model.hide();
       });
     }
