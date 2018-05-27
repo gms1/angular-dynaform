@@ -1,8 +1,9 @@
 import {TestBed} from '@angular/core/testing';
 
 import {FormBuilder} from '../form-builder';
-import {ControlType} from '../config';
+import {ControlConfig, ControlType, ModelType} from '../config';
 import {mainExampleConfig} from '../spec/test.config';
+import {clone} from '../utils/clone';
 
 describe('form-builder test suite', () => {
   let fb: FormBuilder;
@@ -20,6 +21,8 @@ describe('form-builder test suite', () => {
     expect(fb).toBeDefined('failed to resolve FormBuilder');
     const form = fb.createForm({id: 'exampleForm', updateOn: 'blur'});
     const person = form.group.addSubset({id: 'person', controlType: ControlType.CONTROL_DIVISION});
+    expect(person.options).toEqual({});
+
     const address =
         form.group.addGroup({id: 'address', controlType: ControlType.CONTROL_FIELDSET, options: {label: 'Address'}});
     const contacts = form.group.addArray({
@@ -35,13 +38,22 @@ describe('form-builder test suite', () => {
       options: {css: {content: 'button-division-content'}}
     });
 
-    person.group.addControl({
+    const salutationOptions = {valueOptions: [{value: 'mr', label: 'Mr.'}, {value: 'ms', label: 'Ms.'}]};
+    const salutationPartialConfig = {
       id: 'salutation',
       controlType: ControlType.CONTROL_RADIOGROUP,
-      options: {valueOptions: [{value: 'mr', label: 'Mr.'}, {value: 'ms', label: 'Ms.'}]},
+      options: salutationOptions,
       validators: ['required'],
       jp: '/greeting'
-    });
+    };
+
+    const saluationConfig: ControlConfig = clone(salutationPartialConfig);
+    saluationConfig.modelType = ModelType.MODEL_VALUE;
+
+    const salutationCtrl = person.group.addControl(salutationPartialConfig);
+    expect(salutationCtrl.options).toEqual(salutationOptions, 'salution options not initialized properly');
+    expect(salutationCtrl.config).toEqual(saluationConfig, 'salutation config not initialized properly');
+
     person.group.addControl({
       id: 'title',
       controlType: ControlType.CONTROL_INPUT,
@@ -171,10 +183,10 @@ describe('form-builder test suite', () => {
 
 
     expect(form.toFormConfig())
-        .toEqual(
-            JSON.parse(JSON.stringify(mainExampleConfig)),
-            'form builder created config should be same as the config of the main example');
+        .toEqual(mainExampleConfig, 'form builder created config should be same as the config of the main example');
+
 
   });
+
 
 });
