@@ -8,6 +8,7 @@ import {
   GroupOptions,
   ModelType
 } from '../config';
+import {clone} from '../utils/clone';
 
 // ---------------------------------------------------------------
 export class FormBuilderFactory {
@@ -62,9 +63,7 @@ export class FormBuilderObject {
 export abstract class FormBuilderAbstractControl extends FormBuilderObject {
   protected _config: Partial<ControlConfig>;
 
-  get config(): Partial<ControlConfig> {
-    return this._config;
-  }
+  abstract get config(): Partial<ControlConfig>;
 
   get options(): Partial<ControlBaseOptions> {
     if (!this._config.options) {
@@ -73,9 +72,9 @@ export abstract class FormBuilderAbstractControl extends FormBuilderObject {
     return this._config.options;
   }
 
-  constructor(factory: FormBuilderFactory, config?: Partial<ControlConfig>) {
+  constructor(factory: FormBuilderFactory, config: Partial < ControlConfig >= {}) {
     super(factory);
-    this._config = config || {};
+    this._config = clone(config);
   }
 
   abstract toControlConfig(): ControlConfig;
@@ -148,7 +147,7 @@ export class FormBuilderGroupBuilder extends FormBuilderObject {
     if (this.group.length === 0 && Object.entries(this.options).length === 0) {
       return undefined;
       }
-    const options = JSON.parse(JSON.stringify(this.options));
+    const options = clone(this.options);
     options.group = this.toControlConfigArray();
     return options;
   }
@@ -166,13 +165,13 @@ export class FormBuilderGroup extends FormBuilderAbstractControl {
     return this._config;
   }
 
-  constructor(factory: FormBuilderFactory, config?: Partial<ControlConfig>) {
+  constructor(factory: FormBuilderFactory, config: Partial < ControlConfig >= {}) {
     super(factory, config);
     this._group = this.factory.createGroupBuilder();
   }
 
   toControlConfig(): ControlConfig {
-    const config = JSON.parse(JSON.stringify(this.config));
+    const config = clone(this.config);
     config.options.group = this.group.toControlConfigArray();
     return config;
   }
@@ -189,13 +188,13 @@ export class FormBuilderSubset extends FormBuilderAbstractControl {
     return this._config;
   }
 
-  constructor(factory: FormBuilderFactory, config?: Partial<ControlConfig>) {
+  constructor(factory: FormBuilderFactory, config: Partial < ControlConfig >= {}) {
     super(factory, config);
     this._group = this.factory.createGroupBuilder();
   }
 
   toControlConfig(): ControlConfig {
-    const config = JSON.parse(JSON.stringify(this.config));
+    const config = clone(this.config);
     config.options = config.options || {};
     config.options.group = this.group.toControlConfigArray();
     return config;
@@ -224,7 +223,7 @@ export class FormBuilderArray extends FormBuilderAbstractControl {
     return this._config;
   }
 
-  constructor(factory: FormBuilderFactory, config?: Partial<ControlConfig>) {
+  constructor(factory: FormBuilderFactory, config: Partial < ControlConfig >= {}) {
     super(factory, config);
     this._group = this.factory.createGroupBuilder();
     this._header = this.factory.createGroupBuilder();
@@ -232,7 +231,7 @@ export class FormBuilderArray extends FormBuilderAbstractControl {
   }
 
   toControlConfig(): ControlConfig {
-    const config = JSON.parse(JSON.stringify(this.config));
+    const config = clone(this.config);
     config.options = config.options || {};
     const headerOptions = this.header.toGroupOptions();
     const itemOptions = this.group.toGroupOptions();
@@ -258,12 +257,12 @@ export class FormBuilderValueControl extends FormBuilderAbstractControl {
     return this._config;
   }
 
-  constructor(factory: FormBuilderFactory, config?: Partial<ControlConfig>) {
+  constructor(factory: FormBuilderFactory, config: Partial < ControlConfig >= {}) {
     super(factory, config);
   }
 
   toControlConfig(): ControlConfig {
-    const config = JSON.parse(JSON.stringify(this.config));
+    const config = clone(this.config);
     return config;
   }
   }
@@ -275,13 +274,13 @@ export class FormBuilderButtonControl extends FormBuilderAbstractControl {
     return this._config;
   }
 
-  constructor(factory: FormBuilderFactory, config?: Partial<ControlConfig>) {
+  constructor(factory: FormBuilderFactory, config: Partial < ControlConfig >= {}) {
     super(factory, config);
     this.config.controlType = ControlType.CONTROL_BUTTON;  // allow overwrite
   }
 
   toControlConfig(): ControlConfig {
-    const config = JSON.parse(JSON.stringify(this.config));
+    const config = clone(this.config);
     return config;
   }
   }
@@ -293,13 +292,13 @@ export class FormBuilderSeparatorControl extends FormBuilderAbstractControl {
     return this._config;
   }
 
-  constructor(factory: FormBuilderFactory, config?: Partial<ControlConfig>) {
+  constructor(factory: FormBuilderFactory, config: Partial < ControlConfig >= {}) {
     super(factory, config);
     this.config.controlType = ControlType.CONTROL_SEPARATOR;  // allow overwrite
   }
 
   toControlConfig(): ControlConfig {
-    const config = JSON.parse(JSON.stringify(this.config));
+    const config = clone(this.config);
     return config;
   }
   }
@@ -322,12 +321,12 @@ export class FormBuilderForm {
 
   constructor(factory: FormBuilderFactory, config: FormBaseConfig) {
     this._factory = factory;
-    this._config = config;
+    this._config = clone(config);
     this._group = this.factory.createGroupBuilder();
   }
 
   toFormConfig(): FormConfig {
-    const config = JSON.parse(JSON.stringify(this.config));
+    const config = clone(this.config);
     config.options = this.group.toGroupOptions();
     return config;
   }
