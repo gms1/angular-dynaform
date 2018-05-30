@@ -35,7 +35,7 @@ describe('ng-form-array', () => {
 
   });
 
-  it('NgFormArray', () => {
+  it('NgArrayModelHandler', () => {
     ary.updateLength(5);
     expect(ary.ngControl.length).toEqual(5, 'increasing length failed');
     ary.updateLength(3);
@@ -44,6 +44,11 @@ describe('ng-form-array', () => {
     expect(ary.ngControl.length).toEqual(3, 'setting smaller minimum length failed');
     ary.updateLength(7, true);
     expect(ary.ngControl.length).toEqual(7, 'setting greater minimum length failed');
+  });
+
+
+  it('NgFormArray without NgArrayModelHandler model', () => {
+    ary.updateLength(7, true);
 
     ary.ngControl.model = undefined;
     try {
@@ -51,9 +56,20 @@ describe('ng-form-array', () => {
     } catch (e) {
       fail(e);
     }
-
-
   });
+
+
+  it('NgFormArray', () => {
+    ary.updateLength(1, true);
+    const v: any[] = [{}, {}];
+    try {
+      ary.ngControl.patchValue(v);
+    } catch (e) {
+      fail(e);
+    }
+    expect(ary.ngControl.value.length).toBe(2, 'failed to increase NgFormArray length by patchValue');
+  });
+
 
 
 });

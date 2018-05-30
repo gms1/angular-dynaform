@@ -25,14 +25,13 @@ export class NgFormArray extends FormArray {
   }
 
   setValue(value: any[], options: {onlySelf?: boolean, emitEvent?: boolean} = {}): void {
-    this.updateLength(value ? value.length : 0);
+    this.updateLength(value.length);
     super.setValue(value, options);
   }
 
   patchValue(value: any[], options: {onlySelf?: boolean, emitEvent?: boolean} = {}): void {
-    const minLength = value ? value.length : 0;
-    if (minLength < this.length) {
-      this.updateLength(minLength, true);
+    if (value.length > this.length) {
+      this.updateLength(value.length, true);
     }
     super.patchValue(value, options);
   }
