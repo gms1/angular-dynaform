@@ -7,7 +7,7 @@ all: build
 #-------------------------------------------------------------
 .PHONY: build test e2e
 
-build: basic-example material-example # nativescript
+build: basic-example material-example nativescript
 test:  test-core test-basic test-material
 e2e:   e2e-basic-example e2e-material-example
 
