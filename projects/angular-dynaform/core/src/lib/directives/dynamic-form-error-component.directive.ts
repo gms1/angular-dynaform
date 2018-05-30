@@ -13,6 +13,7 @@ import {
 
 // tslint:disable-next-line no-unused-variable  ?
 import {DynamicFormError} from '../components/dynamic-form-error.interface';
+import {DynamicFormErrorComponent} from '../components/dynamic-form-error.component';
 import {DynamicFormComponent} from '../components/dynamic-form.component';
 import {ControlModel} from '../models/control-model.interface';
 import {DynamicFormComponentFactoryService} from '../services/dynamic-form-component-factory.service';
@@ -63,11 +64,10 @@ export class DynamicFormErrorComponentDirective implements OnInit, DoCheck, OnDe
       }
       }
 
-    // tslint:disable no-unnecessary-type-assertion
-    if ((this.componentRef.instance as any).elementRef) {
+    if ((this.componentRef.instance as DynamicFormErrorComponent).elementRef) {
       // TODO: test for instanceof ElementRef
       this.dynamicClass = new DynamicClass(
-          this.keyValueDiffers, (this.componentRef.instance as any).elementRef as ElementRef, this.renderer,
+          this.keyValueDiffers, (this.componentRef.instance as DynamicFormErrorComponent).elementRef, this.renderer,
           this.model.css.error);
     }
   }
@@ -84,7 +84,10 @@ export class DynamicFormErrorComponentDirective implements OnInit, DoCheck, OnDe
   }
 
   private destroyComponent(): void {
-    this.dynamicClass = undefined;
+    if (this.dynamicClass) {
+      this.dynamicClass.classes = {};
+      this.dynamicClass = undefined;
+      }
     if (this.componentRef) {
       this.componentRef.instance.ngOnDestroy();
       this.componentRef.destroy();

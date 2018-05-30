@@ -13,6 +13,7 @@ import {
 
 // tslint:disable-next-line no-unused-variable  ?
 import {DynamicFormControl} from '../components/dynamic-form-control.interface';
+import {DynamicFormControlComponentBase} from '../components/dynamic-form-control.component';
 import {DynamicFormComponent} from '../components/dynamic-form.component';
 import {ControlModel} from '../models/control-model.interface';
 import {DynamicFormComponentFactoryService} from '../services/dynamic-form-component-factory.service';
@@ -62,12 +63,11 @@ export class DynamicFormControlComponentDirective implements OnInit, DoCheck, On
     }
     this.form.registerComponent(this.model.id, this.componentRef.instance);
 
-    // tslint:disable no-unnecessary-type-assertion
-    if ((this.componentRef.instance as any).elementRef) {
+    if ((this.componentRef.instance as DynamicFormControlComponentBase).elementRef) {
       // TODO: test for instanceof ElementRef
       this.dynamicClass = new DynamicClass(
-          this.keyValueDiffers, (this.componentRef.instance as any).elementRef as ElementRef, this.renderer,
-          this.model.css.container);
+          this.keyValueDiffers, (this.componentRef.instance as DynamicFormControlComponentBase).elementRef,
+          this.renderer, this.model.css.container);
     }
   }
 
@@ -82,7 +82,10 @@ export class DynamicFormControlComponentDirective implements OnInit, DoCheck, On
   }
 
   private destroyComponent(): void {
-    this.dynamicClass = undefined;
+    if (this.dynamicClass) {
+      this.dynamicClass.classes = {};
+      this.dynamicClass = undefined;
+      }
     if (this.componentRef) {
       this.componentRef.instance.ngOnDestroy();
       this.form.unRegisterComponent(this.model.id);
