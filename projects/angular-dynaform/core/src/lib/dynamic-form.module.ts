@@ -61,6 +61,7 @@ const dynamicFormComponents = [dynamicFormEntryComponents, dynamicFormExportComp
 })
 export class DynamicFormModule {
   constructor(private dynamicFormService: DynamicFormService, @Optional() @SkipSelf() parentModule: DynamicFormModule) {
+    /* istanbul ignore if */
     if (parentModule) {
       console.warn('DynamicFormModule is already loaded. Import it in the AppModule');
       return;

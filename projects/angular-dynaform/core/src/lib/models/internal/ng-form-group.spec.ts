@@ -7,7 +7,8 @@ describe('ng-null-control', () => {
   let ngFormGroup: NgFormGroup;
 
   beforeEach(() => {
-    ngFormGroup = new NgFormGroup({'a': new FormControl(), 'b': new FormControl(), 'n': new NgNullControl()});
+    ngFormGroup = new NgFormGroup(
+        {'a': new FormControl(), 'b': new FormControl(), 'n': new NgNullControl()}, {updateOn: 'change'});
   });
 
 

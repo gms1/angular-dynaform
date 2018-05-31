@@ -18,10 +18,8 @@ export interface NgArrayModelHandler { updateLength(length: number, isMinimum?: 
 export class NgFormArray extends FormArray {
   model?: NgArrayModelHandler;
 
-  constructor(
-      controls: AbstractControl[], validatorOrOpts?: ValidatorFn|ValidatorFn[]|AbstractControlOptions|null,
-      asyncValidator?: AsyncValidatorFn|AsyncValidatorFn[]|null) {
-    super(controls, validatorOrOpts, asyncValidator);
+  constructor(controls: AbstractControl[], options: AbstractControlOptions) {
+    super(controls, options);
   }
 
   setValue(value: any[], options: {onlySelf?: boolean, emitEvent?: boolean} = {}): void {

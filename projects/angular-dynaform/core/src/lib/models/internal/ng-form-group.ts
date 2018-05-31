@@ -10,11 +10,8 @@ import {AbstractControlOptions} from './ng-abstract';
  * @export
  */
 export class NgFormGroup extends FormGroup {
-  constructor(
-      controls: {[key: string]: AbstractControl},
-      validatorOrOpts?: ValidatorFn|ValidatorFn[]|AbstractControlOptions|null,
-      asyncValidator?: AsyncValidatorFn|AsyncValidatorFn[]|null) {
-    super(controls, validatorOrOpts, asyncValidator);
+  constructor(controls: {[key: string]: AbstractControl}, options: AbstractControlOptions) {
+    super(controls, options);
   }
 
 

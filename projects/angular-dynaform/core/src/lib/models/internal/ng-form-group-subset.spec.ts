@@ -7,7 +7,7 @@ import {NgFormGroup} from './ng-form-group';
 describe('ng-null-control', () => {
 
   it('NgFormGroup and Subset', () => {
-    let grp = new NgFormGroup({a: new FormControl(), b: new FormControl(), c: new FormControl()});
+    let grp = new NgFormGroup({a: new FormControl(), b: new FormControl(), c: new FormControl()}, {updateOn: 'change'});
     let subsetGroup1 = createNgFormGroupSubset(grp);
     let subsetGroup2 = createNgFormGroupSubset(grp, {c: grp.controls.c});
     subsetGroup1.subset = {b: grp.controls.b};
