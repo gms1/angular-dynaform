@@ -39,22 +39,14 @@ export class DynamicFormFormControlComponentDirective implements OnInit, DoCheck
       private keyValueDiffers: KeyValueDiffers) {}
 
   ngOnInit(): void {
-    this.createComponent();
-  }
-
-  ngDoCheck(): void {
-    this.checkComponent();
-  }
-
-  ngOnDestroy(): void {
-    this.destroyComponent();
-  }
-
-  private createComponent(): void {
     const formControlFactory = this.componentsFactoryService.getFormControlComponentFactory();
+
+    /* istanbul ignore if */
     if (!formControlFactory) {
       throw new Error('failed to resolve factory for DynamicFormFormControl');
       }
+
+    // create the component:
     try {
       this.componentRef = this.viewContainerRef.createComponent<DynamicFormFormControl>(
           formControlFactory, undefined, this.viewContainerRef.injector);
@@ -66,36 +58,39 @@ export class DynamicFormFormControlComponentDirective implements OnInit, DoCheck
       }
     }
 
-    this.componentRef.instance.submit.subscribe(() => this.form.adfSubmit.emit());
-    this.componentRef.instance.reset.subscribe(() => this.form.adfReset.emit());
+    // register the newly created component:
 
     this.form.formControlRef = this.componentRef;
     this.form.registerComponent(this.model.id, this.componentRef.instance);
 
-    if ((this.componentRef.instance as DynamicFormFormControlComponent).elementRef) {
-      // TODO: test for instanceof ElementRef
-      this.dynamicClass = new DynamicClass(
-          this.keyValueDiffers,
-          (this.componentRef.instance as DynamicFormFormControlComponent).elementRef as ElementRef, this.renderer,
-          this.model.css.container);
-    }
+    this.componentRef.instance.submit.subscribe(() => this.form.adfSubmit.emit());
+    this.componentRef.instance.reset.subscribe(() => this.form.adfReset.emit());
+
+    // instantiate helper class to dynamically change CSS classes on the host element of the component:
+    this.dynamicClass = new DynamicClass(
+        this.keyValueDiffers, (this.componentRef.instance as DynamicFormFormControlComponent).elementRef as ElementRef,
+        this.renderer, this.model.css.container);
   }
 
-  private checkComponent(): void {
+  ngDoCheck(): void {
+    /* istanbul ignore else */
     if (this.dynamicClass) {
       this.dynamicClass.ngDoCheck();
       }
+    /* istanbul ignore else */
     if (this.componentRef) {
       this.componentRef.instance.model = this.model;
       this.componentRef.changeDetectorRef.detectChanges();
     }
   }
 
-  private destroyComponent(): void {
+  ngOnDestroy(): void {
+    /* istanbul ignore else */
     if (this.dynamicClass) {
       this.dynamicClass.classes = {};
       this.dynamicClass = undefined;
       }
+    /* istanbul ignore else */
     if (this.componentRef) {
       this.componentRef.instance.ngOnDestroy();
       this.form.formControlRef = undefined;

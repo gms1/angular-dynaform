@@ -37,20 +37,9 @@ export class DynamicFormControlComponentDirective implements OnInit, DoCheck, On
       private keyValueDiffers: KeyValueDiffers) {}
 
   ngOnInit(): void {
-    this.createComponent();
-  }
-
-  ngDoCheck(): void {
-    this.checkComponent();
-  }
-
-  ngOnDestroy(): void {
-    this.destroyComponent();
-  }
-
-  private createComponent(): void {
     const componentFactory = this.componentsFactoryService.getControlComponentFactory(this.model.config);
 
+    // create the component:
     try {
       this.componentRef = this.viewContainerRef.createComponent<DynamicFormControl>(
           componentFactory, undefined, this.viewContainerRef.injector);
@@ -61,31 +50,35 @@ export class DynamicFormControlComponentDirective implements OnInit, DoCheck, On
         throw(e);
       }
     }
+
+    // register the newly created component:
     this.form.registerComponent(this.model.id, this.componentRef.instance);
 
-    if ((this.componentRef.instance as DynamicFormControlComponentBase).elementRef) {
-      // TODO: test for instanceof ElementRef
-      this.dynamicClass = new DynamicClass(
-          this.keyValueDiffers, (this.componentRef.instance as DynamicFormControlComponentBase).elementRef,
-          this.renderer, this.model.css.container);
-    }
+    // instantiate helper class to dynamically change CSS classes on the host element of the component:
+    this.dynamicClass = new DynamicClass(
+        this.keyValueDiffers, (this.componentRef.instance as DynamicFormControlComponentBase).elementRef, this.renderer,
+        this.model.css.container);
   }
 
-  private checkComponent(): void {
+  ngDoCheck(): void {
+    /* istanbul ignore else */
     if (this.dynamicClass) {
       this.dynamicClass.ngDoCheck();
       }
+    /* istanbul ignore else */
     if (this.componentRef) {
       this.componentRef.instance.model = this.model;
       this.componentRef.changeDetectorRef.detectChanges();
     }
   }
 
-  private destroyComponent(): void {
+  ngOnDestroy(): void {
+    /* istanbul ignore else */
     if (this.dynamicClass) {
       this.dynamicClass.classes = {};
       this.dynamicClass = undefined;
       }
+    /* istanbul ignore else */
     if (this.componentRef) {
       this.componentRef.instance.ngOnDestroy();
       this.form.unRegisterComponent(this.model.id);
