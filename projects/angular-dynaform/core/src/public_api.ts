@@ -24,5 +24,6 @@ export * from './lib/components/dynamic-form-error.component';
 export * from './lib/directives/dynamic-form-dom-element.directive';
 export * from './lib/directives/dynamic-form-html-dom-element.directive';
 
-export * from './lib/form-builder';
+export * from './lib/form-builder/form-builder.factory';
+export * from './lib/form-builder/form-builder.service';
 export * from './lib/dynamic-form.module';

@@ -25,10 +25,10 @@ import {Component} from '@angular/core';
         [innerHTML]="model.local.label"
       ></StackLayout>
       <ng-container *ngIf="model.header" >
-        <StackLayout [ngClass]="model.header.css.content">
+        <FlexboxLayout [ngClass]="model.header.css.content">
           <ng-container *ngFor="let item of model.header.items;" adfControlComponent [model]="item" >
           </ng-container>
-        </StackLayout>
+        </FlexboxLayout>
       </ng-container>
       <adf-error-container [model]="model">
       </adf-error-container>
@@ -40,17 +40,17 @@ import {Component} from '@angular/core';
           *ngFor="let arrayItem of model.items; let i=index"
           [formGroupName]="i"
         >
-          <StackLayout [ngClass]="arrayItem.css.content">
+          <FlexboxLayout [ngClass]="arrayItem.css.content">
             <ng-container *ngFor="let item of arrayItem.items;" adfControlComponent [model]="item" >
             </ng-container>
-          </StackLayout>
+          </FlexboxLayout>
         </ng-container>
       </StackLayout>
       <ng-container *ngIf="model.footer" >
-        <StackLayout [ngClass]="model.footer.css.content">
+        <FlexboxLayout [ngClass]="model.footer.css.content">
           <ng-container *ngFor="let item of model.footer.items;" adfControlComponent [model]="item" >
           </ng-container>
-        </StackLayout>
+        </FlexboxLayout>
       </ng-container>
     </StackLayout>
   </StackLayout>

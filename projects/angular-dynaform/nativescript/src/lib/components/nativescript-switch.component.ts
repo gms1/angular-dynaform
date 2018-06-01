@@ -18,7 +18,7 @@ import {Component} from '@angular/core';
       *ngIf="model.local.label"
       class="adf-front-label"
       [ngClass]="model.css.label"
-      [innerHTML]="model.local.label"
+      [text]="model.local.label"
     ></Label>
     <Switch
       [formControlName]="model.key"

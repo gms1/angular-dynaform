@@ -34,7 +34,7 @@ export class ResetButtonAction extends DynamicFormAction {
   }
 
   // the handler for the click event on the reset button element
-  onClick(event?: Event): boolean {
+  onClick(event?: Event): void {
     /* istanbul ignore if */
     if (this.rootFormGroup.pristine) {
       // NOTE: this should not happen; reset button should be disabled on pristine form
@@ -42,12 +42,16 @@ export class ResetButtonAction extends DynamicFormAction {
       if (event) {
         event.stopImmediatePropagation();
         event.preventDefault();
-        }
-      return false;
+      }
     } else {
-      // bubble up: trigger the reset event on the form element
-      // return true to emit the output-click event of the control component
-      return true;
+      // istanbul ignore if */
+      if (!event || !event.bubbles) {
+        // no bubble up: e.g for nativescript
+        // emit event to forms form-control
+        if (this.component.form.formControlRef && this.component.form.formControlRef.instance) {
+          this.component.form.formControlRef.instance.onReset();
+        }
+      }
     }
   }
 

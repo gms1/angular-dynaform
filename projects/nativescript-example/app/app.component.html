@@ -1,0 +1,12 @@
+<RadSideDrawer [drawerTransition]="sideDrawerTransition">
+  <StackLayout tkDrawerContent class="sidedrawer sidedrawer-left">
+    <ScrollView row="1">
+      <StackLayout class="sidedrawer-content">
+        <Label col="1" text="Test Switch" class="sidedrawer-list-item" [class.selected]="isComponentSelected('/testSwitch')" (tap)="onNavItemTap('/testSwitch')"></Label>
+        <Label col="1" text="Test Slider" class="sidedrawer-list-item" [class.selected]="isComponentSelected('/testSlider')" (tap)="onNavItemTap('/testSlider')"></Label>
+      </StackLayout>
+    </ScrollView>
+  </StackLayout>
+
+  <page-router-outlet tkMainContent class="page page-content"></page-router-outlet>
+</RadSideDrawer>

@@ -36,7 +36,7 @@ export class SubmitButtonAction extends DynamicFormAction {
   }
 
   // the handler for the click event on the submit button element
-  onClick(event?: Event): boolean {
+  onClick(event?: Event): void {
     /* istanbul ignore if */
     if (!this.rootFormGroup.valid) {
       // do not trigger the submit event on the form element:
@@ -44,12 +44,16 @@ export class SubmitButtonAction extends DynamicFormAction {
       if (event) {
         event.stopImmediatePropagation();
         event.preventDefault();
-        }
-      return false;
+      }
     } else {
-      // bubble up: trigger the submit (ngSubmit) event on the form element:
-      // return true to emit the output-click event of the control component
-      return true;
+      // istanbul ignore if */
+      if (!event || !event.bubbles) {
+        // no bubble up: e.g for nativescript
+        // emit event to forms form-control
+        if (this.component.form.formControlRef && this.component.form.formControlRef.instance) {
+          this.component.form.formControlRef.instance.onSubmit();
+        }
+      }
     }
   }
 

@@ -21,7 +21,7 @@ import {
       [ngClass]="model.css.label"
       [innerHTML]="model.local.label"
     ></Label>
-    <adf-custom-listpicker
+    <ListPicker
       [formControlName]="model.key"
       [id]="model.id"
       [ngClass]="model.css.control"
@@ -29,7 +29,7 @@ import {
       [items]="listPickerItems"
     >
     <!-- TODO: missing properties: [attr.multiple]="options.multiple" -->
-    </adf-custom-listpicker>
+    </ListPicker>
     <adf-error-container [model]="model">
     </adf-error-container>
   </StackLayout>

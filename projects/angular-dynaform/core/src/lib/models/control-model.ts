@@ -54,9 +54,9 @@ export class ValueControlModel extends ControlModelBase<ControlValueOptions> {
         new FormControl(
             {
               disabled: config.disabled,
-              value: config.options && (config.options as ControlValueOptions).value ?
+              value: config.options && (config.options as ControlValueOptions).value !== undefined ?
                   (config.options as ControlValueOptions).value :
-                  ''
+                  null
             },
             {updateOn: config.updateOn}),
         formModel, parentPath, parentGroup, parentArray, parentArrayIdx);

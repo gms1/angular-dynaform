@@ -21,27 +21,47 @@ export class DynamicFormComponent extends DynamicForm {
   config!: FormConfig;
 
   @Input()
-  get model(): FormModel { return this._model; }
+  get model(): FormModel {
+    return this._model;
+  }
   set model(model: FormModel) {
     this._model = model;
     this.config = this.model.config;
   }
 
   @Output()
-  get adfSubmit(): EventEmitter<any> { return this._submit; }
+  get adfSubmit(): EventEmitter<any> {
+    return this._submit;
+  }
 
   @Output()
-  get adfReset(): EventEmitter<any> { return this._reset; }
+  get adfReset(): EventEmitter<any> {
+    return this._reset;
+  }
 
-  get value(): any { return this.model.value; }
-  get valueChanges(): Observable<any> { return this.model.valueChanges; }
+  get value(): any {
+    return this.model.value;
+  }
+  get valueChanges(): Observable<any> {
+    return this.model.valueChanges;
+  }
 
-  get valid(): boolean { return this.model.valid; }
-  get status(): string { return this.model.status; }
-  get statusChanges(): Observable<string> { return this.model.statusChanges; }
+  get valid(): boolean {
+    return this.model.valid;
+  }
+  get status(): string {
+    return this.model.status;
+  }
+  get statusChanges(): Observable<string> {
+    return this.model.statusChanges;
+  }
 
-  get pristine(): boolean { return this.model.pristine; }
-  get touched(): boolean { return this.model.touched; }
+  get pristine(): boolean {
+    return this.model.pristine;
+  }
+  get touched(): boolean {
+    return this.model.touched;
+  }
 
   formControlRef: ComponentRef<DynamicFormFormControl>|undefined;
   stepper?: Stepper;
@@ -59,9 +79,15 @@ export class DynamicFormComponent extends DynamicForm {
     this.mapIdToControl = new Map<string, DynamicFormControl>();
   }
 
-  initValue(value?: any): void { this.model.initValue(value); }
-  resetValue(): void { this.model.resetValue(); }
-  clearValue(): void { this.model.clearValue(); }
+  initValue(value?: any): void {
+    this.model.initValue(value);
+  }
+  resetValue(): void {
+    this.model.resetValue();
+  }
+  clearValue(): void {
+    this.model.clearValue();
+  }
 
 
   initValueFromAppModel(appData: any, appPointerPrefix?: string): any {
@@ -76,11 +102,17 @@ export class DynamicFormComponent extends DynamicForm {
     return this.model.valueToAppModel(appData, appPointerPrefix);
   }
 
-  registerComponent(id: string, control: DynamicFormControl): void { this.mapIdToControl.set(id, control); }
+  registerComponent(id: string, control: DynamicFormControl): void {
+    this.mapIdToControl.set(id, control);
+  }
 
-  unRegisterComponent(id: string): void { this.mapIdToControl.delete(id); }
+  unRegisterComponent(id: string): void {
+    this.mapIdToControl.delete(id);
+  }
 
-  findComponentById(id: string): DynamicFormControl|undefined { return this.mapIdToControl.get(id); }
+  findComponentById(id: string): DynamicFormControl|undefined {
+    return this.mapIdToControl.get(id);
+  }
 
   findParentComponent(control: DynamicFormControl): DynamicFormControl|undefined {
     let parentId: string|undefined;
@@ -91,7 +123,7 @@ export class DynamicFormComponent extends DynamicForm {
     if (!found) {
       parentId = control.model.parentArray ? control.model.parentArray.id : undefined;
       found = parentId ? this.findComponentById(parentId) : undefined;
-    }
+      }
     return found;
   }
 }

@@ -14,6 +14,6 @@ export interface DynamicFormFormControl extends DynamicFormControl {
   submit: EventEmitter<any>;
   reset: EventEmitter<any>;
 
-  onSubmit(event: Event): void;
-  onReset(event: Event): void;
+  onSubmit(event?: Event): void;
+  onReset(event?: Event): void;
 }

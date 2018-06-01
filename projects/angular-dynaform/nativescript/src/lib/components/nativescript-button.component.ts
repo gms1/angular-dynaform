@@ -17,13 +17,12 @@ import {Component} from '@angular/core';
     <Button
       [formControlName]="model.key"
       [id]="model.id"
+      class="btn"
       [ngClass]="model.css.control"
       adfNSDomElement
       ngDefaultControl
+      [text]="model.local.label"
     >
-      <Span [ngClass]="model.css.control"
-        [innerHTML]="model.local.label"
-      ></Span>
     </Button>
   </StackLayout>
 `,

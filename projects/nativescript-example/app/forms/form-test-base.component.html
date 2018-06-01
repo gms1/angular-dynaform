@@ -1,0 +1,10 @@
+<ActionBar class="action-bar">
+  <ActionItem ios.systemIcon="4" android.systemIcon="ic_menu_btn_add" (tap)="onDrawerButtonTap()" ios.position="left">
+  </ActionItem>
+  <Label class="action-bar-title" [text]="title"></Label>
+</ActionBar>
+
+<StackLayout class="page page-content" tkMainContent>
+  <adf-form [model]="model" (adfSubmit)="onSubmit()" (adfReset)="onReset()">
+  </adf-form>
+</StackLayout>

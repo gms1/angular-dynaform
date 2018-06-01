@@ -13,3 +13,4 @@
 
 ## nativescript
 
+* [checkbox](https://github.com/nstudio/nativescript-checkbox)

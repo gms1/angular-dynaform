@@ -4,3 +4,4 @@ app/**/*.js
 
 /hooks
 /platforms
+/node_modules

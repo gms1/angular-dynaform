@@ -50,20 +50,26 @@ export class DynamicFormFormControlComponent extends DynamicFormControlComponent
     super.ngOnDestroy();
   }
 
-  onSubmit(event: Event): void {
-    // do not bubble up
-    event.stopImmediatePropagation();
-    event.preventDefault();
+  onSubmit(event?: Event): void {
+    /* istanbul ignore else */
+    if (event) {
+      // do not bubble up
+      event.stopImmediatePropagation();
+      event.preventDefault();
+    }
     // emit output submit event:
     // this event will be forwarded by the DynamicFormFormControlComponentDirective
     // to the DynamicFormComponent
     this.submit.emit();
   }
 
-  onReset(event: Event): void {
-    // do not bubble up
-    event.stopImmediatePropagation();
-    event.preventDefault();
+  onReset(event?: Event): void {
+    /* istanbul ignore else */
+    if (event) {
+      // do not bubble up
+      event.stopImmediatePropagation();
+      event.preventDefault();
+    }
     this.form.resetValue();
     // emit output reset event:
     // this event will be forwarded by the DynamicFormFormControlComponentDirective

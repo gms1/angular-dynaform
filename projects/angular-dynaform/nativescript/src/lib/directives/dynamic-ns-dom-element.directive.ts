@@ -5,7 +5,8 @@ import {Directive, ElementRef, Renderer2} from '@angular/core';
 import {DynamicFormControlComponentBase, DynamicFormDomElementDirective} from '@angular-dynaform/core';
 
 // forwards blur/focus/click events to the control component and calls the lifecycle hooks for optional dynamic actions
-
+// currently focus/blur is only implemented for textviews:
+//   see https://github.com/NativeScript/NativeScript/issues/5902
 @Directive({
   selector: '[adfNSDomElement]',
   host: {
@@ -19,9 +20,15 @@ export class DynamicNSDomElementDirective extends DynamicFormDomElementDirective
     super(elementRef, renderer, component);
   }
 
-  onBlur(): void { super.onBlur(); }
+  onBlur(): void {
+    super.onBlur();
+  }
 
-  onFocus(): void { super.onFocus(); }
+  onFocus(): void {
+    super.onFocus();
+  }
 
-  onClick(): void { super.onClick(); }
+  onClick(): void {
+    super.onClick();
+  }
 }

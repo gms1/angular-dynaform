@@ -118,9 +118,7 @@ export class DynamicFormControlComponentBase implements DynamicFormControl {
 
   onElementClick(event?: Event): void {
     if (this.action) {
-      if (!this.action.onClick(event)) {
-        return;
-      }
+      this.action.onClick(event);
     }
     this.click.emit(event);
   }

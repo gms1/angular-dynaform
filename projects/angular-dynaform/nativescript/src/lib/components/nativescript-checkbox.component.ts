@@ -14,18 +14,14 @@ import {Component} from '@angular/core';
     [formGroup]="model.ngGroup"
     [visibility]="model.hidden ? 'collapsed' : 'visible'"
   >
-    <adf-custom-checkbox
+    <CheckBox
       [formControlName]="model.key"
       [id]="model.id"
       [ngClass]="model.css.control"
       adfNSDomElement
+      [text]="model.local.label"
     >
-      <Span
-        class="adf-back-label"
-        [ngClass]="model.css.label"
-        [innerHTML]="model.local.label">
-      </Span>
-    </adf-custom-checkbox>
+    </CheckBox>
     <adf-error-container [model]="model">
     </adf-error-container>
   </StackLayout>

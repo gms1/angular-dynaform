@@ -1,4 +1,3 @@
-export * from './custom-listpicker.component';
 
 export * from './nativescript-array.component';
 export * from './nativescript-button.component';

@@ -1,4 +1,4 @@
-// tslint:disable no-non-null-assertion
+// tslint:disable no-non-null-assertion no-use-before-declare
 import {Component, DoCheck, ElementRef, forwardRef, Inject, KeyValueDiffers, OnDestroy, Renderer2} from '@angular/core';
 import {TestBed, ComponentFixture, async} from '@angular/core/testing';
 import {DynamicClass} from './dynamic-class';
