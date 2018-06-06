@@ -4,6 +4,9 @@ sudo: required
 node_js:
   - "8"
 
+install:
+  - bash build/travis_install
+
 script:
    - ./build/travis_run
 
