@@ -22,8 +22,9 @@ import {Component, ElementRef, OnChanges} from '@angular/core';
       *ngIf="model.local.label"
       class="adf-front-label"
       [ngClass]="model.css.label"
-      [innerHTML]="model.local.label"
-    ></Label>
+      [text]="model.local.label"
+    >
+    </Label>
     <TextField
       [formControlName]="model.key"
       [id]="model.id"

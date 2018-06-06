@@ -19,13 +19,13 @@ import {Component} from '@angular/core';
       [ngClass]="model.css.control"
       adfNSDomElement
     >
-      <StackLayout
+      <Label
         *ngIf="model.local.label"
         class="adf-front-label"
         [ngClass]="model.css.label"
-        [innerHTML]="model.local.label"
+        [text]="model.local.label"
       >
-      </StackLayout>
+      </Label>
       <adf-error-container [model]="model">
       </adf-error-container>
       <FlexboxLayout [ngClass]="model.css.content">

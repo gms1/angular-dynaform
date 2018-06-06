@@ -19,11 +19,12 @@ import {Component} from '@angular/core';
       [ngClass]="model.css.control"
       adfNSDomElement
     >
-      <StackLayout
+      <Label
         *ngIf="model.local.label"
         [ngClass]="model.css.label"
-        [innerHTML]="model.local.label"
-      ></StackLayout>
+        [text]="model.local.label"
+      >
+      </Label>
       <ng-container *ngIf="model.header" >
         <FlexboxLayout [ngClass]="model.header.css.content">
           <ng-container *ngFor="let item of model.header.items;" adfControlComponent [model]="item" >

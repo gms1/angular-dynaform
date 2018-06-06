@@ -26,7 +26,7 @@ import {Component} from '@angular/core';
       <Label
         *ngIf="model.local.label"
         [ngClass]="model.css.label"
-        [innerHTML]="model.local.label"
+        [text]="model.local.label"
       ></Label>
       <RadioButton *ngFor="let opt of model.local.valueOptions"
         [formControlName]="model.key"

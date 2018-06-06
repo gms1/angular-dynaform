@@ -19,7 +19,8 @@ import {Component} from '@angular/core';
       class="adf-front-label"
       [ngClass]="model.css.label"
       [text]="model.local.label"
-    ></Label>
+    >
+    </Label>
     <Switch
       [formControlName]="model.key"
       [id]="model.id"
