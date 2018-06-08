@@ -1,7 +1,7 @@
 // tslint:disable use-input-property-decorator use-output-property-decorator use-life-cycle-interface
 // tslint:disable no-use-before-declare
-import {Component, ElementRef, ViewChild, AfterViewInit, EventEmitter} from '@angular/core';
-import {Observable, Subject} from 'rxjs';
+import {Component, ElementRef, AfterViewInit, EventEmitter} from '@angular/core';
+import {Observable} from 'rxjs';
 
 import {
   GroupModelBase,

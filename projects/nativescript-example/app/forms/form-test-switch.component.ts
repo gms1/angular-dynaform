@@ -1,4 +1,4 @@
-import {ControlType, DynamicFormService, FormBaseConfig, FormBuilder, FormBuilderSubset} from '@angular-dynaform/core';
+import {ControlType, DynamicFormService, FormBuilder, FormBuilderSubset} from '@angular-dynaform/core';
 import {Component} from '@angular/core';
 import {FormTestBaseComponent} from './form-test-base.component';
 
@@ -16,7 +16,7 @@ export class FormTestSwitchComponent extends FormTestBaseComponent {
 
 
   addControl(fieldsdiv: FormBuilderSubset): void {
-    const fbControl = fieldsdiv.group.addControl({
+    fieldsdiv.group.addControl({
       id: TEST_CONTROL_ID,
       controlType: ControlType.CONTROL_SWITCH,
       options: {label: TEST_CONTROL_LABEL, placeholder: TEST_CONTROL_PLACEHOLDER}

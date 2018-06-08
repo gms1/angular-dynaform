@@ -8,7 +8,7 @@ import {
   FormModel,
   FormBuilderSubset
 } from '@angular-dynaform/core';
-import {AfterViewInit, Component, ViewChild, OnDestroy, OnInit} from '@angular/core';
+import {AfterViewInit, ViewChild, OnDestroy, OnInit} from '@angular/core';
 import {Subject} from 'rxjs';
 import {takeUntil} from 'rxjs/operators';
 import {RadSideDrawer} from 'nativescript-ui-sidedrawer';

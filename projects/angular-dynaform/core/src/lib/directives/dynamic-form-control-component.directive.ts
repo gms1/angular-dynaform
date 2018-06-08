@@ -6,7 +6,6 @@ import {
   OnDestroy,
   OnInit,
   ViewContainerRef,
-  ElementRef,
   KeyValueDiffers,
   Renderer2
 } from '@angular/core';

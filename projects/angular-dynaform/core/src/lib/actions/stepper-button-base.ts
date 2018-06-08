@@ -24,6 +24,7 @@ export abstract class StepperButtonBaseAction extends DynamicFormAction implemen
   ngAfterViewInit(): void {
     super.ngAfterViewInit();
     this.stepper = this.findStepper();
+    /* istanbul ignore else */
     if (this.stepper) {
       this.onIndexChange(0);
       this.stepper.selectionChange()
@@ -42,6 +43,7 @@ export abstract class StepperButtonBaseAction extends DynamicFormAction implemen
   private findStepper(): Stepper|undefined {
     let component: DynamicFormControl|undefined = this.component;
     while (component) {
+      /* istanbul ignore if */
       if (component.stepper) {
         return component.stepper;
       }

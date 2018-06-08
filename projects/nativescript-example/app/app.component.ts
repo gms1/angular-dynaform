@@ -9,7 +9,7 @@ export class AppComponent {
 }
 */
 
-import {Component, OnInit, ViewChild} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {NavigationEnd, Router} from '@angular/router';
 import * as app from 'application';
 import {RouterExtensions} from 'nativescript-angular/router';

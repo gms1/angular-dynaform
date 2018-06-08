@@ -3,7 +3,7 @@ import {DynamicForm, DynamicFormService, FormModel, ControlType, FormConfig, Mod
 
 
 @Component({
-  selector: 'stepper-example',
+  selector: 'app-stepper-example',
   template: `
 <div class="stepper-example">
   <mat-card class="mat-card">
@@ -344,7 +344,7 @@ export const stepperHorizantalExample2Config: FormConfig = {
 
 
 @Component({
-  selector: 'stepper-examples',
+  selector: 'app-stepper-examples',
   template: `
  <div class="stepper-examples">
   <stepper-example [title]="title1" [subTitle]="subTitle1" [config]="config1"></stepper-example>
@@ -354,10 +354,10 @@ export const stepperHorizantalExample2Config: FormConfig = {
   styles: []
 })
 export class StepperExamplesComponent {
-  title1: string = 'Horizontal Stepper Example 1';
-  subTitle1: string = 'buttons below stepper';
+  title1 = 'Horizontal Stepper Example 1';
+  subTitle1 = 'buttons below stepper';
   config1: FormConfig = stepperHorizantalExample1Config;
-  title2: string = 'Horizontal Stepper Example 2';
-  subTitle2: string = 'buttons inside stepper';
+  title2 = 'Horizontal Stepper Example 2';
+  subTitle2 = 'buttons inside stepper';
   config2: FormConfig = stepperHorizantalExample2Config;
 }

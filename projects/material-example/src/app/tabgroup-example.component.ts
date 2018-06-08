@@ -162,7 +162,7 @@ export const tabGroupExampleConfig: FormConfig = {
 
 
 @Component({
-  selector: 'tabgroup-example',
+  selector: 'app-tabgroup-example',
   template: `
 <div class="tabgroup-example">
   <mat-card class="mat-card">

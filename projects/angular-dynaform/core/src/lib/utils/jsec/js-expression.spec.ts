@@ -1,4 +1,4 @@
-// tslint:disable prefer-const
+// tslint:disable no-null-keyword no-unbound-method no-unused-variable prefer-const
 import {JsExpression} from './js-expression';
 import {JsonPointer} from 'jsonpointerx';
 

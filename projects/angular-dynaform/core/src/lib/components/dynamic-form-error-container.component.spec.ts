@@ -1,4 +1,4 @@
-import {Component, Input} from '@angular/core';
+// tslint:disable no-null-keyword no-unbound-method no-unused-variable prefer-const
 import {FormControl} from '@angular/forms';
 import {async, ComponentFixture, TestBed} from '@angular/core/testing';
 

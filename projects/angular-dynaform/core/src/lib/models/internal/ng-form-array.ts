@@ -1,4 +1,4 @@
-import {AbstractControl, AsyncValidatorFn, FormArray, ValidatorFn} from '@angular/forms';
+import {AbstractControl, FormArray} from '@angular/forms';
 
 
 import {AbstractControlOptions} from './ng-abstract';
