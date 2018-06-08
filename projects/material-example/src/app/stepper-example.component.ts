@@ -347,8 +347,8 @@ export const stepperHorizantalExample2Config: FormConfig = {
   selector: 'app-stepper-examples',
   template: `
  <div class="stepper-examples">
-  <stepper-example [title]="title1" [subTitle]="subTitle1" [config]="config1"></stepper-example>
-  <stepper-example [title]="title2" [subTitle]="subTitle2" [config]="config2"></stepper-example>
+  <app-stepper-example [title]="title1" [subTitle]="subTitle1" [config]="config1"></app-stepper-example>
+  <app-stepper-example [title]="title2" [subTitle]="subTitle2" [config]="config2"></app-stepper-example>
   </div>
   `,
   styles: []
