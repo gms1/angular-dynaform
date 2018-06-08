@@ -4,6 +4,11 @@ TYPE ?= prod
 BUILDFLAGS = -- --$(TYPE)
 
 all: build
+
+#-------------------------------------------------------------
+clean:
+	@-rm -rf dist
+
 #-------------------------------------------------------------
 .PHONY: build test e2e
 
@@ -72,24 +77,17 @@ lint:
 	@npm run lint:basic
 	@npm run lint:material
 
-release-doc:
-	@npm run typedoc 1>/dev/null
-
-release-build: lint
-	@-rm -rf dist
-	@npm run lint:core
-	@npm run lint:basic
-	@npm run lint:material
-	@npm run build:core -- --prod
-	@npm run build:basic -- --prod
-	@npm run build:material -- --prod
-	@npm run build:basic-example -- --prod
-	@npm run build:material-example -- --prod
+coverage:
 	@npm run coverage:core
 	@npm run coverage:basic
 	@npm run coverage:material
+
+release-build: clean lint build coverage
 	@echo RELEASE BUILD SUCCEEDED
 
-release: release-doc release-build
+release-doc:
+	@npm run typedoc 1>/dev/null
+
+release: release-build release-doc
 	@./build/publish-prepare
 	@echo READY TO BE PUBLISHED
