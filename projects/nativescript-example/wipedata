@@ -1,0 +1,20 @@
+#!/bin/bash
+EMULATOR=$(which emulator)
+
+if [ -z "${EMULATOR}" ]; then
+  echo "emulator is not in PATH" >&2
+  exit 1
+fi
+
+# android list avd
+AVD=NS_Pixel_C_API_26
+
+TOOLS_DIR=$(dirname "${EMULATOR}")
+pushd "${TOOLS_DIR}" &>/dev/null || { echo "directory '${TOOLS_DIR}' not found" >&2; exit 1; }
+
+  emulator -avd "${AVD}" -wipe-data
+
+popd &>/dev/null
+
+
+

@@ -8,7 +8,7 @@ import {
 import {Component} from '@angular/core';
 
 @Component({
-  selector: 'adf-nativescript-array-component',
+  selector: 'adf-nativescript-array',
   template: `
   <StackLayout
     [formGroup]="model.ngGroup"

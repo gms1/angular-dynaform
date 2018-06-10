@@ -26,7 +26,7 @@ export class AppComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this._activatedUrl = '/testSwitch';
+    // this._activatedUrl = '/testSwitch';
     this._sideDrawerTransition = new SlideInOnTopTransition();
 
     this.router.events.pipe(filter((event: any) => event instanceof NavigationEnd))

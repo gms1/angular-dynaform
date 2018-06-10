@@ -2,27 +2,46 @@
   <StackLayout tkDrawerContent class="sidedrawer sidedrawer-left">
     <ScrollView row="1">
       <StackLayout class="sidedrawer-content">
-        <Label col="1" text="Test Switch" class="sidedrawer-list-item" [class.selected]="isComponentSelected('/testSwitch')" (tap)="onNavItemTap('/testSwitch')"></Label>
+        <Label col="1" text="Test CheckBox" class="sidedrawer-list-item" [class.selected]="isComponentSelected('/testCheckBox')"
+          (tap)="onNavItemTap('/testCheckBox')"></Label>
+        <Label col="1" text="Test ListPicker" class="sidedrawer-list-item" [class.selected]="isComponentSelected('/testListPicker')"
+          (tap)="onNavItemTap('/testListPicker')"></Label>
         <Label col="1" text="Test Slider" class="sidedrawer-list-item" [class.selected]="isComponentSelected('/testSlider')" (tap)="onNavItemTap('/testSlider')"></Label>
+        <Label col="1" text="Test Switch" class="sidedrawer-list-item" [class.selected]="isComponentSelected('/testSwitch')" (tap)="onNavItemTap('/testSwitch')"></Label>
+        <Label col="1" text="Test TextField" class="sidedrawer-list-item" [class.selected]="isComponentSelected('/testTextField')"
+          (tap)="onNavItemTap('/testTextField')"></Label>
+        <Label col="1" text="Test TextField Number" class="sidedrawer-list-item" [class.selected]="isComponentSelected('/testTextFieldNumber')"
+          (tap)="onNavItemTap('/testTextFieldNumber')"></Label>
+        <Label col="1" text="Test TextFieldSecure" class="sidedrawer-list-item" [class.selected]="isComponentSelected('/testTextFieldSecure')"
+          (tap)="onNavItemTap('/testTextFieldSecure')"></Label>
+        <Label col="1" text="Test TextView" class="sidedrawer-list-item" [class.selected]="isComponentSelected('/testTextView')"
+          (tap)="onNavItemTap('/testTextView')"></Label>
       </StackLayout>
     </ScrollView>
   </StackLayout>
 
   <!--
-TODO: add menu for:
-array
-button
-checkbox
-datepicker
-division
-fieldset
-listpicker
-radiogroup
-separator
-slider
-switch: done
-textfield
-textview
+
+TODO: review layouts used in nativescript components
+
+                                              enable    show | focus | updateOn
+TODO:       | css | value | touch. | prist. | disable | hide | blur  | blur
+checkbox    |  y  |   y   |   NO   |   y    |   y     |  y   |  NO   | NO
+datepicker  |  x  |       |        |        |         |      |       |
+listpicker  |  y  |   y   |   NO   |   y    |   y     |  y   |  NO   | NO
+radiogroup  |  x  |       |        |        |         |      |       |
+slider      |  y  |   y   |   NO   |   y    |   y     |  y   |  NO   | NO
+switch      |  y  |   y   |   y    |   y    |   y     |  y   |  NO   | NO
+textfield*  |  y  |   y   |   y    |   y    |   y     |  y   |  y    | NO
+textview    |  y  |   y   |   y    |   y    |   y     |  y   |  y    | NO
+
+*) supported inputType for TextField:
+password (text), datetime, number, url, email, phone
+
+other controls:
+array, button, division, fieldset, separator
+
+
   -->
 
   <page-router-outlet tkMainContent class="page page-content"></page-router-outlet>

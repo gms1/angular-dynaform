@@ -8,7 +8,7 @@ import {
 import {Component} from '@angular/core';
 
 @Component({
-  selector: 'adf-nativescript-separator-component',
+  selector: 'adf-nativescript-separator',
   template: `
   <StackLayout
     [formGroup]="model.ngGroup"

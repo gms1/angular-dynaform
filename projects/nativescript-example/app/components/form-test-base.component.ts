@@ -83,10 +83,18 @@ export abstract class FormTestBaseComponent implements OnInit, AfterViewInit, On
       options: {css: {container: 'hr-light m-10'}}
     });
 
-    buttondiv.group.addControl(
-        {id: DISABLE_CONTROL_ID, controlType: ControlType.CONTROL_SWITCH, options: {value: false, label: 'disable'}});
-    buttondiv.group.addControl(
-        {id: HIDE_CONTROL_ID, controlType: ControlType.CONTROL_SWITCH, options: {value: false, label: 'hide'}});
+    buttondiv.group.addControl({
+      id: DISABLE_CONTROL_ID,
+      controlType: ControlType.CONTROL_SWITCH,
+      updateOn: 'change',
+      options: {value: false, label: 'disable'}
+    });
+    buttondiv.group.addControl({
+      id: HIDE_CONTROL_ID,
+      controlType: ControlType.CONTROL_SWITCH,
+      updateOn: 'change',
+      options: {value: false, label: 'hide'}
+    });
     this.model = this.dynamicFormService.createFormModel(formConfig.toFormConfig());
   }
 
@@ -111,10 +119,11 @@ export abstract class FormTestBaseComponent implements OnInit, AfterViewInit, On
     });
 
     // control state
-    console.log(`control state: ${this.controlComponent.model.status}`);
+    console.log(`control state: ${this.controlComponent.model.status
+                }, touched: ${this.controlComponent.model.touched}, pristine: ${this.controlComponent.model.pristine}`);
     this.controlComponent.model.statusChanges.pipe(takeUntil(this.unsubscribe)).subscribe((state) => {
-      console.log(`control state: ${state} touched: ${this.controlComponent.model.touched
-                  } pristine: ${this.controlComponent.model.pristine}`);
+      console.log(`control state: ${state}, touched: ${this.controlComponent.model.touched
+                  }, pristine: ${this.controlComponent.model.pristine}`);
     });
 
     // control focus

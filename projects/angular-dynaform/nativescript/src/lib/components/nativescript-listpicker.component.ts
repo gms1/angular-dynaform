@@ -1,4 +1,4 @@
-import {Component, OnChanges, SimpleChanges} from '@angular/core';
+import {Component} from '@angular/core';
 
 // tslint:disable use-input-property-decorator use-output-property-decorator
 import {
@@ -9,7 +9,7 @@ import {
 } from '@angular-dynaform/core';
 
 @Component({
-  selector: 'adf-nativescript-listpicker-component',
+  selector: 'adf-nativescript-listpicker',
   template: `
   <StackLayout
     [formGroup]="model.ngGroup"
@@ -21,15 +21,15 @@ import {
       [ngClass]="model.css.label"
       [text]="model.local.label"
       ></Label>
-    <ListPicker
+    <adf-custom-listpicker
       [formControlName]="model.key"
+      [valueOptions]="model.local.valueOptions"
       [id]="model.id"
       [ngClass]="model.css.control"
       adfNSDomElement
-      [items]="listPickerItems"
     >
-    <!-- TODO: missing properties: [attr.multiple]="options.multiple" -->
-    </ListPicker>
+    <!-- TODO: not implemented: "options.multiple" -->
+    </adf-custom-listpicker>
     <adf-error-container [model]="model">
     </adf-error-container>
   </StackLayout>
@@ -37,19 +37,7 @@ import {
   inputs: ['model'],
   providers: [{provide: DynamicFormControlComponentBase, useExisting: NativeScriptListPickerComponent}]
 })
-export class NativeScriptListPickerComponent extends DynamicFormControlComponent<ValueControlModel> implements
-    OnChanges {
+export class NativeScriptListPickerComponent extends DynamicFormControlComponent<ValueControlModel> {
   model!: ValueControlModel;
   options!: ControlSelectOptions;
-
-  listPickerItems: Array<string> = [];
-
-  public ngOnChanges(changes: SimpleChanges): void {
-    if (!this.model.local || !this.model.local.valueOptions) {
-      this.listPickerItems = [];
-    } else {
-      this.listPickerItems = this.model.local.valueOptions.map((opt) => opt.label);
-    }
-    super.ngOnChanges(changes);
-  }
 }

@@ -1,14 +1,20 @@
 // tslint:disable use-input-property-decorator use-output-property-decorator
 import {
   ControlTextareaOptions,
+  DynamicForm,
   DynamicFormControlComponentBase,
   DynamicFormControlComponent,
+  DynamicFormService,
   ValueControlModel
 } from '@angular-dynaform/core';
-import {Component} from '@angular/core';
+import {Component, ElementRef, OnInit, OnChanges, SimpleChanges} from '@angular/core';
+
+const TEXTVIEW_DEFAULT_MAXLENGTH = 250;
+const TEXTVIEW_DEFAULT_COLS = 30;
+const TEXTVIEW_DEFAULT_ROWS = 10;
 
 @Component({
-  selector: 'adf-nativescript-textview-component',
+  selector: 'adf-nativescript-textview',
   template: `
   <StackLayout
     [formGroup]="model.ngGroup"
@@ -24,17 +30,15 @@ import {Component} from '@angular/core';
     <TextView
       [formControlName]="model.key"
       [id]="model.id"
-      [maxLength]="options.maxLength"
+      [maxLength]="opts.maxLength"
       [editable]="!options.readOnly"
       [textWrap]="options.wrap"
-      [col]="options.cols"
-      [row]="options.rows"
+      [col]="opts.col"
+      [row]="opts.row"
+      [hint]="model.local.placeholder"
       [ngClass]="model.css.control"
       adfNSDomElement
     >
-    <!--
-    [hint]="options.local.placeholder"
-    -->
     </TextView>
     <adf-error-container [model]="model">
     </adf-error-container>
@@ -43,7 +47,41 @@ import {Component} from '@angular/core';
   inputs: ['model'],
   providers: [{provide: DynamicFormControlComponentBase, useExisting: NativeScriptTextViewComponent}]
 })
-export class NativeScriptTextViewComponent extends DynamicFormControlComponent<ValueControlModel> {
+export class NativeScriptTextViewComponent extends DynamicFormControlComponent<ValueControlModel> implements OnInit,
+                                                                                                             OnChanges {
   model!: ValueControlModel;
   options!: ControlTextareaOptions;
+  opts: {[key: string]: any};
+
+  constructor(form: DynamicForm, dynamicFormService: DynamicFormService, elRef: ElementRef) {
+    super(form, dynamicFormService, elRef);
+    this.opts = {};
+  }
+
+  setOptsDefaults(): void {
+    this.opts.maxLength = TEXTVIEW_DEFAULT_MAXLENGTH;
+    this.opts.col = TEXTVIEW_DEFAULT_COLS;
+    this.opts.row = TEXTVIEW_DEFAULT_ROWS;
+  }
+
+  updateOpts(): void {
+    if (this.options) {
+      this.opts.maxLength = this.options.maxLength ? this.options.maxLength : TEXTVIEW_DEFAULT_MAXLENGTH;
+      this.opts.col = this.options.cols ? this.options.cols : TEXTVIEW_DEFAULT_COLS;
+      this.opts.row = this.options.rows ? this.options.rows : TEXTVIEW_DEFAULT_ROWS;
+    } else {
+      this.setOptsDefaults();
+    }
+  }
+
+
+  ngOnInit() {
+    this.updateOpts();
+    super.ngOnInit();
+  }
+
+  ngOnChanges(changes: SimpleChanges): void {
+    this.updateOpts();
+    super.ngOnChanges(changes);
+  }
 }

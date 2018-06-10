@@ -1,4 +1,7 @@
 
+export * from './custom-checkbox.component';
+export * from './custom-listpicker.component';
+
 export * from './nativescript-array.component';
 export * from './nativescript-button.component';
 export * from './nativescript-checkbox.component';

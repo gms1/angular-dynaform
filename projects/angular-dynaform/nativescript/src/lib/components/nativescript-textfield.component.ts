@@ -7,12 +7,15 @@ import {
   DynamicFormService,
   ValueControlModel
 } from '@angular-dynaform/core';
-import {Component, ElementRef, OnChanges} from '@angular/core';
+import {Component, ElementRef, OnInit, OnChanges, SimpleChanges} from '@angular/core';
 
-// TODO: implement CustomTextView to support numeric input
+// TODO: support numeric input
+
+const TEXTFIELD_DEFAULT_MAXLENGTH = 100;
+const TEXTFIELD_DEFAULT_KEYBOARDTYPE = null;
 
 @Component({
-  selector: 'adf-nativescript-textfield-component',
+  selector: 'adf-nativescript-textfield',
   template: `
   <StackLayout
     [formGroup]="model.ngGroup"
@@ -28,15 +31,14 @@ import {Component, ElementRef, OnChanges} from '@angular/core';
     <TextField
       [formControlName]="model.key"
       [id]="model.id"
-      [secureproperty]="opts.secureProperty"
+      [secure]="opts.secure"
       [editable]="!options.readOnly"
-      [maxLength]="options.maxLength"
+      [maxLength]="opts.maxLength"
+      [hint]="model.local.placeholder"
+      [keyboardType]="opts.keyboardType"
       [ngClass]="model.css.control"
       adfNSDomElement
     >
-    <!--
-    [hint]="options.local.placeholder"
-    -->
     </TextField>
     <adf-error-container [model]="model">
     </adf-error-container>
@@ -46,20 +48,70 @@ import {Component, ElementRef, OnChanges} from '@angular/core';
   providers: [{provide: DynamicFormControlComponentBase, useExisting: NativeScriptTextFieldComponent}]
 })
 export class NativeScriptTextFieldComponent extends DynamicFormControlComponent<ValueControlModel> implements
-    OnChanges {
+    OnInit, OnChanges {
   model!: ValueControlModel;
   options!: ControlInputOptions;
-  opts: {[key: string]: any};
+  opts!: {[key: string]: any};
 
   constructor(form: DynamicForm, dynamicFormService: DynamicFormService, elRef: ElementRef) {
     super(form, dynamicFormService, elRef);
-    this.opts = {};
-    this.opts.secureProperty = false;
+    this.updateOpts();
   }
 
-  ngOnChanges(): void {
+  setOptsDefaults(): void {
+    this.opts.secure = false;
+    this.opts.maxLength = TEXTFIELD_DEFAULT_MAXLENGTH;
+    this.opts.keyboardType = TEXTFIELD_DEFAULT_KEYBOARDTYPE;
+  }
+
+  updateOpts(): void {
+    this.opts = {};
     if (this.options) {
-      this.opts.secureProperty = this.options.inputType === 'password' ? true : false;
+      this.opts.maxLength = this.options.maxLength ? this.options.maxLength : TEXTFIELD_DEFAULT_MAXLENGTH;
+      if (this.options.inputType) {
+        if (this.options.inputType === 'password') {
+          this.opts.secure = true;
+          this.opts.keyboardType = TEXTFIELD_DEFAULT_KEYBOARDTYPE;
+        } else {
+          this.opts.secure = false;
+          switch (this.options.inputType) {
+            case 'datetime-local':
+              this.opts.keyboardType = 'datetime';
+              break;
+            case 'number':
+              this.opts.keyboardType = 'number';
+              break;
+            case 'url':
+              this.opts.keyboardType = 'url';
+              break;
+            case 'email':
+              this.opts.keyboardType = 'email';
+              break;
+            case 'phone':
+              this.opts.keyboardType = 'phone';
+              break;
+            default:
+              this.opts.keyboardType = TEXTFIELD_DEFAULT_KEYBOARDTYPE;
+              break;
+          }
+        }
+      }
+
+    } else {
+      this.setOptsDefaults();
     }
+    console.log(`keyboardType: ${this.opts.keyboardType}`);
+    console.log(`secure: ${this.opts.secure}`);
+  }
+
+
+  ngOnInit() {
+    this.updateOpts();
+    super.ngOnInit();
+  }
+
+  ngOnChanges(changes: SimpleChanges): void {
+    this.updateOpts();
+    super.ngOnChanges(changes);
   }
 }

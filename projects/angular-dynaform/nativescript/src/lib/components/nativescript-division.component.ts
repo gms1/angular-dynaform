@@ -8,7 +8,7 @@ import {
 import {Component} from '@angular/core';
 
 @Component({
-  selector: 'adf-nativescript-division-component',
+  selector: 'adf-nativescript-division',
   template: `
   <StackLayout
     [formGroup]="model.ngGroup"

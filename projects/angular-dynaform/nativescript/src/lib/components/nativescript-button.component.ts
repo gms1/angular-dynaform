@@ -8,7 +8,7 @@ import {
 import {Component} from '@angular/core';
 
 @Component({
-  selector: 'adf-nativescript-button-component',
+  selector: 'adf-nativescript-button',
   template: `
   <StackLayout
     [formGroup]="model.ngGroup"

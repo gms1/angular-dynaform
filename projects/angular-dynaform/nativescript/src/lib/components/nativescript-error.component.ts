@@ -5,7 +5,7 @@ import {ControlModel, ControlOptions, DynamicFormErrorComponent, DynamicValidati
 import {Component} from '@angular/core';
 
 @Component({
-  selector: 'adf-nativescript-error-component',
+  selector: 'adf-nativescript-error',
   template: `
   <StackLayout [ngClass]="model.css.error" [innerHTML]="error.message"></StackLayout>
 `,

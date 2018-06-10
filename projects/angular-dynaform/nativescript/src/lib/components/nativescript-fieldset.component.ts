@@ -8,7 +8,7 @@ import {
 import {Component} from '@angular/core';
 
 @Component({
-  selector: 'adf-nativescript-fieldset-component',
+  selector: 'adf-nativescript-fieldset',
   template: `
   <StackLayout
     [formGroup]="model.ngGroup"

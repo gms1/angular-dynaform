@@ -10,7 +10,7 @@ import {Component} from '@angular/core';
 
 
 @Component({
-  selector: 'adf-nativescript-form-component',
+  selector: 'adf-nativescript-form',
   template: `
   <StackLayout>
     <StackLayout

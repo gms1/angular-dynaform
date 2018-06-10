@@ -12,7 +12,7 @@ import {Component} from '@angular/core';
 // it would be a good idea to implement a CustomRadioGroup having a similar interface like the CustomListPicker
 
 @Component({
-  selector: 'adf-nativescript-radiogroup-component',
+  selector: 'adf-nativescript-radiogroup',
   template: `
   <StackLayout
     [formGroup]="model.ngGroup"

@@ -10,6 +10,10 @@ import {TNSCheckBoxModule} from 'nativescript-checkbox/angular';
 
 import {DynamicNSDomElementDirective} from './directives/dynamic-ns-dom-element.directive';
 
+
+import {CustomCheckBoxComponent} from './components/custom-checkbox.component';
+import {CustomListPickerComponent} from './components/custom-listpicker.component';
+
 import {NativeScriptArrayComponent} from './components/nativescript-array.component';
 import {NativeScriptButtonComponent} from './components/nativescript-button.component';
 import {NativeScriptCheckboxComponent} from './components/nativescript-checkbox.component';
@@ -35,7 +39,8 @@ const entryComponents: any[] = [
   NativeScriptTextViewComponent
 ];
 
-const moduleDeclarations: any[] = [DynamicNSDomElementDirective, entryComponents];
+const moduleDeclarations: any[] =
+    [DynamicNSDomElementDirective, CustomListPickerComponent, CustomCheckBoxComponent, ...entryComponents];
 
 @NgModule({
   imports: [

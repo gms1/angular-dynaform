@@ -9,8 +9,14 @@ import {DynamicNativeScriptFormModule} from '@angular-dynaform/nativescript';
 import {AppRoutingModule} from './app.routing';
 import {AppComponent} from './app.component';
 
-import {FormTestSwitchComponent} from './forms/form-test-switch.component';
-import {FormTestSliderComponent} from './forms/form-test-slider.component';
+import {FormTestCheckBoxComponent} from './components/form-test-checkbox.component';
+import {FormTestListPickerComponent} from './components/form-test-listpicker.component';
+import {FormTestSliderComponent} from './components/form-test-slider.component';
+import {FormTestSwitchComponent} from './components/form-test-switch.component';
+import {FormTestTextFieldComponent} from './components/form-test-textfield.component';
+import {FormTestTextFieldNumberComponent} from './components/form-test-textfield-number.component';
+import {FormTestTextFieldSecureComponent} from './components/form-test-textfield-secure.component';
+import {FormTestTextViewComponent} from './components/form-test-textview.component';
 
 
 @NgModule({
@@ -19,7 +25,11 @@ import {FormTestSliderComponent} from './forms/form-test-slider.component';
     NativeScriptModule, NativeScriptFormsModule, NativeScriptUISideDrawerModule, DynamicFormModule.forRoot(),
     DynamicNativeScriptFormModule, AppRoutingModule
   ],
-  declarations: [AppComponent, FormTestSwitchComponent, FormTestSliderComponent],
+  declarations: [
+    AppComponent, FormTestCheckBoxComponent, FormTestListPickerComponent, FormTestSliderComponent,
+    FormTestSwitchComponent, FormTestTextFieldComponent, FormTestTextFieldNumberComponent,
+    FormTestTextFieldSecureComponent, FormTestTextViewComponent
+  ],
   providers: [],
   schemas: [NO_ERRORS_SCHEMA]
 })
