@@ -60,7 +60,7 @@
     "core-js": "^2.5.7",
     "hammerjs": "^2.0.8",
     "jsep": "^0.3.4",
-    "jsonpointerx": "^1.0.11",
+    "jsonpointerx": "^1.0.12",
     "nativescript-angular": "^6.1.0-2018-05-30-02",
     "nativescript-checkbox": "^3.0.3",
     "rxjs": "^6.2.1",
