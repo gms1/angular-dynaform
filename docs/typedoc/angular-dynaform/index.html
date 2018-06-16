@@ -62,16 +62,20 @@
 			<div class="tsd-panel tsd-typography">
 				<h1 id="angular-dynaform">angular-dynaform</h1>
 				<p><a href="https://www.npmjs.com/package/%40angular-dynaform%2Fcore"><img src="https://img.shields.io/npm/v/@angular-dynaform/core.svg?colorB=007ec6" alt="npm (scoped)"></a>
+					<a href="https://snyk.io/test/github/gms1/angular-dynaform"><img src="https://snyk.io/test/github/gms1/angular-dynaform/badge.svg" alt="Known Vulnerabilities"></a>
 					<a href="https://travis-ci.org/gms1/angular-dynaform"><img src="https://api.travis-ci.org/gms1/angular-dynaform.svg?branch=master" alt="Build Status"></a>
 					<a href="https://coveralls.io/github/gms1/angular-dynaform?branch=master"><img src="https://img.shields.io/coveralls/github/gms1/angular-dynaform/master.svg" alt="Coverage Status"></a>
-					<a href="https://snyk.io/test/github/gms1/angular-dynaform"><img src="https://snyk.io/test/github/gms1/angular-dynaform/badge.svg" alt="Known Vulnerabilities"></a>
 					<a href="https://deepscan.io/dashboard/#view=project&amp;pid=698&amp;bid=1106"><img src="https://deepscan.io/api/projects/698/branches/1106/badge/grade.svg" alt="DeepScan Grade"></a>
+					<a href="https://david-dm.org/gms1/angular-dynaform"><img src="https://david-dm.org/gms1/angular-dynaform.svg" alt="Dependency Status"></a>
 				<a href="https://greenkeeper.io/"><img src="https://badges.greenkeeper.io/gms1/angular-dynaform.svg" alt="Greenkeeper badge"></a></p>
-				<p><strong>angular-dynaform</strong> is a library for rapid development of model-driven reactive forms</p>
+				<p><a href="http://makeapullrequest.com"><img src="https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat-square" alt="PRs Welcome"></a></p>
+				<p><strong>angular-dynaform</strong> is a library for rapid development of model-driven reactive forms for mobile and web</p>
 				<h2 id="features">Features</h2>
 				<ul>
 					<li>generic, expressive and extendable form library</li>
 					<li>JSON serializable form configuration</li>
+					<li>shared forms for mobile and web</li>
+					<li>form builder</li>
 					<li>observable form values and form value updates using angulars form model as a tree of FormGroups/FormArrays/FormControls</li>
 					<li>observable focus changes</li>
 					<li>application data model to form data model mapping</li>
@@ -84,13 +88,10 @@
 						</ul>
 					</li>
 				</ul>
-				<blockquote>
-					<p>NOTE: development is in early stage!</p>
-				</blockquote>
 				<h2 id="supported-ui-frameworks">Supported UI-Frameworks</h2>
 				<ul>
 					<li><a href="https://github.com/angular/material2">Material</a></li>
-					<li><a href="https://www.nativescript.org/">TODO: Nativescript</a></li>
+					<li><a href="https://github.com/NativeScript/nativescript-angular/">Nativescript Angular</a></li>
 				</ul>
 				<h2 id="links">Links</h2>
 				<ul>
@@ -375,7 +376,7 @@ npm install @angular-dynaform/material --save
 							<td>Array</td>
 							<td>yes</td>
 							<td>yes</td>
-							<td></td>
+							<td>yes</td>
 						</tr>
 						<tr>
 							<td>Group- or Subset-Model:</td>
@@ -385,14 +386,14 @@ npm install @angular-dynaform/material --save
 							<td>Fieldset</td>
 							<td>yes</td>
 							<td>yes</td>
-							<td></td>
+							<td>yes</td>
 						</tr>
 						<tr>
 							<td></td>
 							<td>Division</td>
 							<td>yes</td>
 							<td>yes</td>
-							<td></td>
+							<td>yes</td>
 						</tr>
 						<tr>
 							<td></td>
@@ -416,14 +417,14 @@ npm install @angular-dynaform/material --save
 							<td>Checkbox</td>
 							<td>yes</td>
 							<td>yes</td>
-							<td></td>
+							<td>yes</td>
 						</tr>
 						<tr>
 							<td></td>
 							<td>Datepicker</td>
 							<td>*</td>
 							<td>yes</td>
-							<td></td>
+							<td>yes**</td>
 						</tr>
 						<tr>
 							<td></td>
@@ -437,7 +438,7 @@ npm install @angular-dynaform/material --save
 							<td>Radiogroup</td>
 							<td>yes</td>
 							<td>yes</td>
-							<td></td>
+							<td>yes</td>
 						</tr>
 						<tr>
 							<td></td>
@@ -451,14 +452,14 @@ npm install @angular-dynaform/material --save
 							<td>Slider</td>
 							<td>yes</td>
 							<td>yes</td>
-							<td></td>
+							<td>yes</td>
 						</tr>
 						<tr>
 							<td></td>
 							<td>Switch</td>
 							<td>yes</td>
 							<td>yes</td>
-							<td></td>
+							<td>yes</td>
 						</tr>
 						<tr>
 							<td></td>
@@ -482,14 +483,14 @@ npm install @angular-dynaform/material --save
 							<td>Button</td>
 							<td>yes</td>
 							<td>yes</td>
-							<td></td>
+							<td>yes</td>
 						</tr>
 						<tr>
 							<td></td>
 							<td>Separator</td>
 							<td>yes</td>
 							<td>yes</td>
-							<td></td>
+							<td>yes</td>
 						</tr>
 						<tr>
 							<td></td>
@@ -500,6 +501,9 @@ npm install @angular-dynaform/material --save
 					</tbody>
 				</table>
 				<p>*) you can use &quot;input type=&#39;date&#39;&quot; as replacement for a datepicker</p>
+				<p>**) reports date as utc-timestamp</p>
+				<p>e.g if timezone is &quot;Central European Summer Time&quot; and selected date is &quot;2018-06-06&quot;
+				the value of the form control is set to &quot;2018-06-05T22:00:00.000Z&quot;</p>
 				<h2 id="license">License</h2>
 				<p><strong>angular-dynaform</strong> is licensed under the MIT license</p>
 				<p><a href="./LICENSE">LICENSE</a></p>
@@ -826,6 +830,9 @@ npm install @angular-dynaform/material --save
 						<a href="interfaces/stepper.html" class="tsd-kind-icon">Stepper</a>
 					</li>
 					<li class=" tsd-kind-interface">
+						<a href="interfaces/uiproperties.html" class="tsd-kind-icon">UIProperties</a>
+					</li>
+					<li class=" tsd-kind-interface">
 						<a href="interfaces/unaryoperations.html" class="tsd-kind-icon">Unary<wbr>Operations</a>
 					</li>
 					<li class=" tsd-kind-interface">
@@ -863,6 +870,12 @@ npm install @angular-dynaform/material --save
 					</li>
 					<li class=" tsd-kind-variable">
 						<a href="globals.html#model_value" class="tsd-kind-icon">MODEL_<wbr>VALUE</a>
+					</li>
+					<li class=" tsd-kind-function">
+						<a href="globals.html#cleanvalue" class="tsd-kind-icon">clean<wbr>Value</a>
+					</li>
+					<li class=" tsd-kind-function">
+						<a href="globals.html#clone" class="tsd-kind-icon">clone</a>
 					</li>
 					<li class=" tsd-kind-function">
 						<a href="globals.html#testasyncpatternvalidate" class="tsd-kind-icon">test<wbr>Async<wbr>Pattern<wbr>Validate</a>
