@@ -3,7 +3,7 @@ import {TestBed} from '@angular/core/testing';
 import {FormBuilder} from '../form-builder';
 import {ControlConfig, ControlType, ModelType} from '../config';
 import {mainExampleConfig} from '../spec/test.config';
-import {clone} from '../utils/clone';
+import {clone, cleanValue} from '../utils/clone';
 
 describe('form-builder test suite', () => {
   let fb: FormBuilder;
@@ -182,7 +182,7 @@ describe('form-builder test suite', () => {
         {id: 'submit', controlType: ControlType.CONTROL_BUTTON, options: {label: 'Submit'}, action: 'submit'});
 
 
-    expect(form.toFormConfig())
+    expect(cleanValue(form.toFormConfig()))
         .toEqual(mainExampleConfig, 'form builder created config should be same as the config of the main example');
 
 

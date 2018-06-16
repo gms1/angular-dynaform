@@ -10,8 +10,10 @@ import {DynamicFormFormControl} from './dynamic-form-form-control.interface';
 
 import {Stepper} from '../models/stepper.interface';
 
-// TODO: changed from interface to injectable abstract class
+export interface UIProperties { [key: string]: any; }
 
+
+// TODO: changed from interface to injectable abstract class
 @Injectable()
 export abstract class DynamicForm {
   abstract model: FormModel;
@@ -29,6 +31,8 @@ export abstract class DynamicForm {
 
   abstract get pristine(): boolean;
   abstract get touched(): boolean;
+
+  abstract get uiProperties(): UIProperties;
 
   formControlRef: ComponentRef<DynamicFormFormControl>|undefined;
   stepper?: Stepper;

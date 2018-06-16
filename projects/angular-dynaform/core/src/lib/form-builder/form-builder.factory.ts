@@ -16,27 +16,27 @@ export class FormBuilderFactory {
     return new FormBuilderForm(this, config);
   }
 
-  createGroup(config?: Partial<ControlConfig>): FormBuilderGroup {
+  createGroup(config: Partial<ControlConfig>): FormBuilderGroup {
     return new FormBuilderGroup(this, config);
   }
 
-  createSubset(config?: Partial<ControlConfig>): FormBuilderSubset {
+  createSubset(config: Partial<ControlConfig>): FormBuilderSubset {
     return new FormBuilderSubset(this, config);
   }
 
-  createArray(config?: Partial<ControlConfig>): FormBuilderArray {
+  createArray(config: Partial<ControlConfig>): FormBuilderArray {
     return new FormBuilderArray(this, config);
   }
 
-  createValueControl(config?: Partial<ControlConfig>): FormBuilderValueControl {
+  createValueControl(config: Partial<ControlConfig>): FormBuilderValueControl {
     return new FormBuilderValueControl(this, config);
   }
 
-  createButtonControl(config?: Partial<ControlConfig>): FormBuilderButtonControl {
+  createButtonControl(config: Partial<ControlConfig>): FormBuilderButtonControl {
     return new FormBuilderButtonControl(this, config);
   }
 
-  createSeparatorControl(config?: Partial<ControlConfig>): FormBuilderSeparatorControl {
+  createSeparatorControl(config: Partial<ControlConfig>): FormBuilderSeparatorControl {
     return new FormBuilderSeparatorControl(this, config);
   }
 
@@ -72,7 +72,7 @@ export abstract class FormBuilderAbstractControl extends FormBuilderObject {
     return this._config.options;
   }
 
-  constructor(factory: FormBuilderFactory, config: Partial < ControlConfig >= {}) {
+  constructor(factory: FormBuilderFactory, config: Partial<ControlConfig>) {
     super(factory);
     this._config = clone(config);
   }
@@ -99,37 +99,37 @@ export class FormBuilderGroupBuilder extends FormBuilderObject {
     this._options = {};
   }
 
-  addGroup(config?: Partial<ControlConfig>): FormBuilderGroup {
+  addGroup(config: Partial<ControlConfig>): FormBuilderGroup {
     const item = this.factory.createGroup(config);
     this.group.push(item);
     return item;
   }
 
-  addSubset(config?: Partial<ControlConfig>): FormBuilderSubset {
+  addSubset(config: Partial<ControlConfig>): FormBuilderSubset {
     const item = this.factory.createSubset(config);
     this.group.push(item);
     return item;
   }
 
-  addArray(config?: Partial<ControlConfig>): FormBuilderArray {
+  addArray(config: Partial<ControlConfig>): FormBuilderArray {
     const item = this.factory.createArray(config);
     this.group.push(item);
     return item;
   }
 
-  addControl(config?: Partial<ControlConfig>): FormBuilderValueControl {
+  addControl(config: Partial<ControlConfig>): FormBuilderValueControl {
     const item = this.factory.createValueControl(config);
     this.group.push(item);
     return item;
   }
 
-  addButton(config?: Partial<ControlConfig>): FormBuilderButtonControl {
+  addButton(config: Partial<ControlConfig>): FormBuilderButtonControl {
     const item = this.factory.createButtonControl(config);
     this.group.push(item);
     return item;
   }
 
-  addSeparator(config?: Partial<ControlConfig>): FormBuilderSeparatorControl {
+  addSeparator(config: Partial<ControlConfig>): FormBuilderSeparatorControl {
     const item = this.factory.createSeparatorControl(config);
     this.group.push(item);
     return item;
@@ -165,7 +165,7 @@ export class FormBuilderGroup extends FormBuilderAbstractControl {
     return this._config;
   }
 
-  constructor(factory: FormBuilderFactory, config: Partial < ControlConfig >= {}) {
+  constructor(factory: FormBuilderFactory, config: Partial<ControlConfig>) {
     super(factory, config);
     this._group = this.factory.createGroupBuilder();
   }
@@ -188,7 +188,7 @@ export class FormBuilderSubset extends FormBuilderAbstractControl {
     return this._config;
   }
 
-  constructor(factory: FormBuilderFactory, config: Partial < ControlConfig >= {}) {
+  constructor(factory: FormBuilderFactory, config: Partial<ControlConfig>) {
     super(factory, config);
     this._group = this.factory.createGroupBuilder();
   }
@@ -223,7 +223,7 @@ export class FormBuilderArray extends FormBuilderAbstractControl {
     return this._config;
   }
 
-  constructor(factory: FormBuilderFactory, config: Partial < ControlConfig >= {}) {
+  constructor(factory: FormBuilderFactory, config: Partial<ControlConfig>) {
     super(factory, config);
     this._group = this.factory.createGroupBuilder();
     this._header = this.factory.createGroupBuilder();
@@ -237,15 +237,9 @@ export class FormBuilderArray extends FormBuilderAbstractControl {
     const itemOptions = this.group.toGroupOptions();
     const footerOptions = this.footer.toGroupOptions();
 
-    if (headerOptions) {
-      config.options.header = headerOptions;
-      }
-    if (itemOptions) {
-      config.options.item = itemOptions;
-      }
-    if (footerOptions) {
-      config.options.footer = footerOptions;
-      }
+    config.options.header = headerOptions;
+    config.options.item = itemOptions;
+    config.options.footer = footerOptions;
     return config;
   }
   }
@@ -257,7 +251,7 @@ export class FormBuilderValueControl extends FormBuilderAbstractControl {
     return this._config;
   }
 
-  constructor(factory: FormBuilderFactory, config: Partial < ControlConfig >= {}) {
+  constructor(factory: FormBuilderFactory, config: Partial<ControlConfig>) {
     super(factory, config);
   }
 
@@ -274,7 +268,7 @@ export class FormBuilderButtonControl extends FormBuilderAbstractControl {
     return this._config;
   }
 
-  constructor(factory: FormBuilderFactory, config: Partial < ControlConfig >= {}) {
+  constructor(factory: FormBuilderFactory, config: Partial<ControlConfig>) {
     super(factory, config);
     this.config.controlType = ControlType.CONTROL_BUTTON;  // allow overwrite
   }
@@ -292,7 +286,7 @@ export class FormBuilderSeparatorControl extends FormBuilderAbstractControl {
     return this._config;
   }
 
-  constructor(factory: FormBuilderFactory, config: Partial < ControlConfig >= {}) {
+  constructor(factory: FormBuilderFactory, config: Partial<ControlConfig>) {
     super(factory, config);
     this.config.controlType = ControlType.CONTROL_SEPARATOR;  // allow overwrite
   }

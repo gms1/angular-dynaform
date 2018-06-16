@@ -7,7 +7,7 @@ import {FormModel} from '../models/form-model';
 
 import {DynamicFormControl} from './dynamic-form-control.interface';
 import {DynamicFormFormControl} from './dynamic-form-form-control.interface';
-import {DynamicForm} from './dynamic-form.interface';
+import {DynamicForm, UIProperties} from './dynamic-form.interface';
 
 import {Stepper} from '../models/stepper.interface';
 
@@ -19,6 +19,7 @@ import {Stepper} from '../models/stepper.interface';
 })
 export class DynamicFormComponent extends DynamicForm {
   config!: FormConfig;
+
 
   @Input()
   get model(): FormModel {
@@ -63,6 +64,10 @@ export class DynamicFormComponent extends DynamicForm {
     return this.model.touched;
   }
 
+  get uiProperties(): UIProperties {
+    return this._uiProperties;
+  }
+
   formControlRef: ComponentRef<DynamicFormFormControl>|undefined;
   stepper?: Stepper;
 
@@ -72,11 +77,14 @@ export class DynamicFormComponent extends DynamicForm {
 
   private mapIdToControl: Map<string, DynamicFormControl>;
 
+  _uiProperties: UIProperties;
+
   constructor() {
     super();
     this._submit = new EventEmitter<any>(false);
     this._reset = new EventEmitter<any>(false);
     this.mapIdToControl = new Map<string, DynamicFormControl>();
+    this._uiProperties = {};
   }
 
   initValue(value?: any): void {

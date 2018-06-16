@@ -48,9 +48,7 @@ import {
   mainExampleAppModelData
 } from './spec/test.config';
 
-function cleanValue(value: any): any {
-  return JSON.parse(JSON.stringify(value, (k, v) => (v === null) ? undefined : v, 2));
-}
+import {cleanValue} from './utils/clone';
 
 describe('core-module test suite', () => {
   let fixture: ComponentFixture<TestFormContainerComponent>;
@@ -354,6 +352,8 @@ describe('core-module test suite', () => {
   // ACTIONS
   // --------------------------------------------------------------------------------------------------
   it('submit/reset should be disabled on invalid/pristine form', () => {
+    expect(form.uiProperties).toEqual({});
+
     // empty form should be invalid, because some fields are required
     expect(form.valid).toBe(false, 'empty form is valid');
     expect(form.pristine).toBe(true, 'new empty form is not pristine');
