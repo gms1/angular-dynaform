@@ -6,6 +6,10 @@ import * as path from 'path';
 export function bump(pkgPath: string, version: string, indent?: number): any {
   const pkgJson = require(pkgPath);
   pkgJson.version = version;
+  if (pkgJson.name === '@angular-dynaform/nativescript') {
+    pkgJson.version += '-alpha.0';
+    }
+
   const tmpJsonPath = pkgPath + '.tmp';
 
   const pkgText = JSON.stringify(pkgJson, undefined, indent || 2) + '\n';
@@ -23,5 +27,5 @@ if (process.argv.length !== 4) {
   }
 
 
-const pkgName = bump(path.resolve(process.argv[2]), process.argv[3]).name;
-console.log(`setting ${process.argv[2]}: ${pkgName}@${process.argv[3]} succeed`);
+const newPkgJson = bump(path.resolve(process.argv[2]), process.argv[3]);
+console.log(`setting ${process.argv[2]}: ${newPkgJson.name}@${newPkgJson.version} succeed`);

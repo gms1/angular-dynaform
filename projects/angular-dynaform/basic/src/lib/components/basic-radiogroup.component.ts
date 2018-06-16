@@ -20,6 +20,11 @@ import {Component} from '@angular/core';
         adfHTMLDomElement
         [ngClass]="model.css.control"
       >
+        <legend
+          *ngIf="model.local.label"
+          [ngClass]="model.css.label"
+          [innerHTML]="model.local.label"
+        ></legend>
         <label *ngFor="let opt of model.local.valueOptions">
           <input
             [formControlName]="model.key"
@@ -29,13 +34,6 @@ import {Component} from '@angular/core';
           <span [innerHTML]="opt.label"></span>
         </label>
       </fieldset>
-      <label
-        *ngIf="model.local.label"
-        [attr.for]="model.id"
-        class="adf-back-label"
-        [ngClass]="model.css.label"
-        [innerHTML]="model.local.label"
-      ></label>
       <adf-error-container [model]="model">
       </adf-error-container>
     </div>

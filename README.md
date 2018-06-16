@@ -1,21 +1,24 @@
 # angular-dynaform
 
 [![npm (scoped)](https://img.shields.io/npm/v/@angular-dynaform/core.svg?colorB=007ec6)](https://www.npmjs.com/package/%40angular-dynaform%2Fcore)
+[![Known Vulnerabilities](https://snyk.io/test/github/gms1/angular-dynaform/badge.svg)](https://snyk.io/test/github/gms1/angular-dynaform)
 [![Build Status](https://api.travis-ci.org/gms1/angular-dynaform.svg?branch=master)](https://travis-ci.org/gms1/angular-dynaform)
 [![Coverage Status](https://img.shields.io/coveralls/github/gms1/angular-dynaform/master.svg)](https://coveralls.io/github/gms1/angular-dynaform?branch=master)
-[![Known Vulnerabilities](https://snyk.io/test/github/gms1/angular-dynaform/badge.svg)](https://snyk.io/test/github/gms1/angular-dynaform)
 [![DeepScan Grade](https://deepscan.io/api/projects/698/branches/1106/badge/grade.svg)](https://deepscan.io/dashboard/#view=project&pid=698&bid=1106)
+[![Dependency Status](https://david-dm.org/gms1/angular-dynaform.svg)](https://david-dm.org/gms1/angular-dynaform)
 [![Greenkeeper badge](https://badges.greenkeeper.io/gms1/angular-dynaform.svg)](https://greenkeeper.io/)
 
 
 [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat-square)](http://makeapullrequest.com)
 
-**angular-dynaform** is a library for rapid development of model-driven reactive forms
+
+**angular-dynaform** is a library for rapid development of model-driven reactive forms for mobile and web
 
 ## Features
 
 * generic, expressive and extendable form library
 * JSON serializable form configuration
+* shared forms for mobile and web
 * form builder
 * observable form values and form value updates using angulars form model as a tree of FormGroups/FormArrays/FormControls
 * observable focus changes
@@ -30,7 +33,7 @@
 ## Supported UI-Frameworks
 
 * [Material](https://github.com/angular/material2)
-* [TODO: Nativescript](https://www.nativescript.org/)
+* [Nativescript Angular](https://github.com/NativeScript/nativescript-angular/)
 
 ## Links
 
@@ -322,28 +325,33 @@ implement either **DynamicFormValidatorFn** or **DynamicFormAsyncValidatorFn** a
 | Model                     | Control    | HTML  | Material | Nativescript     |
 |---------------------------|------------|-------|----------|------------------|
 |  ArrayModel:
-|                           | Array      |  yes  |  yes     |                  |
+|                           | Array      |  yes  |  yes     | yes              |
 |  Group- or Subset-Model:
-|                           | Fieldset   |  yes  |  yes     |                  |
-|                           | Division   |  yes  |  yes     |                  |
+|                           | Fieldset   |  yes  |  yes     | yes              |
+|                           | Division   |  yes  |  yes     | yes              |
 |                           | Tabgroup   |       |  yes     |                  |
 |                           | Stepper    |       |  yes     |                  |
 |  ValueControlModel:
-|                           | Checkbox   |  yes  |  yes     |                  |
-|                           | Datepicker |  *    |  yes     |                  |
+|                           | Checkbox   |  yes  |  yes     |  yes             |
+|                           | Datepicker |  *    |  yes     |  yes**           |
 |                           | Input      |  yes  |  yes     |  yes (TextField) |
-|                           | Radiogroup |  yes  |  yes     |                  |
+|                           | Radiogroup |  yes  |  yes     |  yes             |
 |                           | Select     |  yes  |  yes     |                  |
-|                           | Slider     |  yes  |  yes     |                  |
-|                           | Switch     |  yes  |  yes     |                  |
+|                           | Slider     |  yes  |  yes     |  yes             |
+|                           | Switch     |  yes  |  yes     |  yes             |
 |                           | Textarea   |  yes  |  yes     |  yes (TextView)  |
 |                           | Listpicker |       |          |  yes             |
 |  NullControlModel:
-|                           | Button     |  yes  |  yes     |                  |
-|                           | Separator  |  yes  |  yes     |                  |
+|                           | Button     |  yes  |  yes     |  yes             |
+|                           | Separator  |  yes  |  yes     |  yes             |
 |                           |            |       |          |                  |
 
 *) you can use "input type='date'" as replacement for a datepicker
+
+**) reports date as utc-timestamp
+
+e.g if timezone is "Central European Summer Time" and selected date is "2018-06-06"
+ the value of the form control is set to "2018-06-05T22:00:00.000Z"
 
 ## License
 

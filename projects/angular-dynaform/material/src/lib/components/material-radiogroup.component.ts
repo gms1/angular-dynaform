@@ -14,6 +14,13 @@ import {Component} from '@angular/core';
       [formGroup]="model.ngGroup"
       [hidden]="model.hidden"
     >
+      <label
+        *ngIf="model.local.label"
+        [attr.for]="model.id"
+        class="adf-front-label"
+        [ngClass]="model.css.label"
+        [innerHTML]="model.local.label"
+      ></label>
       <mat-radio-group
         [id]="model.id"
         [formControlName]="model.key"
@@ -27,13 +34,6 @@ import {Component} from '@angular/core';
           <span [innerHTML]="opt.label"></span>
         </mat-radio-button>
       </mat-radio-group>
-      <label
-        *ngIf="model.local.label"
-        [attr.for]="model.id"
-        class="adf-back-label"
-        [ngClass]="model.css.label"
-        [innerHTML]="model.local.label"
-      ></label>
       <adf-error-container [model]="model">
       </adf-error-container>
     </div>

@@ -56,7 +56,6 @@ export class CustomListPickerComponent implements ControlValueAccessor, OnInit {
 
   selectedIndexChanged(index: number): void {
     const newValue = index < 0 || index >= this.listPickerValues.length ? null : this.listPickerValues[index];
-    console.log(`onChange(${newValue})`);
     this.onChange(newValue);  // call registered onChange callback to set the form model value
   }
 
@@ -67,7 +66,6 @@ export class CustomListPickerComponent implements ControlValueAccessor, OnInit {
   private onTouched = (): void => {};
 
   registerOnChange(fn: (val: any) => void): void {
-    console.log(`registerOnChange(fn)`);
     this.onChange = fn;
   }
   registerOnTouched(fn: () => void): void {
@@ -78,11 +76,9 @@ export class CustomListPickerComponent implements ControlValueAccessor, OnInit {
   }
 
   writeValue(val: any) {
-    console.log(`writeValue(${val})`);
     // search for the index of the given value
     const newIdx = this.listPickerValues.indexOf(val);
     // update selectedIndex to update the ListPicker control
     this.selectedIndex = newIdx >= 0 ? newIdx : undefined;
-    console.log(`selectedIndex=${this.selectedIndex}`);
   }
 }

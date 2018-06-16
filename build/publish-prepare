@@ -14,6 +14,7 @@ PKGJSON=(
 dist/@angular-dynaform/core/package.json
 dist/@angular-dynaform/basic/package.json
 dist/@angular-dynaform/material/package.json
+dist/@angular-dynaform/nativescript/package.json
 )
 
 #---------------------------------------------------------

@@ -33,4 +33,12 @@ pushd "${PROJ_HOME}/dist/@angular-dynaform/material" &>/dev/null || \
       die "failed to publish 'material'"
 popd &>/dev/null
 
+pushd "${PROJ_HOME}/dist/@angular-dynaform/nativescript" &>/dev/null || \
+    die "directory '${PROJ_HOME}/dist/@angular-dynaform/nativescript' not found"
+  npm publish --tag next || \
+      die "failed to publish 'nativescript'"
+popd &>/dev/null
+
+
+
 

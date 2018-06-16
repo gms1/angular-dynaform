@@ -4,8 +4,12 @@
       <StackLayout class="sidedrawer-content">
         <Label col="1" text="Test CheckBox" class="sidedrawer-list-item" [class.selected]="isComponentSelected('/testCheckBox')"
           (tap)="onNavItemTap('/testCheckBox')"></Label>
+        <Label col="1" text="Test DatePicker" class="sidedrawer-list-item" [class.selected]="isComponentSelected('/testDatePicker')"
+          (tap)="onNavItemTap('/testDatePicker')"></Label>
         <Label col="1" text="Test ListPicker" class="sidedrawer-list-item" [class.selected]="isComponentSelected('/testListPicker')"
           (tap)="onNavItemTap('/testListPicker')"></Label>
+        <Label col="1" text="Test RadioGroup" class="sidedrawer-list-item" [class.selected]="isComponentSelected('/testRadioGroup')"
+          (tap)="onNavItemTap('/testRadioGroup')"></Label>
         <Label col="1" text="Test Slider" class="sidedrawer-list-item" [class.selected]="isComponentSelected('/testSlider')" (tap)="onNavItemTap('/testSlider')"></Label>
         <Label col="1" text="Test Switch" class="sidedrawer-list-item" [class.selected]="isComponentSelected('/testSwitch')" (tap)="onNavItemTap('/testSwitch')"></Label>
         <Label col="1" text="Test TextField" class="sidedrawer-list-item" [class.selected]="isComponentSelected('/testTextField')"
@@ -27,9 +31,9 @@ TODO: review layouts used in nativescript components
                                               enable    show | focus | updateOn
 TODO:       | css | value | touch. | prist. | disable | hide | blur  | blur
 checkbox    |  y  |   y   |   NO   |   y    |   y     |  y   |  NO   | NO
-datepicker  |  x  |       |        |        |         |      |       |
+datepicker  |  y  |   y** |   NO   |   y    |   y     |  y   |  NO   | NO
 listpicker  |  y  |   y   |   NO   |   y    |   y     |  y   |  NO   | NO
-radiogroup  |  x  |       |        |        |         |      |       |
+radiogroup  |  y  |   y   |   NO   |   y    |   y     |  y   |  NO   | NO
 slider      |  y  |   y   |   NO   |   y    |   y     |  y   |  NO   | NO
 switch      |  y  |   y   |   y    |   y    |   y     |  y   |  NO   | NO
 textfield*  |  y  |   y   |   y    |   y    |   y     |  y   |  y    | NO
@@ -37,6 +41,8 @@ textview    |  y  |   y   |   y    |   y    |   y     |  y   |  y    | NO
 
 *) supported inputType for TextField:
 password (text), datetime, number, url, email, phone
+
+**) reports date as utc-timestamp
 
 other controls:
 array, button, division, fieldset, separator

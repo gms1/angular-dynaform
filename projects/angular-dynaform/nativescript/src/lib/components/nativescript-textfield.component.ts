@@ -100,8 +100,6 @@ export class NativeScriptTextFieldComponent extends DynamicFormControlComponent<
     } else {
       this.setOptsDefaults();
     }
-    console.log(`keyboardType: ${this.opts.keyboardType}`);
-    console.log(`secure: ${this.opts.secure}`);
   }
 
 

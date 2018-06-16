@@ -10,7 +10,9 @@ import {AppRoutingModule} from './app.routing';
 import {AppComponent} from './app.component';
 
 import {FormTestCheckBoxComponent} from './components/form-test-checkbox.component';
+import {FormTestDatePickerComponent} from './components/form-test-datepicker.component';
 import {FormTestListPickerComponent} from './components/form-test-listpicker.component';
+import {FormTestRadioGroupComponent} from './components/form-test-radiogroup.component';
 import {FormTestSliderComponent} from './components/form-test-slider.component';
 import {FormTestSwitchComponent} from './components/form-test-switch.component';
 import {FormTestTextFieldComponent} from './components/form-test-textfield.component';
@@ -26,9 +28,9 @@ import {FormTestTextViewComponent} from './components/form-test-textview.compone
     DynamicNativeScriptFormModule, AppRoutingModule
   ],
   declarations: [
-    AppComponent, FormTestCheckBoxComponent, FormTestListPickerComponent, FormTestSliderComponent,
-    FormTestSwitchComponent, FormTestTextFieldComponent, FormTestTextFieldNumberComponent,
-    FormTestTextFieldSecureComponent, FormTestTextViewComponent
+    AppComponent, FormTestCheckBoxComponent, FormTestDatePickerComponent, FormTestListPickerComponent,
+    FormTestRadioGroupComponent, FormTestSliderComponent, FormTestSwitchComponent, FormTestTextFieldComponent,
+    FormTestTextFieldNumberComponent, FormTestTextFieldSecureComponent, FormTestTextViewComponent
   ],
   providers: [],
   schemas: [NO_ERRORS_SCHEMA]

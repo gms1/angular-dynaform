@@ -10,6 +10,7 @@ import {NG_VALUE_ACCESSOR, ControlValueAccessor} from '@angular/forms';
       [id]="id"
       [text]="text"
       [isEnabled]="isEnabled" [checked]="checked" (checkedChange)="checkedChange($event.value)"
+      class="checkbox"
     >
     </CheckBox>
 `,

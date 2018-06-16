@@ -1,12 +1,14 @@
 // tslint:disable use-input-property-decorator use-output-property-decorator
 // import { Component, EventEmitter, Output } from '@angular/core';
 import {
+  DynamicForm,
   DynamicFormControlComponentBase,
   DynamicFormFormControlComponent,
+  DynamicFormService,
   GroupModel,
   GroupOptions
 } from '@angular-dynaform/core';
-import {Component} from '@angular/core';
+import {Component, ElementRef} from '@angular/core';
 
 
 @Component({
@@ -41,5 +43,8 @@ export class NativeScriptFormComponent extends DynamicFormFormControlComponent {
   model!: GroupModel;
   options!: GroupOptions;
 
-  // TODO: onSubmit/onReset
+  constructor(form: DynamicForm, dynamicFormService: DynamicFormService, elRef: ElementRef) {
+    super(form, dynamicFormService, elRef);
+    this.form.uiProperties.type = 'NativeScript';
+  }
 }
