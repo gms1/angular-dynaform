@@ -1,5 +1,17 @@
 # CHANGELOG
 
+## 1.0.2
+
+* **Feature**
+  * nativescript support
+
+* **Fix**
+  * missing peerDependencies
+
+## 1.0.1
+
+maintenance release
+
 ## 1.0.0
 
 * **Feature**
