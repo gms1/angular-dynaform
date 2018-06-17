@@ -3,6 +3,13 @@
   "dest": "../../../dist/@angular-dynaform/core",
   "keepLifecycleScripts": true,
   "lib": {
-    "entryFile": "src/public_api.ts"
+    "entryFile": "src/public_api.ts",
+    "umdId": "adf.core",
+    "umdModuleIds": {
+      "jsep": "jsep",
+      "jsonpointerx": "jsonpointerx",
+      "rxjs": "Rx",
+      "rxjs/operators": "Rx.Observable.prototype"
+    }
   }
 }

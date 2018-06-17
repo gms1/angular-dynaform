@@ -17,25 +17,25 @@ fi
 
 pushd "${PROJ_HOME}/dist/@angular-dynaform/core" &>/dev/null || \
     die "directory '${PROJ_HOME}/dist/@angular-dynaform/core' not found"
-  npm publish || \
+  npm publish --access=public || \
       die "failed to publish 'core'"
 popd &>/dev/null
 
 pushd "${PROJ_HOME}/dist/@angular-dynaform/basic" &>/dev/null || \
     die "directory '${PROJ_HOME}/dist/@angular-dynaform/basic' not found"
-  npm publish || \
+  npm publish --access=public || \
       die "failed to publish 'basic'"
 popd &>/dev/null
 
 pushd "${PROJ_HOME}/dist/@angular-dynaform/material" &>/dev/null || \
     die "directory '${PROJ_HOME}/dist/@angular-dynaform/material' not found"
-  npm publish || \
+  npm publish --access=public || \
       die "failed to publish 'material'"
 popd &>/dev/null
 
 pushd "${PROJ_HOME}/dist/@angular-dynaform/nativescript" &>/dev/null || \
     die "directory '${PROJ_HOME}/dist/@angular-dynaform/nativescript' not found"
-  npm publish --tag next || \
+  npm publish --access=public --tag next || \
       die "failed to publish 'nativescript'"
 popd &>/dev/null
 
