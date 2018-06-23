@@ -25,16 +25,16 @@
     ],
     "paths": {
       "@angular-dynaform/core": [
-        "dist/@angular-dynaform/core"
+        "dist/angular-dynaform/core"
       ],
       "@angular-dynaform/basic": [
-        "dist/@angular-dynaform/basic"
+        "dist/angular-dynaform/basic"
       ],
       "@angular-dynaform/material": [
-        "dist/@angular-dynaform/material"
+        "dist/angular-dynaform/material"
       ],
       "@angular-dynaform/nativescript": [
-        "dist/@angular-dynaform/nativescript"
+        "dist/angular-dynaform/nativescript"
       ]
     }
   }

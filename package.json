@@ -42,7 +42,8 @@
     "plunker:build": "adf_plunker_build",
     "plunker:publish": "adf_plunker_publish",
     "plunker:basic-example": "cd dist/plunkr/basic-example && lite-server",
-    "plunker:material-example": "cd dist/plunkr/material-example && lite-server"
+    "plunker:material-example": "cd dist/plunkr/material-example && lite-server",
+    "postinstall": "./build/post-install"
   },
   "private": true,
   "dependencies": {

@@ -1,0 +1,32 @@
+
+#---------------------------------------------------------
+PKG_JSONS=(
+  ./package.json
+  ./projects/angular-dynaform/core/package.json
+  ./projects/angular-dynaform/basic/package.json
+  ./projects/angular-dynaform/material/package.json
+  ./projects/angular-dynaform/nativescript/package.json
+)
+
+export PKG_JSONS
+
+#---------------------------------------------------------
+PKG_JSON_LOCKS=(
+  ./package-lock.json
+)
+
+export PKG_JSON_LOCKS
+
+#---------------------------------------------------------
+
+PKG_JSONS_DIST=(
+  ./dist/angular-dynaform/core/package.json
+  ./dist/angular-dynaform/basic/package.json
+  ./dist/angular-dynaform/material/package.json
+  ./dist/angular-dynaform/nativescript/package.json
+)
+
+export PKG_JSONS_DIST
+
+#---------------------------------------------------------
+

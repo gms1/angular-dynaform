@@ -9,15 +9,8 @@ BUILD_SH_HOME="${PROJ_HOME}/build/sh"
 . "${DN}/sh/lib.sh"
 
 #---------------------------------------------------------
-
-PKGJSON=(
-  package.json
-  package-lock.json
-  projects/angular-dynaform/core/package.json
-  projects/angular-dynaform/basic/package.json
-  projects/angular-dynaform/material/package.json
-  projects/angular-dynaform/nativescript/package.json
-)
+[ -f "${DN}/config" ] || die "config '${DN}/config' not found"
+. "${DN}/config"
 
 #---------------------------------------------------------
 if [ $# -ne 1 ]; then
@@ -26,10 +19,20 @@ if [ $# -ne 1 ]; then
 fi
 VER=$1
 
+PKGS=()
+PKGS+=( "${PKG_JSONS[@]}" )
+PKGS+=( "${PKG_JSON_LOCKS[@]}" )
+
 pushd "${PROJ_HOME}" &>/dev/null        || die "failed to cwd '${PROJ_HOME}'"
 
-  for file in "${PKGJSON[@]}"; do
-    ${BUILD_SH_HOME}/tsrun version-bump.ts "${file}" "${VER}"
+  for file in "${PKGS[@]}"; do
+    if [[ "$file" == */nativescript/* ]]; then
+      ${BUILD_SH_HOME}/tsrun version-bump.ts "${file}" "${VER}-alpha.0"
+    else
+      ${BUILD_SH_HOME}/tsrun version-bump.ts "${file}" "${VER}"
+    fi
   done
 
 popd &>/dev/null
+echo
+"${DN}/post-install"

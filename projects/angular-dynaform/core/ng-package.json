@@ -1,6 +1,6 @@
 {
   "$schema": "../../../node_modules/ng-packagr/ng-package.schema.json",
-  "dest": "../../../dist/@angular-dynaform/core",
+  "dest": "../../../dist/angular-dynaform/core",
   "deleteDestPath": false,
   "keepLifecycleScripts": true,
   "lib": {

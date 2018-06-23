@@ -18,10 +18,4 @@ if [ $# -ne 0 ]; then
   exit 1
 fi
 
-pushd "${PROJ_HOME}" &>/dev/null        || die "failed to cwd '${PROJ_HOME}'"
-
-  for file in "${PKG_JSONS_DIST[@]}"; do
-    ${BUILD_SH_HOME}/tsrun publish-prepare.ts "${file}"
-  done
-
-popd &>/dev/null
+ ${BUILD_SH_HOME}/tsrun post-install.ts "${PKG_JSONS[@]}"

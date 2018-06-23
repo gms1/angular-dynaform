@@ -29,6 +29,16 @@
       "ios": "3.0.1"
     }
   },
+  "peerDependencies": {
+    "rxjs": "^6.2.1",
+    "@angular/core": "^6.0.6",
+    "@angular/common": "^6.0.6",
+    "@angular/forms": "^6.0.6",
+    "tns-core-modules": "^4.1.0",
+    "nativescript-angular": "^6.1.0-2018-05-30-02",
+    "nativescript-checkbox": "^3.0.3",
+    "@angular-dynaform/core": "1.0.2"
+  },
   "scripts": {
     "prepublishOnly": "echo \"ERROR: please use the production-build for publishing\" && exit 1"
   }
