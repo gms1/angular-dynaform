@@ -3,6 +3,7 @@ import * as process from 'process';
 import {readPackageJson, writePackageJson, getPackageDependencies} from './utils/package-json';
 
 /*
+  update peerDeps versions according to first package.json
  */
 
 const appname = path.basename(process.argv[1]);
@@ -22,13 +23,11 @@ pkgJsons.forEach((pkgJson) => depMap.set(pkgJson.json.name, pkgJson.json.version
 
 pkgJsons.slice(1).forEach(
     (pkgJson) => {
-      if (!pkgJson.json.peerDependencies) {
-        return;
-      }
+      if (!pkgJson.json.peerDependencies) { return; }
       let update = false;
       Object.keys(pkgJson.json.peerDependencies).forEach((name) => {
         const newVer = depMap.get(name);
-        if (newVer !== pkgJson.json.peerDependencies[name]) {
+        if (newVer && newVer !== pkgJson.json.peerDependencies[name]) {
           const oldVer = pkgJson.json.peerDependencies[name];
           pkgJson.json.peerDependencies[name] = newVer;
           console.log(`${pkgJson.path}:  peer-dependency ${name}: changed ${oldVer} => ${newVer}`);

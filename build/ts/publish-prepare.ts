@@ -19,5 +19,6 @@ if (process.argv.length !== 3) {
 
 let pkgJson = readPackageJson(process.argv[2]);
 delete pkgJson.scripts;
+delete pkgJson.devDependencies;
 pkgJson = writePackageJson(process.argv[2], pkgJson);
 console.log(`prepare publishing for ${process.argv[2]} => ${pkgJson.name}@${pkgJson.version} succeed`);
