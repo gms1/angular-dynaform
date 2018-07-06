@@ -28,9 +28,9 @@ export abstract class DynamicFormValidationBase<Fn> {
     const msg = (control.local.errors && control.local.errors[key]) ||
         (control.formModel.i18n && control.formModel.i18n.errors && control.formModel.i18n.errors[key]) ||
         control.formModel.config.errors && control.formModel.config.errors[key] || key;
-    return {[key]: {key, order, message: msg || key}};
+    return {[key]: {key, order, message: msg}};
   }
-  }
+}
 
 export abstract class DynamicFormValidation extends DynamicFormValidationBase<ValidatorFn> {
   validateWrap(control: ControlModel, key: string|string[], order: number): ValidatorFn[] {
@@ -41,7 +41,7 @@ export abstract class DynamicFormValidation extends DynamicFormValidationBase<Va
       });
     } else {
       res.push(this.validateKey(control, key, order));
-      }
+    }
     return res;
   }
 
@@ -52,7 +52,7 @@ export abstract class DynamicFormValidation extends DynamicFormValidationBase<Va
       return res === null ? res : super.buildError(control, key, order, res);
     };
   }
-  }
+}
 
 export abstract class DynamicFormAsyncValidation extends DynamicFormValidationBase<AsyncValidatorFn> {
   validateWrap(control: ControlModel, key: string|string[], order: number): AsyncValidatorFn[] {
@@ -63,7 +63,7 @@ export abstract class DynamicFormAsyncValidation extends DynamicFormValidationBa
       });
     } else {
       res.push(this.validateKey(control, key, order));
-      }
+    }
     return res;
   }
 
@@ -82,7 +82,7 @@ export abstract class DynamicFormAsyncValidation extends DynamicFormValidationBa
       }
     };
   }
-  }
+}
 
 export class DynamicFormValidatorRegistry extends DynamicFormValidation {
   reg: FnRegistry<DynamicFormValidatorFn>;
@@ -110,7 +110,7 @@ export class DynamicFormValidatorRegistry extends DynamicFormValidation {
     const dffn = this.reg.getFn(key);
     if (!dffn) {
       return DynamicFormValidatorRegistry.nullValidator;
-      }
+    }
     return dffn(key, control);
   }
 
@@ -128,38 +128,38 @@ export class DynamicFormValidatorRegistry extends DynamicFormValidation {
   static minLength(key: string, control: ControlModel): ValidatorFn {
     if (!control.options || typeof control.options.minLength !== 'number') {
       return DynamicFormValidatorRegistry.nullValidator;
-      }
+    }
     return Validators.minLength(control.options.minLength);
   }
   static maxLength(key: string, control: ControlModel): ValidatorFn {
     if (!control.options || typeof control.options.maxLength !== 'number') {
       return DynamicFormValidatorRegistry.nullValidator;
-      }
+    }
     return Validators.maxLength(control.options.maxLength);
   }
   static min(key: string, control: ControlModel): ValidatorFn {
     if (!control.options || typeof control.options.min !== 'number') {
       return DynamicFormValidatorRegistry.nullValidator;
-      }
+    }
     return Validators.min(control.options.min);
   }
   static max(key: string, control: ControlModel): ValidatorFn {
     if (!control.options || typeof control.options.max !== 'number') {
       return DynamicFormValidatorRegistry.nullValidator;
-      }
+    }
     return Validators.max(control.options.max);
   }
   static pattern(key: string, control: ControlModel): ValidatorFn {
     if (!control.options || typeof control.options.pattern !== 'string') {
       return DynamicFormValidatorRegistry.nullValidator;
-      }
+    }
     return Validators.pattern(control.options.pattern);
   }
   static email(key: string, control: ControlModel): ValidatorFn {
     return Validators.email;
   }
   // tslint:enable no-unbound-method
-  }
+}
 
 
 export class DynamicFormAsyncValidatorRegistry extends DynamicFormAsyncValidation {
@@ -179,7 +179,7 @@ export class DynamicFormAsyncValidatorRegistry extends DynamicFormAsyncValidatio
     const dffn = this.reg.getFn(key);
     if (!dffn) {
       return DynamicFormAsyncValidatorRegistry.nullValidator;
-      }
+    }
     return dffn(key, control);
   }
 
