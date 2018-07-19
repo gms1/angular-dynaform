@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## 1.0.3
+
+maintenance release
+
 ## 1.0.2
 
 * **Feature**
