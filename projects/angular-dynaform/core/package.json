@@ -25,7 +25,7 @@
     "@angular/core": "^6.0.9",
     "@angular/common": "^6.0.9",
     "@angular/forms": "^6.0.9",
-    "jsonpointerx": "^1.0.12",
+    "jsonpointerx": "^1.0.14",
     "jsep": "^0.3.4"
   },
   "scripts": {
