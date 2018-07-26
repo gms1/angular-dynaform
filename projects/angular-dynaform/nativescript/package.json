@@ -31,11 +31,11 @@
   },
   "peerDependencies": {
     "rxjs": "^6.2.2",
-    "@angular/core": "^6.0.9",
-    "@angular/common": "^6.0.9",
-    "@angular/forms": "^6.0.9",
+    "@angular/core": "^6.1.0",
+    "@angular/common": "^6.1.0",
+    "@angular/forms": "^6.1.0",
     "tns-core-modules": "^4.1.1",
-    "nativescript-angular": "^6.0.6",
+    "nativescript-angular": ">=6.1.0-2018-07-25-01 <6.2",
     "nativescript-checkbox": "^3.0.3",
     "@angular-dynaform/core": "1.0.3"
   },
