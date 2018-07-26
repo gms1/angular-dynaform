@@ -4,3 +4,7 @@
  [Scoped library paths cannot be resolved](https://github.com/angular/angular-cli/issues/10620)
  [ng build v6 does not use paths section of root tsconfig.json](https://github.com/angular/angular-cli/issues/10444)
 => added @adf/core path definition to tsconfig.lib for @adf/basic, @adf/material and @adf/nativescript
+
+## systemjs examples are broken
+
+[Incorrect assumption around host being defined in base64encode/base64decode](https://github.com/Microsoft/TypeScript/issues/24638)
