@@ -69,14 +69,14 @@
     "zone.js": "^0.8.26"
   },
   "devDependencies": {
-    "@angular-devkit/build-angular": "^0.7.0",
-    "@angular-devkit/build-ng-packagr": "^0.7.0",
+    "@angular-devkit/build-angular": "^0.7.2",
+    "@angular-devkit/build-ng-packagr": "^0.7.2",
     "@angular/cli": "^6.1.0",
     "@angular/compiler-cli": "^6.1.0",
     "@angular/language-service": "^6.1.0",
     "@types/jasmine": "~2.8.8",
     "@types/jasminewd2": "~2.0.3",
-    "@types/node": "^10.5.3",
+    "@types/node": "^10.5.5",
     "codelyzer": "^4.4.2",
     "coveralls": "^3.0.2",
     "jasmine-core": "~2.99.1",
