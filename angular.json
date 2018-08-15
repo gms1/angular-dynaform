@@ -27,6 +27,7 @@
             "main": "projects/angular-dynaform/core/src/test.ts",
             "tsConfig": "projects/angular-dynaform/core/tsconfig.spec.json",
             "karmaConfig": "projects/angular-dynaform/core/karma.conf.js",
+            "sourceMap": true,
             "codeCoverageExclude": [
               "**/spec/**/*.ts"
             ]
@@ -70,6 +71,7 @@
             "main": "projects/angular-dynaform/basic/src/test.ts",
             "tsConfig": "projects/angular-dynaform/basic/tsconfig.spec.json",
             "karmaConfig": "projects/angular-dynaform/basic/karma.conf.js",
+            "sourceMap": true,
             "codeCoverageExclude": [
               "**/spec/**/*.ts"
             ]
@@ -113,6 +115,7 @@
             "main": "projects/angular-dynaform/material/src/test.ts",
             "tsConfig": "projects/angular-dynaform/material/tsconfig.spec.json",
             "karmaConfig": "projects/angular-dynaform/material/karma.conf.js",
+            "sourceMap": true,
             "codeCoverageExclude": [
               "**/spec/**/*.ts"
             ]
@@ -156,6 +159,7 @@
             "main": "projects/angular-dynaform/nativescript/src/test.ts",
             "tsConfig": "projects/angular-dynaform/nativescript/tsconfig.spec.json",
             "karmaConfig": "projects/angular-dynaform/nativescript/karma.conf.js",
+            "sourceMap": true,
             "codeCoverageExclude": [
               "**/spec/**/*.ts"
             ]
