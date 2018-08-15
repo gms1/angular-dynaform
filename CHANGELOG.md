@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## 1.1.1
+
+maintenance release
+
 ## 1.1.0
 
 release based on Angular 6.1
