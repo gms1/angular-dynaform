@@ -23,12 +23,12 @@
   },
   "peerDependencies": {
     "rxjs": "^6.2.2",
-    "@angular/core": "^6.1.0",
-    "@angular/common": "^6.1.0",
-    "@angular/forms": "^6.1.0",
-    "@angular/cdk": "^6.4.1",
-    "@angular/material": "^6.4.1",
-    "@angular/platform-browser": "^6.1.0",
+    "@angular/core": "^6.1.2",
+    "@angular/common": "^6.1.2",
+    "@angular/forms": "^6.1.2",
+    "@angular/cdk": "^6.4.5",
+    "@angular/material": "^6.4.5",
+    "@angular/platform-browser": "^6.1.2",
     "@angular-dynaform/core": "1.1.0"
   },
   "scripts": {
