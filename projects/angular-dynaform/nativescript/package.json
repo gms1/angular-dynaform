@@ -30,10 +30,10 @@
     }
   },
   "peerDependencies": {
-    "rxjs": "^6.2.2",
-    "@angular/core": "^6.1.2",
-    "@angular/common": "^6.1.2",
-    "@angular/forms": "^6.1.2",
+    "rxjs": "^6.3.1",
+    "@angular/core": "^6.1.6",
+    "@angular/common": "^6.1.6",
+    "@angular/forms": "^6.1.6",
     "tns-core-modules": "^4.2.0",
     "nativescript-angular": "^6.1.0",
     "nativescript-checkbox": "^3.0.3",
