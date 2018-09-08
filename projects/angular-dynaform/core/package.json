@@ -21,10 +21,10 @@
     "url": "git+https://github.com/gms1/angular-dynaform.git"
   },
   "peerDependencies": {
-    "rxjs": "^6.3.1",
-    "@angular/core": "^6.1.6",
-    "@angular/common": "^6.1.6",
-    "@angular/forms": "^6.1.6",
+    "rxjs": "^6.3.2",
+    "@angular/core": "^6.1.7",
+    "@angular/common": "^6.1.7",
+    "@angular/forms": "^6.1.7",
     "jsonpointerx": "^1.0.15",
     "jsep": "^0.3.4"
   },
