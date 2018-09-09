@@ -64,7 +64,7 @@
 				<p><a href="https://www.npmjs.com/package/%40angular-dynaform%2Fcore"><img src="https://img.shields.io/npm/v/@angular-dynaform/core.svg?colorB=007ec6" alt="npm (scoped)"></a>
 					<a href="https://snyk.io/test/github/gms1/angular-dynaform"><img src="https://snyk.io/test/github/gms1/angular-dynaform/badge.svg" alt="Known Vulnerabilities"></a>
 					<a href="https://travis-ci.org/gms1/angular-dynaform"><img src="https://api.travis-ci.org/gms1/angular-dynaform.svg?branch=master" alt="Build Status"></a>
-					<a href="https://coveralls.io/github/gms1/angular-dynaform?branch=master"><img src="https://coveralls.io/repos/github/gms1/angular-dynaform/badge.svg?branch=master&amp;service=github" alt="Coverage Status"></a>
+					<a href="https://coveralls.io/github/gms1/angular-dynaform?branch=master"><img src="https://coveralls.io/repos/github/gms1/angular-dynaform/badge.svg?branch=master&service=github" alt="Coverage Status"></a>
 					<a href="https://deepscan.io/dashboard/#view=project&amp;pid=698&amp;bid=1106"><img src="https://deepscan.io/api/projects/698/branches/1106/badge/grade.svg" alt="DeepScan Grade"></a>
 					<a href="https://david-dm.org/gms1/angular-dynaform"><img src="https://david-dm.org/gms1/angular-dynaform.svg" alt="Dependency Status"></a>
 				<a href="https://greenkeeper.io/"><img src="https://badges.greenkeeper.io/gms1/angular-dynaform.svg" alt="Greenkeeper badge"></a></p>
@@ -116,41 +116,37 @@
 				<ul>
 					<li>install the packages:</li>
 				</ul>
-				<pre><code class="lang-shell">npm install @angular-dynaform/core --save
-npm install @angular-dynaform/material --save
-</code></pre>
+				<pre><code class="language-shell">npm install @angular-dynaform/core --save
+npm install @angular-dynaform/material --save</code></pre>
 				<blockquote>
 					<p>NOTE: please install required peer dependencies if they are not already installed</p>
 				</blockquote>
-				<pre><code class="lang-shell">npm install @angular/common @angular/core @angular/forms rxjs jsep jsonpointerx
-</code></pre>
+				<pre><code class="language-shell">npm install @angular/common @angular/core @angular/forms rxjs jsep jsonpointerx</code></pre>
 				<h2 id="basic-usage">Basic Usage</h2>
 				<ul>
 					<li>import the form modules in the root NgModule of your application:</li>
 				</ul>
-				<pre><code class="lang-typescript"><span class="hljs-meta">@NgModule</span>({
+				<pre><code class="language-typescript"><span class="hljs-meta">@NgModule</span>({
   ...
   imports: [DynamicFormModule.forRoot(), DynamicMaterialFormModule, ...],
   ...
 })
 <span class="hljs-keyword">export</span> <span class="hljs-keyword">class</span> AppModule {
-}
-</code></pre>
+}</code></pre>
 				<ul>
 					<li>in other modules, import only the &#39;DynamicFormModule&#39; and do not import the UI specific modules (e.g &#39;DynamicMaterialFormModule&#39;):</li>
 				</ul>
-				<pre><code class="lang-typescript"><span class="hljs-meta">@NgModule</span>({
+				<pre><code class="language-typescript"><span class="hljs-meta">@NgModule</span>({
   ...
   imports: [DynamicFormModule],
   ...
 })
 <span class="hljs-keyword">export</span> <span class="hljs-keyword">class</span> SharedModule {
-}
-</code></pre>
+}</code></pre>
 				<ul>
 					<li>implement a form:</li>
 				</ul>
-				<pre><code class="lang-typescript"><span class="hljs-meta">@Component</span>({
+				<pre><code class="language-typescript"><span class="hljs-meta">@Component</span>({
   selector: <span class="hljs-string">'app-basic-form'</span>,
   template: <span class="hljs-string">`
     &lt;adf-form [model]="formModel" (adfSubmit)="onSubmit($event)"&gt;
@@ -193,8 +189,7 @@ npm install @angular-dynaform/material --save
   onSubmit(event: Event): <span class="hljs-built_in">void</span> {
     <span class="hljs-keyword">this</span>.name = <span class="hljs-keyword">this</span>.formModel.value.name;
   }
-}
-</code></pre>
+}</code></pre>
 				<ul>
 					<li><p>create the form config:</p>
 						<ul>
@@ -204,7 +199,7 @@ npm install @angular-dynaform/material --save
 						</ul>
 					</li>
 				</ul>
-				<pre><code class="lang-typescript">
+				<pre><code class="language-typescript">
     <span class="hljs-keyword">const</span> form = formBuilder.createForm({id: <span class="hljs-string">'exampleForm'</span>, updateOn: <span class="hljs-string">'blur'</span>});
 
     <span class="hljs-comment">// create divisions:</span>
@@ -250,7 +245,6 @@ npm install @angular-dynaform/material --save
 
     <span class="hljs-comment">// create to form configuration:</span>
     <span class="hljs-keyword">const</span> formConfig: FormConfig = form.toFormConfig();
-
 </code></pre>
 				<ul>
 					<li><p>JSON configuration:</p>
@@ -261,7 +255,7 @@ npm install @angular-dynaform/material --save
 				<ul>
 					<li>observable form value and form value update:</li>
 				</ul>
-				<pre><code class="lang-typescript">    <span class="hljs-comment">// subscribe to form value changes:</span>
+				<pre><code class="language-typescript">    <span class="hljs-comment">// subscribe to form value changes:</span>
     dynaForm.valueChanges.subscribe(...);
 
     <span class="hljs-comment">// get form value:</span>
@@ -275,12 +269,11 @@ npm install @angular-dynaform/material --save
 
     <span class="hljs-comment">// reset form value to the last value provided to 'initValue':</span>
     dynaForm.resetValue();
-
 </code></pre>
 				<ul>
 					<li>observable control values and control value updates:</li>
 				</ul>
-				<pre><code class="lang-typescript">    ctrlModel = dynaForm.findComponentById(id).model;
+				<pre><code class="language-typescript">    ctrlModel = dynaForm.findComponentById(id).model;
     ctrlModel = dynaForm.model.findControlByPath(path);
 
     <span class="hljs-comment">// subscribe to form value changes:</span>
@@ -291,19 +284,17 @@ npm install @angular-dynaform/material --save
 
     <span class="hljs-comment">// patch/set form value:</span>
     ctrlModel.patchValue(value);
-    ctrlModel.setValue(value);
-</code></pre>
+    ctrlModel.setValue(value);</code></pre>
 				<ul>
 					<li>observable focus changes and click events:</li>
 				</ul>
-				<pre><code class="lang-typescript">    ctrlComp = dynaForm.findComponentById(id);
+				<pre><code class="language-typescript">    ctrlComp = dynaForm.findComponentById(id);
 
     <span class="hljs-comment">// subscribe to focus changes:</span>
     ctrlComp.focusChanges.subscribe(<span class="hljs-function">(<span class="hljs-params">focus</span>) =&gt;</span> { <span class="hljs-built_in">console</span>.log(focus ? <span class="hljs-string">'got focus'</span> : <span class="hljs-string">'lost focus'</span>);});
 
     <span class="hljs-comment">// subscribe to click event:</span>
-    ctrlComp.click.subscribe(...);
-</code></pre>
+    ctrlComp.click.subscribe(...);</code></pre>
 				<ul>
 					<li>get/set form data using an application data model to form data model mapping</li>
 				</ul>
@@ -314,7 +305,7 @@ npm install @angular-dynaform/material --save
 				</ul>
 				<p>In the relations expressions, you can combine all common arithmetic, comparison, and logical operators, as well as references to form control values. &#39;foo.bar&#39; would reference the value of the &#39;bar&#39; control in the &#39;foo&#39; group;
 				In this example, the &#39;newsletter&#39; checkbox will only be enabled if the &#39;atc&#39; checkbox has been selected:</p>
-				<pre><code class="lang-typescript">          group: [
+				<pre><code class="language-typescript">          group: [
             {
               key: <span class="hljs-string">'atc'</span>,
               controlType: ControlType.CONTROL_CHECKBOX,
@@ -326,8 +317,7 @@ npm install @angular-dynaform/material --save
               ...
               relations: {enable: <span class="hljs-string">'atc'</span>}
             }
-          ]
-</code></pre>
+          ]</code></pre>
 				<ul>
 					<li>layout/styling</li>
 				</ul>
@@ -367,139 +357,154 @@ npm install @angular-dynaform/material --save
 							<th>Nativescript</th>
 						</tr>
 					</thead>
-					<tbody>
-						<tr>
+					<tbody><tr>
 							<td>ArrayModel:</td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
 						</tr>
 						<tr>
+							<td>| Array</td>
+							<td>yes</td>
+							<td>yes</td>
+							<td>yes</td>
 							<td></td>
-							<td>Array</td>
-							<td>yes</td>
-							<td>yes</td>
-							<td>yes</td>
 						</tr>
 						<tr>
 							<td>Group- or Subset-Model:</td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
 						</tr>
 						<tr>
-							<td></td>
-							<td>Fieldset</td>
+							<td>| Fieldset</td>
 							<td>yes</td>
 							<td>yes</td>
-							<td>yes</td>
-						</tr>
-						<tr>
-							<td></td>
-							<td>Division</td>
-							<td>yes</td>
-							<td>yes</td>
-							<td>yes</td>
-						</tr>
-						<tr>
-							<td></td>
-							<td>Tabgroup</td>
-							<td></td>
 							<td>yes</td>
 							<td></td>
 						</tr>
 						<tr>
-							<td></td>
-							<td>Stepper</td>
-							<td></td>
+							<td>| Division</td>
 							<td>yes</td>
+							<td>yes</td>
+							<td>yes</td>
+							<td></td>
+						</tr>
+						<tr>
+							<td>| Tabgroup</td>
+							<td>|  yes</td>
+							<td></td>
+							<td></td>
+							<td></td>
+						</tr>
+						<tr>
+							<td>| Stepper</td>
+							<td>|  yes</td>
+							<td></td>
+							<td></td>
 							<td></td>
 						</tr>
 						<tr>
 							<td>ValueControlModel:</td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
 						</tr>
 						<tr>
+							<td>| Checkbox</td>
+							<td>yes</td>
+							<td>yes</td>
+							<td>yes</td>
 							<td></td>
-							<td>Checkbox</td>
-							<td>yes</td>
-							<td>yes</td>
-							<td>yes</td>
 						</tr>
 						<tr>
-							<td></td>
-							<td>Datepicker</td>
+							<td>| Datepicker</td>
 							<td>*</td>
 							<td>yes</td>
 							<td>yes**</td>
+							<td></td>
 						</tr>
 						<tr>
-							<td></td>
-							<td>Input</td>
+							<td>| Input</td>
 							<td>yes</td>
 							<td>yes</td>
 							<td>yes (TextField)</td>
+							<td></td>
 						</tr>
 						<tr>
-							<td></td>
-							<td>Radiogroup</td>
+							<td>| Radiogroup</td>
 							<td>yes</td>
-							<td>yes</td>
-							<td>yes</td>
-						</tr>
-						<tr>
-							<td></td>
-							<td>Select</td>
 							<td>yes</td>
 							<td>yes</td>
 							<td></td>
 						</tr>
 						<tr>
+							<td>| Select</td>
+							<td>yes</td>
+							<td>yes</td>
 							<td></td>
-							<td>Slider</td>
-							<td>yes</td>
-							<td>yes</td>
-							<td>yes</td>
+							<td></td>
 						</tr>
 						<tr>
+							<td>| Slider</td>
+							<td>yes</td>
+							<td>yes</td>
+							<td>yes</td>
 							<td></td>
-							<td>Switch</td>
-							<td>yes</td>
-							<td>yes</td>
-							<td>yes</td>
 						</tr>
 						<tr>
+							<td>| Switch</td>
+							<td>yes</td>
+							<td>yes</td>
+							<td>yes</td>
 							<td></td>
-							<td>Textarea</td>
+						</tr>
+						<tr>
+							<td>| Textarea</td>
 							<td>yes</td>
 							<td>yes</td>
 							<td>yes (TextView)</td>
+							<td></td>
 						</tr>
 						<tr>
-							<td></td>
-							<td>Listpicker</td>
-							<td></td>
-							<td></td>
+							<td>| Listpicker</td>
+							<td>|</td>
 							<td>yes</td>
+							<td></td>
+							<td></td>
 						</tr>
 						<tr>
 							<td>NullControlModel:</td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
 						</tr>
 						<tr>
+							<td>| Button</td>
+							<td>yes</td>
+							<td>yes</td>
+							<td>yes</td>
 							<td></td>
-							<td>Button</td>
-							<td>yes</td>
-							<td>yes</td>
-							<td>yes</td>
 						</tr>
 						<tr>
+							<td>| Separator</td>
+							<td>yes</td>
+							<td>yes</td>
+							<td>yes</td>
 							<td></td>
-							<td>Separator</td>
-							<td>yes</td>
-							<td>yes</td>
-							<td>yes</td>
 						</tr>
 						<tr>
-							<td></td>
+							<td>|</td>
+							<td>|</td>
 							<td></td>
 							<td></td>
 							<td></td>
 						</tr>
-					</tbody>
-				</table>
+				</tbody></table>
 				<p>*) you can use &quot;input type=&#39;date&#39;&quot; as replacement for a datepicker</p>
 				<p>**) reports date as utc-timestamp</p>
 				<p>e.g if timezone is &quot;Central European Summer Time&quot; and selected date is &quot;2018-06-06&quot;
