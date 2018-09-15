@@ -7,9 +7,11 @@ pushd "${DN}" &>/dev/null
   rm -f package-lock.json
   rm -rf platforms/*
   rm -rf hooks/
-  
-  npm install
 
+  npm install
+  npm install --save-dev nativescript-dev-webpack
+  "${DN}/node_modules/.bin/update-ns-webpack" --configs --deps
+  tns update
   tns prepare android
 
 popd
