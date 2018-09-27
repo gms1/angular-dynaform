@@ -4,8 +4,7 @@
     "removeComments": false,
     "outDir": "../../../out-tsc/spec",
     "types": [
-      "jasmine",
-      "node"
+      "jasmine"
     ]
   },
   "files": [
