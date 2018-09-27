@@ -1,0 +1,20 @@
+{
+  "ignore": {
+    "jasmine-core": {
+      "versions": ">=3",
+      "reason": "not supported by @angular"
+    },
+    "karma-jasmine-html-reporter": {
+      "versions": ">=0.3",
+      "reason": "not supported by @angular"
+    },
+    "systemjs": {
+      "versions": ">=0.20",
+      "reason": "not supported by angular"
+    },
+    "typescript": {
+      "versions": ">=3",
+      "reason": "not supported by @angular"
+    }
+  }
+}
