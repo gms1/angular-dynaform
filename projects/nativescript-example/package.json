@@ -24,6 +24,7 @@
     "@angular/platform-browser": "^6.1.9",
     "@angular/platform-browser-dynamic": "^6.1.9",
     "@angular/router": "^6.1.9",
+    "codelyzer": "^4.5.0",
     "jsep": "^0.3.4",
     "jsonpointerx": "^1.0.16",
     "nativescript-angular": "^6.1.0",
@@ -39,7 +40,7 @@
   "devDependencies": {
     "@angular/compiler-cli": "~6.1.0",
     "@ngtools/webpack": "~6.2.0",
-    "nativescript-dev-webpack": "^0.16.1"
+    "nativescript-dev-webpack": "^0.16.2"
   },
   "scripts": {
     "clean": "echo dummy-clean",
