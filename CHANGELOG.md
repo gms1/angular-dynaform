@@ -1,6 +1,6 @@
 # CHANGELOG
 
-## 1.1.1 - 1.1.2
+## 1.1.1 - 1.1.3
 
 maintenance release
 
@@ -14,11 +14,12 @@ maintenance release
 
 ## 1.0.2
 
-* **Feature**
-  * nativescript support
+- **Feature**
 
-* **Fix**
-  * missing peerDependencies
+  - nativescript support
+
+- **Fix**
+  - missing peerDependencies
 
 ## 1.0.1
 
@@ -26,8 +27,8 @@ maintenance release
 
 ## 1.0.0
 
-* **Feature**
-  * form-builder (see README)
+- **Feature**
+  - form-builder (see README)
 
 ## 0.6.1
 
@@ -47,15 +48,15 @@ maintenance release based on angular 5.1
 
 ## 0.2.5
 
-* **Fixes**
-  * material: non-functional prev/next stepper buttons
+- **Fixes**
+  - material: non-functional prev/next stepper buttons
 
 ## 0.2.4
 
-* **Features**
-  * material: mat-tab-group: added support for all known properties
-  * material: mat-horizontal/vertical-stepper and mat-step: added support for all known properties
-  * material: mat-horizontal/vertical-stepper: added support for prev/next buttons
+- **Features**
+  - material: mat-tab-group: added support for all known properties
+  - material: mat-horizontal/vertical-stepper and mat-step: added support for all known properties
+  - material: mat-horizontal/vertical-stepper: added support for prev/next buttons
 
 ## 0.2.3
 
@@ -63,13 +64,14 @@ maintenance release
 
 ## 0.2.2
 
-* **Features**
-  * support for material datepicker, tabs and initial support for stepper
-  * autocomplete/autofill support
-  * support for readonly attribute for input/textarea
+- **Features**
 
-* **Fixes**
-  * form not set to dirty after array insert/add/delete operations
+  - support for material datepicker, tabs and initial support for stepper
+  - autocomplete/autofill support
+  - support for readonly attribute for input/textarea
+
+- **Fixes**
+  - form not set to dirty after array insert/add/delete operations
 
 ## 0.2.1
 
@@ -77,9 +79,9 @@ maintenance release
 
 ## 0.2.0
 
-* **Features**
-  * custom validators support improved
-  * support for generic i18n error messages
+- **Features**
+  - custom validators support improved
+  - support for generic i18n error messages
 
 ## 0.1.2
 
@@ -87,26 +89,26 @@ maintenance release
 
 ## 0.1.1
 
-* **Features**
-  * find control model by path
-  * improved documentation
+- **Features**
+  - find control model by path
+  - improved documentation
 
 ## 0.1.0
 
-* **Features**
-  * enable/disable or show/hide fields based on conditions defined on related field values
+- **Features**
+  - enable/disable or show/hide fields based on conditions defined on related field values
 
 ## 0.0.3
 
-* **Features**
-  * angular v5 updateOn option support
+- **Features**
+  - angular v5 updateOn option support
 
 ## 0.0.2
 
-* **Features**
-  * angular v5 upgrade
+- **Features**
+  - angular v5 upgrade
 
 ## 0.0.1
 
-* **Features**
-  * initial release
+- **Features**
+  - initial release
