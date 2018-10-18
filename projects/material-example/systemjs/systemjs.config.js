@@ -62,8 +62,8 @@ System.config({
     'jsonpointerx': 'npm-ext:jsonpointerx/bundles/jsonpointerx.umd.js',
     'jsep': 'npm-ext:jsep/build/jsep.js',
 
-    '@angular-dynaform/core': 'npm-int:@angular-dynaform/core/bundles/angular-dynaform-core.umd.js',
-    '@angular-dynaform/material': 'npm-int:@angular-dynaform/material/bundles/angular-dynaform-material.umd.js',
+    '@angular-dynaform/core': 'npm-int:angular-dynaform/core/bundles/angular-dynaform-core.umd.js',
+    '@angular-dynaform/material': 'npm-int:angular-dynaform/material/bundles/angular-dynaform-material.umd.js',
 
     'app': '/src',
   },
