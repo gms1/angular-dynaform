@@ -16,7 +16,7 @@ class NgFormArrayWrapper implements NgArrayModelHandler {
       while (this.ngControl.length > length) {
         this.ngControl.removeAt(this.ngControl.length - 1);
       }
-      }
+    }
     while (this.ngControl.length < length) {
       this.ngControl.push(this.createItem());
     }
@@ -30,7 +30,6 @@ describe('ng-form-array', () => {
   let ary: NgFormArrayWrapper;
   beforeEach(() => {
     ary = new NgFormArrayWrapper();
-
   });
 
   it('update NgFormArray length using NgArrayModelHandler implementation', () => {
@@ -49,11 +48,7 @@ describe('ng-form-array', () => {
     ary.updateLength(7, true);
 
     ary.ngControl.model = undefined;
-    try {
-      ary.ngControl.updateLength(5);
-    } catch (e) {
-      fail(e);
-    }
+    expect(() => ary.ngControl.updateLength(5)).not.toThrow();
   });
 
 
@@ -101,5 +96,4 @@ describe('ng-form-array', () => {
     }
     expect(ary.ngControl.value.length).toBe(2, 'failed to increase NgFormArray length by setValue');
   });
-
 });
