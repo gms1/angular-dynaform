@@ -89,7 +89,7 @@
     "rimraf": "^2.6.2",
     "systemjs": "<0.20",
     "ts-node": "^7.0.1",
-    "tsickle": "<0.33",
+    "tsickle": "0.33.1",
     "tslib": "^1.9.3",
     "tslint": "^5.11.0",
     "typedoc": "^0.13.0",
