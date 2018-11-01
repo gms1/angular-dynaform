@@ -78,7 +78,6 @@ lint:
 	@npm run lint:material
 	@npm run lint:basic-example
 	@npm run lint:material-example
-	@npm run lint:nativescript-example
 
 coverage:
 	@npm run coverage:core
