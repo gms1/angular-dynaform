@@ -22,9 +22,9 @@
   },
   "peerDependencies": {
     "rxjs": "^6.3.3",
-    "@angular/core": "^7.0.0",
-    "@angular/common": "^7.0.0",
-    "@angular/forms": "^7.0.0",
+    "@angular/core": "^7.0.2",
+    "@angular/common": "^7.0.2",
+    "@angular/forms": "^7.0.2",
     "@angular-dynaform/core": "2.0.0"
   },
   "scripts": {
