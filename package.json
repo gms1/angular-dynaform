@@ -87,7 +87,7 @@
     "lite-server": "^2.4.0",
     "ng-packagr": "^4.3.1",
     "rimraf": "^2.6.2",
-    "systemjs": "<0.20",
+    "systemjs": "2.1.0",
     "ts-node": "^7.0.1",
     "tsickle": "<0.33",
     "tslib": "^1.9.3",
