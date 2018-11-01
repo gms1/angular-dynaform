@@ -34,4 +34,3 @@ angular-dynaform (master)$ npm run release:publish
 ```
 
 * update stackblitz example
-

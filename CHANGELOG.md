@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## 2.0.1
+
+maintenance release
+
 ## 2.0.0
 
 release based on Angular 7.0
