@@ -65,7 +65,7 @@
     "nativescript-angular": "^6.1.0",
     "nativescript-checkbox": "^3.0.3",
     "rxjs": "^6.3.3",
-    "tns-core-modules": "^4.2.1",
+    "tns-core-modules": "^5.0.1",
     "zone.js": "^0.8.26"
   },
   "devDependencies": {
