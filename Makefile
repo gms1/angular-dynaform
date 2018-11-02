@@ -3,7 +3,7 @@ TYPE ?= prod
 
 BUILDFLAGS = -- --$(TYPE)
 
-all: build
+all: release-build
 
 #-------------------------------------------------------------
 clean:

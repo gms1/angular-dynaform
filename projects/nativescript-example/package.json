@@ -38,8 +38,8 @@
     "zone.js": "^0.8.26"
   },
   "devDependencies": {
-    "@angular/compiler-cli": "~6.1.0",
-    "@ngtools/webpack": "~6.2.0",
+    "@angular/compiler-cli": "~7.0.2",
+    "@ngtools/webpack": "~7.0.3",
     "nativescript-dev-webpack": "^0.16.3"
   },
   "scripts": {
