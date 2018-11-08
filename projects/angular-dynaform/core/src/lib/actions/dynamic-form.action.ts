@@ -1,6 +1,6 @@
 import {AfterViewInit, OnDestroy, OnInit, OnChanges, SimpleChanges} from '@angular/core';
 
-import {ControlModel} from '../models/control-model.interface';
+import {ControlModel} from '../models/control-model';
 import {DynamicFormControlComponentBase} from '../components/dynamic-form-control.component';
 
 

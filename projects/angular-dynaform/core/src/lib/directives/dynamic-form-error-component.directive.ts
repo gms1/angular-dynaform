@@ -11,12 +11,12 @@ import {
 } from '@angular/core';
 
 // tslint:disable-next-line no-unused-variable  ?
-import {DynamicFormError} from '../components/dynamic-form-error.interface';
+import {DynamicFormError} from '../components/dynamic-form-error';
 import {DynamicFormErrorComponent} from '../components/dynamic-form-error.component';
 import {DynamicFormComponent} from '../components/dynamic-form.component';
-import {ControlModel} from '../models/control-model.interface';
+import {ControlModel} from '../models/control-model';
 import {DynamicFormComponentFactoryService} from '../services/dynamic-form-component-factory.service';
-import {DynamicValidationError} from '../validations/dynamic-validation-error.interface';
+import {DynamicValidationError} from '../validations/dynamic-validation-error';
 
 import {DynamicClass} from '../utils/dynamic-class';
 
@@ -24,11 +24,9 @@ import {DynamicClass} from '../utils/dynamic-class';
 
 @Directive({selector: '[adfErrorComponent]'})
 export class DynamicFormErrorComponentDirective implements OnInit, DoCheck, OnDestroy {
-  @Input()
-  model!: ControlModel;
+  @Input() model!: ControlModel;
 
-  @Input()
-  error!: DynamicValidationError;
+  @Input() error!: DynamicValidationError;
 
   private componentRef: ComponentRef<DynamicFormError>|undefined;
   private dynamicClass: DynamicClass|undefined;
@@ -49,7 +47,7 @@ export class DynamicFormErrorComponentDirective implements OnInit, DoCheck, OnDe
       /* istanbul ignore next */
       {
         e.message = `failed to create error component: ${e.message}`;
-        throw(e);
+        throw (e);
       }
     }
 
@@ -63,7 +61,7 @@ export class DynamicFormErrorComponentDirective implements OnInit, DoCheck, OnDe
     /* istanbul ignore else */
     if (this.dynamicClass) {
       this.dynamicClass.ngDoCheck();
-      }
+    }
     /* istanbul ignore else */
     if (this.componentRef) {
       this.componentRef.instance.model = this.model;
@@ -77,7 +75,7 @@ export class DynamicFormErrorComponentDirective implements OnInit, DoCheck, OnDe
     if (this.dynamicClass) {
       this.dynamicClass.classes = {};
       this.dynamicClass = undefined;
-      }
+    }
     /* istanbul ignore else */
     if (this.componentRef) {
       this.componentRef.instance.ngOnDestroy();

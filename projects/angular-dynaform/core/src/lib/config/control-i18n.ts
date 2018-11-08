@@ -1,4 +1,4 @@
-import {ValueOptions} from './control-options.interface';
+import {ValueOptions} from './control-options';
 
 export interface ControlI18n {
   label?: string;

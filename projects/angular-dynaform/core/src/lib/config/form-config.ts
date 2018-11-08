@@ -1,4 +1,4 @@
-import {GroupOptions} from './control-options.interface';
+import {GroupOptions} from './control-options';
 
 export interface FormBaseConfig {
   /**
@@ -30,7 +30,7 @@ export interface FormBaseConfig {
    * additional user data
    */
   user?: any;
-  }
+}
 
 export interface FormConfig extends FormBaseConfig {
   /**

@@ -1,4 +1,4 @@
-import {ControlI18n} from './control-i18n.interface';
+import {ControlI18n} from './control-i18n';
 
 
 export interface FormI18n {

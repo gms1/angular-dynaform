@@ -11,10 +11,10 @@ import {
 } from '@angular/core';
 
 // tslint:disable-next-line no-unused-variable  ?
-import {DynamicFormControl} from '../components/dynamic-form-control.interface';
+import {DynamicFormControl} from '../components/dynamic-form-control';
 import {DynamicFormControlComponentBase} from '../components/dynamic-form-control.component';
 import {DynamicFormComponent} from '../components/dynamic-form.component';
-import {ControlModel} from '../models/control-model.interface';
+import {ControlModel} from '../models/control-model';
 import {DynamicFormComponentFactoryService} from '../services/dynamic-form-component-factory.service';
 
 import {DynamicClass} from '../utils/dynamic-class';
@@ -24,8 +24,7 @@ import {DynamicClass} from '../utils/dynamic-class';
 
 @Directive({selector: '[adfControlComponent]'})
 export class DynamicFormControlComponentDirective implements OnInit, DoCheck, OnDestroy {
-  @Input()
-  model!: ControlModel;
+  @Input() model!: ControlModel;
 
   private componentRef: ComponentRef<DynamicFormControl>|undefined;
   private dynamicClass: DynamicClass|undefined;
@@ -46,7 +45,7 @@ export class DynamicFormControlComponentDirective implements OnInit, DoCheck, On
       /* istanbul ignore next */
       {
         e.message = `failed to create control component for '${this.model.id}': ${e.message}`;
-        throw(e);
+        throw (e);
       }
     }
 
@@ -63,7 +62,7 @@ export class DynamicFormControlComponentDirective implements OnInit, DoCheck, On
     /* istanbul ignore else */
     if (this.dynamicClass) {
       this.dynamicClass.ngDoCheck();
-      }
+    }
     /* istanbul ignore else */
     if (this.componentRef) {
       this.componentRef.instance.model = this.model;
@@ -76,7 +75,7 @@ export class DynamicFormControlComponentDirective implements OnInit, DoCheck, On
     if (this.dynamicClass) {
       this.dynamicClass.classes = {};
       this.dynamicClass = undefined;
-      }
+    }
     /* istanbul ignore else */
     if (this.componentRef) {
       this.componentRef.instance.ngOnDestroy();

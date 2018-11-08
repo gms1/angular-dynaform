@@ -1,12 +1,12 @@
 // tslint:disable no-use-before-declare
 import {FormGroup} from '@angular/forms';
 
-import {ControlConfig} from '../config/control-config.interface';
-import {GroupOptions} from '../config/control-options.interface';
+import {ControlConfig} from '../config/control-config';
+import {GroupOptions} from '../config/control-options';
 import {DynamicFormService} from '../services/dynamic-form.service';
 
 import {ArrayModel} from './array-model';
-import {ControlModel, AbstractControlModel} from './control-model.interface';
+import {ControlModel, AbstractControlModel} from './control-model';
 import {FormModel} from './form-model';
 
 import {NgFormGroup} from './internal/ng-form-group';
@@ -63,7 +63,7 @@ export class GroupModelBase extends AbstractControlModel<FormGroup, GroupOptions
 
       // TODO: error handling for duplicate key values
       this.ngControl.addControl(control.key, control.ngControl);
-      }
+    }
     return control;
   }
 
@@ -80,7 +80,7 @@ export class GroupModelBase extends AbstractControlModel<FormGroup, GroupOptions
     });
     return appData;
   }
-  }
+}
 
 export class GroupModel extends GroupModelBase {
   constructor(
@@ -106,7 +106,7 @@ export class GroupModel extends GroupModelBase {
     this.controls[control.key] = control;
     return control;
   }
-  }
+}
 
 export class SubsetModel extends GroupModelBase {
   superGroup: GroupModel;
@@ -146,7 +146,7 @@ export class SubsetModel extends GroupModelBase {
     let ancestor: GroupModelBase = parent;
     while (!(ancestor instanceof GroupModel) && ancestor.parentGroup) {
       ancestor = ancestor.parentGroup;
-      }
+    }
     return ancestor as GroupModel;
   }
 }

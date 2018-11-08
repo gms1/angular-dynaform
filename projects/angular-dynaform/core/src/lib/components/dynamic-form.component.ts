@@ -2,14 +2,14 @@
 import {Component, ComponentRef, EventEmitter, Input, Output} from '@angular/core';
 import {Observable} from 'rxjs';
 
-import {FormConfig} from '../config/form-config.interface';
+import {FormConfig} from '../config/form-config';
 import {FormModel} from '../models/form-model';
 
-import {DynamicFormControl} from './dynamic-form-control.interface';
-import {DynamicFormFormControl} from './dynamic-form-form-control.interface';
-import {DynamicForm, UIProperties} from './dynamic-form.interface';
+import {DynamicFormControl} from './dynamic-form-control';
+import {DynamicFormFormControl} from './dynamic-form-form-control';
+import {DynamicForm, UIProperties} from './dynamic-form';
 
-import {Stepper} from '../models/stepper.interface';
+import {Stepper} from '../models/stepper';
 
 
 @Component({
@@ -131,7 +131,7 @@ export class DynamicFormComponent extends DynamicForm {
     if (!found) {
       parentId = control.model.parentArray ? control.model.parentArray.id : undefined;
       found = parentId ? this.findComponentById(parentId) : undefined;
-      }
+    }
     return found;
   }
 }

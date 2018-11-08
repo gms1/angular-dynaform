@@ -1,11 +1,11 @@
 import {Component, ElementRef, EventEmitter, Input, Output, SimpleChanges, Type} from '@angular/core';
 
-import {DynamicFormControl} from './dynamic-form-control.interface';
-import {DynamicForm} from './dynamic-form.interface';
+import {DynamicFormControl} from './dynamic-form-control';
+import {DynamicForm} from './dynamic-form';
 import {DynamicFormService} from '../services/dynamic-form.service';
 
-import {ControlOptions} from '../config/control-options.interface';
-import {ControlModel} from '../models/control-model.interface';
+import {ControlOptions} from '../config/control-options';
+import {ControlModel} from '../models/control-model';
 import {DynamicFormAction} from '../actions/dynamic-form.action';
 import {RelationAction} from '../actions/relation.action';
 
@@ -33,11 +33,9 @@ export class DynamicFormControlComponentBase implements DynamicFormControl {
     }
   }
 
-  @Output()
-  focusChanges: EventEmitter<any>;
+  @Output() focusChanges: EventEmitter<any>;
 
-  @Output()
-  click: EventEmitter<any>;
+  @Output() click: EventEmitter<any>;
 
   get elementRef(): ElementRef {
     return this._elementRef;
@@ -66,7 +64,7 @@ export class DynamicFormControlComponentBase implements DynamicFormControl {
     if (this.model.enableIf || this.model.showIf) {
       this.relationAction = new RelationAction(this);
       this.relationAction.ngOnInit();
-      }
+    }
     if (this.model.config.action) {
       const type: Type<DynamicFormAction>|undefined =
           this.dynamicFormService.actionTypes.getType(this.model.config.action);
@@ -84,7 +82,7 @@ export class DynamicFormControlComponentBase implements DynamicFormControl {
   ngAfterViewInit(): void {
     if (this.relationAction) {
       this.relationAction.ngAfterViewInit();
-      }
+    }
     if (this.action) {
       this.action.ngAfterViewInit();
     }
@@ -93,7 +91,7 @@ export class DynamicFormControlComponentBase implements DynamicFormControl {
   ngOnDestroy(): void {
     if (this.action) {
       this.action.ngOnDestroy();
-      }
+    }
     if (this.relationAction) {
       this.relationAction.ngOnDestroy();
     }
@@ -109,7 +107,7 @@ export class DynamicFormControlComponentBase implements DynamicFormControl {
   onElementFocus(event?: Event): void {
     if (this.action) {
       this.action.onFocus(event);
-      }
+    }
     if (this.model.parentArray && this.model.parentArrayIdx !== undefined && this.model.parentArrayIdx >= 0) {
       this.model.parentArray.selectedIndex = this.model.parentArrayIdx;
     }
@@ -132,8 +130,7 @@ export class DynamicFormControlComponentBase implements DynamicFormControl {
   template: `Please provide a control-component for '{{ model.config.controlType }}!'`
 })
 export class DynamicFormControlComponent<M extends ControlModel> extends DynamicFormControlComponentBase {
-  @Input()
-  model!: M;
+  @Input() model!: M;
 
   constructor(form: DynamicForm, dynamicFormService: DynamicFormService, elRef: ElementRef) {
     super(form, dynamicFormService, elRef);

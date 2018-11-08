@@ -43,7 +43,13 @@ export const mainExampleConfig: FormConfig = {
               id: 'firstName',
               modelType: ModelType.MODEL_VALUE,
               controlType: ControlType.CONTROL_INPUT,
-              options: {label: 'First name', placeholder: 'Enter your first name', maxLength: 30, minLength: 4},
+              options: {
+                label: 'First name',
+                placeholder: 'Enter your first name',
+                maxLength: 30,
+                minLength: 4,
+                required: true
+              },
               validators: ['required', 'minLength', 'maxLength'],
               jp: '/name/first'
             },
@@ -51,7 +57,13 @@ export const mainExampleConfig: FormConfig = {
               id: 'lastName',
               modelType: ModelType.MODEL_VALUE,
               controlType: ControlType.CONTROL_INPUT,
-              options: {label: 'Last name', placeholder: 'Enter your last name', maxLength: 30, minLength: 4},
+              options: {
+                label: 'Last name',
+                placeholder: 'Enter your last name',
+                maxLength: 30,
+                minLength: 4,
+                required: true
+              },
               validators: ['required', 'minLength', 'maxLength'],
               jp: '/name/last'
             },
@@ -59,7 +71,7 @@ export const mainExampleConfig: FormConfig = {
               id: 'birthday',
               modelType: ModelType.MODEL_VALUE,
               controlType: [ControlType.CONTROL_DATEPICKER, ControlType.CONTROL_INPUT],
-              options: {label: 'Birthday name', placeholder: 'Enter your birthday', inputType: 'date'},
+              options: {label: 'Birthday name', placeholder: 'Enter your birthday', inputType: 'date', required: true},
               validators: ['required'],
               jp: '/birthday'
             }
@@ -310,11 +322,8 @@ export const mainExampleFormLanguages = {
       submit: {label: 'Ok'}
     }
   },
-  errors: {
-    required: `wird benötigt`,
-    minLength: `minimale Länge unterschritten`,
-    maxLength: `maximale Länge überschritten`
-  }
+  errors:
+      {required: `wird benötigt`, minLength: `minimale Länge unterschritten`, maxLength: `maximale Länge überschritten`}
 };
 
 

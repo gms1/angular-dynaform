@@ -1,12 +1,12 @@
 // tslint:disable use-input-property-decorator use-output-property-decorator
 import {Component, ElementRef, EventEmitter, Input, Output, SimpleChanges} from '@angular/core';
 
-import {GroupOptions} from '../config/control-options.interface';
+import {GroupOptions} from '../config/control-options';
 import {GroupModel} from '../models/group-model';
 
 import {DynamicFormControlComponentBase, DynamicFormControlComponent} from './dynamic-form-control.component';
-import {DynamicFormFormControl} from './dynamic-form-form-control.interface';
-import {DynamicForm} from './dynamic-form.interface';
+import {DynamicFormFormControl} from './dynamic-form-form-control';
+import {DynamicForm} from './dynamic-form';
 import {DynamicFormService} from '../services/dynamic-form.service';
 
 @Component({
@@ -20,16 +20,13 @@ import {DynamicFormService} from '../services/dynamic-form.service';
 // tslint:disable use-life-cycle-interface
 export class DynamicFormFormControlComponent extends DynamicFormControlComponent<GroupModel> implements
     DynamicFormFormControl {
-  @Input()
-  model!: GroupModel;
+  @Input() model!: GroupModel;
 
   options!: GroupOptions;
 
-  @Output()
-  submit: EventEmitter<any>;
+  @Output() submit: EventEmitter<any>;
 
-  @Output()
-  reset: EventEmitter<any>;
+  @Output() reset: EventEmitter<any>;
 
 
   constructor(form: DynamicForm, dynamicFormService: DynamicFormService, elRef: ElementRef) {

@@ -2,15 +2,17 @@
 import {ComponentRef, EventEmitter, Injectable} from '@angular/core';
 import {Observable} from 'rxjs';
 
-import {FormConfig} from '../config/form-config.interface';
+import {FormConfig} from '../config/form-config';
 import {FormModel} from '../models/form-model';
 
-import {DynamicFormControl} from './dynamic-form-control.interface';
-import {DynamicFormFormControl} from './dynamic-form-form-control.interface';
+import {DynamicFormControl} from './dynamic-form-control';
+import {DynamicFormFormControl} from './dynamic-form-form-control';
 
-import {Stepper} from '../models/stepper.interface';
+import {Stepper} from '../models/stepper';
 
-export interface UIProperties { [key: string]: any; }
+export interface UIProperties {
+  [key: string]: any;
+}
 
 
 // TODO: changed from interface to injectable abstract class

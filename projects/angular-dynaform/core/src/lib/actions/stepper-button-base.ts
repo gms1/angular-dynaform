@@ -4,8 +4,8 @@ import {Subject} from 'rxjs';
 
 import {DynamicFormAction} from './dynamic-form.action';
 import {DynamicFormControlComponentBase} from '../components/dynamic-form-control.component';
-import {DynamicFormControl} from '../components/dynamic-form-control.interface';
-import {Stepper} from '../models/stepper.interface';
+import {DynamicFormControl} from '../components/dynamic-form-control';
+import {Stepper} from '../models/stepper';
 
 // base class for actions on a stepper component
 
@@ -48,7 +48,7 @@ export abstract class StepperButtonBaseAction extends DynamicFormAction implemen
         return component.stepper;
       }
       component = this.component.form.findParentComponent(component);
-      }
+    }
     return this.component.form.stepper;
   }
 }

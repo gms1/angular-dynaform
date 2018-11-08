@@ -12,7 +12,7 @@ import {
 } from '@angular/core';
 
 // tslint:disable-next-line no-unused-variable  ?
-import {DynamicFormFormControl} from '../components/dynamic-form-form-control.interface';
+import {DynamicFormFormControl} from '../components/dynamic-form-form-control';
 import {DynamicFormFormControlComponent} from '../components/dynamic-form-form-control.component';
 import {DynamicFormComponent} from '../components/dynamic-form.component';
 import {GroupModel} from '../models/group-model';
@@ -27,8 +27,7 @@ import {DynamicClass} from '../utils/dynamic-class';
 
 @Directive({selector: '[adfFormControlComponent]'})
 export class DynamicFormFormControlComponentDirective implements OnInit, DoCheck, OnDestroy {
-  @Input()
-  model!: GroupModel;
+  @Input() model!: GroupModel;
 
   private componentRef: ComponentRef<DynamicFormFormControl>|undefined;
   private dynamicClass: DynamicClass|undefined;
@@ -44,7 +43,7 @@ export class DynamicFormFormControlComponentDirective implements OnInit, DoCheck
     /* istanbul ignore if */
     if (!formControlFactory) {
       throw new Error('failed to resolve factory for DynamicFormFormControl');
-      }
+    }
 
     // create the component:
     try {
@@ -54,7 +53,7 @@ export class DynamicFormFormControlComponentDirective implements OnInit, DoCheck
       /* istanbul ignore next */
       {
         e.message = `failed to create form control component: ${e.message}`;
-        throw(e);
+        throw (e);
       }
     }
 
@@ -76,7 +75,7 @@ export class DynamicFormFormControlComponentDirective implements OnInit, DoCheck
     /* istanbul ignore else */
     if (this.dynamicClass) {
       this.dynamicClass.ngDoCheck();
-      }
+    }
     /* istanbul ignore else */
     if (this.componentRef) {
       this.componentRef.instance.model = this.model;
@@ -89,7 +88,7 @@ export class DynamicFormFormControlComponentDirective implements OnInit, DoCheck
     if (this.dynamicClass) {
       this.dynamicClass.classes = {};
       this.dynamicClass = undefined;
-      }
+    }
     /* istanbul ignore else */
     if (this.componentRef) {
       this.componentRef.instance.ngOnDestroy();

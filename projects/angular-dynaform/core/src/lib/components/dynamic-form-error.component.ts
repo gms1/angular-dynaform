@@ -1,11 +1,11 @@
 import {Component, ElementRef, Input, SimpleChanges} from '@angular/core';
 
-import {ControlOptions} from '../config/control-options.interface';
-import {ControlModel} from '../models/control-model.interface';
-import {DynamicValidationError} from '../validations/dynamic-validation-error.interface';
+import {ControlOptions} from '../config/control-options';
+import {ControlModel} from '../models/control-model';
 
-import {DynamicFormError} from './dynamic-form-error.interface';
-import {DynamicForm} from './dynamic-form.interface';
+import {DynamicFormError} from './dynamic-form-error';
+import {DynamicForm} from './dynamic-form';
+import {DynamicValidationError} from '../validations/dynamic-validation-error';
 
 @Component({selector: 'adf-error-component', template: `Please provide a component for displaying error messages!'`})
 // tslint:disable use-life-cycle-interface
@@ -19,8 +19,7 @@ export class DynamicFormErrorComponent implements DynamicFormError {
     this.options = this.model.options;
   }
 
-  @Input()
-  error!: DynamicValidationError;
+  @Input() error!: DynamicValidationError;
 
   private _model!: ControlModel;
   options!: ControlOptions;

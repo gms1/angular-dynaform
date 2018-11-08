@@ -1,5 +1,5 @@
-import {ControlConfig} from './control-config.interface';
-import {ControlCssOptions} from './control-css-options.interface';
+import {ControlConfig} from './control-config';
+import {ControlCssOptions} from './control-css-options';
 
 /*
   value options for the select-control
@@ -7,7 +7,7 @@ import {ControlCssOptions} from './control-css-options.interface';
 export interface ValueOptions {
   value: any;
   label: string;
-  }
+}
 
 
 export interface ControlBaseOptions {
@@ -37,7 +37,7 @@ export interface ControlBaseOptions {
    *
    */
   [key: string]: any;
-  }
+}
 
 
 
@@ -46,10 +46,12 @@ export interface ArrayOptions extends ControlBaseOptions {
   header?: GroupOptions;
   item: GroupOptions;
   footer?: GroupOptions;
-  }
+}
 
 
-export interface GroupOptions extends ControlBaseOptions { group: ControlConfig[]; }
+export interface GroupOptions extends ControlBaseOptions {
+  group: ControlConfig[];
+}
 
 export interface ControlValueOptions extends ControlBaseOptions {
   /**
@@ -79,7 +81,8 @@ export interface ControlValueOptions extends ControlBaseOptions {
   min?: number;
   max?: number;
   pattern?: string;
-  }
+  required?: boolean;
+}
 
 export interface ControlInputOptions extends ControlValueOptions {
   /**
@@ -95,7 +98,7 @@ export interface ControlInputOptions extends ControlValueOptions {
   inputType?: string;
 
   step?: number;  // use e.g '0.01' for fixed-comma, use 'any' for floating-point
-  }
+}
 
 
 // TODO: make options observable and add async pipe to template
@@ -106,14 +109,14 @@ export interface ControlSelectOptions extends ControlValueOptions {
    */
   valueOptions?: ValueOptions[];
   multiple?: boolean;
-  }
+}
 
 
 export interface ControlSliderOptions extends ControlValueOptions {
   min: number;
   max: number;
   step: number;
-  }
+}
 
 
 // tslint:disable no-empty-interface
@@ -124,8 +127,8 @@ export interface ControlTextareaOptions extends ControlValueOptions {
   cols?: number;
   rows?: number;
   wrap?: boolean;
-  }
+}
 
 
-export type ControlOptions = ControlBaseOptions | GroupOptions | ArrayOptions | ControlInputOptions |
-    ControlSelectOptions | ControlSliderOptions | ControlSwitchOptions | ControlTextareaOptions;
+export type ControlOptions = ControlBaseOptions|GroupOptions|ArrayOptions|ControlInputOptions|ControlSelectOptions|
+    ControlSliderOptions|ControlSwitchOptions|ControlTextareaOptions;

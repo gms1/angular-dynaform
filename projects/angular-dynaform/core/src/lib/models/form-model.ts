@@ -6,7 +6,7 @@ import {DynamicFormService} from '../services/dynamic-form.service';
 
 import {ModelHelper} from './model-helper';
 import {GroupModel} from './group-model';
-import {ControlModel} from './control-model.interface';
+import {ControlModel} from './control-model';
 
 import {JsonPointer} from 'jsonpointerx';
 
@@ -128,7 +128,7 @@ export class FormModel {
         return undefined;
       }
       resModel = foundModel;
-      }
+    }
     return resModel;
   }
 }

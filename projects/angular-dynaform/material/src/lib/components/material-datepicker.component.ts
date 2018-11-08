@@ -7,8 +7,6 @@ import {
 } from '@angular-dynaform/core';
 import {Component} from '@angular/core';
 
-// TODO: make toggle optional
-
 @Component({
   selector: 'adf-material-datepicker-component',
   template: `
@@ -34,6 +32,7 @@ import {Component} from '@angular/core';
           [ngClass]="model.css.control"
           adfHTMLDomElement
           [matDatepicker]="myDatepicker"
+          [required]="options.required ? '' : null"
         />
           <mat-datepicker-toggle matSuffix [for]="myDatepicker"></mat-datepicker-toggle>
           <mat-datepicker #myDatepicker></mat-datepicker>

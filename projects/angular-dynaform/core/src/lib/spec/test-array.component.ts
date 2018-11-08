@@ -20,8 +20,8 @@ import {Component} from '@angular/core';
           [innerHTML]="model.local.label"
         ></legend>
         <ng-container *ngIf="model.header" >
-          <div [ngClass]="model.header.css.content">
-            <ng-container *ngFor="let item of model.header.items;" adfControlComponent [model]="item" >
+          <div [ngClass]="model.header?.css.content">
+            <ng-container *ngFor="let item of model.header?.items;" adfControlComponent [model]="item" >
             </ng-container>
           </div>
         </ng-container>
@@ -44,8 +44,8 @@ import {Component} from '@angular/core';
           </ng-container>
         </div>
         <ng-container *ngIf="model.footer" >
-          <div [ngClass]="model.footer.css.content">
-            <ng-container *ngFor="let item of model.footer.items;" adfControlComponent [model]="item" >
+          <div [ngClass]="model.footer?.css.content">
+            <ng-container *ngFor="let item of model.footer?.items;" adfControlComponent [model]="item" >
             </ng-container>
           </div>
         </ng-container>

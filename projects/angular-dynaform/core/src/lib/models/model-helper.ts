@@ -1,7 +1,7 @@
-import {ControlModel} from './control-model.interface';
+import {ControlModel} from './control-model';
 import {ArrayModel} from './array-model';
 import {GroupModelBase} from './group-model';
-import {ValueControlModel} from './control-model';
+import {ValueControlModel} from './control-model-base';
 
 // tslint:disable no-namespace
 export namespace ModelHelper {
@@ -12,18 +12,18 @@ export namespace ModelHelper {
       for (let i = 0; i < len; i++) {
         copyStates(fromItem.items[i], toItem.items[i]);
       }
-      }
+    }
     if (fromItem.ngControl.touched) {
       toItem.ngControl.markAsTouched({onlySelf: true});
     } else {
       toItem.ngControl.markAsUntouched({onlySelf: true});
-      }
+    }
     if (fromItem.ngControl.dirty) {
       toItem.ngControl.markAsDirty({onlySelf: true});
     } else {
       toItem.ngControl.markAsPristine({onlySelf: true});
     }
-    }
+  }
 
 
   export function setDirtyIfChanged(item: ControlModel, fromFormValue: any): void {

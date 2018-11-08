@@ -5,7 +5,7 @@ import {DynamicFormControlComponentBase} from '../components/dynamic-form-contro
 import {DynamicFormErrorComponent} from '../components/dynamic-form-error.component';
 // tslint:disable-next-line no-unused-variable  ?
 import {DynamicFormFormControlComponent} from '../components/dynamic-form-form-control.component';
-import {ControlConfig} from '../config/control-config.interface';
+import {ControlConfig} from '../config/control-config';
 import {ControlType} from '../config/control-types.enum';
 
 import {DynamicFormService} from './dynamic-form.service';
@@ -23,7 +23,7 @@ export class DynamicFormComponentFactoryService {
   constructor(private dynamicFormService: DynamicFormService, private resolver: ComponentFactoryResolver) {
     if (!this.dynamicFormService.formControlComponentType) {
       throw new Error('FormControlComponent not set in DynamicFormService');
-      }
+    }
     if (!this.dynamicFormService.errorComponentType) {
       throw new Error('ErrorComponent not set in DynamicFormService');
     }
@@ -48,10 +48,10 @@ export class DynamicFormComponentFactoryService {
     } else {
       controlType = this.controlComponentRegistry.get(config.controlType) ||
           this.controlComponentRegistry.get(ControlType.CONTROL_UNKNOWN);
-      }
+    }
     if (!controlType) {
       throw new Error(`control component '${config.controlType}' defined for '${config.id}' not found`);
-      }
+    }
     return this.resolver.resolveComponentFactory<DynamicFormControlComponentBase>(controlType);
   }
 

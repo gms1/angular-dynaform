@@ -26,8 +26,8 @@ import {Component} from '@angular/core';
       >
       </Label>
       <ng-container *ngIf="model.header" >
-        <FlexboxLayout [ngClass]="model.header.css.content">
-          <ng-container *ngFor="let item of model.header.items;" adfControlComponent [model]="item" >
+        <FlexboxLayout [ngClass]="model.header?.css.content">
+          <ng-container *ngFor="let item of model.header?.items;" adfControlComponent [model]="item" >
           </ng-container>
         </FlexboxLayout>
       </ng-container>
@@ -48,8 +48,8 @@ import {Component} from '@angular/core';
         </ng-container>
       </StackLayout>
       <ng-container *ngIf="model.footer" >
-        <FlexboxLayout [ngClass]="model.footer.css.content">
-          <ng-container *ngFor="let item of model.footer.items;" adfControlComponent [model]="item" >
+        <FlexboxLayout [ngClass]="model.footer?.css.content">
+          <ng-container *ngFor="let item of model.footer?.items;" adfControlComponent [model]="item" >
           </ng-container>
         </FlexboxLayout>
       </ng-container>

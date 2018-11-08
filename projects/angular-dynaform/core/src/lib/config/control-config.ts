@@ -1,4 +1,4 @@
-import {ControlOptions} from './control-options.interface';
+import {ControlOptions} from './control-options';
 // tslint:disable: no-empty-interface
 
 
@@ -141,7 +141,7 @@ export interface ControlConfig {
    * additional user data
    */
   user?: any;
-  }
+}
 
 
 /**

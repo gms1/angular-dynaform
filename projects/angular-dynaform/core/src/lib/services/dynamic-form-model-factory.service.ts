@@ -2,11 +2,11 @@
 import {Injectable, Injector} from '@angular/core';
 
 import {ControlConfig, ModelType, GroupOptions, ControlType} from '../config';
-import {FormConfig} from '../config/form-config.interface';
-import {FormI18n} from '../config/form-i18n.interface';
+import {FormConfig} from '../config/form-config';
+import {FormI18n} from '../config/form-i18n';
 import {ArrayModel} from '../models/array-model';
-import {NullControlModel, ValueControlModel} from '../models/control-model';
-import {ControlModel} from '../models/control-model.interface';
+import {NullControlModel, ValueControlModel} from '../models/control-model-base';
+import {ControlModel} from '../models/control-model';
 import {FormModel} from '../models/form-model';
 import {GroupModelBase, SubsetModel, GroupModel} from '../models/group-model';
 
@@ -30,7 +30,7 @@ export class DynamicFormModelFactoryService {
       parentArray?: ArrayModel, parentArrayIdx?: number): ControlModel {
     if (!parentGroup) {
       throw new Error(`internal error: no parentGroup defined for control '${config.id}'`);
-      }
+    }
     switch (config.modelType) {
       case ModelType.MODEL_GROUP:
         return new GroupModel(

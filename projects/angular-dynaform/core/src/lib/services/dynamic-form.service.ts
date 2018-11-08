@@ -1,7 +1,7 @@
 import {Injectable, Type} from '@angular/core';
 
-import {FormConfig} from '../config/form-config.interface';
-import {FormI18n} from '../config/form-i18n.interface';
+import {FormConfig} from '../config/form-config';
+import {FormI18n} from '../config/form-i18n';
 import {FormModel} from '../models/form-model';
 import {TypeRegistry} from '../utils/type-registry';
 

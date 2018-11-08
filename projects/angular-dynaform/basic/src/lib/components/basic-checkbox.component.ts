@@ -20,6 +20,7 @@ import {Component} from '@angular/core';
         type="checkbox"
         [ngClass]="model.css.control"
         adfHTMLDomElement
+        [required]="options.required ? '' : null"
       />
       <label
         [attr.for]="model.id"
