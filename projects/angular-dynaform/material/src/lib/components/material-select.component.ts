@@ -29,6 +29,7 @@ import {Component} from '@angular/core';
           [multiple]="options.multiple"
           [ngClass]="model.css.control"
           adfHTMLDomElement
+          [required]="options.required ? '' : null"
         >
           <mat-option *ngFor="let opt of model.local.valueOptions" [value]="opt.value"><span [innerHTML]="opt.label"></span></mat-option>
         </mat-select>

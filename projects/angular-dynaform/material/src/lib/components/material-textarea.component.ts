@@ -25,8 +25,6 @@ import {Component} from '@angular/core';
         <textarea matInput
           [formControlName]="model.key"
           [id]="model.id"
-          [maxlength]="options.maxLength"
-          [minlength]="options.minLength"
           [readonly]="options.readOnly"
           [wrap]="options.wrap"
           [cols]="options.cols"
@@ -34,6 +32,10 @@ import {Component} from '@angular/core';
           [placeholder]="model.local.placeholder"
           [ngClass]="model.css.control"
           adfHTMLDomElement
+          [required]="options.required ? '' : null"
+          [attr.min]="options.min"
+          [attr.max]="options.max"
+          [maxlength]="options.maxLength"
         >
         </textarea>
         <adf-error-container [model]="model">

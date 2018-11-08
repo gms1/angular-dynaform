@@ -38,6 +38,7 @@ const TEXTVIEW_DEFAULT_ROWS = 10;
       [hint]="model.local.placeholder"
       [ngClass]="model.css.control"
       adfNSDomElement
+      [required]="options.required"
     >
     </TextView>
     <adf-error-container [model]="model">
@@ -65,13 +66,10 @@ export class NativeScriptTextViewComponent extends DynamicFormControlComponent<V
   }
 
   updateOpts(): void {
-    if (this.options) {
-      this.opts.maxLength = this.options.maxLength ? this.options.maxLength : TEXTVIEW_DEFAULT_MAXLENGTH;
-      this.opts.col = this.options.cols ? this.options.cols : TEXTVIEW_DEFAULT_COLS;
-      this.opts.row = this.options.rows ? this.options.rows : TEXTVIEW_DEFAULT_ROWS;
-    } else {
-      this.setOptsDefaults();
-    }
+    this.setOptsDefaults();
+    this.opts.maxLength = this.options.maxLength ? this.options.maxLength : TEXTVIEW_DEFAULT_MAXLENGTH;
+    this.opts.col = this.options.cols ? this.options.cols : TEXTVIEW_DEFAULT_COLS;
+    this.opts.row = this.options.rows ? this.options.rows : TEXTVIEW_DEFAULT_ROWS;
   }
 
 

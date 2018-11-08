@@ -26,6 +26,7 @@ import {Component} from '@angular/core';
         [id]="model.id"
         [ngClass]="model.css.control"
         adfHTMLDomElement
+        [required]="options.required ? '' : null"
       >
       </mat-slide-toggle>
       <adf-error-container [model]="model">

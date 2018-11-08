@@ -25,11 +25,12 @@ import {Component} from '@angular/core';
         [formControlName]="model.key"
         [id]="model.id"
         type="range"
-        [min]="options.min"
-        [max]="options.max"
         [step]="options.step"
         [ngClass]="model.css.control"
         adfHTMLDomElement
+        [required]="options.required ? '' : null"
+        [attr.min]="options.min"
+        [attr.max]="options.max"
       />
       <adf-error-container [model]="model">
       </adf-error-container>

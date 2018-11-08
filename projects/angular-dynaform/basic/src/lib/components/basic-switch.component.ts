@@ -30,6 +30,7 @@ import {Component} from '@angular/core';
         step="1"
         [ngClass]="model.css.control"
         adfHTMLDomElement
+        [required]="options.required ? '' : null"
       />
       <adf-error-container [model]="model">
       </adf-error-container>

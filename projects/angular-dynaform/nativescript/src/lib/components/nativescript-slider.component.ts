@@ -30,6 +30,7 @@ import {Component} from '@angular/core';
       [maxValue]="options.max"
       [ngClass]="model.css.control"
       adfNSDomElement
+      [required]="options.required"
     >
     </Slider>
     <adf-error-container [model]="model">

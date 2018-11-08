@@ -38,6 +38,7 @@ const TEXTFIELD_DEFAULT_KEYBOARDTYPE = null;
       [keyboardType]="opts.keyboardType"
       [ngClass]="model.css.control"
       adfNSDomElement
+      [required]="options.required"
     >
     </TextField>
     <adf-error-container [model]="model">
@@ -66,39 +67,35 @@ export class NativeScriptTextFieldComponent extends DynamicFormControlComponent<
 
   updateOpts(): void {
     this.opts = {};
-    if (this.options) {
-      this.opts.maxLength = this.options.maxLength ? this.options.maxLength : TEXTFIELD_DEFAULT_MAXLENGTH;
-      if (this.options.inputType) {
-        if (this.options.inputType === 'password') {
-          this.opts.secure = true;
-          this.opts.keyboardType = TEXTFIELD_DEFAULT_KEYBOARDTYPE;
-        } else {
-          this.opts.secure = false;
-          switch (this.options.inputType) {
-            case 'datetime-local':
-              this.opts.keyboardType = 'datetime';
-              break;
-            case 'number':
-              this.opts.keyboardType = 'number';
-              break;
-            case 'url':
-              this.opts.keyboardType = 'url';
-              break;
-            case 'email':
-              this.opts.keyboardType = 'email';
-              break;
-            case 'phone':
-              this.opts.keyboardType = 'phone';
-              break;
-            default:
-              this.opts.keyboardType = TEXTFIELD_DEFAULT_KEYBOARDTYPE;
-              break;
-          }
+    this.setOptsDefaults();
+    this.opts.maxLength = this.options.maxLength ? this.options.maxLength : TEXTFIELD_DEFAULT_MAXLENGTH;
+    if (this.options.inputType) {
+      if (this.options.inputType === 'password') {
+        this.opts.secure = true;
+        this.opts.keyboardType = TEXTFIELD_DEFAULT_KEYBOARDTYPE;
+      } else {
+        this.opts.secure = false;
+        switch (this.options.inputType) {
+          case 'datetime-local':
+            this.opts.keyboardType = 'datetime';
+            break;
+          case 'number':
+            this.opts.keyboardType = 'number';
+            break;
+          case 'url':
+            this.opts.keyboardType = 'url';
+            break;
+          case 'email':
+            this.opts.keyboardType = 'email';
+            break;
+          case 'phone':
+            this.opts.keyboardType = 'phone';
+            break;
+          default:
+            this.opts.keyboardType = TEXTFIELD_DEFAULT_KEYBOARDTYPE;
+            break;
         }
       }
-
-    } else {
-      this.setOptsDefaults();
     }
   }
 

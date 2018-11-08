@@ -27,6 +27,7 @@ import {Component} from '@angular/core';
         [attr.multiple]="options.multiple"
         [ngClass]="model.css.control"
         adfHTMLDomElement
+        [required]="options.required ? '' : null"
       >
         <option value="" disabled selected hidden>{{ model.local.placeholder }}</option>
         <option *ngFor="let opt of model.local.valueOptions" [value]="opt.value"><span [innerHTML]="opt.label"></span></option>

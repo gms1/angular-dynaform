@@ -26,6 +26,7 @@ import {Component} from '@angular/core';
       [id]="model.id"
       [ngClass]="model.css.control"
       adfNSDomElement
+      [required]="options.required"
     >
     </Switch>
     <adf-error-container [model]="model">

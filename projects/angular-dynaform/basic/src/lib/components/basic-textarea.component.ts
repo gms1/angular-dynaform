@@ -24,7 +24,6 @@ import {Component} from '@angular/core';
       <textarea
         [formControlName]="model.key"
         [id]="model.id"
-        [maxlength]="options.maxLength"
         [readonly]="options.readOnly"
         [wrap]="options.wrap"
         [cols]="options.cols"
@@ -32,6 +31,10 @@ import {Component} from '@angular/core';
         [attr.placeholder]="model.local.placeholder"
         [ngClass]="model.css.control"
         adfHTMLDomElement
+        [required]="options.required ? '' : null"
+        [attr.min]="options.min"
+        [attr.max]="options.max"
+        [maxlength]="options.maxLength"
       >
       </textarea>
       <adf-error-container [model]="model">

@@ -27,6 +27,7 @@ import {Component} from '@angular/core';
         ngDefaultControl
         adfHTMLDomElement
         [ngClass]="model.css.control"
+        [required]="options.required ? '' : null"
       >
         <mat-radio-button *ngFor="let opt of model.local.valueOptions"
           [value]="opt.value"

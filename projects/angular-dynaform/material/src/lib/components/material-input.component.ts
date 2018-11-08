@@ -27,11 +27,14 @@ import {Component} from '@angular/core';
           [id]="model.id"
           [type]="options.inputType || 'text'"
           [readonly]="options.readOnly"
-          [maxlength]="options.maxLength"
           [attr.autocomplete]="model.autoComplete"
           [placeholder]="model.local.placeholder"
           [ngClass]="model.css.control"
           adfHTMLDomElement
+          [required]="options.required ? '' : null"
+          [attr.min]="options.min"
+          [attr.max]="options.max"
+          [maxlength]="options.maxLength"
         />
           <adf-error-container [model]="model">
           </adf-error-container>

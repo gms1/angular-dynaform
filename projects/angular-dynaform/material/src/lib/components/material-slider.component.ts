@@ -24,11 +24,12 @@ import {Component} from '@angular/core';
       <mat-slider
         [formControlName]="model.key"
         [id]="model.id"
-        [min]="options.min"
-        [max]="options.max"
         [step]="options.step"
         [ngClass]="model.css.control"
         adfHTMLDomElement
+        [required]="options.required ? '' : null"
+        [attr.min]="options.min"
+        [attr.max]="options.max"
       >
       </mat-slider>
       <adf-error-container [model]="model">
