@@ -63,7 +63,7 @@ export const stepperHorizantalExample1Config: FormConfig = {
       {
         id: 'stepper',
         modelType: ModelType.MODEL_SUBSET,
-        controlType: ControlType.CONTROL_STEPPER,
+        controlType: ControlType.CONTROL_STEPPER, // use stepper group-control
         options: {
           label: 'Stepper',
           group: [
@@ -167,7 +167,7 @@ export const stepperHorizantalExample2Config: FormConfig = {
     group: [{
       id: 'stepper',
       modelType: ModelType.MODEL_SUBSET,
-      controlType: ControlType.CONTROL_STEPPER,
+      controlType: ControlType.CONTROL_STEPPER, // use stepper group-control
       options: {
         label: 'Stepper',
         group: [

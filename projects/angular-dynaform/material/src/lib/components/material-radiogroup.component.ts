@@ -20,7 +20,8 @@ import {Component} from '@angular/core';
         class="adf-front-label"
         [ngClass]="model.css.label"
         [innerHTML]="model.local.label"
-      ></label>
+      >
+      </label>
       <mat-radio-group
         [id]="model.id"
         [formControlName]="model.key"

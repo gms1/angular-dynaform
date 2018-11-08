@@ -263,8 +263,7 @@ export const mainExampleConfig: FormConfig = {
 };
 
 
-
-export const mainExampleFormLanguages = {
+export const mainExampleFormLanguages: { [key: string]: FormI18n; } = {
   en: {
     controls: {
       salutation: {valueOptions: [{value: 'mr', label: 'Mr.'}, {value: 'ms', label: 'Ms.'}]},
@@ -292,7 +291,11 @@ export const mainExampleFormLanguages = {
       reset: {label: 'Reset'},
       submit: {label: 'Submit'}
     },
-    errors: {required: `is required`, minLength: `minimum length`, maxLength: `maximum length`}
+    errors: {
+      required: 'is required',
+      minLength: 'minimum length ${requiredLength}',
+      maxLength: 'maximum length ${requiredLength}'
+    }
   },
   de: {
     controls: {
@@ -320,10 +323,13 @@ export const mainExampleFormLanguages = {
       clear: {label: 'Leeren'},
       reset: {label: 'Zurücksetzen'},
       submit: {label: 'Ok'}
+    },
+    errors: {
+      required: 'wird benötigt',
+      minLength: 'minimale Länge ${requiredLength}',
+      maxLength: 'maximale Länge ${requiredLength}'
     }
-  },
-  errors:
-      {required: `wird benötigt`, minLength: `minimale Länge unterschritten`, maxLength: `maximale Länge überschritten`}
+  }
 };
 
 

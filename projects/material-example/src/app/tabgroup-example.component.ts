@@ -23,7 +23,7 @@ export const tabGroupExampleConfig: FormConfig = {
       {
         id: 'tabGroup',
         modelType: ModelType.MODEL_SUBSET,
-        controlType: ControlType.CONTROL_TABGROUP,
+        controlType: ControlType.CONTROL_TABGROUP,  // use tabgroup control
         options: {
           label: 'TabGroup',
           matTabGroupDynamicHeight: true,

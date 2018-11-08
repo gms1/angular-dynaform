@@ -24,7 +24,8 @@ import {Component} from '@angular/core';
           *ngIf="model.local.label"
           [ngClass]="model.css.label"
           [innerHTML]="model.local.label"
-        ></legend>
+        >
+        </legend>
         <label *ngFor="let opt of model.local.valueOptions">
           <input
             [formControlName]="model.key"
