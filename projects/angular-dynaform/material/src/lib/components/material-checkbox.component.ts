@@ -21,16 +21,8 @@ import {Component} from '@angular/core';
         adfHTMLDomElement
         [required]="options.required ? '' : null"
       >
+        {{model.local.label}}
       </mat-checkbox>
-      <label
-        [attr.for]="model.id"
-        class="adf-back-label"
-        [ngClass]="model.css.label"
-      >
-        <span [ngClass]="model.css.label"
-          [innerHTML]="model.local.label">
-        </span>
-      </label>
       <adf-error-container [model]="model">
       </adf-error-container>
     </div>
