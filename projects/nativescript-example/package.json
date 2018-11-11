@@ -27,7 +27,7 @@
     "codelyzer": "^4.5.0",
     "jsep": "^0.3.4",
     "jsonpointerx": "^1.0.18",
-    "nativescript-angular": "^6.2.0",
+    "nativescript-angular": "^7.0.0-rc.0",
     "nativescript-checkbox": "^3.0.3",
     "nativescript-theme-core": "^1.0.4",
     "nativescript-ui-sidedrawer": "^5.0.0",
@@ -38,8 +38,8 @@
     "zone.js": "^0.8.26"
   },
   "devDependencies": {
-    "@angular/compiler-cli": "~7.0.3",
-    "@ngtools/webpack": "~7.0.5",
+    "@angular/compiler-cli": "^7.0.3",
+    "@ngtools/webpack": "~6.2.0",
     "nativescript-dev-webpack": "^0.17.0"
   },
   "scripts": {
