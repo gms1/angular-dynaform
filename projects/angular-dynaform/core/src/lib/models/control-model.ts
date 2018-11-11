@@ -389,6 +389,7 @@ export abstract class AbstractControlModel<C extends AbstractControl, O extends 
       // initialize using the defaults from the form configuration
       this.local.errors = this.config.errors;
       this.local.label = this.options.label;
+      this.local.hint = this.options.hint;
       this.local.placeholder = this.options.placeholder;
       this.local.valueOptions = [];
       if (this.options.valueOptions) {
@@ -404,6 +405,7 @@ export abstract class AbstractControlModel<C extends AbstractControl, O extends 
     const i18n = this._formModel.i18n.controls[this.config.id];
     this.local.errors = i18n.errors;
     this.local.label = i18n.label;
+    this.local.hint = i18n.hint;
     this.local.placeholder = i18n.placeholder;
     this.local.valueOptions = [];
     if (this.options.valueOptions) {

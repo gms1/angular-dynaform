@@ -36,8 +36,12 @@ import {Component} from '@angular/core';
         />
           <mat-datepicker-toggle matSuffix [for]="myDatepicker"></mat-datepicker-toggle>
           <mat-datepicker #myDatepicker></mat-datepicker>
+          <span matPrefix *ngIf="options.icon">
+            <mat-icon>options.icon</mat-icon>
+          </span>
           <adf-error-container [model]="model">
           </adf-error-container>
+          <mat-hint>model.local.hint</mat-hint>
         </mat-form-field>
   </div>
   `,

@@ -82,6 +82,17 @@ export interface ControlValueOptions extends ControlBaseOptions {
   max?: number;
   pattern?: string;
   required?: boolean;
+
+  /**
+   * hint text (currently only supported for material (input/textarea/select/datepicker))
+   */
+  hint?: string;
+
+
+  /**
+   * icon prefix (currently only supported for material (input/textarea/select/datepicker))
+   */
+  icon?: string;
 }
 
 export interface ControlInputOptions extends ControlValueOptions {
