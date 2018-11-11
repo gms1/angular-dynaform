@@ -94,10 +94,10 @@
 						<section class="tsd-index-section ">
 							<h3>Methods</h3>
 							<ul class="tsd-index-list">
-								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-inherited tsd-is-protected"><a href="dynamicformvalidatorregistry.html#builderror" class="tsd-kind-icon">build<wbr>Error</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-overwrite tsd-is-inherited"><a href="dynamicformvalidatorregistry.html#createvalidators" class="tsd-kind-icon">create<wbr>Validators</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-inherited tsd-is-protected"><a href="dynamicformvalidatorregistry.html#enrichresult" class="tsd-kind-icon">enrich<wbr>Result</a></li>
 								<li class="tsd-kind-method tsd-parent-kind-class"><a href="dynamicformvalidatorregistry.html#setfn" class="tsd-kind-icon">set<wbr>Fn</a></li>
 								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-overwrite"><a href="dynamicformvalidatorregistry.html#validate" class="tsd-kind-icon">validate</a></li>
-								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-overwrite tsd-is-inherited"><a href="dynamicformvalidatorregistry.html#validatewrap" class="tsd-kind-icon">validate<wbr>Wrap</a></li>
 								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-static"><a href="dynamicformvalidatorregistry.html#email" class="tsd-kind-icon">email</a></li>
 								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-static"><a href="dynamicformvalidatorregistry.html#max" class="tsd-kind-icon">max</a></li>
 								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-static"><a href="dynamicformvalidatorregistry.html#maxlength" class="tsd-kind-icon">max<wbr>Length</a></li>
@@ -124,7 +124,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/gms1/angular-dynaform/blob/76a63d5/projects/angular-dynaform/core/src/lib/validations/dynamic-form.validator.ts#L88">lib/validations/dynamic-form.validator.ts:88</a></li>
+									<li>Defined in <a href="https://github.com/gms1/angular-dynaform/blob/c074e6d/projects/angular-dynaform/core/src/lib/validations/dynamic-form.validator.ts#L97">lib/validations/dynamic-form.validator.ts:97</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-returns-title">Returns <a href="dynamicformvalidatorregistry.html" class="tsd-signature-type">DynamicFormValidatorRegistry</a></h4>
@@ -140,25 +140,26 @@
 					<div class="tsd-signature tsd-kind-icon">reg<span class="tsd-signature-symbol">:</span> <a href="fnregistry.html" class="tsd-signature-type">FnRegistry</a><span class="tsd-signature-symbol">&lt;</span><a href="../globals.html#dynamicformvalidatorfn" class="tsd-signature-type">DynamicFormValidatorFn</a><span class="tsd-signature-symbol">&gt;</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/gms1/angular-dynaform/blob/76a63d5/projects/angular-dynaform/core/src/lib/validations/dynamic-form.validator.ts#L88">lib/validations/dynamic-form.validator.ts:88</a></li>
+							<li>Defined in <a href="https://github.com/gms1/angular-dynaform/blob/c074e6d/projects/angular-dynaform/core/src/lib/validations/dynamic-form.validator.ts#L97">lib/validations/dynamic-form.validator.ts:97</a></li>
 						</ul>
 					</aside>
 				</section>
 			</section>
 			<section class="tsd-panel-group tsd-member-group ">
 				<h2>Methods</h2>
-				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-inherited tsd-is-protected">
-					<a name="builderror" class="tsd-anchor"></a>
-					<h3><span class="tsd-flag ts-flagProtected">Protected</span> build<wbr>Error</h3>
-					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-inherited tsd-is-protected">
-						<li class="tsd-signature tsd-kind-icon">build<wbr>Error<span class="tsd-signature-symbol">(</span>control<span class="tsd-signature-symbol">: </span><a href="../interfaces/controlmodel.html" class="tsd-signature-type">ControlModel</a>, key<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span>, order<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span>, error<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">ValidationErrors</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="../globals.html#dynamicvalidationerrorresult" class="tsd-signature-type">DynamicValidationErrorResult</a></li>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-overwrite tsd-is-inherited">
+					<a name="createvalidators" class="tsd-anchor"></a>
+					<h3>create<wbr>Validators</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-overwrite tsd-is-inherited">
+						<li class="tsd-signature tsd-kind-icon">create<wbr>Validators<span class="tsd-signature-symbol">(</span>control<span class="tsd-signature-symbol">: </span><a href="../interfaces/controlmodel.html" class="tsd-signature-type">ControlModel</a>, key<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">[]</span>, order<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">ValidatorFn</span><span class="tsd-signature-symbol">[]</span></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
-								<p>Inherited from <a href="dynamicformvalidationbase.html">DynamicFormValidationBase</a>.<a href="dynamicformvalidationbase.html#builderror">buildError</a></p>
+								<p>Inherited from <a href="dynamicformvalidation.html">DynamicFormValidation</a>.<a href="dynamicformvalidation.html#createvalidators">createValidators</a></p>
+								<p>Overrides <a href="dynamicformvalidationbase.html">DynamicFormValidationBase</a>.<a href="dynamicformvalidationbase.html#createvalidators">createValidators</a></p>
 								<ul>
-									<li>Defined in <a href="https://github.com/gms1/angular-dynaform/blob/76a63d5/projects/angular-dynaform/core/src/lib/validations/dynamic-form.validator.ts#L26">lib/validations/dynamic-form.validator.ts:26</a></li>
+									<li>Defined in <a href="https://github.com/gms1/angular-dynaform/blob/c074e6d/projects/angular-dynaform/core/src/lib/validations/dynamic-form.validator.ts#L48">lib/validations/dynamic-form.validator.ts:48</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -167,16 +168,46 @@
 									<h5>control: <a href="../interfaces/controlmodel.html" class="tsd-signature-type">ControlModel</a></h5>
 								</li>
 								<li>
+									<h5>key: <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">[]</span></h5>
+								</li>
+								<li>
+									<h5>order: <span class="tsd-signature-type">number</span></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">ValidatorFn</span><span class="tsd-signature-symbol">[]</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-inherited tsd-is-protected">
+					<a name="enrichresult" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagProtected">Protected</span> enrich<wbr>Result</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-inherited tsd-is-protected">
+						<li class="tsd-signature tsd-kind-icon">enrich<wbr>Result<span class="tsd-signature-symbol">(</span>error<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">ValidationErrors</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">null</span>, key<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span>, order<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">ValidationErrors</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">null</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<p>Inherited from <a href="dynamicformvalidationbase.html">DynamicFormValidationBase</a>.<a href="dynamicformvalidationbase.html#enrichresult">enrichResult</a></p>
+								<ul>
+									<li>Defined in <a href="https://github.com/gms1/angular-dynaform/blob/c074e6d/projects/angular-dynaform/core/src/lib/validations/dynamic-form.validator.ts#L21">lib/validations/dynamic-form.validator.ts:21</a></li>
+								</ul>
+							</aside>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>error: <span class="tsd-signature-type">ValidationErrors</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">null</span></h5>
+								</li>
+								<li>
 									<h5>key: <span class="tsd-signature-type">string</span></h5>
 								</li>
 								<li>
 									<h5>order: <span class="tsd-signature-type">number</span></h5>
 								</li>
-								<li>
-									<h5>error: <span class="tsd-signature-type">ValidationErrors</span></h5>
-								</li>
 							</ul>
-							<h4 class="tsd-returns-title">Returns <a href="../globals.html#dynamicvalidationerrorresult" class="tsd-signature-type">DynamicValidationErrorResult</a></h4>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">ValidationErrors</span>
+								<span class="tsd-signature-symbol"> | </span>
+								<span class="tsd-signature-type">null</span>
+							</h4>
 						</li>
 					</ul>
 				</section>
@@ -190,7 +221,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/gms1/angular-dynaform/blob/76a63d5/projects/angular-dynaform/core/src/lib/validations/dynamic-form.validator.ts#L105">lib/validations/dynamic-form.validator.ts:105</a></li>
+									<li>Defined in <a href="https://github.com/gms1/angular-dynaform/blob/c074e6d/projects/angular-dynaform/core/src/lib/validations/dynamic-form.validator.ts#L114">lib/validations/dynamic-form.validator.ts:114</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -220,7 +251,7 @@
 							<aside class="tsd-sources">
 								<p>Overrides <a href="dynamicformvalidationbase.html">DynamicFormValidationBase</a>.<a href="dynamicformvalidationbase.html#validate">validate</a></p>
 								<ul>
-									<li>Defined in <a href="https://github.com/gms1/angular-dynaform/blob/76a63d5/projects/angular-dynaform/core/src/lib/validations/dynamic-form.validator.ts#L109">lib/validations/dynamic-form.validator.ts:109</a></li>
+									<li>Defined in <a href="https://github.com/gms1/angular-dynaform/blob/c074e6d/projects/angular-dynaform/core/src/lib/validations/dynamic-form.validator.ts#L118">lib/validations/dynamic-form.validator.ts:118</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -236,37 +267,6 @@
 						</li>
 					</ul>
 				</section>
-				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-overwrite tsd-is-inherited">
-					<a name="validatewrap" class="tsd-anchor"></a>
-					<h3>validate<wbr>Wrap</h3>
-					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-overwrite tsd-is-inherited">
-						<li class="tsd-signature tsd-kind-icon">validate<wbr>Wrap<span class="tsd-signature-symbol">(</span>control<span class="tsd-signature-symbol">: </span><a href="../interfaces/controlmodel.html" class="tsd-signature-type">ControlModel</a>, key<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">[]</span>, order<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">ValidatorFn</span><span class="tsd-signature-symbol">[]</span></li>
-					</ul>
-					<ul class="tsd-descriptions">
-						<li class="tsd-description">
-							<aside class="tsd-sources">
-								<p>Inherited from <a href="dynamicformvalidation.html">DynamicFormValidation</a>.<a href="dynamicformvalidation.html#validatewrap">validateWrap</a></p>
-								<p>Overrides <a href="dynamicformvalidationbase.html">DynamicFormValidationBase</a>.<a href="dynamicformvalidationbase.html#validatewrap">validateWrap</a></p>
-								<ul>
-									<li>Defined in <a href="https://github.com/gms1/angular-dynaform/blob/76a63d5/projects/angular-dynaform/core/src/lib/validations/dynamic-form.validator.ts#L36">lib/validations/dynamic-form.validator.ts:36</a></li>
-								</ul>
-							</aside>
-							<h4 class="tsd-parameters-title">Parameters</h4>
-							<ul class="tsd-parameters">
-								<li>
-									<h5>control: <a href="../interfaces/controlmodel.html" class="tsd-signature-type">ControlModel</a></h5>
-								</li>
-								<li>
-									<h5>key: <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">[]</span></h5>
-								</li>
-								<li>
-									<h5>order: <span class="tsd-signature-type">number</span></h5>
-								</li>
-							</ul>
-							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">ValidatorFn</span><span class="tsd-signature-symbol">[]</span></h4>
-						</li>
-					</ul>
-				</section>
 				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-static">
 					<a name="email" class="tsd-anchor"></a>
 					<h3><span class="tsd-flag ts-flagStatic">Static</span> email</h3>
@@ -277,7 +277,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/gms1/angular-dynaform/blob/76a63d5/projects/angular-dynaform/core/src/lib/validations/dynamic-form.validator.ts#L158">lib/validations/dynamic-form.validator.ts:158</a></li>
+									<li>Defined in <a href="https://github.com/gms1/angular-dynaform/blob/c074e6d/projects/angular-dynaform/core/src/lib/validations/dynamic-form.validator.ts#L167">lib/validations/dynamic-form.validator.ts:167</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -303,7 +303,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/gms1/angular-dynaform/blob/76a63d5/projects/angular-dynaform/core/src/lib/validations/dynamic-form.validator.ts#L146">lib/validations/dynamic-form.validator.ts:146</a></li>
+									<li>Defined in <a href="https://github.com/gms1/angular-dynaform/blob/c074e6d/projects/angular-dynaform/core/src/lib/validations/dynamic-form.validator.ts#L155">lib/validations/dynamic-form.validator.ts:155</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -329,7 +329,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/gms1/angular-dynaform/blob/76a63d5/projects/angular-dynaform/core/src/lib/validations/dynamic-form.validator.ts#L134">lib/validations/dynamic-form.validator.ts:134</a></li>
+									<li>Defined in <a href="https://github.com/gms1/angular-dynaform/blob/c074e6d/projects/angular-dynaform/core/src/lib/validations/dynamic-form.validator.ts#L143">lib/validations/dynamic-form.validator.ts:143</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -355,7 +355,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/gms1/angular-dynaform/blob/76a63d5/projects/angular-dynaform/core/src/lib/validations/dynamic-form.validator.ts#L140">lib/validations/dynamic-form.validator.ts:140</a></li>
+									<li>Defined in <a href="https://github.com/gms1/angular-dynaform/blob/c074e6d/projects/angular-dynaform/core/src/lib/validations/dynamic-form.validator.ts#L149">lib/validations/dynamic-form.validator.ts:149</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -381,7 +381,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/gms1/angular-dynaform/blob/76a63d5/projects/angular-dynaform/core/src/lib/validations/dynamic-form.validator.ts#L128">lib/validations/dynamic-form.validator.ts:128</a></li>
+									<li>Defined in <a href="https://github.com/gms1/angular-dynaform/blob/c074e6d/projects/angular-dynaform/core/src/lib/validations/dynamic-form.validator.ts#L137">lib/validations/dynamic-form.validator.ts:137</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -407,7 +407,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/gms1/angular-dynaform/blob/76a63d5/projects/angular-dynaform/core/src/lib/validations/dynamic-form.validator.ts#L117">lib/validations/dynamic-form.validator.ts:117</a></li>
+									<li>Defined in <a href="https://github.com/gms1/angular-dynaform/blob/c074e6d/projects/angular-dynaform/core/src/lib/validations/dynamic-form.validator.ts#L126">lib/validations/dynamic-form.validator.ts:126</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -433,7 +433,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/gms1/angular-dynaform/blob/76a63d5/projects/angular-dynaform/core/src/lib/validations/dynamic-form.validator.ts#L152">lib/validations/dynamic-form.validator.ts:152</a></li>
+									<li>Defined in <a href="https://github.com/gms1/angular-dynaform/blob/c074e6d/projects/angular-dynaform/core/src/lib/validations/dynamic-form.validator.ts#L161">lib/validations/dynamic-form.validator.ts:161</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -459,7 +459,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/gms1/angular-dynaform/blob/76a63d5/projects/angular-dynaform/core/src/lib/validations/dynamic-form.validator.ts#L122">lib/validations/dynamic-form.validator.ts:122</a></li>
+									<li>Defined in <a href="https://github.com/gms1/angular-dynaform/blob/c074e6d/projects/angular-dynaform/core/src/lib/validations/dynamic-form.validator.ts#L131">lib/validations/dynamic-form.validator.ts:131</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -485,7 +485,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/gms1/angular-dynaform/blob/76a63d5/projects/angular-dynaform/core/src/lib/validations/dynamic-form.validator.ts#L125">lib/validations/dynamic-form.validator.ts:125</a></li>
+									<li>Defined in <a href="https://github.com/gms1/angular-dynaform/blob/c074e6d/projects/angular-dynaform/core/src/lib/validations/dynamic-form.validator.ts#L134">lib/validations/dynamic-form.validator.ts:134</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -524,17 +524,17 @@
 							<li class=" tsd-kind-property tsd-parent-kind-class">
 								<a href="dynamicformvalidatorregistry.html#reg" class="tsd-kind-icon">reg</a>
 							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-overwrite tsd-is-inherited">
+								<a href="dynamicformvalidatorregistry.html#createvalidators" class="tsd-kind-icon">create<wbr>Validators</a>
+							</li>
 							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-inherited tsd-is-protected">
-								<a href="dynamicformvalidatorregistry.html#builderror" class="tsd-kind-icon">build<wbr>Error</a>
+								<a href="dynamicformvalidatorregistry.html#enrichresult" class="tsd-kind-icon">enrich<wbr>Result</a>
 							</li>
 							<li class=" tsd-kind-method tsd-parent-kind-class">
 								<a href="dynamicformvalidatorregistry.html#setfn" class="tsd-kind-icon">set<wbr>Fn</a>
 							</li>
 							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-overwrite">
 								<a href="dynamicformvalidatorregistry.html#validate" class="tsd-kind-icon">validate</a>
-							</li>
-							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-overwrite tsd-is-inherited">
-								<a href="dynamicformvalidatorregistry.html#validatewrap" class="tsd-kind-icon">validate<wbr>Wrap</a>
 							</li>
 							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-static">
 								<a href="dynamicformvalidatorregistry.html#email" class="tsd-kind-icon">email</a>

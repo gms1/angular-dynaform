@@ -1,5 +1,12 @@
 # CHANGELOG
 
+## 2.1.0
+
+- **Feature**
+  - support for icon and hint in Material input/select/textarea/datepicker components
+  - added 'required', 'maxlength', 'min', 'max' attributes to html
+  - string interpolation in error messages
+
 ## 2.0.1
 
 maintenance release
