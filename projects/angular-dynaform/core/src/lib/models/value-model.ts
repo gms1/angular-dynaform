@@ -32,7 +32,7 @@ export abstract class ControlModelBase<O> extends AbstractControlModel<FormContr
 }
 
 
-export class NullControlModel extends ControlModelBase<ControlBaseOptions> {
+export class NullModel extends ControlModelBase<ControlBaseOptions> {
   constructor(
       dynamicFormService: DynamicFormService, config: ControlConfig, formModel: FormModel, parentPath?: string[],
       parentGroup?: GroupModelBase, parentArray?: ArrayModel, parentArrayIdx?: number) {
@@ -43,7 +43,7 @@ export class NullControlModel extends ControlModelBase<ControlBaseOptions> {
 }
 
 
-export class ValueControlModel extends ControlModelBase<ControlValueOptions> {
+export class ValueModel extends ControlModelBase<ControlValueOptions> {
   readonly autoComplete: string;
 
   constructor(
@@ -93,3 +93,18 @@ export class ValueControlModel extends ControlModelBase<ControlValueOptions> {
     return appData;
   }
 }
+
+/**
+ * @deprecated
+ *
+ * ValueControlModel
+ */
+export class ValueControlModel extends ValueModel {}
+
+
+/**
+ * @deprecated
+ *
+ * NullControlModel
+ */
+export class NullControlModel extends NullModel {}

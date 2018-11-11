@@ -3,7 +3,7 @@ import {
   ControlSwitchOptions,
   DynamicFormControlComponentBase,
   DynamicFormControlComponent,
-  ValueControlModel
+  ValueModel
 } from '@angular-dynaform/core';
 import {Component} from '@angular/core';
 
@@ -39,7 +39,7 @@ import {Component} from '@angular/core';
   inputs: ['model'],
   providers: [{provide: DynamicFormControlComponentBase, useExisting: BasicSwitchComponent}]
 })
-export class BasicSwitchComponent extends DynamicFormControlComponent<ValueControlModel> {
-  model!: ValueControlModel;
+export class BasicSwitchComponent extends DynamicFormControlComponent<ValueModel> {
+  model!: ValueModel;
   options!: ControlSwitchOptions;
 }

@@ -1,7 +1,7 @@
 
 export * from './control-model';
 
-export * from './control-model-base';
+export * from './value-model';
 export * from './group-model';
 export * from './array-model';
 

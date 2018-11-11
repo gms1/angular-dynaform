@@ -13,7 +13,10 @@
       "jsonpointerx": "jsonpointerx",
       "rxjs": "Rx",
       "rxjs/operators": "Rx.Observable.prototype",
-      "@angular-dynaform/core": "adf.core"
+      "@angular-dynaform/core": "adf.core",
+      "nativescript-angular/common": "ns.ng.common",
+      "nativescript-angular/forms": "ns.ng.forms",
+      "nativescript-checkbox/angular": "ns.checkbox"
     }
   }
 }

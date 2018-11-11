@@ -11,13 +11,6 @@ import {NgFormArray, NgArrayModelHandler} from './internal/ng-form-array';
 import {JsonPointer} from 'jsonpointerx';
 
 
-import {ModelHelper} from './model-helper';
-/*
-declare namespace ModelHelper {
-  function copyStates(fromItem: ControlModel, toItem: ControlModel): void;
-  }
-*/
-
 const HEADER_IDX = -1;
 const FOOTER_IDX = -2;
 
@@ -267,6 +260,28 @@ export class ArrayModel extends AbstractControlModel<NgFormArray, ArrayOptions> 
 
   static copyItem(fromItem: GroupModelBase, toItem: GroupModelBase): void {
     toItem.ngControl.setValue(fromItem.ngControl.value);
-    ModelHelper.copyStates(fromItem, toItem);
+    copyStates(fromItem, toItem);
+  }
+}
+
+
+
+function copyStates(fromItem: ControlModel, toItem: ControlModel): void {
+  if ((fromItem instanceof GroupModelBase && toItem instanceof GroupModelBase) ||
+      (fromItem instanceof ArrayModel && toItem instanceof ArrayModel)) {
+    const len: number = Math.min(fromItem.items.length, toItem.items.length);
+    for (let i = 0; i < len; i++) {
+      copyStates(fromItem.items[i], toItem.items[i]);
+    }
+  }
+  if (fromItem.ngControl.touched) {
+    toItem.ngControl.markAsTouched({onlySelf: true});
+  } else {
+    toItem.ngControl.markAsUntouched({onlySelf: true});
+  }
+  if (fromItem.ngControl.dirty) {
+    toItem.ngControl.markAsDirty({onlySelf: true});
+  } else {
+    toItem.ngControl.markAsPristine({onlySelf: true});
   }
 }

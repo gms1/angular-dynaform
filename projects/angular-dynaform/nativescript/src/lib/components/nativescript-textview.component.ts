@@ -5,7 +5,7 @@ import {
   DynamicFormControlComponentBase,
   DynamicFormControlComponent,
   DynamicFormService,
-  ValueControlModel
+  ValueModel
 } from '@angular-dynaform/core';
 import {Component, ElementRef, OnInit, OnChanges, SimpleChanges} from '@angular/core';
 
@@ -48,9 +48,9 @@ const TEXTVIEW_DEFAULT_ROWS = 10;
   inputs: ['model'],
   providers: [{provide: DynamicFormControlComponentBase, useExisting: NativeScriptTextViewComponent}]
 })
-export class NativeScriptTextViewComponent extends DynamicFormControlComponent<ValueControlModel> implements OnInit,
-                                                                                                             OnChanges {
-  model!: ValueControlModel;
+export class NativeScriptTextViewComponent extends DynamicFormControlComponent<ValueModel> implements OnInit,
+                                                                                                      OnChanges {
+  model!: ValueModel;
   options!: ControlTextareaOptions;
   opts: {[key: string]: any};
 

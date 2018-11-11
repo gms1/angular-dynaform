@@ -5,7 +5,7 @@ import {
   ControlSelectOptions,
   DynamicFormControlComponentBase,
   DynamicFormControlComponent,
-  ValueControlModel
+  ValueModel
 } from '@angular-dynaform/core';
 
 @Component({
@@ -37,7 +37,7 @@ import {
   inputs: ['model'],
   providers: [{provide: DynamicFormControlComponentBase, useExisting: NativeScriptListPickerComponent}]
 })
-export class NativeScriptListPickerComponent extends DynamicFormControlComponent<ValueControlModel> {
-  model!: ValueControlModel;
+export class NativeScriptListPickerComponent extends DynamicFormControlComponent<ValueModel> {
+  model!: ValueModel;
   options!: ControlSelectOptions;
 }

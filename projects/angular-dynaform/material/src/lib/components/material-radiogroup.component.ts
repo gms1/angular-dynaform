@@ -3,7 +3,7 @@ import {
   ControlSelectOptions,
   DynamicFormControlComponentBase,
   DynamicFormControlComponent,
-  ValueControlModel
+  ValueModel
 } from '@angular-dynaform/core';
 import {Component} from '@angular/core';
 
@@ -43,7 +43,7 @@ import {Component} from '@angular/core';
   inputs: ['model'],
   providers: [{provide: DynamicFormControlComponentBase, useExisting: MaterialRadioGroupComponent}]
 })
-export class MaterialRadioGroupComponent extends DynamicFormControlComponent<ValueControlModel> {
-  model!: ValueControlModel;
+export class MaterialRadioGroupComponent extends DynamicFormControlComponent<ValueModel> {
+  model!: ValueModel;
   options!: ControlSelectOptions;
 }

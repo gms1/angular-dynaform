@@ -3,7 +3,7 @@ import {
   ControlInputOptions,
   DynamicFormControlComponentBase,
   DynamicFormControlComponent,
-  ValueControlModel
+  ValueModel
 } from '../../public_api';
 import {Component} from '@angular/core';
 
@@ -39,7 +39,7 @@ import {Component} from '@angular/core';
   inputs: ['model'],
   providers: [{provide: DynamicFormControlComponentBase, useExisting: TestInputComponent}]
 })
-export class TestInputComponent extends DynamicFormControlComponent<ValueControlModel> {
-  model!: ValueControlModel;
+export class TestInputComponent extends DynamicFormControlComponent<ValueModel> {
+  model!: ValueModel;
   options!: ControlInputOptions;
 }

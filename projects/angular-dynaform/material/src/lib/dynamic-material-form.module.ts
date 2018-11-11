@@ -13,7 +13,8 @@ import {
   MatDatepickerModule,
   MatNativeDateModule,
   MatTabsModule,
-  MatStepperModule
+  MatStepperModule,
+  MatIconModule,
 } from '@angular/material';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 
@@ -50,9 +51,10 @@ const moduleDeclarations: any[] = entryComponents;
   imports: [
     CommonModule, ReactiveFormsModule, DynamicFormModule, BrowserAnimationsModule, MatButtonModule, MatCheckboxModule,
     MatInputModule, MatRadioModule, MatSelectModule, MatSliderModule, MatSlideToggleModule, MatNativeDateModule,
-    MatDatepickerModule, MatTabsModule, MatStepperModule
+    MatDatepickerModule, MatTabsModule, MatStepperModule, MatIconModule
   ],
-  declarations: [moduleDeclarations], entryComponents,
+  declarations: [moduleDeclarations],
+  entryComponents,
   exports: [DynamicFormModule, entryComponents]
 })
 export class DynamicMaterialFormModule {

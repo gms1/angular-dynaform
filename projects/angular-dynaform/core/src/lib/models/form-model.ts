@@ -4,9 +4,10 @@ import {Observable} from 'rxjs';
 import {FormConfig, FormI18n, ControlConfig, ModelType, ControlType} from '../config';
 import {DynamicFormService} from '../services/dynamic-form.service';
 
-import {ModelHelper} from './model-helper';
-import {GroupModel} from './group-model';
 import {ControlModel} from './control-model';
+import {GroupModel, GroupModelBase} from './group-model';
+import {ArrayModel} from './array-model';
+import {ValueModel} from './value-model';
 
 import {JsonPointer} from 'jsonpointerx';
 
@@ -93,7 +94,7 @@ export class FormModel {
   clearValue(): void {
     if (this._initValue) {
       this.group.ngControl.reset(undefined, {emitEvent: false});
-      ModelHelper.setDirtyIfChanged(this.group, this._initValue);
+      setDirtyIfChanged(this.group, this._initValue);
       // emit event to notify controls
       (this.valueChanges as EventEmitter<any>).emit(this.value);
     } else {
@@ -130,5 +131,27 @@ export class FormModel {
       resModel = foundModel;
     }
     return resModel;
+  }
+}
+
+
+
+function setDirtyIfChanged(item: ControlModel, fromFormValue: any): void {
+  if ((item instanceof GroupModelBase) || (item instanceof ArrayModel)) {
+    (item.items as ControlModel[]).forEach((childItem: ControlModel) => {
+      setDirtyIfChanged(childItem, fromFormValue);
+    });
+    if (item instanceof ArrayModel && item.jpForm) {
+      const cmpValue = item.jpForm.get(fromFormValue);
+      if (Array.isArray(cmpValue) && cmpValue.length !== item.items.length) {
+        item.ngControl.markAsDirty();
+      }
+    }
+  } else if (item instanceof ValueModel && item.jpForm) {
+    const cmpValue = item.jpForm.get(fromFormValue);
+    // tslint:disable-next-line triple-equals
+    if (cmpValue != item.value) {
+      item.ngControl.markAsDirty();
+    }
   }
 }

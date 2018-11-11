@@ -5,7 +5,7 @@ import {
   DynamicFormControlComponentBase,
   DynamicFormControlComponent,
   DynamicFormService,
-  ValueControlModel
+  ValueModel
 } from '@angular-dynaform/core';
 import {Component, ElementRef, OnInit, OnChanges, SimpleChanges} from '@angular/core';
 
@@ -48,9 +48,9 @@ const TEXTFIELD_DEFAULT_KEYBOARDTYPE = null;
   inputs: ['model'],
   providers: [{provide: DynamicFormControlComponentBase, useExisting: NativeScriptTextFieldComponent}]
 })
-export class NativeScriptTextFieldComponent extends DynamicFormControlComponent<ValueControlModel> implements
-    OnInit, OnChanges {
-  model!: ValueControlModel;
+export class NativeScriptTextFieldComponent extends DynamicFormControlComponent<ValueModel> implements OnInit,
+                                                                                                       OnChanges {
+  model!: ValueModel;
   options!: ControlInputOptions;
   opts!: {[key: string]: any};
 

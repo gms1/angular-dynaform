@@ -1,6 +1,6 @@
 // tslint:disable use-input-property-decorator use-output-property-decorator use-life-cycle-interface
 import {
-  NullControlModel,
+  NullModel,
   ControlBaseOptions,
   DynamicFormControlComponentBase,
   DynamicFormControlComponent
@@ -32,8 +32,8 @@ import {Component} from '@angular/core';
   inputs: ['model'],
   providers: [{provide: DynamicFormControlComponentBase, useExisting: MaterialButtonComponent}]
 })
-export class MaterialButtonComponent extends DynamicFormControlComponent<NullControlModel> {
-  model!: NullControlModel;
+export class MaterialButtonComponent extends DynamicFormControlComponent<NullModel> {
+  model!: NullModel;
   options!: ControlBaseOptions;
 
   ngAfterViewInit(): void {

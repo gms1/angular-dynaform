@@ -1,6 +1,6 @@
 // tslint:disable use-input-property-decorator use-output-property-decorator
 import {
-  NullControlModel,
+  NullModel,
   ControlBaseOptions,
   DynamicFormControlComponentBase,
   DynamicFormControlComponent
@@ -22,7 +22,7 @@ import {Component} from '@angular/core';
   inputs: ['model'],
   providers: [{provide: DynamicFormControlComponentBase, useExisting: MaterialSeparatorComponent}]
 })
-export class MaterialSeparatorComponent extends DynamicFormControlComponent<NullControlModel> {
-  model!: NullControlModel;
+export class MaterialSeparatorComponent extends DynamicFormControlComponent<NullModel> {
+  model!: NullModel;
   options!: ControlBaseOptions;
 }

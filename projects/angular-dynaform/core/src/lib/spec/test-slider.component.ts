@@ -3,7 +3,7 @@ import {
   ControlSliderOptions,
   DynamicFormControlComponentBase,
   DynamicFormControlComponent,
-  ValueControlModel
+  ValueModel
 } from '../../public_api';
 import {Component} from '@angular/core';
 
@@ -39,7 +39,7 @@ import {Component} from '@angular/core';
   inputs: ['model'],
   providers: [{provide: DynamicFormControlComponentBase, useExisting: TestSliderComponent}]
 })
-export class TestSliderComponent extends DynamicFormControlComponent<ValueControlModel> {
-  model!: ValueControlModel;
+export class TestSliderComponent extends DynamicFormControlComponent<ValueModel> {
+  model!: ValueModel;
   options!: ControlSliderOptions;
 }

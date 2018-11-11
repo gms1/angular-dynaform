@@ -3,7 +3,7 @@ import {
   ControlInputOptions,
   DynamicFormControlComponentBase,
   DynamicFormControlComponent,
-  ValueControlModel
+  ValueModel
 } from '@angular-dynaform/core';
 import {Component} from '@angular/core';
 
@@ -36,15 +36,15 @@ import {Component} from '@angular/core';
           [attr.max]="options.max"
           [maxlength]="options.maxLength"
         />
-          <adf-error-container [model]="model">
-          </adf-error-container>
-        </mat-form-field>
+        <adf-error-container [model]="model">
+        </adf-error-container>
+      </mat-form-field>
   </div>
   `,
   inputs: ['model'],
   providers: [{provide: DynamicFormControlComponentBase, useExisting: MaterialInputComponent}]
 })
-export class MaterialInputComponent extends DynamicFormControlComponent<ValueControlModel> {
-  model!: ValueControlModel;
+export class MaterialInputComponent extends DynamicFormControlComponent<ValueModel> {
+  model!: ValueModel;
   options!: ControlInputOptions;
 }

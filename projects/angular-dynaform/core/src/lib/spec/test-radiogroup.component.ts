@@ -3,7 +3,7 @@ import {
   ControlSelectOptions,
   DynamicFormControlComponentBase,
   DynamicFormControlComponent,
-  ValueControlModel
+  ValueModel
 } from '../../public_api';
 import {Component} from '@angular/core';
 
@@ -42,7 +42,7 @@ import {Component} from '@angular/core';
   inputs: ['model'],
   providers: [{provide: DynamicFormControlComponentBase, useExisting: TestRadioGroupComponent}]
 })
-export class TestRadioGroupComponent extends DynamicFormControlComponent<ValueControlModel> {
-  model!: ValueControlModel;
+export class TestRadioGroupComponent extends DynamicFormControlComponent<ValueModel> {
+  model!: ValueModel;
   options!: ControlSelectOptions;
 }

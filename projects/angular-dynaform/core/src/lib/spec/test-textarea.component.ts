@@ -3,7 +3,7 @@ import {
   ControlTextareaOptions,
   DynamicFormControlComponentBase,
   DynamicFormControlComponent,
-  ValueControlModel
+  ValueModel
 } from '../../public_api';
 import {Component} from '@angular/core';
 
@@ -41,7 +41,7 @@ import {Component} from '@angular/core';
   inputs: ['model'],
   providers: [{provide: DynamicFormControlComponentBase, useExisting: TestTextareaComponent}]
 })
-export class TestTextareaComponent extends DynamicFormControlComponent<ValueControlModel> {
-  model!: ValueControlModel;
+export class TestTextareaComponent extends DynamicFormControlComponent<ValueModel> {
+  model!: ValueModel;
   options!: ControlTextareaOptions;
 }

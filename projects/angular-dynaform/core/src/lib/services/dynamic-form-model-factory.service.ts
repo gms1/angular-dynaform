@@ -5,7 +5,7 @@ import {ControlConfig, ModelType, GroupOptions, ControlType} from '../config';
 import {FormConfig} from '../config/form-config';
 import {FormI18n} from '../config/form-i18n';
 import {ArrayModel} from '../models/array-model';
-import {NullControlModel, ValueControlModel} from '../models/control-model-base';
+import {NullModel, ValueModel} from '../models/value-model';
 import {ControlModel} from '../models/control-model';
 import {FormModel} from '../models/form-model';
 import {GroupModelBase, SubsetModel, GroupModel} from '../models/group-model';
@@ -42,10 +42,10 @@ export class DynamicFormModelFactoryService {
         return new SubsetModel(
             formModel.dynamicFormService, config, formModel, parentPath, parentGroup, parentArray, parentArrayIdx);
       case ModelType.MODEL_VALUE:
-        return new ValueControlModel(
+        return new ValueModel(
             formModel.dynamicFormService, config, formModel, parentPath, parentGroup, parentArray, parentArrayIdx);
       case ModelType.MODEL_NULL:
-        return new NullControlModel(
+        return new NullModel(
             formModel.dynamicFormService, config, formModel, undefined, parentGroup, parentArray, parentArrayIdx);
       default:
         throw new Error(`model type '${config.modelType}' defined for '${config.id}' is unknown`);

@@ -3,7 +3,7 @@ import {
   ControlInputOptions,
   DynamicFormControlComponentBase,
   DynamicFormControlComponent,
-  ValueControlModel
+  ValueModel
 } from '@angular-dynaform/core';
 import {Component} from '@angular/core';
 
@@ -44,7 +44,7 @@ import {Component} from '@angular/core';
   inputs: ['model'],
   providers: [{provide: DynamicFormControlComponentBase, useExisting: MaterialDatepickerComponent}]
 })
-export class MaterialDatepickerComponent extends DynamicFormControlComponent<ValueControlModel> {
-  model!: ValueControlModel;
+export class MaterialDatepickerComponent extends DynamicFormControlComponent<ValueModel> {
+  model!: ValueModel;
   options!: ControlInputOptions;
 }
