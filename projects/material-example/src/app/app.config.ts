@@ -263,7 +263,7 @@ export const mainExampleConfig: FormConfig = {
 };
 
 
-export const mainExampleFormLanguages: {[key: string]: FormI18n;} = {
+export const mainExampleFormLanguages: {[key: string]: FormI18n} = {
   en: {
     controls: {
       salutation: {valueOptions: [{value: 'mr', label: 'Mr.'}, {value: 'ms', label: 'Ms.'}]},
