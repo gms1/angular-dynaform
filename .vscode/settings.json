@@ -6,26 +6,11 @@
   "files.exclude": {
     "**/.git": true,
     "**/node_modules": true,
-    "dist": true,
-    "hooks": true,
-    "out-tsc": true,
-    "**/tmp": true
-  },
-  "files.watcherExclude": {
-    "**/.git": true,
-    "**/node_modules": true,
-    "dist": true,
-    "hooks": true,
-    "out-tsc": true,
+    "**/dist": true,
+    "**/hooks": true,
+    "**/out-tsc": true,
     "**/tmp": true
   },
   // Configure glob patterns for excluding files and folders in searches. Inherits all glob patterns from the files.exclude setting.
-  "search.exclude": {
-    "**/.git": true,
-    "**/node_modules": true,
-    "dist": true,
-    "hooks": true,
-    "out-tsc": true,
-    "**/tmp": true
-  }
+  "search.exclude": {}
 }

@@ -26,7 +26,7 @@
     "@angular/router": "^7.1.1",
     "codelyzer": "^4.5.0",
     "jsep": "^0.3.4",
-    "jsonpointerx": "^1.0.18",
+    "jsonpointerx": "^1.0.19",
     "nativescript-angular": "^7.0.2",
     "nativescript-checkbox": "^3.0.3",
     "nativescript-theme-core": "^1.0.4",
