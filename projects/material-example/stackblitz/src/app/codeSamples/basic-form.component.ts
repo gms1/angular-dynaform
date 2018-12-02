@@ -1,4 +1,4 @@
-import {Component, OnInit, ViewChild} from '@angular/core';
+import {Component, ViewChild} from '@angular/core';
 import {ControlType, DynamicForm, FormConfig, FormModel, ModelType, DynamicFormService} from '@angular-dynaform/core';
 
 
