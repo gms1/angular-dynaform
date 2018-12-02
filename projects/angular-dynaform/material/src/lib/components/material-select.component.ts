@@ -34,11 +34,11 @@ import {Component} from '@angular/core';
           <mat-option *ngFor="let opt of model.local.valueOptions" [value]="opt.value"><span [innerHTML]="opt.label"></span></mat-option>
         </mat-select>
         <span matPrefix *ngIf="options.icon">
-          <mat-icon>options.icon</mat-icon>
+          <mat-icon>{{options.icon}}</mat-icon>
         </span>
         <adf-error-container [model]="model">
         </adf-error-container>
-        <mat-hint>model.local.hint</mat-hint>
+        <mat-hint [innerHTML]="model.local.hint"></mat-hint>
       </mat-form-field>
     </div>
   `,

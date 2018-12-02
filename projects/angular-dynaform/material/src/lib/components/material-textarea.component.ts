@@ -39,11 +39,11 @@ import {Component} from '@angular/core';
         >
         </textarea>
         <span matPrefix *ngIf="options.icon">
-          <mat-icon>options.icon</mat-icon>
+          <mat-icon>{{options.icon}}</mat-icon>
         </span>
         <adf-error-container [model]="model">
         </adf-error-container>
-        <mat-hint>model.local.hint</mat-hint>
+        <mat-hint [innerHTML]="model.local.hint"></mat-hint>
       </mat-form-field>
   </div>
   `,

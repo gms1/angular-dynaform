@@ -62,7 +62,7 @@ export const mainExampleConfig: FormConfig = {
                 placeholder: 'Enter your last name',
                 maxLength: 30,
                 minLength: 4,
-                required: true
+                required: true,
               },
               validators: ['required', 'minLength', 'maxLength'],
               jp: '/name/last'
@@ -263,7 +263,7 @@ export const mainExampleConfig: FormConfig = {
 };
 
 
-export const mainExampleFormLanguages: { [key: string]: FormI18n; } = {
+export const mainExampleFormLanguages: {[key: string]: FormI18n;} = {
   en: {
     controls: {
       salutation: {valueOptions: [{value: 'mr', label: 'Mr.'}, {value: 'ms', label: 'Ms.'}]},
