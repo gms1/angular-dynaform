@@ -205,7 +205,7 @@ export class BasicFormComponent {
 
   [Configuration of the plunker example](./projects/material-example/src/app/app.config.ts)
 
-  [ControlConfig Interface](./docs/typedoc/angular-dynaform/interfaces/controlconfig.html)
+  [ControlConfig Interface](./projects/angular-dynaform/core/src/lib/config/control-config.ts)
 
 * observable form value and form value update:
 
@@ -258,7 +258,7 @@ export class BasicFormComponent {
 
 * get/set form data using an application data model to form data model mapping
 
-In your form configuration define the JSON pointer to the application data model **ControlConfig.jp** and
+In your form configuration define the JSON pointer to the application data model and
 use 'dynaForm.initValueFromAppModel' instead of 'dynaForm.initValue' and 'dynaForm.valueToAppModel' instead of 'dynaForm.value'
 
 * enable/disable or show/hide fields based on conditions defined on related field values

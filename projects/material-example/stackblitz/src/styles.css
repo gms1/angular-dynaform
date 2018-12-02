@@ -1,0 +1,70 @@
+/* You can add global styles to this file, and also import other style files */
+
+html, body, .mat-sidenav-container, .app-content {
+  display: block;
+  width: 100%;
+  height: 100%;
+  background-color: #fff;
+}
+body {
+  font-family: Roboto, 'Helvetica Neue', sans-serif;
+  margin: 10;
+}
+
+.app-toolbar {
+  width: 100%;
+  text-align: center
+}
+
+/* main example */
+
+div.main-example, div.tabgroup-example {
+  display: block;
+  margin: 10px;
+}
+
+mat-card {
+  display: block;
+  max-width: 768px;
+  box-shadow: 0 3px 1px -2px rgba(0,0,0,.2), 0 2px 2px 0 rgba(0,0,0,.14), 0 1px 5px 0 rgba(0,0,0,.12);
+}
+
+mat-card-content, mat-card-header {
+  display: block;
+  margin: 20px;
+}
+
+mat-card-content {
+  padding: 20px;
+}
+/* form specific */
+
+.adf-front-label {
+  display: none;
+}
+
+fieldset.adf-control, legend.adf-label {
+  margin: 0px;
+  border:1px solid lightgray;
+}
+
+.button-division-content {
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: flex-end;
+}
+
+.button-separator {
+  width: 30px
+}
+
+.adf-array-item-selected {
+  background-color: AliceBlue;
+}
+
+.adf-array-content {
+  overflow-y: auto;
+  height:200px;
+}
+
+
