@@ -440,5 +440,5 @@
       }
     }
   },
-  "defaultProject": "@angular-dynaform/core"
+  "defaultProject": "material-example"
 }
