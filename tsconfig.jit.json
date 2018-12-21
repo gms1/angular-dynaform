@@ -1,0 +1,41 @@
+{
+  "compileOnSave": false,
+  "compilerOptions": {
+    "baseUrl": "./",
+    "outDir": "./dist/out-tsc",
+    "sourceMap": true,
+    "declaration": false,
+    "moduleResolution": "node",
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true,
+    "noImplicitAny": true,
+    "noImplicitReturns": true,
+    "noImplicitThis": true,
+    "removeComments": true,
+    "preserveConstEnums": true,
+    "strict": true,
+    "strictNullChecks": true,
+    "target": "es5",
+    "typeRoots": [
+      "node_modules/@types"
+    ],
+    "lib": [
+      "es2017",
+      "dom"
+    ],
+    "paths": {
+      "@angular-dynaform/core": [
+        "projects/angular-dynaform/core/src/public_api"
+      ],
+      "@angular-dynaform/basic": [
+        "projects/angular-dynaform/basic/src/public_api"
+      ],
+      "@angular-dynaform/material": [
+        "projects/angular-dynaform/material/src/public_api"
+      ],
+      "@angular-dynaform/nativescript": [
+        "projects/angular-dynaform/nativescript/src/public_api"
+      ]
+    }
+  }
+}
