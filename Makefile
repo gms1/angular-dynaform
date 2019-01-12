@@ -85,6 +85,7 @@ coverage:
 	@npm run coverage:material
 
 release: clean lint build coverage
+	@./build/publish-prepare
 	@echo RELEASE BUILD SUCCEEDED
 
 
