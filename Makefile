@@ -3,7 +3,7 @@ TYPE ?= prod
 
 BUILDFLAGS = -- --$(TYPE)
 
-all: release-build
+all: release
 
 #-------------------------------------------------------------
 clean:
@@ -70,7 +70,7 @@ e2e-material-example:
 #-------------------------------------------------------------
 # release build
 
-.PHONY: release release-build release-doc
+.PHONY: release
 
 lint:
 	@npm run lint:core
@@ -84,12 +84,7 @@ coverage:
 	@npm run coverage:basic
 	@npm run coverage:material
 
-release-build: clean lint build coverage
+release: clean lint build coverage
 	@echo RELEASE BUILD SUCCEEDED
 
-release-doc:
-	@npm run typedoc 1>/dev/null
 
-release: release-build release-doc
-	@./build/publish-prepare
-	@echo READY TO BE PUBLISHED
