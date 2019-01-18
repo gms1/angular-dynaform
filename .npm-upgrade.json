@@ -5,11 +5,11 @@
       "reason": "not supported by angular"
     },
     "tsickle": {
-      "versions": ">=0.34",
+      "versions": ">0.34",
       "reason": "not supported by @angular"
     },
     "typescript": {
-      "versions": ">=3.2",
+      "versions": ">=3.3",
       "reason": "not supported by @angular"
     }
   }
