@@ -1,10 +1,10 @@
-import {distinctUntilChanged, map, takeUntil} from 'rxjs/operators';
-import {Subject} from 'rxjs';
+import { distinctUntilChanged, map, takeUntil } from 'rxjs/operators';
+import { Subject } from 'rxjs';
 
-import {FormGroup} from '@angular/forms';
+import { FormGroup } from '@angular/forms';
 
-import {DynamicFormAction} from './dynamic-form.action';
-import {DynamicFormControlComponentBase} from '../components/dynamic-form-control.component';
+import { DynamicFormAction } from './dynamic-form.action';
+import { DynamicFormControlComponentBase } from '../components/dynamic-form-control.component';
 
 // enable the submit button if form is valid, disable otherwise
 
@@ -22,11 +22,15 @@ export class SubmitButtonAction extends DynamicFormAction {
     super.ngOnInit();
     this.rootFormGroup = this.model.formModel.group.ngControl;
     this.model.ngControl.disable();
-    this.rootFormGroup.statusChanges.pipe(map((status) => status === 'VALID'), distinctUntilChanged())
-        .pipe(takeUntil(this.unsubscribe))
-        .subscribe((valid) => {
-          this.updateState(valid);
-        });
+    this.rootFormGroup.statusChanges
+      .pipe(
+        map((status) => status === 'VALID'),
+        distinctUntilChanged(),
+      )
+      .pipe(takeUntil(this.unsubscribe))
+      .subscribe((valid) => {
+        this.updateState(valid);
+      });
   }
 
   ngOnDestroy(): void {

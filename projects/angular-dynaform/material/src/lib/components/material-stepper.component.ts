@@ -1,8 +1,8 @@
 // tslint:disable use-input-property-decorator use-output-property-decorator use-life-cycle-interface
 // tslint:disable no-use-before-declare
-import {Component, ElementRef, ViewChild, AfterViewInit, EventEmitter} from '@angular/core';
-import {map, takeUntil} from 'rxjs/operators';
-import {Observable, Subject} from 'rxjs';
+import { Component, ElementRef, ViewChild, AfterViewInit, EventEmitter } from '@angular/core';
+import { map, takeUntil } from 'rxjs/operators';
+import { Observable, Subject } from 'rxjs';
 
 import {
   GroupModelBase,
@@ -11,9 +11,9 @@ import {
   DynamicFormControlComponent,
   DynamicFormService,
   GroupOptions,
-  Stepper
+  Stepper,
 } from '@angular-dynaform/core';
-import {MatStepper} from '@angular/material';
+import { MatStepper } from '@angular/material';
 
 // TODO: missing tests
 // TODO: using the #steps template didn't work
@@ -21,16 +21,9 @@ import {MatStepper} from '@angular/material';
 @Component({
   selector: 'adf-material-stepper-component',
   template: `
-    <div
-      [formGroup]="model.ngGroup"
-      [hidden]="model.hidden"
-    >
-      <div
-        [ngClass]="model.css.control"
-        adfHTMLDomElement
-      >
-        <adf-error-container [model]="model">
-        </adf-error-container>
+    <div [formGroup]="model.ngGroup" [hidden]="model.hidden">
+      <div [ngClass]="model.css.control" adfHTMLDomElement>
+        <adf-error-container [model]="model"></adf-error-container>
 
         <!--ng-template #steps>
             <mat-step *ngFor="let item of model.items; let i=index"
@@ -42,11 +35,15 @@ import {MatStepper} from '@angular/material';
             </mat-step>
         </ng-template-->
 
-        <ng-container *ngIf="options.matStepperVertical; else horizontalStepper" >
-          <mat-vertical-stepper [ngClass]="model.css.content"
-              [linear]="options.matStepperLinear === undefined ? false : options.matStepperLinear" #stepper>
+        <ng-container *ngIf="options.matStepperVertical; else horizontalStepper">
+          <mat-vertical-stepper
+            [ngClass]="model.css.content"
+            [linear]="options.matStepperLinear === undefined ? false : options.matStepperLinear"
+            #stepper
+          >
             <!--ng-container *ngTemplateOutlet="steps"></ng-container-->
-            <mat-step *ngFor="let item of model.items; let i=index"
+            <mat-step
+              *ngFor="let item of model.items; let i = index"
               [stepControl]="item.ngSubsetControl ? item.ngSubsetControl : item.ngControl"
               [editable]="options.matStepEditable === undefined ? true : options.matStepEditable"
               [optional]="options.matStepOptional"
@@ -55,14 +52,18 @@ import {MatStepper} from '@angular/material';
               <ng-template matStepLabel>{{ item.local.label }}</ng-template>
               <ng-template adfControlComponent [model]="item"></ng-template>
             </mat-step>
-        </mat-vertical-stepper>
+          </mat-vertical-stepper>
         </ng-container>
 
-        <ng-template #horizontalStepper >
-          <mat-horizontal-stepper [ngClass]="model.css.content"
-              [linear]="options.matStepperLinear === undefined ? false : options.matStepperLinear" #stepper>
+        <ng-template #horizontalStepper>
+          <mat-horizontal-stepper
+            [ngClass]="model.css.content"
+            [linear]="options.matStepperLinear === undefined ? false : options.matStepperLinear"
+            #stepper
+          >
             <!--ng-container *ngTemplateOutlet="steps"></ng-container-->
-            <mat-step *ngFor="let item of model.items; let i=index"
+            <mat-step
+              *ngFor="let item of model.items; let i = index"
               [stepControl]="item.ngSubsetControl ? item.ngSubsetControl : item.ngControl"
               [editable]="options.matStepEditable === undefined ? true : options.matStepEditable"
               [optional]="options.matStepOptional"
@@ -71,15 +72,16 @@ import {MatStepper} from '@angular/material';
               <ng-template matStepLabel>{{ item.local.label }}</ng-template>
               <ng-template adfControlComponent [model]="item"></ng-template>
             </mat-step>
-        </mat-horizontal-stepper>
+          </mat-horizontal-stepper>
         </ng-template>
       </div>
     </div>
   `,
   inputs: ['model'],
-  providers: [{provide: DynamicFormControlComponentBase, useExisting: MaterialStepperComponent}]
+  providers: [{ provide: DynamicFormControlComponentBase, useExisting: MaterialStepperComponent }],
 })
-export class MaterialStepperComponent extends DynamicFormControlComponent<GroupModelBase> implements AfterViewInit {
+export class MaterialStepperComponent extends DynamicFormControlComponent<GroupModelBase>
+  implements AfterViewInit {
   model!: GroupModelBase;
   options!: GroupOptions;
 
@@ -104,7 +106,6 @@ export class MaterialStepperComponent extends DynamicFormControlComponent<GroupM
     super.ngAfterViewInit();
   }
 
-
   ngOnDestroy(): void {
     super.ngOnDestroy();
     if (this.stepper) {
@@ -114,7 +115,7 @@ export class MaterialStepperComponent extends DynamicFormControlComponent<GroupM
       (this.stepper as MatStepperWrapper).matStepper = undefined;
     }
   }
-  }
+}
 
 /*
  *
@@ -124,10 +125,10 @@ export class MatStepperWrapper implements Stepper {
   private _selectionChange: EventEmitter<number>;
 
   private _matStepper?: MatStepper;
-  get matStepper(): MatStepper|undefined {
+  get matStepper(): MatStepper | undefined {
     return this._matStepper;
   }
-  set matStepper(matStepper: MatStepper|undefined) {
+  set matStepper(matStepper: MatStepper | undefined) {
     this.changeStepper(matStepper);
   }
 
@@ -161,16 +162,17 @@ export class MatStepperWrapper implements Stepper {
   private changeStepper(matStepper?: MatStepper): void {
     if (this._matStepper === matStepper) {
       return;
-      }
+    }
     if (this._matStepper && this.unsubscribe) {
       this.unsubscribe.next();
       this.unsubscribe.complete();
-      }
+    }
     if (matStepper) {
       this.unsubscribe = new Subject<any>();
-      matStepper.selectionChange.pipe(map((sc) => sc.selectedIndex))
-          .pipe(takeUntil(this.unsubscribe))
-          .subscribe((currIndex) => this._selectionChange.emit(currIndex));
+      matStepper.selectionChange
+        .pipe(map((sc) => sc.selectedIndex))
+        .pipe(takeUntil(this.unsubscribe))
+        .subscribe((currIndex) => this._selectionChange.emit(currIndex));
     }
     this._matStepper = matStepper;
   }

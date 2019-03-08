@@ -1,21 +1,16 @@
 // tslint:disable component-selector
-import {Component, ViewChild} from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 
-import {DynamicForm, DynamicFormService, FormModel} from '@angular-dynaform/core';
+import { DynamicForm, DynamicFormService, FormModel } from '@angular-dynaform/core';
 
 @Component({
   selector: 'adf-test-form-container-component',
   template: `
-<div>
-  <adf-form
-    [model]="model"
-    (adfSubmit)="onSubmit()"
-    (adfReset)="onReset()"
-  >
-  </adf-form>
-</div>
+    <div>
+      <adf-form [model]="model" (adfSubmit)="onSubmit()" (adfReset)="onReset()"></adf-form>
+    </div>
   `,
-  styles: []
+  styles: [],
 })
 export class TestFormContainerComponent {
   @ViewChild(DynamicForm) form!: DynamicForm;

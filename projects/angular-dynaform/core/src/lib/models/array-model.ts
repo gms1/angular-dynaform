@@ -1,15 +1,14 @@
-import {EventEmitter} from '@angular/core';
-import {ControlConfig} from '../config/control-config';
-import {ArrayOptions} from '../config/control-options';
-import {DynamicFormService} from '../services/dynamic-form.service';
+import { EventEmitter } from '@angular/core';
+import { ControlConfig } from '../config/control-config';
+import { ArrayOptions } from '../config/control-options';
+import { DynamicFormService } from '../services/dynamic-form.service';
 
-import {AbstractControlModel, ControlModel} from './control-model';
-import {FormModel} from './form-model';
-import {GroupModelBase} from './group-model';
-import {NgFormArray, NgArrayModelHandler} from './internal/ng-form-array';
+import { AbstractControlModel, ControlModel } from './control-model';
+import { FormModel } from './form-model';
+import { GroupModelBase } from './group-model';
+import { NgFormArray, NgArrayModelHandler } from './internal/ng-form-array';
 
-import {JsonPointer} from 'jsonpointerx';
-
+import { JsonPointer } from 'jsonpointerx';
 
 const HEADER_IDX = -1;
 const FOOTER_IDX = -2;
@@ -22,7 +21,8 @@ const FOOTER_IDX = -2;
 // In case of delete/insert operations this prefix stays the same, because we only delete/add such item nodes at the end
 // of the array and are moving the values of the item nodes around
 
-export class ArrayModel extends AbstractControlModel<NgFormArray, ArrayOptions> implements NgArrayModelHandler {
+export class ArrayModel extends AbstractControlModel<NgFormArray, ArrayOptions>
+  implements NgArrayModelHandler {
   header?: GroupModelBase;
   items: GroupModelBase[];
   footer?: GroupModelBase;
@@ -46,14 +46,26 @@ export class ArrayModel extends AbstractControlModel<NgFormArray, ArrayOptions> 
     }
   }
 
-
   constructor(
-      dynamicFormService: DynamicFormService, config: ControlConfig, formModel: FormModel, parentPath?: string[],
-      parentGroup?: GroupModelBase, parentArray?: ArrayModel, parentArrayIdx?: number) {
+    dynamicFormService: DynamicFormService,
+    config: ControlConfig,
+    formModel: FormModel,
+    parentPath?: string[],
+    parentGroup?: GroupModelBase,
+    parentArray?: ArrayModel,
+    parentArrayIdx?: number,
+  ) {
     super(
-        dynamicFormService, config, (config.options || {item: {}}) as ArrayOptions,
-        new NgFormArray([], {updateOn: config.updateOn}), formModel, parentPath, parentGroup, parentArray,
-        parentArrayIdx);
+      dynamicFormService,
+      config,
+      (config.options || { item: {} }) as ArrayOptions,
+      new NgFormArray([], { updateOn: config.updateOn }),
+      formModel,
+      parentPath,
+      parentGroup,
+      parentArray,
+      parentArrayIdx,
+    );
     this.items = [];
     this._selectedIndex = HEADER_IDX;
     this.selectionChange = new EventEmitter<number>();
@@ -75,7 +87,7 @@ export class ArrayModel extends AbstractControlModel<NgFormArray, ArrayOptions> 
     }
   }
 
-  getControl(key: string): ControlModel|undefined {
+  getControl(key: string): ControlModel | undefined {
     const idx = parseInt(key, 10);
     if (isNaN(idx) || this.items.length <= idx) {
       return undefined;
@@ -136,7 +148,6 @@ export class ArrayModel extends AbstractControlModel<NgFormArray, ArrayOptions> 
     this.ngControl.updateLength(newLength);
   }
 
-
   updateLength(length: number, isMinLength?: boolean): void {
     if (!isMinLength) {
       while (this.ngControl.length > length) {
@@ -149,7 +160,13 @@ export class ArrayModel extends AbstractControlModel<NgFormArray, ArrayOptions> 
     if (this.items.length < length) {
       while (this.items.length < length) {
         const item = this.dynamicFormService.modelFactory.createArrayGroup(
-            `${this.items.length}`, this.formModel, this, this.items.length, this.options.item, this.path);
+          `${this.items.length}`,
+          this.formModel,
+          this,
+          this.items.length,
+          this.options.item,
+          this.path,
+        );
         item.setCSSClasses(item.css.content, 'adf-array-item');
         this.items.push(item);
       }
@@ -161,7 +178,6 @@ export class ArrayModel extends AbstractControlModel<NgFormArray, ArrayOptions> 
       this.selectedIndex = this.items.length - 1;
     }
   }
-
 
   getId(id: string, idx: number, parentGroup?: GroupModelBase): string {
     if (parentGroup) {
@@ -184,7 +200,6 @@ export class ArrayModel extends AbstractControlModel<NgFormArray, ArrayOptions> 
     }
   }
 
-
   reTranslate(): void {
     if (this.header) {
       this.header.reTranslate();
@@ -198,30 +213,41 @@ export class ArrayModel extends AbstractControlModel<NgFormArray, ArrayOptions> 
     super.reTranslate();
   }
 
-  protected createHeader(): GroupModelBase|undefined {
+  protected createHeader(): GroupModelBase | undefined {
     if (this.options.header) {
       this.header = this.dynamicFormService.modelFactory.createArrayGroup(
-          'HEADER', this.formModel, this, HEADER_IDX, this.options.header);
+        'HEADER',
+        this.formModel,
+        this,
+        HEADER_IDX,
+        this.options.header,
+      );
       this.header.setCSSClasses(this.header.css.content, 'adf-array-header-content');
     }
     return this.header;
   }
 
-  protected createFooter(): GroupModelBase|undefined {
+  protected createFooter(): GroupModelBase | undefined {
     if (this.options.footer) {
       this.footer = this.dynamicFormService.modelFactory.createArrayGroup(
-          'FOOTER', this.formModel, this, FOOTER_IDX, this.options.footer);
+        'FOOTER',
+        this.formModel,
+        this,
+        FOOTER_IDX,
+        this.options.footer,
+      );
       this.footer.setCSSClasses(this.footer.css.content, 'adf-array-footer-content');
     }
     return this.footer;
   }
 
-
   valueFromAppModel(formData: any, appData: any, appPointerPrefix?: JsonPointer): any {
     if (!this.jpApp || !this.jpForm) {
       return formData;
     }
-    const appValue = (appPointerPrefix ? appPointerPrefix.concat(this.jpApp) : this.jpApp).get(appData);
+    const appValue = (appPointerPrefix ? appPointerPrefix.concat(this.jpApp) : this.jpApp).get(
+      appData,
+    );
     if (!Array.isArray(appValue)) {
       this.jpForm.set(formData, undefined);
       return formData;
@@ -264,24 +290,24 @@ export class ArrayModel extends AbstractControlModel<NgFormArray, ArrayOptions> 
   }
 }
 
-
-
 function copyStates(fromItem: ControlModel, toItem: ControlModel): void {
-  if ((fromItem instanceof GroupModelBase && toItem instanceof GroupModelBase) ||
-      (fromItem instanceof ArrayModel && toItem instanceof ArrayModel)) {
+  if (
+    (fromItem instanceof GroupModelBase && toItem instanceof GroupModelBase) ||
+    (fromItem instanceof ArrayModel && toItem instanceof ArrayModel)
+  ) {
     const len: number = Math.min(fromItem.items.length, toItem.items.length);
     for (let i = 0; i < len; i++) {
       copyStates(fromItem.items[i], toItem.items[i]);
     }
   }
   if (fromItem.ngControl.touched) {
-    toItem.ngControl.markAsTouched({onlySelf: true});
+    toItem.ngControl.markAsTouched({ onlySelf: true });
   } else {
-    toItem.ngControl.markAsUntouched({onlySelf: true});
+    toItem.ngControl.markAsUntouched({ onlySelf: true });
   }
   if (fromItem.ngControl.dirty) {
-    toItem.ngControl.markAsDirty({onlySelf: true});
+    toItem.ngControl.markAsDirty({ onlySelf: true });
   } else {
-    toItem.ngControl.markAsPristine({onlySelf: true});
+    toItem.ngControl.markAsPristine({ onlySelf: true });
   }
 }

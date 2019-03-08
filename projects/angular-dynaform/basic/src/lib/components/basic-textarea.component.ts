@@ -3,17 +3,14 @@ import {
   ControlTextareaOptions,
   DynamicFormControlComponentBase,
   DynamicFormControlComponent,
-  ValueModel
+  ValueModel,
 } from '@angular-dynaform/core';
-import {Component} from '@angular/core';
+import { Component } from '@angular/core';
 
 @Component({
   selector: 'adf-basic-textarea-component',
   template: `
-    <div
-      [formGroup]="model.ngGroup"
-      [hidden]="model.hidden"
-    >
+    <div [formGroup]="model.ngGroup" [hidden]="model.hidden">
       <label
         *ngIf="model.local.label"
         [attr.for]="model.id"
@@ -35,14 +32,12 @@ import {Component} from '@angular/core';
         [attr.min]="options.min"
         [attr.max]="options.max"
         [maxlength]="options.maxLength"
-      >
-      </textarea>
-      <adf-error-container [model]="model">
-      </adf-error-container>
+      ></textarea>
+      <adf-error-container [model]="model"></adf-error-container>
     </div>
   `,
   inputs: ['model'],
-  providers: [{provide: DynamicFormControlComponentBase, useExisting: BasicTextareaComponent}]
+  providers: [{ provide: DynamicFormControlComponentBase, useExisting: BasicTextareaComponent }],
 })
 export class BasicTextareaComponent extends DynamicFormControlComponent<ValueModel> {
   model!: ValueModel;

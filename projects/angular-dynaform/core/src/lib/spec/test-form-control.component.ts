@@ -3,10 +3,9 @@ import {
   DynamicFormControlComponentBase,
   DynamicFormFormControlComponent,
   GroupModel,
-  GroupOptions
+  GroupOptions,
 } from '../../public_api';
-import {Component} from '@angular/core';
-
+import { Component } from '@angular/core';
 
 @Component({
   selector: 'adf-test-form-component',
@@ -18,13 +17,15 @@ import {Component} from '@angular/core';
         [ngClass]="model.css.control"
         (ngSubmit)="onSubmit($event)"
         (reset)="onReset($event)"
-
         adfHTMLDomElement
         novalidate
       >
         <div [ngClass]="model.css.content">
-          <ng-container *ngFor="let item of model.items;" adfControlComponent [model]="item" >
-          </ng-container>
+          <ng-container
+            *ngFor="let item of model.items"
+            adfControlComponent
+            [model]="item"
+          ></ng-container>
         </div>
       </form>
     </div>
@@ -34,10 +35,10 @@ import {Component} from '@angular/core';
   providers: [
     {
       provide: DynamicFormControlComponentBase,
-      useExisting: TestFormControlComponent
-    },  // required to support 'adfHTMLDomElement' directive
-    {provide: DynamicFormFormControlComponent, useExisting: TestFormControlComponent}
-  ]
+      useExisting: TestFormControlComponent,
+    }, // required to support 'adfHTMLDomElement' directive
+    { provide: DynamicFormFormControlComponent, useExisting: TestFormControlComponent },
+  ],
 })
 export class TestFormControlComponent extends DynamicFormFormControlComponent {
   model!: GroupModel;

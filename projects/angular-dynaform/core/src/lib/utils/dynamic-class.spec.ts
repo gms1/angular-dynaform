@@ -1,16 +1,28 @@
 // tslint:disable no-non-null-assertion no-use-before-declare
-import {Component, DoCheck, ElementRef, forwardRef, Inject, KeyValueDiffers, OnDestroy, Renderer2} from '@angular/core';
-import {TestBed, ComponentFixture, async} from '@angular/core/testing';
-import {DynamicClass} from './dynamic-class';
+import {
+  Component,
+  DoCheck,
+  ElementRef,
+  forwardRef,
+  Inject,
+  KeyValueDiffers,
+  OnDestroy,
+  Renderer2,
+} from '@angular/core';
+import { TestBed, ComponentFixture, async } from '@angular/core/testing';
+import { DynamicClass } from './dynamic-class';
 
-
-@Component({selector: 'adf-dynamic-class-test', template: '<div class="static"> </div>'})
+@Component({ selector: 'adf-dynamic-class-test', template: '<div class="static"> </div>' })
 class DynamicClassTestComponent implements DoCheck, OnDestroy {
-  dynamicClass: DynamicClass|undefined;
+  dynamicClass: DynamicClass | undefined;
 
   constructor(
-      @Inject(forwardRef(() => DynamicClassTestContainerComponent)) private parent: DynamicClassTestContainerComponent,
-      private elementRef: ElementRef, private renderer: Renderer2, private keyValueDiffers: KeyValueDiffers) {
+    @Inject(forwardRef(() => DynamicClassTestContainerComponent))
+    private parent: DynamicClassTestContainerComponent,
+    private elementRef: ElementRef,
+    private renderer: Renderer2,
+    private keyValueDiffers: KeyValueDiffers,
+  ) {
     this.parent.child = this;
     this.dynamicClass = new DynamicClass(this.keyValueDiffers, this.elementRef, this.renderer, {});
   }
@@ -26,28 +38,29 @@ class DynamicClassTestComponent implements DoCheck, OnDestroy {
 
 @Component({
   selector: 'adf-dynamic-class-test-container',
-  template: '<adf-dynamic-class-test class="static"> </adf-dynamic-class-test>'
+  template: '<adf-dynamic-class-test class="static"> </adf-dynamic-class-test>',
 })
 class DynamicClassTestContainerComponent {
-  child: DynamicClassTestComponent|undefined;
+  child: DynamicClassTestComponent | undefined;
   constructor() {}
 }
-
-
 
 describe('dynamic CSS classes', () => {
   let fixture: ComponentFixture<DynamicClassTestContainerComponent>;
 
   function sortedClasses(classes: string) {
-    return classes.trim()
-        .split(' ')
-        .sort()
-        .filter((val: string, idx: number, arr: string[]) => !idx || val !== arr[idx - 1])
-        .join(' ');
-    }
+    return classes
+      .trim()
+      .split(' ')
+      .sort()
+      .filter((val: string, idx: number, arr: string[]) => !idx || val !== arr[idx - 1])
+      .join(' ');
+  }
 
   function expectClasses(classes: string) {
-    expect(sortedClasses(fixture.debugElement.children[0].nativeElement.className)).toEqual(sortedClasses(classes));
+    expect(sortedClasses(fixture.debugElement.children[0].nativeElement.className)).toEqual(
+      sortedClasses(classes),
+    );
   }
 
   beforeEach(() => {
@@ -58,44 +71,43 @@ describe('dynamic CSS classes', () => {
   });
 
   it('should add and remove classes', async(() => {
-       fixture.detectChanges();
-       expect(fixture.componentRef.instance.child).toBeDefined('container has no child');
-       expect(fixture.componentRef.instance.child!.dynamicClass).toBeDefined('child has no dynamic class');
+    fixture.detectChanges();
+    expect(fixture.componentRef.instance.child).toBeDefined('container has no child');
+    expect(fixture.componentRef.instance.child!.dynamicClass).toBeDefined(
+      'child has no dynamic class',
+    );
 
-       let testClasses: {[clazz: string]: any};
+    let testClasses: { [clazz: string]: any };
 
-       testClasses = {a: false, b: false};
-       fixture.componentRef.instance.child!.dynamicClass!.classes = testClasses;
-       fixture.detectChanges();
-       expectClasses('static');
+    testClasses = { a: false, b: false };
+    fixture.componentRef.instance.child!.dynamicClass!.classes = testClasses;
+    fixture.detectChanges();
+    expectClasses('static');
 
-       testClasses = {a: true, b: false};
-       fixture.componentRef.instance.child!.dynamicClass!.classes = testClasses;
-       fixture.detectChanges();
-       expectClasses('static a');
+    testClasses = { a: true, b: false };
+    fixture.componentRef.instance.child!.dynamicClass!.classes = testClasses;
+    fixture.detectChanges();
+    expectClasses('static a');
 
-       testClasses = {a: false, b: true};
-       fixture.componentRef.instance.child!.dynamicClass!.classes = testClasses;
-       fixture.detectChanges();
-       expectClasses('static b');
+    testClasses = { a: false, b: true };
+    fixture.componentRef.instance.child!.dynamicClass!.classes = testClasses;
+    fixture.detectChanges();
+    expectClasses('static b');
 
-       // change item
-       testClasses.a = true;
-       testClasses.c = false;
-       expect(fixture.componentRef.instance.child!.dynamicClass!.classes).toBe(testClasses);
-       fixture.detectChanges();
-       expectClasses('static a b');
+    // change item
+    testClasses.a = true;
+    testClasses.c = false;
+    expect(fixture.componentRef.instance.child!.dynamicClass!.classes).toBe(testClasses);
+    fixture.detectChanges();
+    expectClasses('static a b');
 
-       // remove item
-       delete testClasses.b;
-       delete testClasses.c;
-       fixture.detectChanges();
-       expectClasses('static a');
-
-
-     }));
+    // remove item
+    delete testClasses.b;
+    delete testClasses.c;
+    fixture.detectChanges();
+    expectClasses('static a');
+  }));
 });
-
 
 /*
 

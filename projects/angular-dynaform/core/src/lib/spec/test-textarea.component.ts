@@ -3,17 +3,14 @@ import {
   ControlTextareaOptions,
   DynamicFormControlComponentBase,
   DynamicFormControlComponent,
-  ValueModel
+  ValueModel,
 } from '../../public_api';
-import {Component} from '@angular/core';
+import { Component } from '@angular/core';
 
 @Component({
   selector: 'adf-test-textarea-component',
   template: `
-    <div
-      [formGroup]="model.ngGroup"
-      [hidden]="model.hidden"
-    >
+    <div [formGroup]="model.ngGroup" [hidden]="model.hidden">
       <label
         *ngIf="model.local.label"
         [attr.for]="model.id"
@@ -32,14 +29,12 @@ import {Component} from '@angular/core';
         [attr.placeholder]="model.local.placeholder"
         [ngClass]="model.css.control"
         adfHTMLDomElement
-      >
-      </textarea>
-      <adf-error-container [model]="model">
-      </adf-error-container>
+      ></textarea>
+      <adf-error-container [model]="model"></adf-error-container>
     </div>
   `,
   inputs: ['model'],
-  providers: [{provide: DynamicFormControlComponentBase, useExisting: TestTextareaComponent}]
+  providers: [{ provide: DynamicFormControlComponentBase, useExisting: TestTextareaComponent }],
 })
 export class TestTextareaComponent extends DynamicFormControlComponent<ValueModel> {
   model!: ValueModel;

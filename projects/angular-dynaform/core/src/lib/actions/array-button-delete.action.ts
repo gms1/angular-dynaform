@@ -1,8 +1,8 @@
-import {takeUntil} from 'rxjs/operators';
-import {Subject} from 'rxjs';
+import { takeUntil } from 'rxjs/operators';
+import { Subject } from 'rxjs';
 
-import {ArrayButtonAction} from './array-button.action';
-import {DynamicFormControlComponentBase} from '../components/dynamic-form-control.component';
+import { ArrayButtonAction } from './array-button.action';
+import { DynamicFormControlComponentBase } from '../components/dynamic-form-control.component';
 
 // delete array item
 
@@ -38,9 +38,11 @@ export class ArrayButtonDeleteAction extends ArrayButtonAction {
     this.selectionChanged(this.targetArray ? this.targetArray.selectedIndex : -1);
     if (this.targetArray) {
       this._unsubscribeSelectionChange = new Subject<any>();
-      this.targetArray.selectionChange.pipe(takeUntil(this._unsubscribeSelectionChange)).subscribe((newIndex) => {
-        this.selectionChanged(newIndex);
-      });
+      this.targetArray.selectionChange
+        .pipe(takeUntil(this._unsubscribeSelectionChange))
+        .subscribe((newIndex) => {
+          this.selectionChanged(newIndex);
+        });
     }
   }
 

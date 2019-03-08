@@ -3,17 +3,14 @@ import {
   ControlTextareaOptions,
   DynamicFormControlComponentBase,
   DynamicFormControlComponent,
-  ValueModel
+  ValueModel,
 } from '@angular-dynaform/core';
-import {Component} from '@angular/core';
+import { Component } from '@angular/core';
 
 @Component({
   selector: 'adf-material-textarea-component',
   template: `
-    <div
-      [formGroup]="model.ngGroup"
-      [hidden]="model.hidden"
-    >
+    <div [formGroup]="model.ngGroup" [hidden]="model.hidden">
       <label
         *ngIf="model.local.label"
         [attr.for]="model.id"
@@ -22,7 +19,8 @@ import {Component} from '@angular/core';
         [innerHTML]="model.local.label"
       ></label>
       <mat-form-field [ngClass]="model.css.control">
-        <textarea matInput
+        <textarea
+          matInput
           [formControlName]="model.key"
           [id]="model.id"
           [readonly]="options.readOnly"
@@ -36,19 +34,17 @@ import {Component} from '@angular/core';
           [attr.min]="options.min"
           [attr.max]="options.max"
           [maxlength]="options.maxLength"
-        >
-        </textarea>
+        ></textarea>
         <span matPrefix *ngIf="options.icon">
-          <mat-icon>{{options.icon}}</mat-icon>
+          <mat-icon>{{ options.icon }}</mat-icon>
         </span>
-        <adf-error-container [model]="model">
-        </adf-error-container>
+        <adf-error-container [model]="model"></adf-error-container>
         <mat-hint [innerHTML]="model.local.hint"></mat-hint>
       </mat-form-field>
-  </div>
+    </div>
   `,
   inputs: ['model'],
-  providers: [{provide: DynamicFormControlComponentBase, useExisting: MaterialTextareaComponent}]
+  providers: [{ provide: DynamicFormControlComponentBase, useExisting: MaterialTextareaComponent }],
 })
 export class MaterialTextareaComponent extends DynamicFormControlComponent<ValueModel> {
   model!: ValueModel;

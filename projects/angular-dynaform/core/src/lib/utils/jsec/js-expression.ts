@@ -5,10 +5,16 @@ import * as jsep from 'jsep';
 // to make rollup happy: (should normally be able to use imported 'jsep' instead)
 const jsepCall = jsep;
 
-import {JsonPointer} from 'jsonpointerx';
+import { JsonPointer } from 'jsonpointerx';
 
-import {BINARYOPS, BinaryOperations, BinaryFunction, UNARYOPS, UnaryOperations, UnaryFunction} from './js-operations';
-
+import {
+  BINARYOPS,
+  BinaryOperations,
+  BinaryFunction,
+  UNARYOPS,
+  UnaryOperations,
+  UnaryFunction,
+} from './js-operations';
 
 interface JsMemberVariable {
   keys: string[];
@@ -20,7 +26,7 @@ type resolveVariableFn = (variable: JsMemberVariable) => any;
 
 const getVariableReference: resolveVariableFn = (variable: JsMemberVariable) => variable;
 const getVariableValue: resolveVariableFn = (variable: JsMemberVariable) =>
-    (variable.jp as JsonPointer).get(variable.getObject());
+  (variable.jp as JsonPointer).get(variable.getObject());
 
 export class JsExpression {
   static binaryOps: BinaryOperations = BINARYOPS;
@@ -110,7 +116,7 @@ export class JsExpression {
       const binaryOp = JsExpression.binaryOps[binaryNode.operator];
       if (!binaryOp) {
         throw new Error(`unsupported expression: ${binaryNode.operator}(arg1, arg2)`);
-        }
+      }
       const arg1 = this.consumeASTPart(binaryNode.left);
       const arg2 = this.consumeASTPart(binaryNode.right);
       return () => binaryOp(arg1(), arg2());
@@ -119,14 +125,14 @@ export class JsExpression {
       const unaryOp = JsExpression.unaryOps[unaryNode.operator];
       if (!unaryOp) {
         throw new Error(`unsupported expression: ${unaryNode.operator}(arg)`);
-        }
+      }
       const arg = this.consumeASTPart(unaryNode.argument);
       return () => unaryOp(arg());
     } else if (node.type === 'ConditionalExpression') {
       const test = this.consumeASTPart((node as any).test);
       const consequent = this.consumeASTPart((node as any).consequent);
       const alternate = this.consumeASTPart((node as any).alternate);
-      return () => test() ? consequent() : alternate();
+      return () => (test() ? consequent() : alternate());
     } else if (node.type === 'ArrayExpression') {
       const elements: any[] = [];
       (node as any).elements.forEach((element: any) => {
@@ -149,20 +155,23 @@ export class JsExpression {
         variable.keys.push(keys);
       } else {
         variable.keys.push((memberNode.property as jsep.Identifier).name);
-        }
+      }
       return this.consumeVariable.bind(this, variable);
     } else if (node.type === 'Identifier') {
-      const variable: JsMemberVariable = {getObject: () => this.context, keys: [(node as jsep.Identifier).name]};
+      const variable: JsMemberVariable = {
+        getObject: () => this.context,
+        keys: [(node as jsep.Identifier).name],
+      };
       this._contextMembers.push(variable);
       return this.consumeVariable.bind(this, variable);
     } else {
       /* istanbul ignore else */
       if (node.type === 'ThisExpression') {
-        const variable: JsMemberVariable = {getObject: () => this.thisArg, keys: []};
+        const variable: JsMemberVariable = { getObject: () => this.thisArg, keys: [] };
         this._thisMembers.push(variable);
         return this.consumeVariable.bind(this, variable);
       }
-      }
+    }
     // TODO: should not happen
     /* istanbul ignore next */
     throw new Error(`unsupported expression type ${node.type}`);
@@ -173,17 +182,18 @@ export class JsExpression {
   }
 
   private getMembersRoot(members: JsMemberVariable[]): string[] {
-    return members.map((curr) => curr.keys).reduce((prev, curr, idx, arr) => {
-      const minLen = Math.min(prev.length, curr.length);
-      for (let i = 0; i < minLen; i++) {
-        if (curr[i] !== prev[i]) {
-          return prev.slice(0, i);
+    return members
+      .map((curr) => curr.keys)
+      .reduce((prev, curr, idx, arr) => {
+        const minLen = Math.min(prev.length, curr.length);
+        for (let i = 0; i < minLen; i++) {
+          if (curr[i] !== prev[i]) {
+            return prev.slice(0, i);
+          }
         }
-        }
-      return prev.slice(0, minLen);
-    });
+        return prev.slice(0, minLen);
+      });
   }
-
 
   /**
    * compile expression
@@ -194,7 +204,6 @@ export class JsExpression {
     self.compile(expression);
     return self;
   }
-
 
   static compiledFn(expression: string): (thisArg: any, context: any) => any {
     const le = JsExpression.compile(expression);

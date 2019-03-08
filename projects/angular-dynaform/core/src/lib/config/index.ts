@@ -8,6 +8,6 @@ export * from './control-i18n';
 export * from './form-i18n';
 
 import * as modelTypes from './model-type.enum';
-export {modelTypes as ModelType};
+export { modelTypes as ModelType };
 
 export * from './control-types.enum';

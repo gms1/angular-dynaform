@@ -1,15 +1,14 @@
-import {ComponentFactory, ComponentFactoryResolver, Injectable, Type} from '@angular/core';
+import { ComponentFactory, ComponentFactoryResolver, Injectable, Type } from '@angular/core';
 
 // tslint:disable-next-line no-unused-variable  ?
-import {DynamicFormControlComponentBase} from '../components/dynamic-form-control.component';
-import {DynamicFormErrorComponent} from '../components/dynamic-form-error.component';
+import { DynamicFormControlComponentBase } from '../components/dynamic-form-control.component';
+import { DynamicFormErrorComponent } from '../components/dynamic-form-error.component';
 // tslint:disable-next-line no-unused-variable  ?
-import {DynamicFormFormControlComponent} from '../components/dynamic-form-form-control.component';
-import {ControlConfig} from '../config/control-config';
-import {ControlType} from '../config/control-types.enum';
+import { DynamicFormFormControlComponent } from '../components/dynamic-form-form-control.component';
+import { ControlConfig } from '../config/control-config';
+import { ControlType } from '../config/control-types.enum';
 
-import {DynamicFormService} from './dynamic-form.service';
-
+import { DynamicFormService } from './dynamic-form.service';
 
 // provides the factories for the available (registered) types of components, which can then be instantiated using
 // dependency injection
@@ -20,7 +19,10 @@ export class DynamicFormComponentFactoryService {
   private controlComponentRegistry: Map<string, Type<DynamicFormControlComponentBase>>;
   private errorComponent: Type<DynamicFormErrorComponent>;
 
-  constructor(private dynamicFormService: DynamicFormService, private resolver: ComponentFactoryResolver) {
+  constructor(
+    private dynamicFormService: DynamicFormService,
+    private resolver: ComponentFactoryResolver,
+  ) {
     if (!this.dynamicFormService.formControlComponentType) {
       throw new Error('FormControlComponent not set in DynamicFormService');
     }
@@ -32,12 +34,16 @@ export class DynamicFormComponentFactoryService {
     this.errorComponent = this.dynamicFormService.errorComponentType;
   }
 
-  getFormControlComponentFactory(): ComponentFactory<DynamicFormFormControlComponent>|undefined {
-    return this.resolver.resolveComponentFactory<DynamicFormFormControlComponent>(this.formControlComponent);
+  getFormControlComponentFactory(): ComponentFactory<DynamicFormFormControlComponent> | undefined {
+    return this.resolver.resolveComponentFactory<DynamicFormFormControlComponent>(
+      this.formControlComponent,
+    );
   }
 
-  getControlComponentFactory(config: ControlConfig): ComponentFactory<DynamicFormControlComponentBase>|never {
-    let controlType: Type<DynamicFormControlComponentBase>|undefined;
+  getControlComponentFactory(
+    config: ControlConfig,
+  ): ComponentFactory<DynamicFormControlComponentBase> | never {
+    let controlType: Type<DynamicFormControlComponentBase> | undefined;
     if (Array.isArray(config.controlType)) {
       for (const typeName of config.controlType) {
         controlType = this.controlComponentRegistry.get(typeName);
@@ -46,11 +52,14 @@ export class DynamicFormComponentFactoryService {
         }
       }
     } else {
-      controlType = this.controlComponentRegistry.get(config.controlType) ||
-          this.controlComponentRegistry.get(ControlType.CONTROL_UNKNOWN);
+      controlType =
+        this.controlComponentRegistry.get(config.controlType) ||
+        this.controlComponentRegistry.get(ControlType.CONTROL_UNKNOWN);
     }
     if (!controlType) {
-      throw new Error(`control component '${config.controlType}' defined for '${config.id}' not found`);
+      throw new Error(
+        `control component '${config.controlType}' defined for '${config.id}' not found`,
+      );
     }
     return this.resolver.resolveComponentFactory<DynamicFormControlComponentBase>(controlType);
   }

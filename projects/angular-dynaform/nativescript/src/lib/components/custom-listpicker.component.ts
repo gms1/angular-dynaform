@@ -1,7 +1,7 @@
-import {Component, Input, OnInit} from '@angular/core';
-import {ControlValueAccessor, NG_VALUE_ACCESSOR} from '@angular/forms';
+import { Component, Input, OnInit } from '@angular/core';
+import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 
-import {ValueOptions} from '@angular-dynaform/core';
+import { ValueOptions } from '@angular-dynaform/core';
 
 // TODO: forward focus-, blur- and click-events if enabled
 
@@ -12,12 +12,13 @@ import {ValueOptions} from '@angular-dynaform/core';
       [id]="id"
       [items]="listPickerItems"
       [isEnabled]="isEnabled"
-      [selectedIndex]="selectedIndex" (selectedIndexChange)="selectedIndexChanged($event.value)"
+      [selectedIndex]="selectedIndex"
+      (selectedIndexChange)="selectedIndexChanged($event.value)"
     >
-    <!-- TODO: not implemented: "options.multiple" -->
+      <!-- TODO: not implemented: "options.multiple" -->
     </ListPicker>
-`,
-  providers: [{provide: NG_VALUE_ACCESSOR, useExisting: CustomListPickerComponent, multi: true}]
+  `,
+  providers: [{ provide: NG_VALUE_ACCESSOR, useExisting: CustomListPickerComponent, multi: true }],
 })
 export class CustomListPickerComponent implements ControlValueAccessor, OnInit {
   @Input()
@@ -55,10 +56,10 @@ export class CustomListPickerComponent implements ControlValueAccessor, OnInit {
   }
 
   selectedIndexChanged(index: number): void {
-    const newValue = index < 0 || index >= this.listPickerValues.length ? null : this.listPickerValues[index];
-    this.onChange(newValue);  // call registered onChange callback to set the form model value
+    const newValue =
+      index < 0 || index >= this.listPickerValues.length ? null : this.listPickerValues[index];
+    this.onChange(newValue); // call registered onChange callback to set the form model value
   }
-
 
   private onChange = (val: any): void => {};
 

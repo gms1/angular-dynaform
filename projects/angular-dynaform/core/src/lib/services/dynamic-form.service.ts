@@ -1,19 +1,22 @@
-import {Injectable, Type} from '@angular/core';
+import { Injectable, Type } from '@angular/core';
 
-import {FormConfig} from '../config/form-config';
-import {FormI18n} from '../config/form-i18n';
-import {FormModel} from '../models/form-model';
-import {TypeRegistry} from '../utils/type-registry';
+import { FormConfig } from '../config/form-config';
+import { FormI18n } from '../config/form-i18n';
+import { FormModel } from '../models/form-model';
+import { TypeRegistry } from '../utils/type-registry';
 
-import {DynamicFormControlComponentBase} from '../components/dynamic-form-control.component';
-import {DynamicFormErrorComponent} from '../components/dynamic-form-error.component';
-import {DynamicFormFormControlComponent} from '../components/dynamic-form-form-control.component';
+import { DynamicFormControlComponentBase } from '../components/dynamic-form-control.component';
+import { DynamicFormErrorComponent } from '../components/dynamic-form-error.component';
+import { DynamicFormFormControlComponent } from '../components/dynamic-form-form-control.component';
 
-import {DynamicFormValidatorRegistry, DynamicFormAsyncValidatorRegistry} from '../validations/dynamic-form.validator';
+import {
+  DynamicFormValidatorRegistry,
+  DynamicFormAsyncValidatorRegistry,
+} from '../validations/dynamic-form.validator';
 
-import {DynamicFormModelFactoryService} from './dynamic-form-model-factory.service';
+import { DynamicFormModelFactoryService } from './dynamic-form-model-factory.service';
 
-import {DynamicFormAction} from '../actions/dynamic-form.action';
+import { DynamicFormAction } from '../actions/dynamic-form.action';
 
 @Injectable()
 export class DynamicFormService {
@@ -53,13 +56,19 @@ export class DynamicFormService {
     this._controlComponentTypes = new TypeRegistry<DynamicFormControlComponentBase>();
   }
 
-
   // component registry:
-  setControlComponent(typeName: string, component: Type<DynamicFormControlComponentBase>, ifNotExist?: boolean): void {
+  setControlComponent(
+    typeName: string,
+    component: Type<DynamicFormControlComponentBase>,
+    ifNotExist?: boolean,
+  ): void {
     this._controlComponentTypes.setType(typeName, component, ifNotExist);
   }
 
-  setFormControlComponent(component: Type<DynamicFormFormControlComponent>, ifNotExist?: boolean): void {
+  setFormControlComponent(
+    component: Type<DynamicFormFormControlComponent>,
+    ifNotExist?: boolean,
+  ): void {
     if (!ifNotExist || !this.formControlComponentType) {
       this.formControlComponentType = component;
     }

@@ -1,5 +1,5 @@
-import {ControlConfig} from './control-config';
-import {ControlCssOptions} from './control-css-options';
+import { ControlConfig } from './control-config';
+import { ControlCssOptions } from './control-css-options';
 
 /*
   value options for the select-control
@@ -8,7 +8,6 @@ export interface ValueOptions {
   value: any;
   label: string;
 }
-
 
 export interface ControlBaseOptions {
   /**
@@ -39,15 +38,12 @@ export interface ControlBaseOptions {
   [key: string]: any;
 }
 
-
-
 export interface ArrayOptions extends ControlBaseOptions {
   initialItemCount?: number;
   header?: GroupOptions;
   item: GroupOptions;
   footer?: GroupOptions;
 }
-
 
 export interface GroupOptions extends ControlBaseOptions {
   group: ControlConfig[];
@@ -74,7 +70,7 @@ export interface ControlValueOptions extends ControlBaseOptions {
    * as string, it should be either 'on', 'off', or a valid autofill keyword
    * see https://html.spec.whatwg.org/multipage/form-control-infrastructure.html#inappropriate-for-the-control
    */
-  autoComplete?: string|boolean;
+  autoComplete?: string | boolean;
 
   minLength?: number;
   maxLength?: number;
@@ -87,7 +83,6 @@ export interface ControlValueOptions extends ControlBaseOptions {
    * hint text (currently only supported for material (input/textarea/select/datepicker))
    */
   hint?: string;
-
 
   /**
    * icon prefix (currently only supported for material (input/textarea/select/datepicker))
@@ -108,9 +103,8 @@ export interface ControlInputOptions extends ControlValueOptions {
    */
   inputType?: string;
 
-  step?: number;  // use e.g '0.01' for fixed-comma, use 'any' for floating-point
+  step?: number; // use e.g '0.01' for fixed-comma, use 'any' for floating-point
 }
-
 
 // TODO: make options observable and add async pipe to template
 
@@ -122,17 +116,14 @@ export interface ControlSelectOptions extends ControlValueOptions {
   multiple?: boolean;
 }
 
-
 export interface ControlSliderOptions extends ControlValueOptions {
   min: number;
   max: number;
   step: number;
 }
 
-
 // tslint:disable no-empty-interface
 export interface ControlSwitchOptions extends ControlValueOptions {}
-
 
 export interface ControlTextareaOptions extends ControlValueOptions {
   cols?: number;
@@ -140,6 +131,12 @@ export interface ControlTextareaOptions extends ControlValueOptions {
   wrap?: boolean;
 }
 
-
-export type ControlOptions = ControlBaseOptions|GroupOptions|ArrayOptions|ControlInputOptions|ControlSelectOptions|
-    ControlSliderOptions|ControlSwitchOptions|ControlTextareaOptions;
+export type ControlOptions =
+  | ControlBaseOptions
+  | GroupOptions
+  | ArrayOptions
+  | ControlInputOptions
+  | ControlSelectOptions
+  | ControlSliderOptions
+  | ControlSwitchOptions
+  | ControlTextareaOptions;

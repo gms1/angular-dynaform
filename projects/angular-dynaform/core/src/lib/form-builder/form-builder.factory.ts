@@ -6,9 +6,9 @@ import {
   FormBaseConfig,
   FormConfig,
   GroupOptions,
-  ModelType
+  ModelType,
 } from '../config';
-import {clone} from '../utils/clone';
+import { clone } from '../utils/clone';
 
 // ---------------------------------------------------------------
 export class FormBuilderFactory {
@@ -43,8 +43,7 @@ export class FormBuilderFactory {
   createGroupBuilder(): FormBuilderGroupBuilder {
     return new FormBuilderGroupBuilder(this);
   }
-  }
-
+}
 
 // ---------------------------------------------------------------
 export class FormBuilderObject {
@@ -56,8 +55,7 @@ export class FormBuilderObject {
   constructor(factory: FormBuilderFactory) {
     this._factory = factory;
   }
-  }
-
+}
 
 // ---------------------------------------------------------------
 export abstract class FormBuilderAbstractControl extends FormBuilderObject {
@@ -68,7 +66,7 @@ export abstract class FormBuilderAbstractControl extends FormBuilderObject {
   get options(): Partial<ControlBaseOptions> {
     if (!this._config.options) {
       this._config.options = {};
-      }
+    }
     return this._config.options;
   }
 
@@ -78,8 +76,7 @@ export abstract class FormBuilderAbstractControl extends FormBuilderObject {
   }
 
   abstract toControlConfig(): ControlConfig;
-  }
-
+}
 
 // ---------------------------------------------------------------
 export class FormBuilderGroupBuilder extends FormBuilderObject {
@@ -143,16 +140,15 @@ export class FormBuilderGroupBuilder extends FormBuilderObject {
     return group;
   }
 
-  toGroupOptions(): GroupOptions|undefined {
+  toGroupOptions(): GroupOptions | undefined {
     if (this.group.length === 0 && Object.entries(this.options).length === 0) {
       return undefined;
-      }
+    }
     const options = clone(this.options);
     options.group = this.toControlConfigArray();
     return options;
   }
-  }
-
+}
 
 // ---------------------------------------------------------------
 export class FormBuilderGroup extends FormBuilderAbstractControl {
@@ -175,7 +171,7 @@ export class FormBuilderGroup extends FormBuilderAbstractControl {
     config.options.group = this.group.toControlConfigArray();
     return config;
   }
-  }
+}
 
 // ---------------------------------------------------------------
 export class FormBuilderSubset extends FormBuilderAbstractControl {
@@ -199,7 +195,7 @@ export class FormBuilderSubset extends FormBuilderAbstractControl {
     config.options.group = this.group.toControlConfigArray();
     return config;
   }
-  }
+}
 
 // ---------------------------------------------------------------
 export class FormBuilderArray extends FormBuilderAbstractControl {
@@ -242,7 +238,7 @@ export class FormBuilderArray extends FormBuilderAbstractControl {
     config.options.footer = footerOptions;
     return config;
   }
-  }
+}
 
 // ---------------------------------------------------------------
 export class FormBuilderValueControl extends FormBuilderAbstractControl {
@@ -259,7 +255,7 @@ export class FormBuilderValueControl extends FormBuilderAbstractControl {
     const config = clone(this.config);
     return config;
   }
-  }
+}
 
 // ---------------------------------------------------------------
 export class FormBuilderButtonControl extends FormBuilderAbstractControl {
@@ -270,14 +266,14 @@ export class FormBuilderButtonControl extends FormBuilderAbstractControl {
 
   constructor(factory: FormBuilderFactory, config: Partial<ControlConfig>) {
     super(factory, config);
-    this.config.controlType = ControlType.CONTROL_BUTTON;  // allow overwrite
+    this.config.controlType = ControlType.CONTROL_BUTTON; // allow overwrite
   }
 
   toControlConfig(): ControlConfig {
     const config = clone(this.config);
     return config;
   }
-  }
+}
 
 // ---------------------------------------------------------------
 export class FormBuilderSeparatorControl extends FormBuilderAbstractControl {
@@ -288,14 +284,14 @@ export class FormBuilderSeparatorControl extends FormBuilderAbstractControl {
 
   constructor(factory: FormBuilderFactory, config: Partial<ControlConfig>) {
     super(factory, config);
-    this.config.controlType = ControlType.CONTROL_SEPARATOR;  // allow overwrite
+    this.config.controlType = ControlType.CONTROL_SEPARATOR; // allow overwrite
   }
 
   toControlConfig(): ControlConfig {
     const config = clone(this.config);
     return config;
   }
-  }
+}
 
 // ---------------------------------------------------------------
 export class FormBuilderForm {

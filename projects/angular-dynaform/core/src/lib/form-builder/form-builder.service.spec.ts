@@ -1,15 +1,15 @@
-import {TestBed} from '@angular/core/testing';
+import { TestBed } from '@angular/core/testing';
 
-import {FormBuilder} from '../form-builder';
-import {ControlConfig, ControlType, ModelType} from '../config';
-import {mainExampleConfig} from '../spec/test.config';
-import {clone, cleanValue} from '../utils/clone';
+import { FormBuilder } from '../form-builder';
+import { ControlConfig, ControlType, ModelType } from '../config';
+import { mainExampleConfig } from '../spec/test.config';
+import { clone, cleanValue } from '../utils/clone';
 
 describe('form-builder test suite', () => {
   let fb: FormBuilder;
 
   beforeEach(() => {
-    TestBed.configureTestingModule({providers: [FormBuilder]});
+    TestBed.configureTestingModule({ providers: [FormBuilder] });
     fb = TestBed.get(FormBuilder);
   });
 
@@ -19,103 +19,130 @@ describe('form-builder test suite', () => {
 
   it('FormBuilder should be able to build a form', () => {
     expect(fb).toBeDefined('failed to resolve FormBuilder');
-    const form = fb.createForm({id: 'exampleForm', updateOn: 'blur'});
-    const person = form.group.addSubset({id: 'person', controlType: ControlType.CONTROL_DIVISION});
+    const form = fb.createForm({ id: 'exampleForm', updateOn: 'blur' });
+    const person = form.group.addSubset({
+      id: 'person',
+      controlType: ControlType.CONTROL_DIVISION,
+    });
     expect(person.options).toEqual({});
 
-    const address =
-        form.group.addGroup({id: 'address', controlType: ControlType.CONTROL_FIELDSET, options: {label: 'Address'}});
+    const address = form.group.addGroup({
+      id: 'address',
+      controlType: ControlType.CONTROL_FIELDSET,
+      options: { label: 'Address' },
+    });
     const contacts = form.group.addArray({
       id: 'contacts',
       controlType: ControlType.CONTROL_ARRAY,
       jp: '/contacts',
-      options: {label: 'Contacts', initialItemCount: 1}
+      options: { label: 'Contacts', initialItemCount: 1 },
     });
-    const info = form.group.addSubset({id: 'info', controlType: ControlType.CONTROL_DIVISION});
+    const info = form.group.addSubset({ id: 'info', controlType: ControlType.CONTROL_DIVISION });
     const buttondiv = form.group.addSubset({
       id: 'buttondivision',
       controlType: [ControlType.CONTROL_DIVISION],
-      options: {css: {content: 'button-division-content'}}
+      options: { css: { content: 'button-division-content' } },
     });
 
-    const salutationOptions = {valueOptions: [{value: 'mr', label: 'Mr.'}, {value: 'ms', label: 'Ms.'}]};
+    const salutationOptions = {
+      valueOptions: [{ value: 'mr', label: 'Mr.' }, { value: 'ms', label: 'Ms.' }],
+    };
     const salutationPartialConfig = {
       id: 'salutation',
       controlType: ControlType.CONTROL_RADIOGROUP,
       options: salutationOptions,
       validators: ['required'],
-      jp: '/greeting'
+      jp: '/greeting',
     };
 
     const saluationConfig: ControlConfig = clone(salutationPartialConfig);
     saluationConfig.modelType = ModelType.MODEL_VALUE;
 
     const salutationCtrl = person.group.addControl(salutationPartialConfig);
-    expect(salutationCtrl.options).toEqual(salutationOptions, 'salution options not initialized properly');
-    expect(salutationCtrl.config).toEqual(saluationConfig, 'salutation config not initialized properly');
+    expect(salutationCtrl.options).toEqual(
+      salutationOptions,
+      'salution options not initialized properly',
+    );
+    expect(salutationCtrl.config).toEqual(
+      saluationConfig,
+      'salutation config not initialized properly',
+    );
 
     person.group.addControl({
       id: 'title',
       controlType: ControlType.CONTROL_INPUT,
-      options: {label: 'Title', placeholder: 'Enter your title', maxLength: 30, minLength: 2},
+      options: { label: 'Title', placeholder: 'Enter your title', maxLength: 30, minLength: 2 },
       validators: ['minLength', 'maxLength'],
-      jp: '/title'
+      jp: '/title',
     });
     person.group.addControl({
       id: 'firstName',
       controlType: ControlType.CONTROL_INPUT,
-      options: {label: 'First name', placeholder: 'Enter your first name', maxLength: 30, minLength: 4},
+      options: {
+        label: 'First name',
+        placeholder: 'Enter your first name',
+        maxLength: 30,
+        minLength: 4,
+      },
       validators: ['required', 'minLength', 'maxLength'],
-      jp: '/name/first'
+      jp: '/name/first',
     });
     person.group.addControl({
       id: 'lastName',
       controlType: ControlType.CONTROL_INPUT,
-      options: {label: 'Last name', placeholder: 'Enter your last name', maxLength: 30, minLength: 4},
+      options: {
+        label: 'Last name',
+        placeholder: 'Enter your last name',
+        maxLength: 30,
+        minLength: 4,
+      },
       validators: ['required', 'minLength', 'maxLength'],
-      jp: '/name/last'
+      jp: '/name/last',
     });
     person.group.addControl({
       id: 'birthday',
       controlType: [ControlType.CONTROL_DATEPICKER, ControlType.CONTROL_INPUT],
-      options: {label: 'Birthday name', placeholder: 'Enter your birthday', inputType: 'date'},
+      options: { label: 'Birthday name', placeholder: 'Enter your birthday', inputType: 'date' },
       validators: ['required'],
-      jp: '/birthday'
+      jp: '/birthday',
     });
 
     address.group.addControl({
       id: 'street',
       controlType: ControlType.CONTROL_INPUT,
-      options: {label: 'Street', placeholder: 'Enter street'},
-      jp: '/address/street'
+      options: { label: 'Street', placeholder: 'Enter street' },
+      jp: '/address/street',
     });
     address.group.addControl({
       id: 'postcode',
       controlType: ControlType.CONTROL_INPUT,
-      options: {label: 'Postcode', placeholder: 'Enter postcode'},
-      jp: '/address/postcode'
+      options: { label: 'Postcode', placeholder: 'Enter postcode' },
+      jp: '/address/postcode',
     });
 
-
-    contacts.header.options.css = {content: 'button-division-content'};
-    contacts.header.addButton(
-        {id: 'addContact', controlType: ControlType.CONTROL_BUTTON, options: {label: 'Add'}, action: 'arrayAddItem'});
+    contacts.header.options.css = { content: 'button-division-content' };
+    contacts.header.addButton({
+      id: 'addContact',
+      controlType: ControlType.CONTROL_BUTTON,
+      options: { label: 'Add' },
+      action: 'arrayAddItem',
+    });
     contacts.header.addButton({
       id: 'insertContact',
       controlType: ControlType.CONTROL_BUTTON,
-      options: {label: 'Insert'},
-      action: 'arrayInsertItem'
+      options: { label: 'Insert' },
+      action: 'arrayInsertItem',
     });
     contacts.header.addSeparator({
       id: 'separatorContactButtons',
       controlType: ControlType.CONTROL_SEPARATOR,
-      options: {css: {container: 'button-separator'}}
+      options: { css: { container: 'button-separator' } },
     });
     contacts.header.addButton({
       id: 'deleteContact',
       controlType: ControlType.CONTROL_BUTTON,
-      options: {label: 'Delete'},
-      action: 'arrayDeleteItem'
+      options: { label: 'Delete' },
+      action: 'arrayDeleteItem',
     });
 
     contacts.group.addControl({
@@ -124,17 +151,17 @@ describe('form-builder test suite', () => {
       controlType: ControlType.CONTROL_SELECT,
       options: {
         label: 'Type',
-        valueOptions: [{value: 'phone', label: 'Telephone'}, {value: 'email', label: 'Email'}],
-        placeholder: 'Select an option'
+        valueOptions: [{ value: 'phone', label: 'Telephone' }, { value: 'email', label: 'Email' }],
+        placeholder: 'Select an option',
       },
-      jp: 'carrier'
+      jp: 'carrier',
     });
     contacts.group.addControl({
       id: 'contactValue',
       key: 'value',
       controlType: ControlType.CONTROL_INPUT,
-      options: {label: 'Value', placeholder: 'Enter a value'},
-      jp: 'value'
+      options: { label: 'Value', placeholder: 'Enter a value' },
+      jp: 'value',
     });
 
     info.group.addControl({
@@ -148,45 +175,57 @@ describe('form-builder test suite', () => {
         readOnly: false,
         cols: 60,
         rows: 7,
-        wrap: true
+        wrap: true,
       },
-      jp: '/notes'
+      jp: '/notes',
     });
-    const checkboxdiv =
-        info.group.addSubset({id: 'checkboxdivision', controlType: ControlType.CONTROL_DIVISION, jp: '/options'});
+    const checkboxdiv = info.group.addSubset({
+      id: 'checkboxdivision',
+      controlType: ControlType.CONTROL_DIVISION,
+      jp: '/options',
+    });
     checkboxdiv.group.addControl({
       id: 'atc',
       controlType: ControlType.CONTROL_CHECKBOX,
-      options: {label: 'Accept Terms and conditions', value: false},
+      options: { label: 'Accept Terms and conditions', value: false },
       jp: 'atc',
-      updateOn: 'change'
+      updateOn: 'change',
     });
     checkboxdiv.group.addControl({
       id: 'newsletter',
       controlType: ControlType.CONTROL_CHECKBOX,
-      options: {label: 'Subscribe to newsletter', value: true},
+      options: { label: 'Subscribe to newsletter', value: true },
       jp: 'newsletter',
-      relations: {enable: 'atc'}
+      relations: { enable: 'atc' },
     });
 
-    buttondiv.group.addButton(
-        {id: 'clear', controlType: ControlType.CONTROL_BUTTON, options: {label: 'Clear'}, action: 'clear'});
+    buttondiv.group.addButton({
+      id: 'clear',
+      controlType: ControlType.CONTROL_BUTTON,
+      options: { label: 'Clear' },
+      action: 'clear',
+    });
     buttondiv.group.addSeparator({
       id: 'separatorMainButtons',
       controlType: ControlType.CONTROL_SEPARATOR,
-      options: {css: {container: 'button-separator'}}
+      options: { css: { container: 'button-separator' } },
     });
-    buttondiv.group.addButton(
-        {id: 'reset', controlType: ControlType.CONTROL_BUTTON, options: {label: 'Reset'}, action: 'reset'});
-    buttondiv.group.addButton(
-        {id: 'submit', controlType: ControlType.CONTROL_BUTTON, options: {label: 'Submit'}, action: 'submit'});
+    buttondiv.group.addButton({
+      id: 'reset',
+      controlType: ControlType.CONTROL_BUTTON,
+      options: { label: 'Reset' },
+      action: 'reset',
+    });
+    buttondiv.group.addButton({
+      id: 'submit',
+      controlType: ControlType.CONTROL_BUTTON,
+      options: { label: 'Submit' },
+      action: 'submit',
+    });
 
-
-    expect(cleanValue(form.toFormConfig()))
-        .toEqual(mainExampleConfig, 'form builder created config should be same as the config of the main example');
-
-
+    expect(cleanValue(form.toFormConfig())).toEqual(
+      mainExampleConfig,
+      'form builder created config should be same as the config of the main example',
+    );
   });
-
-
 });

@@ -3,17 +3,14 @@ import {
   ControlSwitchOptions,
   DynamicFormControlComponentBase,
   DynamicFormControlComponent,
-  ValueModel
+  ValueModel,
 } from '@angular-dynaform/core';
-import {Component} from '@angular/core';
+import { Component } from '@angular/core';
 
 @Component({
   selector: 'adf-basic-checkbox-component',
   template: `
-    <div
-      [formGroup]="model.ngGroup"
-      [hidden]="model.hidden"
-    >
+    <div [formGroup]="model.ngGroup" [hidden]="model.hidden">
       <input
         [formControlName]="model.key"
         [id]="model.id"
@@ -22,21 +19,14 @@ import {Component} from '@angular/core';
         adfHTMLDomElement
         [required]="options.required ? '' : null"
       />
-      <label
-        [attr.for]="model.id"
-        class="adf-back-label"
-        [ngClass]="model.css.label"
-      >
-        <span [ngClass]="model.css.label"
-          [innerHTML]="model.local.label">
-        </span>
+      <label [attr.for]="model.id" class="adf-back-label" [ngClass]="model.css.label">
+        <span [ngClass]="model.css.label" [innerHTML]="model.local.label"></span>
       </label>
-      <adf-error-container [model]="model">
-      </adf-error-container>
+      <adf-error-container [model]="model"></adf-error-container>
     </div>
   `,
   inputs: ['model'],
-  providers: [{provide: DynamicFormControlComponentBase, useExisting: BasicCheckboxComponent}]
+  providers: [{ provide: DynamicFormControlComponentBase, useExisting: BasicCheckboxComponent }],
 })
 export class BasicCheckboxComponent extends DynamicFormControlComponent<ValueModel> {
   model!: ValueModel;

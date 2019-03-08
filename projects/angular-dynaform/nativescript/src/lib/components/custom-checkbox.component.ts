@@ -1,5 +1,5 @@
-import {Component, Input} from '@angular/core';
-import {NG_VALUE_ACCESSOR, ControlValueAccessor} from '@angular/forms';
+import { Component, Input } from '@angular/core';
+import { NG_VALUE_ACCESSOR, ControlValueAccessor } from '@angular/forms';
 
 // TODO: forward focus-, blur- and click-events if enabled
 
@@ -9,12 +9,13 @@ import {NG_VALUE_ACCESSOR, ControlValueAccessor} from '@angular/forms';
     <CheckBox
       [id]="id"
       [text]="text"
-      [isEnabled]="isEnabled" [checked]="checked" (checkedChange)="checkedChange($event.value)"
+      [isEnabled]="isEnabled"
+      [checked]="checked"
+      (checkedChange)="checkedChange($event.value)"
       class="checkbox"
-    >
-    </CheckBox>
-`,
-  providers: [{provide: NG_VALUE_ACCESSOR, useExisting: CustomCheckBoxComponent, multi: true}]
+    ></CheckBox>
+  `,
+  providers: [{ provide: NG_VALUE_ACCESSOR, useExisting: CustomCheckBoxComponent, multi: true }],
 })
 export class CustomCheckBoxComponent implements ControlValueAccessor {
   @Input()

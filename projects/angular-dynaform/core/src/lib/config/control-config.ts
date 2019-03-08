@@ -1,6 +1,5 @@
-import {ControlOptions} from './control-options';
+import { ControlOptions } from './control-options';
 // tslint:disable: no-empty-interface
-
 
 /**
  *
@@ -53,7 +52,7 @@ export interface ControlConfig {
    *   ControlType.CONTROL_SEPARATOR
    * ```
    */
-  controlType: string|string[];
+  controlType: string | string[];
   /**
    * The unique id (for the DOM element)
    *
@@ -86,24 +85,24 @@ export interface ControlConfig {
    * (the event on which this control will update itself)
    * default: 'change'
    */
-  updateOn?: 'change'|'blur'|'submit';
+  updateOn?: 'change' | 'blur' | 'submit';
 
   /**
    * sync validators
    *
    * ignore for MODEL_NULL or MODEL_SUBSET
    */
-  validators?: string|string[];
+  validators?: string | string[];
   /**
    * async validators
    *
    * ignore for MODEL_NULL or MODEL_SUBSET
    */
-  asyncValidators?: string|string[];
+  asyncValidators?: string | string[];
   /**
    * error messages for the validators
    */
-  errors?: {[key: string]: string};
+  errors?: { [key: string]: string };
   /**
    * relations
    *
@@ -131,7 +130,6 @@ export interface ControlConfig {
    */
   options?: ControlOptions;
 
-
   /**
    * JSON pointer (application data model specific)
    */
@@ -142,7 +140,6 @@ export interface ControlConfig {
    */
   user?: any;
 }
-
 
 /**
  * define conditions (javascript expressions) based

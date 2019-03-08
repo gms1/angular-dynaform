@@ -1,13 +1,14 @@
-import {AfterViewInit, OnInit} from '@angular/core';
-import {StepperButtonBaseAction} from './stepper-button-base';
+import { AfterViewInit, OnInit } from '@angular/core';
+import { StepperButtonBaseAction } from './stepper-button-base';
 
 // next-button for a stepper component
 
-export class StepperButtonNextAction extends StepperButtonBaseAction implements AfterViewInit, OnInit {
+export class StepperButtonNextAction extends StepperButtonBaseAction
+  implements AfterViewInit, OnInit {
   onClick(event?: Event): boolean {
     if (this.stepper) {
       this.stepper.next();
-      }
+    }
     return true;
   }
 

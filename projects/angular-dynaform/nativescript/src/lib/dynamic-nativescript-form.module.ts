@@ -1,64 +1,82 @@
-import {ControlType, DynamicFormModule, DynamicFormService} from '@angular-dynaform/core';
-import {CommonModule} from '@angular/common';
-import {NgModule, NO_ERRORS_SCHEMA, Optional, SkipSelf} from '@angular/core';
-import {ReactiveFormsModule} from '@angular/forms';
+import { ControlType, DynamicFormModule, DynamicFormService } from '@angular-dynaform/core';
+import { CommonModule } from '@angular/common';
+import { NgModule, NO_ERRORS_SCHEMA, Optional, SkipSelf } from '@angular/core';
+import { ReactiveFormsModule } from '@angular/forms';
 
-import {NativeScriptCommonModule} from 'nativescript-angular/common';
-import {NativeScriptFormsModule} from 'nativescript-angular/forms';
+import { NativeScriptCommonModule } from 'nativescript-angular/common';
+import { NativeScriptFormsModule } from 'nativescript-angular/forms';
 
-import {TNSCheckBoxModule} from 'nativescript-checkbox/angular';
+import { TNSCheckBoxModule } from 'nativescript-checkbox/angular';
 
-import {DynamicNSDomElementDirective} from './directives/dynamic-ns-dom-element.directive';
+import { DynamicNSDomElementDirective } from './directives/dynamic-ns-dom-element.directive';
 
+import { CustomCheckBoxComponent } from './components/custom-checkbox.component';
+import { CustomListPickerComponent } from './components/custom-listpicker.component';
+import { CustomRadioGroupComponent } from './components/custom-radiogroup.component';
 
-import {CustomCheckBoxComponent} from './components/custom-checkbox.component';
-import {CustomListPickerComponent} from './components/custom-listpicker.component';
-import {CustomRadioGroupComponent} from './components/custom-radiogroup.component';
+import { NativeScriptArrayComponent } from './components/nativescript-array.component';
+import { NativeScriptButtonComponent } from './components/nativescript-button.component';
+import { NativeScriptCheckboxComponent } from './components/nativescript-checkbox.component';
+import { NativeScriptDatePickerComponent } from './components/nativescript-datepicker.component';
+import { NativeScriptDivisionComponent } from './components/nativescript-division.component';
+import { NativeScriptErrorComponent } from './components/nativescript-error.component';
+import { NativeScriptFieldsetComponent } from './components/nativescript-fieldset.component';
+import { NativeScriptFormComponent } from './components/nativescript-form.component';
+import { NativeScriptTextFieldComponent } from './components/nativescript-textfield.component';
+import { NativeScriptRadioGroupComponent } from './components/nativescript-radiogroup.component';
+import { NativeScriptListPickerComponent } from './components/nativescript-listpicker.component';
+import { NativeScriptSeparatorComponent } from './components/nativescript-separator.component';
+import { NativeScriptSliderComponent } from './components/nativescript-slider.component';
 
-import {NativeScriptArrayComponent} from './components/nativescript-array.component';
-import {NativeScriptButtonComponent} from './components/nativescript-button.component';
-import {NativeScriptCheckboxComponent} from './components/nativescript-checkbox.component';
-import {NativeScriptDatePickerComponent} from './components/nativescript-datepicker.component';
-import {NativeScriptDivisionComponent} from './components/nativescript-division.component';
-import {NativeScriptErrorComponent} from './components/nativescript-error.component';
-import {NativeScriptFieldsetComponent} from './components/nativescript-fieldset.component';
-import {NativeScriptFormComponent} from './components/nativescript-form.component';
-import {NativeScriptTextFieldComponent} from './components/nativescript-textfield.component';
-import {NativeScriptRadioGroupComponent} from './components/nativescript-radiogroup.component';
-import {NativeScriptListPickerComponent} from './components/nativescript-listpicker.component';
-import {NativeScriptSeparatorComponent} from './components/nativescript-separator.component';
-import {NativeScriptSliderComponent} from './components/nativescript-slider.component';
-
-import {NativeScriptSwitchComponent} from './components/nativescript-switch.component';
-import {NativeScriptTextViewComponent} from './components/nativescript-textview.component';
-import {NativeScriptControlType} from './models';
+import { NativeScriptSwitchComponent } from './components/nativescript-switch.component';
+import { NativeScriptTextViewComponent } from './components/nativescript-textview.component';
+import { NativeScriptControlType } from './models';
 
 const entryComponents: any[] = [
-  NativeScriptFormComponent, NativeScriptErrorComponent, NativeScriptArrayComponent, NativeScriptDivisionComponent,
-  NativeScriptFieldsetComponent, NativeScriptButtonComponent, NativeScriptCheckboxComponent,
-  NativeScriptDatePickerComponent, NativeScriptTextFieldComponent, NativeScriptRadioGroupComponent,
-  NativeScriptListPickerComponent, NativeScriptSeparatorComponent, NativeScriptSliderComponent,
-  NativeScriptSwitchComponent, NativeScriptTextViewComponent
+  NativeScriptFormComponent,
+  NativeScriptErrorComponent,
+  NativeScriptArrayComponent,
+  NativeScriptDivisionComponent,
+  NativeScriptFieldsetComponent,
+  NativeScriptButtonComponent,
+  NativeScriptCheckboxComponent,
+  NativeScriptDatePickerComponent,
+  NativeScriptTextFieldComponent,
+  NativeScriptRadioGroupComponent,
+  NativeScriptListPickerComponent,
+  NativeScriptSeparatorComponent,
+  NativeScriptSliderComponent,
+  NativeScriptSwitchComponent,
+  NativeScriptTextViewComponent,
 ];
 
 const moduleDeclarations: any[] = [
-  DynamicNSDomElementDirective, CustomCheckBoxComponent, CustomListPickerComponent, CustomRadioGroupComponent,
-  ...entryComponents
+  DynamicNSDomElementDirective,
+  CustomCheckBoxComponent,
+  CustomListPickerComponent,
+  CustomRadioGroupComponent,
+  ...entryComponents,
 ];
 
 @NgModule({
   imports: [
-    CommonModule, ReactiveFormsModule, DynamicFormModule, NativeScriptCommonModule, NativeScriptFormsModule,
-    TNSCheckBoxModule
+    CommonModule,
+    ReactiveFormsModule,
+    DynamicFormModule,
+    NativeScriptCommonModule,
+    NativeScriptFormsModule,
+    TNSCheckBoxModule,
   ],
-  declarations: [moduleDeclarations], entryComponents,
+  declarations: [moduleDeclarations],
+  entryComponents,
   exports: [DynamicFormModule, entryComponents],
-  schemas: [NO_ERRORS_SCHEMA]  // TODO: is it possible to avoid the need for NO_ERRORS_SCHEMA?
+  schemas: [NO_ERRORS_SCHEMA], // TODO: is it possible to avoid the need for NO_ERRORS_SCHEMA?
 })
 export class DynamicNativeScriptFormModule {
   constructor(
-      private dynamicFormService: DynamicFormService,
-      @Optional() @SkipSelf() parentModule: DynamicNativeScriptFormModule) {
+    private dynamicFormService: DynamicFormService,
+    @Optional() @SkipSelf() parentModule: DynamicNativeScriptFormModule,
+  ) {
     if (parentModule) {
       return;
     }
@@ -66,49 +84,139 @@ export class DynamicNativeScriptFormModule {
     this.dynamicFormService.setErrorComponent(NativeScriptErrorComponent, true);
 
     // register default control components:
-    this.dynamicFormService.setControlComponent(ControlType.CONTROL_ARRAY, NativeScriptArrayComponent, true);
-    this.dynamicFormService.setControlComponent(ControlType.CONTROL_FIELDSET, NativeScriptFieldsetComponent, true);
-    this.dynamicFormService.setControlComponent(ControlType.CONTROL_DIVISION, NativeScriptDivisionComponent, true);
-    this.dynamicFormService.setControlComponent(ControlType.CONTROL_BUTTON, NativeScriptButtonComponent, true);
-    this.dynamicFormService.setControlComponent(ControlType.CONTROL_SEPARATOR, NativeScriptSeparatorComponent, true);
+    this.dynamicFormService.setControlComponent(
+      ControlType.CONTROL_ARRAY,
+      NativeScriptArrayComponent,
+      true,
+    );
+    this.dynamicFormService.setControlComponent(
+      ControlType.CONTROL_FIELDSET,
+      NativeScriptFieldsetComponent,
+      true,
+    );
+    this.dynamicFormService.setControlComponent(
+      ControlType.CONTROL_DIVISION,
+      NativeScriptDivisionComponent,
+      true,
+    );
+    this.dynamicFormService.setControlComponent(
+      ControlType.CONTROL_BUTTON,
+      NativeScriptButtonComponent,
+      true,
+    );
+    this.dynamicFormService.setControlComponent(
+      ControlType.CONTROL_SEPARATOR,
+      NativeScriptSeparatorComponent,
+      true,
+    );
 
-    this.dynamicFormService.setControlComponent(ControlType.CONTROL_CHECKBOX, NativeScriptCheckboxComponent, true);
-    this.dynamicFormService.setControlComponent(ControlType.CONTROL_DATEPICKER, NativeScriptDatePickerComponent, true);
-    this.dynamicFormService.setControlComponent(ControlType.CONTROL_INPUT, NativeScriptTextFieldComponent, true);
-    this.dynamicFormService.setControlComponent(ControlType.CONTROL_RADIOGROUP, NativeScriptRadioGroupComponent, true);
-    this.dynamicFormService.setControlComponent(ControlType.CONTROL_SELECT, NativeScriptListPickerComponent, true);
-    this.dynamicFormService.setControlComponent(ControlType.CONTROL_SLIDER, NativeScriptSliderComponent, true);
-    this.dynamicFormService.setControlComponent(ControlType.CONTROL_SWITCH, NativeScriptSwitchComponent, true);
-    this.dynamicFormService.setControlComponent(ControlType.CONTROL_TEXTAREA, NativeScriptTextViewComponent, true);
-
+    this.dynamicFormService.setControlComponent(
+      ControlType.CONTROL_CHECKBOX,
+      NativeScriptCheckboxComponent,
+      true,
+    );
+    this.dynamicFormService.setControlComponent(
+      ControlType.CONTROL_DATEPICKER,
+      NativeScriptDatePickerComponent,
+      true,
+    );
+    this.dynamicFormService.setControlComponent(
+      ControlType.CONTROL_INPUT,
+      NativeScriptTextFieldComponent,
+      true,
+    );
+    this.dynamicFormService.setControlComponent(
+      ControlType.CONTROL_RADIOGROUP,
+      NativeScriptRadioGroupComponent,
+      true,
+    );
+    this.dynamicFormService.setControlComponent(
+      ControlType.CONTROL_SELECT,
+      NativeScriptListPickerComponent,
+      true,
+    );
+    this.dynamicFormService.setControlComponent(
+      ControlType.CONTROL_SLIDER,
+      NativeScriptSliderComponent,
+      true,
+    );
+    this.dynamicFormService.setControlComponent(
+      ControlType.CONTROL_SWITCH,
+      NativeScriptSwitchComponent,
+      true,
+    );
+    this.dynamicFormService.setControlComponent(
+      ControlType.CONTROL_TEXTAREA,
+      NativeScriptTextViewComponent,
+      true,
+    );
 
     // register nativescript control components:
     this.dynamicFormService.setControlComponent(
-        NativeScriptControlType.CONTROL_ARRAY, NativeScriptArrayComponent, true);
+      NativeScriptControlType.CONTROL_ARRAY,
+      NativeScriptArrayComponent,
+      true,
+    );
     this.dynamicFormService.setControlComponent(
-        NativeScriptControlType.CONTROL_FIELDSET, NativeScriptFieldsetComponent, true);
+      NativeScriptControlType.CONTROL_FIELDSET,
+      NativeScriptFieldsetComponent,
+      true,
+    );
     this.dynamicFormService.setControlComponent(
-        NativeScriptControlType.CONTROL_DIVISION, NativeScriptDivisionComponent, true);
+      NativeScriptControlType.CONTROL_DIVISION,
+      NativeScriptDivisionComponent,
+      true,
+    );
     this.dynamicFormService.setControlComponent(
-        NativeScriptControlType.CONTROL_BUTTON, NativeScriptButtonComponent, true);
+      NativeScriptControlType.CONTROL_BUTTON,
+      NativeScriptButtonComponent,
+      true,
+    );
     this.dynamicFormService.setControlComponent(
-        NativeScriptControlType.CONTROL_SEPARATOR, NativeScriptSeparatorComponent, true);
+      NativeScriptControlType.CONTROL_SEPARATOR,
+      NativeScriptSeparatorComponent,
+      true,
+    );
 
     this.dynamicFormService.setControlComponent(
-        NativeScriptControlType.CONTROL_CHECKBOX, NativeScriptCheckboxComponent, true);
+      NativeScriptControlType.CONTROL_CHECKBOX,
+      NativeScriptCheckboxComponent,
+      true,
+    );
     this.dynamicFormService.setControlComponent(
-        NativeScriptControlType.CONTROL_DATEPICKER, NativeScriptDatePickerComponent, true);
+      NativeScriptControlType.CONTROL_DATEPICKER,
+      NativeScriptDatePickerComponent,
+      true,
+    );
     this.dynamicFormService.setControlComponent(
-        NativeScriptControlType.CONTROL_TEXTFIELD, NativeScriptTextFieldComponent, true);
+      NativeScriptControlType.CONTROL_TEXTFIELD,
+      NativeScriptTextFieldComponent,
+      true,
+    );
     this.dynamicFormService.setControlComponent(
-        NativeScriptControlType.CONTROL_RADIOGROUP, NativeScriptRadioGroupComponent, true);
+      NativeScriptControlType.CONTROL_RADIOGROUP,
+      NativeScriptRadioGroupComponent,
+      true,
+    );
     this.dynamicFormService.setControlComponent(
-        NativeScriptControlType.CONTROL_LISTPICKER, NativeScriptListPickerComponent, true);
+      NativeScriptControlType.CONTROL_LISTPICKER,
+      NativeScriptListPickerComponent,
+      true,
+    );
     this.dynamicFormService.setControlComponent(
-        NativeScriptControlType.CONTROL_SLIDER, NativeScriptSliderComponent, true);
+      NativeScriptControlType.CONTROL_SLIDER,
+      NativeScriptSliderComponent,
+      true,
+    );
     this.dynamicFormService.setControlComponent(
-        NativeScriptControlType.CONTROL_SWITCH, NativeScriptSwitchComponent, true);
+      NativeScriptControlType.CONTROL_SWITCH,
+      NativeScriptSwitchComponent,
+      true,
+    );
     this.dynamicFormService.setControlComponent(
-        NativeScriptControlType.CONTROL_TEXTVIEW, NativeScriptTextViewComponent, true);
+      NativeScriptControlType.CONTROL_TEXTVIEW,
+      NativeScriptTextViewComponent,
+      true,
+    );
   }
 }

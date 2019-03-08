@@ -1,5 +1,5 @@
-import {AsyncValidatorFn, FormControl, ValidatorFn} from '@angular/forms';
-import {AbstractControlOptions} from './ng-abstract';
+import { AsyncValidatorFn, FormControl, ValidatorFn } from '@angular/forms';
+import { AbstractControlOptions } from './ng-abstract';
 
 // ==============================================================================================================================
 /**
@@ -17,13 +17,17 @@ import {AbstractControlOptions} from './ng-abstract';
  */
 export class NgNullControl extends FormControl {
   constructor(
-      formState?: any, validatorOrOpts?: ValidatorFn|ValidatorFn[]|AbstractControlOptions|null,
-      asyncValidator?: AsyncValidatorFn|AsyncValidatorFn[]|null) {
+    formState?: any,
+    validatorOrOpts?: ValidatorFn | ValidatorFn[] | AbstractControlOptions | null,
+    asyncValidator?: AsyncValidatorFn | AsyncValidatorFn[] | null,
+  ) {
     super(formState, validatorOrOpts, asyncValidator);
   }
-  get value(): any { return undefined; }
+  get value(): any {
+    return undefined;
+  }
   set value(value: any) {}
-  patchValue(value: any, options: {onlySelf?: boolean, emitEvent?: boolean} = {}): void {}
-  setValue(value: any, options: {onlySelf?: boolean, emitEvent?: boolean} = {}): void {}
-  reset(value?: any, options?: {onlySelf?: boolean; emitEvent?: boolean}): void {}
+  patchValue(value: any, options: { onlySelf?: boolean; emitEvent?: boolean } = {}): void {}
+  setValue(value: any, options: { onlySelf?: boolean; emitEvent?: boolean } = {}): void {}
+  reset(value?: any, options?: { onlySelf?: boolean; emitEvent?: boolean }): void {}
 }

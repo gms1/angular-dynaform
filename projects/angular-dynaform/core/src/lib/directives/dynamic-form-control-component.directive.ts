@@ -7,45 +7,53 @@ import {
   OnInit,
   ViewContainerRef,
   KeyValueDiffers,
-  Renderer2
+  Renderer2,
 } from '@angular/core';
 
 // tslint:disable-next-line no-unused-variable  ?
-import {DynamicFormControl} from '../components/dynamic-form-control';
-import {DynamicFormControlComponentBase} from '../components/dynamic-form-control.component';
-import {DynamicFormComponent} from '../components/dynamic-form.component';
-import {ControlModel} from '../models/control-model';
-import {DynamicFormComponentFactoryService} from '../services/dynamic-form-component-factory.service';
+import { DynamicFormControl } from '../components/dynamic-form-control';
+import { DynamicFormControlComponentBase } from '../components/dynamic-form-control.component';
+import { DynamicFormComponent } from '../components/dynamic-form.component';
+import { ControlModel } from '../models/control-model';
+import { DynamicFormComponentFactoryService } from '../services/dynamic-form-component-factory.service';
 
-import {DynamicClass} from '../utils/dynamic-class';
+import { DynamicClass } from '../utils/dynamic-class';
 
 // this directive creates/destroys the DynamicFormControls dynamically
 // and initializes the model (input-)property of the DynamicFormControls
 
-@Directive({selector: '[adfControlComponent]'})
+@Directive({ selector: '[adfControlComponent]' })
 export class DynamicFormControlComponentDirective implements OnInit, DoCheck, OnDestroy {
   @Input() model!: ControlModel;
 
-  private componentRef: ComponentRef<DynamicFormControl>|undefined;
-  private dynamicClass: DynamicClass|undefined;
+  private componentRef: ComponentRef<DynamicFormControl> | undefined;
+  private dynamicClass: DynamicClass | undefined;
 
   constructor(
-      public form: DynamicFormComponent, private componentsFactoryService: DynamicFormComponentFactoryService,
-      private viewContainerRef: ViewContainerRef, private renderer: Renderer2,
-      private keyValueDiffers: KeyValueDiffers) {}
+    public form: DynamicFormComponent,
+    private componentsFactoryService: DynamicFormComponentFactoryService,
+    private viewContainerRef: ViewContainerRef,
+    private renderer: Renderer2,
+    private keyValueDiffers: KeyValueDiffers,
+  ) {}
 
   ngOnInit(): void {
-    const componentFactory = this.componentsFactoryService.getControlComponentFactory(this.model.config);
+    const componentFactory = this.componentsFactoryService.getControlComponentFactory(
+      this.model.config,
+    );
 
     // create the component:
     try {
       this.componentRef = this.viewContainerRef.createComponent<DynamicFormControl>(
-          componentFactory, undefined, this.viewContainerRef.injector);
+        componentFactory,
+        undefined,
+        this.viewContainerRef.injector,
+      );
     } catch (e) {
       /* istanbul ignore next */
       {
         e.message = `failed to create control component for '${this.model.id}': ${e.message}`;
-        throw (e);
+        throw e;
       }
     }
 
@@ -54,8 +62,11 @@ export class DynamicFormControlComponentDirective implements OnInit, DoCheck, On
 
     // instantiate helper class to dynamically change CSS classes on the host element of the component:
     this.dynamicClass = new DynamicClass(
-        this.keyValueDiffers, (this.componentRef.instance as DynamicFormControlComponentBase).elementRef, this.renderer,
-        this.model.css.container);
+      this.keyValueDiffers,
+      (this.componentRef.instance as DynamicFormControlComponentBase).elementRef,
+      this.renderer,
+      this.model.css.container,
+    );
   }
 
   ngDoCheck(): void {

@@ -1,25 +1,25 @@
 // tslint:disable no-forward-ref
-import {Component, ComponentRef, EventEmitter, Input, Output} from '@angular/core';
-import {Observable} from 'rxjs';
+import { Component, ComponentRef, EventEmitter, Input, Output } from '@angular/core';
+import { Observable } from 'rxjs';
 
-import {FormConfig} from '../config/form-config';
-import {FormModel} from '../models/form-model';
+import { FormConfig } from '../config/form-config';
+import { FormModel } from '../models/form-model';
 
-import {DynamicFormControl} from './dynamic-form-control';
-import {DynamicFormFormControl} from './dynamic-form-form-control';
-import {DynamicForm, UIProperties} from './dynamic-form';
+import { DynamicFormControl } from './dynamic-form-control';
+import { DynamicFormFormControl } from './dynamic-form-form-control';
+import { DynamicForm, UIProperties } from './dynamic-form';
 
-import {Stepper} from '../models/stepper';
-
+import { Stepper } from '../models/stepper';
 
 @Component({
   selector: 'adf-form',
-  template: `<ng-container adfFormControlComponent [model]="model.group" ></ng-container>`,
-  providers: [{provide: DynamicForm, useExisting: DynamicFormComponent}]
+  template: `
+    <ng-container adfFormControlComponent [model]="model.group"></ng-container>
+  `,
+  providers: [{ provide: DynamicForm, useExisting: DynamicFormComponent }],
 })
 export class DynamicFormComponent extends DynamicForm {
   config!: FormConfig;
-
 
   @Input()
   get model(): FormModel {
@@ -68,7 +68,7 @@ export class DynamicFormComponent extends DynamicForm {
     return this._uiProperties;
   }
 
-  formControlRef: ComponentRef<DynamicFormFormControl>|undefined;
+  formControlRef: ComponentRef<DynamicFormFormControl> | undefined;
   stepper?: Stepper;
 
   private _model!: FormModel;
@@ -97,7 +97,6 @@ export class DynamicFormComponent extends DynamicForm {
     this.model.clearValue();
   }
 
-
   initValueFromAppModel(appData: any, appPointerPrefix?: string): any {
     this.model.initValueFromAppModel(appData, appPointerPrefix);
   }
@@ -118,13 +117,13 @@ export class DynamicFormComponent extends DynamicForm {
     this.mapIdToControl.delete(id);
   }
 
-  findComponentById(id: string): DynamicFormControl|undefined {
+  findComponentById(id: string): DynamicFormControl | undefined {
     return this.mapIdToControl.get(id);
   }
 
-  findParentComponent(control: DynamicFormControl): DynamicFormControl|undefined {
-    let parentId: string|undefined;
-    let found: DynamicFormControl|undefined;
+  findParentComponent(control: DynamicFormControl): DynamicFormControl | undefined {
+    let parentId: string | undefined;
+    let found: DynamicFormControl | undefined;
 
     parentId = control.model.parentGroup ? control.model.parentGroup.id : undefined;
     found = parentId ? this.findComponentById(parentId) : undefined;

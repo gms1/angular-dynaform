@@ -3,17 +3,14 @@ import {
   ControlSwitchOptions,
   DynamicFormControlComponentBase,
   DynamicFormControlComponent,
-  ValueModel
+  ValueModel,
 } from '../../public_api';
-import {Component} from '@angular/core';
+import { Component } from '@angular/core';
 
 @Component({
   selector: 'adf-test-switch-component',
   template: `
-    <div
-      [formGroup]="model.ngGroup"
-      [hidden]="model.hidden"
-    >
+    <div [formGroup]="model.ngGroup" [hidden]="model.hidden">
       <label
         *ngIf="model.local.label"
         [attr.for]="model.id"
@@ -31,12 +28,11 @@ import {Component} from '@angular/core';
         [ngClass]="model.css.control"
         adfHTMLDomElement
       />
-      <adf-error-container [model]="model">
-      </adf-error-container>
+      <adf-error-container [model]="model"></adf-error-container>
     </div>
   `,
   inputs: ['model'],
-  providers: [{provide: DynamicFormControlComponentBase, useExisting: TestSwitchComponent}]
+  providers: [{ provide: DynamicFormControlComponentBase, useExisting: TestSwitchComponent }],
 })
 export class TestSwitchComponent extends DynamicFormControlComponent<ValueModel> {
   model!: ValueModel;

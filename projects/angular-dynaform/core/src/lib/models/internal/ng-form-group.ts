@@ -1,6 +1,6 @@
-import {AbstractControl, FormGroup} from '@angular/forms';
-import {NgNullControl} from './ng-null-control';
-import {AbstractControlOptions} from './ng-abstract';
+import { AbstractControl, FormGroup } from '@angular/forms';
+import { NgNullControl } from './ng-null-control';
+import { AbstractControlOptions } from './ng-abstract';
 
 /**
  * @description NgFormGroup extends FormGroup
@@ -10,17 +10,16 @@ import {AbstractControlOptions} from './ng-abstract';
  * @export
  */
 export class NgFormGroup extends FormGroup {
-  constructor(controls: {[key: string]: AbstractControl}, options: AbstractControlOptions) {
+  constructor(controls: { [key: string]: AbstractControl }, options: AbstractControlOptions) {
     super(controls, options);
   }
-
 
   /**
    * provides default values for all childs of instance NgNullControl
    * before calling the parent setValue method.
    * So the strict check for other controls is kept, but NgNullControls do not need to be initialized
    */
-  setValue(value: any, options: {onlySelf?: boolean, emitEvent?: boolean} = {}): void {
+  setValue(value: any, options: { onlySelf?: boolean; emitEvent?: boolean } = {}): void {
     let v: any;
     v = Object.assign({}, value);
     Object.keys(this.controls).forEach((name) => {

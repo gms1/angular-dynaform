@@ -1,8 +1,7 @@
-import {AfterViewInit, OnDestroy, OnInit, OnChanges, SimpleChanges} from '@angular/core';
+import { AfterViewInit, OnDestroy, OnInit, OnChanges, SimpleChanges } from '@angular/core';
 
-import {ControlModel} from '../models/control-model';
-import {DynamicFormControlComponentBase} from '../components/dynamic-form-control.component';
-
+import { ControlModel } from '../models/control-model';
+import { DynamicFormControlComponentBase } from '../components/dynamic-form-control.component';
 
 export abstract class DynamicFormAction implements OnInit, AfterViewInit, OnDestroy, OnChanges {
   public component: DynamicFormControlComponentBase;

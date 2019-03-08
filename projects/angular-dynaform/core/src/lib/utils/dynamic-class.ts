@@ -1,16 +1,16 @@
-import {DoCheck, ElementRef, KeyValueDiffer, KeyValueDiffers, Renderer2} from '@angular/core';
+import { DoCheck, ElementRef, KeyValueDiffer, KeyValueDiffers, Renderer2 } from '@angular/core';
 // similar to ngClass
 // in use to dynamically set classes on the host element of a form component
 // see ../config/control-css-options.ts
 
 export class DynamicClass implements DoCheck {
-  private _classes: {[clazz: string]: any};
+  private _classes: { [clazz: string]: any };
   private _keyValueDiffer!: KeyValueDiffer<string, any>;
 
-  get classes(): {[clazz: string]: any} {
+  get classes(): { [clazz: string]: any } {
     return this._classes;
   }
-  set classes(classes: {[clazz: string]: any}) {
+  set classes(classes: { [clazz: string]: any }) {
     this.cleanupElementClasses();
 
     this._classes = classes;
@@ -18,10 +18,12 @@ export class DynamicClass implements DoCheck {
     this._keyValueDiffer = this.keyValueDiffers.find(this._classes).create();
   }
 
-
   constructor(
-      private keyValueDiffers: KeyValueDiffers, private elRef: ElementRef, private renderer: Renderer2,
-      classes: {[clazz: string]: any}) {
+    private keyValueDiffers: KeyValueDiffers,
+    private elRef: ElementRef,
+    private renderer: Renderer2,
+    classes: { [clazz: string]: any },
+  ) {
     this._classes = {};
     this.classes = classes;
   }

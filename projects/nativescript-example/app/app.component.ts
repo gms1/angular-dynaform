@@ -9,14 +9,18 @@ export class AppComponent {
 }
 */
 
-import {Component, OnInit} from '@angular/core';
-import {NavigationEnd, Router} from '@angular/router';
+import { Component, OnInit } from '@angular/core';
+import { NavigationEnd, Router } from '@angular/router';
 import * as app from 'application';
-import {RouterExtensions} from 'nativescript-angular/router';
-import {DrawerTransitionBase, RadSideDrawer, SlideInOnTopTransition} from 'nativescript-ui-sidedrawer';
-import {filter} from 'rxjs/operators';
+import { RouterExtensions } from 'nativescript-angular/router';
+import {
+  DrawerTransitionBase,
+  RadSideDrawer,
+  SlideInOnTopTransition,
+} from 'nativescript-ui-sidedrawer';
+import { filter } from 'rxjs/operators';
 
-@Component({selector: 'adf-ns-app', templateUrl: 'app.component.html'})
+@Component({ selector: 'adf-ns-app', templateUrl: 'app.component.html' })
 export class AppComponent implements OnInit {
   private _activatedUrl: string;
   private _sideDrawerTransition: DrawerTransitionBase;
@@ -29,8 +33,9 @@ export class AppComponent implements OnInit {
     // this._activatedUrl = '/testSwitch';
     this._sideDrawerTransition = new SlideInOnTopTransition();
 
-    this.router.events.pipe(filter((event: any) => event instanceof NavigationEnd))
-        .subscribe((event: NavigationEnd) => this._activatedUrl = event.urlAfterRedirects);
+    this.router.events
+      .pipe(filter((event: any) => event instanceof NavigationEnd))
+      .subscribe((event: NavigationEnd) => (this._activatedUrl = event.urlAfterRedirects));
   }
 
   get sideDrawerTransition(): DrawerTransitionBase {
@@ -42,7 +47,7 @@ export class AppComponent implements OnInit {
   }
 
   onNavItemTap(navItemRoute: string): void {
-    this.routerExtensions.navigate([navItemRoute], {transition: {name: 'fade'}});
+    this.routerExtensions.navigate([navItemRoute], { transition: { name: 'fade' } });
 
     const sideDrawer = <RadSideDrawer>app.getRootView();
     sideDrawer.closeDrawer();

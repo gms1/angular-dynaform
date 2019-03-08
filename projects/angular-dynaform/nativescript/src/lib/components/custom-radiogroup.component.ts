@@ -1,9 +1,10 @@
-import {Component, Input, OnInit} from '@angular/core';
-import {NG_VALUE_ACCESSOR, ControlValueAccessor} from '@angular/forms';
-import {ValueOptions} from '@angular-dynaform/core';
+import { Component, Input, OnInit } from '@angular/core';
+import { NG_VALUE_ACCESSOR, ControlValueAccessor } from '@angular/forms';
+import { ValueOptions } from '@angular-dynaform/core';
 
-
-export interface RadioOptions extends ValueOptions { selected: boolean; }
+export interface RadioOptions extends ValueOptions {
+  selected: boolean;
+}
 
 // TODO: forward focus-, blur- and click-events if enabled
 
@@ -12,19 +13,21 @@ export interface RadioOptions extends ValueOptions { selected: boolean; }
   template: `
     <StackLayout class="radiogroup" [id]="id" *ngFor="let option of valueOptions">
       <StackLayout orientation="horizontal" verticalAlignment="center">
-        <CheckBox #elem
+        <CheckBox
+          #elem
           [isEnabled]="isEnabled"
           [checked]="option.selected"
           (checkedChange)="elem.checked != option.selected && checkedChange(option)"
-          class="radiogroup" boxType="circle">
-        </CheckBox>
+          class="radiogroup"
+          boxType="circle"
+        ></CheckBox>
         <StackLayout verticalAlignment="center">
-            <Label [text]="option.label" textWrap="true" (tap)="checkedChange(option)"></Label>
+          <Label [text]="option.label" textWrap="true" (tap)="checkedChange(option)"></Label>
         </StackLayout>
       </StackLayout>
     </StackLayout>
-`,
-  providers: [{provide: NG_VALUE_ACCESSOR, useExisting: CustomRadioGroupComponent, multi: true}]
+  `,
+  providers: [{ provide: NG_VALUE_ACCESSOR, useExisting: CustomRadioGroupComponent, multi: true }],
 })
 export class CustomRadioGroupComponent implements ControlValueAccessor, OnInit {
   @Input()
@@ -49,7 +52,9 @@ export class CustomRadioGroupComponent implements ControlValueAccessor, OnInit {
     }
     this.radioOptions = [];
     // tslint:disable-next-line no-non-null-assertion
-    this.valueOptions.forEach((opt) => this.radioOptions!.push({value: opt.value, label: opt.label, selected: false}));
+    this.valueOptions.forEach((opt) =>
+      this.radioOptions!.push({ value: opt.value, label: opt.label, selected: false }),
+    );
   }
 
   private onChange = (val: any): void => {};
@@ -60,7 +65,7 @@ export class CustomRadioGroupComponent implements ControlValueAccessor, OnInit {
   public checkedChange(opt: RadioOptions): void {
     if (opt.selected) {
       return;
-      }
+    }
     if (this.lastOption) {
       this.lastOption.selected = false;
     }
@@ -79,7 +84,9 @@ export class CustomRadioGroupComponent implements ControlValueAccessor, OnInit {
     if (this.lastOption) {
       this.lastOption.selected = false;
     }
-    this.lastOption = this.radioOptions ? this.radioOptions.find((opt) => opt.value === value) : undefined;
+    this.lastOption = this.radioOptions
+      ? this.radioOptions.find((opt) => opt.value === value)
+      : undefined;
     if (this.lastOption) {
       this.lastOption.selected = true;
     }

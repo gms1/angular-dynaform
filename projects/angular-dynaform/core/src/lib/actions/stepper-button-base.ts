@@ -1,15 +1,16 @@
-import {AfterViewInit, OnDestroy, OnInit} from '@angular/core';
-import {takeUntil} from 'rxjs/operators';
-import {Subject} from 'rxjs';
+import { AfterViewInit, OnDestroy, OnInit } from '@angular/core';
+import { takeUntil } from 'rxjs/operators';
+import { Subject } from 'rxjs';
 
-import {DynamicFormAction} from './dynamic-form.action';
-import {DynamicFormControlComponentBase} from '../components/dynamic-form-control.component';
-import {DynamicFormControl} from '../components/dynamic-form-control';
-import {Stepper} from '../models/stepper';
+import { DynamicFormAction } from './dynamic-form.action';
+import { DynamicFormControlComponentBase } from '../components/dynamic-form-control.component';
+import { DynamicFormControl } from '../components/dynamic-form-control';
+import { Stepper } from '../models/stepper';
 
 // base class for actions on a stepper component
 
-export abstract class StepperButtonBaseAction extends DynamicFormAction implements AfterViewInit, OnInit, OnDestroy {
+export abstract class StepperButtonBaseAction extends DynamicFormAction
+  implements AfterViewInit, OnInit, OnDestroy {
   stepper?: Stepper;
   private unsubscribe: Subject<any>;
 
@@ -27,9 +28,10 @@ export abstract class StepperButtonBaseAction extends DynamicFormAction implemen
     /* istanbul ignore else */
     if (this.stepper) {
       this.onIndexChange(0);
-      this.stepper.selectionChange()
-          .pipe(takeUntil(this.unsubscribe))
-          .subscribe((currIndex) => this.onIndexChange(currIndex));
+      this.stepper
+        .selectionChange()
+        .pipe(takeUntil(this.unsubscribe))
+        .subscribe((currIndex) => this.onIndexChange(currIndex));
     }
   }
 
@@ -39,9 +41,8 @@ export abstract class StepperButtonBaseAction extends DynamicFormAction implemen
     super.ngOnDestroy();
   }
 
-
-  private findStepper(): Stepper|undefined {
-    let component: DynamicFormControl|undefined = this.component;
+  private findStepper(): Stepper | undefined {
+    let component: DynamicFormControl | undefined = this.component;
     while (component) {
       /* istanbul ignore if */
       if (component.stepper) {

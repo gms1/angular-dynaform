@@ -1,7 +1,6 @@
-import {Injectable} from '@angular/core';
-import {FormBaseConfig} from '../config';
-import {FormBuilderFactory, FormBuilderForm} from './form-builder.factory';
-
+import { Injectable } from '@angular/core';
+import { FormBaseConfig } from '../config';
+import { FormBuilderFactory, FormBuilderForm } from './form-builder.factory';
 
 // ---------------------------------------------------------------
 @Injectable()

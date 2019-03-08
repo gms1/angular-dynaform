@@ -1,6 +1,12 @@
-import {Component, AfterViewInit, ViewChild} from '@angular/core';
-import {DynamicForm, DynamicFormService, FormModel, ControlType, FormConfig, ModelType} from '@angular-dynaform/core';
-
+import { Component, AfterViewInit, ViewChild } from '@angular/core';
+import {
+  DynamicForm,
+  DynamicFormService,
+  FormModel,
+  ControlType,
+  FormConfig,
+  ModelType,
+} from '@angular-dynaform/core';
 
 export const tabGroupExampleConfig: FormConfig = {
   id: 'tabGroupExampleForm',
@@ -12,18 +18,20 @@ export const tabGroupExampleConfig: FormConfig = {
         modelType: ModelType.MODEL_SUBSET,
         controlType: ControlType.CONTROL_DIVISION,
         options: {
-          group: [{
-            id: 'name',
-            modelType: ModelType.MODEL_VALUE,
-            controlType: ControlType.CONTROL_INPUT,
-            options: {label: 'Name', placeholder: 'Enter the name'}
-          }]
-        }
+          group: [
+            {
+              id: 'name',
+              modelType: ModelType.MODEL_VALUE,
+              controlType: ControlType.CONTROL_INPUT,
+              options: { label: 'Name', placeholder: 'Enter the name' },
+            },
+          ],
+        },
       },
       {
         id: 'tabGroup',
         modelType: ModelType.MODEL_SUBSET,
-        controlType: ControlType.CONTROL_TABGROUP,  // use tabgroup control
+        controlType: ControlType.CONTROL_TABGROUP, // use tabgroup control
         options: {
           label: 'TabGroup',
           matTabGroupDynamicHeight: true,
@@ -39,22 +47,22 @@ export const tabGroupExampleConfig: FormConfig = {
                     id: 'tab1Field1',
                     modelType: ModelType.MODEL_VALUE,
                     controlType: ControlType.CONTROL_CHECKBOX,
-                    options: {label: 'Field 1'}
+                    options: { label: 'Field 1' },
                   },
                   {
                     id: 'tab1Field2',
                     modelType: ModelType.MODEL_VALUE,
                     controlType: ControlType.CONTROL_CHECKBOX,
-                    options: {label: 'Field 2'}
+                    options: { label: 'Field 2' },
                   },
                   {
                     id: 'tab1Field3',
                     modelType: ModelType.MODEL_VALUE,
                     controlType: ControlType.CONTROL_CHECKBOX,
-                    options: {label: 'Field 3'}
-                  }
-                ]
-              }
+                    options: { label: 'Field 3' },
+                  },
+                ],
+              },
             },
             {
               id: 'tab2',
@@ -67,22 +75,22 @@ export const tabGroupExampleConfig: FormConfig = {
                     id: 'tab2Field1',
                     modelType: ModelType.MODEL_VALUE,
                     controlType: ControlType.CONTROL_CHECKBOX,
-                    options: {label: 'Field 4'}
+                    options: { label: 'Field 4' },
                   },
                   {
                     id: 'tab2Field2',
                     modelType: ModelType.MODEL_VALUE,
                     controlType: ControlType.CONTROL_CHECKBOX,
-                    options: {label: 'Field 5'}
+                    options: { label: 'Field 5' },
                   },
                   {
                     id: 'tab2Field3',
                     modelType: ModelType.MODEL_VALUE,
                     controlType: ControlType.CONTROL_CHECKBOX,
-                    options: {label: 'Field 6'}
-                  }
-                ]
-              }
+                    options: { label: 'Field 6' },
+                  },
+                ],
+              },
             },
             {
               id: 'tab3',
@@ -95,25 +103,25 @@ export const tabGroupExampleConfig: FormConfig = {
                     id: 'tab3Field1',
                     modelType: ModelType.MODEL_VALUE,
                     controlType: ControlType.CONTROL_CHECKBOX,
-                    options: {label: 'Field 7'}
+                    options: { label: 'Field 7' },
                   },
                   {
                     id: 'tab3Field2',
                     modelType: ModelType.MODEL_VALUE,
                     controlType: ControlType.CONTROL_CHECKBOX,
-                    options: {label: 'Field 8'}
+                    options: { label: 'Field 8' },
                   },
                   {
                     id: 'tab3Field3',
                     modelType: ModelType.MODEL_VALUE,
                     controlType: ControlType.CONTROL_CHECKBOX,
-                    options: {label: 'Field 9'}
-                  }
-                ]
-              }
-            }
-          ]
-        }
+                    options: { label: 'Field 9' },
+                  },
+                ],
+              },
+            },
+          ],
+        },
       },
       {
         id: 'buttondivision',
@@ -126,61 +134,55 @@ export const tabGroupExampleConfig: FormConfig = {
               id: 'clear',
               modelType: ModelType.MODEL_NULL,
               controlType: ControlType.CONTROL_BUTTON,
-              options: {label: 'Clear'},
-              action: 'clear'
+              options: { label: 'Clear' },
+              action: 'clear',
             },
             {
               key: 'separator',
               id: 'separatorMainButtons',
               modelType: ModelType.MODEL_NULL,
               controlType: ControlType.CONTROL_SEPARATOR,
-              options: {css: {container: 'button-separator'}}
+              options: { css: { container: 'button-separator' } },
             },
             {
               key: 'resetButton',
               id: 'reset',
               modelType: ModelType.MODEL_NULL,
               controlType: ControlType.CONTROL_BUTTON,
-              options: {label: 'Reset'},
-              action: 'reset'
+              options: { label: 'Reset' },
+              action: 'reset',
             },
             {
               key: 'submitButton',
               id: 'submit',
               modelType: ModelType.MODEL_NULL,
               controlType: ControlType.CONTROL_BUTTON,
-              options: {label: 'Submit'},
-              action: 'submit'
-            }
+              options: { label: 'Submit' },
+              action: 'submit',
+            },
           ],
-          css: {content: 'button-division-content'}
-        }
-      }
-    ]
-  }
+          css: { content: 'button-division-content' },
+        },
+      },
+    ],
+  },
 };
-
 
 @Component({
   selector: 'app-tabgroup-example',
   template: `
-<div class="tabgroup-example">
-  <mat-card class="mat-card">
-    <mat-card-header>
-      <mat-card-title><h2>TabGroup Example</h2></mat-card-title>
-    </mat-card-header>
-    <mat-card-content>
-        <adf-form
-        [model]="model"
-        (adfSubmit)="onSubmit()"
-        (adfReset)="onReset()"
-      >
-      </adf-form>
-    </mat-card-content>
-  </mat-card>
-</div>
+    <div class="tabgroup-example">
+      <mat-card class="mat-card">
+        <mat-card-header>
+          <mat-card-title><h2>TabGroup Example</h2></mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+          <adf-form [model]="model" (adfSubmit)="onSubmit()" (adfReset)="onReset()"></adf-form>
+        </mat-card-content>
+      </mat-card>
+    </div>
   `,
-  styles: []
+  styles: [],
 })
 export class TabGroupExampleComponent implements AfterViewInit {
   @ViewChild(DynamicForm) form!: DynamicForm;

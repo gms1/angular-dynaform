@@ -1,26 +1,25 @@
-import {ModuleWithProviders, NgModule, Optional, SkipSelf} from '@angular/core';
-import {CommonModule} from '@angular/common';
-import {ReactiveFormsModule} from '@angular/forms';
-
+import { ModuleWithProviders, NgModule, Optional, SkipSelf } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { ReactiveFormsModule } from '@angular/forms';
 
 import {
   DynamicFormControlComponentBase,
-  DynamicFormControlComponent
+  DynamicFormControlComponent,
 } from './components/dynamic-form-control.component';
-import {DynamicFormErrorContainerComponent} from './components/dynamic-form-error-container.component';
-import {DynamicFormErrorComponent} from './components/dynamic-form-error.component';
-import {DynamicFormFormControlComponent} from './components/dynamic-form-form-control.component';
-import {DynamicFormComponent} from './components/dynamic-form.component';
+import { DynamicFormErrorContainerComponent } from './components/dynamic-form-error-container.component';
+import { DynamicFormErrorComponent } from './components/dynamic-form-error.component';
+import { DynamicFormFormControlComponent } from './components/dynamic-form-form-control.component';
+import { DynamicFormComponent } from './components/dynamic-form.component';
 
-import {DynamicFormControlComponentDirective} from './directives/dynamic-form-control-component.directive';
-import {DynamicFormDomElementDirective} from './directives/dynamic-form-dom-element.directive';
-import {DynamicFormHTMLDomElementDirective} from './directives/dynamic-form-html-dom-element.directive';
-import {DynamicFormErrorComponentDirective} from './directives/dynamic-form-error-component.directive';
-import {DynamicFormFormControlComponentDirective} from './directives/dynamic-form-form-control-component.directive';
+import { DynamicFormControlComponentDirective } from './directives/dynamic-form-control-component.directive';
+import { DynamicFormDomElementDirective } from './directives/dynamic-form-dom-element.directive';
+import { DynamicFormHTMLDomElementDirective } from './directives/dynamic-form-html-dom-element.directive';
+import { DynamicFormErrorComponentDirective } from './directives/dynamic-form-error-component.directive';
+import { DynamicFormFormControlComponentDirective } from './directives/dynamic-form-form-control-component.directive';
 
-import {DynamicFormComponentFactoryService} from './services/dynamic-form-component-factory.service';
-import {DynamicFormModelFactoryService} from './services/dynamic-form-model-factory.service';
-import {DynamicFormService} from './services/dynamic-form.service';
+import { DynamicFormComponentFactoryService } from './services/dynamic-form-component-factory.service';
+import { DynamicFormModelFactoryService } from './services/dynamic-form-model-factory.service';
+import { DynamicFormService } from './services/dynamic-form.service';
 
 import {
   ArrayButtonAddAction,
@@ -30,25 +29,32 @@ import {
   ResetButtonAction,
   ClearButtonAction,
   StepperButtonPrevAction,
-  StepperButtonNextAction
+  StepperButtonNextAction,
 } from './actions';
 
-
-import {FormBuilder} from './form-builder/form-builder.service';
-
+import { FormBuilder } from './form-builder/form-builder.service';
 
 const dynamicFormExportDirectives = [
-  DynamicFormHTMLDomElementDirective, DynamicFormControlComponentDirective, DynamicFormFormControlComponentDirective,
-  DynamicFormErrorComponentDirective, DynamicFormDomElementDirective
+  DynamicFormHTMLDomElementDirective,
+  DynamicFormControlComponentDirective,
+  DynamicFormFormControlComponentDirective,
+  DynamicFormErrorComponentDirective,
+  DynamicFormDomElementDirective,
 ];
 
 const dynamicFormDirectives = [dynamicFormExportDirectives];
 
-const dynamicFormEntryComponents =
-    [DynamicFormControlComponentBase, DynamicFormFormControlComponent, DynamicFormErrorComponent];
+const dynamicFormEntryComponents = [
+  DynamicFormControlComponentBase,
+  DynamicFormFormControlComponent,
+  DynamicFormErrorComponent,
+];
 
-const dynamicFormExportComponents =
-    [DynamicFormComponent, DynamicFormControlComponent, DynamicFormErrorContainerComponent];
+const dynamicFormExportComponents = [
+  DynamicFormComponent,
+  DynamicFormControlComponent,
+  DynamicFormErrorContainerComponent,
+];
 
 const dynamicFormComponents = [dynamicFormEntryComponents, dynamicFormExportComponents];
 
@@ -57,10 +63,13 @@ const dynamicFormComponents = [dynamicFormEntryComponents, dynamicFormExportComp
   declarations: [dynamicFormDirectives, dynamicFormComponents],
   entryComponents: dynamicFormEntryComponents,
   exports: [dynamicFormExportDirectives, dynamicFormExportComponents],
-  providers: [DynamicFormComponentFactoryService, DynamicFormModelFactoryService, FormBuilder]
+  providers: [DynamicFormComponentFactoryService, DynamicFormModelFactoryService, FormBuilder],
 })
 export class DynamicFormModule {
-  constructor(private dynamicFormService: DynamicFormService, @Optional() @SkipSelf() parentModule: DynamicFormModule) {
+  constructor(
+    private dynamicFormService: DynamicFormService,
+    @Optional() @SkipSelf() parentModule: DynamicFormModule,
+  ) {
     /* istanbul ignore if */
     if (parentModule) {
       console.warn('DynamicFormModule is already loaded. Import it in the AppModule');
@@ -81,8 +90,8 @@ export class DynamicFormModule {
       ngModule: DynamicFormModule,
       providers: [
         // our singleton service:
-        DynamicFormService
-      ]
+        DynamicFormService,
+      ],
     };
   }
 }

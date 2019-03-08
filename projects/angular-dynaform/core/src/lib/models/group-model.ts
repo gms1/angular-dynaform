@@ -1,18 +1,18 @@
 // tslint:disable no-use-before-declare
-import {FormGroup} from '@angular/forms';
+import { FormGroup } from '@angular/forms';
 
-import {ControlConfig} from '../config/control-config';
-import {GroupOptions} from '../config/control-options';
-import {DynamicFormService} from '../services/dynamic-form.service';
+import { ControlConfig } from '../config/control-config';
+import { GroupOptions } from '../config/control-options';
+import { DynamicFormService } from '../services/dynamic-form.service';
 
-import {ArrayModel} from './array-model';
-import {ControlModel, AbstractControlModel} from './control-model';
-import {FormModel} from './form-model';
+import { ArrayModel } from './array-model';
+import { ControlModel, AbstractControlModel } from './control-model';
+import { FormModel } from './form-model';
 
-import {NgFormGroup} from './internal/ng-form-group';
-import {createNgFormGroupSubset} from './internal/ng-form-group-subset';
+import { NgFormGroup } from './internal/ng-form-group';
+import { createNgFormGroupSubset } from './internal/ng-form-group-subset';
 
-import {JsonPointer} from 'jsonpointerx';
+import { JsonPointer } from 'jsonpointerx';
 
 // groups for model type MODEL_GROUP (GroupModel)
 //   have their own FormGroup assigned to the ngControl property
@@ -27,11 +27,26 @@ export class GroupModelBase extends AbstractControlModel<FormGroup, GroupOptions
   }
 
   constructor(
-      dynamicFormService: DynamicFormService, config: ControlConfig, ngControl: FormGroup, formModel: FormModel,
-      parentPath?: string[], parentGroup?: GroupModelBase, parentArray?: ArrayModel, parentArrayIdx?: number) {
+    dynamicFormService: DynamicFormService,
+    config: ControlConfig,
+    ngControl: FormGroup,
+    formModel: FormModel,
+    parentPath?: string[],
+    parentGroup?: GroupModelBase,
+    parentArray?: ArrayModel,
+    parentArrayIdx?: number,
+  ) {
     super(
-        dynamicFormService, config, (config.options || {group: []}) as GroupOptions, ngControl, formModel, parentPath,
-        parentGroup, parentArray, parentArrayIdx);
+      dynamicFormService,
+      config,
+      (config.options || { group: [] }) as GroupOptions,
+      ngControl,
+      formModel,
+      parentPath,
+      parentGroup,
+      parentArray,
+      parentArrayIdx,
+    );
     this._items = [];
     this.setCSSClasses(this.css.container, 'adf-group-container');
     this.setCSSClasses(this.css.control, 'adf-group-control');
@@ -55,7 +70,13 @@ export class GroupModelBase extends AbstractControlModel<FormGroup, GroupOptions
 
   protected createItem(itemConfig: ControlConfig): ControlModel {
     const control = this.dynamicFormService.modelFactory.createControl(
-        itemConfig, this.formModel, this.path, this, this.parentArray, this.parentArrayIdx);
+      itemConfig,
+      this.formModel,
+      this.path,
+      this,
+      this.parentArray,
+      this.parentArrayIdx,
+    );
     this.items.push(control);
     if (!(control instanceof SubsetModel)) {
       // NOTES: SubsetModel is using the same ngControl (FormGroup) as the parentGroup, so adding a subset to the
@@ -84,11 +105,24 @@ export class GroupModelBase extends AbstractControlModel<FormGroup, GroupOptions
 
 export class GroupModel extends GroupModelBase {
   constructor(
-      dynamicFormService: DynamicFormService, config: ControlConfig, formModel: FormModel, parentPath?: string[],
-      parentGroup?: GroupModelBase, parentArray?: ArrayModel, parentArrayIdx?: number) {
+    dynamicFormService: DynamicFormService,
+    config: ControlConfig,
+    formModel: FormModel,
+    parentPath?: string[],
+    parentGroup?: GroupModelBase,
+    parentArray?: ArrayModel,
+    parentArrayIdx?: number,
+  ) {
     super(
-        dynamicFormService, config, new NgFormGroup({}, {updateOn: config.updateOn}), formModel, parentPath,
-        parentGroup, parentArray, parentArrayIdx);
+      dynamicFormService,
+      config,
+      new NgFormGroup({}, { updateOn: config.updateOn }),
+      formModel,
+      parentPath,
+      parentGroup,
+      parentArray,
+      parentArrayIdx,
+    );
     this.createItems();
     this.createValidators();
     this.createAsyncValidators();
@@ -111,13 +145,25 @@ export class GroupModel extends GroupModelBase {
 export class SubsetModel extends GroupModelBase {
   superGroup: GroupModel;
   constructor(
-      dynamicFormService: DynamicFormService, config: ControlConfig, formModel: FormModel, parentPath?: string[],
-      parentGroup?: GroupModelBase, parentArray?: ArrayModel, parentArrayIdx?: number) {
+    dynamicFormService: DynamicFormService,
+    config: ControlConfig,
+    formModel: FormModel,
+    parentPath?: string[],
+    parentGroup?: GroupModelBase,
+    parentArray?: ArrayModel,
+    parentArrayIdx?: number,
+  ) {
     super(
-        dynamicFormService, config,
-        // tslint:disable-next-line no-unnecessary-type-assertion
-        SubsetModel.getSuperGroup(parentGroup as GroupModelBase).ngControl, formModel, parentPath, parentGroup,
-        parentArray, parentArrayIdx);
+      dynamicFormService,
+      config,
+      // tslint:disable-next-line no-unnecessary-type-assertion
+      SubsetModel.getSuperGroup(parentGroup as GroupModelBase).ngControl,
+      formModel,
+      parentPath,
+      parentGroup,
+      parentArray,
+      parentArrayIdx,
+    );
     // tslint:disable-next-line no-unnecessary-type-assertion
     this.superGroup = SubsetModel.getSuperGroup(this.parentGroup as GroupModelBase) as GroupModel;
     this._ngSubsetControl = createNgFormGroupSubset(this.superGroup.ngControl, this.controls);
@@ -126,7 +172,6 @@ export class SubsetModel extends GroupModelBase {
       this.disable();
     }
   }
-
 
   protected createItem(itemConfig: ControlConfig): ControlModel {
     const control = super.createItem(itemConfig);
@@ -140,7 +185,6 @@ export class SubsetModel extends GroupModelBase {
     this.controls[control.key] = control;
     return control;
   }
-
 
   static getSuperGroup(parent: GroupModelBase): GroupModel {
     let ancestor: GroupModelBase = parent;

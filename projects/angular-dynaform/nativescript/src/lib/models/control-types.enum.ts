@@ -1,4 +1,3 @@
-
 export enum NativeScriptControlType {
   CONTROL_UNKNOWN = 'tns:unknown',
 
@@ -6,7 +5,7 @@ export enum NativeScriptControlType {
   CONTROL_DIVISION = 'tns:division',
   CONTROL_FIELDSET = 'tns:fieldset',
   CONTROL_TABGROUP = 'tns:tabgroup',
-  CONTROL_STEPPER  = 'tns:stepper',
+  CONTROL_STEPPER = 'tns:stepper',
 
   // controls for array model:
   CONTROL_ARRAY = 'tns:array',
@@ -26,5 +25,5 @@ export enum NativeScriptControlType {
 
   // controls for null model:
   CONTROL_BUTTON = 'tns:button',
-  CONTROL_SEPARATOR = 'tns:separator'
+  CONTROL_SEPARATOR = 'tns:separator',
 }

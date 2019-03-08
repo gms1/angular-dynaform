@@ -3,17 +3,14 @@ import {
   ControlSelectOptions,
   DynamicFormControlComponentBase,
   DynamicFormControlComponent,
-  ValueModel
+  ValueModel,
 } from '../../public_api';
-import {Component} from '@angular/core';
+import { Component } from '@angular/core';
 
 @Component({
   selector: 'adf-test-select-component',
   template: `
-    <div
-      [formGroup]="model.ngGroup"
-      [hidden]="model.hidden"
-    >
+    <div [formGroup]="model.ngGroup" [hidden]="model.hidden">
       <label
         *ngIf="model.local.label"
         [attr.for]="model.id"
@@ -29,14 +26,15 @@ import {Component} from '@angular/core';
         adfHTMLDomElement
       >
         <option value="" disabled selected hidden>{{ model.local.placeholder }}</option>
-        <option *ngFor="let opt of model.local.valueOptions" [value]="opt.value"><span [innerHTML]="opt.label"></span></option>
+        <option *ngFor="let opt of model.local.valueOptions" [value]="opt.value">
+          <span [innerHTML]="opt.label"></span>
+        </option>
       </select>
-      <adf-error-container [model]="model">
-      </adf-error-container>
+      <adf-error-container [model]="model"></adf-error-container>
     </div>
   `,
   inputs: ['model'],
-  providers: [{provide: DynamicFormControlComponentBase, useExisting: TestSelectComponent}]
+  providers: [{ provide: DynamicFormControlComponentBase, useExisting: TestSelectComponent }],
 })
 export class TestSelectComponent extends DynamicFormControlComponent<ValueModel> {
   model!: ValueModel;

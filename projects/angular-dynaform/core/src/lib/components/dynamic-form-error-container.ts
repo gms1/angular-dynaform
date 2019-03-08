@@ -1,4 +1,4 @@
-import {ControlModel} from '../models/control-model';
+import { ControlModel } from '../models/control-model';
 
 export interface DynamicFormErrorContainer {
   model: ControlModel;

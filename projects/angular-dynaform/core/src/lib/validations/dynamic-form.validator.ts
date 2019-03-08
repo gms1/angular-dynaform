@@ -1,51 +1,58 @@
 // tslint:disable max-classes-per-file no-null-keyword
-import {AbstractControl, AsyncValidatorFn, ValidatorFn, Validators, ValidationErrors} from '@angular/forms';
-import {Observable} from 'rxjs';
-import {map} from 'rxjs/operators';
+import {
+  AbstractControl,
+  AsyncValidatorFn,
+  ValidatorFn,
+  Validators,
+  ValidationErrors,
+} from '@angular/forms';
+import { Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
 
-import {ControlModel} from '../models/control-model';
+import { ControlModel } from '../models/control-model';
 
-import {FnRegistry} from '../utils/fn-registry';
-
+import { FnRegistry } from '../utils/fn-registry';
 
 export type DynamicFormValidatorFn = (key: string, control: ControlModel) => ValidatorFn;
 export type DynamicFormAsyncValidatorFn = (key: string, control: ControlModel) => AsyncValidatorFn;
 
-
 export abstract class DynamicFormValidationBase<Fn> {
-  abstract createValidators(control: ControlModel, key: string|string[], order: number): Fn[];
+  abstract createValidators(control: ControlModel, key: string | string[], order: number): Fn[];
 
   abstract validate(key: string, control: ControlModel): Fn;
 
-
-  protected enrichResult(error: ValidationErrors|null, key: string, order: number): ValidationErrors|null {
+  protected enrichResult(
+    error: ValidationErrors | null,
+    key: string,
+    order: number,
+  ): ValidationErrors | null {
     if (!error) {
       return error;
     }
     let result: ValidationErrors;
     // the result should have our given 'key' as key
     if (error[key]) {
-      result = {[key]: error[key]};
+      result = { [key]: error[key] };
     } else {
       const errKeys = Object.keys(error);
       if (errKeys.length >= 1) {
-        result = {[key]: error[errKeys[0]]};
+        result = { [key]: error[errKeys[0]] };
       } else {
-        result = {[key]: {}};
+        result = { [key]: {} };
       }
     }
     // enrich by 'order' number
     if (Object.keys(result[key]).length >= 1) {
       result[key]['order'] = order;
     } else {
-      result[key] = {order};
+      result[key] = { order };
     }
     return result;
   }
 }
 
 export abstract class DynamicFormValidation extends DynamicFormValidationBase<ValidatorFn> {
-  createValidators(control: ControlModel, key: string|string[], order: number): ValidatorFn[] {
+  createValidators(control: ControlModel, key: string | string[], order: number): ValidatorFn[] {
     const res: ValidatorFn[] = [];
     if (Array.isArray(key)) {
       key.forEach((keyItem) => {
@@ -59,14 +66,20 @@ export abstract class DynamicFormValidation extends DynamicFormValidationBase<Va
 
   private createValidator(control: ControlModel, key: string, order: number): ValidatorFn {
     const fn: ValidatorFn = this.validate(key, control);
-    return (c: AbstractControl): ValidationErrors|null => {
+    return (c: AbstractControl): ValidationErrors | null => {
       return this.enrichResult(fn(c), key, order);
     };
   }
 }
 
-export abstract class DynamicFormAsyncValidation extends DynamicFormValidationBase<AsyncValidatorFn> {
-  createValidators(control: ControlModel, key: string|string[], order: number): AsyncValidatorFn[] {
+export abstract class DynamicFormAsyncValidation extends DynamicFormValidationBase<
+  AsyncValidatorFn
+> {
+  createValidators(
+    control: ControlModel,
+    key: string | string[],
+    order: number,
+  ): AsyncValidatorFn[] {
     const res: AsyncValidatorFn[] = [];
     if (Array.isArray(key)) {
       key.forEach((keyItem) => {
@@ -80,7 +93,9 @@ export abstract class DynamicFormAsyncValidation extends DynamicFormValidationBa
 
   private createValidator(control: ControlModel, key: string, order: number): AsyncValidatorFn {
     const fn: AsyncValidatorFn = this.validate(key, control);
-    return (c: AbstractControl): Promise<ValidationErrors|null>|Observable<ValidationErrors|null> => {
+    return (
+      c: AbstractControl,
+    ): Promise<ValidationErrors | null> | Observable<ValidationErrors | null> => {
       const res = fn(c);
       if (res instanceof Promise) {
         return res.then((value) => this.enrichResult(value, key, order));
@@ -123,7 +138,7 @@ export class DynamicFormValidatorRegistry extends DynamicFormValidation {
     return dffn.call(control, key, control);
   }
 
-  static nullValidator(c: AbstractControl): ValidationErrors|null {
+  static nullValidator(c: AbstractControl): ValidationErrors | null {
     return null;
   }
 
@@ -170,10 +185,8 @@ export class DynamicFormValidatorRegistry extends DynamicFormValidation {
   // tslint:enable no-unbound-method
 }
 
-
 export class DynamicFormAsyncValidatorRegistry extends DynamicFormAsyncValidation {
   reg: FnRegistry<DynamicFormAsyncValidatorFn>;
-
 
   constructor() {
     super();
@@ -192,7 +205,7 @@ export class DynamicFormAsyncValidatorRegistry extends DynamicFormAsyncValidatio
     return dffn.call(control, key, control);
   }
 
-  static nullValidator(c: AbstractControl): Promise<ValidationErrors|null> {
+  static nullValidator(c: AbstractControl): Promise<ValidationErrors | null> {
     return Promise.resolve(null);
   }
 }

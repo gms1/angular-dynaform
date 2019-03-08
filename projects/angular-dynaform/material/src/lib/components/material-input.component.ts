@@ -3,17 +3,14 @@ import {
   ControlInputOptions,
   DynamicFormControlComponentBase,
   DynamicFormControlComponent,
-  ValueModel
+  ValueModel,
 } from '@angular-dynaform/core';
-import {Component} from '@angular/core';
+import { Component } from '@angular/core';
 
 @Component({
   selector: 'adf-material-input-component',
   template: `
-    <div
-      [formGroup]="model.ngGroup"
-      [hidden]="model.hidden"
-    >
+    <div [formGroup]="model.ngGroup" [hidden]="model.hidden">
       <label
         *ngIf="model.local.label"
         [attr.for]="model.id"
@@ -22,7 +19,8 @@ import {Component} from '@angular/core';
         [innerHTML]="model.local.label"
       ></label>
       <mat-form-field [ngClass]="model.css.control">
-        <input matInput
+        <input
+          matInput
           [formControlName]="model.key"
           [id]="model.id"
           [type]="options.inputType || 'text'"
@@ -37,16 +35,15 @@ import {Component} from '@angular/core';
           [maxlength]="options.maxLength"
         />
         <span matPrefix *ngIf="options.icon">
-          <mat-icon>{{options.icon}}</mat-icon>
+          <mat-icon>{{ options.icon }}</mat-icon>
         </span>
-        <adf-error-container [model]="model">
-        </adf-error-container>
+        <adf-error-container [model]="model"></adf-error-container>
         <mat-hint [innerHTML]="model.local.hint"></mat-hint>
       </mat-form-field>
-  </div>
+    </div>
   `,
   inputs: ['model'],
-  providers: [{provide: DynamicFormControlComponentBase, useExisting: MaterialInputComponent}]
+  providers: [{ provide: DynamicFormControlComponentBase, useExisting: MaterialInputComponent }],
 })
 export class MaterialInputComponent extends DynamicFormControlComponent<ValueModel> {
   model!: ValueModel;

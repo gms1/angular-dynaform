@@ -1,5 +1,5 @@
-import {ArrayButtonAction} from './array-button.action';
-import {DynamicFormControlComponentBase} from '../components/dynamic-form-control.component';
+import { ArrayButtonAction } from './array-button.action';
+import { DynamicFormControlComponentBase } from '../components/dynamic-form-control.component';
 
 // insert array item
 

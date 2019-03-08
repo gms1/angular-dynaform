@@ -1,13 +1,13 @@
 // THIS is an INTERNAL action, indirectly created if a
 // RelationExpressions has be defined for a control
 
-import {distinctUntilChanged, map, takeUntil} from 'rxjs/operators';
-import {Subject} from 'rxjs';
+import { distinctUntilChanged, map, takeUntil } from 'rxjs/operators';
+import { Subject } from 'rxjs';
 
-import {DynamicFormAction} from './dynamic-form.action';
-import {DynamicFormControlComponentBase} from '../components/dynamic-form-control.component';
-import {ControlModel, ArrayModel} from '../models';
-import {JsExpression} from '../utils/jsec';
+import { DynamicFormAction } from './dynamic-form.action';
+import { DynamicFormControlComponentBase } from '../components/dynamic-form-control.component';
+import { ControlModel, ArrayModel } from '../models';
+import { JsExpression } from '../utils/jsec';
 
 // tslint:disable use-life-cycle-interface
 export class RelationAction extends DynamicFormAction {
@@ -34,7 +34,7 @@ export class RelationAction extends DynamicFormAction {
           }
         }
       });
-      }
+    }
 
     if (this.model.showIf) {
       this.subscribeToChanges(this.model.showIf, (v) => {
@@ -48,7 +48,7 @@ export class RelationAction extends DynamicFormAction {
     this.unsubscribe.complete();
   }
 
-  private subscribeToChanges(expr: JsExpression, next: ((v: boolean) => void)): void {
+  private subscribeToChanges(expr: JsExpression, next: (v: boolean) => void): void {
     // binding thisArg to the ngControl is not documented yet
     // and subject for changes in the future
     expr.thisArg = this.model.ngControl;
@@ -59,7 +59,7 @@ export class RelationAction extends DynamicFormAction {
       // NOTE: this should not happen, we should always get a model (default formModel.group) and a corresponding
       // json-pointer
       return;
-      }
+    }
     const jpForm = model.jpForm;
     let run: (v: any) => any;
     if (jpForm.root) {
@@ -73,10 +73,14 @@ export class RelationAction extends DynamicFormAction {
         return !!expr.run();
       };
     }
-    model.valueChanges.pipe(map(run), distinctUntilChanged()).pipe(takeUntil(this.unsubscribe)).subscribe(next);
+    model.valueChanges
+      .pipe(
+        map(run),
+        distinctUntilChanged(),
+      )
+      .pipe(takeUntil(this.unsubscribe))
+      .subscribe(next);
   }
-
-
 
   private findRelatedRootModel(path: string[]): ControlModel {
     let relModel: ControlModel = this.model.formModel.group;
@@ -87,7 +91,7 @@ export class RelationAction extends DynamicFormAction {
         return relModel;
       }
       relModel = foundModel;
-      }
+    }
     return relModel;
   }
 }

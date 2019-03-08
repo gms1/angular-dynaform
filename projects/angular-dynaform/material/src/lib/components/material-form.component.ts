@@ -4,10 +4,9 @@ import {
   DynamicFormControlComponentBase,
   DynamicFormFormControlComponent,
   GroupModel,
-  GroupOptions
+  GroupOptions,
 } from '@angular-dynaform/core';
-import {Component} from '@angular/core';
-
+import { Component } from '@angular/core';
 
 @Component({
   selector: 'adf-material-form-component',
@@ -19,13 +18,15 @@ import {Component} from '@angular/core';
         [ngClass]="model.css.control"
         (ngSubmit)="onSubmit($event)"
         (reset)="onReset($event)"
-
         adfHTMLDomElement
         novalidate
       >
         <div [ngClass]="model.css.content">
-          <ng-container *ngFor="let item of model.items;" adfControlComponent [model]="item" >
-          </ng-container>
+          <ng-container
+            *ngFor="let item of model.items"
+            adfControlComponent
+            [model]="item"
+          ></ng-container>
         </div>
       </form>
     </div>
@@ -35,10 +36,10 @@ import {Component} from '@angular/core';
   providers: [
     {
       provide: DynamicFormControlComponentBase,
-      useExisting: MaterialFormComponent
-    },  // required to support 'adfHTMLDomElement' directive
-    {provide: DynamicFormFormControlComponent, useExisting: MaterialFormComponent}
-  ]
+      useExisting: MaterialFormComponent,
+    }, // required to support 'adfHTMLDomElement' directive
+    { provide: DynamicFormFormControlComponent, useExisting: MaterialFormComponent },
+  ],
 })
 export class MaterialFormComponent extends DynamicFormFormControlComponent {
   model!: GroupModel;

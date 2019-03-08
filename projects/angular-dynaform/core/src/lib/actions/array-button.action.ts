@@ -1,6 +1,6 @@
-import {DynamicFormAction} from './dynamic-form.action';
-import {DynamicFormControlComponentBase} from '../components/dynamic-form-control.component';
-import {ArrayModel} from '../models/array-model';
+import { DynamicFormAction } from './dynamic-form.action';
+import { DynamicFormControlComponentBase } from '../components/dynamic-form-control.component';
+import { ArrayModel } from '../models/array-model';
 
 export class ArrayButtonAction extends DynamicFormAction {
   targetArray?: ArrayModel;

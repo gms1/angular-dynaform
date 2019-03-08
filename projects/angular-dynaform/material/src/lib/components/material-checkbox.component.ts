@@ -3,17 +3,14 @@ import {
   ControlSwitchOptions,
   DynamicFormControlComponentBase,
   DynamicFormControlComponent,
-  ValueModel
+  ValueModel,
 } from '@angular-dynaform/core';
-import {Component} from '@angular/core';
+import { Component } from '@angular/core';
 
 @Component({
   selector: 'adf-material-checkbox-component',
   template: `
-    <div
-      [formGroup]="model.ngGroup"
-      [hidden]="model.hidden"
-    >
+    <div [formGroup]="model.ngGroup" [hidden]="model.hidden">
       <mat-checkbox
         [formControlName]="model.key"
         [id]="model.id"
@@ -21,14 +18,13 @@ import {Component} from '@angular/core';
         adfHTMLDomElement
         [required]="options.required ? '' : null"
       >
-        {{model.local.label}}
+        {{ model.local.label }}
       </mat-checkbox>
-      <adf-error-container [model]="model">
-      </adf-error-container>
+      <adf-error-container [model]="model"></adf-error-container>
     </div>
   `,
   inputs: ['model'],
-  providers: [{provide: DynamicFormControlComponentBase, useExisting: MaterialCheckboxComponent}]
+  providers: [{ provide: DynamicFormControlComponentBase, useExisting: MaterialCheckboxComponent }],
 })
 export class MaterialCheckboxComponent extends DynamicFormControlComponent<ValueModel> {
   model!: ValueModel;

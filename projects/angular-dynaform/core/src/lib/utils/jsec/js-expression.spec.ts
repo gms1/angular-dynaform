@@ -1,13 +1,13 @@
 // tslint:disable no-null-keyword no-unbound-method no-unused-variable prefer-const
-import {JsExpression} from './js-expression';
-import {JsonPointer} from 'jsonpointerx';
+import { JsExpression } from './js-expression';
+import { JsonPointer } from 'jsonpointerx';
 
 function newTestExpression(expression: string, context?: any, thisArg?: any): JsExpression {
   let res = JsExpression.compile(expression);
   res.context = context;
   res.thisArg = thisArg;
   return res;
-  }
+}
 
 function testExpression(expression: string, result: any, context?: any, thisArg?: any): void {
   let compiled = newTestExpression(expression, context, thisArg);
@@ -21,27 +21,45 @@ describe('js-expression test suite', () => {
   let compiled: JsExpression;
 
   it('context members', () => {
-    context = {a: 42, b: {c: {d: 9}}};
+    context = { a: 42, b: { c: { d: 9 } } };
     thisArg = undefined;
 
     expr = 'a';
     compiled = newTestExpression(expr, context, thisArg);
-    expect(compiled.run()).toEqual(context.a, `expr ${expr} failed for context ${compiled.context}`);
+    expect(compiled.run()).toEqual(
+      context.a,
+      `expr ${expr} failed for context ${compiled.context}`,
+    );
     context.a = 13;
-    expect(compiled.run()).toEqual(context.a, `expr ${expr} failed for context ${compiled.context}`);
+    expect(compiled.run()).toEqual(
+      context.a,
+      `expr ${expr} failed for context ${compiled.context}`,
+    );
 
-    expr = 'b.c[\'d\']';
+    expr = "b.c['d']";
     compiled = newTestExpression(expr, context, thisArg);
-    expect(compiled.run()).toEqual(context.b.c.d, `expr ${expr} failed for context ${compiled.context}`);
+    expect(compiled.run()).toEqual(
+      context.b.c.d,
+      `expr ${expr} failed for context ${compiled.context}`,
+    );
     context.b.c.d += 1;
-    expect(compiled.run()).toEqual(context.b.c.d, `expr ${expr} failed for context ${compiled.context}`);
+    expect(compiled.run()).toEqual(
+      context.b.c.d,
+      `expr ${expr} failed for context ${compiled.context}`,
+    );
 
-    expr = 'b[\'c\'].d';
+    expr = "b['c'].d";
     compiled = newTestExpression(expr, context, thisArg);
     context.b.c.d += 1;
-    expect(compiled.run()).toEqual(context.b.c.d, `expr ${expr} failed for context ${compiled.context}`);
+    expect(compiled.run()).toEqual(
+      context.b.c.d,
+      `expr ${expr} failed for context ${compiled.context}`,
+    );
     context.b.c.d += 1;
-    expect(compiled.run()).toEqual(context.b.c.d, `expr ${expr} failed for context ${compiled.context}`);
+    expect(compiled.run()).toEqual(
+      context.b.c.d,
+      `expr ${expr} failed for context ${compiled.context}`,
+    );
 
     expr = 'r';
     compiled = newTestExpression(expr, context, thisArg);
@@ -58,13 +76,11 @@ describe('js-expression test suite', () => {
     expr = 'a.b.c && b.c.d && c.d.e';
     compiled = newTestExpression(expr, context, thisArg);
     expect(compiled.getContextMembersRoot()).toEqual([]);
-
   });
 
   it('this members', () => {
-
     context = undefined;
-    thisArg = {a: 42, b: {c: {d: 9}}};
+    thisArg = { a: 42, b: { c: { d: 9 } } };
 
     expr = 'this.a';
     compiled = newTestExpression(expr, context, thisArg);
@@ -72,18 +88,30 @@ describe('js-expression test suite', () => {
     thisArg.a = 13;
     expect(compiled.run()).toEqual(thisArg.a, `expr ${expr} failed for this ${compiled.thisArg}`);
 
-    expr = 'this.b.c[\'d\']';
+    expr = "this.b.c['d']";
     compiled = newTestExpression(expr, context, thisArg);
-    expect(compiled.run()).toEqual(thisArg.b.c.d, `expr ${expr} failed for this ${compiled.thisArg}`);
+    expect(compiled.run()).toEqual(
+      thisArg.b.c.d,
+      `expr ${expr} failed for this ${compiled.thisArg}`,
+    );
     thisArg.b.c.d += 1;
-    expect(compiled.run()).toEqual(thisArg.b.c.d, `expr ${expr} failed for this ${compiled.thisArg}`);
+    expect(compiled.run()).toEqual(
+      thisArg.b.c.d,
+      `expr ${expr} failed for this ${compiled.thisArg}`,
+    );
 
-    expr = 'this.b[\'c\'].d';
+    expr = "this.b['c'].d";
     compiled = newTestExpression(expr, context, thisArg);
     thisArg.b.c.d += 1;
-    expect(compiled.run()).toEqual(thisArg.b.c.d, `expr ${expr} failed for this ${compiled.thisArg}`);
+    expect(compiled.run()).toEqual(
+      thisArg.b.c.d,
+      `expr ${expr} failed for this ${compiled.thisArg}`,
+    );
     thisArg.b.c.d += 1;
-    expect(compiled.run()).toEqual(thisArg.b.c.d, `expr ${expr} failed for this ${compiled.thisArg}`);
+    expect(compiled.run()).toEqual(
+      thisArg.b.c.d,
+      `expr ${expr} failed for this ${compiled.thisArg}`,
+    );
 
     expr = 'this.r';
     compiled = newTestExpression(expr, context, thisArg);
@@ -96,11 +124,10 @@ describe('js-expression test suite', () => {
     expr = 'this.a.b.c && this.a.x.y';
     compiled = newTestExpression(expr, context, thisArg);
     expect(compiled.getThisMembersRoot()).toEqual(['a']);
-
   });
 
   it('expressions', () => {
-    context = {a: 4, b: 0};
+    context = { a: 4, b: 0 };
     testExpression('a < 5', true, context);
     testExpression('a >= 4', true, context);
     testExpression('a > 4', false, context);
@@ -125,7 +152,6 @@ describe('js-expression test suite', () => {
     testExpression('c ? a : b', 0, context);
 
     testExpression('[1,2]', [1, 2], undefined);
-
   });
 
   it('expect run to return undefined if no expression has been compiled', () => {
@@ -150,7 +176,7 @@ describe('js-expression test suite', () => {
   });
 
   it('expect unsupported unary operation to throw', () => {
-    context = {a: 4, b: 0};
+    context = { a: 4, b: 0 };
     compiled = newTestExpression('-a', context, undefined);
     expect(compiled.run()).toEqual(-context.a, `result of '-a' is not -${context.a}`);
     let negateOp = JsExpression.unaryOps['-'];
@@ -180,12 +206,11 @@ describe('js-expression test suite', () => {
     expect(() => {
       JsExpression.compile('~3');
     }).toThrow();
-
   });
 
   it('expect compiledFn to work', () => {
     let compiledFnd = JsExpression.compiledFn('(a % b) + this.c');
-    expect(compiledFnd({c: 7}, {a: 5, b: 3})).toEqual(9);
+    expect(compiledFnd({ c: 7 }, { a: 5, b: 3 })).toEqual(9);
   });
 
   it('expect compiledFn to work', () => {
@@ -196,10 +221,8 @@ describe('js-expression test suite', () => {
       constructor() {
         this.testFunc = compiledFnd.bind(this, this);
       }
-      }
+    }
     let testObj = new TestClass();
-    expect(testObj.testFunc({a: 5, b: 3})).toEqual(9);
+    expect(testObj.testFunc({ a: 5, b: 3 })).toEqual(9);
   });
-
-
 });

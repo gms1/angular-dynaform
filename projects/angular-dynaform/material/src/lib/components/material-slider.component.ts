@@ -3,17 +3,14 @@ import {
   ControlSliderOptions,
   DynamicFormControlComponentBase,
   DynamicFormControlComponent,
-  ValueModel
+  ValueModel,
 } from '@angular-dynaform/core';
-import {Component} from '@angular/core';
+import { Component } from '@angular/core';
 
 @Component({
   selector: 'adf-material-slider-component',
   template: `
-    <div
-      [formGroup]="model.ngGroup"
-      [hidden]="model.hidden"
-    >
+    <div [formGroup]="model.ngGroup" [hidden]="model.hidden">
       <label
         *ngIf="model.local.label"
         [attr.for]="model.id"
@@ -30,14 +27,12 @@ import {Component} from '@angular/core';
         [required]="options.required ? '' : null"
         [attr.min]="options.min"
         [attr.max]="options.max"
-      >
-      </mat-slider>
-      <adf-error-container [model]="model">
-      </adf-error-container>
+      ></mat-slider>
+      <adf-error-container [model]="model"></adf-error-container>
     </div>
   `,
   inputs: ['model'],
-  providers: [{provide: DynamicFormControlComponentBase, useExisting: MaterialSliderComponent}]
+  providers: [{ provide: DynamicFormControlComponentBase, useExisting: MaterialSliderComponent }],
 })
 export class MaterialSliderComponent extends DynamicFormControlComponent<ValueModel> {
   model!: ValueModel;

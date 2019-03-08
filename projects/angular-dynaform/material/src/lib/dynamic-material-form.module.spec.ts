@@ -1,8 +1,8 @@
 // tslint:disable no-null-keyword no-unbound-method no-unused-variable prefer-const
-import {APP_BASE_HREF} from '@angular/common';
-import {DebugElement} from '@angular/core';
-import {TestBed, ComponentFixture} from '@angular/core/testing';
-import {By} from '@angular/platform-browser';
+import { APP_BASE_HREF } from '@angular/common';
+import { DebugElement } from '@angular/core';
+import { TestBed, ComponentFixture } from '@angular/core/testing';
+import { By } from '@angular/platform-browser';
 
 import {
   ArrayModel,
@@ -10,19 +10,19 @@ import {
   DynamicFormControl,
   DynamicFormModule,
   DynamicFormService,
-  FormModel
+  FormModel,
 } from '@angular-dynaform/core';
-import {DynamicMaterialFormModule} from './dynamic-material-form.module';
-import {TestFormContainerComponent} from './spec/test-form-container.component';
+import { DynamicMaterialFormModule } from './dynamic-material-form.module';
+import { TestFormContainerComponent } from './spec/test-form-container.component';
 import {
   mainExampleConfig,
   mainExampleFormLanguages,
   mainExampleFormModelData,
-  mainExampleAppModelData
+  mainExampleAppModelData,
 } from './spec/test.config';
 
 function cleanValue(value: any): any {
-  return JSON.parse(JSON.stringify(value, (k, v) => (v === null) ? undefined : v, 2));
+  return JSON.parse(JSON.stringify(value, (k, v) => (v === null ? undefined : v), 2));
 }
 
 describe('material-module test suite', () => {
@@ -37,31 +37,31 @@ describe('material-module test suite', () => {
     const comp = form.findComponentById(id);
     if (!comp) {
       throw new Error(`component with id "${id}" not found`);
-      }
-    return comp;
     }
+    return comp;
+  }
 
   function setComponentValue(comp: DynamicFormControl, value: any) {
     fixture.detectChanges();
     comp.model.ngControl.setValue(value);
     fixture.detectChanges();
-    }
+  }
 
   function findDebugElementById(id: string): DebugElement {
     const dbgEl = debugElement.query(By.css(`#${id}`));
     expect(dbgEl instanceof DebugElement).toBe(true, `element with id "${id}" not found`);
     return dbgEl;
-    }
+  }
 
   function findInputElement(dbgEl: DebugElement): HTMLInputElement {
     const tagName = (dbgEl.nativeElement as HTMLElement).tagName;
     if (tagName === 'INPUT') {
       return dbgEl.nativeElement;
-      }
+    }
     const htmlInput = dbgEl.nativeElement.querySelector('input');
     expect(htmlInput).toBeTruthy(`element ${name} (${tagName}) does not have an input-element`);
     return htmlInput;
-    }
+  }
 
   function setElementInput(dbgEl: DebugElement, value: any) {
     fixture.detectChanges();
@@ -71,7 +71,7 @@ describe('material-module test suite', () => {
     htmlInput.dispatchEvent(new Event('input'));
     dbgEl.triggerEventHandler('blur', null);
     fixture.detectChanges();
-    }
+  }
 
   function clickElementInput(dbgEl: DebugElement) {
     fixture.detectChanges();
@@ -80,7 +80,7 @@ describe('material-module test suite', () => {
     htmlInput.click();
     dbgEl.triggerEventHandler('blur', null);
     fixture.detectChanges();
-    }
+  }
 
   function clickElement(dbgEl: DebugElement) {
     fixture.detectChanges();
@@ -88,16 +88,16 @@ describe('material-module test suite', () => {
     fixture.detectChanges();
   }
 
-  beforeEach(async() => {
+  beforeEach(async () => {
     TestBed.configureTestingModule({
       imports: [DynamicFormModule.forRoot(), DynamicMaterialFormModule],
       declarations: [TestFormContainerComponent],
-      providers: [{provide: APP_BASE_HREF, useValue: '/'}]
+      providers: [{ provide: APP_BASE_HREF, useValue: '/' }],
     });
     fixture = TestBed.createComponent(TestFormContainerComponent);
   });
 
-  beforeEach(async() => {
+  beforeEach(async () => {
     expect(fixture).toBeDefined('fixture is not defined');
     debugElement = fixture.debugElement;
     expect(debugElement instanceof DebugElement).toBe(true, 'debugElement is not defined');
@@ -136,13 +136,17 @@ describe('material-module test suite', () => {
     let clearEl = findDebugElementById('clear');
 
     // reset should be disabled on pristine form
-    expect(resetComp.model.ngControl.disabled).toBeTruthy('reset button not disabled on pristine form');
+    expect(resetComp.model.ngControl.disabled).toBeTruthy(
+      'reset button not disabled on pristine form',
+    );
     spyOn(container, 'onReset');
     clickElement(resetEl);
     expect(container.onReset).toHaveBeenCalledTimes(0);
 
     // submit should be disabled on invalid form
-    expect(submitComp.model.ngControl.disabled).toBeTruthy('submit button not disabled on invalid form');
+    expect(submitComp.model.ngControl.disabled).toBeTruthy(
+      'submit button not disabled on invalid form',
+    );
     spyOn(container, 'onSubmit');
     clickElement(submitEl);
     expect(container.onSubmit).toHaveBeenCalledTimes(0);
@@ -150,12 +154,17 @@ describe('material-module test suite', () => {
     // clear should be enabled
     expect(clearComp.model.ngControl.disabled).toBeFalsy('clear button is not enabled');
     clickElement(clearEl);
-    expect(cleanValue(form.value)).toEqual({address: {}, contacts: []}, '1st cleared value is not empty');
+    expect(cleanValue(form.value)).toEqual(
+      { address: {}, contacts: [] },
+      '1st cleared value is not empty',
+    );
     expect(form.valid).toBe(false, 'cleared form is valid');
     expect(form.pristine).toBe(true, 'empty form should not be touched after clear');
     form.clearValue();
-    expect(cleanValue(form.value)).toEqual({address: {}, contacts: []}, '2nd cleared value is not empty');
-
+    expect(cleanValue(form.value)).toEqual(
+      { address: {}, contacts: [] },
+      '2nd cleared value is not empty',
+    );
   });
 
   // --------------------------------------------------------------------------------------------------
@@ -175,29 +184,42 @@ describe('material-module test suite', () => {
     let clearEl = findDebugElementById('clear');
 
     // reset should be disabled on pristine form
-    expect(resetComp.model.ngControl.disabled).toBeTruthy('reset button not disabled on pristine form');
+    expect(resetComp.model.ngControl.disabled).toBeTruthy(
+      'reset button not disabled on pristine form',
+    );
     spyOn(container, 'onReset');
     clickElement(resetEl);
     expect(container.onReset).toHaveBeenCalledTimes(0);
 
     // submit should be enabled on valid form
-    expect(submitComp.model.ngControl.disabled).toBeFalsy('submit button not enabled on valid form');
+    expect(submitComp.model.ngControl.disabled).toBeFalsy(
+      'submit button not enabled on valid form',
+    );
     spyOn(container, 'onSubmit');
     clickElement(submitEl);
     expect(container.onSubmit).toHaveBeenCalledTimes(1);
 
     // submitted value should be same as initial value
-    expect(cleanValue(form.value)).toEqual(mainExampleFormModelData, 'submitted value is different to initial value');
+    expect(cleanValue(form.value)).toEqual(
+      mainExampleFormModelData,
+      'submitted value is different to initial value',
+    );
 
     // clear should be enabled
     expect(clearComp.model.ngControl.disabled).toBeFalsy('clear button is not enabled');
     clickElement(clearEl);
-    expect(cleanValue(form.value)).toEqual({address: {}, contacts: []}, '1st cleared value is not empty');
+    expect(cleanValue(form.value)).toEqual(
+      { address: {}, contacts: [] },
+      '1st cleared value is not empty',
+    );
     expect(form.valid).toBe(false, 'cleared form is valid');
     // TODO: expect(form.pristine).toBe(true, 'initialized form should be touched after clear');
 
     form.clearValue();
-    expect(cleanValue(form.value)).toEqual({address: {}, contacts: []}, '2nd cleared value is not empty');
+    expect(cleanValue(form.value)).toEqual(
+      { address: {}, contacts: [] },
+      '2nd cleared value is not empty',
+    );
   });
 
   // --------------------------------------------------------------------------------------------------
@@ -242,9 +264,11 @@ describe('material-module test suite', () => {
     expect(container.onSubmit).toHaveBeenCalledTimes(1);
 
     // submitted value should be same as initial value
-    expect(cleanValue(form.value)).toEqual(mainExampleFormModelData, 'submitted value is different to initial value');
+    expect(cleanValue(form.value)).toEqual(
+      mainExampleFormModelData,
+      'submitted value is different to initial value',
+    );
   });
-
 
   it('subscription to form.valueChanges and form.statusChanges', () => {
     form.initValue(mainExampleFormModelData);
@@ -253,8 +277,8 @@ describe('material-module test suite', () => {
 
     const values: any[] = [];
     const states: string[] = [];
-    let subValue = form.valueChanges.subscribe(val => values.push(val));
-    let subState = form.statusChanges.subscribe(state => states.push(state));
+    let subValue = form.valueChanges.subscribe((val) => values.push(val));
+    let subState = form.statusChanges.subscribe((state) => states.push(state));
 
     let lastNameEl = findDebugElementById('lastName');
     setElementInput(lastNameEl, 'X');
@@ -289,20 +313,27 @@ describe('material-module test suite', () => {
     let contactsTypeEl = findDebugElementById('contacts-0-contactType');
 
     contactsTypeEl.triggerEventHandler('focus', null);
-    expect(contactsModel.selectedIndex).toBe(0, 'current index has not been set by focus on contactType field');
+    expect(contactsModel.selectedIndex).toBe(
+      0,
+      'current index has not been set by focus on contactType field',
+    );
 
     let contactsDeleteComp = findComponentById('contacts-HEADER-deleteContact');
     let contactsDeleteEl = findDebugElementById('contacts-HEADER-deleteContact');
 
-    expect(contactsDeleteComp.model.ngControl.disabled).toBe(false, 'contact delete button not properly initialized');
+    expect(contactsDeleteComp.model.ngControl.disabled).toBe(
+      false,
+      'contact delete button not properly initialized',
+    );
 
     clickElement(contactsDeleteEl);
     expect(contactsModel.items.length).toBe(0, 'contacts array item has not been deleted');
 
-    expect(contactsDeleteComp.model.ngControl.disabled)
-        .toBe(true, 'contact delete button has not been disabled after deleting all items');
+    expect(contactsDeleteComp.model.ngControl.disabled).toBe(
+      true,
+      'contact delete button has not been disabled after deleting all items',
+    );
   });
-
 
   // --------------------------------------------------------------------------------------------------
   it('should be able to add array item', () => {
@@ -324,7 +355,10 @@ describe('material-module test suite', () => {
 
     contacts0ValueEl.triggerEventHandler('focus', null);
     contacts0ValueEl.triggerEventHandler('blur', null);
-    expect(contactsModel.selectedIndex).toBe(0, 'current index has not been set to the 1st item of the contact array');
+    expect(contactsModel.selectedIndex).toBe(
+      0,
+      'current index has not been set to the 1st item of the contact array',
+    );
 
     let contactsAddEl = findDebugElementById('contacts-HEADER-addContact');
     clickElement(contactsAddEl);
@@ -332,18 +366,21 @@ describe('material-module test suite', () => {
     expect(contactsModel.items.length).toBe(2, 'contacts array item has not been added');
 
     contacts0ValueEl = findDebugElementById('contacts-0-contactValue');
-    expect(contacts0ValueEl.nativeElement.value)
-        .toBe(contact0Value, 'got wrong contact value for old item after adding new item');
+    expect(contacts0ValueEl.nativeElement.value).toBe(
+      contact0Value,
+      'got wrong contact value for old item after adding new item',
+    );
 
     let contacts1ValueEl = findDebugElementById('contacts-1-contactValue');
     expect(contacts1ValueEl.nativeElement.value).toBe('', 'got wrong contact value for new item');
 
     contacts1ValueEl.triggerEventHandler('focus', null);
     contacts1ValueEl.triggerEventHandler('blur', null);
-    expect(contactsModel.selectedIndex).toBe(1, 'current index has not been set to the 2nd item of the contact array');
-
+    expect(contactsModel.selectedIndex).toBe(
+      1,
+      'current index has not been set to the 2nd item of the contact array',
+    );
   });
-
 
   // --------------------------------------------------------------------------------------------------
   it('should be able to insert array item', () => {
@@ -365,7 +402,10 @@ describe('material-module test suite', () => {
 
     contacts0ValueEl.triggerEventHandler('focus', null);
     contacts0ValueEl.triggerEventHandler('blur', null);
-    expect(contactsModel.selectedIndex).toBe(0, 'current index has not been set by focus on contactValue field');
+    expect(contactsModel.selectedIndex).toBe(
+      0,
+      'current index has not been set by focus on contactValue field',
+    );
 
     let contactsInsertEl = findDebugElementById('contacts-HEADER-insertContact');
     clickElement(contactsInsertEl);
@@ -373,10 +413,11 @@ describe('material-module test suite', () => {
     expect(contactsModel.items.length).toBe(2, 'contacts array item has not been inserted');
 
     let contacts1ValueEl = findDebugElementById('contacts-1-contactValue');
-    expect(contacts1ValueEl.nativeElement.value).toBe(contactValue, 'got wrong contact value after inserting item');
-
+    expect(contacts1ValueEl.nativeElement.value).toBe(
+      contactValue,
+      'got wrong contact value after inserting item',
+    );
   });
-
 
   // --------------------------------------------------------------------------------------------------
   // APPLICATION DATA MODEL
@@ -386,7 +427,9 @@ describe('material-module test suite', () => {
     form.initValueFromAppModel(mainExampleAppModelData);
     expect(form.valid).toBe(true, 'initialized form is not valid');
 
-    expect(cleanValue(form.value)).toEqual(cleanValue(form.valueFromAppModel(mainExampleAppModelData)));
+    expect(cleanValue(form.value)).toEqual(
+      cleanValue(form.valueFromAppModel(mainExampleAppModelData)),
+    );
 
     let submitEl = findDebugElementById('submit');
     clickElement(submitEl);
@@ -397,9 +440,11 @@ describe('material-module test suite', () => {
     if (!cmpAppData.options) {
       cmpAppData.options = {};
     }
-    expect(cleanValue(form.valueToAppModel({}))).toEqual(cmpAppData, 'submitted value is different to initial value');
+    expect(cleanValue(form.valueToAppModel({}))).toEqual(
+      cmpAppData,
+      'submitted value is different to initial value',
+    );
   });
-
 
   // --------------------------------------------------------------------------------------------------
   // RELATIONS
@@ -411,21 +456,25 @@ describe('material-module test suite', () => {
     let newsLetterComp = findComponentById('newsletter');
     let atcEl = findDebugElementById('atc');
 
-    expect(newsLetterComp.model.ngControl.disabled)
-        .toBe(true, 'newsletter component is not disabled on initialization');
+    expect(newsLetterComp.model.ngControl.disabled).toBe(
+      true,
+      'newsletter component is not disabled on initialization',
+    );
 
     clickElementInput(atcEl);
 
-    expect(newsLetterComp.model.ngControl.disabled)
-        .toBe(false, 'newsletter component is not enabled after atc has been selected');
+    expect(newsLetterComp.model.ngControl.disabled).toBe(
+      false,
+      'newsletter component is not enabled after atc has been selected',
+    );
 
     clickElementInput(atcEl);
 
-    expect(newsLetterComp.model.ngControl.disabled)
-        .toBe(true, 'newsletter component is not disabled after atc has been deselected');
-
+    expect(newsLetterComp.model.ngControl.disabled).toBe(
+      true,
+      'newsletter component is not disabled after atc has been deselected',
+    );
   });
-
 
   // --------------------------------------------------------------------------------------------------
   // FOCUS CHANGES
@@ -445,7 +494,6 @@ describe('material-module test suite', () => {
     expect(hasFocus).toBeFalsy('focus change not triggered the blur event');
 
     lastNameComp.focusChanges.unsubscribe();
-
   });
 
   // --------------------------------------------------------------------------------------------------
@@ -467,6 +515,4 @@ describe('material-module test suite', () => {
 
     lastNameComp.click.unsubscribe();
   });
-
-
 });

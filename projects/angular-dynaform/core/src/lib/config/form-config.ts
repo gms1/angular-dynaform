@@ -1,4 +1,4 @@
-import {GroupOptions} from './control-options';
+import { GroupOptions } from './control-options';
 
 export interface FormBaseConfig {
   /**
@@ -8,19 +8,19 @@ export interface FormBaseConfig {
   /**
    * default update strategy of the form
    */
-  updateOn?: 'change'|'blur'|'submit';
+  updateOn?: 'change' | 'blur' | 'submit';
   /**
    * sync validators
    */
-  validators?: string|string[];
+  validators?: string | string[];
   /**
    * async validators
    */
-  asyncValidators?: string|string[];
+  asyncValidators?: string | string[];
   /**
    * error messages for the validators
    */
-  errors?: {[key: string]: string};
+  errors?: { [key: string]: string };
 
   /**
    */

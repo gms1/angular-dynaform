@@ -1,7 +1,7 @@
 // tslint:disable use-input-property-decorator use-output-property-decorator use-life-cycle-interface
 // tslint:disable no-use-before-declare
-import {Component, ElementRef, AfterViewInit, EventEmitter} from '@angular/core';
-import {Observable} from 'rxjs';
+import { Component, ElementRef, AfterViewInit, EventEmitter } from '@angular/core';
+import { Observable } from 'rxjs';
 
 import {
   GroupModelBase,
@@ -10,7 +10,7 @@ import {
   DynamicFormControlComponent,
   DynamicFormService,
   GroupOptions,
-  Stepper
+  Stepper,
 } from '../../public_api';
 
 export class TestStepper implements Stepper {
@@ -44,29 +44,21 @@ export class TestStepper implements Stepper {
   }
 }
 
-
 @Component({
   selector: 'adf-test-stepper-component',
   template: `
-    <div
-      [formGroup]="model.ngGroup"
-      [hidden]="model.hidden"
-    >
-      <div
-        [ngClass]="model.css.control"
-        adfHTMLDomElement
-      >
-        <adf-error-container [model]="model">
-        </adf-error-container>
-        <ng-template>
-        </ng-template>
+    <div [formGroup]="model.ngGroup" [hidden]="model.hidden">
+      <div [ngClass]="model.css.control" adfHTMLDomElement>
+        <adf-error-container [model]="model"></adf-error-container>
+        <ng-template></ng-template>
       </div>
     </div>
   `,
   inputs: ['model'],
-  providers: [{provide: DynamicFormControlComponentBase, useExisting: TestStepperComponent}]
+  providers: [{ provide: DynamicFormControlComponentBase, useExisting: TestStepperComponent }],
 })
-export class TestStepperComponent extends DynamicFormControlComponent<GroupModelBase> implements AfterViewInit {
+export class TestStepperComponent extends DynamicFormControlComponent<GroupModelBase>
+  implements AfterViewInit {
   model!: GroupModelBase;
   options!: GroupOptions;
 
@@ -85,7 +77,6 @@ export class TestStepperComponent extends DynamicFormControlComponent<GroupModel
   ngAfterViewInit(): void {
     super.ngAfterViewInit();
   }
-
 
   ngOnDestroy(): void {
     super.ngOnDestroy();

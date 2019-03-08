@@ -2,8 +2,6 @@
  * Public API Surface of core
  */
 
-
-
 export * from './lib/config/index';
 export * from './lib/models/index';
 export * from './lib/validations/index';

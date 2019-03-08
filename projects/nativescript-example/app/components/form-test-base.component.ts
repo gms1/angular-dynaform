@@ -6,18 +6,16 @@ import {
   FormBaseConfig,
   FormBuilder,
   FormModel,
-  FormBuilderSubset
+  FormBuilderSubset,
 } from '@angular-dynaform/core';
-import {AfterViewInit, ViewChild, OnDestroy, OnInit} from '@angular/core';
-import {Subject} from 'rxjs';
-import {takeUntil} from 'rxjs/operators';
-import {RadSideDrawer} from 'nativescript-ui-sidedrawer';
+import { AfterViewInit, ViewChild, OnDestroy, OnInit } from '@angular/core';
+import { Subject } from 'rxjs';
+import { takeUntil } from 'rxjs/operators';
+import { RadSideDrawer } from 'nativescript-ui-sidedrawer';
 import * as app from 'application';
-
 
 const DISABLE_CONTROL_ID = 'disable_switch';
 const HIDE_CONTROL_ID = 'hide_switch';
-
 
 export abstract class FormTestBaseComponent implements OnInit, AfterViewInit, OnDestroy {
   @ViewChild(DynamicForm) form!: DynamicForm;
@@ -28,23 +26,29 @@ export abstract class FormTestBaseComponent implements OnInit, AfterViewInit, On
   controlComponent!: DynamicFormControl;
 
   constructor(
-      public dynamicFormService: DynamicFormService, public formBuilder: FormBuilder, public title: string,
-      formBaseConfig: FormBaseConfig) {
+    public dynamicFormService: DynamicFormService,
+    public formBuilder: FormBuilder,
+    public title: string,
+    formBaseConfig: FormBaseConfig,
+  ) {
     console.log(`INSTANTIATION ${formBaseConfig.id}`);
     this.unsubscribe = new Subject<any>();
 
     const formConfig = formBuilder.createForm(formBaseConfig);
     // create divisions:
-    const fieldsdiv = formConfig.group.addSubset({id: 'fields', controlType: ControlType.CONTROL_DIVISION});
+    const fieldsdiv = formConfig.group.addSubset({
+      id: 'fields',
+      controlType: ControlType.CONTROL_DIVISION,
+    });
     formConfig.group.addSeparator({
       id: 'separatorDivisions',
       controlType: ControlType.CONTROL_SEPARATOR,
-      options: {css: {container: 'hr-light m-10'}}
+      options: { css: { container: 'hr-light m-10' } },
     });
     const buttondiv = formConfig.group.addSubset({
       id: 'buttondivision',
       controlType: [ControlType.CONTROL_DIVISION],
-      options: {css: {content: 'button-division-content'}}
+      options: { css: { content: 'button-division-content' } },
     });
 
     // add control fieds to the fields division:
@@ -55,45 +59,57 @@ export abstract class FormTestBaseComponent implements OnInit, AfterViewInit, On
       }
     } else {
       throw new Error('missing test control config (id)');
-      }
+    }
     const control = fieldsdiv.group.group[0];
     this.controlId = control.config.id as string;
     if (!control.config.relations) {
-      control.config.relations = {enable: `!${DISABLE_CONTROL_ID}`, show: `!${HIDE_CONTROL_ID}`};
+      control.config.relations = { enable: `!${DISABLE_CONTROL_ID}`, show: `!${HIDE_CONTROL_ID}` };
     }
 
     // add controls to the button division:
-    buttondiv.group.addButton(
-        {id: 'clear', controlType: ControlType.CONTROL_BUTTON, options: {label: 'Clear'}, action: 'clear'});
+    buttondiv.group.addButton({
+      id: 'clear',
+      controlType: ControlType.CONTROL_BUTTON,
+      options: { label: 'Clear' },
+      action: 'clear',
+    });
 
     buttondiv.group.addSeparator({
       id: 'separatorMainButtons',
       controlType: ControlType.CONTROL_SEPARATOR,
-      options: {css: {container: 'hr-light m-10'}}
+      options: { css: { container: 'hr-light m-10' } },
     });
 
-    buttondiv.group.addButton(
-        {id: 'reset', controlType: ControlType.CONTROL_BUTTON, options: {label: 'Reset'}, action: 'reset'});
-    buttondiv.group.addButton(
-        {id: 'submit', controlType: ControlType.CONTROL_BUTTON, options: {label: 'Submit'}, action: 'submit'});
+    buttondiv.group.addButton({
+      id: 'reset',
+      controlType: ControlType.CONTROL_BUTTON,
+      options: { label: 'Reset' },
+      action: 'reset',
+    });
+    buttondiv.group.addButton({
+      id: 'submit',
+      controlType: ControlType.CONTROL_BUTTON,
+      options: { label: 'Submit' },
+      action: 'submit',
+    });
 
     buttondiv.group.addSeparator({
       id: 'separatorSwitchControls',
       controlType: ControlType.CONTROL_SEPARATOR,
-      options: {css: {container: 'hr-light m-10'}}
+      options: { css: { container: 'hr-light m-10' } },
     });
 
     buttondiv.group.addControl({
       id: DISABLE_CONTROL_ID,
       controlType: ControlType.CONTROL_SWITCH,
       updateOn: 'change',
-      options: {value: false, label: 'disable'}
+      options: { value: false, label: 'disable' },
     });
     buttondiv.group.addControl({
       id: HIDE_CONTROL_ID,
       controlType: ControlType.CONTROL_SWITCH,
       updateOn: 'change',
-      options: {value: false, label: 'hide'}
+      options: { value: false, label: 'hide' },
     });
     this.model = this.dynamicFormService.createFormModel(formConfig.toFormConfig());
   }
@@ -114,17 +130,27 @@ export abstract class FormTestBaseComponent implements OnInit, AfterViewInit, On
 
     // control value
     console.log(`control value: `, JSON.stringify(this.controlComponent.model.value));
-    this.controlComponent.model.valueChanges.pipe(takeUntil(this.unsubscribe)).subscribe((value) => {
-      console.log(`control value: `, JSON.stringify(value));
-    });
+    this.controlComponent.model.valueChanges
+      .pipe(takeUntil(this.unsubscribe))
+      .subscribe((value) => {
+        console.log(`control value: `, JSON.stringify(value));
+      });
 
     // control state
-    console.log(`control state: ${this.controlComponent.model.status
-                }, touched: ${this.controlComponent.model.touched}, pristine: ${this.controlComponent.model.pristine}`);
-    this.controlComponent.model.statusChanges.pipe(takeUntil(this.unsubscribe)).subscribe((state) => {
-      console.log(`control state: ${state}, touched: ${this.controlComponent.model.touched
-                  }, pristine: ${this.controlComponent.model.pristine}`);
-    });
+    console.log(
+      `control state: ${this.controlComponent.model.status}, touched: ${
+        this.controlComponent.model.touched
+      }, pristine: ${this.controlComponent.model.pristine}`,
+    );
+    this.controlComponent.model.statusChanges
+      .pipe(takeUntil(this.unsubscribe))
+      .subscribe((state) => {
+        console.log(
+          `control state: ${state}, touched: ${this.controlComponent.model.touched}, pristine: ${
+            this.controlComponent.model.pristine
+          }`,
+        );
+      });
 
     // control focus
     this.controlComponent.focusChanges.pipe(takeUntil(this.unsubscribe)).subscribe((focus) => {

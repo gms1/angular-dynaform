@@ -6,38 +6,39 @@ import {
   DynamicFormFormControlComponent,
   DynamicFormService,
   GroupModel,
-  GroupOptions
+  GroupOptions,
 } from '@angular-dynaform/core';
-import {Component, ElementRef} from '@angular/core';
-
+import { Component, ElementRef } from '@angular/core';
 
 @Component({
   selector: 'adf-nativescript-form',
   template: `
-  <StackLayout>
-    <StackLayout
-      [formGroup]="model.ngControl"
-      [id]="model.id"
-      [ngClass]="model.css.control"
-
-      adfNSDomElement
-    >
-      <FlexboxLayout [ngClass]="model.css.content">
-        <ng-container *ngFor="let item of model.items;" adfControlComponent [model]="item" >
-        </ng-container>
-      </FlexboxLayout>
+    <StackLayout>
+      <StackLayout
+        [formGroup]="model.ngControl"
+        [id]="model.id"
+        [ngClass]="model.css.control"
+        adfNSDomElement
+      >
+        <FlexboxLayout [ngClass]="model.css.content">
+          <ng-container
+            *ngFor="let item of model.items"
+            adfControlComponent
+            [model]="item"
+          ></ng-container>
+        </FlexboxLayout>
+      </StackLayout>
     </StackLayout>
-  </StackLayout>
-`,
+  `,
   inputs: ['model'],
   outputs: ['submit', 'reset'],
   providers: [
     {
       provide: DynamicFormControlComponentBase,
-      useExisting: NativeScriptFormComponent
-    },  // required to support 'adfNSDomElement' directive
-    {provide: DynamicFormFormControlComponent, useExisting: NativeScriptFormComponent}
-  ]
+      useExisting: NativeScriptFormComponent,
+    }, // required to support 'adfNSDomElement' directive
+    { provide: DynamicFormFormControlComponent, useExisting: NativeScriptFormComponent },
+  ],
 })
 export class NativeScriptFormComponent extends DynamicFormFormControlComponent {
   model!: GroupModel;

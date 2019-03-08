@@ -1,14 +1,12 @@
 // tslint:disable no-null-keyword no-unbound-method no-unused-variable prefer-const
-import {NgFormGroup} from './ng-form-group';
-import {NgFormArray, NgArrayModelHandler} from './ng-form-array';
-import {createNgFormGroupSubset, NgFormGroupSubset} from './ng-form-group-subset';
-
-
+import { NgFormGroup } from './ng-form-group';
+import { NgFormArray, NgArrayModelHandler } from './ng-form-array';
+import { createNgFormGroupSubset, NgFormGroupSubset } from './ng-form-group-subset';
 
 class NgFormArrayWrapper implements NgArrayModelHandler {
   ngControl: NgFormArray;
   constructor() {
-    this.ngControl = new NgFormArray([], {updateOn: 'change'});
+    this.ngControl = new NgFormArray([], { updateOn: 'change' });
     this.ngControl.model = this;
   }
   updateLength(length: number, isMinimum?: boolean): void {
@@ -22,7 +20,7 @@ class NgFormArrayWrapper implements NgArrayModelHandler {
     }
   }
   createItem(): NgFormGroup {
-    return new NgFormGroup({}, {updateOn: 'change'});
+    return new NgFormGroup({}, { updateOn: 'change' });
   }
 }
 
@@ -43,14 +41,12 @@ describe('ng-form-array', () => {
     expect(ary.ngControl.length).toEqual(7, 'setting greater minimum length failed');
   });
 
-
   it('update NgFormArray length without NgArrayModelHandler model should not throw', () => {
     ary.updateLength(7, true);
 
     ary.ngControl.model = undefined;
     expect(() => ary.ngControl.updateLength(5)).not.toThrow();
   });
-
 
   it('update NgFormArray length by patching value without options', () => {
     ary.updateLength(1, true);
@@ -60,20 +56,25 @@ describe('ng-form-array', () => {
     } catch (e) {
       fail(e);
     }
-    expect(ary.ngControl.value.length).toBe(2, 'failed to increase NgFormArray length by patchValue');
+    expect(ary.ngControl.value.length).toBe(
+      2,
+      'failed to increase NgFormArray length by patchValue',
+    );
   });
 
   it('update NgFormArray length by patching value using options', () => {
     ary.updateLength(1, true);
     const v: any[] = [{}, {}];
     try {
-      ary.ngControl.patchValue(v, {onlySelf: false, emitEvent: true});
+      ary.ngControl.patchValue(v, { onlySelf: false, emitEvent: true });
     } catch (e) {
       fail(e);
     }
-    expect(ary.ngControl.value.length).toBe(2, 'failed to increase NgFormArray length by patchValue');
+    expect(ary.ngControl.value.length).toBe(
+      2,
+      'failed to increase NgFormArray length by patchValue',
+    );
   });
-
 
   it('update NgFormArray length by set value without options', () => {
     ary.updateLength(1, true);
@@ -90,7 +91,7 @@ describe('ng-form-array', () => {
     ary.updateLength(1, true);
     const v: any[] = [{}, {}];
     try {
-      ary.ngControl.setValue(v, {onlySelf: false, emitEvent: true});
+      ary.ngControl.setValue(v, { onlySelf: false, emitEvent: true });
     } catch (e) {
       fail(e);
     }

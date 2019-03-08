@@ -1,6 +1,5 @@
 // tslint:disable no-unused-variable
-import {Type} from '@angular/core';
-
+import { Type } from '@angular/core';
 
 export class TypeRegistry<T> {
   private _reg: Map<string, Type<T>>;
@@ -17,7 +16,7 @@ export class TypeRegistry<T> {
     return this._reg.has(name);
   }
 
-  getType(name: string): Type<T>|undefined {
+  getType(name: string): Type<T> | undefined {
     return this._reg.get(name);
   }
 

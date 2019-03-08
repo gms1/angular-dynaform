@@ -1,19 +1,19 @@
-import {AbstractControl, AsyncValidatorFn, FormGroup, ValidatorFn} from '@angular/forms';
-import {Observable} from 'rxjs';
+import { AbstractControl, AsyncValidatorFn, FormGroup, ValidatorFn } from '@angular/forms';
+import { Observable } from 'rxjs';
 
-import {ControlConfig} from '../config/control-config';
-import {ControlBaseOptions, ValueOptions} from '../config/control-options';
-import {ControlI18n} from '../config/control-i18n';
-import {DynamicFormService} from '../services/dynamic-form.service';
+import { ControlConfig } from '../config/control-config';
+import { ControlBaseOptions, ValueOptions } from '../config/control-options';
+import { ControlI18n } from '../config/control-i18n';
+import { DynamicFormService } from '../services/dynamic-form.service';
 
-import {ArrayModel} from './array-model';
-import {FormModel} from './form-model';
-import {GroupModelBase} from './group-model';
+import { ArrayModel } from './array-model';
+import { FormModel } from './form-model';
+import { GroupModelBase } from './group-model';
 
-import {CSSModel} from './css-model';
+import { CSSModel } from './css-model';
 
-import {JsonPointer} from 'jsonpointerx';
-import {JsExpression} from '../utils/jsec';
+import { JsonPointer } from 'jsonpointerx';
+import { JsExpression } from '../utils/jsec';
 
 // the root node of the model-tree is of type GroupModel without a parentGroup property
 // (similar to the child nodes of the ArrayModel, see below)
@@ -61,12 +61,11 @@ export interface ControlModel {
 
   // all child controls by key:
   // based on the form data model (ignoring subsets)
-  readonly controls: {[key: string]: ControlModel};
+  readonly controls: { [key: string]: ControlModel };
 
-
-  setValue(value: any, options?: {onlySelf?: boolean; emitEvent?: boolean}): void;
-  patchValue(value: any, options?: {onlySelf?: boolean; emitEvent?: boolean}): void;
-  reset(value?: any, options?: {onlySelf?: boolean; emitEvent?: boolean}): void;
+  setValue(value: any, options?: { onlySelf?: boolean; emitEvent?: boolean }): void;
+  patchValue(value: any, options?: { onlySelf?: boolean; emitEvent?: boolean }): void;
+  reset(value?: any, options?: { onlySelf?: boolean; emitEvent?: boolean }): void;
 
   show(): void;
   hide(): void;
@@ -76,18 +75,20 @@ export interface ControlModel {
 
   // get control by key:
   // based on the form data model (ignoring subsets)
-  getControl(key: string): ControlModel|undefined;
+  getControl(key: string): ControlModel | undefined;
 
   setParentGroup(parentGroup: GroupModelBase): void;
   reTranslate(): void;
-  setCSSClasses(classes: {[key: string]: boolean}, setClasses: string|string[]|undefined, value: boolean): void;
+  setCSSClasses(
+    classes: { [key: string]: boolean },
+    setClasses: string | string[] | undefined,
+    value: boolean,
+  ): void;
 }
 
-
-
 // NOTES: currently this must be in the same source file as the ControlModel interface
-export abstract class AbstractControlModel<C extends AbstractControl, O extends ControlBaseOptions> implements
-    ControlModel {
+export abstract class AbstractControlModel<C extends AbstractControl, O extends ControlBaseOptions>
+  implements ControlModel {
   private _dynamicFormService: DynamicFormService;
   get dynamicFormService(): DynamicFormService {
     return this._dynamicFormService;
@@ -109,7 +110,7 @@ export abstract class AbstractControlModel<C extends AbstractControl, O extends 
   }
 
   protected _ngSubsetControl?: C;
-  get ngSubsetControl(): C|undefined {
+  get ngSubsetControl(): C | undefined {
     return this._ngSubsetControl;
   }
 
@@ -119,20 +120,20 @@ export abstract class AbstractControlModel<C extends AbstractControl, O extends 
   }
 
   private _parentGroup?: GroupModelBase;
-  get parentGroup(): GroupModelBase|undefined {
+  get parentGroup(): GroupModelBase | undefined {
     return this._parentGroup;
   }
-  get ngGroup(): FormGroup|undefined {
+  get ngGroup(): FormGroup | undefined {
     return this._parentGroup ? this._parentGroup._ngControl : undefined;
   }
 
   private _parentArray?: ArrayModel;
-  get parentArray(): ArrayModel|undefined {
+  get parentArray(): ArrayModel | undefined {
     return this._parentArray;
   }
 
   private _parentArrayIdx?: number;
-  get parentArrayIdx(): number|undefined {
+  get parentArrayIdx(): number | undefined {
     return this._parentArrayIdx;
   }
 
@@ -151,12 +152,12 @@ export abstract class AbstractControlModel<C extends AbstractControl, O extends 
 
   // data model path
   private _path?: string[];
-  get path(): string[]|undefined {
+  get path(): string[] | undefined {
     return this._path;
   }
 
   private _jpForm?: JsonPointer;
-  get jpForm(): JsonPointer|undefined {
+  get jpForm(): JsonPointer | undefined {
     if (this._jpForm) {
       return this._jpForm;
     }
@@ -166,8 +167,8 @@ export abstract class AbstractControlModel<C extends AbstractControl, O extends 
     return this._jpForm;
   }
 
-  private _jpApp: JsonPointer|undefined;
-  get jpApp(): JsonPointer|undefined {
+  private _jpApp: JsonPointer | undefined;
+  get jpApp(): JsonPointer | undefined {
     return this._jpApp;
   }
 
@@ -211,29 +212,36 @@ export abstract class AbstractControlModel<C extends AbstractControl, O extends 
   }
 
   private _enableIf?: JsExpression;
-  get enableIf(): JsExpression|undefined {
+  get enableIf(): JsExpression | undefined {
     return this._enableIf;
   }
 
   private _showIf?: JsExpression;
-  get showIf(): JsExpression|undefined {
+  get showIf(): JsExpression | undefined {
     return this._showIf;
   }
-
 
   private _local: ControlI18n;
   get local(): ControlI18n {
     return this._local;
   }
 
-  private _controls: {[key: string]: ControlModel};
-  get controls(): {[key: string]: ControlModel} {
+  private _controls: { [key: string]: ControlModel };
+  get controls(): { [key: string]: ControlModel } {
     return this._controls;
   }
 
   constructor(
-      dynamicFormService: DynamicFormService, config: ControlConfig, options: O, ngControl: C, formModel: FormModel,
-      parentPath?: string[], parentGroup?: GroupModelBase, parentArray?: ArrayModel, parentArrayIdx?: number) {
+    dynamicFormService: DynamicFormService,
+    config: ControlConfig,
+    options: O,
+    ngControl: C,
+    formModel: FormModel,
+    parentPath?: string[],
+    parentGroup?: GroupModelBase,
+    parentArray?: ArrayModel,
+    parentArrayIdx?: number,
+  ) {
     this._dynamicFormService = dynamicFormService;
     this._config = config;
     this._options = options;
@@ -258,18 +266,17 @@ export abstract class AbstractControlModel<C extends AbstractControl, O extends 
     this._hidden = !!this.config.hidden;
   }
 
-
-  setValue(value: any, options?: {onlySelf?: boolean; emitEvent?: boolean}): void {
+  setValue(value: any, options?: { onlySelf?: boolean; emitEvent?: boolean }): void {
     this.ngControl.setValue(value, options);
   }
-  patchValue(value: any, options?: {onlySelf?: boolean; emitEvent?: boolean}): void {
+  patchValue(value: any, options?: { onlySelf?: boolean; emitEvent?: boolean }): void {
     this.ngControl.patchValue(value, options);
   }
-  reset(value?: any, options?: {onlySelf?: boolean; emitEvent?: boolean}): void {
+  reset(value?: any, options?: { onlySelf?: boolean; emitEvent?: boolean }): void {
     this.ngControl.reset(value, options);
   }
 
-  getControl(key: string): ControlModel|undefined {
+  getControl(key: string): ControlModel | undefined {
     return this.controls[key];
   }
 
@@ -287,7 +294,11 @@ export abstract class AbstractControlModel<C extends AbstractControl, O extends 
   protected createValidators(): void {
     this.ngControl.clearValidators();
     if (this.config.validators) {
-      this.validatorFns = this.dynamicFormService.validatorFn.createValidators(this, this.config.validators, 1);
+      this.validatorFns = this.dynamicFormService.validatorFn.createValidators(
+        this,
+        this.config.validators,
+        1,
+      );
       this.ngControl.setValidators(this.validatorFns);
     }
   }
@@ -295,8 +306,11 @@ export abstract class AbstractControlModel<C extends AbstractControl, O extends 
   protected createAsyncValidators(): void {
     this.ngControl.clearAsyncValidators();
     if (this.config.asyncValidators) {
-      this.asyncValidatorFns =
-          this.dynamicFormService.asyncValidatorFn.createValidators(this, this.config.asyncValidators, 1);
+      this.asyncValidatorFns = this.dynamicFormService.asyncValidatorFn.createValidators(
+        this,
+        this.config.asyncValidators,
+        1,
+      );
       this.ngControl.setAsyncValidators(this.asyncValidatorFns);
     }
   }
@@ -309,7 +323,7 @@ export abstract class AbstractControlModel<C extends AbstractControl, O extends 
       }
       return;
     }
-    if (this.parentGroup && this.ngControl as AbstractControl === this.parentGroup.ngControl) {
+    if (this.parentGroup && (this.ngControl as AbstractControl) === this.parentGroup.ngControl) {
       // SubsetModel
       this._path = parentPath;
     } else {
@@ -325,14 +339,13 @@ export abstract class AbstractControlModel<C extends AbstractControl, O extends 
     }
   }
 
-
   private initJpApp(): void {
     if (this.config.jp) {
       const jpSuffix = this.config.jp.substr(0, 1) === '/' ? this.config.jp : '/' + this.config.jp;
       if (this.config.jp !== jpSuffix || this.parentArray) {
         // relative path
-        let parentJp: JsonPointer|undefined;
-        let parentGroup: GroupModelBase|undefined = this.parentGroup;
+        let parentJp: JsonPointer | undefined;
+        let parentGroup: GroupModelBase | undefined = this.parentGroup;
         while (parentGroup && !parentJp) {
           parentJp = parentGroup.jpApp;
           parentGroup = parentGroup.parentGroup;
@@ -346,9 +359,14 @@ export abstract class AbstractControlModel<C extends AbstractControl, O extends 
         this._jpApp = JsonPointer.compile(this.config.jp);
       }
     } else {
-      // tslint:disable-next-line: triple-equals
-      if (!this.parentGroup && this.parentArray && this.parentArray.jpApp && this.parentArrayIdx != undefined &&
-          this.parentArrayIdx >= 0) {
+      if (
+        !this.parentGroup &&
+        this.parentArray &&
+        this.parentArray.jpApp &&
+        // tslint:disable-next-line: triple-equals
+        this.parentArrayIdx != undefined &&
+        this.parentArrayIdx >= 0
+      ) {
         // FormGroup item of FormArray having JSON pointer
         this._jpApp = this.parentArray.jpApp.concat(JsonPointer.compile(`/${this.parentArrayIdx}`));
       }
@@ -356,7 +374,7 @@ export abstract class AbstractControlModel<C extends AbstractControl, O extends 
   }
 
   private initCSSModel(): void {
-    this._css = {container: {}, control: {}, content: {}, error: {}, label: {}};
+    this._css = { container: {}, control: {}, content: {}, error: {}, label: {} };
     this.setCSSClasses(this._css.container, 'adf-container');
     this.setCSSClasses(this._css.control, 'adf-control');
     this.setCSSClasses(this._css.content, 'adf-content');
@@ -373,12 +391,16 @@ export abstract class AbstractControlModel<C extends AbstractControl, O extends 
     this.setCSSClasses(this._css.label, this.options.css.label);
   }
 
-  setCSSClasses(classes: {[key: string]: boolean}, setClasses: string|string[]|undefined, value: boolean = true): void {
+  setCSSClasses(
+    classes: { [key: string]: boolean },
+    setClasses: string | string[] | undefined,
+    value: boolean = true,
+  ): void {
     if (!setClasses) {
       return;
     }
     if (Array.isArray(setClasses)) {
-      setClasses.forEach((key) => classes[key] = value);
+      setClasses.forEach((key) => (classes[key] = value));
     } else {
       classes[setClasses] = value;
     }
@@ -396,7 +418,7 @@ export abstract class AbstractControlModel<C extends AbstractControl, O extends 
         this.options.valueOptions.forEach((opt: ValueOptions) => {
           // type assertion is not necessary, but tsc wants it
           // tslint:disable-next-line no-unnecessary-type-assertion
-          (this.local.valueOptions as ValueOptions[]).push({value: opt.value, label: opt.label});
+          (this.local.valueOptions as ValueOptions[]).push({ value: opt.value, label: opt.label });
         });
       }
       return;
@@ -420,12 +442,14 @@ export abstract class AbstractControlModel<C extends AbstractControl, O extends 
         if (optionsMap.has(opt.value)) {
           // type assertion is not necessary, but tsc wants it
           // tslint:disable-next-line no-unnecessary-type-assertion
-          (this.local.valueOptions as ValueOptions[])
-              .push({value: opt.value, label: optionsMap.get(opt.value) as string});
+          (this.local.valueOptions as ValueOptions[]).push({
+            value: opt.value,
+            label: optionsMap.get(opt.value) as string,
+          });
         } else {
           // type assertion is not necessary, but tsc wants it
           // tslint:disable-next-line no-unnecessary-type-assertion
-          (this.local.valueOptions as ValueOptions[]).push({value: opt.value, label: opt.label});
+          (this.local.valueOptions as ValueOptions[]).push({ value: opt.value, label: opt.label });
         }
       });
     }

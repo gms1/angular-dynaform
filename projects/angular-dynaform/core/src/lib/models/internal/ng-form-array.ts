@@ -1,11 +1,10 @@
-import {AbstractControl, FormArray} from '@angular/forms';
+import { AbstractControl, FormArray } from '@angular/forms';
 
+import { AbstractControlOptions } from './ng-abstract';
 
-import {AbstractControlOptions} from './ng-abstract';
-
-
-export interface NgArrayModelHandler { updateLength(length: number, isMinimum?: boolean): void; }
-
+export interface NgArrayModelHandler {
+  updateLength(length: number, isMinimum?: boolean): void;
+}
 
 /**
  * @description NgFormArray extends FormArray
@@ -22,19 +21,19 @@ export class NgFormArray extends FormArray {
     super(controls, options);
   }
 
-  setValue(value: any[], options: {onlySelf?: boolean, emitEvent?: boolean} = {}): void {
+  setValue(value: any[], options: { onlySelf?: boolean; emitEvent?: boolean } = {}): void {
     this.updateLength(value.length);
     super.setValue(value, options);
   }
 
-  patchValue(value: any[], options: {onlySelf?: boolean, emitEvent?: boolean} = {}): void {
+  patchValue(value: any[], options: { onlySelf?: boolean; emitEvent?: boolean } = {}): void {
     if (value.length > this.length) {
       this.updateLength(value.length, true);
     }
     super.patchValue(value, options);
   }
 
-  reset(value?: any[], options?: {onlySelf?: boolean; emitEvent?: boolean}): void {
+  reset(value?: any[], options?: { onlySelf?: boolean; emitEvent?: boolean }): void {
     this.updateLength(value ? value.length : 0);
     super.reset(value, options);
   }

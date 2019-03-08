@@ -1,19 +1,29 @@
-import {Component, ElementRef, EventEmitter, Input, Output, SimpleChanges, Type} from '@angular/core';
+import {
+  Component,
+  ElementRef,
+  EventEmitter,
+  Input,
+  Output,
+  SimpleChanges,
+  Type,
+} from '@angular/core';
 
-import {DynamicFormControl} from './dynamic-form-control';
-import {DynamicForm} from './dynamic-form';
-import {DynamicFormService} from '../services/dynamic-form.service';
+import { DynamicFormControl } from './dynamic-form-control';
+import { DynamicForm } from './dynamic-form';
+import { DynamicFormService } from '../services/dynamic-form.service';
 
-import {ControlOptions} from '../config/control-options';
-import {ControlModel} from '../models/control-model';
-import {DynamicFormAction} from '../actions/dynamic-form.action';
-import {RelationAction} from '../actions/relation.action';
+import { ControlOptions } from '../config/control-options';
+import { ControlModel } from '../models/control-model';
+import { DynamicFormAction } from '../actions/dynamic-form.action';
+import { RelationAction } from '../actions/relation.action';
 
 const defaultButtonType = 'button';
 
 @Component({
   selector: 'adf-contol-component-base',
-  template: `Please provide a control-component for '{{ model.config.controlType }}!'`
+  template: `
+    Please provide a control-component for '{{ model.config.controlType }}!'
+  `,
 })
 // tslint:disable use-life-cycle-interface
 // tslint:disable-next-line component-class-suffix
@@ -47,7 +57,10 @@ export class DynamicFormControlComponentBase implements DynamicFormControl {
   private relationAction?: RelationAction;
 
   constructor(
-      public form: DynamicForm, public dynamicFormService: DynamicFormService, private _elementRef: ElementRef) {
+    public form: DynamicForm,
+    public dynamicFormService: DynamicFormService,
+    private _elementRef: ElementRef,
+  ) {
     this.focusChanges = new EventEmitter<any>();
     this.click = new EventEmitter<any>();
     this.buttonType = defaultButtonType;
@@ -59,19 +72,19 @@ export class DynamicFormControlComponentBase implements DynamicFormControl {
     }
   }
 
-
   ngOnInit(): void {
     if (this.model.enableIf || this.model.showIf) {
       this.relationAction = new RelationAction(this);
       this.relationAction.ngOnInit();
     }
     if (this.model.config.action) {
-      const type: Type<DynamicFormAction>|undefined =
-          this.dynamicFormService.actionTypes.getType(this.model.config.action);
+      const type: Type<DynamicFormAction> | undefined = this.dynamicFormService.actionTypes.getType(
+        this.model.config.action,
+      );
       if (!type) {
         throw new Error(`no type registered for '${this.model.config.action}'`);
       }
-      this.action = new type(this);  // DI not supported, because we may need multiple instances for the same type
+      this.action = new type(this); // DI not supported, because we may need multiple instances for the same type
       if (this.model.config.action === 'submit' || this.model.config.action === 'reset') {
         this.buttonType = this.model.config.action;
       }
@@ -108,7 +121,11 @@ export class DynamicFormControlComponentBase implements DynamicFormControl {
     if (this.action) {
       this.action.onFocus(event);
     }
-    if (this.model.parentArray && this.model.parentArrayIdx !== undefined && this.model.parentArrayIdx >= 0) {
+    if (
+      this.model.parentArray &&
+      this.model.parentArrayIdx !== undefined &&
+      this.model.parentArrayIdx >= 0
+    ) {
       this.model.parentArray.selectedIndex = this.model.parentArrayIdx;
     }
     this.focusChanges.emit(true);
@@ -127,9 +144,13 @@ export class DynamicFormControlComponentBase implements DynamicFormControl {
   selector: 'adf-contol-component',
   inputs: ['model'],
   outputs: ['focusChanges', 'click'],
-  template: `Please provide a control-component for '{{ model.config.controlType }}!'`
+  template: `
+    Please provide a control-component for '{{ model.config.controlType }}!'
+  `,
 })
-export class DynamicFormControlComponent<M extends ControlModel> extends DynamicFormControlComponentBase {
+export class DynamicFormControlComponent<
+  M extends ControlModel
+> extends DynamicFormControlComponentBase {
   @Input() model!: M;
 
   constructor(form: DynamicForm, dynamicFormService: DynamicFormService, elRef: ElementRef) {

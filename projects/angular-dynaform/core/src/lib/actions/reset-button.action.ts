@@ -1,10 +1,10 @@
-import {Subject} from 'rxjs';
-import {distinctUntilChanged, map, takeUntil} from 'rxjs/operators';
+import { Subject } from 'rxjs';
+import { distinctUntilChanged, map, takeUntil } from 'rxjs/operators';
 
-import {FormGroup} from '@angular/forms';
+import { FormGroup } from '@angular/forms';
 
-import {DynamicFormAction} from './dynamic-form.action';
-import {DynamicFormControlComponentBase} from '../components/dynamic-form-control.component';
+import { DynamicFormAction } from './dynamic-form.action';
+import { DynamicFormControlComponentBase } from '../components/dynamic-form-control.component';
 
 // tslint:disable use-life-cycle-interface
 export class ResetButtonAction extends DynamicFormAction {
@@ -20,11 +20,15 @@ export class ResetButtonAction extends DynamicFormAction {
     super.ngOnInit();
     this.rootFormGroup = this.model.formModel.group.ngControl;
     this.model.ngControl.disable();
-    this.rootFormGroup.valueChanges.pipe(map(() => this.rootFormGroup.dirty ? true : false), distinctUntilChanged())
-        .pipe(takeUntil(this.unsubscribe))
-        .subscribe((dirty) => {
-          this.updateState(dirty);
-        });
+    this.rootFormGroup.valueChanges
+      .pipe(
+        map(() => (this.rootFormGroup.dirty ? true : false)),
+        distinctUntilChanged(),
+      )
+      .pipe(takeUntil(this.unsubscribe))
+      .subscribe((dirty) => {
+        this.updateState(dirty);
+      });
   }
 
   ngOnDestroy(): void {

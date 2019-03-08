@@ -3,17 +3,14 @@ import {
   ControlInputOptions,
   DynamicFormControlComponentBase,
   DynamicFormControlComponent,
-  ValueModel
+  ValueModel,
 } from '@angular-dynaform/core';
-import {Component} from '@angular/core';
+import { Component } from '@angular/core';
 
 @Component({
   selector: 'adf-basic-input-component',
   template: `
-    <div
-      [formGroup]="model.ngGroup"
-      [hidden]="model.hidden"
-    >
+    <div [formGroup]="model.ngGroup" [hidden]="model.hidden">
       <label
         *ngIf="model.local.label"
         [attr.for]="model.id"
@@ -35,12 +32,11 @@ import {Component} from '@angular/core';
         [attr.max]="options.max"
         [maxlength]="options.maxLength"
       />
-      <adf-error-container [model]="model">
-      </adf-error-container>
+      <adf-error-container [model]="model"></adf-error-container>
     </div>
   `,
   inputs: ['model'],
-  providers: [{provide: DynamicFormControlComponentBase, useExisting: BasicInputComponent}]
+  providers: [{ provide: DynamicFormControlComponentBase, useExisting: BasicInputComponent }],
 })
 export class BasicInputComponent extends DynamicFormControlComponent<ValueModel> {
   model!: ValueModel;

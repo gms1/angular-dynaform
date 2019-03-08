@@ -1,12 +1,11 @@
 export enum ControlType {
-
   CONTROL_UNKNOWN = 'type:unknown',
 
   // controls for group or subset model:
   CONTROL_DIVISION = 'type:division',
   CONTROL_FIELDSET = 'type:fieldset',
   CONTROL_TABGROUP = 'type:tabgroup',
-  CONTROL_STEPPER  = 'type:stepper',
+  CONTROL_STEPPER = 'type:stepper',
 
   // controls for array model:
   CONTROL_ARRAY = 'type:array',
@@ -26,5 +25,5 @@ export enum ControlType {
 
   // controls for null model:
   CONTROL_BUTTON = 'type:button',
-  CONTROL_SEPARATOR = 'type:separator'
+  CONTROL_SEPARATOR = 'type:separator',
 }

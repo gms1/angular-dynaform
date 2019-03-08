@@ -1,4 +1,3 @@
-
 export enum MaterialControlType {
   CONTROL_UNKNOWN = 'mat:unknown',
 
@@ -6,7 +5,7 @@ export enum MaterialControlType {
   CONTROL_DIVISION = 'mat:division',
   CONTROL_FIELDSET = 'mat:fieldset',
   CONTROL_TABGROUP = 'mat:tabgroup',
-  CONTROL_STEPPER  = 'mat:stepper',
+  CONTROL_STEPPER = 'mat:stepper',
 
   // controls for array model:
   CONTROL_ARRAY = 'mat:array',
@@ -26,6 +25,5 @@ export enum MaterialControlType {
 
   // controls for null model:
   CONTROL_BUTTON = 'mat:button',
-  CONTROL_SEPARATOR = 'mat:separator'
-
+  CONTROL_SEPARATOR = 'mat:separator',
 }

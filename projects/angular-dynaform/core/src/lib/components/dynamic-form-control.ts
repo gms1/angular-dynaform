@@ -1,11 +1,18 @@
-import {EventEmitter, OnChanges, OnDestroy, OnInit, AfterViewInit, ElementRef} from '@angular/core';
+import {
+  EventEmitter,
+  OnChanges,
+  OnDestroy,
+  OnInit,
+  AfterViewInit,
+  ElementRef,
+} from '@angular/core';
 
-import {ControlOptions} from '../config/control-options';
-import {ControlModel} from '../models/control-model';
-import {Stepper} from '../models/stepper';
+import { ControlOptions } from '../config/control-options';
+import { ControlModel } from '../models/control-model';
+import { Stepper } from '../models/stepper';
 
-import {DynamicForm} from './dynamic-form';
-import {DynamicFormAction} from '../actions/dynamic-form.action';
+import { DynamicForm } from './dynamic-form';
+import { DynamicFormAction } from '../actions/dynamic-form.action';
 
 export interface DynamicFormControl extends OnChanges, OnInit, OnDestroy, AfterViewInit {
   form: DynamicForm;

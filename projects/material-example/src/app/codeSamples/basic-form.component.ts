@@ -1,13 +1,18 @@
-import {Component, ViewChild} from '@angular/core';
-import {ControlType, DynamicForm, FormConfig, FormModel, ModelType, DynamicFormService} from '@angular-dynaform/core';
-
+import { Component, ViewChild } from '@angular/core';
+import {
+  ControlType,
+  DynamicForm,
+  FormConfig,
+  FormModel,
+  ModelType,
+  DynamicFormService,
+} from '@angular-dynaform/core';
 
 @Component({
   selector: 'app-basic-form',
   template: `
-    <adf-form [model]="formModel" (adfSubmit)="onSubmit($event)">
-    </adf-form>
-  `
+    <adf-form [model]="formModel" (adfSubmit)="onSubmit($event)"></adf-form>
+  `,
 })
 export class BasicFormComponent {
   @ViewChild(DynamicForm) dynaForm!: DynamicForm;
@@ -22,18 +27,18 @@ export class BasicFormComponent {
           id: 'name',
           modelType: ModelType.MODEL_VALUE,
           controlType: ControlType.CONTROL_INPUT,
-          options: {label: 'name', placeholder: 'Enter your name', maxLength: 30, minLength: 4},
-          validators: ['required', 'minLength', 'maxLength']
+          options: { label: 'name', placeholder: 'Enter your name', maxLength: 30, minLength: 4 },
+          validators: ['required', 'minLength', 'maxLength'],
         },
         {
           id: 'submit',
           modelType: ModelType.MODEL_NULL,
           controlType: ControlType.CONTROL_BUTTON,
-          options: {label: 'Submit'},
-          action: 'submit'
-        }
-      ]
-    }
+          options: { label: 'Submit' },
+          action: 'submit',
+        },
+      ],
+    },
   };
 
   name?: string;
@@ -50,19 +55,21 @@ export class BasicFormComponent {
 @Component({
   selector: 'app-basic-form-container',
   template: `
-<div class="basic-form-example">
-  <mat-card class="mat-card">
-    <mat-card-header>
-      <mat-card-title *ngIf="formComponent.name; else fresh">Basic Form for {{formComponent.name}}</mat-card-title>
-      <ng-template #fresh>Basic Form</ng-template>
-    </mat-card-header>
-    <mat-card-content>
-      <app-basic-form></app-basic-form>
-    </mat-card-content>
-  </mat-card>
-</div>
+    <div class="basic-form-example">
+      <mat-card class="mat-card">
+        <mat-card-header>
+          <mat-card-title *ngIf="formComponent.name; else fresh">
+            Basic Form for {{ formComponent.name }}
+          </mat-card-title>
+          <ng-template #fresh>Basic Form</ng-template>
+        </mat-card-header>
+        <mat-card-content>
+          <app-basic-form></app-basic-form>
+        </mat-card-content>
+      </mat-card>
+    </div>
   `,
-  styles: []
+  styles: [],
 })
 export class BasicFormContainerComponent {
   @ViewChild(BasicFormComponent) formComponent!: BasicFormComponent;

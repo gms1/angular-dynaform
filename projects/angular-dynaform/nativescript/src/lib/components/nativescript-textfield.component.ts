@@ -5,9 +5,9 @@ import {
   DynamicFormControlComponentBase,
   DynamicFormControlComponent,
   DynamicFormService,
-  ValueModel
+  ValueModel,
 } from '@angular-dynaform/core';
-import {Component, ElementRef, OnInit, OnChanges, SimpleChanges} from '@angular/core';
+import { Component, ElementRef, OnInit, OnChanges, SimpleChanges } from '@angular/core';
 
 // TODO: support numeric input
 
@@ -17,42 +17,38 @@ const TEXTFIELD_DEFAULT_KEYBOARDTYPE = null;
 @Component({
   selector: 'adf-nativescript-textfield',
   template: `
-  <StackLayout
-    [formGroup]="model.ngGroup"
-    [visibility]="model.hidden ? 'collapsed' : 'visible'"
-  >
-    <Label
-      *ngIf="model.local.label"
-      class="adf-front-label"
-      [ngClass]="model.css.label"
-      [text]="model.local.label"
-    >
-    </Label>
-    <TextField
-      [formControlName]="model.key"
-      [id]="model.id"
-      [secure]="opts.secure"
-      [editable]="!options.readOnly"
-      [maxLength]="opts.maxLength"
-      [hint]="model.local.placeholder"
-      [keyboardType]="opts.keyboardType"
-      [ngClass]="model.css.control"
-      adfNSDomElement
-      [required]="options.required"
-    >
-    </TextField>
-    <adf-error-container [model]="model">
-    </adf-error-container>
-  </StackLayout>
-`,
+    <StackLayout [formGroup]="model.ngGroup" [visibility]="model.hidden ? 'collapsed' : 'visible'">
+      <Label
+        *ngIf="model.local.label"
+        class="adf-front-label"
+        [ngClass]="model.css.label"
+        [text]="model.local.label"
+      ></Label>
+      <TextField
+        [formControlName]="model.key"
+        [id]="model.id"
+        [secure]="opts.secure"
+        [editable]="!options.readOnly"
+        [maxLength]="opts.maxLength"
+        [hint]="model.local.placeholder"
+        [keyboardType]="opts.keyboardType"
+        [ngClass]="model.css.control"
+        adfNSDomElement
+        [required]="options.required"
+      ></TextField>
+      <adf-error-container [model]="model"></adf-error-container>
+    </StackLayout>
+  `,
   inputs: ['model'],
-  providers: [{provide: DynamicFormControlComponentBase, useExisting: NativeScriptTextFieldComponent}]
+  providers: [
+    { provide: DynamicFormControlComponentBase, useExisting: NativeScriptTextFieldComponent },
+  ],
 })
-export class NativeScriptTextFieldComponent extends DynamicFormControlComponent<ValueModel> implements OnInit,
-                                                                                                       OnChanges {
+export class NativeScriptTextFieldComponent extends DynamicFormControlComponent<ValueModel>
+  implements OnInit, OnChanges {
   model!: ValueModel;
   options!: ControlInputOptions;
-  opts!: {[key: string]: any};
+  opts!: { [key: string]: any };
 
   constructor(form: DynamicForm, dynamicFormService: DynamicFormService, elRef: ElementRef) {
     super(form, dynamicFormService, elRef);
@@ -68,7 +64,9 @@ export class NativeScriptTextFieldComponent extends DynamicFormControlComponent<
   updateOpts(): void {
     this.opts = {};
     this.setOptsDefaults();
-    this.opts.maxLength = this.options.maxLength ? this.options.maxLength : TEXTFIELD_DEFAULT_MAXLENGTH;
+    this.opts.maxLength = this.options.maxLength
+      ? this.options.maxLength
+      : TEXTFIELD_DEFAULT_MAXLENGTH;
     if (this.options.inputType) {
       if (this.options.inputType === 'password') {
         this.opts.secure = true;
@@ -98,7 +96,6 @@ export class NativeScriptTextFieldComponent extends DynamicFormControlComponent<
       }
     }
   }
-
 
   ngOnInit() {
     this.updateOpts();

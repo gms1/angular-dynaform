@@ -1,15 +1,15 @@
-import {Injector, EventEmitter} from '@angular/core';
-import {Observable} from 'rxjs';
+import { Injector, EventEmitter } from '@angular/core';
+import { Observable } from 'rxjs';
 
-import {FormConfig, FormI18n, ControlConfig, ModelType, ControlType} from '../config';
-import {DynamicFormService} from '../services/dynamic-form.service';
+import { FormConfig, FormI18n, ControlConfig, ModelType, ControlType } from '../config';
+import { DynamicFormService } from '../services/dynamic-form.service';
 
-import {ControlModel} from './control-model';
-import {GroupModel, GroupModelBase} from './group-model';
-import {ArrayModel} from './array-model';
-import {ValueModel} from './value-model';
+import { ControlModel } from './control-model';
+import { GroupModel, GroupModelBase } from './group-model';
+import { ArrayModel } from './array-model';
+import { ValueModel } from './value-model';
 
-import {JsonPointer} from 'jsonpointerx';
+import { JsonPointer } from 'jsonpointerx';
 
 export class FormModel {
   dynamicFormService: DynamicFormService;
@@ -27,12 +27,12 @@ export class FormModel {
     const groupConfig: ControlConfig = {
       id: config.id,
       modelType: ModelType.MODEL_GROUP,
-      controlType: ControlType.CONTROL_UNKNOWN,  // this model has no corresponding control component
+      controlType: ControlType.CONTROL_UNKNOWN, // this model has no corresponding control component
       updateOn: config.updateOn,
       validators: config.validators,
       asyncValidators: config.asyncValidators,
       options: config.options,
-      user: config.user
+      user: config.user,
     };
     this.group = this.dynamicFormService.modelFactory.createRootGroup(groupConfig, this);
     this.group.setCSSClasses(this.group.css.container, 'adf-form-container');
@@ -41,10 +41,10 @@ export class FormModel {
     this.group.setCSSClasses(this.group.css.error, 'adf-form-error');
   }
 
-  get i18n(): FormI18n|undefined {
+  get i18n(): FormI18n | undefined {
     return this._i18n;
   }
-  set i18n(i18n: FormI18n|undefined) {
+  set i18n(i18n: FormI18n | undefined) {
     this._i18n = i18n;
     this.group.reTranslate();
   }
@@ -75,11 +75,16 @@ export class FormModel {
 
   private _initValue: any;
 
-  constructor(dynamicFormService: DynamicFormService, injector: Injector, config: FormConfig, i18n?: FormI18n) {
+  constructor(
+    dynamicFormService: DynamicFormService,
+    injector: Injector,
+    config: FormConfig,
+    i18n?: FormI18n,
+  ) {
     this.dynamicFormService = dynamicFormService;
     this.injector = injector;
     this._i18n = i18n;
-    this.config = config;  // create the group control
+    this.config = config; // create the group control
   }
 
   initValue(value?: any): void {
@@ -93,7 +98,7 @@ export class FormModel {
 
   clearValue(): void {
     if (this._initValue) {
-      this.group.ngControl.reset(undefined, {emitEvent: false});
+      this.group.ngControl.reset(undefined, { emitEvent: false });
       setDirtyIfChanged(this.group, this._initValue);
       // emit event to notify controls
       (this.valueChanges as EventEmitter<any>).emit(this.value);
@@ -102,8 +107,6 @@ export class FormModel {
     }
   }
 
-
-
   initValueFromAppModel(appData: any, appPointerPrefix?: string): any {
     const newVal = this.valueFromAppModel(appData, appPointerPrefix);
     this.initValue(newVal);
@@ -111,14 +114,20 @@ export class FormModel {
 
   valueFromAppModel(appData: any, appPointerPrefix?: string): any {
     return this.group.valueFromAppModel(
-        {}, appData, appPointerPrefix ? JsonPointer.compile(appPointerPrefix) : undefined);
+      {},
+      appData,
+      appPointerPrefix ? JsonPointer.compile(appPointerPrefix) : undefined,
+    );
   }
 
   valueToAppModel(appData: any, appPointerPrefix?: string): any {
-    return this.group.valueToAppModel(appData, appPointerPrefix ? JsonPointer.compile(appPointerPrefix) : undefined);
+    return this.group.valueToAppModel(
+      appData,
+      appPointerPrefix ? JsonPointer.compile(appPointerPrefix) : undefined,
+    );
   }
 
-  findControlByPath(path: string|string[]): ControlModel|undefined {
+  findControlByPath(path: string | string[]): ControlModel | undefined {
     const searchPath = Array.isArray(path) ? path : path.split('.');
 
     let resModel: ControlModel = this.group;
@@ -134,10 +143,8 @@ export class FormModel {
   }
 }
 
-
-
 function setDirtyIfChanged(item: ControlModel, fromFormValue: any): void {
-  if ((item instanceof GroupModelBase) || (item instanceof ArrayModel)) {
+  if (item instanceof GroupModelBase || item instanceof ArrayModel) {
     (item.items as ControlModel[]).forEach((childItem: ControlModel) => {
       setDirtyIfChanged(childItem, fromFormValue);
     });
