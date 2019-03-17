@@ -1,6 +1,6 @@
 {
   "name": "@angular-dynaform/main",
-  "version": "2.1.4",
+  "version": "2.1.5",
   "license": "MIT",
   "scripts": {
     "ng": "ng",
@@ -82,7 +82,7 @@
     "core-js": "^2.6.5",
     "hammerjs": "^2.0.8",
     "jsep": "^0.3.4",
-    "jsonpointerx": "^1.0.21",
+    "jsonpointerx": "^1.0.22",
     "nativescript-angular": "^7.2.3",
     "nativescript-checkbox": "^3.0.3",
     "rxjs": "^6.4.0",

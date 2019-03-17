@@ -1,6 +1,6 @@
 {
   "name": "@angular-dynaform/basic",
-  "version": "2.1.4",
+  "version": "2.1.5",
   "description": "angular-dynaform - basic",
   "author": "Guenter Sandner <www.gms@gmx.at>",
   "license": "MIT",
@@ -25,7 +25,7 @@
     "@angular/core": "^7.2.9",
     "@angular/common": "^7.2.9",
     "@angular/forms": "^7.2.9",
-    "@angular-dynaform/core": "2.1.4"
+    "@angular-dynaform/core": "2.1.5"
   },
   "scripts": {
     "prepublishOnly": "echo \"ERROR: please use the production-build for publishing\" && exit 1"
