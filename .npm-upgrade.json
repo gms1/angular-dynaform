@@ -3,6 +3,22 @@
     "systemjs": {
       "versions": ">=0.20",
       "reason": "not supported by angular"
+    },
+    "core-js": {
+      "versions": ">=3.0.0",
+      "reason": "angular/cli issue 13954"
+    },
+    "zone.js": {
+      "versions": ">=0.9.0",
+      "reason": "@angular/core peer dependency"
+    },
+    "ng-packagr": {
+      "versions": ">=5.0.0",
+      "reason": "@angular-devkit/build-ng-packagr peer dependency"
+    },
+    "typescript": {
+      "versions": ">=3.3.0",
+      "reason": "@angular/compiler-cli peer dependency"
     }
   }
 }
