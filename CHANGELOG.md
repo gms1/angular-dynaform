@@ -1,6 +1,6 @@
 # CHANGELOG
 
-## 2.1.1 - 2.1.5
+## 2.1.1 - 2.1.6
 
 maintenance release
 
