@@ -2,16 +2,16 @@ language: node_js
 sudo: required
 
 node_js:
-  - "node"
+  - 'lts/*'
 
 install:
   - bash build/travis_install
 
 script:
-   - ./build/travis_run
+  - ./build/travis_run
 
 after_script:
   - npm run coverage:coveralls
 
 addons:
- chrome: stable
+  chrome: stable
