@@ -1,43 +1,40 @@
 # angular-dynaform
 
 [![npm (scoped)](https://img.shields.io/npm/v/@angular-dynaform/core.svg?colorB=007ec6)](https://www.npmjs.com/package/%40angular-dynaform%2Fcore)
-[![Known Vulnerabilities](https://snyk.io/test/github/gms1/angular-dynaform/badge.svg)](https://snyk.io/test/github/gms1/angular-dynaform)
 [![Build Status](https://api.travis-ci.org/gms1/angular-dynaform.svg?branch=master)](https://travis-ci.org/gms1/angular-dynaform)
 [![Coverage Status](https://coveralls.io/repos/github/gms1/angular-dynaform/badge.svg?branch=master&service=github)](https://coveralls.io/github/gms1/angular-dynaform?branch=master)
 [![DeepScan Grade](https://deepscan.io/api/projects/698/branches/1106/badge/grade.svg)](https://deepscan.io/dashboard/#view=project&pid=698&bid=1106)
 [![Dependency Status](https://david-dm.org/gms1/angular-dynaform.svg)](https://david-dm.org/gms1/angular-dynaform)
-[![Greenkeeper badge](https://badges.greenkeeper.io/gms1/angular-dynaform.svg)](https://greenkeeper.io/)
-
+[![Known Vulnerabilities](https://snyk.io/test/github/gms1/angular-dynaform/badge.svg)](https://snyk.io/test/github/gms1/angular-dynaform)
 
 [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat-square)](http://makeapullrequest.com)
-
 
 **angular-dynaform** is a library for rapid development of model-driven reactive forms for mobile and web
 
 ## Features
 
-* generic, expressive and extendable form library
-* JSON serializable form configuration
-* shared forms for mobile and web
-* form builder
-* observable form values and form value updates using angulars form model as a tree of FormGroups/FormArrays/FormControls
-* observable focus changes
-* application data model to form data model mapping
-* enable/disable or show/hide fields based on conditions defined on related field values
-* generic internationalization (labels, placeholders, options (select/radiobutton))
-* easily extensible through:
-  * custom components
-  * custom validators
-  * custom actions (triggered by blur/focus/click events) and/or observing value/status changes
+- generic, expressive and extendable form library
+- JSON serializable form configuration
+- shared forms for mobile and web
+- form builder
+- observable form values and form value updates using angulars form model as a tree of FormGroups/FormArrays/FormControls
+- observable focus changes
+- application data model to form data model mapping
+- enable/disable or show/hide fields based on conditions defined on related field values
+- generic internationalization (labels, placeholders, options (select/radiobutton))
+- easily extensible through:
+  - custom components
+  - custom validators
+  - custom actions (triggered by blur/focus/click events) and/or observing value/status changes
 
 ## Supported UI-Frameworks
 
-* [Material](https://github.com/angular/material2)
-* [Nativescript Angular](https://github.com/NativeScript/nativescript-angular/)
+- [Material](https://github.com/angular/material2)
+- [Nativescript Angular](https://github.com/NativeScript/nativescript-angular/)
 
 ## Links
 
-* [Example on Stackblitz](https://stackblitz.com/edit/gms1-angular-dynaform-material)
+- [Example on Stackblitz](https://stackblitz.com/edit/gms1-angular-dynaform-material)
 
 ## TODO
 
@@ -47,17 +44,17 @@
 
 ## Table of Contents
 
-* [Getting Started](#getting-started)
-* [Basic Usage](#basic-usage)
-* [Customization](#customization)
-* [Control-types](#control-types)
-* [License](#license)
-* [Release Notes](#release-notes)
-* [Contributing](#contributing)
+- [Getting Started](#getting-started)
+- [Basic Usage](#basic-usage)
+- [Customization](#customization)
+- [Control-types](#control-types)
+- [License](#license)
+- [Release Notes](#release-notes)
+- [Contributing](#contributing)
 
 ## Getting Started
 
-* install the packages:
+- install the packages:
 
 ```shell
 npm install @angular-dynaform/core --save
@@ -72,7 +69,7 @@ npm install @angular/common @angular/core @angular/forms rxjs jsep jsonpointerx
 
 ## Basic Usage
 
-* import the form modules in the root NgModule of your application:
+- import the form modules in the root NgModule of your application:
 
 ```typescript
 @NgModule({
@@ -84,7 +81,7 @@ export class AppModule {
 }
 ```
 
-* in other modules, import only the 'DynamicFormModule' and do not import the UI specific modules (e.g 'DynamicMaterialFormModule'):
+- in other modules, import only the 'DynamicFormModule' and do not import the UI specific modules (e.g 'DynamicMaterialFormModule'):
 
 ```typescript
 @NgModule({
@@ -96,15 +93,14 @@ export class SharedModule {
 }
 ```
 
-* implement a form:
+- implement a form:
 
 ```typescript
 @Component({
   selector: 'app-basic-form',
   template: `
-    <adf-form [model]="formModel" (adfSubmit)="onSubmit($event)">
-    </adf-form>
-  `
+    <adf-form [model]="formModel" (adfSubmit)="onSubmit($event)"></adf-form>
+  `,
 })
 export class BasicFormComponent {
   @ViewChild(DynamicForm) dynaForm!: DynamicForm;
@@ -119,18 +115,18 @@ export class BasicFormComponent {
           id: 'name',
           modelType: ModelType.MODEL_VALUE,
           controlType: ControlType.CONTROL_INPUT,
-          options: {label: 'name', placeholder: 'Enter your name', maxLength: 30, minLength: 4},
-          validators: ['required', 'minLength', 'maxLength']
+          options: { label: 'name', placeholder: 'Enter your name', maxLength: 30, minLength: 4 },
+          validators: ['required', 'minLength', 'maxLength'],
         },
         {
           id: 'submit',
           modelType: ModelType.MODEL_NULL,
           controlType: ControlType.CONTROL_BUTTON,
-          options: {label: 'Submit'},
-          action: 'submit'
-        }
-      ]
-    }
+          options: { label: 'Submit' },
+          action: 'submit',
+        },
+      ],
+    },
   };
 
   name?: string;
@@ -145,69 +141,79 @@ export class BasicFormComponent {
 }
 ```
 
-* create the form config:
+- create the form config:
 
-  * using the Form Builder:
+  - using the Form Builder:
 
-   inject `FormBuilder` into your component class. You can then call its method 'createForm' to create an instance of 'FormBuilderForm'
+  inject `FormBuilder` into your component class. You can then call its method 'createForm' to create an instance of 'FormBuilderForm'
 
 ```typescript
+const form = formBuilder.createForm({ id: 'exampleForm', updateOn: 'blur' });
 
-    const form = formBuilder.createForm({id: 'exampleForm', updateOn: 'blur'});
+// create divisions:
+const persondiv = form.group.addSubset({ id: 'person', controlType: ControlType.CONTROL_DIVISION });
+const buttondiv = form.group.addSubset({
+  id: 'buttondivision',
+  controlType: [ControlType.CONTROL_DIVISION],
+  options: { css: { content: 'button-division-content' } },
+});
 
-    // create divisions:
-    const persondiv = form.group.addSubset({id: 'person', controlType: ControlType.CONTROL_DIVISION});
-    const buttondiv = form.group.addSubset({
-      id: 'buttondivision',
-      controlType: [ControlType.CONTROL_DIVISION],
-      options: {css: {content: 'button-division-content'}}
-    });
+// add controls to the persondiv division:
+persondiv.group.addControl({
+  id: 'salutation',
+  controlType: ControlType.CONTROL_RADIOGROUP,
+  options: { valueOptions: [{ value: 'mr', label: 'Mr.' }, { value: 'ms', label: 'Ms.' }] },
+  validators: ['required'],
+});
+persondiv.group.addControl({
+  id: 'title',
+  controlType: ControlType.CONTROL_INPUT,
+  options: { label: 'Title', placeholder: 'Enter your title', maxLength: 30, minLength: 2 },
+  validators: ['minLength', 'maxLength'],
+});
+persondiv.group.addControl({
+  id: 'name',
+  controlType: ControlType.CONTROL_INPUT,
+  options: { label: 'name', placeholder: 'Enter your name', maxLength: 60, minLength: 4 },
+  validators: ['required', 'minLength', 'maxLength'],
+});
 
-    // add controls to the persondiv division:
-    persondiv.group.addControl({
-      id: 'salutation',
-      controlType: ControlType.CONTROL_RADIOGROUP,
-      options: {valueOptions: [{value: 'mr', label: 'Mr.'}, {value: 'ms', label: 'Ms.'}]},
-      validators: ['required']
-    });
-    persondiv.group.addControl({
-      id: 'title',
-      controlType: ControlType.CONTROL_INPUT,
-      options: {label: 'Title', placeholder: 'Enter your title', maxLength: 30, minLength: 2},
-      validators: ['minLength', 'maxLength']
-    });
-    persondiv.group.addControl({
-      id: 'name',
-      controlType: ControlType.CONTROL_INPUT,
-      options: {label: 'name', placeholder: 'Enter your name', maxLength: 60, minLength: 4},
-      validators: ['required', 'minLength', 'maxLength']
-    });
+// add controls to the button division:
+buttondiv.group.addButton({
+  id: 'clear',
+  controlType: ControlType.CONTROL_BUTTON,
+  options: { label: 'Clear' },
+  action: 'clear',
+});
+buttondiv.group.addSeparator({
+  id: 'separatorMainButtons',
+  controlType: ControlType.CONTROL_SEPARATOR,
+  options: { css: { container: 'button-separator' } },
+});
+buttondiv.group.addButton({
+  id: 'reset',
+  controlType: ControlType.CONTROL_BUTTON,
+  options: { label: 'Reset' },
+  action: 'reset',
+});
+buttondiv.group.addButton({
+  id: 'submit',
+  controlType: ControlType.CONTROL_BUTTON,
+  options: { label: 'Submit' },
+  action: 'submit',
+});
 
-    // add controls to the button division:
-    buttondiv.group.addButton(
-        {id: 'clear', controlType: ControlType.CONTROL_BUTTON, options: {label: 'Clear'}, action: 'clear'});
-    buttondiv.group.addSeparator({
-      id: 'separatorMainButtons',
-      controlType: ControlType.CONTROL_SEPARATOR,
-      options: {css: {container: 'button-separator'}}
-    });
-    buttondiv.group.addButton(
-        {id: 'reset', controlType: ControlType.CONTROL_BUTTON, options: {label: 'Reset'}, action: 'reset'});
-    buttondiv.group.addButton(
-        {id: 'submit', controlType: ControlType.CONTROL_BUTTON, options: {label: 'Submit'}, action: 'submit'});
-
-    // create to form configuration:
-    const formConfig: FormConfig = form.toFormConfig();
-
+// create to form configuration:
+const formConfig: FormConfig = form.toFormConfig();
 ```
 
-  * JSON configuration:
+- JSON configuration:
 
-  [Configuration of the plunker example](./projects/material-example/src/app/app.config.ts)
+[Configuration of the plunker example](./projects/material-example/src/app/app.config.ts)
 
-  [ControlConfig Interface](./projects/angular-dynaform/core/src/lib/config/control-config.ts)
+[ControlConfig Interface](./projects/angular-dynaform/core/src/lib/config/control-config.ts)
 
-* observable form value and form value update:
+- observable form value and form value update:
 
 ```typescript
     // subscribe to form value changes:
@@ -227,7 +233,7 @@ export class BasicFormComponent {
 
 ```
 
-* observable control values and control value updates:
+- observable control values and control value updates:
 
 ```typescript
     ctrlModel = dynaForm.findComponentById(id).model;
@@ -244,7 +250,7 @@ export class BasicFormComponent {
     ctrlModel.setValue(value);
 ```
 
-* observable focus changes and click events:
+- observable focus changes and click events:
 
 ```typescript
     ctrlComp = dynaForm.findComponentById(id);
@@ -256,12 +262,12 @@ export class BasicFormComponent {
     ctrlComp.click.subscribe(...);
 ```
 
-* get/set form data using an application data model to form data model mapping
+- get/set form data using an application data model to form data model mapping
 
 In your form configuration define the JSON pointer to the application data model and
 use 'dynaForm.initValueFromAppModel' instead of 'dynaForm.initValue' and 'dynaForm.valueToAppModel' instead of 'dynaForm.value'
 
-* enable/disable or show/hide fields based on conditions defined on related field values
+- enable/disable or show/hide fields based on conditions defined on related field values
 
 In the relations expressions, you can combine all common arithmetic, comparison, and logical operators, as well as references to form control values. 'foo.bar' would reference the value of the 'bar' control in the 'foo' group;
 In this example, the 'newsletter' checkbox will only be enabled if the 'atc' checkbox has been selected:
@@ -282,20 +288,20 @@ In this example, the 'newsletter' checkbox will only be enabled if the 'atc' che
           ]
 ```
 
-* layout/styling
+- layout/styling
 
 you can optionally assign additional CSS classes using **ControlConfig.options.css** and let **angular-dynaform** add them to the container, control, label sections of the corresponding component
 
 The following CSS classes are predefined:
 
-  * on all components: 'adf-container', 'adf-control', 'adf-content', 'adf-error' and 'adf-label'
-  * on the form-control-component: 'adf-form-container', 'adf-form-control', 'adf-form-content', 'adf-form-error'
-  * on all group-components: 'adf-group-container', 'adf-group-control', 'adf-group-content', 'adf-group-error' and 'adf-group-label'
-  * on all array-components: 'adf-array-container', 'adf-array-control', 'adf-array-content', 'adf-array-error' and 'adf-array-label'
-  * on all array-header sections: 'adf-header-content'
-  * on all array-footer sections: 'adf-footer-content'
-  * on the array-item sections: 'adf-array-item' and if the item is selected: 'adf-array-item-selected'
-  * for all non-group and non-array-components: 'adf-control-container', 'adf-control-control', 'adf-control-content', 'adf-control-error' and 'adf-control-label'
+- on all components: 'adf-container', 'adf-control', 'adf-content', 'adf-error' and 'adf-label'
+- on the form-control-component: 'adf-form-container', 'adf-form-control', 'adf-form-content', 'adf-form-error'
+- on all group-components: 'adf-group-container', 'adf-group-control', 'adf-group-content', 'adf-group-error' and 'adf-group-label'
+- on all array-components: 'adf-array-container', 'adf-array-control', 'adf-array-content', 'adf-array-error' and 'adf-array-label'
+- on all array-header sections: 'adf-header-content'
+- on all array-footer sections: 'adf-footer-content'
+- on the array-item sections: 'adf-array-item' and if the item is selected: 'adf-array-item-selected'
+- for all non-group and non-array-components: 'adf-control-container', 'adf-control-control', 'adf-control-content', 'adf-control-error' and 'adf-control-label'
 
 ## Customization
 
@@ -322,36 +328,38 @@ implement either **DynamicFormValidatorFn** or **DynamicFormAsyncValidatorFn** a
 
 ## Control-types
 
-| Model                     | Control    | HTML  | Material | Nativescript     |
-|---------------------------|------------|-------|----------|------------------|
-|  ArrayModel:
-|                           | Array      |  yes  |  yes     | yes              |
-|  Group- or Subset-Model:
-|                           | Fieldset   |  yes  |  yes     | yes              |
-|                           | Division   |  yes  |  yes     | yes              |
-|                           | Tabgroup   |       |  yes     |                  |
-|                           | Stepper    |       |  yes     |                  |
-|  ValueControlModel:
-|                           | Checkbox   |  yes  |  yes     |  yes             |
-|                           | Datepicker |  *    |  yes     |  yes**           |
-|                           | Input      |  yes  |  yes     |  yes (TextField) |
-|                           | Radiogroup |  yes  |  yes     |  yes             |
-|                           | Select     |  yes  |  yes     |                  |
-|                           | Slider     |  yes  |  yes     |  yes             |
-|                           | Switch     |  yes  |  yes     |  yes             |
-|                           | Textarea   |  yes  |  yes     |  yes (TextView)  |
-|                           | Listpicker |       |          |  yes             |
-|  NullControlModel:
-|                           | Button     |  yes  |  yes     |  yes             |
-|                           | Separator  |  yes  |  yes     |  yes             |
-|                           |            |       |          |                  |
+| Model | Control | HTML | Material | Nativescript |
+| ----- | ------- | ---- | -------- | ------------ |
 
-*) you can use "input type='date'" as replacement for a datepicker
 
-**) reports date as utc-timestamp
+| ArrayModel:
+| | Array | yes | yes | yes |
+| Group- or Subset-Model:
+| | Fieldset | yes | yes | yes |
+| | Division | yes | yes | yes |
+| | Tabgroup | | yes | |
+| | Stepper | | yes | |
+| ValueControlModel:
+| | Checkbox | yes | yes | yes |
+| | Datepicker | \* | yes | yes\*\* |
+| | Input | yes | yes | yes (TextField) |
+| | Radiogroup | yes | yes | yes |
+| | Select | yes | yes | |
+| | Slider | yes | yes | yes |
+| | Switch | yes | yes | yes |
+| | Textarea | yes | yes | yes (TextView) |
+| | Listpicker | | | yes |
+| NullControlModel:
+| | Button | yes | yes | yes |
+| | Separator | yes | yes | yes |
+| | | | | |
+
+\*) you can use "input type='date'" as replacement for a datepicker
+
+\*\*) reports date as utc-timestamp
 
 e.g if timezone is "Central European Summer Time" and selected date is "2018-06-06"
- the value of the form control is set to "2018-06-05T22:00:00.000Z"
+the value of the form control is set to "2018-06-05T22:00:00.000Z"
 
 ## License
 
