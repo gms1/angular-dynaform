@@ -85,7 +85,7 @@
     "jsonpointerx": "^1.0.23",
     "nativescript-angular": "^7.2.3",
     "nativescript-checkbox": "^3.0.3",
-    "rxjs": "^6.5.1",
+    "rxjs": "^6.5.2",
     "tns-core-modules": "^5.3.2",
     "zone.js": "~0.8.26"
   },
