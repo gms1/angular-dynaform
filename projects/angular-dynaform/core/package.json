@@ -1,6 +1,6 @@
 {
   "name": "@angular-dynaform/core",
-  "version": "2.1.6",
+  "version": "3.0.0",
   "description": "angular-dynaform - core",
   "author": "Guenter Sandner <www.gms@gmx.at>",
   "license": "MIT",
@@ -25,7 +25,7 @@
     "@angular/core": "^8.0.0",
     "@angular/common": "^8.0.0",
     "@angular/forms": "^8.0.0",
-    "jsonpointerx": "^1.0.23",
+    "jsonpointerx": "^1.0.24",
     "jsep": "^0.3.4"
   },
   "scripts": {
