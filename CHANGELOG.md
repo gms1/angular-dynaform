@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## 3.0.0
+
+release based on Angular 8.0
+
 ## 2.1.1 - 2.1.6
 
 maintenance release

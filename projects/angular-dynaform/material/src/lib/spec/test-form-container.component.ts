@@ -13,7 +13,7 @@ import { DynamicForm, DynamicFormService, FormModel } from '@angular-dynaform/co
   styles: [],
 })
 export class TestFormContainerComponent {
-  @ViewChild(DynamicForm) form!: DynamicForm;
+  @ViewChild(DynamicForm, { static: true }) form!: DynamicForm;
   model!: FormModel;
 
   constructor(public dynamicFormService: DynamicFormService) {}

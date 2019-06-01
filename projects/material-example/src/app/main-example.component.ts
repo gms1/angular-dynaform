@@ -19,7 +19,7 @@ import { mainExampleConfig, mainExampleFormLanguages, mainExampleAppModelData } 
   styles: [],
 })
 export class MainExampleComponent implements AfterViewInit {
-  @ViewChild(DynamicForm) form!: DynamicForm;
+  @ViewChild(DynamicForm, { static: true }) form!: DynamicForm;
 
   model: FormModel;
 

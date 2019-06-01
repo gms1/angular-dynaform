@@ -1,30 +1,34 @@
-import {Component, Input, OnInit, ViewChild} from '@angular/core';
-import {DynamicForm, DynamicFormService, FormModel, ControlType, FormConfig, ModelType} from '@angular-dynaform/core';
-
+import { Component, Input, OnInit, ViewChild } from '@angular/core';
+import {
+  DynamicForm,
+  DynamicFormService,
+  FormModel,
+  ControlType,
+  FormConfig,
+  ModelType,
+} from '@angular-dynaform/core';
 
 @Component({
   selector: 'app-stepper-example',
   template: `
-<div class="stepper-example">
-  <mat-card class="mat-card">
-    <mat-card-header>
-      <mat-card-title><h2>{{title}}</h2><h4>{{subTitle}}</h4></mat-card-title>
-    </mat-card-header>
-    <mat-card-content>
-        <adf-form
-        [model]="model"
-        (adfSubmit)="onSubmit()"
-        (adfReset)="onReset()"
-      >
-      </adf-form>
-    </mat-card-content>
-  </mat-card>
-</div>
+    <div class="stepper-example">
+      <mat-card class="mat-card">
+        <mat-card-header>
+          <mat-card-title>
+            <h2>{{ title }}</h2>
+            <h4>{{ subTitle }}</h4>
+          </mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+          <adf-form [model]="model" (adfSubmit)="onSubmit()" (adfReset)="onReset()"></adf-form>
+        </mat-card-content>
+      </mat-card>
+    </div>
   `,
-  styles: []
+  styles: [],
 })
 export class StepperExampleComponent implements OnInit {
-  @ViewChild(DynamicForm) form!: DynamicForm;
+  @ViewChild(DynamicForm, { static: true }) form!: DynamicForm;
 
   @Input()
   title!: string;
@@ -51,9 +55,7 @@ export class StepperExampleComponent implements OnInit {
   ngOnInit(): void {
     this.model = this.dynamicFormService.createFormModel(this.config);
   }
-  }
-
-
+}
 
 export const stepperHorizantalExample1Config: FormConfig = {
   id: 'stepperExampleForm1',
@@ -73,15 +75,22 @@ export const stepperHorizantalExample1Config: FormConfig = {
               controlType: ControlType.CONTROL_DIVISION,
               options: {
                 label: 'Step1',
-                group: [{
-                  id: 'Field1',
-                  modelType: ModelType.MODEL_VALUE,
-                  controlType: ControlType.CONTROL_RADIOGROUP,
-                  options:
-                      {valueOptions: [{value: '11', label: '1'}, {value: '12', label: '2'}, {value: '13', label: '3'}]},
-                  validators: ['required']
-                }]
-              }
+                group: [
+                  {
+                    id: 'Field1',
+                    modelType: ModelType.MODEL_VALUE,
+                    controlType: ControlType.CONTROL_RADIOGROUP,
+                    options: {
+                      valueOptions: [
+                        { value: '11', label: '1' },
+                        { value: '12', label: '2' },
+                        { value: '13', label: '3' },
+                      ],
+                    },
+                    validators: ['required'],
+                  },
+                ],
+              },
             },
             {
               id: 'step2',
@@ -89,15 +98,22 @@ export const stepperHorizantalExample1Config: FormConfig = {
               controlType: ControlType.CONTROL_DIVISION,
               options: {
                 label: 'Step2',
-                group: [{
-                  id: 'Field2',
-                  modelType: ModelType.MODEL_VALUE,
-                  controlType: ControlType.CONTROL_RADIOGROUP,
-                  options:
-                      {valueOptions: [{value: '21', label: '4'}, {value: '22', label: '5'}, {value: '23', label: '6'}]},
-                  validators: ['required']
-                }]
-              }
+                group: [
+                  {
+                    id: 'Field2',
+                    modelType: ModelType.MODEL_VALUE,
+                    controlType: ControlType.CONTROL_RADIOGROUP,
+                    options: {
+                      valueOptions: [
+                        { value: '21', label: '4' },
+                        { value: '22', label: '5' },
+                        { value: '23', label: '6' },
+                      ],
+                    },
+                    validators: ['required'],
+                  },
+                ],
+              },
             },
             {
               id: 'step3',
@@ -105,18 +121,25 @@ export const stepperHorizantalExample1Config: FormConfig = {
               controlType: ControlType.CONTROL_DIVISION,
               options: {
                 label: 'Step3',
-                group: [{
-                  id: 'Field3',
-                  modelType: ModelType.MODEL_VALUE,
-                  controlType: ControlType.CONTROL_RADIOGROUP,
-                  options:
-                      {valueOptions: [{value: '31', label: '7'}, {value: '32', label: '8'}, {value: '33', label: '9'}]},
-                  validators: ['required']
-                }]
-              }
-            }
-          ]
-        }
+                group: [
+                  {
+                    id: 'Field3',
+                    modelType: ModelType.MODEL_VALUE,
+                    controlType: ControlType.CONTROL_RADIOGROUP,
+                    options: {
+                      valueOptions: [
+                        { value: '31', label: '7' },
+                        { value: '32', label: '8' },
+                        { value: '33', label: '9' },
+                      ],
+                    },
+                    validators: ['required'],
+                  },
+                ],
+              },
+            },
+          ],
+        },
       },
       {
         id: 'buttondivision',
@@ -128,230 +151,253 @@ export const stepperHorizantalExample1Config: FormConfig = {
               id: 'prev',
               modelType: ModelType.MODEL_NULL,
               controlType: ControlType.CONTROL_BUTTON,
-              options: {label: 'Prev'},
-              action: 'stepperPrev'
+              options: { label: 'Prev' },
+              action: 'stepperPrev',
             },
             {
               id: 'next',
               modelType: ModelType.MODEL_NULL,
               controlType: ControlType.CONTROL_BUTTON,
-              options: {label: 'Next'},
-              action: 'stepperNext'
+              options: { label: 'Next' },
+              action: 'stepperNext',
             },
             {
               id: 'separatorButtons',
               modelType: ModelType.MODEL_NULL,
               controlType: ControlType.CONTROL_SEPARATOR,
-              options: {css: {container: 'button-separator'}}
+              options: { css: { container: 'button-separator' } },
             },
             {
               id: 'submit',
               modelType: ModelType.MODEL_NULL,
               controlType: ControlType.CONTROL_BUTTON,
-              options: {label: 'Submit'},
-              action: 'submit'
-            }
+              options: { label: 'Submit' },
+              action: 'submit',
+            },
           ],
-          css: {content: 'button-division-content'}
-        }
-      }
-    ]
-  }
+          css: { content: 'button-division-content' },
+        },
+      },
+    ],
+  },
 };
-
 
 export const stepperHorizantalExample2Config: FormConfig = {
   id: 'stepperExampleForm2',
   updateOn: 'blur',
   options: {
-    group: [{
-      id: 'stepper',
-      modelType: ModelType.MODEL_SUBSET,
-      controlType: ControlType.CONTROL_STEPPER, // use stepper group-control
-      options: {
-        label: 'Stepper',
-        group: [
-          {
-            id: 'step1',
-            modelType: ModelType.MODEL_GROUP,
-            controlType: ControlType.CONTROL_DIVISION,
-            options: {
-              label: 'Step1',
-              group: [
-                {
-                  id: 'Field1',
-                  modelType: ModelType.MODEL_VALUE,
-                  controlType: ControlType.CONTROL_RADIOGROUP,
-                  options:
-                      {valueOptions: [{value: '11', label: '1'}, {value: '12', label: '2'}, {value: '13', label: '3'}]},
-                  validators: ['required']
-                },
-                {
-                  id: 'buttondivisionStep1',
-                  modelType: ModelType.MODEL_SUBSET,
-                  controlType: [ControlType.CONTROL_DIVISION],
-                  options: {
-                    group: [
-                      {
-                        id: 'prevStep1',
-                        modelType: ModelType.MODEL_NULL,
-                        controlType: ControlType.CONTROL_BUTTON,
-                        options: {label: 'Prev'},
-                        action: 'stepperPrev'
-                      },
-                      {
-                        id: 'nextStep1',
-                        modelType: ModelType.MODEL_NULL,
-                        controlType: ControlType.CONTROL_BUTTON,
-                        options: {label: 'Next'},
-                        action: 'stepperNext'
-                      },
-                      {
-                        id: 'separatorStep1Buttons',
-                        modelType: ModelType.MODEL_NULL,
-                        controlType: ControlType.CONTROL_SEPARATOR,
-                        options: {css: {container: 'button-separator'}}
-                      },
-                      {
-                        id: 'submitStep1',
-                        modelType: ModelType.MODEL_NULL,
-                        controlType: ControlType.CONTROL_BUTTON,
-                        options: {label: 'Submit'},
-                        action: 'submit'
-                      }
-                    ],
-                    css: {content: 'button-division-content'}
-                  }
-                }
-              ]
-            }
-          },
-          {
-            id: 'step2',
-            modelType: ModelType.MODEL_GROUP,
-            controlType: ControlType.CONTROL_DIVISION,
-            options: {
-              label: 'Step2',
-              group: [
-                {
-                  id: 'Field2',
-                  modelType: ModelType.MODEL_VALUE,
-                  controlType: ControlType.CONTROL_RADIOGROUP,
-                  options:
-                      {valueOptions: [{value: '21', label: '4'}, {value: '22', label: '5'}, {value: '23', label: '6'}]},
-                  validators: ['required']
-                },
-                {
-                  id: 'buttondivisionStep2',
-                  modelType: ModelType.MODEL_SUBSET,
-                  controlType: [ControlType.CONTROL_DIVISION],
-                  options: {
-                    group: [
-                      {
-                        id: 'prevStep2',
-                        modelType: ModelType.MODEL_NULL,
-                        controlType: ControlType.CONTROL_BUTTON,
-                        options: {label: 'Prev'},
-                        action: 'stepperPrev'
-                      },
-                      {
-                        id: 'nextStep2',
-                        modelType: ModelType.MODEL_NULL,
-                        controlType: ControlType.CONTROL_BUTTON,
-                        options: {label: 'Next'},
-                        action: 'stepperNext'
-                      },
-                      {
-                        id: 'separatorStep2Buttons',
-                        modelType: ModelType.MODEL_NULL,
-                        controlType: ControlType.CONTROL_SEPARATOR,
-                        options: {css: {container: 'button-separator'}}
-                      },
-                      {
-                        id: 'submitStep2',
-                        modelType: ModelType.MODEL_NULL,
-                        controlType: ControlType.CONTROL_BUTTON,
-                        options: {label: 'Submit'},
-                        action: 'submit'
-                      }
-                    ],
-                    css: {content: 'button-division-content'}
-                  }
-                }
-              ]
-            }
-          },
-          {
-            id: 'step3',
-            modelType: ModelType.MODEL_GROUP,
-            controlType: ControlType.CONTROL_DIVISION,
-            options: {
-              label: 'Step3',
-              group: [
-                {
-                  id: 'Field3',
-                  modelType: ModelType.MODEL_VALUE,
-                  controlType: ControlType.CONTROL_RADIOGROUP,
-                  options:
-                      {valueOptions: [{value: '31', label: '7'}, {value: '32', label: '8'}, {value: '33', label: '9'}]},
-                  validators: ['required']
-                },
-                {
-                  id: 'buttondivisionStep3',
-                  modelType: ModelType.MODEL_SUBSET,
-                  controlType: [ControlType.CONTROL_DIVISION],
-                  options: {
-                    group: [
-                      {
-                        id: 'prevStep3',
-                        modelType: ModelType.MODEL_NULL,
-                        controlType: ControlType.CONTROL_BUTTON,
-                        options: {label: 'Prev'},
-                        action: 'stepperPrev'
-                      },
-                      {
-                        id: 'nextStep3',
-                        modelType: ModelType.MODEL_NULL,
-                        controlType: ControlType.CONTROL_BUTTON,
-                        options: {label: 'Next'},
-                        action: 'stepperNext'
-                      },
-                      {
-                        id: 'separatorStep3Buttons',
-                        modelType: ModelType.MODEL_NULL,
-                        controlType: ControlType.CONTROL_SEPARATOR,
-                        options: {css: {container: 'button-separator'}}
-                      },
-                      {
-                        id: 'submitStep3',
-                        modelType: ModelType.MODEL_NULL,
-                        controlType: ControlType.CONTROL_BUTTON,
-                        options: {label: 'Submit'},
-                        action: 'submit'
-                      }
-                    ],
-                    css: {content: 'button-division-content'}
-                  }
-                }
-              ]
-            }
-          }
-        ]
-      }
-    }]
-  }
+    group: [
+      {
+        id: 'stepper',
+        modelType: ModelType.MODEL_SUBSET,
+        controlType: ControlType.CONTROL_STEPPER, // use stepper group-control
+        options: {
+          label: 'Stepper',
+          group: [
+            {
+              id: 'step1',
+              modelType: ModelType.MODEL_GROUP,
+              controlType: ControlType.CONTROL_DIVISION,
+              options: {
+                label: 'Step1',
+                group: [
+                  {
+                    id: 'Field1',
+                    modelType: ModelType.MODEL_VALUE,
+                    controlType: ControlType.CONTROL_RADIOGROUP,
+                    options: {
+                      valueOptions: [
+                        { value: '11', label: '1' },
+                        { value: '12', label: '2' },
+                        { value: '13', label: '3' },
+                      ],
+                    },
+                    validators: ['required'],
+                  },
+                  {
+                    id: 'buttondivisionStep1',
+                    modelType: ModelType.MODEL_SUBSET,
+                    controlType: [ControlType.CONTROL_DIVISION],
+                    options: {
+                      group: [
+                        {
+                          id: 'prevStep1',
+                          modelType: ModelType.MODEL_NULL,
+                          controlType: ControlType.CONTROL_BUTTON,
+                          options: { label: 'Prev' },
+                          action: 'stepperPrev',
+                        },
+                        {
+                          id: 'nextStep1',
+                          modelType: ModelType.MODEL_NULL,
+                          controlType: ControlType.CONTROL_BUTTON,
+                          options: { label: 'Next' },
+                          action: 'stepperNext',
+                        },
+                        {
+                          id: 'separatorStep1Buttons',
+                          modelType: ModelType.MODEL_NULL,
+                          controlType: ControlType.CONTROL_SEPARATOR,
+                          options: { css: { container: 'button-separator' } },
+                        },
+                        {
+                          id: 'submitStep1',
+                          modelType: ModelType.MODEL_NULL,
+                          controlType: ControlType.CONTROL_BUTTON,
+                          options: { label: 'Submit' },
+                          action: 'submit',
+                        },
+                      ],
+                      css: { content: 'button-division-content' },
+                    },
+                  },
+                ],
+              },
+            },
+            {
+              id: 'step2',
+              modelType: ModelType.MODEL_GROUP,
+              controlType: ControlType.CONTROL_DIVISION,
+              options: {
+                label: 'Step2',
+                group: [
+                  {
+                    id: 'Field2',
+                    modelType: ModelType.MODEL_VALUE,
+                    controlType: ControlType.CONTROL_RADIOGROUP,
+                    options: {
+                      valueOptions: [
+                        { value: '21', label: '4' },
+                        { value: '22', label: '5' },
+                        { value: '23', label: '6' },
+                      ],
+                    },
+                    validators: ['required'],
+                  },
+                  {
+                    id: 'buttondivisionStep2',
+                    modelType: ModelType.MODEL_SUBSET,
+                    controlType: [ControlType.CONTROL_DIVISION],
+                    options: {
+                      group: [
+                        {
+                          id: 'prevStep2',
+                          modelType: ModelType.MODEL_NULL,
+                          controlType: ControlType.CONTROL_BUTTON,
+                          options: { label: 'Prev' },
+                          action: 'stepperPrev',
+                        },
+                        {
+                          id: 'nextStep2',
+                          modelType: ModelType.MODEL_NULL,
+                          controlType: ControlType.CONTROL_BUTTON,
+                          options: { label: 'Next' },
+                          action: 'stepperNext',
+                        },
+                        {
+                          id: 'separatorStep2Buttons',
+                          modelType: ModelType.MODEL_NULL,
+                          controlType: ControlType.CONTROL_SEPARATOR,
+                          options: { css: { container: 'button-separator' } },
+                        },
+                        {
+                          id: 'submitStep2',
+                          modelType: ModelType.MODEL_NULL,
+                          controlType: ControlType.CONTROL_BUTTON,
+                          options: { label: 'Submit' },
+                          action: 'submit',
+                        },
+                      ],
+                      css: { content: 'button-division-content' },
+                    },
+                  },
+                ],
+              },
+            },
+            {
+              id: 'step3',
+              modelType: ModelType.MODEL_GROUP,
+              controlType: ControlType.CONTROL_DIVISION,
+              options: {
+                label: 'Step3',
+                group: [
+                  {
+                    id: 'Field3',
+                    modelType: ModelType.MODEL_VALUE,
+                    controlType: ControlType.CONTROL_RADIOGROUP,
+                    options: {
+                      valueOptions: [
+                        { value: '31', label: '7' },
+                        { value: '32', label: '8' },
+                        { value: '33', label: '9' },
+                      ],
+                    },
+                    validators: ['required'],
+                  },
+                  {
+                    id: 'buttondivisionStep3',
+                    modelType: ModelType.MODEL_SUBSET,
+                    controlType: [ControlType.CONTROL_DIVISION],
+                    options: {
+                      group: [
+                        {
+                          id: 'prevStep3',
+                          modelType: ModelType.MODEL_NULL,
+                          controlType: ControlType.CONTROL_BUTTON,
+                          options: { label: 'Prev' },
+                          action: 'stepperPrev',
+                        },
+                        {
+                          id: 'nextStep3',
+                          modelType: ModelType.MODEL_NULL,
+                          controlType: ControlType.CONTROL_BUTTON,
+                          options: { label: 'Next' },
+                          action: 'stepperNext',
+                        },
+                        {
+                          id: 'separatorStep3Buttons',
+                          modelType: ModelType.MODEL_NULL,
+                          controlType: ControlType.CONTROL_SEPARATOR,
+                          options: { css: { container: 'button-separator' } },
+                        },
+                        {
+                          id: 'submitStep3',
+                          modelType: ModelType.MODEL_NULL,
+                          controlType: ControlType.CONTROL_BUTTON,
+                          options: { label: 'Submit' },
+                          action: 'submit',
+                        },
+                      ],
+                      css: { content: 'button-division-content' },
+                    },
+                  },
+                ],
+              },
+            },
+          ],
+        },
+      },
+    ],
+  },
 };
-
 
 @Component({
   selector: 'app-stepper-examples',
   template: `
- <div class="stepper-examples">
-  <app-stepper-example [title]="title1" [subTitle]="subTitle1" [config]="config1"></app-stepper-example>
-  <app-stepper-example [title]="title2" [subTitle]="subTitle2" [config]="config2"></app-stepper-example>
-  </div>
+    <div class="stepper-examples">
+      <app-stepper-example
+        [title]="title1"
+        [subTitle]="subTitle1"
+        [config]="config1"
+      ></app-stepper-example>
+      <app-stepper-example
+        [title]="title2"
+        [subTitle]="subTitle2"
+        [config]="config2"
+      ></app-stepper-example>
+    </div>
   `,
-  styles: []
+  styles: [],
 })
 export class StepperExamplesComponent {
   title1 = 'Horizontal Stepper Example 1';

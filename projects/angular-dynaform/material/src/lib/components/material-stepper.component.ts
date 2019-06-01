@@ -85,7 +85,7 @@ export class MaterialStepperComponent extends DynamicFormControlComponent<GroupM
   model!: GroupModelBase;
   options!: GroupOptions;
 
-  @ViewChild('stepper') private matStepper!: MatStepper;
+  @ViewChild('stepper', { static: true }) private matStepper!: MatStepper;
 
   stepper?: Stepper;
 

@@ -185,7 +185,7 @@ export const tabGroupExampleConfig: FormConfig = {
   styles: [],
 })
 export class TabGroupExampleComponent implements AfterViewInit {
-  @ViewChild(DynamicForm) form!: DynamicForm;
+  @ViewChild(DynamicForm, { static: true }) form!: DynamicForm;
 
   model: FormModel;
 

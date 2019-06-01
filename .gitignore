@@ -4,6 +4,7 @@
 /dist
 /tmp
 /out-tsc
+/docs/angular-dynaform
 
 # dependencies
 node_modules

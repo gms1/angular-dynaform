@@ -1,0 +1,9 @@
+{
+  "name": "angular-dynaform",
+  "tsconfig": "projects/angular-dynaform/core/tsconfig.lib.json",
+  "output": "docs/angular-dynaform",
+  "theme": "vagrant",
+  "disablePrivate": true,
+  "disableProtected": true,
+  "disableInternal": true
+}

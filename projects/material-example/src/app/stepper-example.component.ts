@@ -28,7 +28,7 @@ import {
   styles: [],
 })
 export class StepperExampleComponent implements OnInit {
-  @ViewChild(DynamicForm) form!: DynamicForm;
+  @ViewChild(DynamicForm, { static: true }) form!: DynamicForm;
 
   @Input()
   title!: string;

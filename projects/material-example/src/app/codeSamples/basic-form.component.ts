@@ -15,7 +15,7 @@ import {
   `,
 })
 export class BasicFormComponent {
-  @ViewChild(DynamicForm) dynaForm!: DynamicForm;
+  @ViewChild(DynamicForm, { static: true }) dynaForm!: DynamicForm;
   formModel: FormModel;
 
   readonly formConfig: FormConfig = {
@@ -72,5 +72,5 @@ export class BasicFormComponent {
   styles: [],
 })
 export class BasicFormContainerComponent {
-  @ViewChild(BasicFormComponent) formComponent!: BasicFormComponent;
+  @ViewChild(BasicFormComponent, { static: true }) formComponent!: BasicFormComponent;
 }
