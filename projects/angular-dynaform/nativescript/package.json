@@ -34,7 +34,7 @@
     "@angular/core": "^8.0.0",
     "@angular/common": "^8.0.0",
     "@angular/forms": "^8.0.0",
-    "tns-core-modules": "^5.4.1",
+    "tns-core-modules": "^5.4.2",
     "nativescript-angular": "^8.0.0",
     "nativescript-checkbox": "^3.0.3",
     "@angular-dynaform/core": "3.0.0"
