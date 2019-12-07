@@ -22,10 +22,10 @@
   },
   "peerDependencies": {
     "rxjs": "^6.5.3",
-    "@angular/core": "^8.2.13",
-    "@angular/common": "^8.2.13",
-    "@angular/forms": "^8.2.13",
-    "jsonpointerx": "^1.0.25",
+    "@angular/core": "^8.2.14",
+    "@angular/common": "^8.2.14",
+    "@angular/forms": "^8.2.14",
+    "jsonpointerx": "^1.0.26",
     "jsep": "^0.3.4"
   },
   "scripts": {
