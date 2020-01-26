@@ -1,6 +1,6 @@
 {
   "name": "@angular-dynaform/material",
-  "version": "3.0.2",
+  "version": "3.0.3",
   "description": "angular-dynaform - material",
   "author": "Guenter Sandner <www.gms@gmx.at>",
   "license": "MIT",
@@ -29,7 +29,7 @@
     "@angular/cdk": "^8.2.3",
     "@angular/material": "^8.2.3",
     "@angular/platform-browser": "^8.2.14",
-    "@angular-dynaform/core": "3.0.2"
+    "@angular-dynaform/core": "3.0.3"
   },
   "scripts": {
     "prepublishOnly": "echo \"ERROR: please use the production-build for publishing\" && exit 1"

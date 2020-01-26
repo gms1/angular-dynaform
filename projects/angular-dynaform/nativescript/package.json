@@ -1,6 +1,6 @@
 {
   "name": "@angular-dynaform/nativescript",
-  "version": "3.0.2-alpha.0",
+  "version": "3.0.3-alpha.0",
   "description": "angular-dynaform - NativeScript",
   "author": "Guenter Sandner <www.gms@gmx.at>",
   "license": "MIT",
@@ -37,7 +37,7 @@
     "tns-core-modules": "^6.3.2",
     "nativescript-angular": "^8.20.4",
     "nativescript-checkbox": "^3.0.3",
-    "@angular-dynaform/core": "3.0.2"
+    "@angular-dynaform/core": "3.0.3"
   },
   "scripts": {
     "prepublishOnly": "echo \"ERROR: please use the production-build for publishing\" && exit 1"
