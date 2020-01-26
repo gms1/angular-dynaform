@@ -25,7 +25,10 @@ export class FormTestRadioGroupComponent extends FormTestBaseComponent {
       controlType: NativeScriptControlType.CONTROL_RADIOGROUP,
       options: {
         label: TEST_CONTROL_LABEL,
-        valueOptions: [{ value: 'mr', label: 'Mr' }, { value: 'ms', label: 'Ms' }],
+        valueOptions: [
+          { value: 'mr', label: 'Mr' },
+          { value: 'ms', label: 'Ms' },
+        ],
       },
     });
   }

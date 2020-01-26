@@ -26,7 +26,10 @@ export class FormTestListPickerComponent extends FormTestBaseComponent {
       options: {
         label: TEST_CONTROL_LABEL,
         placeholder: TEST_CONTROL_PLACEHOLDER,
-        valueOptions: [{ value: 'mr', label: 'Mr' }, { value: 'ms', label: 'Ms' }],
+        valueOptions: [
+          { value: 'mr', label: 'Mr' },
+          { value: 'ms', label: 'Ms' },
+        ],
       },
     });
   }

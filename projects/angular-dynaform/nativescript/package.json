@@ -30,12 +30,12 @@
     }
   },
   "peerDependencies": {
-    "rxjs": "^6.5.3",
+    "rxjs": "^6.5.4",
     "@angular/core": "^8.2.14",
     "@angular/common": "^8.2.14",
     "@angular/forms": "^8.2.14",
-    "tns-core-modules": "^6.2.3",
-    "nativescript-angular": "^8.20.3",
+    "tns-core-modules": "^6.3.2",
+    "nativescript-angular": "^8.20.4",
     "nativescript-checkbox": "^3.0.3",
     "@angular-dynaform/core": "3.0.2"
   },

@@ -74,10 +74,7 @@ export class RelationAction extends DynamicFormAction {
       };
     }
     model.valueChanges
-      .pipe(
-        map(run),
-        distinctUntilChanged(),
-      )
+      .pipe(map(run), distinctUntilChanged())
       .pipe(takeUntil(this.unsubscribe))
       .subscribe(next);
   }

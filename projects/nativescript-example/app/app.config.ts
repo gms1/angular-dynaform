@@ -28,7 +28,10 @@ export const mainExampleConfig: FormConfig = {
               modelType: ModelType.MODEL_VALUE,
               controlType: ControlType.CONTROL_RADIOGROUP,
               options: {
-                valueOptions: [{ value: 'mr', label: 'Mr.' }, { value: 'ms', label: 'Ms.' }],
+                valueOptions: [
+                  { value: 'mr', label: 'Mr.' },
+                  { value: 'ms', label: 'Ms.' },
+                ],
               },
               validators: ['required'],
               jp: '/greeting',
@@ -278,7 +281,12 @@ export const mainExampleConfig: FormConfig = {
 export const mainExampleFormLanguages = {
   en: {
     controls: {
-      salutation: { valueOptions: [{ value: 'mr', label: 'Mr.' }, { value: 'ms', label: 'Ms.' }] },
+      salutation: {
+        valueOptions: [
+          { value: 'mr', label: 'Mr.' },
+          { value: 'ms', label: 'Ms.' },
+        ],
+      },
       title: { label: 'Title', placeholder: 'Enter your title' },
       firstName: { label: 'First name', placeholder: 'Enter your first name' },
       lastName: { label: 'Last name', placeholder: 'Enter your last name' },
@@ -293,7 +301,10 @@ export const mainExampleFormLanguages = {
       contactType: {
         label: 'Type',
         placeholder: 'Select an option',
-        valueOptions: [{ value: 'phone', label: 'Telephone' }, { value: 'email', label: 'Email' }],
+        valueOptions: [
+          { value: 'phone', label: 'Telephone' },
+          { value: 'email', label: 'Email' },
+        ],
       },
       contactValue: { label: 'Tel/Email', placeholder: 'Enter a value' },
       memo: { label: 'Memo', placeholder: 'Memo' },
@@ -308,7 +319,10 @@ export const mainExampleFormLanguages = {
   de: {
     controls: {
       salutation: {
-        valueOptions: [{ value: 'mr', label: 'Herr' }, { value: 'ms', label: 'Frau' }],
+        valueOptions: [
+          { value: 'mr', label: 'Herr' },
+          { value: 'ms', label: 'Frau' },
+        ],
       },
       title: { label: 'Titel', placeholder: 'Bitte geben Sie Ihren Titel ein' },
       firstName: { label: 'Vorname', placeholder: 'Bitte geben Sie Ihren Vornamen ein' },
@@ -324,7 +338,10 @@ export const mainExampleFormLanguages = {
       contactType: {
         label: 'Kontaktart',
         placeholder: 'Bitte geben Sie die gewünschte Kontaktart ein',
-        valueOptions: [{ value: 'phone', label: 'Telephon' }, { value: 'email', label: 'Email' }],
+        valueOptions: [
+          { value: 'phone', label: 'Telephon' },
+          { value: 'email', label: 'Email' },
+        ],
       },
       contactValue: { label: 'Tel/Email', placeholder: '' },
       memo: { label: 'Notiz', placeholder: 'Notiz' },

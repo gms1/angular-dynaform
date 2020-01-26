@@ -45,7 +45,10 @@ describe('form-builder test suite', () => {
     });
 
     const salutationOptions = {
-      valueOptions: [{ value: 'mr', label: 'Mr.' }, { value: 'ms', label: 'Ms.' }],
+      valueOptions: [
+        { value: 'mr', label: 'Mr.' },
+        { value: 'ms', label: 'Ms.' },
+      ],
     };
     const salutationPartialConfig = {
       id: 'salutation',
@@ -151,7 +154,10 @@ describe('form-builder test suite', () => {
       controlType: ControlType.CONTROL_SELECT,
       options: {
         label: 'Type',
-        valueOptions: [{ value: 'phone', label: 'Telephone' }, { value: 'email', label: 'Email' }],
+        valueOptions: [
+          { value: 'phone', label: 'Telephone' },
+          { value: 'email', label: 'Email' },
+        ],
         placeholder: 'Select an option',
       },
       jp: 'carrier',
